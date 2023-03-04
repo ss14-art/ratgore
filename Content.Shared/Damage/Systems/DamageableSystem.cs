@@ -66,7 +66,7 @@ namespace Content.Shared.Damage
         public FixedPoint2 GetTotalDamage(Entity<DamageableComponent> ent)
             => ent.Comp.TotalDamage;
 
-        public DamageSpecifier GetAllDamage(EntityUid uid)
+        public DamageSpecifier GetAllDamage((EntityUid player, DamageableComponent damageableComp) uid)
         {
             if (!TryComp<DamageableComponent>(uid, out var comp))
                 return new DamageSpecifier();

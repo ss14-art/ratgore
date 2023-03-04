@@ -29,6 +29,6 @@ public sealed class ShowCrewIconsSystem : EquipmentHudSystem<ShowCrewIconsCompon
 
     private void OnHandleState(Entity<ShowCrewIconsComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        RefreshOverlay();
+        RefreshOverlay(ent);
     }
 }

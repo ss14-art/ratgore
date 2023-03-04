@@ -38,16 +38,6 @@ namespace Content.Shared.Stacks
             SubscribeLocalEvent<StackComponent, ExaminedEvent>(OnStackExamined);
             SubscribeLocalEvent<StackComponent, InteractUsingEvent>(OnStackInteractUsing);
 
-            _vvm.GetTypeHandler<StackComponent>()
-                .AddPath(nameof(StackComponent.Count), (_, comp) => comp.Count, SetCount);
-        }
-
-        public override void Shutdown()
-        {
-            base.Shutdown();
-
-            _vvm.GetTypeHandler<StackComponent>()
-                .RemovePath(nameof(StackComponent.Count));
         }
 
         private void OnStackInteractUsing(EntityUid uid, StackComponent stack, InteractUsingEvent args)

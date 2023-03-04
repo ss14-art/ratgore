@@ -20,8 +20,8 @@ namespace Content.Client.Stack
             Subs.ItemStatus<StackComponent>(ent => new StackStatusControl(ent));
         }
 
-        public override void SetCount(
-            (EntityUid ent, StackComponent stackComp) uid,
+        public void SetCount(
+            EntityUid uid,
             int amount,
             StackComponent? component = null
         )

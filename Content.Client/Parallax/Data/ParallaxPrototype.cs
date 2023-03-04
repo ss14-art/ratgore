@@ -5,7 +5,7 @@ namespace Content.Client.Parallax.Data;
 /// <summary>
 /// Prototype data for a parallax.
 /// </summary>
-[Prototype("parallax")]
+[Prototype]
 public sealed partial class ParallaxPrototype : IPrototype
 {
     /// <inheritdoc/>
@@ -22,11 +22,11 @@ public sealed partial class ParallaxPrototype : IPrototype
     /// Parallax layers, low-quality.
     /// </summary>
     [DataField("layersLQ")]
-    public List<ParallaxLayerConfig> LayersLQ { get; private set; } = new();
+    public List<ParallaxLayerConfig> LayersLq { get; private set; } = new();
 
     /// <summary>
     /// If low-quality layers don't exist for this parallax and high-quality should be used instead.
     /// </summary>
     [DataField("layersLQUseHQ")]
-    public bool LayersLQUseHQ { get; private set; } = true;
+    public bool LayersLqUseHq { get; private set; } = true;
 }

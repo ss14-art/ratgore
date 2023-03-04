@@ -248,4 +248,7 @@ public abstract partial class SharedHandsSystem : EntitySystem
     {
         throw new NotImplementedException();
     }
+
+    public bool TryPickup(EntityUid uid, EntityUid entity)
+        => TryPickupAnyHand(uid, entity);
 }

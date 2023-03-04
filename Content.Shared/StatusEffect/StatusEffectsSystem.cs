@@ -490,6 +490,11 @@ namespace Content.Shared.StatusEffect
             time = status.ActiveEffects[key].Cooldown;
             return true;
         }
+
+        public bool TrySetStatusEffect(EntityUid uid, string knockeddown, TimeSpan duration, StatusEffectsComponent status)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
