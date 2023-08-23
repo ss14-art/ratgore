@@ -1,7 +1,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Light.Components;
+namespace Content.Shared.Light.Component;
 
 /// <summary>
 ///     Makes the color of lights on an entity fluctuate. Will update point-light color and modulate some or all of the
@@ -10,8 +10,10 @@ namespace Content.Shared.Light.Components;
 /// <remarks>
 ///     Networked ~~solely for admemes~~ for completely legitimate reasons, like hacked energy swords.
 /// </remarks>
-[NetworkedComponent, RegisterComponent, Access(typeof(SharedRgbLightControllerSystem))]
-public sealed partial class RgbLightControllerComponent : Component
+[NetworkedComponent]
+[RegisterComponent]
+[Access(typeof(SharedRgbLightControllerSystem))]
+public sealed partial class RgbLightControllerComponent : Robust.Shared.GameObjects.Component
 {
     [DataField("cycleRate")]
     public float CycleRate { get; set; } = 0.1f;

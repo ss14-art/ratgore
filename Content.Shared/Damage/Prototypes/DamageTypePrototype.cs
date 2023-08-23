@@ -6,16 +6,10 @@ namespace Content.Shared.Damage.Prototypes
     ///     A single damage type. These types are grouped together in <see cref="DamageGroupPrototype"/>s.
     /// </summary>
     [Prototype("damageType")]
-    public sealed partial class DamageTypePrototype : IPrototype
+    public sealed class DamageTypePrototype : IPrototype
     {
         [IdDataField]
         public string ID { get; private set; } = default!;
-
-        [DataField(required: true)]
-        private LocId Name { get; set; }
-
-        [ViewVariables(VVAccess.ReadOnly)]
-        public string LocalizedName => Loc.GetString(Name);
 
         /// <summary>
         /// The price for each 1% damage reduction in armors
@@ -28,10 +22,5 @@ namespace Content.Shared.Damage.Prototypes
         /// </summary>
         [DataField("armorFlatPrice")]
         public double ArmorPriceFlat { get; set; }
-
-        // Hullrot change
-        // Converts this damage type into another after armor calculations. SPCR 2025
-        [DataField]
-        public string convertInto = "";
     }
 }

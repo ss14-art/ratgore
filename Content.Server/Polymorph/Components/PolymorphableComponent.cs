@@ -1,28 +1,22 @@
-using Content.Server.Polymorph.Systems;
+using Content.Shared.Actions.ActionTypes;
 using Content.Shared.Polymorph;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
-namespace Content.Server.Polymorph.Components;
-
-[RegisterComponent]
-[Access(typeof(PolymorphSystem))]
-public sealed partial class PolymorphableComponent : Component
+namespace Content.Server.Polymorph.Components
 {
-    /// <summary>
-    /// A list of all the polymorphs that the entity has.
-    /// Used to manage them and remove them if needed.
-    /// </summary>
-    public Dictionary<ProtoId<PolymorphPrototype>, EntityUid>? PolymorphActions = null;
-
-    /// <summary>
-    /// Timestamp for when the most recent polymorph ended.
-    /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
-    public TimeSpan? LastPolymorphEnd = null;
+    [RegisterComponent]
+    public sealed partial class PolymorphableComponent : Component
+    {
+        /// <summary>
+        /// A list of all the polymorphs that the entity has.
+        /// Used to manage them and remove them if needed.
+        /// </summary>
+        public Dictionary<string, InstantAction>? PolymorphActions = null;
 
         /// <summary>
-    /// The polymorphs that the entity starts out being able to do.
-    /// </summary>
-    [DataField]
-    public List<ProtoId<PolymorphPrototype>>? InnatePolymorphs;
+        /// The polymorphs that the entity starts out being able to do.
+        /// </summary>
+        [DataField("innatePolymorphs", customTypeSerializer : typeof(PrototypeIdListSerializer<PolymorphPrototype>))]
+        public List<string>? InnatePolymorphs;
+    }
 }

@@ -1,21 +1,19 @@
 using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
-using Content.Server.EntityEffects.Effects.Botany;
 using Content.Shared.Atmos;
-using Content.Shared.Database;
-using Content.Shared.EntityEffects;
-using Content.Shared.Random;
-using Robust.Shared.Audio;
+using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Robust.Shared.Utility;
+using Robust.Shared.Audio;
 
 namespace Content.Server.Botany;
 
-[Prototype]
-public sealed partial class SeedPrototype : SeedData, IPrototype
+[Prototype("seed")]
+public sealed class SeedPrototype : SeedData, IPrototype
 {
-    [IdDataField] public string ID { get; private set; } = default!;
+    [IdDataField] public string ID { get; private init; } = default!;
 }
 
 public enum HarvestType : byte
@@ -58,35 +56,14 @@ public enum HarvestType : byte
 [DataDefinition]
 public partial struct SeedChemQuantity
 {
-    /// <summary>
-    /// Minimum amount of chemical that is added to produce, regardless of the potency
-    /// </summary>
     [DataField("Min")] public int Min;
-
-    /// <summary>
-    /// Maximum amount of chemical that can be produced after taking plant potency into account.
-    /// </summary>
     [DataField("Max")] public int Max;
-
-    /// <summary>
-    /// When chemicals are added to produce, the potency of the seed is divided with this value. Final chemical amount is the result plus the `Min` value.
-    /// Example: PotencyDivisor of 20 with seed potency of 55 results in 2.75, 55/20 = 2.75. If minimum is 1 then final result will be 3.75 of that chemical, 55/20+1 = 3.75.
-    /// </summary>
     [DataField("PotencyDivisor")] public int PotencyDivisor;
-
-    /// <summary>
-    /// Inherent chemical is one that is NOT result of mutation or crossbreeding. These chemicals are removed if species mutation is executed.
-    /// </summary>
-    [DataField("Inherent")] public bool Inherent = true;
 }
 
-// TODO Make Botany ECS and give it a proper API. I removed the limited access of this class because it's egregious how many systems needed access to it due to a lack of an actual API.
-/// <remarks>
-/// SeedData is no longer restricted because the number of friends is absolutely unreasonable.
-/// This entire data definition is unreasonable. I felt genuine fear looking at this, this is horrific. Send help.
-/// </remarks>
-// TODO: Hit Botany with hammers
+// TODO reduce the number of friends to a reasonable level. Requires ECS-ing things like plant holder component.
 [Virtual, DataDefinition]
+[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(ReagentEffect), typeof(MutationSystem))]
 public partial class SeedData
 {
     #region Tracking
@@ -135,70 +112,81 @@ public partial class SeedData
     /// <summary>
     ///     The entity prototype this seed spawns when it gets harvested.
     /// </summary>
-    [DataField]
-    public List<EntProtoId> ProductPrototypes = new();
+    [DataField("productPrototypes", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
+    public List<string> ProductPrototypes = new();
 
-    [DataField] public Dictionary<string, SeedChemQuantity> Chemicals = new();
+    [DataField("chemicals")] public Dictionary<string, SeedChemQuantity> Chemicals = new();
 
-    [DataField] public Dictionary<Gas, float> ConsumeGasses = new();
+    [DataField("consumeGasses")] public Dictionary<Gas, float> ConsumeGasses = new();
 
-    [DataField] public Dictionary<Gas, float> ExudeGasses = new();
+    [DataField("exudeGasses")] public Dictionary<Gas, float> ExudeGasses = new();
 
     #endregion
 
     #region Tolerances
 
-    [DataField] public float NutrientConsumption = 0.75f;
+    [DataField("nutrientConsumption")] public float NutrientConsumption = 0.75f;
 
-    [DataField] public float WaterConsumption = 0.5f;
-    [DataField] public float IdealHeat = 293f;
-    [DataField] public float HeatTolerance = 10f;
-    [DataField] public float IdealLight = 7f;
-    [DataField] public float LightTolerance = 3f;
-    [DataField] public float ToxinsTolerance = 4f;
+    [DataField("waterConsumption")] public float WaterConsumption = 0.5f;
+    [DataField("idealHeat")] public float IdealHeat = 293f;
+    [DataField("heatTolerance")] public float HeatTolerance = 10f;
+    [DataField("idealLight")] public float IdealLight = 7f;
+    [DataField("lightTolerance")] public float LightTolerance = 3f;
+    [DataField("toxinsTolerance")] public float ToxinsTolerance = 4f;
 
-    [DataField] public float LowPressureTolerance = 81f;
+    [DataField("lowPressureTolerance")] public float LowPressureTolerance = 81f;
 
-    [DataField] public float HighPressureTolerance = 121f;
+    [DataField("highPressureTolerance")] public float HighPressureTolerance = 121f;
 
-    [DataField] public float PestTolerance = 5f;
+    [DataField("pestTolerance")] public float PestTolerance = 5f;
 
-    [DataField] public float WeedTolerance = 5f;
+    [DataField("weedTolerance")] public float WeedTolerance = 5f;
 
-    [DataField] public float WeedHighLevelThreshold = 10f;
+    [DataField("weedHighLevelThreshold")] public float WeedHighLevelThreshold = 10f;
 
     #endregion
 
     #region General traits
 
-    [DataField] public float Endurance = 100f;
+    [DataField("endurance")] public float Endurance = 100f;
 
-    [DataField] public int Yield;
-    [DataField] public float Lifespan;
-    [DataField] public float Maturation;
-    [DataField] public float Production;
-    [DataField] public int GrowthStages = 6;
+    [DataField("yield")] public int Yield;
+    [DataField("lifespan")] public float Lifespan;
+    [DataField("maturation")] public float Maturation;
+    [DataField("production")] public float Production;
+    [DataField("growthStages")] public int GrowthStages = 6;
 
-    [DataField] public HarvestType HarvestRepeat = HarvestType.NoRepeat;
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("harvestRepeat")] public HarvestType HarvestRepeat = HarvestType.NoRepeat;
 
-    [DataField] public float Potency = 1f;
+    [DataField("potency")] public float Potency = 1f;
 
     /// <summary>
     ///     If true, cannot be harvested for seeds. Balances hybrids and
     ///     mutations.
     /// </summary>
-    [DataField] public bool Seedless = false;
+    [DataField("seedless")] public bool Seedless = false;
 
     /// <summary>
-    ///     If false, rapidly decrease health while growing. Used to kill off
+    ///     If true, rapidly decrease health while growing. Used to kill off
     ///     plants with "bad" mutations.
     /// </summary>
-    [DataField] public bool Viable = true;
+    [DataField("viable")] public bool Viable = true;
+
+    /// <summary>
+    ///     If true, fruit slips players.
+    /// </summary>
+    [DataField("slip")] public bool Slip = false;
+
+    /// <summary>
+    ///     If true, fruits are sentient.
+    /// </summary>
+    [DataField("sentient")] public bool Sentient = false;
 
     /// <summary>
     ///     If true, a sharp tool is required to harvest this plant.
     /// </summary>
-    [DataField] public bool Ligneous;
+    [DataField("ligneous")] public bool Ligneous;
 
     // No, I'm not removing these.
     // if you re-add these, make sure that they get cloned.
@@ -217,48 +205,28 @@ public partial class SeedData
 
     #region Cosmetics
 
-    [DataField(required: true)]
+    [DataField("plantRsi", required: true)]
     public ResPath PlantRsi { get; set; } = default!;
 
-    [DataField] public string PlantIconState { get; set; } = "produce";
+    [DataField("plantIconState")] public string PlantIconState { get; set; } = "produce";
 
-    /// <summary>
-    /// Screams random sound from collection SoundCollectionSpecifier
-    /// </summary>
-    [DataField]
-    public SoundSpecifier ScreamSound = new SoundCollectionSpecifier("PlantScreams", AudioParams.Default.WithVolume(-10));
+    [DataField("screamSound")]
+    public SoundSpecifier ScreamSound = new SoundPathSpecifier("/Audio/Voice/Human/malescream_1.ogg");
+
 
     [DataField("screaming")] public bool CanScream;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))] public string KudzuPrototype = "WeakKudzu";
+    [DataField("bioluminescent")] public bool Bioluminescent;
+    [DataField("bioluminescentColor")] public Color BioluminescentColor { get; set; } = Color.White;
 
-    [DataField] public bool TurnIntoKudzu;
-    [DataField] public string? SplatPrototype { get; set; }
+    public float BioluminescentRadius = 2f;
+
+    [DataField("kudzuPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))] public string KudzuPrototype = "WeakKudzu";
+
+    [DataField("turnIntoKudzu")] public bool TurnIntoKudzu;
+    [DataField("splatPrototype")] public string? SplatPrototype { get; set; }
 
     #endregion
-
-    /// <summary>
-    /// The mutation effects that have been applied to this plant.
-    /// </summary>
-    [DataField] public List<RandomPlantMutation> Mutations { get; set; } = new();
-
-    /// <summary>
-    ///     The seed prototypes this seed may mutate into when prompted to.
-    /// </summary>
-    [DataField]
-    public List<ProtoId<SeedPrototype>> MutationPrototypes = new();
-
-    /// <summary>
-    ///  Log impact for when the seed is planted.
-    /// </summary>
-    [DataField]
-    public LogImpact? PlantLogImpact = null;
-
-    /// <summary>
-    ///  Log impact for when the seed is harvested.
-    /// </summary>
-    [DataField]
-    public LogImpact? HarvestLogImpact = null;
 
     public SeedData Clone()
     {
@@ -272,8 +240,7 @@ public partial class SeedData
             Mysterious = Mysterious,
 
             PacketPrototype = PacketPrototype,
-            ProductPrototypes = new List<EntProtoId>(ProductPrototypes),
-            MutationPrototypes = new List<ProtoId<SeedPrototype>>(MutationPrototypes),
+            ProductPrototypes = new List<string>(ProductPrototypes),
             Chemicals = new Dictionary<string, SeedChemQuantity>(Chemicals),
             ConsumeGasses = new Dictionary<Gas, float>(ConsumeGasses),
             ExudeGasses = new Dictionary<Gas, float>(ExudeGasses),
@@ -301,95 +268,21 @@ public partial class SeedData
 
             Seedless = Seedless,
             Viable = Viable,
+            Slip = Slip,
+            Sentient = Sentient,
             Ligneous = Ligneous,
 
             PlantRsi = PlantRsi,
             PlantIconState = PlantIconState,
+            Bioluminescent = Bioluminescent,
             CanScream = CanScream,
             TurnIntoKudzu = TurnIntoKudzu,
+            BioluminescentColor = BioluminescentColor,
             SplatPrototype = SplatPrototype,
-            Mutations = new List<RandomPlantMutation>(),
 
             // Newly cloned seed is unique. No need to unnecessarily clone if repeatedly modified.
             Unique = true,
         };
-
-        newSeed.Mutations.AddRange(Mutations);
-        return newSeed;
-    }
-
-
-    /// <summary>
-    /// Handles copying most species defining data from 'other' to this seed while keeping the accumulated mutations intact.
-    /// </summary>
-    public SeedData SpeciesChange(SeedData other)
-    {
-        var newSeed = new SeedData
-        {
-            Name = other.Name,
-            Noun = other.Noun,
-            DisplayName = other.DisplayName,
-            Mysterious = other.Mysterious,
-
-            PacketPrototype = other.PacketPrototype,
-            ProductPrototypes = new List<EntProtoId>(other.ProductPrototypes),
-            MutationPrototypes = new List<ProtoId<SeedPrototype>>(other.MutationPrototypes),
-
-            Chemicals = new Dictionary<string, SeedChemQuantity>(Chemicals),
-            ConsumeGasses = new Dictionary<Gas, float>(ConsumeGasses),
-            ExudeGasses = new Dictionary<Gas, float>(ExudeGasses),
-
-            NutrientConsumption = NutrientConsumption,
-            WaterConsumption = WaterConsumption,
-            IdealHeat = IdealHeat,
-            HeatTolerance = HeatTolerance,
-            IdealLight = IdealLight,
-            LightTolerance = LightTolerance,
-            ToxinsTolerance = ToxinsTolerance,
-            LowPressureTolerance = LowPressureTolerance,
-            HighPressureTolerance = HighPressureTolerance,
-            PestTolerance = PestTolerance,
-            WeedTolerance = WeedTolerance,
-
-            Endurance = Endurance,
-            Yield = Yield,
-            Lifespan = Lifespan,
-            Maturation = Maturation,
-            Production = Production,
-            GrowthStages = other.GrowthStages,
-            HarvestRepeat = HarvestRepeat,
-            Potency = Potency,
-
-            Mutations = Mutations,
-
-            Seedless = Seedless,
-            Viable = Viable,
-            Ligneous = Ligneous,
-
-            PlantRsi = other.PlantRsi,
-            PlantIconState = other.PlantIconState,
-            CanScream = CanScream,
-            TurnIntoKudzu = TurnIntoKudzu,
-            SplatPrototype = other.SplatPrototype,
-
-            // Newly cloned seed is unique. No need to unnecessarily clone if repeatedly modified.
-            Unique = true,
-        };
-
-        // Adding the new chemicals from the new species.
-        foreach (var otherChem in other.Chemicals)
-        {
-            newSeed.Chemicals.TryAdd(otherChem.Key, otherChem.Value);
-        }
-
-        // Removing the inherent chemicals from the old species. Leaving mutated/crossbread ones intact.
-        foreach (var originalChem in newSeed.Chemicals)
-        {
-            if (!other.Chemicals.ContainsKey(originalChem.Key) && originalChem.Value.Inherent)
-            {
-                newSeed.Chemicals.Remove(originalChem.Key);
-            }
-        }
 
         return newSeed;
     }

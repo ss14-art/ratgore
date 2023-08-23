@@ -1,18 +1,16 @@
+using Content.Shared.Actions.ActionTypes;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Movement.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class JetpackComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite), DataField("moleUsage")]
     public float MoleUsage = 0.012f;
 
-    [DataField] public EntProtoId ToggleAction = "ActionToggleJetpack";
-
-    [DataField, AutoNetworkedField] public EntityUid? ToggleActionEntity;
+    [DataField("toggleAction", required: true)]
+    public InstantAction ToggleAction = new();
 
     [ViewVariables(VVAccess.ReadWrite), DataField("acceleration")]
     public float Acceleration = 1f;

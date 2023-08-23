@@ -1,8 +1,6 @@
 using System.Numerics;
-using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store;
-using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -10,15 +8,13 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 namespace Content.Shared.Revenant.Components;
 
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
 public sealed partial class RevenantComponent : Component
 {
     /// <summary>
     /// The total amount of Essence the revenant has. Functions
     /// as health and is regenerated.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    [AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 Essence = 75;
 
     [DataField("stolenEssenceCurrencyPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<CurrencyPrototype>))]
@@ -186,23 +182,7 @@ public sealed partial class RevenantComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("malfunctionRadius")]
     public float MalfunctionRadius = 3.5f;
-
-    /// <summary>
-    /// Whitelist for entities that can be emagged by malfunction.
-    /// Used to prevent ultra gamer things like ghost emagging chem or instantly launching the shuttle.
-    /// </summary>
-    [DataField]
-    public EntityWhitelist? MalfunctionWhitelist;
-
-    /// <summary>
-    /// Whitelist for entities that can never be emagged by malfunction.
-    /// </summary>
-    [DataField]
-    public EntityWhitelist? MalfunctionBlacklist;
     #endregion
-
-    [DataField]
-    public ProtoId<AlertPrototype> EssenceAlert = "Essence";
 
     #region Visualizer
     [DataField("state")]
@@ -214,6 +194,4 @@ public sealed partial class RevenantComponent : Component
     [DataField("harvestingState")]
     public string HarvestingState = "harvesting";
     #endregion
-
-    [DataField] public EntityUid? Action;
 }

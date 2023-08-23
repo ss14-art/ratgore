@@ -1,11 +1,11 @@
 namespace Content.Server.CartridgeLoader.Cartridges;
 
 [RegisterComponent]
-public sealed partial class NewsReaderCartridgeComponent : Component
+public sealed partial class NewsReadCartridgeComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite)]
-    public int ArticleNumber;
+    public int ArticleNum;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
     public bool NotificationOn = true;
 }

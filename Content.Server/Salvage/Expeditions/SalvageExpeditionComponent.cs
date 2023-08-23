@@ -11,7 +11,7 @@ namespace Content.Server.Salvage.Expeditions;
 /// <summary>
 /// Designates this entity as holding a salvage expedition.
 /// </summary>
-[RegisterComponent, AutoGenerateComponentPause]
+[RegisterComponent]
 public sealed partial class SalvageExpeditionComponent : SharedSalvageExpeditionComponent
 {
     public SalvageMissionParams MissionParams = default!;
@@ -26,7 +26,6 @@ public sealed partial class SalvageExpeditionComponent : SharedSalvageExpedition
     /// When the expeditions ends.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("endTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
     public TimeSpan EndTime;
 
     /// <summary>
@@ -40,21 +39,26 @@ public sealed partial class SalvageExpeditionComponent : SharedSalvageExpedition
     /// <summary>
     /// Countdown audio stream.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? Stream = null;
+    public IPlayingAudioStream? Stream = null;
 
     /// <summary>
     /// Sound that plays when the mission end is imminent.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public SoundSpecifier Sound = new SoundCollectionSpecifier("ExpeditionEnd")
+    [ViewVariables(VVAccess.ReadWrite), DataField("sound")]
+    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Misc/tension_session.ogg")
     {
         Params = AudioParams.Default.WithVolume(-5),
     };
 
     /// <summary>
-    /// Song selected on MapInit so we can predict the audio countdown properly.
+    /// The difficulty this mission had or, in the future, was selected.
     /// </summary>
-    [DataField]
-    public SoundPathSpecifier SelectedSong;
+    [ViewVariables(VVAccess.ReadWrite), DataField("difficulty")]
+    public DifficultyRating Difficulty;
+
+    /// <summary>
+    /// List of items to order on mission completion
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField("rewards", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
+    public List<string> Rewards = default!;
 }

@@ -1,14 +1,14 @@
-using Content.Shared.Damage.Systems;
+using Content.Server.Damage.Systems;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared.Damage.Components;
+namespace Content.Server.Damage.Components;
 
 /// <summary>
 /// Should the entity take damage / be stunned if colliding at a speed above MinimumSpeed?
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(DamageOnHighSpeedImpactSystem))]
+[RegisterComponent, Access(typeof(DamageOnHighSpeedImpactSystem))]
 public sealed partial class DamageOnHighSpeedImpactComponent : Component
 {
     [DataField("minimumSpeed"), ViewVariables(VVAccess.ReadWrite)]
@@ -33,7 +33,7 @@ public sealed partial class DamageOnHighSpeedImpactComponent : Component
     public float DamageCooldown = 2f;
 
     [DataField("lastHit", customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan? LastHit;
+    public TimeSpan LastHit = TimeSpan.Zero;
 
     [DataField("damage", required: true), ViewVariables(VVAccess.ReadWrite)]
     public DamageSpecifier Damage = default!;

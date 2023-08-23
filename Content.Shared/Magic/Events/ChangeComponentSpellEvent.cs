@@ -1,8 +1,7 @@
-﻿using Content.Shared.Actions;
-using Content.Shared.Chat;
+using Content.Shared.Actions;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.Magic.Events;
+namespace Content.Server.Magic.Events;
 
 /// <summary>
 ///     Spell that uses the magic of ECS to add & remove components. Components are first removed, then added.
@@ -22,6 +21,4 @@ public sealed partial class ChangeComponentsSpellEvent : EntityTargetActionEvent
 
     [DataField("speech")]
     public string? Speech { get; private set; }
-
-    public InGameICChatType ChatType { get; } = InGameICChatType.Speak;
 }

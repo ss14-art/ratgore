@@ -1,29 +1,25 @@
-﻿using System.Collections;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Content.Shared.Atmos.EntitySystems;
-using Content.Shared.Atmos.Reactions;
+using Content.Server.Atmos.Reactions;
+using Content.Shared.Atmos;
 using Robust.Shared.Serialization;
-using Robust.Shared.Utility;
 
-namespace Content.Shared.Atmos
+namespace Content.Server.Atmos
 {
     /// <summary>
     ///     A general-purpose, variable volume gas mixture.
     /// </summary>
     [Serializable]
     [DataDefinition]
-    public sealed partial class GasMixture : IEquatable<GasMixture>, ISerializationHooks, IEnumerable<(Gas gas, float moles)>
+    public sealed partial class GasMixture : IEquatable<GasMixture>, ISerializationHooks
     {
         public static GasMixture SpaceGas => new() {Volume = Atmospherics.CellVolume, Temperature = Atmospherics.TCMB, Immutable = true};
 
-        // No access, to ensure immutable mixtures are never accidentally mutated.
-        [Access(typeof(SharedAtmosphereSystem), typeof(SharedAtmosDebugOverlaySystem), typeof(GasEnumerator), Other = AccessPermissions.Read)] // Sunrise-Edit
-        [DataField(customTypeSerializer: typeof(GasArraySerializer))]
+        // This must always have a length that is a multiple of 4 for SIMD acceleration.
+        [DataField("moles")]
+        [ViewVariables(VVAccess.ReadWrite)]
         public float[] Moles = new float[Atmospherics.AdjustedNumberOfGases];
-
-        public float this[int gas] => Moles[gas];
 
         [DataField("temperature")]
         [ViewVariables(VVAccess.ReadWrite)]
@@ -33,9 +29,10 @@ namespace Content.Shared.Atmos
         public bool Immutable { get; private set; }
 
         [ViewVariables]
-        public readonly float[] ReactionResults =
+        public readonly Dictionary<GasReaction, float> ReactionResults = new()
         {
-            0f,
+            // We initialize the dictionary here.
+            { GasReaction.Fire, 0f }
         };
 
         [ViewVariables]
@@ -61,9 +58,8 @@ namespace Content.Shared.Atmos
             get => _temperature;
             set
             {
-                DebugTools.Assert(!float.IsNaN(value));
-                if (!Immutable)
-                    _temperature = MathF.Min(MathF.Max(value, Atmospherics.TCMB), Atmospherics.Tmax);
+                if (Immutable) return;
+                _temperature = MathF.Max(value, Atmospherics.TCMB);
             }
         }
 
@@ -80,25 +76,6 @@ namespace Content.Shared.Atmos
             if (volume < 0)
                 volume = 0;
             Volume = volume;
-        }
-
-        public GasMixture(float[] moles, float temp, float volume = Atmospherics.CellVolume)
-        {
-            if (moles.Length != Atmospherics.AdjustedNumberOfGases)
-                throw new InvalidOperationException($"Invalid mole array length");
-
-            if (volume < 0)
-                volume = 0;
-
-            DebugTools.Assert(!float.IsNaN(temp));
-            _temperature = temp;
-            Moles = moles;
-            Volume = volume;
-        }
-
-        public GasMixture(GasMixture toClone)
-        {
-            CopyFrom(toClone);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -138,16 +115,18 @@ namespace Content.Shared.Atmos
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AdjustMoles(int gasId, float quantity)
         {
-            if (Immutable)
-                return;
+            if (!Immutable)
+            {
+                if (!float.IsFinite(quantity))
+                    throw new ArgumentException($"Invalid quantity \"{quantity}\" specified!", nameof(quantity));
 
-            if (!float.IsFinite(quantity))
-                throw new ArgumentException($"Invalid quantity \"{quantity}\" specified!", nameof(quantity));
+                Moles[gasId] += quantity;
 
-            // Clamping is needed because x - x can be negative with floating point numbers. If we don't
-            // clamp here, the caller always has to call GetMoles(), clamp, then SetMoles().
-            ref var moles = ref Moles[gasId];
-            moles = MathF.Max(moles + quantity, 0);
+                var moles = Moles[gasId];
+
+                if (!float.IsFinite(moles) || float.IsNegative(moles))
+                    throw new Exception($"Invalid mole quantity \"{moles}\" in gas Id {gasId} after adjusting moles with \"{quantity}\"!");
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -185,8 +164,7 @@ namespace Content.Shared.Atmos
             {
                 var moles = Moles[i];
                 var otherMoles = removed.Moles[i];
-
-                if ((moles < Atmospherics.GasMinMoles || float.IsNaN(moles)) && !Immutable)
+                if (moles < Atmospherics.GasMinMoles || float.IsNaN(moles))
                     Moles[i] = 0;
 
                 if (otherMoles < Atmospherics.GasMinMoles || float.IsNaN(otherMoles))
@@ -202,12 +180,9 @@ namespace Content.Shared.Atmos
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyFrom(GasMixture sample)
+        public void CopyFromMutable(GasMixture sample)
         {
-            if (Immutable)
-                return;
-
-            Volume = sample.Volume;
+            if (Immutable) return;
             sample.Moles.CopyTo(Moles, 0);
             Temperature = sample.Temperature;
         }
@@ -228,9 +203,6 @@ namespace Content.Shared.Atmos
 
         void ISerializationHooks.AfterDeserialization()
         {
-            // ISerializationHooks is obsolete.
-            // TODO add fixed-length-array serializer
-
             // The arrays MUST have a specific length.
             Array.Resize(ref Moles, Atmospherics.AdjustedNumberOfGases);
         }
@@ -249,16 +221,6 @@ namespace Content.Shared.Atmos
             return new GasMixtureStringRepresentation(TotalMoles, Temperature, Pressure, molesPerGas);
         }
 
-        GasEnumerator GetEnumerator()
-        {
-            return new GasEnumerator(this);
-        }
-
-        IEnumerator<(Gas gas, float moles)> IEnumerable<(Gas gas, float moles)>.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         public override bool Equals(object? obj)
         {
             if (obj is GasMixture mix)
@@ -268,12 +230,8 @@ namespace Content.Shared.Atmos
 
         public bool Equals(GasMixture? other)
         {
-            if (ReferenceEquals(this, other))
-                return true;
-
-            if (ReferenceEquals(null, other))
-                return false;
-
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
             return Moles.SequenceEqual(other.Moles)
                    && _temperature.Equals(other._temperature)
                    && ReactionResults.SequenceEqual(other.ReactionResults)
@@ -299,46 +257,16 @@ namespace Content.Shared.Atmos
             return hashCode.ToHashCode();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         public GasMixture Clone()
         {
-            if (Immutable)
-                return this;
-
             var newMixture = new GasMixture()
             {
                 Moles = (float[])Moles.Clone(),
                 _temperature = _temperature,
+                Immutable = Immutable,
                 Volume = Volume,
             };
             return newMixture;
-        }
-
-        public struct GasEnumerator(GasMixture mixture) : IEnumerator<(Gas gas, float moles)>
-        {
-            private int _idx = -1;
-
-            public void Dispose()
-            {
-                // Nada.
-            }
-
-            public bool MoveNext()
-            {
-                return ++_idx < Atmospherics.TotalNumberOfGases;
-            }
-
-            public void Reset()
-            {
-                _idx = -1;
-            }
-
-            public (Gas gas, float moles) Current => ((Gas)_idx, mixture.Moles[_idx]);
-            object? IEnumerator.Current => Current;
         }
     }
 }

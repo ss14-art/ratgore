@@ -1,23 +1,17 @@
 using Robust.Shared.Audio;
 
-namespace Content.Shared.Sound.Components;
-
-/// <summary>
-/// Base sound emitter which defines most of the data fields.
-/// Accepts both single sounds and sound collections.
-/// </summary>
-public abstract partial class BaseEmitSoundComponent : Component
+namespace Content.Shared.Sound.Components
 {
     /// <summary>
-    /// The <see cref="SoundSpecifier"/> to play.
+    /// Base sound emitter which defines most of the data fields.
+    /// Accepts both single sounds and sound collections.
     /// </summary>
-    [DataField(required: true), AutoNetworkedField]
-    public SoundSpecifier? Sound;
+    public abstract partial class BaseEmitSoundComponent : Component
+    {
+        public static readonly AudioParams DefaultParams = AudioParams.Default.WithVolume(-2f);
 
-    /// <summary>
-    /// Play the sound at the position instead of parented to the source entity.
-    /// Useful if the entity is deleted after.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool Positional;
+        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField("sound", required: true)]
+        public SoundSpecifier? Sound;
+    }
 }

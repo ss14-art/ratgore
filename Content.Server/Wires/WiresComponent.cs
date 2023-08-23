@@ -1,6 +1,4 @@
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
-using Content.Shared.Tag; // Shitmed Change - Starlight Abductors
 
 namespace Content.Server.Wires;
 
@@ -10,14 +8,14 @@ public sealed partial class WiresComponent : Component
     /// <summary>
     ///     The name of this entity's internal board.
     /// </summary>
-    [DataField]
-    public LocId BoardName { get; set; } = "wires-board-name-default";
+    [DataField("BoardName")]
+    public string BoardName { get; set; } = "Wires";
 
     /// <summary>
     ///     The layout ID of this entity's wires.
     /// </summary>
-    [DataField(required: true)]
-    public ProtoId<WireLayoutPrototype> LayoutId { get; set; } = default!;
+    [DataField("LayoutId", required: true)]
+    public string LayoutId { get; set; } = default!;
 
     /// <summary>
     ///     The serial number of this board. Randomly generated upon start,
@@ -50,7 +48,7 @@ public sealed partial class WiresComponent : Component
     ///     layout ID is generated, or if a new wire order should be generated every time.
     /// </summary>
     [DataField("alwaysRandomize")]
-    public bool AlwaysRandomize { get; private set; } = true; // Nyanotrasen - Always randomize wires
+    public bool AlwaysRandomize { get; private set; }
 
     /// <summary>
     ///     Per wire status, keyed by an object.
@@ -66,14 +64,6 @@ public sealed partial class WiresComponent : Component
     [ViewVariables]
     public Dictionary<object, object> StateData { get; } = new();
 
-    [DataField]
+    [DataField("pulseSound")]
     public SoundSpecifier PulseSound = new SoundPathSpecifier("/Audio/Effects/multitool_pulse.ogg");
-
-    // Shitmed Change - Starlight Abductors
-    [ViewVariables]
-    public bool ViewWires = false;
-
-    [DataField]
-    public ProtoId<TagPrototype> ShowWiresTag = "ShowWires";
-    // Shitmed Change End
 }

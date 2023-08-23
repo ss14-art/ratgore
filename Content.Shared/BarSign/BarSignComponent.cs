@@ -1,27 +1,24 @@
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-namespace Content.Shared.BarSign;
-
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class BarSignComponent : Component
+namespace Content.Shared.BarSign
 {
-    /// <summary>
-    /// The current bar sign prototype being displayed.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public ProtoId<BarSignPrototype>? Current;
-}
+    [RegisterComponent, NetworkedComponent]
+    public sealed partial class BarSignComponent : Component
+    {
+        [DataField("current", customTypeSerializer:typeof(PrototypeIdSerializer<BarSignPrototype>))]
+        public string? CurrentSign;
+    }
 
-[Serializable, NetSerializable]
-public enum BarSignUiKey : byte
-{
-    Key
-}
+    [Serializable, NetSerializable]
+    public sealed class BarSignComponentState : ComponentState
+    {
+        public string? CurrentSign;
 
-[Serializable, NetSerializable]
-public sealed class SetBarSignMessage(ProtoId<BarSignPrototype> sign) : BoundUserInterfaceMessage
-{
-    public ProtoId<BarSignPrototype> Sign = sign;
+        public BarSignComponentState(string? current)
+        {
+            CurrentSign = current;
+        }
+    }
 }

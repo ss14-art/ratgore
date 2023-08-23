@@ -1,4 +1,4 @@
-using Robust.Shared.Audio;
+﻿using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.StationEvents.Components;
@@ -6,7 +6,7 @@ namespace Content.Server.StationEvents.Components;
 /// <summary>
 ///     Defines basic data for a station event
 /// </summary>
-[RegisterComponent, AutoGenerateComponentPause]
+[RegisterComponent]
 public sealed partial class StationEventComponent : Component
 {
     public const float WeightVeryLow = 0.0f;
@@ -15,43 +15,49 @@ public sealed partial class StationEventComponent : Component
     public const float WeightHigh = 15.0f;
     public const float WeightVeryHigh = 20.0f;
 
-    [DataField]
+    [DataField("weight")]
     public float Weight = WeightNormal;
 
-    [DataField]
-    public bool StartAnnouncement;
+    [DataField("startAnnouncement")]
+    public string? StartAnnouncement;
 
-    [DataField]
-    public bool EndAnnouncement;
+    [DataField("endAnnouncement")]
+    public string? EndAnnouncement;
+
+    [DataField("startAudio")]
+    public SoundSpecifier? StartAudio;
+
+    [DataField("endAudio")]
+    public SoundSpecifier? EndAudio;
 
     /// <summary>
     ///     In minutes, when is the first round time this event can start
     /// </summary>
-    [DataField]
+    [DataField("earliestStart")]
     public int EarliestStart = 5;
 
     /// <summary>
     ///     In minutes, the amount of time before the same event can occur again
     /// </summary>
-    [DataField]
+    [DataField("reoccurrenceDelay")]
     public int ReoccurrenceDelay = 30;
 
     /// <summary>
     ///     How long after being added does the event start
     /// </summary>
-    [DataField]
+    [DataField("startDelay")]
     public TimeSpan StartDelay = TimeSpan.Zero;
 
     /// <summary>
     ///     How long the event lasts.
     /// </summary>
-    [DataField]
+    [DataField("duration")]
     public TimeSpan? Duration = TimeSpan.FromSeconds(1);
 
     /// <summary>
     ///     The max amount of time the event lasts.
     /// </summary>
-    [DataField]
+    [DataField("maxDuration")]
     public TimeSpan? MaxDuration;
 
     /// <summary>
@@ -60,26 +66,24 @@ public sealed partial class StationEventComponent : Component
     /// <remarks>
     ///     To avoid running deadly events with low-pop
     /// </remarks>
-    [DataField]
+    [DataField("minimumPlayers")]
     public int MinimumPlayers;
 
     /// <summary>
     ///     How many times this even can occur in a single round
     /// </summary>
-    [DataField]
+    [DataField("maxOccurrences")]
     public int? MaxOccurrences;
 
     /// <summary>
     /// When the station event starts.
     /// </summary>
     [DataField("startTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
     public TimeSpan StartTime;
 
     /// <summary>
     /// When the station event ends.
     /// </summary>
     [DataField("endTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
     public TimeSpan? EndTime;
 }

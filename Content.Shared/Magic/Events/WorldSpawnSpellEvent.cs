@@ -1,37 +1,33 @@
 ﻿using System.Numerics;
 using Content.Shared.Actions;
-using Content.Shared.Chat;
 using Content.Shared.Storage;
 
-namespace Content.Shared.Magic.Events;
-
-// TODO: This class needs combining with InstantSpawnSpellEvent
+namespace Content.Server.Magic.Events;
 
 public sealed partial class WorldSpawnSpellEvent : WorldTargetActionEvent, ISpeakSpell
 {
+    // TODO:This class needs combining with InstantSpawnSpellEvent
+
     /// <summary>
     /// The list of prototypes this spell will spawn
     /// </summary>
-    [DataField]
-    public List<EntitySpawnEntry> Prototypes = new();
+    [DataField("prototypes")]
+    public List<EntitySpawnEntry> Contents = new();
 
     // TODO: This offset is liable for deprecation.
-    // TODO: Target tile via code instead?
     /// <summary>
     /// The offset the prototypes will spawn in on relative to the one prior.
     /// Set to 0,0 to have them spawn on the same tile.
     /// </summary>
-    [DataField]
+    [DataField("offset")]
     public Vector2 Offset;
 
     /// <summary>
     /// Lifetime to set for the entities to self delete
     /// </summary>
-    [DataField]
-    public float? Lifetime;
+    [DataField("lifetime")] public float? Lifetime;
 
-    [DataField]
+    [DataField("speech")]
     public string? Speech { get; private set; }
-
-    public InGameICChatType ChatType { get; } = InGameICChatType.Speak;
 }
+

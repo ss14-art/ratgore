@@ -1,14 +1,14 @@
 using Content.Shared.Actions;
+using Content.Shared.Actions.ActionTypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.VendingMachines
 {
-    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+    [RegisterComponent, NetworkedComponent]
     public sealed partial class VendingMachineComponent : Component
     {
         /// <summary>
@@ -87,7 +87,7 @@ namespace Content.Shared.VendingMachines
         /// </summary>
         [DataField("soundVend")]
         // Grabbed from: https://github.com/discordia-space/CEV-Eris/blob/f702afa271136d093ddeb415423240a2ceb212f0/sound/machines/vending_drop.ogg
-        public SoundSpecifier SoundVend = new SoundPathSpecifier("/Audio/SimpleStation14/Machines/machine_vend.ogg")
+        public SoundSpecifier SoundVend = new SoundPathSpecifier("/Audio/Machines/machine_vend.ogg")
         {
             Params = new AudioParams
             {
@@ -105,13 +105,8 @@ namespace Content.Shared.VendingMachines
         /// <summary>
         ///     The action available to the player controlling the vending machine
         /// </summary>
-        [DataField("action", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        [AutoNetworkedField]
-        public string? Action = "ActionVendingThrow";
-
-        [DataField("actionEntity")]
-        [AutoNetworkedField]
-        public EntityUid? ActionEntity;
+        [DataField("action", customTypeSerializer: typeof(PrototypeIdSerializer<InstantActionPrototype>))]
+        public string? Action = "VendingThrow";
 
         public float NonLimitedEjectForce = 7.5f;
 
@@ -120,14 +115,6 @@ namespace Content.Shared.VendingMachines
         public float EjectAccumulator = 0f;
         public float DenyAccumulator = 0f;
         public float DispenseOnHitAccumulator = 0f;
-
-        /// <summary>
-        /// The quality of the stock in the vending machine on spawn.
-        /// Represents the percentage chance (0.0f = 0%, 1.0f = 100%) each set of items in the machine is fully-stocked.
-        /// If not fully stocked, the stock will have a random value between 0 (inclusive) and max stock (exclusive).
-        /// </summary>
-        [DataField]
-        public float InitialStockQuality = 1.0f;
 
         /// <summary>
         ///     While disabled by EMP it randomly ejects items
@@ -186,12 +173,6 @@ namespace Content.Shared.VendingMachines
         /// </summary>
         [DataField("loopDeny")]
         public bool LoopDenyAnimation = true;
-
-        /// <summary>
-        /// HULLROT: every price in the vending machine is multiplied by this. useful for making shit more/less expensive. set to 0 to make everything free.
-        /// </summary>
-        [DataField("globalPriceMod")]
-        public float GlobalPriceMod = 1;
         #endregion
     }
 
@@ -204,9 +185,6 @@ namespace Content.Shared.VendingMachines
         public string ID;
         [ViewVariables(VVAccess.ReadWrite)]
         public uint Amount;
-        [ViewVariables(VVAccess.ReadWrite)]
-        public double Price = 0;
-
         public VendingMachineInventoryEntry(InventoryType type, string id, uint amount)
         {
             Type = type;

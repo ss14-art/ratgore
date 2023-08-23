@@ -1,20 +1,32 @@
-using Content.Shared.Actions;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+﻿using Content.Shared.Actions;
+using Content.Shared.Actions.ActionTypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Silicons.Laws.Components;
 
 /// <summary>
 /// This is used for entities which are bound to silicon laws and can view them.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedSiliconLawSystem))]
+[RegisterComponent, Access(typeof(SharedSiliconLawSystem))]
 public sealed partial class SiliconLawBoundComponent : Component
 {
     /// <summary>
+    /// The sidebar action that toggles the laws screen.
+    /// </summary>
+    [DataField("viewLawsAction", customTypeSerializer: typeof(PrototypeIdSerializer<InstantActionPrototype>))]
+    public string ViewLawsAction = "ViewLaws";
+
+    /// <summary>
+    /// The action for toggling laws. Stored here so we can remove it later.
+    /// </summary>
+    [DataField("providedAction")]
+    public InstantAction? ProvidedAction;
+
+    /// <summary>
     /// The last entity that provided laws to this entity.
     /// </summary>
-    [DataField]
+    [DataField("lastLawProvider")]
     public EntityUid? LastLawProvider;
 }
 
@@ -31,7 +43,7 @@ public record struct GetSiliconLawsEvent(EntityUid Entity)
 {
     public EntityUid Entity = Entity;
 
-    public SiliconLawset Laws = new();
+    public readonly List<SiliconLaw> Laws = new();
 
     public bool Handled = false;
 }
@@ -51,11 +63,9 @@ public enum SiliconLawsUiKey : byte
 public sealed class SiliconLawBuiState : BoundUserInterfaceState
 {
     public List<SiliconLaw> Laws;
-    public HashSet<string>? RadioChannels;
 
-    public SiliconLawBuiState(List<SiliconLaw> laws, HashSet<string>? radioChannels)
+    public SiliconLawBuiState(List<SiliconLaw> laws)
     {
         Laws = laws;
-        RadioChannels = radioChannels;
     }
 }

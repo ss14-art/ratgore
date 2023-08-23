@@ -6,13 +6,12 @@ namespace Content.Shared.Gravity;
 /// <summary>
 /// Indicates this entity is shaking due to gravity changes.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class GravityShakeComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite), DataField("shakeTimes")]
     public int ShakeTimes;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
-    [AutoPausedField]
+    [DataField("nextShake", customTypeSerializer:typeof(TimeOffsetSerializer))]
     public TimeSpan NextShake;
 }

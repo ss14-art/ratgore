@@ -1,16 +1,16 @@
 using Content.Server.Popups;
 using Content.Shared.Actions;
-using Content.Shared.Actions.Events;
 using Content.Shared.Alert;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Physics;
+using Content.Shared.Doors.Components;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Physics;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Timing;
+using Content.Server.Speech.Muting;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Timing;
-using Content.Shared.Abilities.Psionics; //Nyano - Summary: Makes Mime psionic.
-using Content.Shared.Speech.Muting;
 
 namespace Content.Server.Abilities.Mime
 {
@@ -20,7 +20,6 @@ namespace Content.Server.Abilities.Mime
         [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
         [Dependency] private readonly AlertsSystem _alertsSystem = default!;
         [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
-        [Dependency] private readonly SharedPsionicAbilitiesSystem _psionics = default!;
         [Dependency] private readonly TurfSystem _turf = default!;
         [Dependency] private readonly IMapManager _mapMan = default!;
         [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -32,7 +31,6 @@ namespace Content.Server.Abilities.Mime
             SubscribeLocalEvent<MimePowersComponent, ComponentInit>(OnComponentInit);
             SubscribeLocalEvent<MimePowersComponent, InvisibleWallActionEvent>(OnInvisibleWall);
         }
-
         public override void Update(float frameTime)
         {
             base.Update(frameTime);
@@ -55,8 +53,8 @@ namespace Content.Server.Abilities.Mime
         private void OnComponentInit(EntityUid uid, MimePowersComponent component, ComponentInit args)
         {
             EnsureComp<MutedComponent>(uid);
-            _alertsSystem.ShowAlert(uid, component.VowAlert);
-            _actionsSystem.AddAction(uid, ref component.InvisibleWallActionEntity, component.InvisibleWallAction, uid);
+            _actionsSystem.AddAction(uid, component.InvisibleWallAction, uid);
+            _alertsSystem.ShowAlert(uid, AlertType.VowOfSilence);
         }
 
         /// <summary>
@@ -86,7 +84,7 @@ namespace Content.Server.Abilities.Mime
             }
 
             // Check there are no mobs there
-            foreach (var entity in _lookupSystem.GetLocalEntitiesIntersecting(tile.Value, 0f))
+            foreach (var entity in _lookupSystem.GetEntitiesIntersecting(tile.Value, 0f))
             {
                 if (HasComp<MobStateComponent>(entity) && entity != uid)
                 {
@@ -94,9 +92,6 @@ namespace Content.Server.Abilities.Mime
                     return;
                 }
             }
-            // Begin Nyano-code: mime powers are psionic.
-            _psionics.LogPowerUsed(uid, "invisible wall");
-            // End Nyano-code.
             _popupSystem.PopupEntity(Loc.GetString("mime-invisible-wall-popup", ("mime", uid)), uid);
             // Make sure we set the invisible wall to despawn properly
             Spawn(component.WallPrototype, _turf.GetTileCenter(tile.Value));
@@ -119,9 +114,9 @@ namespace Content.Server.Abilities.Mime
             mimePowers.VowBroken = true;
             mimePowers.VowRepentTime = _timing.CurTime + mimePowers.VowCooldown;
             RemComp<MutedComponent>(uid);
-            _alertsSystem.ClearAlert(uid, mimePowers.VowAlert);
-            _alertsSystem.ShowAlert(uid, mimePowers.VowBrokenAlert);
-            _actionsSystem.RemoveAction(uid, mimePowers.InvisibleWallActionEntity);
+            _alertsSystem.ClearAlert(uid, AlertType.VowOfSilence);
+            _alertsSystem.ShowAlert(uid, AlertType.VowBroken);
+            _actionsSystem.RemoveAction(uid, mimePowers.InvisibleWallAction);
         }
 
         /// <summary>
@@ -142,9 +137,13 @@ namespace Content.Server.Abilities.Mime
             mimePowers.ReadyToRepent = false;
             mimePowers.VowBroken = false;
             AddComp<MutedComponent>(uid);
-            _alertsSystem.ClearAlert(uid, mimePowers.VowAlert);
-            _alertsSystem.ShowAlert(uid, mimePowers.VowBrokenAlert);
-            _actionsSystem.AddAction(uid, ref mimePowers.InvisibleWallActionEntity, mimePowers.InvisibleWallAction, uid);
+            _alertsSystem.ClearAlert(uid, AlertType.VowBroken);
+            _alertsSystem.ShowAlert(uid, AlertType.VowOfSilence);
+            _actionsSystem.AddAction(uid, mimePowers.InvisibleWallAction, uid);
         }
+    }
+
+    public sealed partial class InvisibleWallActionEvent : InstantActionEvent
+    {
     }
 }

@@ -1,26 +1,25 @@
-using System.Collections.Frozen;
-using System.Linq;
-using Content.Shared.FixedPoint;
+﻿using System.Linq;
 using System.Text.Json.Serialization;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Body.Prototypes;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reaction;
-using Content.Shared.Contraband;
-using Content.Shared.EntityEffects;
-using Content.Shared.Localizations;
-using Content.Shared.Metabolism;
+using Content.Shared.Database;
+using Content.Shared.FixedPoint;
 using Content.Shared.Nutrition;
-using Content.Shared.Roles;
-using Content.Shared.Slippery;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Chemistry.Reagent
 {
-    [Prototype]
+    [Prototype("reagent")]
     [DataDefinition]
     public sealed partial class ReagentPrototype : IPrototype, IInheritingPrototype
     {
@@ -28,72 +27,47 @@ namespace Content.Shared.Chemistry.Reagent
         [IdDataField]
         public string ID { get; private set; } = default!;
 
-        [DataField(required: true)]
-        private LocId Name { get; set; }
+        [DataField("name", required: true)]
+        private string Name { get; set; } = default!;
 
         [ViewVariables(VVAccess.ReadOnly)]
         public string LocalizedName => Loc.GetString(Name);
 
-        [DataField]
+        [DataField("group")]
         public string Group { get; private set; } = "Unknown";
 
-        [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<ReagentPrototype>))]
+        [ParentDataFieldAttribute(typeof(AbstractPrototypeIdArraySerializer<ReagentPrototype>))]
         public string[]? Parents { get; private set; }
 
         [NeverPushInheritance]
-        [AbstractDataField]
+        [AbstractDataFieldAttribute]
         public bool Abstract { get; private set; }
 
         [DataField("desc", required: true)]
-        private LocId Description { get; set; }
+        private string Description { get; set; } = default!;
 
         [ViewVariables(VVAccess.ReadOnly)]
         public string LocalizedDescription => Loc.GetString(Description);
 
         [DataField("physicalDesc", required: true)]
-        private LocId PhysicalDescription { get; set; } = default!;
+        private string PhysicalDescription { get; set; } = default!;
 
         [ViewVariables(VVAccess.ReadOnly)]
         public string LocalizedPhysicalDescription => Loc.GetString(PhysicalDescription);
 
         /// <summary>
-        ///     The degree of contraband severity this reagent is considered to have.
-        ///     If AllowedDepartments or AllowedJobs are set, they take precedent and override this value.
-        /// </summary>
-        [DataField]
-        public ProtoId<ContrabandSeverityPrototype>? ContrabandSeverity = null;
-
-        /// <summary>
-        ///     Which departments is this reagent restricted to, if any?
-        /// </summary>
-        [DataField]
-        public HashSet<ProtoId<DepartmentPrototype>> AllowedDepartments = new();
-
-        /// <summary>
-        ///     Which jobs is this reagent restricted to, if any?
-        /// </summary>
-        [DataField]
-        public HashSet<ProtoId<JobPrototype>> AllowedJobs = new();
-
-        /// <summary>
         ///     Is this reagent recognizable to the average spaceman (water, welding fuel, ketchup, etc)?
         /// </summary>
-        [DataField]
-        public bool Recognizable;
+        [DataField("recognizable")]
+        public bool Recognizable = false;
 
-        /// <summary>
-        /// Whether this reagent stands out (blood, slime).
-        /// </summary>
-        [DataField]
-        public bool Standsout;
-
-        [DataField]
-        public ProtoId<FlavorPrototype>? Flavor;
+        [DataField("flavor", customTypeSerializer:typeof(PrototypeIdSerializer<FlavorPrototype>))]
+        public string? Flavor;
 
         /// <summary>
         /// There must be at least this much quantity in a solution to be tasted.
         /// </summary>
-        [DataField]
+        [DataField("flavorMinimum")]
         public FixedPoint2 FlavorMinimum = FixedPoint2.New(0.1f);
 
         [DataField("color")]
@@ -103,92 +77,50 @@ namespace Content.Shared.Chemistry.Reagent
         ///     The specific heat of the reagent.
         ///     How much energy it takes to heat one unit of this reagent by one Kelvin.
         /// </summary>
-        [DataField]
+        [DataField("specificHeat")]
         public float SpecificHeat { get; private set; } = 1.0f;
 
-        [DataField]
+        [DataField("boilingPoint")]
         public float? BoilingPoint { get; private set; }
 
-        [DataField]
+        [DataField("meltingPoint")]
         public float? MeltingPoint { get; private set; }
 
-        [DataField]
+        [DataField("metamorphicSprite")]
         public SpriteSpecifier? MetamorphicSprite { get; private set; } = null;
 
-        [DataField]
-        public int MetamorphicMaxFillLevels { get; private set; } = 0;
-
-        [DataField]
-        public string? MetamorphicFillBaseName { get; private set; } = null;
-
-        [DataField]
-        public bool MetamorphicChangeColor { get; private set; } = true;
-
         /// <summary>
-        /// If not null, makes something slippery. Also defines slippery interactions like stun time and launch mult.
+        /// If this reagent is part of a puddle is it slippery.
         /// </summary>
-        [DataField]
-        public SlipperyEffectEntry? SlipData;
-
-        /// <summary>
-        /// The speed at which the reagent evaporates over time.
-        /// </summary>
-        [DataField]
-        public FixedPoint2 EvaporationSpeed = FixedPoint2.Zero;
-
-        /// <summary>
-        /// If this reagent can be used to mop up other reagents.
-        /// </summary>
-        [DataField]
-        public bool Absorbent = false;
-
-        /// <summary>
-        /// How easily this reagent becomes fizzy when aggitated.
-        /// 0 - completely flat, 1 - fizzes up when nudged.
-        /// </summary>
-        [DataField]
-        public float Fizziness;
+        [DataField("slippery")]
+        public bool Slippery = false;
 
         /// <summary>
         /// How much reagent slows entities down if it's part of a puddle.
         /// 0 - no slowdown; 1 - can't move.
         /// </summary>
-        [DataField]
-        public float Viscosity;
+        [DataField("viscosity")]
+        public float Viscosity = 0;
 
-        /// <summary>
-        /// Linear Friction Multiplier for a reagent
-        /// 0 - frictionless, 1 - no effect on friction
-        /// </summary>
-        [DataField]
-        public float Friction = 1.0f;
+        [DataField("metabolisms", serverOnly: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<ReagentEffectsEntry, MetabolismGroupPrototype>))]
+        public Dictionary<string, ReagentEffectsEntry>? Metabolisms = null;
 
-        /// <summary>
-        /// Should this reagent work on the dead?
-        /// </summary>
-        [DataField]
-        public bool WorksOnTheDead;
+        [DataField("reactiveEffects", serverOnly: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<ReactiveReagentEffectEntry, ReactiveGroupPrototype>))]
+        public Dictionary<string, ReactiveReagentEffectEntry>? ReactiveEffects = null;
 
-        [DataField, AlwaysPushInheritance]
-        public ReagentMetabolisms? Metabolisms;
-
-        [DataField]
-        public Dictionary<ProtoId<ReactiveGroupPrototype>, ReactiveReagentEffectEntry>? ReactiveEffects;
-
-        [DataField(serverOnly: true)]
+        [DataField("tileReactions", serverOnly: true)]
         public List<ITileReaction> TileReactions = new(0);
 
-        [DataField("plantMetabolism")]
-        public List<EntityEffect> PlantMetabolisms = new(0);
+        [DataField("plantMetabolism", serverOnly: true)]
+        public List<ReagentEffect> PlantMetabolisms = new(0);
 
-        [DataField]
-        public float PricePerUnit;
+        [DataField("pricePerUnit")] public float PricePerUnit;
 
-        [DataField]
-        public SoundSpecifier FootstepSound = new SoundCollectionSpecifier("FootstepPuddle");
+        // TODO: Pick the highest reagent for sounds and add sticky to cola, juice, etc.
+        [DataField("footstepSound")]
+        public SoundSpecifier FootstepSound = new SoundCollectionSpecifier("FootstepWater");
 
-        // TODO: Reaction tile doesn't work properly and destroys reagents way too quickly
-        public FixedPoint2 ReactionTile(TileRef tile, FixedPoint2 reactVolume, IEntityManager entityManager, List<ReagentData>? data)
+        public FixedPoint2 ReactionTile(TileRef tile, FixedPoint2 reactVolume)
         {
             var removed = FixedPoint2.Zero;
 
@@ -197,7 +129,7 @@ namespace Content.Shared.Chemistry.Reagent
 
             foreach (var reaction in TileReactions)
             {
-                removed += reaction.TileReact(tile, this, reactVolume - removed, entityManager, data);
+                removed += reaction.TileReact(tile, this, reactVolume - removed);
 
                 if (removed > reactVolume)
                     throw new Exception("Removed more than we have!");
@@ -209,32 +141,28 @@ namespace Content.Shared.Chemistry.Reagent
             return removed;
         }
 
-        public IEnumerable<string> GuidebookReagentEffectsDescription(IPrototypeManager prototype, IEntitySystemManager entSys, IEnumerable<EntityEffect> effects, FixedPoint2? metabolism = null)
+        public void ReactionPlant(EntityUid? plantHolder, Solution.ReagentQuantity amount, Solution solution)
         {
-            return effects.Select(x => GuidebookReagentEffectDescription(prototype, entSys, x, metabolism))
-                .Where(x => x is not null)
-                .Select(x => x!)
-                .ToArray();
-        }
+            if (plantHolder == null)
+                return;
 
-        public string? GuidebookReagentEffectDescription(IPrototypeManager prototype, IEntitySystemManager entSys, EntityEffect effect, FixedPoint2? metabolism)
-        {
-            if (effect.EntityEffectGuidebookText(prototype, entSys) is not { } description)
-                return null;
+            var entMan = IoCManager.Resolve<IEntityManager>();
+            var random = IoCManager.Resolve<IRobustRandom>();
+            var args = new ReagentEffectArgs(plantHolder.Value, null, solution, this, amount.Quantity, entMan, null, 1f);
+            foreach (var plantMetabolizable in PlantMetabolisms)
+            {
+                if (!plantMetabolizable.ShouldApply(args, random))
+                    continue;
 
-            var quantity = metabolism == null ? 0f : (double) (effect.MinScale * metabolism);
+                if (plantMetabolizable.ShouldLog)
+                {
+                    var entity = args.SolutionEntity;
+                    EntitySystem.Get<SharedAdminLogSystem>().Add(LogType.ReagentEffect, plantMetabolizable.LogImpact,
+                        $"Plant metabolism effect {plantMetabolizable.GetType().Name:effect} of reagent {ID:reagent} applied on entity {entMan.ToPrettyString(entity):entity} at {entMan.GetComponent<TransformComponent>(entity).Coordinates:coordinates}");
+                }
 
-            return Loc.GetString(
-                "guidebook-reagent-effect-description",
-                ("reagent", LocalizedName),
-                ("quantity", quantity),
-                ("effect", description),
-                ("chance", effect.Probability),
-                ("conditionCount", effect.Conditions?.Length ?? 0),
-                ("conditions",
-                    ContentLocalizationManager.FormatList(
-                        effect.Conditions?.Select(x => x.EntityConditionGuidebookText(prototype)).ToList() ?? new List<string>()
-                    )));
+                plantMetabolizable.Effect(args);
+            }
         }
     }
 
@@ -243,30 +171,17 @@ namespace Content.Shared.Chemistry.Reagent
     {
         public string ReagentPrototype;
 
-        public Dictionary<ProtoId<MetabolismStagePrototype>, ReagentEffectsGuideEntry>? GuideEntries;
-
-        public List<string>? PlantMetabolisms = null;
+        public Dictionary<string, ReagentEffectsGuideEntry>? GuideEntries;
 
         public ReagentGuideEntry(ReagentPrototype proto, IPrototypeManager prototype, IEntitySystemManager entSys)
         {
             ReagentPrototype = proto.ID;
-            GuideEntries = proto.Metabolisms?.Metabolisms
-                .Select(x => (x.Key, x.Value.MakeGuideEntry(prototype, entSys, proto)))
+            GuideEntries = proto.Metabolisms?
+                .Select(x => (x.Key, x.Value.MakeGuideEntry(prototype, entSys)))
                 .ToDictionary(x => x.Key, x => x.Item2);
-            if (proto.PlantMetabolisms.Count > 0)
-            {
-                PlantMetabolisms =
-                    new List<string>(proto.GuidebookReagentEffectsDescription(prototype, entSys, proto.PlantMetabolisms));
-            }
         }
     }
 
-    [DataDefinition]
-    public sealed partial class ReagentMetabolisms
-    {
-        [IncludeDataField(customTypeSerializer: typeof(DictionarySerializer<ProtoId<MetabolismStagePrototype>, ReagentEffectsEntry>))]
-        public Dictionary<ProtoId<MetabolismStagePrototype>, ReagentEffectsEntry> Metabolisms;
-    }
 
     [DataDefinition]
     public sealed partial class ReagentEffectsEntry
@@ -275,27 +190,24 @@ namespace Content.Shared.Chemistry.Reagent
         ///     Amount of reagent to metabolize, per metabolism cycle.
         /// </summary>
         [JsonPropertyName("rate")]
-        [DataField]
+        [DataField("metabolismRate")]
         public FixedPoint2 MetabolismRate = FixedPoint2.New(0.5f);
 
         /// <summary>
         ///     A list of effects to apply when these reagents are metabolized.
         /// </summary>
         [JsonPropertyName("effects")]
-        [DataField]
-        public EntityEffect[] Effects = Array.Empty<EntityEffect>();
+        [DataField("effects", required: true)]
+        public ReagentEffect[] Effects = default!;
 
-        /// <summary>
-        ///     Ratio of this reagent to metabolites for transfer to the next solution by a metabolizer
-        /// </summary>
-        [DataField]
-        public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? Metabolites;
-
-        public string EntityEffectFormat => "guidebook-reagent-effect-description";
-
-        public ReagentEffectsGuideEntry MakeGuideEntry(IPrototypeManager prototype, IEntitySystemManager entSys, ReagentPrototype proto)
+        public ReagentEffectsGuideEntry MakeGuideEntry(IPrototypeManager prototype, IEntitySystemManager entSys)
         {
-            return new ReagentEffectsGuideEntry(MetabolismRate, proto.GuidebookReagentEffectsDescription(prototype, entSys, Effects, MetabolismRate).ToArray(), Metabolites);
+            return new ReagentEffectsGuideEntry(MetabolismRate,
+                Effects
+                    .Select(x => x.GuidebookEffectDescription(prototype, entSys)) // hate.
+                    .Where(x => x is not null)
+                    .Select(x => x!)
+                    .ToArray());
         }
     }
 
@@ -306,13 +218,10 @@ namespace Content.Shared.Chemistry.Reagent
 
         public string[] EffectDescriptions;
 
-        public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? Metabolites;
-
-        public ReagentEffectsGuideEntry(FixedPoint2 metabolismRate, string[] effectDescriptions, Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? metabolites)
+        public ReagentEffectsGuideEntry(FixedPoint2 metabolismRate, string[] effectDescriptions)
         {
             MetabolismRate = metabolismRate;
             EffectDescriptions = effectDescriptions;
-            Metabolites = metabolites;
         }
     }
 
@@ -323,6 +232,6 @@ namespace Content.Shared.Chemistry.Reagent
         public HashSet<ReactionMethod> Methods = default!;
 
         [DataField("effects", required: true)]
-        public EntityEffect[] Effects = default!;
+        public ReagentEffect[] Effects = default!;
     }
 }

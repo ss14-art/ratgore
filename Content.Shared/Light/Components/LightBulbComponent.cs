@@ -2,14 +2,15 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Light.Components;
+namespace Content.Shared.Light.Component;
 
 /// <summary>
 /// Component that represents a light bulb. Can be broken, or burned, which turns them mostly useless.
 /// TODO: Breaking and burning should probably be moved to another component eventually.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
-public sealed partial class LightBulbComponent : Component
+[RegisterComponent]
+[NetworkedComponent]
+public sealed partial class LightBulbComponent : Robust.Shared.GameObjects.Component
 {
     /// <summary>
     /// The color of the lightbulb and the light it produces.
@@ -71,7 +72,7 @@ public sealed partial class LightBulbComponent : Component
     /// </summary>
     [DataField("breakSound")]
     [ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier BreakSound = new SoundCollectionSpecifier("GlassBreak", AudioParams.Default.WithVolume(-6f));
+    public SoundSpecifier BreakSound = new SoundCollectionSpecifier("GlassBreak");
 
     #region Appearance
 

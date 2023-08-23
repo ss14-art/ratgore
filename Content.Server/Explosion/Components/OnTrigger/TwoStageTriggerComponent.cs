@@ -6,7 +6,7 @@ namespace Content.Server.Explosion.Components.OnTrigger;
 /// <summary>
 /// After being triggered applies the specified components and runs triggers again.
 /// </summary>
-[RegisterComponent, AutoGenerateComponentPause]
+[RegisterComponent]
 public sealed partial class TwoStageTriggerComponent : Component
 {
     /// <summary>
@@ -19,16 +19,12 @@ public sealed partial class TwoStageTriggerComponent : Component
     /// <summary>
     /// This list of components that will be added for the second trigger.
     /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
     [DataField("components", required: true)]
     public ComponentRegistry SecondStageComponents = new();
 
     [DataField("nextTriggerTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
     public TimeSpan? NextTriggerTime;
 
-    [DataField("triggered")]
-    public bool Triggered = false;
-
-    [DataField("ComponentsIsLoaded")]
-    public bool ComponentsIsLoaded = false;
+    [ViewVariables(VVAccess.ReadWrite), DataField("triggered")] public bool Triggered = false;
 }

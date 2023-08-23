@@ -1,26 +1,31 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Foldable;
 
 /// <summary>
-/// Used to create "foldable structures" that you can pickup like an item when folded.
+/// Used to create "foldable structures" that you can pickup like an item when folded. Used for rollerbeds and wheelchairs.
 /// </summary>
 /// <remarks>
-/// Will prevent any insertions into containers while this item is unfolded.
+/// Wiill prevent any insertions into containers while this item is unfolded.
 /// </remarks>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(FoldableSystem))]
+[RegisterComponent]
+[NetworkedComponent]
+[Access(typeof(SharedFoldableSystem))]
 public sealed partial class FoldableComponent : Component
 {
-    [DataField("folded"), AutoNetworkedField]
+    [DataField("folded")]
     public bool IsFolded = false;
+}
 
-    [DataField]
-    public bool CanFoldInsideContainer = false;
+// ahhh, the ol' "state thats just a copy of the component".
+[Serializable, NetSerializable]
+public sealed class FoldableComponentState : ComponentState
+{
+    public readonly bool IsFolded;
 
-    [DataField]
-    public LocId UnfoldVerbText = "unfold-verb";
-
-    [DataField]
-    public LocId FoldVerbText = "fold-verb";
+    public FoldableComponentState(bool isFolded)
+    {
+        IsFolded = isFolded;
+    }
 }

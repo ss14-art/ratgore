@@ -1,17 +1,13 @@
 using System.Numerics;
-using Content.Shared.Alert;
-using Content.Shared.CCVar;
 using Content.Shared.Movement.Systems;
-using Robust.Shared.Configuration;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Timing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Movement.Components
 {
-    [RegisterComponent, NetworkedComponent]
+    [RegisterComponent]
+    [NetworkedComponent]
     public sealed partial class InputMoverComponent : Component
     {
         // This class has to be able to handle server TPS being lower than client FPS.
@@ -62,39 +58,19 @@ namespace Content.Shared.Movement.Components
         /// <summary>
         /// The current relative rotation. This will lerp towards the <see cref="TargetRelativeRotation"/>.
         /// </summary>
-        [ViewVariables]
-        public Angle RelativeRotation;
+        [ViewVariables] public Angle RelativeRotation;
 
         /// <summary>
         /// If we traverse on / off a grid then set a timer to update our relative inputs.
         /// </summary>
-        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-        [ViewVariables(VVAccess.ReadWrite)]
+        [ViewVariables(VVAccess.ReadWrite), DataField("lerpTarget", customTypeSerializer: typeof(TimeOffsetSerializer))]
         public TimeSpan LerpTarget;
 
         public const float LerpTime = 1.0f;
 
-        public bool Sprinting => DefaultSprinting
-            ? (HeldMoveButtons & MoveButtons.Walk) != 0x0
-            : (HeldMoveButtons & MoveButtons.Walk) == 0x0;
-
-        public bool DefaultSprinting = true;
+        public bool Sprinting => (HeldMoveButtons & MoveButtons.Walk) == 0x0;
 
         [ViewVariables(VVAccess.ReadWrite)]
-        public bool CanMove = true;
-
-        [DataField]
-        public ProtoId<AlertPrototype> WalkingAlert = "Walking";
-    }
-
-    [Serializable, NetSerializable]
-    public sealed class InputMoverComponentState : ComponentState
-    {
-        public MoveButtons HeldMoveButtons;
-        public NetEntity? RelativeEntity;
-        public Angle TargetRelativeRotation;
-        public Angle RelativeRotation;
-        public TimeSpan LerpTarget;
-        public bool CanMove, DefaultSprinting;
+        public bool CanMove { get; set; } = true;
     }
 }

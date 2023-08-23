@@ -1,23 +1,13 @@
-using Content.Shared.Flash;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
-namespace Content.Shared.Flash.Components
+namespace Content.Server.Flash.Components
 {
-    [RegisterComponent, NetworkedComponent, Access(typeof(SharedFlashSystem))]
+    [RegisterComponent, Access(typeof(FlashSystem))]
     public sealed partial class FlashComponent : Component
     {
-
         [DataField("duration")]
         [ViewVariables(VVAccess.ReadWrite)]
         public int FlashDuration { get; set; } = 5000;
-
-        /// <summary>
-        /// How long a target is stunned when a melee flash is used.
-        /// If null, melee flashes will not stun at all
-        /// </summary>
-        [DataField]
-        public TimeSpan? MeleeStunDuration = null; // Hullrot - Flash nerf
 
         [DataField("range")]
         [ViewVariables(VVAccess.ReadWrite)]
@@ -33,14 +23,8 @@ namespace Content.Shared.Flash.Components
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField("sound")]
-        public SoundSpecifier Sound { get; set; } = new SoundPathSpecifier("/Audio/Weapons/flash.ogg")
-        {
-            Params = AudioParams.Default.WithVolume(1f).WithMaxDistance(3f)
-        };
+        public SoundSpecifier Sound { get; set; } = new SoundPathSpecifier("/Audio/Weapons/flash.ogg");
 
         public bool Flashing;
-
-        [DataField]
-        public float Probability = 1f;
     }
 }

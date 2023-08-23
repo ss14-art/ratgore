@@ -1,13 +1,13 @@
 using Content.Shared.Damage;
 
-namespace Content.Shared.Climbing.Components;
+namespace Content.Server.Climbing.Components;
 
 /// <summary>
 ///     Glass tables shatter and stun you when climbed on.
 ///     This is a really entity-specific behavior, so opted to make it
 ///     not very generalized with regards to naming.
 /// </summary>
-[RegisterComponent, Access(typeof(Systems.ClimbSystem))]
+[RegisterComponent, Access(typeof(ClimbSystem))]
 public sealed partial class GlassTableComponent : Component
 {
     /// <summary>

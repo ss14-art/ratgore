@@ -4,7 +4,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-
 namespace Content.Server.Anomaly.Components;
 
 /// <summary>
@@ -13,7 +12,7 @@ namespace Content.Server.Anomaly.Components;
 /// they generate points for the selected server based on
 /// the anomaly's stability and severity.
 /// </summary>
-[RegisterComponent, Access(typeof(SharedAnomalySystem)), AutoGenerateComponentPause]
+[RegisterComponent, Access(typeof(SharedAnomalySystem))]
 public sealed partial class AnomalyVesselComponent : Component
 {
     /// <summary>
@@ -24,43 +23,23 @@ public sealed partial class AnomalyVesselComponent : Component
     public EntityUid? Anomaly;
 
     /// <summary>
-    /// The base multiplier without any frills
-    /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float BasePointMultiplier = 1;
-
-    /// <summary>
-    /// The base radiation for only the experimental vessel
-    /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float BaseRadiation = .75f;
-
-    /// <summary>
     /// A multiplier applied to the amount of points generated.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [ViewVariables(VVAccess.ReadWrite)]
     public float PointMultiplier = 1;
 
     /// <summary>
-    /// A multiplier applied to the amount of points generated based on the machine parts inserted.
+    /// The machine part that affects the point multiplier of the vessel
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float UpgradePointMultiplier = .5f;
+    [DataField("machinePartPointModifier", customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
+    public string MachinePartPointModifier = "Capacitor";
 
     /// <summary>
-    /// A multipler applied to the radiation
+    /// A value used to scale the point multiplier
+    /// with the corresponding part rating.
     /// </summary>
-    /// <remarks>
-    /// no free ultra point machine 100% legit
-    /// </remarks>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float UpgradeRadiationMultiplier = .35f;
-
-    /// <summary>
-    ///     Which machine part affects the point multiplier
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
-    public string MachinePartPointMultiplier = "Capacitor";
+    [DataField("partRatingPointModifier")]
+    public float PartRatingPointModifier = 1.25f;
 
     /// <summary>
     /// The maximum time between each beep
@@ -78,7 +57,6 @@ public sealed partial class AnomalyVesselComponent : Component
     /// When the next beep sound will play
     /// </summary>
     [DataField("nextBeep", customTypeSerializer:typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
     public TimeSpan NextBeep = TimeSpan.Zero;
 
     /// <summary>

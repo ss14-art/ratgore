@@ -1,14 +1,9 @@
 using Content.Shared.Access;
-using Content.Shared.Guidebook;
-using Content.Shared.Customization.Systems;
-using Content.Shared.Dataset;
 using Content.Shared.Players.PlayTimeTracking;
-using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
-using Content.Shared._Rat.Ranks;
 
 namespace Content.Shared.Roles
 {
@@ -16,7 +11,7 @@ namespace Content.Shared.Roles
     ///     Describes information for a single job on the station.
     /// </summary>
     [Prototype("job")]
-    public sealed partial class JobPrototype : IPrototype
+    public sealed class JobPrototype : IPrototype
     {
         [ViewVariables]
         [IdDataField]
@@ -47,7 +42,7 @@ namespace Content.Shared.Roles
         public string? LocalizedDescription => Description is null ? null : Loc.GetString(Description);
 
         [DataField("requirements")]
-        public List<CharacterRequirement>? Requirements;
+        public HashSet<JobRequirement>? Requirements;
 
         [DataField("joinNotifyCrew")]
         public bool JoinNotifyCrew { get; private set; } = false;
@@ -58,28 +53,8 @@ namespace Content.Shared.Roles
         [DataField("setPreference")]
         public bool SetPreference { get; private set; } = true;
 
-        /// <summary>
-        ///     Whether this job should show in the ID Card Console.
-        ///     If set to null, it will default to SetPreference's value.
-        /// </summary>
-        [DataField]
-        public bool? OverrideConsoleVisibility { get; private set; } = null;
-
         [DataField("canBeAntag")]
         public bool CanBeAntag { get; private set; } = true;
-
-        /// <summary>
-        /// Used by Contractors to determine if a given job should have a passport
-        /// This should be disabled for Borgs and Station AI, for example.
-        /// </summary>
-        [DataField("canHavePassport")]
-        public bool CanHavePassport { get; private set; } = true;
-
-        /// <summary>
-        /// Nyano/DV: For e.g. prisoners, they'll never use their latejoin spawner.
-        /// </summary>
-        [DataField("alwaysUseSpawner")]
-        public bool AlwaysUseSpawner { get; } = false;
 
         /// <summary>
         ///     Whether this job is a head.
@@ -87,16 +62,6 @@ namespace Content.Shared.Roles
         /// </summary>
         [DataField("weight")]
         public int Weight { get; private set; }
-
-        /// <summary>
-        /// How to sort this job relative to other jobs in the UI.
-        /// Jobs with a higher value with sort before jobs with a lower value.
-        /// If not set, <see cref="Weight"/> is used as a fallback.
-        /// </summary>
-        [DataField]
-        public int? DisplayWeight { get; private set; }
-
-        public int RealDisplayWeight => DisplayWeight ?? Weight;
 
         /// <summary>
         ///     A numerical score for how much easier this job is for antagonists.
@@ -109,19 +74,6 @@ namespace Content.Shared.Roles
         public string? StartingGear { get; private set; }
 
         /// <summary>
-        ///     If this has a value, it will randomly set the entity name of the
-        ///     entity upon spawn based on the dataset.
-        /// </summary>
-        [DataField]
-        public ProtoId<LocalizedDatasetPrototype>? NameDataset;
-
-        /// <summary>
-        ///   A list of requirements that when satisfied, add or replace from the base starting gear.
-        /// </summary>
-        [DataField("conditionalStartingGear")]
-        public List<ConditionalStartingGear>? ConditionalStartingGears { get; private set; }
-
-        /// <summary>
         /// Use this to spawn in as a non-humanoid (borg, test subject, etc.)
         /// Starting gear will be ignored.
         /// If you want to just add special attributes to a humanoid, use AddComponentSpecial instead.
@@ -129,89 +81,22 @@ namespace Content.Shared.Roles
         [DataField("jobEntity", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
         public string? JobEntity = null;
 
-        [DataField]
-        public ProtoId<JobIconPrototype> Icon { get; private set; } = "JobIconUnknown";
+        [DataField("icon", customTypeSerializer: typeof(PrototypeIdSerializer<StatusIconPrototype>))]
+        public string Icon { get; private set; } = "JobIconUnknown";
 
         [DataField("special", serverOnly: true)]
         public JobSpecial[] Special { get; private set; } = Array.Empty<JobSpecial>();
 
-        [DataField("afterLoadoutSpecial", serverOnly: true)]
-        public JobSpecial[] AfterLoadoutSpecial { get; private set; } = [];
+        [DataField("access", customTypeSerializer: typeof(PrototypeIdListSerializer<AccessLevelPrototype>))]
+        public IReadOnlyCollection<string> Access { get; private set; } = Array.Empty<string>();
 
-        [DataField("access")]
-        public IReadOnlyCollection<ProtoId<AccessLevelPrototype>> Access { get; private set; } = Array.Empty<ProtoId<AccessLevelPrototype>>();
+        [DataField("accessGroups", customTypeSerializer: typeof(PrototypeIdListSerializer<AccessGroupPrototype>))]
+        public IReadOnlyCollection<string> AccessGroups { get; private set; } = Array.Empty<string>();
 
-        [DataField("accessGroups")]
-        public IReadOnlyCollection<ProtoId<AccessGroupPrototype>> AccessGroups { get; private set; } = Array.Empty<ProtoId<AccessGroupPrototype>>();
+        [DataField("extendedAccess", customTypeSerializer: typeof(PrototypeIdListSerializer<AccessLevelPrototype>))]
+        public IReadOnlyCollection<string> ExtendedAccess { get; private set; } = Array.Empty<string>();
 
-        [DataField("extendedAccess")]
-        public IReadOnlyCollection<ProtoId<AccessLevelPrototype>> ExtendedAccess { get; private set; } = Array.Empty<ProtoId<AccessLevelPrototype>>();
-
-        [DataField("extendedAccessGroups")]
-        public IReadOnlyCollection<ProtoId<AccessGroupPrototype>> ExtendedAccessGroups { get; private set; } = Array.Empty<ProtoId<AccessGroupPrototype>>();
-
-        [DataField]
-        public bool Whitelisted;
-
-        [DataField]
-        public bool SpawnLoadout = true;
-
-        [DataField]
-        public bool ApplyTraits = true;
-
-        /// <summary>
-        /// Optional list of guides associated with this role. If the guides are opened, the first entry in this list
-        /// will be used to select the currently selected guidebook.
-        /// </summary>
-        [DataField]
-        public List<ProtoId<GuideEntryPrototype>>? Guides;
-
-        [DataField]
-        public readonly Dictionary<ProtoId<RankPrototype>, HashSet<CharacterRequirement>?>? Ranks;
-
-    }
-
-    /// <summary>
-    ///   Starting gear that will only be applied upon satisfying requirements.
-    /// </summary>
-    [DataDefinition]
-    public sealed partial class ConditionalStartingGear
-    {
-        /// <summary>
-        ///   The requirements to check.
-        /// </summary>
-        [DataField(required: true)]
-        public List<CharacterRequirement> Requirements;
-
-        /// <summary>
-        ///   The starting gear to apply, replacing the equivalent slots.
-        /// </summary>
-        [DataField(required: true)]
-        public ProtoId<StartingGearPrototype> Id { get; private set; }
-
-    }
-
-    /// <summary>
-    /// Sorts <see cref="JobPrototype"/>s appropriately for display in the UI,
-    /// respecting their <see cref="JobPrototype.Weight"/>.
-    /// </summary>
-    public sealed class JobUIComparer : IComparer<JobPrototype>
-    {
-        public static readonly JobUIComparer Instance = new();
-
-        public int Compare(JobPrototype? x, JobPrototype? y)
-        {
-            if (ReferenceEquals(x, y))
-                return 0;
-            if (ReferenceEquals(null, y))
-                return 1;
-            if (ReferenceEquals(null, x))
-                return -1;
-
-            var cmp = -x.RealDisplayWeight.CompareTo(y.RealDisplayWeight);
-            if (cmp != 0)
-                return cmp;
-            return string.Compare(x.ID, y.ID, StringComparison.Ordinal);
-        }
+        [DataField("extendedAccessGroups", customTypeSerializer: typeof(PrototypeIdListSerializer<AccessGroupPrototype>))]
+        public IReadOnlyCollection<string> ExtendedAccessGroups { get; private set; } = Array.Empty<string>();
     }
 }

@@ -1,40 +1,32 @@
-using Content.Server.Stunnable.Systems;
-using Content.Shared.Whitelist;
-
-namespace Content.Server.Stunnable.Components;
-
-/// <summary>
-///     Adds stun when it collides with an entity
-/// </summary>
-[RegisterComponent, Access(typeof(StunOnCollideSystem))]
-public sealed partial class StunOnCollideComponent : Component
+namespace Content.Server.Stunnable.Components
 {
-    // TODO: Can probably predict this.
-
-    [DataField]
-    public TimeSpan StunAmount = TimeSpan.FromSeconds(5);
-
-    [DataField]
-    public TimeSpan KnockdownAmount = TimeSpan.FromSeconds(5);
-
-    [DataField]
-    public TimeSpan SlowdownAmount = TimeSpan.FromSeconds(10);
-
-    [DataField]
-    public float WalkSpeedMultiplier = 1f;
-
-    [DataField]
-    public float RunSpeedMultiplier = 1f;
-
     /// <summary>
-    ///     Fixture we track for the collision.
+    /// Adds stun when it collides with an entity
     /// </summary>
-    [DataField]
-    public string FixtureId = "projectile";
+    [RegisterComponent, Access(typeof(StunOnCollideSystem))]
+    public sealed partial class StunOnCollideComponent : Component
+    {
+        // TODO: Can probably predict this.
 
-    /// <summary>
-    ///     Entities excluded from collision check.
-    /// </summary>
-    [DataField]
-    public EntityWhitelist? Blacklist;
+        // See stunsystem for what these do
+        [DataField("stunAmount")]
+        public int StunAmount;
+
+        [DataField("knockdownAmount")]
+        public int KnockdownAmount;
+
+        [DataField("slowdownAmount")]
+        public int SlowdownAmount;
+
+        [DataField("walkSpeedMultiplier")]
+        public float WalkSpeedMultiplier = 1f;
+
+        [DataField("runSpeedMultiplier")]
+        public float RunSpeedMultiplier = 1f;
+
+        /// <summary>
+        /// Fixture we track for the collision.
+        /// </summary>
+        [DataField("fixture")] public string FixtureID = "projectile";
+    }
 }

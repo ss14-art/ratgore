@@ -3,14 +3,14 @@ using Content.Server.NPC.Components;
 
 namespace Content.Server.NPC.HTN;
 
-[RegisterComponent]
+[RegisterComponent, ComponentReference(typeof(NPCComponent))]
 public sealed partial class HTNComponent : NPCComponent
 {
     /// <summary>
     /// The base task to use for planning
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite),
-    DataField("rootTask", required: true)]
+     DataField("rootTask", required: true)]
     public HTNCompoundTask RootTask = default!;
 
     /// <summary>
@@ -47,11 +47,4 @@ public sealed partial class HTNComponent : NPCComponent
     /// Is this NPC currently planning?
     /// </summary>
     [ViewVariables] public bool Planning => PlanningJob != null;
-
-
-    /// <summary>
-    /// Determines whether plans should be made / updated for this entity
-    /// </summary>
-    [DataField]
-    public bool Enabled = true;
 }

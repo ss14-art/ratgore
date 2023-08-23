@@ -2,52 +2,43 @@ using Content.Shared.Construction.Prototypes;
 using Content.Shared.Research.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Shared.Lathe
 {
-    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+    [RegisterComponent, NetworkedComponent]
     public sealed partial class LatheComponent : Component
     {
         /// <summary>
         /// All of the recipes that the lathe has by default
         /// </summary>
-        [DataField]
-        public List<ProtoId<LatheRecipePrototype>> StaticRecipes = new();
+        [DataField("staticRecipes", customTypeSerializer: typeof(PrototypeIdListSerializer<LatheRecipePrototype>))]
+        public List<string> StaticRecipes = new();
 
         /// <summary>
         /// All of the recipes that the lathe is capable of researching
         /// </summary>
-        [DataField]
-        public List<ProtoId<LatheRecipePrototype>> DynamicRecipes = new();
+        [DataField("dynamicRecipes", customTypeSerializer: typeof(PrototypeIdListSerializer<LatheRecipePrototype>))]
+        public List<string> DynamicRecipes = new();
 
         /// <summary>
         /// The lathe's construction queue
         /// </summary>
-        [DataField]
+        [DataField("queue")]
         public List<LatheRecipePrototype> Queue = new();
 
         /// <summary>
         /// The sound that plays when the lathe is producing an item, if any
         /// </summary>
-        [DataField]
+        [DataField("producingSound")]
         public SoundSpecifier? ProducingSound;
-
-        [DataField]
-        public string? ReagentOutputSlotId;
-
-        /// <summary>
-        /// The default amount that's displayed in the UI for selecting the print amount.
-        /// </summary>
-        [DataField, AutoNetworkedField]
-        public int DefaultProductionAmount = 1;
-
         #region Visualizer info
-        [DataField]
-        public string? IdleState;
+        [DataField("idleState", required: true)]
+        public string IdleState = default!;
 
-        [DataField]
-        public string? RunningState;
+        [DataField("runningState", required: true)]
+        public string RunningState = default!;
         #endregion
 
         /// <summary>
@@ -56,18 +47,48 @@ namespace Content.Shared.Lathe
         [ViewVariables]
         public LatheRecipePrototype? CurrentRecipe;
 
+        /// <summary>
+        /// Whether the lathe can eject the materials stored within it
+        /// </summary>
+        [DataField("canEjectStoredMaterials")]
+        public bool CanEjectStoredMaterials = true;
+
         #region MachineUpgrading
         /// <summary>
         /// A modifier that changes how long it takes to print a recipe
         /// </summary>
-        [DataField, ViewVariables(VVAccess.ReadWrite)]
+        [ViewVariables(VVAccess.ReadWrite)]
         public float TimeMultiplier = 1;
+
+        /// <summary>
+        /// The machine part that reduces how long it takes to print a recipe.
+        /// </summary>
+        [DataField("machinePartPrintSpeed", customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
+        public string MachinePartPrintTime = "Manipulator";
+
+        /// <summary>
+        /// The value that is used to calculate the modified <see cref="TimeMultiplier"/>
+        /// </summary>
+        [DataField("partRatingPrintTimeMultiplier")]
+        public float PartRatingPrintTimeMultiplier = 0.5f;
 
         /// <summary>
         /// A modifier that changes how much of a material is needed to print a recipe
         /// </summary>
-        [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+        [ViewVariables(VVAccess.ReadWrite)]
         public float MaterialUseMultiplier = 1;
+
+        /// <summary>
+        /// The machine part that reduces how much material it takes to print a recipe.
+        /// </summary>
+        [DataField("machinePartMaterialUse", customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
+        public string MachinePartMaterialUse = "MatterBin";
+
+        /// <summary>
+        /// The value that is used to calculate the modifier <see cref="MaterialUseMultiplier"/>
+        /// </summary>
+        [DataField("partRatingMaterialUseMultiplier")]
+        public float PartRatingMaterialUseMultiplier = DefaultPartRatingMaterialUseMultiplier;
 
         public const float DefaultPartRatingMaterialUseMultiplier = 0.85f;
         #endregion
@@ -77,20 +98,11 @@ namespace Content.Shared.Lathe
     {
         public readonly EntityUid Lathe;
 
-        public bool getUnavailable;
+        public List<string> Recipes = new();
 
-        public List<ProtoId<LatheRecipePrototype>> Recipes = new();
-
-        public LatheGetRecipesEvent(EntityUid lathe, bool forced)
+        public LatheGetRecipesEvent(EntityUid lathe)
         {
             Lathe = lathe;
-            getUnavailable = forced;
         }
     }
-
-    /// <summary>
-    /// Event raised on a lathe when it starts producing a recipe.
-    /// </summary>
-    [ByRefEvent]
-    public readonly record struct LatheStartPrintingEvent(LatheRecipePrototype Recipe);
 }

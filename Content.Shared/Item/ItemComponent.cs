@@ -1,9 +1,6 @@
 using Content.Shared.Hands.Components;
-using Content.Shared.Nyanotrasen.Item.PseudoItem;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Item;
 
@@ -13,20 +10,21 @@ namespace Content.Shared.Item;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent]
-[Access(typeof(SharedItemSystem), typeof(SharedPseudoItemSystem)), AutoGenerateComponentState(true)] // DeltaV - Gave PseudoItem access
+[Access(typeof(SharedItemSystem))]
 public sealed partial class ItemComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    [Access(typeof(SharedItemSystem), typeof(SharedPseudoItemSystem))] // DeltaV - Gave PseudoItem access
-    public ProtoId<ItemSizePrototype> Size = "Small";
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("size")]
+    [Access(typeof(SharedItemSystem), Other = AccessPermissions.ReadExecute)]
+    public int Size = 5;
 
     [Access(typeof(SharedItemSystem))]
-    [DataField]
+    [DataField("inhandVisuals")]
     public Dictionary<HandLocation, List<PrototypeLayerData>> InhandVisuals = new();
 
     [Access(typeof(SharedItemSystem))]
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField, AutoNetworkedField]
+    [DataField("heldPrefix")]
     public string? HeldPrefix;
 
     /// <summary>
@@ -36,31 +34,19 @@ public sealed partial class ItemComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("sprite")]
     public string? RsiPath;
+}
 
-    /// <summary>
-    /// An optional override for the shape of the item within the grid storage.
-    /// If null, a default shape will be used based on <see cref="Size"/>.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public List<Box2i>? Shape;
+[Serializable, NetSerializable]
+public sealed class ItemComponentState : ComponentState
+{
+    public int Size { get; }
+    public string? HeldPrefix { get; }
 
-    /// <summary>
-    /// A sprite used to depict this entity specifically when it is displayed in the storage UI.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier? StoredSprite;
-
-    /// <summary>
-    /// An additional angle offset, in degrees, applied to the visual depiction of the item when displayed in the storage UI.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float StoredRotation = 0;
-
-    /// <summary>
-    /// An additional offset, in pixels, applied to the visual depiction of the item when displayed in the storage UI.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public Vector2i StoredOffset;
+    public ItemComponentState(int size, string? heldPrefix)
+    {
+        Size = size;
+        HeldPrefix = heldPrefix;
+    }
 }
 
 /// <summary>
@@ -70,12 +56,26 @@ public sealed partial class ItemComponent : Component
 [Serializable, NetSerializable]
 public sealed class VisualsChangedEvent : EntityEventArgs
 {
-    public readonly NetEntity Item;
+    public readonly EntityUid Item;
     public readonly string ContainerId;
 
-    public VisualsChangedEvent(NetEntity item, string containerId)
+    public VisualsChangedEvent(EntityUid item, string containerId)
     {
         Item = item;
         ContainerId = containerId;
     }
+}
+
+/// <summary>
+///     Reference sizes for common containers and items.
+/// </summary>
+public enum ReferenceSizes
+{
+    Wallet = 4,
+    Pocket = 12,
+    Box = 24,
+    Belt = 30,
+    Toolbox = 60,
+    Backpack = 100,
+    NoStoring = 9999
 }

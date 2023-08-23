@@ -9,87 +9,86 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 namespace Content.Server.Nutrition.Components;
 
 /// <summary>
-///     This is used for a machine that extracts hunger from entities and creates meat. Yum!
+/// This is used for a machine that extracts hunger from entities and creates meat. Yum!
 /// </summary>
-[RegisterComponent, Access(typeof(FatExtractorSystem)), AutoGenerateComponentPause]
+[RegisterComponent, Access(typeof(FatExtractorSystem))]
 public sealed partial class FatExtractorComponent : Component
 {
     /// <summary>
-    ///     Whether or not the extractor is currently extracting fat from someone
+    /// Whether or not the extractor is currently extracting fat from someone
     /// </summary>
-    [DataField]
+    [DataField("processing")]
     public bool Processing = true;
 
     /// <summary>
-    ///     How much nutrition is extracted per second.
+    /// How much nutrition is extracted per second.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("nutritionPerSecond"), ViewVariables(VVAccess.ReadWrite)]
     public int NutritionPerSecond = 10;
 
     /// <summary>
-    ///     The base rate of extraction
+    /// The base rate of extraction
     /// </summary>
-    [DataField]
+    [DataField("baseNutritionPerSecond"), ViewVariables(VVAccess.ReadWrite)]
     public int BaseNutritionPerSecond = 10;
 
     #region Machine Upgrade
     /// <summary>
-    ///     Which machine part affects the nutrition rate
+    /// Which machine part affects the nutrition rate
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
+    [DataField("machinePartNutritionRate", customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
     public string MachinePartNutritionRate = "Manipulator";
 
     /// <summary>
-    ///     The increase in rate per each rating above 1.
+    /// The increase in rate per each rating above 1.
     /// </summary>
-    [DataField]
+    [DataField("partRatingRateMultiplier")]
     public float PartRatingRateMultiplier = 10;
     #endregion
 
     /// <summary>
-    ///     An accumulator which tracks extracted nutrition to determine
-    ///     when to spawn a meat.
+    /// An accumulator which tracks extracted nutrition to determine
+    /// when to spawn a meat.
     /// </summary>
-    [DataField]
+    [DataField("nutrientAccumulator"), ViewVariables(VVAccess.ReadWrite)]
     public int NutrientAccumulator;
 
     /// <summary>
-    ///     How high <see cref="NutrientAccumulator"/> has to be to spawn meat
+    /// How high <see cref="NutrientAccumulator"/> has to be to spawn meat
     /// </summary>
-    [DataField]
+    [DataField("nutrientPerMeat"), ViewVariables(VVAccess.ReadWrite)]
     public int NutrientPerMeat = 60;
 
     /// <summary>
-    ///     Meat spawned by the extractor.
+    /// Meat spawned by the extractor.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("meatPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>)), ViewVariables(VVAccess.ReadWrite)]
     public string MeatPrototype = "FoodMeat";
 
     /// <summary>
-    ///     When the next update will occur
+    /// When the next update will occur
     /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
+    [DataField("nextUpdate", customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan NextUpdate;
 
     /// <summary>
-    ///     How long each update takes
+    /// How long each update takes
     /// </summary>
-    [DataField]
+    [DataField("updateTime"), ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan UpdateTime = TimeSpan.FromSeconds(1);
 
     /// <summary>
-    ///     The sound played when extracting
+    /// The sound played when extracting
     /// </summary>
-    [DataField]
+    [DataField("processSound")]
     public SoundSpecifier? ProcessSound;
 
-    public EntityUid? Stream;
+    public IPlayingAudioStream? Stream;
 
     /// <summary>
-    ///     A minium hunger threshold for extracting nutrition.
-    ///     Ignored when emagged.
+    /// A minium hunger threshold for extracting nutrition.
+    /// Ignored when emagged.
     /// </summary>
-    [DataField]
+    [DataField("minHungerThreshold")]
     public HungerThreshold MinHungerThreshold = HungerThreshold.Okay;
 }

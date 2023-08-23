@@ -1,10 +1,9 @@
-using Content.Shared.Nutrition.EntitySystems;
+using Content.Server.Nutrition.EntitySystems;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
-namespace Content.Shared.Nutrition.Components
+namespace Content.Server.Nutrition.Components
 {
-    [RegisterComponent, NetworkedComponent, Access(typeof(IngestionSystem))]
+    [RegisterComponent, Access(typeof(UtensilSystem))]
     public sealed partial class UtensilComponent : Component
     {
         [DataField("types")]

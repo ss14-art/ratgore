@@ -1,7 +1,7 @@
 using Content.Shared.Actions;
-using Content.Shared.Whitelist;
+using Content.Shared.Radio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Implants.Components;
 
@@ -10,7 +10,7 @@ namespace Content.Shared.Implants.Components;
 /// The actions can be activated via an action, a passive ability (ie tracking), or a reactive ability (ie on death) or some sort of combination
 /// They're added and removed with implanters
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class SubdermalImplantComponent : Component
 {
     /// <summary>
@@ -18,37 +18,20 @@ public sealed partial class SubdermalImplantComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("implantAction")]
-    public EntProtoId? ImplantAction;
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? Action;
+    public string? ImplantAction;
 
     /// <summary>
     /// The entity this implant is inside
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [ViewVariables]
     public EntityUid? ImplantedEntity;
 
     /// <summary>
     /// Should this implant be removeable?
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("permanent"), AutoNetworkedField]
+    [DataField("permanent")]
     public bool Permanent = false;
-
-    /// <summary>
-    /// Target whitelist for this implant specifically.
-    /// Only checked if the implanter allows implanting on the target to begin with.
-    /// </summary>
-    [DataField]
-    public EntityWhitelist? Whitelist;
-
-    /// <summary>
-    /// Target blacklist for this implant specifically.
-    /// Only checked if the implanter allows implanting on the target to begin with.
-    /// </summary>
-    [DataField]
-    public EntityWhitelist? Blacklist;
 }
 
 /// <summary>
@@ -76,11 +59,6 @@ public sealed partial class ActivateImplantEvent : InstantActionEvent
 /// Used for opening the uplink implant via action.
 /// </summary>
 public sealed partial class OpenUplinkImplantEvent : InstantActionEvent
-{
-
-}
-
-public sealed partial class UseScramImplantEvent : InstantActionEvent
 {
 
 }

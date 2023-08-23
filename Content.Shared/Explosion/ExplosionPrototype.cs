@@ -14,7 +14,7 @@ namespace Content.Shared.Explosion;
 ///     that map of airtight entities. This could be done, but is just not yet implemented.
 /// </remarks>
 [Prototype("explosion")]
-public sealed partial class ExplosionPrototype : IPrototype
+public sealed class ExplosionPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;
@@ -24,12 +24,6 @@ public sealed partial class ExplosionPrototype : IPrototype
     /// </summary>
     [DataField("damagePerIntensity", required: true)]
     public DamageSpecifier DamagePerIntensity = default!;
-
-    /// <summary>
-    ///     Amount of firestacks to apply in addition to igniting.
-    /// </summary>
-    [DataField]
-    public float? FireStacks;
 
     /// <summary>
     ///     This set of points, together with <see cref="_tileBreakIntensity"/> define a function that maps the
@@ -68,33 +62,8 @@ public sealed partial class ExplosionPrototype : IPrototype
     [DataField("fireColor")]
     public Color? FireColor;
 
-    /// <summary>
-    ///     If an explosion finishes in less than this many iterations, play a small sound instead.
-    /// </summary>
-    /// <remarks>
-    ///     This value is tuned such that a minibomb is considered small, but just about anything larger is normal
-    /// </remarks>
-    [DataField("smallSoundIterationThreshold")]
-    public int SmallSoundIterationThreshold = 6;
-
-    /// <summary>
-    /// How far away another explosion in the same tick can be and be combined.
-    /// Total intensity is added to the original queued explosion.
-    /// </summary>
-    [DataField]
-    public float MaxCombineDistance = 1f;
-
-    [DataField("sound")]
-    public SoundSpecifier Sound = new SoundCollectionSpecifier("Explosion");
-
-    [DataField("smallSound")]
-    public SoundSpecifier SmallSound = new SoundCollectionSpecifier("ExplosionSmall");
-
-    [DataField("soundFar")]
-    public SoundSpecifier SoundFar = new SoundCollectionSpecifier("ExplosionFar", AudioParams.Default.WithVolume(2f));
-
-    [DataField("smallSoundFar")]
-    public SoundSpecifier SmallSoundFar = new SoundCollectionSpecifier("ExplosionSmallFar", AudioParams.Default.WithVolume(2f));
+    [DataField("Sound")]
+    public SoundSpecifier Sound = new SoundCollectionSpecifier("explosion");
 
     [DataField("texturePath")]
     public ResPath TexturePath = new("/Textures/Effects/fire.rsi");
@@ -117,7 +86,7 @@ public sealed partial class ExplosionPrototype : IPrototype
     {
         if (_tileBreakChance.Length == 0 || _tileBreakChance.Length != _tileBreakIntensity.Length)
         {
-            Logger.GetSawmill("explosion").Error($"Malformed tile break chance definitions for explosion prototype: {ID}");
+            Logger.Error($"Malformed tile break chance definitions for explosion prototype: {ID}");
             return 0;
         }
 

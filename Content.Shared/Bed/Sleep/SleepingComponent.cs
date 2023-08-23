@@ -1,6 +1,6 @@
 using Content.Shared.FixedPoint;
-using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Bed.Sleep;
 
@@ -8,41 +8,21 @@ namespace Content.Shared.Bed.Sleep;
 /// Added to entities when they go to sleep.
 /// </summary>
 [NetworkedComponent, RegisterComponent]
-[AutoGenerateComponentState, AutoGenerateComponentPause(Dirty = true)]
 public sealed partial class SleepingComponent : Component
 {
     /// <summary>
     /// How much damage of any type it takes to wake this entity.
     /// </summary>
-    [DataField]
+    [DataField("wakeThreshold")]
     public FixedPoint2 WakeThreshold = FixedPoint2.New(2);
 
     /// <summary>
     ///     Cooldown time between users hand interaction.
     /// </summary>
-    [DataField]
+    [DataField("cooldown")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(1f);
 
-    [DataField]
-    [AutoNetworkedField, AutoPausedField]
-    public TimeSpan CooldownEnd;
-
-    /// <summary>
-    ///     The moment this entity went to sleep. Initialized on MapInit.
-    /// </summary>
-    [DataField]
-    public TimeSpan SleepingSince;
-
-    [DataField]
-    [AutoNetworkedField]
-    public EntityUid? WakeAction;
-
-    /// <summary>
-    /// Sound to play when another player attempts to wake this entity.
-    /// </summary>
-    [DataField]
-    public SoundSpecifier WakeAttemptSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
-    {
-        Params = AudioParams.Default.WithVariation(0.05f)
-    };
+    [DataField("cooldownEnd", customTypeSerializer:typeof(TimeOffsetSerializer))]
+    public TimeSpan CoolDownEnd;
 }

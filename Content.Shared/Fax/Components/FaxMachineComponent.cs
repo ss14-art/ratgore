@@ -1,13 +1,12 @@
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Paper;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-namespace Content.Shared.Fax.Components;
+namespace Content.Server.Fax;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
 public sealed partial class FaxMachineComponent : Component
 {
     /// <summary>
@@ -16,20 +15,6 @@ public sealed partial class FaxMachineComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("name")]
     public string FaxName { get; set; } = "Unknown";
-
-    /// <summary>
-    /// If true, will sync fax name with a station name.
-    /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("useStationName")]
-    public bool UseStationName { get; set; }
-
-    /// <summary>
-    /// Sprite to use when inserting an object.
-    /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField, AutoNetworkedField]
-    public string InsertingState = "inserting";
 
     /// <summary>
     /// Device address of fax in network to which data will be send
@@ -41,7 +26,7 @@ public sealed partial class FaxMachineComponent : Component
     /// <summary>
     /// Contains the item to be sent, assumes it's paper...
     /// </summary>
-    [DataField(required: true)]
+    [DataField("paperSlot", required: true)]
     public ItemSlot PaperSlot = new();
 
     /// <summary>
@@ -49,45 +34,39 @@ public sealed partial class FaxMachineComponent : Component
     /// This will make it visible to others on the network
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField]
+    [DataField("responsePings")]
     public bool ResponsePings { get; set; } = true;
 
     /// <summary>
     /// Should admins be notified on message receive
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField]
+    [DataField("notifyAdmins")]
     public bool NotifyAdmins { get; set; } = false;
 
     /// <summary>
     /// Should that fax receive nuke codes send by admins. Probably should be captain fax only
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField]
+    [DataField("receiveNukeCodes")]
     public bool ReceiveNukeCodes { get; set; } = false;
-
-    /// <summary>
-    /// 	Should this fax receive station goals
-    /// </summary>
-    [DataField]
-    public bool ReceiveStationGoal { get; set; } = false;
 
     /// <summary>
     /// Sound to play when fax has been emagged
     /// </summary>
-    [DataField]
+    [DataField("emagSound")]
     public SoundSpecifier EmagSound = new SoundCollectionSpecifier("sparks");
 
     /// <summary>
     /// Sound to play when fax printing new message
     /// </summary>
-    [DataField]
+    [DataField("printSound")]
     public SoundSpecifier PrintSound = new SoundPathSpecifier("/Audio/Machines/printer.ogg");
 
     /// <summary>
     /// Sound to play when fax successfully send message
     /// </summary>
-    [DataField]
+    [DataField("sendSound")]
     public SoundSpecifier SendSound = new SoundPathSpecifier("/Audio/Machines/high_tech_confirm.ogg");
 
     /// <summary>
@@ -100,27 +79,27 @@ public sealed partial class FaxMachineComponent : Component
     /// Print queue of the incoming message
     /// </summary>
     [ViewVariables]
-    [DataField]
+    [DataField("printingQueue")]
     public Queue<FaxPrintout> PrintingQueue { get; private set; } = new();
 
     /// <summary>
     /// Message sending timeout
     /// </summary>
     [ViewVariables]
-    [DataField]
+    [DataField("sendTimeoutRemaining")]
     public float SendTimeoutRemaining;
 
     /// <summary>
     /// Message sending timeout
     /// </summary>
     [ViewVariables]
-    [DataField]
+    [DataField("sendTimeout")]
     public float SendTimeout = 5f;
 
     /// <summary>
     /// Remaining time of inserting animation
     /// </summary>
-    [DataField]
+    [DataField("insertingTimeRemaining")]
     public float InsertingTimeRemaining;
 
     /// <summary>
@@ -132,7 +111,7 @@ public sealed partial class FaxMachineComponent : Component
     /// <summary>
     /// Remaining time of printing animation
     /// </summary>
-    [DataField]
+    [DataField("printingTimeRemaining")]
     public float PrintingTimeRemaining;
 
     /// <summary>
@@ -145,16 +124,13 @@ public sealed partial class FaxMachineComponent : Component
 [DataDefinition]
 public sealed partial class FaxPrintout
 {
-    [DataField(required: true)]
+    [DataField("name", required: true)]
     public string Name { get; private set; } = default!;
 
-    [DataField]
-    public string? Label { get; private set; }
-
-    [DataField(required: true)]
+    [DataField("content", required: true)]
     public string Content { get; private set; } = default!;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
+    [DataField("prototypeId", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
     public string PrototypeId { get; private set; } = default!;
 
     [DataField("stampState")]
@@ -167,11 +143,10 @@ public sealed partial class FaxPrintout
     {
     }
 
-    public FaxPrintout(string content, string name, string? label = null, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null)
+    public FaxPrintout(string content, string name, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null)
     {
         Content = content;
         Name = name;
-        Label = label;
         PrototypeId = prototypeId ?? "";
         StampState = stampState;
         StampedBy = stampedBy ?? new List<StampDisplayInfo>();

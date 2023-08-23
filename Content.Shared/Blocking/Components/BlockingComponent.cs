@@ -1,8 +1,7 @@
+using Content.Shared.Actions.ActionTypes;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Collision.Shapes;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Blocking;
@@ -10,19 +9,19 @@ namespace Content.Shared.Blocking;
 /// <summary>
 /// This component goes on an item that you want to use to block
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
 public sealed partial class BlockingComponent : Component
 {
     /// <summary>
     /// The entity that's blocking
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [ViewVariables]
     public EntityUid? User;
 
     /// <summary>
     /// Is it currently blocking?
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [ViewVariables]
     public bool IsBlocking;
 
     /// <summary>
@@ -48,20 +47,17 @@ public sealed partial class BlockingComponent : Component
     [DataField("activeBlockModifier", required: true)]
     public DamageModifierSet ActiveBlockDamageModifier = default!;
 
-    [DataField("blockingToggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string BlockingToggleAction = "ActionToggleBlock";
+    [DataField("blockingToggleActionId", customTypeSerializer: typeof(PrototypeIdSerializer<InstantActionPrototype>))]
+    public string BlockingToggleActionId = "ToggleBlock";
 
-    [DataField, AutoNetworkedField]
-    public EntityUid? BlockingToggleActionEntity;
+    [DataField("blockingToggleAction")]
+    public InstantAction? BlockingToggleAction;
 
     /// <summary>
     /// The sound to be played when you get hit while actively blocking
     /// </summary>
-    [DataField("blockSound")] public SoundSpecifier BlockSound =
-        new SoundPathSpecifier("/Audio/Weapons/block_metal1.ogg")
-        {
-            Params = AudioParams.Default.WithVariation(0.25f)
-        };
+    [DataField("blockSound")]
+    public SoundSpecifier BlockSound = new SoundPathSpecifier("/Audio/Weapons/block_metal1.ogg");
 
     /// <summary>
     /// Fraction of original damage shield will take instead of user
@@ -76,27 +72,4 @@ public sealed partial class BlockingComponent : Component
     /// </summary>
     [DataField("activeBlockFraction"), ViewVariables(VVAccess.ReadWrite)]
     public float ActiveBlockFraction = 1.0f;
-
-    // Crescent changes start
-    /// <summary>
-    /// Decides if the action is added or not (mostly for clothing w/ shielding).
-    /// </summary>
-    [DataField]
-    public bool BlockAction = true;
-
-    /// <summary>
-    /// If the shield is handheld or clothing.
-    /// </summary>
-    [DataField]
-    public bool IsClothing = false;
-    // Crescent changes end
-}
-
-/// <summary>
-///     Raised directed on the blocking object when attempting to block.
-/// </summary>
-public sealed class BeforeBlockingEvent(EntityUid user, EntityUid? origin) : CancellableEntityEventArgs
-{
-    public EntityUid User = user;
-    public EntityUid? Origin = origin;
 }

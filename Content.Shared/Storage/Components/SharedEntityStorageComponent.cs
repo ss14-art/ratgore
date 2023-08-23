@@ -1,4 +1,4 @@
-using System.Numerics;
+﻿using System.Numerics;
 using Content.Shared.Physics;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
@@ -14,7 +14,7 @@ public abstract partial class SharedEntityStorageComponent : Component
     public readonly float MaxSize = 1.0f; // maximum width or height of an entity allowed inside the storage.
 
     public static readonly TimeSpan InternalOpenAttemptDelay = TimeSpan.FromSeconds(0.5);
-    public TimeSpan NextInternalOpenAttempt;
+    public TimeSpan LastInternalOpenAttempt;
 
     /// <summary>
     ///     Collision masks that get removed when the storage gets opened.
@@ -27,26 +27,19 @@ public abstract partial class SharedEntityStorageComponent : Component
     /// <summary>
     ///     Collision masks that were removed from ANY layer when the storage was opened;
     /// </summary>
-    [DataField]
+    [DataField("removedMasks")]
     public int RemovedMasks;
 
     /// <summary>
     /// The total amount of items that can fit in one entitystorage
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField("capacity")]
     public int Capacity = 30;
-
-    /// <summary>
-    /// Maximum number of mobs (entities with BodyComponent) that can be stored.
-    /// -1 means no mob-specific limit (uses general Capacity).
-    /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public int MaxMobCount = -1;
 
     /// <summary>
     /// Whether or not the entity still has collision when open
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField("isCollidableWhenOpen")]
     public bool IsCollidableWhenOpen;
 
     /// <summary>
@@ -54,76 +47,71 @@ public abstract partial class SharedEntityStorageComponent : Component
     /// If false, it prevents the storage from opening when the entity inside of it moves.
     /// This is for objects that you want the player to move while inside, like large cardboard boxes, without opening the storage.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("openOnMove")]
     public bool OpenOnMove = true;
 
     //The offset for where items are emptied/vacuumed for the EntityStorage.
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField("enteringOffset")]
     public Vector2 EnteringOffset = new(0, 0);
 
     //The collision groups checked, so that items are depositied or grabbed from inside walls.
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField("enteringOffsetCollisionFlags")]
     public CollisionGroup EnteringOffsetCollisionFlags = CollisionGroup.Impassable | CollisionGroup.MidImpassable;
 
     /// <summary>
     /// How close you have to be to the "entering" spot to be able to enter
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField("enteringRange")]
     public float EnteringRange = 0.18f;
-
-    /// <summary>
-    /// If true, there may be mobs inside the container, even if the container is an Item
-    /// </summary>
-    [DataField]
-    public bool ItemCanStoreMobs = false;
 
     /// <summary>
     /// Whether or not to show the contents when the storage is closed
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField("showContents")]
     public bool ShowContents;
 
     /// <summary>
     /// Whether or not light is occluded by the storage
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField("occludesLight")]
     public bool OccludesLight = true;
 
     /// <summary>
     /// Whether or not all the contents stored should be deleted with the entitystorage
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField("deleteContentsOnDestruction"), ViewVariables(VVAccess.ReadWrite)]
     public bool DeleteContentsOnDestruction;
 
     /// <summary>
     /// Whether or not the container is sealed and traps air inside of it
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public bool Airtight;
+    [DataField("airtight"), ViewVariables(VVAccess.ReadWrite)]
+    public bool Airtight = true;
 
     /// <summary>
     /// Whether or not the entitystorage is open or closed
     /// </summary>
-    [DataField]
+    [DataField("open")]
     public bool Open;
 
     /// <summary>
     /// The sound made when closed
     /// </summary>
-    [DataField]
+    [DataField("closeSound")]
     public SoundSpecifier CloseSound = new SoundPathSpecifier("/Audio/Effects/closetclose.ogg");
 
     /// <summary>
     /// The sound made when open
     /// </summary>
-    [DataField]
+    [DataField("openSound")]
     public SoundSpecifier OpenSound = new SoundPathSpecifier("/Audio/Effects/closetopen.ogg");
 
     /// <summary>
     ///     Whitelist for what entities are allowed to be inserted into this container. If this is not null, the
     ///     standard requirement that the entity must be an item or mob is waived.
     /// </summary>
-    [DataField]
+    [DataField("whitelist")]
     public EntityWhitelist? Whitelist;
 
     /// <summary>
@@ -131,6 +119,12 @@ public abstract partial class SharedEntityStorageComponent : Component
     /// </summary>
     [ViewVariables]
     public Container Contents = default!;
+
+    /// <summary>
+    /// Whether or not the storage has been welded shut
+    /// </summary>
+    [DataField("isWeldedShut"), ViewVariables(VVAccess.ReadWrite)]
+    public bool IsWeldedShut;
 }
 
 [Serializable, NetSerializable]
@@ -146,16 +140,16 @@ public sealed class EntityStorageComponentState : ComponentState
 
     public float EnteringRange;
 
-    public TimeSpan NextInternalOpenAttempt;
+    public bool IsWeldedShut;
 
-    public EntityStorageComponentState(bool open, int capacity, bool isCollidableWhenOpen, bool openOnMove, float enteringRange, TimeSpan nextInternalOpenAttempt)
+    public EntityStorageComponentState(bool open, int capacity, bool isCollidableWhenOpen, bool openOnMove, float enteringRange, bool isWeldedShut)
     {
         Open = open;
         Capacity = capacity;
         IsCollidableWhenOpen = isCollidableWhenOpen;
         OpenOnMove = openOnMove;
         EnteringRange = enteringRange;
-        NextInternalOpenAttempt = nextInternalOpenAttempt;
+        IsWeldedShut = isWeldedShut;
     }
 }
 

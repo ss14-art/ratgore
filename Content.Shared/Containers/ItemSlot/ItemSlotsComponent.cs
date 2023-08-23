@@ -21,7 +21,7 @@ namespace Content.Shared.Containers.ItemSlots
         ///     The dictionary that stores all of the item slots whose interactions will be managed by the <see
         ///     cref="ItemSlotsSystem"/>.
         /// </summary>
-        [DataField(readOnly: true)]
+        [DataField("slots", readOnly:true)]
         public Dictionary<string, ItemSlot> Slots = new();
 
         // There are two ways to use item slots:
@@ -38,13 +38,6 @@ namespace Content.Shared.Containers.ItemSlots
         // datafield. This means that if your system/component dynamically changes the item slot (e.g., updating
         // whitelist or whatever), you should use #1. Alternatively: split the Slots dictionary here into two: one
         // datafield, one that is actually used by the ItemSlotsSystem for keeping track of slots.
-
-        /// <summary>
-        /// If the container is empty, and you try to smart-equip from it, should you equip the container itself.
-        /// </summary>
-        [DataField]
-        public bool SmartEquipSelfIfEmpty = false;
-
     }
 
     [Serializable, NetSerializable]
@@ -65,7 +58,6 @@ namespace Content.Shared.Containers.ItemSlots
     [DataDefinition]
     [Access(typeof(ItemSlotsSystem))]
     [Serializable, NetSerializable]
-
     public sealed partial class ItemSlot
     {
         public ItemSlot() { }
@@ -75,20 +67,14 @@ namespace Content.Shared.Containers.ItemSlots
             CopyFrom(other);
         }
 
-        [DataField]
-        [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)]
+
+        [DataField("whitelist")]
         public EntityWhitelist? Whitelist;
 
-        [DataField]
-        public EntityWhitelist? Blacklist;
-
-        [DataField]
-        public bool SelfEjectOnly = false;
-
-        [DataField]
+        [DataField("insertSound")]
         public SoundSpecifier InsertSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/revolver_magin.ogg");
 
-        [DataField]
+        [DataField("ejectSound")]
         public SoundSpecifier EjectSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagOut/revolver_magout.ogg");
 
         /// <summary>
@@ -98,7 +84,7 @@ namespace Content.Shared.Containers.ItemSlots
         ///     This will be passed through Loc.GetString. If the name is an empty string, then verbs will use the name
         ///     of the currently held or currently inserted entity instead.
         /// </remarks>
-        [DataField(readOnly: true)]
+        [DataField("name", readOnly: true)]
         [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
         public string Name = string.Empty;
 
@@ -110,7 +96,7 @@ namespace Content.Shared.Containers.ItemSlots
         ///     property of that component (e.g., cell slot size category), and this can lead to unnecessary changes
         ///     when mapping.
         /// </remarks>
-        [DataField(readOnly: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("startingItem", readOnly: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
         [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
         [NonSerialized]
         public string? StartingItem;
@@ -122,24 +108,15 @@ namespace Content.Shared.Containers.ItemSlots
         ///     This doesn't have to mean the slot is somehow physically locked. In the case of the item cabinet, the
         ///     cabinet may simply be closed at the moment and needs to be opened first.
         /// </remarks>
-        [DataField(readOnly: true)]
+        [DataField("locked", readOnly: true)]
         [ViewVariables(VVAccess.ReadWrite)]
         public bool Locked = false;
-
-        /// <summary>
-        /// Prevents adding the eject alt-verb, but still lets you swap items.
-        /// </summary>
-        /// <remarks>
-        ///     This does not affect EjectOnInteract, since if you do that you probably want ejecting to work.
-        /// </remarks>
-        [DataField, ViewVariables(VVAccess.ReadWrite)]
-        public bool DisableEject = false;
 
         /// <summary>
         ///     Whether the item slots system will attempt to insert item from the user's hands into this slot when interacted with.
         ///     It doesn't block other insertion methods, like verbs.
         /// </summary>
-        [DataField]
+        [DataField("insertOnInteract")]
         public bool InsertOnInteract = true;
 
         /// <summary>
@@ -150,7 +127,7 @@ namespace Content.Shared.Containers.ItemSlots
         ///     there are some exceptions. For example item cabinets and charging stations should probably eject their
         ///     contents when clicked on normally.
         /// </remarks>
-        [DataField]
+        [DataField("ejectOnInteract")]
         public bool EjectOnInteract = false;
 
         /// <summary>
@@ -162,21 +139,21 @@ namespace Content.Shared.Containers.ItemSlots
         ///     'Z' to open UI). Unlike <see cref="EjectOnInteract"/>, this will not make any changes to the context
         ///     menu, nor will it disable alt-click interactions.
         /// </remarks>
-        [DataField]
+        [DataField("ejectOnUse")]
         public bool EjectOnUse = false;
 
         /// <summary>
         ///     Override the insert verb text. Defaults to using the slot's name (if specified) or the name of the
         ///     targeted item. If specified, the verb will not be added to the default insert verb category.
         /// </summary>
-        [DataField]
+        [DataField("insertVerbText")]
         public string? InsertVerbText;
 
         /// <summary>
         ///     Override the eject verb text. Defaults to using the slot's name (if specified) or the name of the
         ///     targeted item. If specified, the verb will not be added to the default eject verb category
         /// </summary>
-        [DataField]
+        [DataField("ejectVerbText")]
         public string? EjectVerbText;
 
         [ViewVariables, NonSerialized]
@@ -189,8 +166,7 @@ namespace Content.Shared.Containers.ItemSlots
         /// <remarks>
         ///     The actual deconstruction logic is handled by the server-side EmptyOnMachineDeconstructSystem.
         /// </remarks>
-        [DataField]
-        [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)]
+        [DataField("ejectOnDeconstruct")]
         [NonSerialized]
         public bool EjectOnDeconstruct = true;
 
@@ -198,42 +174,26 @@ namespace Content.Shared.Containers.ItemSlots
         ///     If this slot belongs to some breakable or destructible entity, should the item inside the slot be
         ///     ejected when it is broken or destroyed?
         /// </summary>
-        [DataField]
-        [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)]
+        [DataField("ejectOnBreak")]
         [NonSerialized]
         public bool EjectOnBreak = false;
 
         /// <summary>
-        ///     When specified, a popup will be generated whenever someone attempts to insert a bad item into this slot.
+        ///     If this is not an empty string, this will generate a popup when someone attempts to insert a bad item
+        ///     into this slot. This string will be passed through localization.
         /// </summary>
-        [DataField]
-        public LocId? WhitelistFailPopup;
-
-        /// <summary>
-        ///     When specified, a popup will be generated whenever someone attempts to insert a valid item, or eject an item
-        ///     from the slot while that slot is locked.
-        /// </summary>
-        [DataField]
-        public LocId? LockedFailPopup;
-
-        /// <summary>
-        ///     When specified, a popup will be generated whenever someone successfully inserts a valid item into this slot.
-        ///     This is also used for insertions resulting from swapping.
-        /// </summary>
-        [DataField]
-        public LocId? InsertSuccessPopup;
+        [DataField("whitelistFailPopup")]
+        public string WhitelistFailPopup = string.Empty;
 
         /// <summary>
         ///     If the user interacts with an entity with an already-filled item slot, should they attempt to swap out the item?
-        ///     If set to null, will be deduced based on the relevant config variable.
         /// </summary>
         /// <remarks>
         ///     Useful for things like chem dispensers, but undesirable for things like the ID card console, where you
         ///     want to insert more than one item that matches the same whitelist.
         /// </remarks>
-        [DataField]
-        [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)]
-        public bool? Swap = null;
+        [DataField("swap")]
+        public bool Swap = true;
 
         public string? ID => ContainerSlot?.ID;
 
@@ -244,7 +204,7 @@ namespace Content.Shared.Containers.ItemSlots
         /// <summary>
         ///     Priority for use with the eject & insert verbs for this slot.
         /// </summary>
-        [DataField]
+        [DataField("priority")]
         public int Priority = 0;
 
         /// <summary>
@@ -254,13 +214,6 @@ namespace Content.Shared.Containers.ItemSlots
         [NonSerialized]
         public bool Local = true;
 
-        /// <summary>
-        ///     Lavaland Change: Can light go through the container of this ItemSlot?
-        /// </summary>
-
-        [DataField]
-        [Access(typeof(ItemSlotsSystem), Other = AccessPermissions.ReadWriteExecute)]
-        public bool OccludesLight = true;
         public void CopyFrom(ItemSlot other)
         {
             // These fields are mutable reference types. But they generally don't get modified, so this should be fine.
@@ -276,11 +229,8 @@ namespace Content.Shared.Containers.ItemSlots
             InsertVerbText = other.InsertVerbText;
             EjectVerbText = other.EjectVerbText;
             WhitelistFailPopup = other.WhitelistFailPopup;
-            LockedFailPopup = other.LockedFailPopup;
-            InsertSuccessPopup = other.InsertSuccessPopup;
             Swap = other.Swap;
             Priority = other.Priority;
-            OccludesLight = other.OccludesLight; // Lavaland Change
         }
     }
 
@@ -295,19 +245,4 @@ namespace Content.Shared.Containers.ItemSlots
     /// </summary>
     [ByRefEvent]
     public record struct ItemSlotEjectAttemptEvent(EntityUid SlotEntity, EntityUid Item, EntityUid? User, ItemSlot Slot, bool Cancelled = false);
-
-    // If you have a problem with me adding the following events take it up with my fucking supervisor.
-    // My job is to code, not deal with the consequences of my actions.
-
-    /// <summary>
-    /// Event raised on the slot entity and the item being inserted to inform that an item was inserted into an item slot.
-    /// </summary>
-    [ByRefEvent]
-    public record struct ItemSlotInsertEvent(EntityUid SlotEntity, EntityUid Item, EntityUid? User, ItemSlot Slot);
-
-    /// <summary>
-    /// Event raised on the slot entity and the item being inserted to inform that an item was ejected from an item slot.
-    /// </summary>
-    [ByRefEvent]
-    public record struct ItemSlotEjectEvent(EntityUid SlotEntity, EntityUid Item, EntityUid? User, ItemSlot Slot);
 }

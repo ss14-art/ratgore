@@ -1,103 +1,94 @@
+using Content.Server.Administration.Logs;
+using Content.Server.Chat.Systems;
+using Content.Server.Popups;
 using Content.Shared.Actions;
-using Content.Shared.Administration.Logs;
-using Content.Shared.Chat;
-using Content.Shared.Clothing;
 using Content.Shared.Database;
-using Content.Shared.Inventory;
-using Content.Shared.Popups;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Preferences;
-using Content.Shared.Speech;
 using Content.Shared.VoiceMask;
-using Robust.Shared.Prototypes;
+using Robust.Server.GameObjects;
 
 namespace Content.Server.VoiceMask;
 
 public sealed partial class VoiceMaskSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
     {
-        base.Initialize();
-        SubscribeLocalEvent<VoiceMaskComponent, InventoryRelayedEvent<TransformSpeakerNameEvent>>(OnTransformSpeakerName);
+        SubscribeLocalEvent<VoiceMaskComponent, TransformSpeakerNameEvent>(OnSpeakerNameTransform);
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeNameMessage>(OnChangeName);
-        SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeVerbMessage>(OnChangeVerb);
-        SubscribeLocalEvent<VoiceMaskComponent, ClothingGotEquippedEvent>(OnEquip);
-        SubscribeLocalEvent<VoiceMaskSetNameEvent>(OpenUI);
+        SubscribeLocalEvent<VoiceMaskerComponent, GotEquippedEvent>(OnEquip);
+        SubscribeLocalEvent<VoiceMaskerComponent, GotUnequippedEvent>(OnUnequip);
+        SubscribeLocalEvent<VoiceMaskSetNameEvent>(OnSetName);
+        // SubscribeLocalEvent<VoiceMaskerComponent, GetVerbsEvent<AlternativeVerb>>(GetVerbs);
     }
 
-    private void OnTransformSpeakerName(Entity<VoiceMaskComponent> entity, ref InventoryRelayedEvent<TransformSpeakerNameEvent> args)
+    private void OnSetName(VoiceMaskSetNameEvent ev)
     {
-        args.Args.VoiceName = GetCurrentVoiceName(entity);
-        args.Args.SpeechVerb = entity.Comp.VoiceMaskSpeechVerb ?? args.Args.SpeechVerb;
+        OpenUI(ev.Performer);
     }
 
-    #region User inputs from UI
-    private void OnChangeVerb(Entity<VoiceMaskComponent> entity, ref VoiceMaskChangeVerbMessage msg)
-    {
-        if (msg.Verb is { } id && !_proto.HasIndex<SpeechVerbPrototype>(id))
-            return;
-
-        entity.Comp.VoiceMaskSpeechVerb = msg.Verb;
-        // verb is only important to metagamers so no need to log as opposed to name
-
-        _popupSystem.PopupEntity(Loc.GetString("voice-mask-popup-success"), entity, msg.Actor);
-
-        UpdateUI(entity);
-    }
-
-    private void OnChangeName(Entity<VoiceMaskComponent> entity, ref VoiceMaskChangeNameMessage message)
+    private void OnChangeName(EntityUid uid, VoiceMaskComponent component, VoiceMaskChangeNameMessage message)
     {
         if (message.Name.Length > HumanoidCharacterProfile.MaxNameLength || message.Name.Length <= 0)
         {
-            _popupSystem.PopupEntity(Loc.GetString("voice-mask-popup-failure"), entity, message.Actor, PopupType.SmallCaution);
+            _popupSystem.PopupCursor(Loc.GetString("voice-mask-popup-failure"), message.Session);
             return;
         }
 
-        entity.Comp.VoiceMaskName = message.Name;
-        _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(message.Actor):player} set voice of {ToPrettyString(entity):mask}: {entity.Comp.VoiceMaskName}");
+        component.VoiceName = message.Name;
+        if (message.Session.AttachedEntity != null)
+            _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(message.Session.AttachedEntity.Value):player} set voice of {ToPrettyString(uid):mask}: {component.VoiceName}");
+        else
+            _adminLogger.Add(LogType.Action, LogImpact.Medium, $"Voice of {ToPrettyString(uid):mask} set: {component.VoiceName}");
 
-        _popupSystem.PopupEntity(Loc.GetString("voice-mask-popup-success"), entity, message.Actor);
+        _popupSystem.PopupCursor(Loc.GetString("voice-mask-popup-success"), message.Session);
 
-        UpdateUI(entity);
-    }
-    #endregion
+        TrySetLastKnownName(uid, message.Name);
 
-    #region UI
-    private void OnEquip(EntityUid uid, VoiceMaskComponent component, ClothingGotEquippedEvent args)
-    {
-        _actions.AddAction(args.Wearer, ref component.ActionEntity, component.Action, uid);
+        UpdateUI(uid, component);
     }
 
-    private void OpenUI(VoiceMaskSetNameEvent ev)
+    private void OnSpeakerNameTransform(EntityUid uid, VoiceMaskComponent component, TransformSpeakerNameEvent args)
     {
-        var maskEntity = ev.Action.Comp.Container;
+        if (component.Enabled)
+        {
+            /*
+            args.Name = _idCard.TryGetIdCard(uid, out var card) && !string.IsNullOrEmpty(card.FullName)
+                ? card.FullName
+                : Loc.GetString("voice-mask-unknown");
+                */
 
-        if (!TryComp<VoiceMaskComponent>(maskEntity, out var voiceMaskComp))
+            args.Name = component.VoiceName;
+        }
+    }
+
+    private void OpenUI(EntityUid player, ActorComponent? actor = null)
+    {
+        if (!Resolve(player, ref actor))
+            return;
+        if (!_uiSystem.TryGetUi(player, VoiceMaskUIKey.Key, out var bui))
             return;
 
-        if (!_uiSystem.HasUi(maskEntity.Value, VoiceMaskUIKey.Key))
+        _uiSystem.OpenUi(bui, actor.PlayerSession);
+        UpdateUI(player);
+    }
+
+    private void UpdateUI(EntityUid owner, VoiceMaskComponent? component = null)
+    {
+        if (!Resolve(owner, ref component))
+        {
             return;
+        }
 
-        _uiSystem.OpenUi(maskEntity.Value, VoiceMaskUIKey.Key, ev.Performer);
-        UpdateUI((maskEntity.Value, voiceMaskComp));
+        if (_uiSystem.TryGetUi(owner, VoiceMaskUIKey.Key, out var bui))
+            UserInterfaceSystem.SetUiState(bui, new VoiceMaskBuiState(component.VoiceName));
     }
+}
 
-    private void UpdateUI(Entity<VoiceMaskComponent> entity)
-    {
-        if (_uiSystem.HasUi(entity, VoiceMaskUIKey.Key))
-            _uiSystem.SetUiState(entity.Owner, VoiceMaskUIKey.Key, new VoiceMaskBuiState(GetCurrentVoiceName(entity), entity.Comp.VoiceMaskSpeechVerb));
-    }
-    #endregion
-
-    #region Helper functions
-    private string GetCurrentVoiceName(Entity<VoiceMaskComponent> entity)
-    {
-        return entity.Comp.VoiceMaskName ?? Loc.GetString("voice-mask-default-name-override");
-    }
-    #endregion
+public sealed partial class VoiceMaskSetNameEvent : InstantActionEvent
+{
 }

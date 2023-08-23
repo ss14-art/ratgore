@@ -21,17 +21,6 @@ public sealed partial class GameMapPrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    [DataField]
-    public float MaxRandomOffset = 1000f;
-
-    /// <summary>
-    /// Turns out some of the map files are actually secretly grids. Excellent. I love map loading code.
-    /// </summary>
-    [DataField] public bool IsGrid;
-
-    [DataField]
-    public bool RandomRotation = true;
-
     /// <summary>
     /// Name of the map to use in generic messages, like the map vote.
     /// </summary>
@@ -51,18 +40,4 @@ public sealed partial class GameMapPrototype : IPrototype
     /// The stations this map contains. The names should match with the BecomesStation components.
     /// </summary>
     public IReadOnlyDictionary<string, StationConfig> Stations => _stations;
-
-    /// <summary>
-    /// Performs a shallow clone of this map prototype, replacing <c>MapPath</c> with the argument.
-    /// </summary>
-    public GameMapPrototype Persistence(ResPath mapPath)
-    {
-        return new()
-        {
-            ID = ID,
-            MapName = MapName,
-            MapPath = mapPath,
-            _stations = _stations
-        };
-    }
 }
