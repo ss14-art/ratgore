@@ -108,6 +108,39 @@
   - type: FootPrints
     leftBarePrint: "footprint-left-bare-lizard"
     rightBarePrint: "footprint-right-bare-lizard"
+  - type: Inventory
+    speciesId: vox
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: hand
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: shoes
 
 - type: entity
   parent: BaseSpeciesDummy
@@ -119,3 +152,36 @@
   - type: Body
     prototype: Vox
 
+  - type: Inventory
+    speciesId: vox
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: hand
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: shoes

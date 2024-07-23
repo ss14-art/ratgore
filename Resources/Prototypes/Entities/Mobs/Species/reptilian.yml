@@ -87,6 +87,15 @@
         Slash: -0.6
     thirstDrain: 0.1
     hungerDrain: 0.4
+  - type: Inventory
+    speciesId: reptilian
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
 
 - type: entity
   parent: BaseSpeciesDummy
@@ -96,3 +105,17 @@
   components:
   - type: HumanoidAppearance
     species: Reptilian
+    hideLayersOnEquip:
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: Inventory
+    speciesId: reptilian
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
+#Weh

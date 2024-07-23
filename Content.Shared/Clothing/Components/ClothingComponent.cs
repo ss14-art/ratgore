@@ -16,8 +16,7 @@ namespace Content.Shared.Clothing.Components;
 [Access(typeof(ClothingSystem), typeof(InventorySystem))]
 public sealed partial class ClothingComponent : Component
 {
-    [DataField]
-    [Access(typeof(ClothingSystem), typeof(InventorySystem), Other = AccessPermissions.ReadExecute)] // TODO remove execute permissions.
+    [DataField("clothingVisuals")]
     public Dictionary<string, List<PrototypeLayerData>> ClothingVisuals = new();
 
     [DataField]
@@ -27,52 +26,41 @@ public sealed partial class ClothingComponent : Component
     [Access(typeof(ClothingSystem), typeof(InventorySystem), Other = AccessPermissions.ReadExecute)]
     public SlotFlags Slots = SlotFlags.NONE;
 
-    /// <summary>
-    ///   The actual sprite layer to render this entity's equipped sprite to, overriding the layer determined by the slot.
-    /// </summary>
-    [DataField]
-    [Access(typeof(ClothingSystem))]
-    public string? RenderLayer;
-
-    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("equipSound")]
     public SoundSpecifier? EquipSound;
 
-    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("unequipSound")]
     public SoundSpecifier? UnequipSound;
 
     [Access(typeof(ClothingSystem))]
-    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("equippedPrefix")]
     public string? EquippedPrefix;
 
     /// <summary>
-    ///     Allows the equipped state to be directly overwritten.
-    ///     useful when prototyping INNERCLOTHING items into OUTERCLOTHING items without duplicating/modifying RSIs etc.
+    /// Allows the equipped state to be directly overwritten.
+    /// useful when prototyping INNERCLOTHING items into OUTERCLOTHING items without duplicating/modifying RSIs etc.
     /// </summary>
     [Access(typeof(ClothingSystem))]
-    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("equippedState")]
     public string? EquippedState;
 
-    [DataField]
-    public string? Sprite;
-
-    [DataField]
-    public ClothingMask MaleMask = ClothingMask.UniformFull;
-
-    [DataField]
-    public ClothingMask FemaleMask = ClothingMask.UniformFull;
-
-    [DataField]
-    public ClothingMask UnisexMask = ClothingMask.UniformFull;
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("sprite")]
+    public string? RsiPath;
 
     /// <summary>
-    ///     Name of the inventory slot the clothing is in.
+    /// Name of the inventory slot the clothing is in.
     /// </summary>
     public string? InSlot;
 
-    [DataField]
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan EquipDelay = TimeSpan.Zero;
 
-    [DataField]
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan UnequipDelay = TimeSpan.Zero;
 
     /// <summary>

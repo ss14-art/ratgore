@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Client.DisplacementMap;
 using Content.Client.Examine;
 using Content.Client.Strip;
 using Content.Client.Verbs.UI;
@@ -41,6 +42,7 @@ namespace Content.Client.Hands.Systems
         public event Action<string, EntityUid>? OnPlayerItemRemoved;
         public event Action<string>? OnPlayerHandBlocked;
         public event Action<string>? OnPlayerHandUnblocked;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -298,7 +300,6 @@ namespace Content.Client.Hands.Systems
 
             if (!hands.Hands.TryGetValue(args.Container.ID, out var hand))
                 return;
-
             UpdateHandVisuals(uid, args.Entity, hand);
             _stripSys.UpdateUi(uid);
 
@@ -383,12 +384,8 @@ namespace Content.Client.Hands.Systems
 
                 sprite.LayerSetData(index, layerData);
 
-                if (hand.Location == HandLocation.Left && handComp.LeftHandDisplacement is not null)
-                    _displacement.TryAddDisplacement(handComp.LeftHandDisplacement, sprite, index, key, revealedLayers);
-                else if (hand.Location == HandLocation.Right && handComp.RightHandDisplacement is not null)
-                    _displacement.TryAddDisplacement(handComp.RightHandDisplacement, sprite, index, key, revealedLayers);
-                //Fallback to default displacement map
-                else if (handComp.HandDisplacement is not null)
+                //Add displacement maps
+                if (handComp.HandDisplacement is not null)
                     _displacement.TryAddDisplacement(handComp.HandDisplacement, sprite, index, key, revealedLayers);
             }
 
