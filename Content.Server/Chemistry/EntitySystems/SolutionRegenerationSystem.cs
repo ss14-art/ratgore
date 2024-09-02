@@ -1,7 +1,7 @@
 using Content.Server.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Timing;
 
@@ -16,16 +16,15 @@ public sealed class SolutionRegenerationSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<SolutionRegenerationComponent>();
-        while (query.MoveNext(out var uid, out var regen))
+        var query = EntityQueryEnumerator<SolutionRegenerationComponent, SolutionContainerManagerComponent>();
+        while (query.MoveNext(out var uid, out var regen, out var manager))
         {
-            if (_timing.CurTime < regen.NextRegenTime
-                || !TryComp(uid, out SolutionContainerManagerComponent? manager))
+            if (_timing.CurTime < regen.NextRegenTime)
                 continue;
 
             // timer ignores if its full, it's just a fixed cycle
             regen.NextRegenTime = _timing.CurTime + regen.Duration;
-            if (_solutionContainer.ResolveSolution((uid, manager), regen.SolutionName, ref regen.SolutionRef, out var solution))
+            if (_solutionContainer.ResolveSolution((uid, manager), regen.SolutionName, ref regen.Solution, out var solution))
             {
                 var amount = FixedPoint2.Min(solution.AvailableVolume, regen.Generated.Volume);
                 if (amount <= FixedPoint2.Zero)
@@ -42,7 +41,7 @@ public sealed class SolutionRegenerationSystem : EntitySystem
                     generated = regen.Generated.Clone().SplitSolution(amount);
                 }
 
-                _solutionContainer.TryAddSolution(regen.SolutionRef.Value, generated);
+                _solutionContainer.TryAddSolution(regen.Solution.Value, generated);
             }
         }
     }
