@@ -36,7 +36,6 @@ using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
 using Content.Server.Silicons.Laws;
-using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Robust.Server.Player;
 using Robust.Shared.Physics.Components;
@@ -64,7 +63,6 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly ArtifactSystem _artifactSystem = default!;
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly PrayerSystem _prayerSystem = default!;
-        [Dependency] private readonly EuiManager _eui = default!;
         [Dependency] private readonly MindSystem _mindSystem = default!;
         [Dependency] private readonly ToolshedManager _toolshed = default!;
         [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
@@ -291,7 +289,7 @@ namespace Content.Server.Administration.Systems
                         Act = () =>
                         {
                             var ui = new AdminLogsEui();
-                            _eui.OpenEui(ui, player);
+                            _euiManager.OpenEui(ui, player);
                             ui.SetLogFilter(search:args.Target.Id.ToString());
                         },
                         Impact = LogImpact.Low

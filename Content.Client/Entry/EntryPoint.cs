@@ -3,7 +3,6 @@ using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
 using Content.Client.DebugMon;
 using Content.Client.Eui;
-using Content.Client.Flash;
 using Content.Client.Fullscreen;
 using Content.Client.GhostKick;
 using Content.Client.Guidebook;
@@ -36,9 +35,6 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
-using Content.Client._Forge.DiscordAuth; // Forge-Change
-using Content.Client._Forge.Sponsors; // Forge-Change
-using Content.Client._Rat.JoinQueue;
 
 namespace Content.Client.Entry
 {
@@ -73,10 +69,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly IResourceManager _resourceManager = default!;
         [Dependency] private readonly IReplayLoadManager _replayLoad = default!;
         [Dependency] private readonly ILogManager _logManager = default!;
-        [Dependency] private readonly DiscordAuthManager _discordAuth = default!;
         [Dependency] private readonly DebugMonitorManager _debugMonitorManager = default!;
-        [Dependency] private readonly SponsorManager _sponsorMan = default!; // Forge-Change
-        [Dependency] private readonly JoinQueueManager _joinQueueManager = default!;
 
         public override void Init()
         {
@@ -125,7 +118,6 @@ namespace Content.Client.Entry
             _prototypeManager.RegisterIgnore("wireLayout");
             _prototypeManager.RegisterIgnore("alertLevels");
             _prototypeManager.RegisterIgnore("nukeopsRole");
-            _prototypeManager.RegisterIgnore("stationGoal");
             _prototypeManager.RegisterIgnore("ghostRoleRaffleDecider");
 
             _componentFactory.GenerateNetIds();
@@ -138,7 +130,6 @@ namespace Content.Client.Entry
             _extendedDisconnectInformation.Initialize();
             _jobRequirements.Initialize();
             _playbackMan.Initialize();
-            _sponsorMan.Initialize(); // Forge-Change
 
             //AUTOSCALING default Setup!
             _configManager.SetCVar("interface.resolutionAutoScaleUpperCutoffX", 1080);
@@ -160,7 +151,6 @@ namespace Content.Client.Entry
             _parallaxManager.LoadDefaultParallax();
 
             _overlayManager.AddOverlay(new SingularityOverlay());
-            _overlayManager.AddOverlay(new FlashOverlay());
             _overlayManager.AddOverlay(new RadiationPulseOverlay());
             _chatManager.Initialize();
             _clientPreferencesManager.Initialize();
@@ -169,8 +159,6 @@ namespace Content.Client.Entry
             _userInterfaceManager.SetDefaultTheme("SS14DefaultTheme");
             _userInterfaceManager.SetActiveTheme(_configManager.GetCVar(CVars.InterfaceTheme));
             _documentParsingManager.Initialize();
-            _discordAuth.Initialize();
-            _joinQueueManager.Initialize();
 
             _baseClient.RunLevelChanged += (_, args) =>
             {
@@ -202,6 +190,7 @@ namespace Content.Client.Entry
                     _resourceManager,
                     ReplayConstants.ReplayZipFolder.ToRootedPath());
 
+                _playbackMan.LastLoad = (null, ReplayConstants.ReplayZipFolder.ToRootedPath());
                 _replayLoad.LoadAndStartReplay(reader);
             }
             else if (_gameController.LaunchState.FromLauncher)

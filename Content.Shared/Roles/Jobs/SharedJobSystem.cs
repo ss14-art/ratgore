@@ -13,11 +13,9 @@ namespace Content.Shared.Roles.Jobs;
 /// </summary>
 public abstract class SharedJobSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPlayerSystem _playerSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
-
-    private readonly Dictionary<string, List<string>> _inverseTrackerLookup = new();
+    [Dependency] private readonly SharedPlayerSystem _playerSystem = default!;
+    private readonly Dictionary<string, string> _inverseTrackerLookup = new();
 
     public override void Initialize()
     {
@@ -39,10 +37,7 @@ public abstract class SharedJobSystem : EntitySystem
         // This breaks if you have N trackers to 1 JobId but future concern.
         foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
         {
-            if (_inverseTrackerLookup.ContainsKey(job.PlayTimeTracker))
-                _inverseTrackerLookup[job.PlayTimeTracker].Add(job.ID);
-            else
-                _inverseTrackerLookup.Add(job.PlayTimeTracker, new List<string>() { job.ID});
+            _inverseTrackerLookup.Add(job.PlayTimeTracker, job.ID);
         }
     }
 
@@ -51,7 +46,7 @@ public abstract class SharedJobSystem : EntitySystem
     /// </summary>
     /// <param name="trackerProto"></param>
     /// <returns></returns>
-    public List<string> GetJobPrototype(string trackerProto)
+    public string GetJobPrototype(string trackerProto)
     {
         DebugTools.Assert(_prototypes.HasIndex<PlayTimeTrackerPrototype>(trackerProto));
         return _inverseTrackerLookup[trackerProto];
@@ -105,41 +100,32 @@ public abstract class SharedJobSystem : EntitySystem
 
     public bool MindHasJobWithId(EntityUid? mindId, string prototypeId)
     {
-
-        if (mindId is null)
-            return false;
-
-        _roles.MindHasRole<JobRoleComponent>(mindId.Value, out var role);
-
-        if (role is null)
-            return false;
-
-        return role.Value.Comp1.JobPrototype == prototypeId;
+        return CompOrNull<JobComponent>(mindId)?.Prototype == prototypeId;
     }
 
     public bool MindTryGetJob(
         [NotNullWhen(true)] EntityUid? mindId,
+        [NotNullWhen(true)] out JobComponent? comp,
         [NotNullWhen(true)] out JobPrototype? prototype)
     {
+        comp = null;
         prototype = null;
-        MindTryGetJobId(mindId, out var protoId);
 
-        return (_prototypes.TryIndex<JobPrototype>(protoId, out prototype) || prototype is not null);
+        return TryComp(mindId, out comp) &&
+               comp.Prototype != null &&
+               _prototypes.TryIndex(comp.Prototype, out prototype);
     }
 
-    public bool MindTryGetJobId(
-        [NotNullWhen(true)] EntityUid? mindId,
-        out ProtoId<JobPrototype>? job)
+    public bool MindTryGetJobId([NotNullWhen(true)] EntityUid? mindId, out ProtoId<JobPrototype>? job)
     {
-        job = null;
-
-        if (mindId is null)
+        if (!TryComp(mindId, out JobComponent? comp))
+        {
+            job = null;
             return false;
+        }
 
-        if (_roles.MindHasRole<JobRoleComponent>(mindId.Value, out var role))
-            job = role.Value.Comp1.JobPrototype;
-
-        return job is not null;
+        job = comp.Prototype;
+        return true;
     }
 
     /// <summary>
@@ -148,7 +134,7 @@ public abstract class SharedJobSystem : EntitySystem
     /// </summary>
     public bool MindTryGetJobName([NotNullWhen(true)] EntityUid? mindId, out string name)
     {
-        if (MindTryGetJob(mindId, out var prototype))
+        if (MindTryGetJob(mindId, out _, out var prototype))
         {
             name = prototype.LocalizedName;
             return true;
@@ -175,7 +161,7 @@ public abstract class SharedJobSystem : EntitySystem
         if (_playerSystem.ContentData(player) is not { Mind: { } mindId })
             return true;
 
-        if (!MindTryGetJob(mindId, out var prototype))
+        if (!MindTryGetJob(mindId, out _, out var prototype))
             return true;
 
         return prototype.CanBeAntag;
