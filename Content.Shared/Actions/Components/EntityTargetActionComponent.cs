@@ -1,9 +1,12 @@
-﻿using Content.Shared.Whitelist;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Actions;
 
+/// <summary>
+/// Used on action entities to define an action that triggers when targeting an entity.
+/// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class EntityTargetActionComponent : BaseTargetActionComponent
 {
@@ -12,14 +15,26 @@ public sealed partial class EntityTargetActionComponent : BaseTargetActionCompon
     /// <summary>
     ///     The local-event to raise when this action is performed.
     /// </summary>
-    [DataField]
+    [DataField("event")]
     [NonSerialized]
     public EntityTargetActionEvent? Event;
 
-    [DataField] public EntityWhitelist? Whitelist;
+    /// <summary>
+    /// Determines which entities are valid targets for this action.
+    /// </summary>
+    /// <remarks>No whitelist check when null.</remarks>
+    [DataField("whitelist")] public EntityWhitelist? Whitelist;
+
+    /// <summary>
+    /// Determines which entities are NOT valid targets for this action.
+    /// </summary>
+    /// <remarks>No blacklist check when null.</remarks>
     [DataField] public EntityWhitelist? Blacklist;
 
-    [DataField] public bool CanTargetSelf = true;
+    /// <summary>
+    /// Whether this action considers the user as a valid target entity when using this action.
+    /// </summary>
+    [DataField("canTargetSelf")] public bool CanTargetSelf = true;
 }
 
 [Serializable, NetSerializable]
