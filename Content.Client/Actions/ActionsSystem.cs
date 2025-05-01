@@ -204,6 +204,7 @@ namespace Content.Client.Actions
                 return;
 
             OnActionAdded?.Invoke(actionId);
+            ActionsUpdated?.Invoke();
         }
 
         protected override void ActionRemoved(EntityUid performer, EntityUid actionId, ActionsComponent comp, BaseActionComponent action)
@@ -212,6 +213,7 @@ namespace Content.Client.Actions
                 return;
 
             OnActionRemoved?.Invoke(actionId);
+            ActionsUpdated?.Invoke();
         }
 
         public IEnumerable<(EntityUid Id, BaseActionComponent Comp)> GetClientActions()
