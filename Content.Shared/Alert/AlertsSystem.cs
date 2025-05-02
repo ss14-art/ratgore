@@ -8,8 +8,8 @@ namespace Content.Shared.Alert;
 
 public abstract class AlertsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private FrozenDictionary<ProtoId<AlertPrototype>, AlertPrototype> _typeToAlert = default!;
 
@@ -195,7 +195,7 @@ public abstract class AlertsSystem : EntitySystem
 
         SubscribeLocalEvent<AlertAutoRemoveComponent, EntityUnpausedEvent>(OnAutoRemoveUnPaused);
 
-        SubscribeNetworkEvent<ClickAlertEvent>(HandleClickAlert);
+        SubscribeAllEvent<ClickAlertEvent>(HandleClickAlert);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(HandlePrototypesReloaded);
         LoadPrototypes();
     }
@@ -328,7 +328,28 @@ public abstract class AlertsSystem : EntitySystem
             return;
         }
 
-        alert.OnClick?.AlertClicked(player.Value);
+        if (ActivateAlert(player.Value, alert) && _timing.IsFirstTimePredicted)
+        {
+            HandledAlert();
+        }
+    }
+
+    protected virtual void HandledAlert()
+    {
+
+    }
+
+    public bool ActivateAlert(EntityUid user, AlertPrototype alert)
+    {
+        if (alert.ClickEvent is not { } clickEvent)
+            return false;
+
+        clickEvent.Handled = false;
+        clickEvent.User = user;
+        clickEvent.AlertId = alert.ID;
+
+        RaiseLocalEvent(user, (object) clickEvent, true);
+        return clickEvent.Handled;
     }
 
     private void OnPlayerAttached(EntityUid uid, AlertsComponent component, PlayerAttachedEvent args)
