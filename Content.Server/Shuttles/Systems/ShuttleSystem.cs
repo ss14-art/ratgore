@@ -6,6 +6,7 @@ using Content.Server.Body.Systems;
 using Content.Server.Buckle.Systems;
 using Content.Server.Doors.Systems;
 using Content.Server.Parallax;
+using Content.Server.Procedural;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -52,6 +53,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private readonly BuckleSystem _buckle = default!;
     [Dependency] private readonly DamageableSystem _damageSys = default!;
     [Dependency] private readonly DockingSystem _dockSystem = default!;
+    [Dependency] private readonly DungeonSystem _dungeon = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
@@ -101,6 +103,9 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
         SubscribeLocalEvent<ShuttleComponent, ComponentStartup>(OnShuttleStartup);
         SubscribeLocalEvent<ShuttleComponent, ComponentShutdown>(OnShuttleShutdown);
+        SubscribeLocalEvent<ShuttleComponent, TileFrictionEvent>(OnTileFriction);
+        SubscribeLocalEvent<ShuttleComponent, FTLStartedEvent>(OnFTLStarted);
+        SubscribeLocalEvent<ShuttleComponent, FTLCompletedEvent>(OnFTLCompleted);
 
         SubscribeLocalEvent<GridInitializeEvent>(OnGridInit);
         SubscribeLocalEvent<FixturesComponent, GridFixtureChangeEvent>(OnGridFixtureChange);
