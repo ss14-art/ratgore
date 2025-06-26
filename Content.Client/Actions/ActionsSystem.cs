@@ -144,6 +144,7 @@ namespace Content.Client.Actions
             if (args.Current is not ActionsComponentState state)
                 return;
 
+            var (uid, comp) = ent;
             _added.Clear();
             _removed.Clear();
             var stateEnts = EnsureEntitySet<ActionsComponent>(state.Actions, uid);

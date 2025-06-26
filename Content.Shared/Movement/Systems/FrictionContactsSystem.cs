@@ -1,3 +1,4 @@
+using Content.Shared.Gravity;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -7,13 +8,15 @@ namespace Content.Shared.Movement.Systems;
 
 public sealed class FrictionContactsSystem : EntitySystem
 {
+    [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speedModifierSystem = default!;
 
     // Comment copied from "original" SlowContactsSystem.cs (now SpeedModifierContactsSystem.cs)
-    // TODO full-game-save 
+    // TODO full-game-save
     // Either these need to be processed before a map is saved, or slowed/slowing entities need to update on init.
-    private HashSet<EntityUid> _toUpdate = new();
+    private readonly HashSet<EntityUid> _toUpdate = new();
+    private readonly HashSet<EntityUid> _toRemove = new();
 
     public override void Initialize()
     {

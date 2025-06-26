@@ -309,7 +309,7 @@ namespace Content.Client.Hands.Systems
             OnPlayerItemRemoved?.Invoke(hand.Name, args.Entity);
 
             if (HasComp<VirtualItemComponent>(args.Entity))
-                OnPlayerHandUnblocked?.Invoke(hand.Name);
+                OnPlayerHandUnblocked?.Invoke(args.Container.ID);
         }
 
         /// <summary>
