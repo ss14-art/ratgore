@@ -1,7 +1,9 @@
 using Content.Server.Body.Systems;
+using Content.Shared.Alert;
+using Content.Shared.Atmos;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
-using Content.Shared.Sound.Components;
-using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Body.Components
@@ -9,6 +11,28 @@ namespace Content.Server.Body.Components
     [RegisterComponent, Access(typeof(RespiratorSystem))]
     public sealed partial class RespiratorComponent : Component
     {
+        /// <summary>
+        ///     Gas container for this entity
+        /// </summary>
+        [DataField]
+        public GasMixture Air = new()
+        {
+            Volume = 6, // 6 liters, the average lung capacity for a human according to Google
+            Temperature = Atmospherics.NormalBodyTemperature
+        };
+
+        /// <summary>
+        ///     Volume of our breath in liters
+        /// </summary>
+        [DataField]
+        public float BreathVolume = Atmospherics.BreathVolume;
+
+        /// <summary>
+        ///     How much of the gas we inhale is metabolized? Value range is (0, 1]
+        /// </summary>
+        [DataField]
+        public float Ratio = 1.0f;
+
         /// <summary>
         ///     The next time that this body will inhale or exhale.
         /// </summary>
@@ -52,10 +76,16 @@ namespace Content.Server.Body.Components
         public DamageSpecifier DamageRecovery = default!;
 
         [DataField]
-        public TimeSpan GaspPopupCooldown = TimeSpan.FromSeconds(8);
+        public TimeSpan GaspEmoteCooldown = TimeSpan.FromSeconds(8);
 
         [ViewVariables]
-        public TimeSpan LastGaspPopupTime;
+        public TimeSpan LastGaspEmoteTime;
+
+        /// <summary>
+        ///     The emote when gasps
+        /// </summary>
+        [DataField]
+        public ProtoId<EmotePrototype> GaspEmote = "Gasp";
 
         /// <summary>
         ///     How many cycles in a row has the mob been under-saturated?
