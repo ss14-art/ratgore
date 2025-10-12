@@ -1,4 +1,4 @@
-﻿using Content.Server.Body.Components;
+using Content.Server.Body.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Temperature.Components;

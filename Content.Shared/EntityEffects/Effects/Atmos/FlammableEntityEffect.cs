@@ -1,5 +1,4 @@
-﻿using Content.Shared.Database;
-using Robust.Shared.Prototypes;
+﻿using Robust.Shared.Prototypes;
 
 namespace Content.Shared.EntityEffects.Effects.Atmos;
 
@@ -25,5 +24,5 @@ public sealed partial class Flammable : EntityEffectBase<Flammable>
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-flammable-reaction", ("chance", Probability));
 
-    public override LogImpact? Impact => LogImpact.Low;
+    public override bool ShouldLog => true;
 }

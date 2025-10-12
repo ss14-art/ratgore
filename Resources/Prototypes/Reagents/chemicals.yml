@@ -18,7 +18,7 @@
   boilingPoint: 55.5
   meltingPoint: -50.0
   metabolisms:
-    Bloodstream:
+    Poison:
       effects:
       - !type:HealthChange
         damage:
@@ -35,7 +35,7 @@
   boilingPoint: 4200.0
   meltingPoint: 3550.0
   metabolisms:
-    Bloodstream:
+    Medicine:
       effects:
       - !type:HealthChange
         damage:
@@ -53,6 +53,21 @@
   color: white
 
 - type: reagent
+  id: Lye
+  name: reagent-name-lye
+  desc: reagent-desc-lye
+  flavor: alkaline
+  physicalDesc: reagent-physical-desc-alkaline
+  color: "#e5420b"
+  metabolisms:
+    Poison:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: 1
+
+- type: reagent
   id: SodiumCarbonate
   name: reagent-name-sodium-carbonate
   desc: reagent-desc-sodium-carbonate
@@ -65,9 +80,11 @@
   desc: reagent-desc-artifexium
   flavor: metallic
   physicalDesc: reagent-physical-desc-crystalline
+  allowedDepartments:
+  - Science
   color: "#776291"
   metabolisms:
-    Bloodstream:
+    Poison:
       effects:
       - !type:HealthChange
         damage:
@@ -100,11 +117,13 @@
   name: reagent-name-benzene
   desc: reagent-desc-benzene
   physicalDesc: reagent-physical-desc-acidic
+  allowedJobs:
+  - Chemist
   color: "#E7EA91"
   boilingPoint: 353.2
   meltingPoint: 278.7
   metabolisms:
-    Bloodstream:
+    Poison:
       effects:
       - !type:HealthChange
         damage:
@@ -129,12 +148,14 @@
   boilingPoint: 1661.0
   meltingPoint: 596.0
   metabolisms:
-    Bloodstream:
+    Poison:
       effects:
       - !type:HealthChange
         damage:
           types:
             Heat: 1.5
+    Medicine:
+      effects:
       - !type:Vomit
         conditions:
         - !type:ReagentCondition
@@ -160,7 +181,7 @@
   physicalDesc: reagent-physical-desc-grainy
   color: "#F0F0F0"
   metabolisms:
-    Bloodstream:
+    Poison:
       effects:
       - !type:SatiateThirst
         factor: -5 # This is basically industrial dessicant
@@ -178,3 +199,23 @@
   flavor: bitter
   color: "#E6E6DA"
   physicalDesc: reagent-physical-desc-crystalline
+
+- type: reagent
+  id: Rororium
+  name: reagent-name-rororium
+  desc: reagent-desc-rororium
+  group: Biological
+  flavor: tingly
+  physicalDesc: reagent-physical-desc-refreshing
+  color: "#bf1365"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -4
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
+        time: 120

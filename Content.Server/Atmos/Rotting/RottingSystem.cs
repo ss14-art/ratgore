@@ -2,8 +2,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body.Events;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Gibbing;
+using Content.Shared.Damage;
 using Content.Shared.Temperature.Components;
 using Robust.Server.Containers;
 using Robust.Shared.Physics.Components;
@@ -22,12 +21,12 @@ public sealed class RottingSystem : SharedRottingSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RottingComponent, GibbedBeforeDeletionEvent>(OnGibbed);
+        SubscribeLocalEvent<RottingComponent, BeingGibbedEvent>(OnGibbed);
 
         SubscribeLocalEvent<TemperatureComponent, IsRottingEvent>(OnTempIsRotting);
     }
 
-    private void OnGibbed(EntityUid uid, RottingComponent component, GibbedBeforeDeletionEvent args)
+    private void OnGibbed(EntityUid uid, RottingComponent component, BeingGibbedEvent args)
     {
         if (!TryComp<PhysicsComponent>(uid, out var physics))
             return;
@@ -73,26 +72,22 @@ public sealed class RottingSystem : SharedRottingSystem
         {
             if (_timing.CurTime < perishable.RotNextUpdate)
                 continue;
-
             perishable.RotNextUpdate += perishable.PerishUpdateRate;
 
             var stage = PerishStage((uid, perishable), MaxStages);
             if (stage != perishable.Stage)
             {
                 perishable.Stage = stage;
-                DirtyField(uid, perishable, nameof(PerishableComponent.Stage));
+                Dirty(uid, perishable);
             }
 
             if (IsRotten(uid) || !IsRotProgressing(uid, perishable))
                 continue;
 
             perishable.RotAccumulator += perishable.PerishUpdateRate * GetRotRate(uid);
-            DirtyField(uid, perishable, nameof(PerishableComponent.RotAccumulator));
             if (perishable.RotAccumulator >= perishable.RotAfter)
             {
                 var rot = AddComp<RottingComponent>(uid);
-                var ev = new BeginRottingEvent();
-                RaiseLocalEvent(uid, ref ev);
                 rot.NextRotUpdate = _timing.CurTime + rot.RotUpdateRate;
             }
         }
@@ -127,11 +122,11 @@ public sealed class RottingSystem : SharedRottingSystem
 
             if (!TryComp<PhysicsComponent>(uid, out var physics))
                 continue;
-
             // We need a way to get the mass of the mob alone without armor etc in the future
             // or just remove the mass mechanics altogether because they aren't good.
             var molRate = perishable.MolsPerSecondPerUnitMass * (float)rotting.RotUpdateRate.TotalSeconds;
-            _atmosphere.AdjustTileMixture(uid, Gas.Ammonia, molRate * physics.FixturesMass, excite: true);
+            var tileMix = _atmosphere.GetTileMixture(uid, excite: true);
+            tileMix?.AdjustMoles(Gas.Ammonia, molRate * physics.FixturesMass);
         }
     }
 }

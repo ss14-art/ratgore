@@ -15,6 +15,8 @@
     - type: ActiveEdgeSpreader
     - type: EdgeSpreader
       id: Kudzu
+    - type: SpeedModifierContacts
+      affectAirborne: true
 
 - type: entity
   id: Kudzu
@@ -25,7 +27,8 @@
     - type: MeleeSound
       soundGroups:
         Brute:
-          path: "/Audio/Weapons/slash.ogg"
+          path:
+            "/Audio/Weapons/slash.ogg"
     - type: Sprite
       sprite: Objects/Misc/kudzu.rsi
       state: kudzu_11
@@ -37,19 +40,21 @@
         fix1:
           hard: false
           density: 7
-          shape: !type:PhysShapeAabb
+          shape:
+            !type:PhysShapeAabb
             bounds: "-0.5,-0.5,0.5,0.5"
           layer:
-            - MidImpassable
+          - MidImpassable
     - type: Damageable
       damageModifierSet: Wood
     - type: Destructible
       thresholds:
-        - trigger: !type:DamageTrigger
-            damage: 10
-          behaviors:
-            - !type:DoActsBehavior
-              acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
     - type: Temperature
       heatDamage:
         types:
@@ -66,14 +71,14 @@
         Flammable: [Touch]
         Extinguish: [Touch]
       reactions:
-        - reagents: [WeedKiller, PlantBGone]
-          methods: [Touch]
-          effects:
-            - !type:HealthChange
-              scaling: true
-              damage:
-                types:
-                  Heat: 10
+      - reagents: [WeedKiller, PlantBGone]
+        methods: [Touch]
+        effects:
+        - !type:HealthChange
+          scaling: true
+          damage:
+            types:
+              Heat: 0.5
     - type: AtmosExposed
     - type: Kudzu
       growthTickChance: 0.3
@@ -83,19 +88,19 @@
       sprintSpeedModifier: 0.2
       ignoreWhitelist:
         components:
-          - IgnoreKudzu
+        - IgnoreKudzu
     - type: Food
       requiresSpecialDigestion: true
       delay: 0.5
     - type: FlavorProfile
       flavors:
-        - fiber
+      - fiber
     - type: SolutionContainerManager
       solutions:
         food:
           reagents:
-            - ReagentId: Nutriment
-              Quantity: 2
+          - ReagentId: Nutriment
+            Quantity: 2
     - type: Tag
       tags:
       - Ruminant
@@ -127,22 +132,22 @@
       sprintSpeedModifier: 0.8
       ignoreWhitelist:
         components:
-          - IgnoreKudzu
+        - IgnoreKudzu
     - type: RandomSpawner
       deleteSpawnerAfterSpawn: false
       rareChance: 0.15
       offset: 0.2
       chance: 0.05
       prototypes:
-        - LightTree01
-        - LightTree02
-        - LightTree03
-        - LightTree04
-        - LightTree05
-        - LightTree06
-        - CrystalCyan
+      - LightTree #TODO: transform into EntityTable with weight
+      - LightTree
+      - LightTree
+      - LightTree
+      - LightTree
+      - LightTree
+      - CrystalCyan
       rarePrototypes:
-        - AnomalyFloraBulb
+      - AnomalyFloraBulb
 
 - type: entity
   id: KudzuFlowerAngry
@@ -154,11 +159,11 @@
     - type: RandomSpawner
       chance: 0.05
       rarePrototypes:
-        - AnomalyFloraBulb
-        - AnomalyFloraBulb
-        - MobLuminousEntity
-        - MobLuminousObject
-        - MobLuminousPerson
+      - AnomalyFloraBulb
+      - AnomalyFloraBulb
+      - MobLuminousEntity
+      - MobLuminousObject
+      - MobLuminousPerson
 
 - type: entity
   id: FleshKudzu
@@ -173,7 +178,8 @@
     - type: MeleeSound
       soundGroups:
         Brute:
-          path: "/Audio/Weapons/slash.ogg"
+          path:
+            "/Audio/Weapons/slash.ogg"
     - type: Sprite
       sprite: Objects/Misc/fleshkudzu.rsi
       state: kudzu_11
@@ -185,18 +191,20 @@
         fix1:
           hard: false
           density: 7
-          shape: !type:PhysShapeAabb
+          shape:
+            !type:PhysShapeAabb
             bounds: "-0.5,-0.5,0.5,0.5"
           layer:
-            - MidImpassable
+          - MidImpassable
     - type: Damageable
     - type: Destructible
       thresholds:
-        - trigger: !type:DamageTrigger
-            damage: 40
-          behaviors:
-            - !type:DoActsBehavior
-              acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 40
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
     - type: DamageContacts
       damage:
         types:
@@ -204,7 +212,7 @@
           Piercing: 1.5
       ignoreWhitelist:
         tags:
-          - Flesh
+        - Flesh
     - type: Kudzu
       growthTickChance: 0.1
       spreadChance: 0.4
@@ -229,35 +237,36 @@
     - type: Flammable
       fireSpread: true
       damage:
-        types:
-          Heat: 3
+       types:
+         Heat: 3
     - type: AtmosExposed
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.3
       sprintSpeedModifier: 0.3
       ignoreWhitelist:
         tags:
-          - Flesh
+        - Flesh
     - type: Food # delightfully devilish !
       delay: 0.5
     - type: SolutionContainerManager
       solutions:
         food:
           reagents:
-            - ReagentId: Protein
-              Quantity: 2
-    - type: Respirator
-      damage:
-        types:
-          Asphyxiation: 0.25
-      damageRecovery:
-        types:
-          Asphyxiation: -0.25
+          - ReagentId: Razorium
+            Quantity: 2
+          - ReagentId: Protein
+            Quantity: 1
+    - type: AutoEmote # Meat Kudzu used to have respirator, but couldn't breathe so all it would do is gasp.
+      emotes:
+      - MeatGasp
+    - type: Tag
+      tags:
+      - Meat
 
 - type: entity
   name: dark haze
   id: ShadowKudzu
-  parent: [BaseKudzu, BaseShadow]
+  parent: [ BaseKudzu, BaseShadow ]
   components:
     - type: Physics
       canCollide: false
@@ -266,9 +275,9 @@
       drawdepth: Effects
       sprite: Effects/spookysmoke.rsi
       layers:
-        - state: spookysmoke
-          color: "#793a80dd"
-          map: [base]
+      - state: spookysmoke
+        color: "#793a80dd"
+        map: [base]
     - type: Kudzu
       growthTickChance: 0.2
       spreadChance: 0.99
@@ -278,10 +287,10 @@
       offset: 0.2
       chance: 0.45
       prototypes:
-        - ShadowBasaltRandom
+      - ShadowBasaltRandom
       rarePrototypes:
-        - ShadowPortal
-        - ShadowKudzuLootSpawner
+      - ShadowPortal
+      - ShadowKudzuLootSpawner
     - type: Tag
       tags:
         - HideContextMenu
@@ -289,47 +298,15 @@
     - type: OptionsVisualizer
       visuals:
         base:
-          - options: Default
-            data: { state: spookysmoke }
-          - options: ReducedMotion
-            data: { state: spookysmoke_static }
+        - options: Default
+          data: { state: spookysmoke }
+        - options: ReducedMotion
+          data: { state: spookysmoke_static }
 
 - type: entity
-  name: Haze
+  name: haze
   id: ShadowKudzuWeak
   parent: ShadowKudzu
   components:
     - type: Kudzu
       spreadChance: 0 #appears during pulsation. It shouldnt spreading.
-
-- type: entity
-  name: Voidborn Haze
-  id: VoidbornShadow
-  parent: ShadowKudzuWeak
-  components:
-    - type: RandomSpawner
-      deleteSpawnerAfterSpawn: false
-      rareChance: 0
-      offset: 0.2
-      chance: 0.45
-      prototypes:
-        - ShadowBasaltRandom
-    - type: TimedDespawn
-      lifetime: 5
-
-- type: entity
-  name: fading haze
-  id: ShadowKudzuTemp
-  parent: ShadowKudzuWeak
-  components:
-    - type: RandomSpawner
-      deleteSpawnerAfterSpawn: false
-      rareChance: 0.2
-      offset: 0.2
-      chance: 0.45
-      prototypes:
-        - ShadowBasaltRandom
-      rarePrototypes:
-        - ShadowKudzuLootSpawnerTemp
-    - type: TimedDespawn
-      lifetime: 12

@@ -1,4 +1,5 @@
 ﻿using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.EntityEffects.Effects.StatusEffects;
@@ -8,11 +9,11 @@ namespace Content.Shared.EntityEffects.Effects.StatusEffects;
 /// Duration is modified by scale.
 /// </summary>
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
-public sealed partial class ModifyStatusEffectEntityEffectSystem : EntityEffectSystem<MetaDataComponent, ModifyStatusEffect>
+public sealed partial class ModifyStatusEffectEntityEffectSystem : EntityEffectSystem<StatusEffectContainerComponent, ModifyStatusEffect>
 {
     [Dependency] private readonly StatusEffectsSystem _status = default!;
 
-    protected override void Effect(Entity<MetaDataComponent> entity, ref EntityEffectEvent<ModifyStatusEffect> args)
+    protected override void Effect(Entity<StatusEffectContainerComponent> entity, ref EntityEffectEvent<ModifyStatusEffect> args)
     {
         var time = args.Effect.Time * args.Scale;
         var delay = args.Effect.Delay;

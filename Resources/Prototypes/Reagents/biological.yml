@@ -12,34 +12,35 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   recognizable: true
+  standsout: true
   physicalDesc: reagent-physical-desc-ferrous
   metabolisms:
-    Digestion:
-      metabolites:
-        UncookedAnimalProteins: 0.2
+    Drink:
       effects:
       - !type:SatiateThirst
         factor: 1.0
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Human ]
-          inverted: true
-      - !type:EvenHealthChange
+          - !type:MetabolizerTypeCondition
+            type: [ Human ]
+            inverted: true
+    Food:
+      effects:
+        - !type:AdjustReagent
+          reagent: UncookedAnimalProteins
+          amount: 0.1
+    Medicine:
+      effects:
+      - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Bloodsucker ]
         damage:
-          Brute: -3
-          Burn: -1.25
-    Bloodstream: # Don't inject someone else's blood into yourself! Your own blood won't actually metabolise.
-      effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: 0.2
+          groups:
+            Brute: -3
+            Burn: -1.25
   plantMetabolism:
-  - !type:PlantAdjustWater
-    amount: 0.5
+    - !type:PlantAdjustWater
+      amount: 0.5
   footstepSound:
     collection: FootstepBlood
     params:
@@ -68,22 +69,13 @@
   physicalDesc: reagent-physical-desc-viscous
   viscosity: 0.25
   tileReactions:
-  - !type:SpillTileReaction
+    - !type:SpillTileReaction
   metabolisms:
-    Digestion:
+    Food:
       # Delicious!
       effects:
       - !type:SatiateHunger
         factor: 1
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [Slime]
-          inverted: true
-      - !type:ModifyBloodLevel
-        amount: 0.5 # drawing 15u removes 5% blood level from a slimeperson, this will add 5% when injecting 15u
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [Slime]
   footstepSound:
     collection: FootstepSlime # makes sense
     params:
@@ -100,9 +92,9 @@
   physicalDesc: reagent-physical-desc-sticky
   viscosity: 0.10
   tileReactions:
-  - !type:SpillTileReaction
+    - !type:SpillTileReaction
   metabolisms:
-    Digestion:
+    Food:
       # Sweet!
       effects:
       - !type:SatiateHunger
@@ -137,17 +129,6 @@
   physicalDesc: reagent-physical-desc-pungent
 
 - type: reagent
-  parent: Blood
-  id: SulfurBlood
-  name: reagent-name-sulfur-blood
-  group: Biological
-  desc: reagent-desc-sulfur-blood
-  flavor: bitter
-  color: "#ccac1f"
-  recognizable: true
-  physicalDesc: reagent-physical-desc-strong-smelling
-
-- type: reagent
   id: ZombieBlood
   name: reagent-name-zombie-blood
   group: Biological
@@ -156,12 +137,12 @@
   flavor: bitter
   color: "#2b0700"
   metabolisms:
-    Digestion:
+    Drink:
       # Disgusting!
       effects:
       - !type:SatiateThirst
         factor: -0.5
-    Bloodstream:
+    Poison:
       effects:
       - !type:HealthChange
         damage:
@@ -180,11 +161,11 @@
   color: "#f4692e"
   recognizable: true
   metabolisms:
-    Bloodstream:
+    Drink:
       effects:
       - !type:SatiateThirst
         factor: 1.5
-      # Dragon doesn't require airloss healing, so omnizine is still best for humans.
+    # Dragon doesn't require airloss healing, so omnizine is still best for humans.
       - !type:ModifyBloodLevel
         amount: 3
       - !type:EvenHealthChange
@@ -232,12 +213,13 @@
     requiredSlipSpeed: 4.0 #It's not as slippery as water
   friction: 0.4
   metabolisms:
-    Digestion:
-      metabolites:
-        Nutriment: 0.1
+    Drink:
       effects:
       - !type:SatiateThirst
         factor: 0.5
+      - !type:AdjustReagent
+        reagent: Nutriment
+        amount: 0.1
   footstepSound:
     collection: FootstepBlood
     params:
@@ -252,10 +234,12 @@
   flavor: mindful
   color: "#C584B8"
   metabolisms:
-    Digestion:
+    Drink:
       effects:
       - !type:SatiateHunger
         factor: 1.5
+    Poison:
+      effects:
       - !type:HealthChange
         damage:
           types:
