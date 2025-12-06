@@ -77,6 +77,11 @@ public sealed class CharacterCreationTest : GameTest
         AssertEqual(serverCharacters[1], profile);
     }
 
+    private void AssertEqual(ICharacterProfile clientCharacter, HumanoidCharacterProfile profile)
+    {
+        throw new NotImplementedException();
+    }
+
     private void AssertEqual(HumanoidCharacterProfile a, HumanoidCharacterProfile b)
     {
         if (a.MemberwiseEquals(b))

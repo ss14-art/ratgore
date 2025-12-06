@@ -28,6 +28,8 @@ public sealed partial class GameRuleComponent : Component
     /// </summary>
     [DataField]
     public MinMax? Delay;
+
+    public bool CancelPresetOnTooFewPlayers { get; set; }
 }
 
 /// <summary>

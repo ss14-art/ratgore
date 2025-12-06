@@ -66,7 +66,7 @@ public sealed partial class HandPlaceholderSystem : EntitySystem
             if (_proto.TryIndex(ent.Comp.Prototype, out var itemProto))
                 _metadata.SetEntityName(placeholder, itemProto.Name);
 
-            if (!_hands.TryPickup(user, placeholder)) // Can we get the hand this came from?
+            if (_hands.TryPickup(user, placeholder!)) // Can we get the hand this came from?
                 QueueDel(placeholder);
         }
     }

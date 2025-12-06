@@ -25,7 +25,11 @@ namespace Content.Server.Stack
             SubscribeLocalEvent<StackComponent, GetVerbsEvent<AlternativeVerb>>(OnStackAlternativeInteract);
         }
 
-        public override void SetCount(EntityUid uid, int amount, StackComponent? component = null)
+        public override void SetCount(
+            (EntityUid ent, StackComponent stackComp) uid,
+            int amount,
+            StackComponent? component = null
+        )
         {
             if (!Resolve(uid, ref component, false))
                 return;

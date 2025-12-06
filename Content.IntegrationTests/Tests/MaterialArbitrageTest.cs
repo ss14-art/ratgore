@@ -1,5 +1,6 @@
 #nullable enable
 using System.Collections.Generic;
+using System.Diagnostics;
 using Content.IntegrationTests.Fixtures;
 using Content.Server.Cargo.Systems;
 using Content.Server.Construction.Completions;
@@ -260,6 +261,7 @@ public sealed class MaterialArbitrageTest : GameTest
                 // Check lathe production
                 if (latheRecipes.TryGetValue(id, out var recipes))
                 {
+                    Debug.Assert(recipes != null, nameof(recipes) + " != null");
                     foreach (var recipe in recipes)
                     {
                         if (!minMultiplier.TryGetValue(recipe, out var multiplier))
@@ -411,7 +413,7 @@ public sealed class MaterialArbitrageTest : GameTest
                 // Check lathe production
                 if (latheRecipes.TryGetValue(id, out var recipes))
                 {
-                    foreach (var recipe in recipes)
+                    foreach (var recipe in recipes!)
                     {
                         if (!minMultiplier.TryGetValue(recipe, out var multiplier))
                         {

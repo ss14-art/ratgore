@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared._Art.TTS; // Art-TTS
@@ -22,7 +23,7 @@ namespace Content.Shared.Preferences;
 /// Character profile. Looks immutable, but uses non-immutable semantics internally for serialization/code sanity purposes
 [DataDefinition]
 [Serializable, NetSerializable]
-public sealed partial class HumanoidCharacterProfile : ICharacterProfile
+public sealed partial class HumanoidCharacterProfile : ICharacterProfile, IEnumerable
 {
     private static readonly Regex RestrictedNameRegex = new("[^А-Яа-яёЁ0-9' -]"); // RU-Localization
     private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
@@ -174,7 +175,8 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         HashSet<LoadoutPreference> loadoutPreferences,
         long bankWealth,
         string proFaction,
-        List<string> characterFlags
+        List<string> characterFlags,
+        HumanoidCharacterProfile loadouts
     )
     {
         Name = name;
@@ -205,10 +207,11 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         BankBalance = bankWealth;
         Faction = proFaction;
         CharacterFlags = characterFlags;
+        Loadouts = loadouts;
     }
 
     /// <summary>Copy constructor</summary>
-    public HumanoidCharacterProfile(HumanoidCharacterProfile other)
+    public HumanoidCharacterProfile(HumanoidCharacterProfile other, HumanoidCharacterProfile loadouts)
         : this(
             other.Name,
             other.FlavorText,
@@ -237,14 +240,17 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
             new HashSet<LoadoutPreference>(other.LoadoutPreferences),
             other.BankBalance,
             other.Faction,
-            other.CharacterFlags) { }
+            other.CharacterFlags,
+            loadouts) { }
 
     /// <summary>
     ///     Get the default humanoid character profile, using internal constant values.
     ///     Defaults to <see cref="SharedHumanoidAppearanceSystem.DefaultSpecies"/> for the species.
     /// </summary>
     /// <returns></returns>
-    public HumanoidCharacterProfile() { }
+    public HumanoidCharacterProfile(HumanoidCharacterProfile loadouts) {
+        Loadouts = loadouts;
+    }
 
     /// <summary>
     ///     Return a default character profile, based on species.i
@@ -386,7 +392,7 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         new(this) { SpawnPriority = spawnPriority };
 
     public HumanoidCharacterProfile WithJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities) =>
-        new(this) { _jobPriorities = new Dictionary<string, JobPriority>(jobPriorities) };
+        new(this) { _jobPriorities = new Dictionary<string, JobPriority>((IEnumerable<KeyValuePair<string, JobPriority>>)jobPriorities) };
 
     public HumanoidCharacterProfile WithJobPriority(string jobId, JobPriority priority)
     {
@@ -459,7 +465,9 @@ public string Summary =>
             ("age", Age)
         );
 
-    public bool MemberwiseEquals(ICharacterProfile maybeOther)
+public HumanoidCharacterProfile Loadouts { get; set; }
+
+public bool MemberwiseEquals(ICharacterProfile maybeOther)
     {
         return maybeOther is HumanoidCharacterProfile other
             && Name == other.Name

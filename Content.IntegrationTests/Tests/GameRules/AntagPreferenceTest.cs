@@ -55,7 +55,7 @@ public sealed class AntagPreferenceTest : GameTest
         Assert.That(pool.Count, Is.EqualTo(0));
 
         // Opt into the traitor role.
-        await pair.SetAntagPref("Traitor", true);
+        await pair.SetAntagPreference("Traitor", true);
 
         Assert.That(sys.IsSessionValid(rule, pair.Player, def), Is.True);
         Assert.That(sys.IsEntityValid(client.AttachedEntity, def), Is.True);
@@ -66,7 +66,7 @@ public sealed class AntagPreferenceTest : GameTest
         Assert.That(sessions.Count, Is.EqualTo(1));
 
         // opt back out
-        await pair.SetAntagPref("Traitor", false);
+        await pair.SetAntagPreference("Traitor", false);
 
         Assert.That(sys.IsSessionValid(rule, pair.Player, def), Is.True);
         Assert.That(sys.IsEntityValid(client.AttachedEntity, def), Is.True);

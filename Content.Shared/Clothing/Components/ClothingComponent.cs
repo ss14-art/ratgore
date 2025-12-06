@@ -74,6 +74,8 @@ public sealed partial class ClothingComponent : Component
     /// </summary>
     [DataField(serverOnly: true)]
     public TraitFunction[] OnUnequipFunctions { get; private set; } = Array.Empty<TraitFunction>();
+
+    public string Sprite { get; set; }
 }
 
 [Serializable, NetSerializable]

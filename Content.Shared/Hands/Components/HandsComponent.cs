@@ -53,6 +53,8 @@ public sealed partial class HandsComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public float ThrowRange { get; set; } = 8f;
 
+    public object ActiveHandId { get; set; }
+
     /// <summary>
     ///     Whether or not to add in-hand sprites for held items. Some entities (e.g., drones) don't want these.
     ///     Used by the client.

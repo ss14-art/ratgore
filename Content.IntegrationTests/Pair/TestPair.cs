@@ -12,6 +12,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Log;
 using Robust.Shared.Network;
+using Robust.Shared.Utility;
 using Robust.UnitTesting;
 
 namespace Content.IntegrationTests.Pair;
@@ -123,5 +124,10 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair
             entSysMan.LoadExtraSystemType<TestDestructibleListenerSystem>();
         };
         return opts;
+    }
+
+    public async ValueTask<TestMapData> LoadTestMap(ValueType testMapPath)
+    {
+        throw new NotImplementedException();
     }
 }

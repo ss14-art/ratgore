@@ -483,7 +483,7 @@ namespace Content.Server.Strip
                 return;
 
             _handsSystem.TryDrop(user, checkActionBlocker: false, handsComp: user.Comp);
-            _handsSystem.TryPickup(target, held, handName, checkActionBlocker: false, animateUser: hidden, animate: hidden, handsComp: target.Comp);
+            _handsSystem.TryPickup(target, held, handName: handName, checkActionBlocker: false, animateUser: hidden, animate: hidden, handsComp: target.Comp);
             _adminLogger.Add(LogType.Stripping, LogImpact.Medium, $"{ToPrettyString(user):actor} has placed the item {ToPrettyString(held):item} in {ToPrettyString(target):target}'s hands");
 
             // Hand update will trigger strippable update.
