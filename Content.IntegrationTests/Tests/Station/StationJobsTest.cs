@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Content.IntegrationTests.Fixtures;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Maps;
@@ -16,7 +15,7 @@ namespace Content.IntegrationTests.Tests.Station;
 
 [TestFixture]
 [TestOf(typeof(StationJobsSystem))]
-public sealed class StationJobsTest : GameTest
+public sealed class StationJobsTest
 {
     private const string StationMapId = "FooStation";
 
@@ -86,7 +85,7 @@ public sealed class StationJobsTest : GameTest
     [Test]
     public async Task AssignJobsTest()
     {
-        var pair = Pair;
+        await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
 
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
@@ -154,12 +153,13 @@ public sealed class StationJobsTest : GameTest
                 Assert.That(assigned.Values.Select(x => x.Item1).ToList(), Does.Contain("TCaptain"));
             });
         });
+        await pair.CleanReturnAsync();
     }
 
     [Test]
     public async Task AdjustJobsTest()
     {
-        var pair = Pair;
+        await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
 
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
@@ -203,12 +203,13 @@ public sealed class StationJobsTest : GameTest
                 Assert.That(stationJobs.IsJobUnlimited(station, "TChaplain"), "Could not make TChaplain unlimited.");
             });
         });
+        await pair.CleanReturnAsync();
     }
 
     [Test]
     public async Task InvalidRoundstartJobsTest()
     {
-        var pair = Pair;
+        await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
 
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
@@ -237,12 +238,16 @@ public sealed class StationJobsTest : GameTest
 
                         foreach (var (job, array) in ((StationJobsComponent) comp).SetupAvailableJobs)
                         {
+                            Assert.That(array.Length, Is.EqualTo(2));
+                            Assert.That(array[0] is -1 or >= 0);
+                            Assert.That(array[1] is -1 or >= 0);
                             Assert.That(invalidJobs, Does.Not.Contain(job), $"Station {stationId} contains job prototype {job} which cannot be present roundstart.");
                         }
                     }
                 }
             });
         });
+        await pair.CleanReturnAsync();
     }
 }
 

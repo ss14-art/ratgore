@@ -1,4 +1,4 @@
-﻿namespace Content.Shared.Maps;
+namespace Content.Shared.Maps;
 
 public sealed partial class GameMapPrototype
 {
