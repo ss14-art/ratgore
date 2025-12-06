@@ -157,7 +157,11 @@ namespace Content.Shared.Stacks
             Hands.PickupOrDrop(user, item, handsComp: hands);
         }
 
-        public virtual void SetCount(EntityUid uid, int amount, StackComponent? component = null)
+        public virtual void SetCount(
+            (EntityUid ent, StackComponent stackComp) uid,
+            int amount,
+            StackComponent? component = null
+        )
         {
             if (!Resolve(uid, ref component))
                 return;

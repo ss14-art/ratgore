@@ -81,8 +81,6 @@ public sealed class SuicideSystem : EntitySystem
         // This is kind of weird, not sure what it applies to?
         if (_tagSystem.HasTag(victim, "CannotSuicide"))
             args.CanReturnToBody = true;
-
-        if (_gameTicker.OnGhostAttempt(victim.Comp.Mind.Value, args.CanReturnToBody, mind: mindComponent))
             args.Handled = true;
     }
 

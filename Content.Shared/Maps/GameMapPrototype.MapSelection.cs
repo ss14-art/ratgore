@@ -1,3 +1,6 @@
+using Robust.Shared.Utility;
+
+
 namespace Content.Shared.Maps;
 
 public sealed partial class GameMapPrototype
@@ -26,4 +29,6 @@ public sealed partial class GameMapPrototype
     /// The game map conditions that must be fulfilled for this map to be selectable.
     /// </summary>
     public IReadOnlyList<GameMapCondition> Conditions => _conditions;
+
+    public ResPath MapPath { get; set; }
 }

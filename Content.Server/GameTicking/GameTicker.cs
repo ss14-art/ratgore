@@ -138,5 +138,15 @@ namespace Content.Server.GameTicking
             UpdateRoundFlow(frameTime);
             UpdateGameRules();
         }
+
+        public bool OnGhostAttempt(EntityUid mindId, bool b, bool b1, MindComponent mind)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnGhostAttempt(EntityUid mindId, bool componentCanReturn, MindComponent mind)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

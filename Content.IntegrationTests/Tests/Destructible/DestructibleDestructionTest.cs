@@ -91,5 +91,7 @@ namespace Content.IntegrationTests.Tests.Destructible
                 Assert.That(found, Is.True, $"Unable to find {SpawnedEntityId} nearby for destructible test; found {entitiesInRange.Count} entities.");
             });
         }
+
+        public string TestBruteDamageGroupId { get; set; }
     }
 }

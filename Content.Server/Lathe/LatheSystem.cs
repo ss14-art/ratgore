@@ -59,6 +59,8 @@ namespace Content.Server.Lathe
         /// </summary>
         private readonly List<GasMixture> _environments = new();
 
+        public object InverseRecipes { get; }
+
         public override void Initialize()
         {
             base.Initialize();
@@ -409,5 +411,10 @@ namespace Content.Server.Lathe
             UpdateUserInterfaceState(uid, component);
         }
         #endregion
+
+        public IEnumerable<ProtoId<LatheRecipePrototype>> GetAllPossibleRecipes(LatheComponent lathe)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

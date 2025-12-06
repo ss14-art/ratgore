@@ -14,6 +14,11 @@ namespace Content.Server.Construction.Components
         public Container BoardContainer = default!;
         [ViewVariables]
         public Container PartContainer = default!;
+
+        public void Board()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>

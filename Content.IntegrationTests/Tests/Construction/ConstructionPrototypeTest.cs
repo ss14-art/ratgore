@@ -73,9 +73,9 @@ namespace Content.IntegrationTests.Tests.Construction
 
                 using (Assert.EnterMultipleScope())
                 {
-                    Assert.That(graph.Nodes.ContainsKey(start),
+                    Assert.That(graph.Nodes.Equals(start),
                         $"Found no startNode \"{start}\" on graph \"{graph.ID}\"!");
-                    Assert.That(graph.Nodes.ContainsKey(target),
+                    Assert.That(graph.Nodes.Equals(target),
                         $"Found no targetNode \"{target}\" on graph \"{graph.ID}\"!");
                 }
 

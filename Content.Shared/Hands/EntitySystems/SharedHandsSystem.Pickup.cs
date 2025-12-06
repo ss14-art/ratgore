@@ -1,3 +1,4 @@
+using Content.Shared.Clothing.Components;
 using Content.Shared.Database;
 using Content.Shared.Hands.Components;
 using Content.Shared.Item;
@@ -40,12 +41,14 @@ public abstract partial class SharedHandsSystem : EntitySystem
     public bool TryPickup(
         EntityUid uid,
         EntityUid entity,
+        object handsComponentActiveHandId,
         string? handName = null,
         bool checkActionBlocker = true,
         bool animateUser = false,
         bool animate = true,
         HandsComponent? handsComp = null,
-        ItemComponent? item = null)
+        ItemComponent? item = null
+    )
     {
         if (!Resolve(uid, ref handsComp, false))
             return false;
@@ -229,5 +232,20 @@ public abstract partial class SharedHandsSystem : EntitySystem
 
         if (hand == hands.ActiveHand)
             RaiseLocalEvent(entity, new HandSelectedEvent(uid), false);
+    }
+
+    public bool TryPickup(EntityUid argsUser, EntityUid entity, bool animateUser)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool TryPickup(EntityUid argsUser, Entity<ClothingComponent> removing)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool TryPickup(EntityUid localPlayer, EntityUid itemEnt, HandsComponent handsComp, bool animate)
+    {
+        throw new NotImplementedException();
     }
 }

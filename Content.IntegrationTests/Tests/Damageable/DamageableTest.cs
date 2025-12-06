@@ -146,7 +146,7 @@ namespace Content.IntegrationTests.Tests.Damageable
             await server.WaitRunTicks(5);
             await server.WaitAssertion(() =>
             {
-                var uid = sDamageableEntity;
+                EntityUid uid = sDamageableEntity;
                 var ent = new Entity<DamageableComponent>(uid, sDamageableComponent);
 
                 // Check that damage is evenly distributed over a group if its a nice multiple

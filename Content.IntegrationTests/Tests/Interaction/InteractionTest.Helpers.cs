@@ -727,7 +727,14 @@ public abstract partial class InteractionTest
     /// List of currently active DoAfters on the player.
     /// </summary>
     protected IEnumerable<Shared.DoAfter.DoAfter> ActiveDoAfters
-        => DoAfters.DoAfters.Values.Where(x => !x.Cancelled && !x.Completed);
+    {
+        get
+        {
+            if (DoAfters != null)
+                return DoAfters.DoAfters.Values.Where(x => !x.Cancelled && !x.Completed);
+            throw new InvalidOperationException();
+        }
+    }
 
     #region Component
 

@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.JavaScript;
 using Content.Shared.Damage.Prototypes;
@@ -65,11 +66,17 @@ namespace Content.Shared.Damage
         public FixedPoint2 GetTotalDamage(Entity<DamageableComponent> ent)
             => ent.Comp.TotalDamage;
 
-        public DamageSpecifier GetAllDamage((EntityUid player, DamageableComponent damageableComp) uid)
+        public DamageSpecifier GetAllDamage(EntityUid uid)
         {
             if (!TryComp<DamageableComponent>(uid, out var comp))
                 return new DamageSpecifier();
+            Debug.Assert(comp != null, nameof(comp) + " != null");
             return comp.Damage;
+        }
+
+        private bool TryComp<T>((EntityUid player, T damageableComp) uid, out T comp)
+        {
+            throw new NotImplementedException();
         }
 
         public Dictionary<string, FixedPoint2> GetDamagePerGroup(Entity<DamageableComponent> ent)
