@@ -1,18 +1,18 @@
 ## UI
 
-adventure-list-start = NCWL State Bank
-adventure-mode-profit-text = made a total profit of: { " " }
-adventure-mode-loss-text = lost a total of: { " " }
-adventure-list-high = Today's Top Earners:
-adventure-list-low = Today's Biggest Spenders:
-currency = Credits
-shipyard-rules-default1 = Welcome back, Agent.
+adventure-list-start = Государственный банк NCWL
+adventure-mode-profit-text = получил общую прибыль в: { " " }
+adventure-mode-loss-text = потерял в общей сложности: { " " }
+adventure-list-high = Лучшие заработки сегодня:
+adventure-list-low = Крупнейшие траты сегодня:
+currency = Кредиты
+shipyard-rules-default1 = Добро пожаловать назад, агент.
 shipyard-rules-default2 =
-    You are now being issued a Corporate vessel.
-    You are expected to follow Corporate Law to
-    the letter.
-shuttle-ftl-proximity = Too close to large mass for FTL!
-changelog-tab-title-Upstream = Upstream Changelog
-multiauth-already-connected = Already connected to Frontier Official servers.
-public-transit-departure = Now departing for { $destination }. Estimated travel time: { $flytime } seconds.
-public-transit-arrival = Thank you for choosing NCWL Public Transit. Next transfer to { $destination } departs in { $waittime } seconds.
+    Вам выдаётся корпоративное судно.
+    От вас ожидается соблюдение корпоративного закона
+    до мелочей.
+shuttle-ftl-proximity = Слишком близко к крупной массе для СВС-прыжка!
+changelog-tab-title-Upstream = Upstream список изменений
+multiauth-already-connected = Уже подключено к официальным серверам Frontier.
+public-transit-departure = Отправляемся в { $destination }. Предполагаемое время в пути: { $flytime } секунд.
+public-transit-arrival = Спасибо, что выбрали общественный транспорт NCWL. Следующая пересадка до { $destination } отправляется через { $waittime } секунд.
