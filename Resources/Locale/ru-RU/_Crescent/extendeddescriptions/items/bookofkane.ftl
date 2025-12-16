@@ -1,6 +1,6 @@
-bookofkane-extendeddescription-NCWL = A book containing the quotes of a martyr hero from the early Revolution. Inspiring.
-bookofkane-extendeddescription-DSM = An affront to all values a righteous noble should stand for!
-bookofkane-extendeddescription-SHI = An affront to all values a corporate employee should stand for! My Boss can't see me reading this!
-bookofkane-extendeddescription-TFSC = An old propaganda book filled with quotes. Looks old.
-bookofkane-extendeddescription-ATH = An affront to all values a diligent citizen should stand for! Nobody can see me read this!
-bookofkane-extendeddescription-SRM = An affront to all values a righteous follower of Romaine should stand for! Except VIOLENCE!
+bookofkane-extendeddescription-NCWL = Книга с цитатами героя-мученика ранней Революции. Вдохновляет.
+bookofkane-extendeddescription-DSM = Поругание всех ценностей, за которые должен стоять праведный дворянин!
+bookofkane-extendeddescription-SHI = Поругание всех ценностей, за которые должен стоять корпоративный сотрудник! Начальник не должен видеть, что я это читаю!
+bookofkane-extendeddescription-TFSC = Старая пропагандистская книжка, набитая цитатами. Выглядит потрёпанной.
+bookofkane-extendeddescription-ATH = Поругание всех ценностей, за которые должен стоять прилежный гражданин! Никто не должен видеть, что я это читаю!
+bookofkane-extendeddescription-SRM = Поругание всех ценностей, за которые должен стоять праведный последователь Ромэна! Кроме **НАСИЛИЯ**!

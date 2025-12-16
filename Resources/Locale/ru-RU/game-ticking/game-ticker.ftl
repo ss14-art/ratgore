@@ -1,45 +1,54 @@
-game-ticker-restart-round = Restarting round...
-game-ticker-start-round = The round is starting now...
-game-ticker-start-round-cannot-start-game-mode-fallback = Failed to start { $failedGameMode } mode! Defaulting to { $fallbackMode }...
-game-ticker-start-round-cannot-start-game-mode-restart = Failed to start { $failedGameMode } mode! Restarting round...
-game-ticker-start-round-invalid-map = Selected map { $map } is inelligible for gamemode { $mode }. Gamemode may not function as intended...
-game-ticker-unknown-role = Unknown
-game-ticker-delay-start = Round start has been delayed for { $seconds } seconds.
-game-ticker-pause-start = Round start has been paused.
-game-ticker-pause-start-resumed = Round start countdown is now resumed.
-game-ticker-player-join-game-message = Welcome to Sector Crescent. Keep your eyes open, your paranoia high and your allies close. You might just live through this.
+game-ticker-restart-round = Перезапуск раунда...
+game-ticker-start-round = Раунд начинается...
+game-ticker-start-round-cannot-start-game-mode-fallback = Не удалось запустить режим { $failedGameMode }! Запускаем { $fallbackMode }...
+game-ticker-start-round-cannot-start-game-mode-restart = Не удалось запустить режим { $failedGameMode }! Перезапуск раунда...
+game-ticker-start-round-invalid-map = Выбранная карта { $map } не подходит для игрового режима { $mode }. Игровой режим может не функционировать как задумано...
+game-ticker-unknown-role = Неизвестный
+game-ticker-delay-start = Начало раунда отложено на { $seconds } { $seconds ->
+    [one] секунду
+    [few] секунды
+   *[other] секунд
+}.
+game-ticker-pause-start = Начало раунда было приостановлено.
+game-ticker-pause-start-resumed = Отсчёт начала раунда возобновлён.
+game-ticker-player-join-game-message = Добро пожаловать в Сектор Полумесяца. Держите глаза открытыми, паранойю высокой, а союзников близко. Возможно, вы переживёте это.
 game-ticker-get-info-text =
-    Enter [color=white]Hullrot[/color]
-    The current round is: [color=white]#{ $roundId }[/color]
-    The current player count is: [color=white]{ $playerCount }[/color]
-    The current game mode is: [color=white]{ $gmTitle }[/color]
+    Добро пожаловать на сервер [color=white]Ratbite[/color]
+    Текущий раунд: [color=white]#{ $roundId }[/color]
+    Текущее количество игроков: [color=white]{ $playerCount }[/color]
+    Текущий игровой режим: [color=white]{ $gmTitle }[/color]
     >[color=yellow]{ $desc }[/color]
 game-ticker-get-info-preround-text =
-    Enter [color=red]Hullrot[/color]
-    The current round is: [color=white]#{ $roundId }[/color]
-    The current player count is: [color=white]{ $playerCount }[/color] ([color=white]{ $readyCount }[/color] { $readyCount ->
-        [one] is
-       *[other] are
-    } ready)
-    The current game mode is: [color=white]{ $gmTitle }[/color]
+    Добро пожаловать на сервер [color=white]Ratbite[/color]
+    Текущий раунд: [color=white]#{ $roundId }[/color]
+    Текущее количество игроков: [color=white]{ $playerCount }[/color] ([color=white]{ $readyCount }[/color] { $readyCount ->
+        [one] готов
+        [few] готовы
+       *[other] готовы
+    })
+    Текущий игровой режим: [color=white]{ $gmTitle }[/color]
     >[color=yellow]{ $desc }[/color]
-game-ticker-no-map-selected = [color=yellow]Map not yet selected![/color]
-game-ticker-player-no-jobs-available-when-joining = When attempting to join to the game, no jobs were available.
-game-ticker-welcome-to-the-station = The Hadal Tide has rescinded. All personnel are to resume their normal duties. Anyone who suspects Hadal Contamination is to present to the medbay.
+game-ticker-no-map-selected = [color=yellow]Карта ещё не выбрана![/color]
+game-ticker-player-no-jobs-available-when-joining = При попытке присоединиться к игре не было доступных должностей.
+game-ticker-welcome-to-the-station = Гадальный прилив отступил. Весь персонал должен возобновить свои обычные обязанности. Любой, кто подозревает Гадальное заражение, должен явиться в медбей.
 # Displayed in chat to admins when a player joins
-player-join-message = Player { $name } joined.
-player-first-join-message = Player { $name } joined for the first time.
+player-join-message = Игрок { $name } присоединился.
+player-first-join-message = Игрок { $name } присоединился впервые.
 # Displayed in chat to admins when a player leaves
-player-leave-message = Player { $name } left.
-latejoin-arrival-announcement = { $character } ({ $job }) { CONJUGATE-HAVE($entity) } arrived at the station!
-latejoin-arrival-announcement-special = { $job } { $character } on deck!
-latejoin-arrival-sender = Station
-latejoin-arrivals-direction = A shuttle transferring you to your station will arrive shortly.
-latejoin-arrivals-direction-time = A shuttle transferring you to your station will arrive in { $time }.
-latejoin-arrivals-dumped-from-shuttle = A mysterious force prevents you from leaving with the arrivals shuttle.
-latejoin-arrivals-teleport-to-spawn = A mysterious force teleports you off the arrivals shuttle. Have a safe shift!
-preset-not-enough-ready-players = Can't start { $presetName }. Requires { $minimumPlayers } players but we have { $readyPlayersCount }.
-preset-no-one-ready = Can't start { $presetName }. No players are ready.
-game-run-level-PreRoundLobby = Pre-round lobby
-game-run-level-InRound = In round
-game-run-level-PostRound = Post round
+player-leave-message = Игрок { $name } вышел.
+latejoin-arrival-announcement = { $character } ({ $job }) { CONJUGATE-HAVE($entity) } прибыл на станцию!
+latejoin-arrival-announcement-special = { $job } { $character } на палубе!
+latejoin-arrival-sender = Станция
+latejoin-arrivals-direction = Шаттл, который доставит вас на станцию, прибудет в ближайшее время.
+latejoin-arrivals-direction-time = Шаттл, который доставит вас на станцию, прибудет через { $time }.
+latejoin-arrivals-dumped-from-shuttle = Таинственная сила не даёт вам покинуть шаттл прибытия.
+latejoin-arrivals-teleport-to-spawn = Таинственная сила телепортирует вас с шаттла прибытия. Удачной смены!
+preset-not-enough-ready-players = Невозможно запустить { $presetName }. Требуется { $minimumPlayers } { $minimumPlayers ->
+    [one] игрок
+    [few] игрока
+   *[other] игроков
+}, а готовы { $readyPlayersCount }.
+preset-no-one-ready = Невозможно запустить { $presetName }. Нет готовых игроков.
+game-run-level-PreRoundLobby = Лобби перед раундом
+game-run-level-InRound = В раунде
+game-run-level-PostRound = После раунда

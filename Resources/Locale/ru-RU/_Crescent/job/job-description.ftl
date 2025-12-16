@@ -1,162 +1,157 @@
 # nanotrasen
-job-description-nt-melee-borg = Engage threats in close combat. Crush skulls with your fists. Coordinate with fellow NT assets.
-job-description-nt-ranged-borg = Engage threats in ranged combat. Pulverize corpses with a drill. Coordinate with fellow NT assets.
-job-description-nt-utility-ipc = Load ammunition and upkeep nanotrasen ships. Coordinate with fellow NT assets.
+job-description-nt-melee-borg = Вступай в ближний бой с угрозами. Круши черепа кулаками. Координируй действия с другими активами НаноТрейзен.
+job-description-nt-ranged-borg = Вступай в бой с угрозами на дистанции. Перемалывай тела буром. Координируй действия с другими активами НаноТрейзен.
+job-description-nt-utility-ipc = Загружай боеприпасы и обслуживай корабли НаноТрейзен. Координируй действия с другими активами НаноТрейзен.
 
 # ncwl
-
-job-description-ncwl-faction-leader = Lead the League from the external end. Maintain relations or war plans with other factions. Don't die.
-job-description-ncwl-kommissar = Lead the League from the internal end. Make sure the Homeguard and Union does their job. Execute traitors.
-job-description-ncwl-mvd-officer = Be the visible hand of the Central Committee. Lead your small team and follow the Kommissar's orders.
-job-description-ncwl-mvd-grunt = Be the visible hand of the Central Committee. Follow the Kommissar and obey his orders.
-job-description-ncwl-fleetkapitan = Command the mass of Partisans. Listen to the Kommissar. Maintain battlefield cohesion.
-job-description-ncwl-partisan = Defend the League. Listen to your Fleetkapitan. Do what you're told.
-job-description-ncwl-industry-taskmaster = Ensure materials are being refined into trade goods and ammo. Organize fleet maintenance.
-job-description-ncwl-industry-artificer = Listen to the Starshina. Gather resources for the League. Do repairs and shipmods.
-job-description-ncwl-medical-director = Keep the League alive and healthy. Coordinate research. Order cybernetics and new drugs.
-job-description-ncwl-artificer = Ensure materials are being refined into trade goods and ammo. Conduct research.
-job-description-ncwl-worker-overboss = Organize salvage and mining. Make sure workers are working. Keep resources flowing to the League Industrial Complex. Organize trade routes.
-job-description-ncwl-worker-dockhand = Listen to the Dockmaster. Do trade runs. Order supplies. Man the salvage and mining crews. Get caught in conveyor belts.
-job-description-ncwl-medical-doctor = Keep the Workers and the Homeguard alive. Run with the Homeguard on missions. Make drugs, save those lost in space.
-job-description-ncwl-coordinator = Organize salvage and mining. Make sure workers are working. Keep resources flowing to the league.
-job-description-ncwl-newbie = Do what work needs doing. Serve the League. Listen to your superiors.
+job-description-ncwl-faction-leader = Руководи Лигой на внешнем контуре. Поддерживай отношения с другими фракциями или готовь планы войны. Не умирай.
+job-description-ncwl-kommissar = Руководи Лигой изнутри. Следи, чтобы рабочие выполняли свою работу. Казни предателей.
+job-description-ncwl-mvd-officer = Будь видимой рукой Центрального Комитета. Веди свой небольшой отряд и выполняй приказы Комиссара.
+job-description-ncwl-mvd-grunt = Будь видимой рукой Центрального Комитета. Следуй за Комиссаром и исполняй его приказы.
+job-description-ncwl-fleetkapitan = Командуй массой партизан. Слушай Комиссара. Поддерживай сплочённость на поле боя.
+job-description-ncwl-partisan = Защищай Лигу. Слушай своего Флоткапитана. Делай, что приказано.
+job-description-ncwl-industry-taskmaster = Следи, чтобы материалы перерабатывались в товары на обмен и боеприпасы. Организуй обслуживание флота.
+job-description-ncwl-industry-artificer = Слушай старшину. Добывай ресурсы для Лиги. Делай ремонт и модификации кораблей.
+job-description-ncwl-medical-director = Держи Лигу живой и здоровой. Координируй исследования. Заказывай кибернетику и новые препараты.
+job-description-ncwl-artificer = Следи, чтобы материалы перерабатывались в товары на обмен и боеприпасы. Проводите исследования.
+job-description-ncwl-worker-overboss = Организуй разбор обломков и добычу. Следи, чтобы рабочие работали. Обеспечь поток ресурсов в Промышленный Комплекс Лиги. Организуй торговые маршруты.
+job-description-ncwl-worker-dockhand = Слушай Начальника Снабжения. Выполняй торговые рейсы. Заказывай снабжение. Работай в командах по разбору обломков и добыче. Попадай в конвейерные ленты.
+job-description-ncwl-medical-doctor = Держи Рабочих в живых. Ходи со Стражей на задания. Делай препараты, спасай тех, кто потерялся в космосе.
+job-description-ncwl-coordinator = Организуй разбор обломков и добычу. Следи, чтобы рабочие работали. Обеспечь поток ресурсов в Лигу.
+job-description-ncwl-newbie = Делай работу, которую нужно делать. Служи Лиге. Слушай начальство.
 
 # syndicate
-
-job-description-ringleader = Coordinate the NCSP. Approve and uphold contracts.
-job-description-lieutenant = Assist your Ringleader to coordinate the NCSP. Approve and uphold contracts.
-job-description-infanteer = Follow your contracts. Hunt bounties. Sell to the highest bidder.
-job-description-technician = Follow your contracts. Hunt bounties. Maintain your vessel's artillery.
-job-description-coordinator = Coordinate Interdyne Pharmaceuticals. Keep track of stock. See to it that contracts are fullfilled.
-job-description-ripperdoc = Follow your contracts. Tend to your fellow mercenaries.
-job-description-traumasec = Secure policyholders. Tend to their medical needs. Eliminate threats to the policyholder.
-job-description-operative = Sabotage enemy vessels and gather intelligence for the Syndicate.
-job-description-intelligenceofficer = Represent the interests of the Family. Sabotage the enemies of the Syndicate.
-job-description-cyberdawntech = Research new technologies for the Family.
-ghost-role-information-CS-core-description = An advanced artificial intelligence created by Cybersun. You have been operating for hundreds of years, complete the goals of CDT, and protect your ship and crew.
-job-description-shipbreaker = Repair Syndicate vessels, take the others apart for scrap.
-job-description-foreman = Coordinate the SAWs. Lead pirate boardings. Scrap vessels.
+job-description-ringleader = Координируй NCSP. Утверждай и обеспечивай исполнение контрактов.
+job-description-lieutenant = Помогай своему Ринглидеру координировать NCSP. Утверждай и обеспечивай исполнение контрактов.
+job-description-infanteer = Следуй своим контрактам. Охоться за наградами. Продавай тому, кто заплатит больше.
+job-description-technician = Следуй своим контрактам. Охоться за наградами. Обслуживай артиллерию своего судна.
+job-description-coordinator = Координируй Interdyne Pharmaceuticals. Веди учёт запасов. Следи, чтобы контракты выполнялись.
+job-description-ripperdoc = Следуй своим контрактам. Оказывай помощь своим наёмникам.
+job-description-traumasec = Обеспечивай безопасность клиентов по полису. Занимайся их медицинскими нуждами. Устраняй угрозы клиенту.
+job-description-operative = Саботируй вражеские суда и собирай разведданные для Синдиката.
+job-description-intelligenceofficer = Представляй интересы Семьи. Саботируй врагов Синдиката.
+job-description-cyberdawntech = Исследуй новые технологии для Семьи.
+ghost-role-information-CS-core-description = Продвинутый искусственный интеллект, созданный Cybersun. Ты действуешь уже сотни лет: выполняй цели CDT и защищай свой корабль и экипаж.
+job-description-shipbreaker = Чини суда Синдиката, а чужие разбирай на лом.
+job-description-foreman = Координируй SAWs. Веди пиратские абордажи. Разбирай суда на лом.
 
 # empire
-
-job-description-freeholder = Obey the Imperial hierarchy. Earn Credits for the Lord Admiral.
-job-description-levyman = Obey your liege, the Lord Admiral. Uphold the will of the Kaiserin.
-job-description-knight = Organize the Imperial Navy. Obey your liege, the Lord Admiral.
-job-description-ritter = Don your Exoplate. Obey your liege, the Lord Admiral. Bring glory in battle.
-job-description-courtier = Obey  your liege, the Lord Admiral. Intrigue for power and rank within his prestigious court.
-job-description-labor = Oversee industrial and trade efforts on behalf of  your liege, the Lord Admiral.
-job-description-adjutant = Obey the Kaiserin, and your liege, the Lord Admiral. Attempt to coordinate the Empire.
-job-description-governor = Exercise the Kaiserin's will. Protect your fief. The Mandate must survive.
-job-description-logistics = Outfit your liege, the Lord Admiral's military with vessels and munitions.
-job-description-wealth = Oversee the barony's economy, generate revenue for your liege, the Lord Admiral and pay his men.
-job-description-foremanimp = Coordinate the workers of your liege, the Lord Admiral.
-job-description-scribe = Explore, discover new technologies, and recover derelicts.
-job-description-archmaester = Coordinate the Scribes Guild, discover new technologies for the Lord Admiral.
-job-description-surgeon = Tend to the bodily ails of your comrades.
-job-description-advocatus = Scrutinise the loyalty of your liege, the Kaiser's subjects. Question violators of His will. Ensure compliance to the Mandate.
-job-description-advocatustemplar = Protect the Advocatus and carry out their will. Ensure compliance to the Mandate.
+job-description-freeholder = Подчиняйся Имперской иерархии. Зарабатывай кредиты для Лорда-адмирала.
+job-description-levyman = Подчиняйся своему сюзерену, Лорду-адмиралу. Поддерживай волю Кайзерины.
+job-description-knight = Организуй Имперский флот. Подчиняйся своему сюзерену, Лорду-адмиралу.
+job-description-ritter = Надень экзопанцирь. Подчиняйся своему сюзерену, Лорду-адмиралу. Неси славу в бою.
+job-description-courtier = Подчиняйся своему сюзерену, Лорду-адмиралу. Плети интриги ради власти и ранга при его престижном дворе.
+job-description-labor = Курируй промышленность и торговлю от имени своего сюзерена, Лорда-адмирала.
+job-description-adjutant = Подчиняйся Кайзерине и своему сюзерену, Лорду-адмиралу. Пытайся координировать Империю.
+job-description-governor = Проводить волю Кайзера. Защищай свою территорию. Мандат должен выжить.
+job-description-logistics = Снабжай войска своего сюзерена, Лорда-адмирала, кораблями и боеприпасами.
+job-description-wealth = Курируй экономику баронства, обеспечивай доход своему сюзерену, Лорду-адмиралу, и оплачивай его людей.
+job-description-foremanimp = Координируй рабочих своего сюзерена, Лорда-адмирала.
+job-description-scribe = Исследуй, открывай новые технологии и поднимай брошенные суда.
+job-description-archmaester = Координируй Гильдию писцов, открывай новые технологии для Лорда-адмирала.
+job-description-surgeon = Лечи телесные недуги своих товарищей.
+job-description-advocatus = Проверяй лояльность подданных своего сюзерена, Кайзера. Допрашивай нарушителей Его воли. Обеспечивай соблюдение Мандата.
+job-description-advocatustemplar = Охраняй Адвокатуса и исполняй его волю. Обеспечивай соблюдение Мандата.
 
 # srm#
-
-job-description-tender = Tend to the wounds of your comrades. Tend to the vessels of the Saint. Carry out menial chores.
-job-description-apprenticehunter = Learn the Hunt from your assigned Master Hunter.
-job-description-hunter = Partake in the Hunt. Capture non-conformists for sale.
-job-description-montagne = Assist your Overseer in organizing the Hunters in the Sector.
-job-description-overseer = Oversee the Great Hunt.
+job-description-tender = Лечи раны товарищей. Обслуживай суда Святого. Выполняй черновую работу.
+job-description-apprenticehunter = Учись Охоте у назначенного Мастера-Охотника.
+job-description-hunter = Участвуй в Охоте. Лови нонконформистов для продажи.
+job-description-montagne = Помогай своему Надсмотрщику организовывать Охотников в секторе.
+job-description-overseer = Руководи Великой Охотой.
 
 # shi
-
-job-description-executive = Manage Shinohara assets within Taypan.
-job-description-board = Assist your Manager in coordinating Shinohara assets within the System.
-job-description-corpsec = Secure assets of the Corporation. Detain unruly customers or employees.
-job-description-highsec = Secure the military interests of the Corporation. Respond to high-risk missions.
-job-description-boardhr = Ensure Corporate Standards are being met alongside with handling public relations.
-job-description-hos-shi = Organize the security force of the corporation.
-job-description-employee = Serve in various departments of the Corporation.
-job-description-medtech = Research and develop new technologies, tend to the ailments of employees.
+job-description-executive = Управляй активами Shinohara в пределах Тайпана.
+job-description-board = Помогай своему Управляющему координировать активы Shinohara в системе.
+job-description-corpsec = Охраняй активы корпорации. Задерживай буйных клиентов или сотрудников.
+job-description-highsec = Защищай военные интересы корпорации. Реагируй на высокорисковые задания.
+job-description-boardhr = Следи за соблюдением корпоративных стандартов и занимайся связями с общественностью.
+job-description-hos-shi = Организуй службу безопасности корпорации.
+job-description-employee = Служи в различных отделах корпорации.
+job-description-medtech = Исследуй и разрабатывай новые технологии, лечи недуги сотрудников.
 
 # cmm
-
-job-description-ordnanceman = Man the artillery of Minuteman vessels.
-job-description-machinist = Repair and maintain Minuteman vessels.
-job-description-physician = Tend to the prisoners and warriors of the CMM.
-job-description-minuteman = Arrest criminals. Police the lawful areas of the System.
-job-description-watchmaster = Coordinate your underlings for the Deputy Marshal.
-job-description-deputymarshal = Coordinate the Minutemen in the absence of the Marshal. Whip the militia into shape.
-job-description-marshal = Coordinate the Minutemen. Oversee martial and civil court. Protect the System.
+job-description-ordnanceman = Обслуживай артиллерию судов Minutemen.
+job-description-machinist = Чини и обслуживай суда Minutemen.
+job-description-physician = Лечи заключённых и воинов CMM.
+job-description-minuteman = Арестовывай преступников. Патрулируй законные районы системы.
+job-description-watchmaster = Координируй своих подчинённых для заместителя маршала.
+job-description-deputymarshal = Координируй Minutemen в отсутствие маршала. Приводи ополчение в порядок.
+job-description-marshal = Координируй Minutemen. Надзирай за военным и гражданским судом. Защищай систему.
 
 # tap
-
-job-description-prophet = Lead your flock into the light. Ensure order within the Families.
-job-description-acolytetap = Follow your Prophet. Ensure their safety.
-job-description-tinkerer = Tend to the always-ailing Aasim. Ensure things are always operational. Research new technologies.
-job-description-hangartech = Tend to the Thukker storefront, move freight, mind the cargo hold of the Aasim.
-job-description-techminer = Go scavenging for scrap. Find artifacts and lost technology for the Tinkerers.
-job-description-beltrunner = Move the Izdari product from the Aasim to relevant parties. Ensure the security of your family's operations.
-job-description-draugr = Assert your superiority over the Serviles. Protect the war-freighter. Listen to the Prophet. Their word is law.
-job-description-servile = Listen to your Draugrs - earn your stay in the family. Make a name for yourself.
-job-description-antiquarian = Fulfill the system's blackmarketing needs. Make sure your office stays in one piece.
+job-description-prophet = Веди свою паству к свету. Поддерживай порядок в Семьях.
+job-description-acolytetap = Следуй за своим Пророком. Обеспечивай его безопасность.
+job-description-tinkerer = Присматривай за вечно хворающим Aasim. Следи, чтобы всё работало. Исследуй новые технологии.
+job-description-hangartech = Присматривай за лавкой Thukker, перемещай грузы, следи за трюмом Aasim.
+job-description-techminer = Ходи за ломом. Ищи артефакты и утраченную технологию для Мастеров.
+job-description-beltrunner = Доставляй продукцию Izdari с Aasim нужным людям. Обеспечивай безопасность операций своей семьи.
+job-description-draugr = Утверждай своё превосходство над Сервилами. Охраняй боевой грузовик. Слушай Пророка. Его слово — закон.
+job-description-servile = Слушай своих Драугров — отрабатывай право жить в семье. Сделай себе имя.
+job-description-antiquarian = Обеспечивай нужды системы на чёрном рынке. Следи, чтобы твой офис остался цел.
 
 # ath
-
-job-description-kommandant = Command the 43rd Battlegroup. Ensure total integration of this system.
-job-description-leutnant = Lead the 43rd Battlegroup's battle fleets.
-job-description-kanoneer = Tend to repairs and maintenance of the armaments and shuttles of the 43rd Battlegroup.
-job-description-soldat = Be the boots on the ground of the 43rd Battlegroup. Patrol the sector. Vanquish psionicists.
-job-description-sanitat = Tend to the wounded and the sickly of the 43rd Battlegroup. Diagnose the many mental illnesses of your peers.
-job-description-steward = Ensure the smooth running of the 43rd Battlegroup. Be the glue that holds it together.
-job-description-oberartz = Sector Crescent is trapped with your magnificient mind and your overwhelming Faustian Spirit.
-job-description-logistat = Organise the vast cargoes that maintain the 43rd Battlegroup. Forget where the Battlegroup's container of speakers went.
-job-description-handels = Peddle the cargoes that maintain the 43rd Battlegroup and your credit balance.
-job-description-forscher = Trapped within such a bountiful space of curiosities. Such potential for research is within your grasp.
-job-description-chirurgeon = So many new dissections to catalog. But do you delay that amputation another hour.
-job-description-vorarbeiter = Guide the Arbeiters in new industrial conquests. Mine the stars and forge the 43rd Battlegroup's might.
-job-description-arbeiter = The industrial life blood of the Authoritat. Follow the Vorarbeiter's direction. Fear the psionicist.
+job-description-kommandant = Командуй 43-й боевой группой. Обеспечь полную интеграцию этой системы.
+job-description-leutnant = Веди боевые флоты 43-й боевой группы.
+job-description-kanoneer = Занимайся ремонтом и обслуживанием вооружения и шаттлов 43-й боевой группы.
+job-description-soldat = Будь пехотой 43-й боевой группы. Патрулируй сектор. Уничтожай псиоников.
+job-description-sanitat = Лечи раненых и больных 43-й боевой группы. Диагностируй многочисленные психические болезни товарищей.
+job-description-steward = Обеспечивай бесперебойную работу 43-й боевой группы. Будь клеем, который держит её вместе.
+job-description-oberartz = Сектор Кресент заперт вместе с твоим великолепным умом и твоим сокрушительным фаустовским духом.
+job-description-logistat = Организуй огромные грузы, которые снабжают 43-ю боевую группу. Не забудь, куда делся контейнер с колонками.
+job-description-handels = Торгуй грузами, которые снабжают 43-ю боевую группу, и пополняй свой кредитный баланс.
+job-description-forscher = Заперт в таком богатом пространстве редкостей. Такой потенциал для исследований у тебя в руках.
+job-description-chirurgeon = Столько новых вскрытий для каталога. Но отложишь ли ты ампутацию ещё на час.
+job-description-vorarbeiter = Веди Работяг к новым промышленным завоеваниям. Добывай звёзды и куй мощь 43-й боевой группы.
+job-description-arbeiter = Промышленная кровь Авторитата. Следуй указаниям Ворарбайтера. Бойся псионика.
 
 # misc
+job-description-spacer = Будь независимым гражданином Тайпана.
+job-description-gliess-sheriff = Следи за законом в Глиесс-Санто.
+job-description-gliess-deputy = Помогай Шерифу поддерживать закон в Глиесс-Санто.
+job-description-gliess-dockmaster = Следи, чтобы никто не взорвал твою станцию.
+job-description-dockhand = Помогай Док-мастеру обслуживать Глиесс-Санто.
 
-job-description-spacer = Be an independent citizen of Taypan.
-job-description-gliess-sheriff = Keep the law in Gliess Santo.
-job-description-gliess-deputy = Assist the Sheriff in keeping the law in Gliess Santo.
-job-description-gliess-dockmaster = Make sure nobody blows up your station.
-job-description-dockhand = Assist the Dockmaster in upkeeping Gliess Santo.
 # conscript-ncwl - for PLANETFALL
-job-description-conscript-ncwl-ship-captain = Pilot the Clementine. Ensure it's safety and use its armaments well. Go down with the ship.
-job-description-conscript-ncwl-ship-crew = Man the guns and fix holes. Load ammo. Help the soldiers do their job. Don't leave the ship.
-job-description-conscript-ncwl-leader = Lead the remnants of the NCWL. Ensure the League takes control of Vladzena.
-job-description-conscript-ncwl-officer = Command the men in infantry combat. Ensure cohesion. Listen to your superiors.
-job-description-conscript-ncwl-amr = Deal with priority targets. Pick your shots carefully. Don't miss. (Anti-Materiel Rifle)
-job-description-conscript-ncwl-lmg = Provide fire support for your comrades. Control the battlefield. (Light Machine Gun)
-job-description-conscript-ncwl-doctor = Keep your comrades alive. Retrieve corpses to clone. (Magnum)
-job-description-conscript-ncwl-shotgun = Punch through enemy lines. Be the first to fall. (Double-Barrel Shotgun)
-job-description-conscript-ncwl-smg = Punish overconfidence. Make them keep their head down. (Submachine Gun)
-job-description-conscript-ncwl-rifleman = Be the rank and file. Be the corpses the League will stand on. (Bolt-action Rifle)
-job-description-conscript-ncwl-cadet = Listen to your superiors. Keep your head down and learn. (Bolt-action Rifle)
+job-description-conscript-ncwl-ship-captain = Пилотируй «Клементину». Следи за её сохранностью и грамотно используй вооружение. Погибни вместе с кораблём.
+job-description-conscript-ncwl-ship-crew = Обслуживай орудия и латай пробоины. Загружай боеприпасы. Помогай солдатам делать свою работу. Не покидай корабль.
+job-description-conscript-ncwl-leader = Веди остатки NCWL. Обеспечь, чтобы Лига взяла под контроль Владзену.
+job-description-conscript-ncwl-officer = Командуй людьми в пехотном бою. Обеспечь сплочённость. Слушай старших.
+job-description-conscript-ncwl-amr = Работай по приоритетным целям. Тщательно выбирай выстрелы. Не промахивайся. (Крупнокалиберная винтовка)
+job-description-conscript-ncwl-lmg = Обеспечивай огневую поддержку товарищам. Контролируй поле боя. (Лёгкий пулемёт)
+job-description-conscript-ncwl-doctor = Держи товарищей в живых. Собирай тела для клонирования. (Magnum)
+job-description-conscript-ncwl-shotgun = Пробивайся сквозь вражеские линии. Падай первым. (Двуствольный дробовик)
+job-description-conscript-ncwl-smg = Наказывай самоуверенность. Не давай поднять голову. (Пистолет-пулемёт)
+job-description-conscript-ncwl-rifleman = Будь рядовым строя. Будь трупами, на которых Лига будет стоять. (Винтовка с продольно-скользящим затвором)
+job-description-conscript-ncwl-cadet = Слушай старших. Держи голову ниже и учись. (Винтовка с продольно-скользящим затвором)
+
 # conscript-dsm - for PLANETFALL
-job-description-conscript-dsm-ship-captain = Pilot the Nemesis. Ensure it's safety and use its armaments well. Go down with the ship.
-job-description-conscript-dsm-ship-crew = Man the guns and fix holes. Load ammo. Help the soldiers do their job. Don't leave the ship.
-job-description-conscript-dsm-leader = Lead the punishment regimen. Reclaim the honor of your house. Stamp out the League.
-job-description-conscript-dsm-officer = Command the men in infantry combat. Ensure cohesion. Listen to your superiors.
-job-description-conscript-dsm-amr = Deal with priority targets. Pick your shots carefully. Don't miss. (Anti-Materiel Rifle)
-job-description-conscript-dsm-lmg = Provide fire support for your brothers. Control the battlefield. (Light Machine Gun)
-job-description-conscript-dsm-doctor = Keep your brothers alive. Retrieve corpses to clone. (Magnum)
-job-description-conscript-dsm-shotgun = Punch through enemy lines. Be the first to fall. (Revolver Shotgun)
-job-description-conscript-dsm-smg = Punish overconfidence. Make them keep their head down. (Submachine Gun)
-job-description-conscript-dsm-rifleman = Be the rank and file. Be the corpses the League will stand on. (Lever-action Rifle)
-job-description-conscript-dsm-cadet = Listen to your superiors. Keep your head down and learn. (Lever-action Rifle)
+job-description-conscript-dsm-ship-captain = Пилотируй «Немезиду». Следи за её сохранностью и грамотно используй вооружение. Погибни вместе с кораблём.
+job-description-conscript-dsm-ship-crew = Обслуживай орудия и латай пробоины. Загружай боеприпасы. Помогай солдатам делать свою работу. Не покидай корабль.
+job-description-conscript-dsm-leader = Веди карательный режим. Верни честь своему дому. Сотри Лигу.
+job-description-conscript-dsm-officer = Командуй людьми в пехотном бою. Обеспечь сплочённость. Слушай старших.
+job-description-conscript-dsm-amr = Работай по приоритетным целям. Тщательно выбирай выстрелы. Не промахивайся. (Крупнокалиберная винтовка)
+job-description-conscript-dsm-lmg = Обеспечивай огневую поддержку братьям. Контролируй поле боя. (Лёгкий пулемёт)
+job-description-conscript-dsm-doctor = Держи братьев в живых. Собирай тела для клонирования. (Magnum)
+job-description-conscript-dsm-shotgun = Пробивайся сквозь вражеские линии. Падай первым. (Револьверный дробовик)
+job-description-conscript-dsm-smg = Наказывай самоуверенность. Не давай поднять голову. (Пистолет-пулемёт)
+job-description-conscript-dsm-rifleman = Будь рядовым строя. Будь трупами, на которых Лига будет стоять. (Винтовка с рычажным затвором)
+job-description-conscript-dsm-cadet = Слушай старших. Держи голову ниже и учись. (Винтовка с рычажным затвором)
+
 # unionfall-ncwl
-job-description-unionfall-ncwl-ship-captain = Pilot the fleet's anchors. Coordinate with other vessels. Go down with your ship.
-job-description-unionfall-ncwl-ship-crew = Man the guns and fix holes. Load ammo. Don't leave the ship. Listen to the Grand Steward.
-job-description-unionfall-ncwl-leader = Lead the remnants of the NCWL. Ensure the League survives and eliminates its enemies.
-job-description-unionfall-ncwl-officer = Lead small squads. Ensure cohesion. Listen to the Kommandant.
-job-description-unionfall-ncwl-doctor = Keep your comrades alive.
-job-description-unionfall-ncwl-rifleman = Be the rank and file. Pilot fighters and ultralights. Listen to your superiors.
-job-description-unionfall-ncwl-cadet = Listen to your superiors. Keep your head down and learn.
+job-description-unionfall-ncwl-ship-captain = Пилотируй якорные корабли флота. Координируйся с другими судами. Погибни вместе с кораблём.
+job-description-unionfall-ncwl-ship-crew = Обслуживай орудия и латай пробоины. Загружай боеприпасы. Не покидай корабль. Слушай Великого Стюарда.
+job-description-unionfall-ncwl-leader = Веди остатки NCWL. Обеспечь, чтобы Лига выжила и уничтожила своих врагов.
+job-description-unionfall-ncwl-officer = Веди небольшие отряды. Обеспечь сплочённость. Слушай Коменданта.
+job-description-unionfall-ncwl-doctor = Держи товарищей в живых.
+job-description-unionfall-ncwl-rifleman = Будь рядовым строя. Пилотируй истребители и ультралайты. Слушай старших.
+job-description-unionfall-ncwl-cadet = Слушай старших. Держи голову ниже и учись.
+
 # unionfall-dsm
-job-description-unionfall-dsm-ship-captain = Pilot the fleet's anchors. Coordinate with other vessels. Go down with your ship.
-job-description-unionfall-dsm-ship-crew = Man the guns and fix holes. Load ammo. Don't leave the ship. Listen to the Grand Steward.
-job-description-unionfall-dsm-leader = Lead the punishment regimen. Reclaim the honor of your house. Stamp out the League.
-job-description-unionfall-dsm-officer = Lead small squads. Ensure cohesion. Listen to the Knight-Bannaret.
-job-description-unionfall-dsm-doctor = Keep your fellow men alive.
-job-description-unionfall-dsm-rifleman = Be the rank and file. Pilot fighters and ultralights. Listen to your superiors.
-job-description-unionfall-dsm-cadet = Listen to your superiors. Keep your head down and learn.
+job-description-unionfall-dsm-ship-captain = Пилотируй якорные корабли флота. Координируйся с другими судами. Погибни вместе с кораблём.
+job-description-unionfall-dsm-ship-crew = Обслуживай орудия и латай пробоины. Загружай боеприпасы. Не покидай корабль. Слушай Великого Стюарда.
+job-description-unionfall-dsm-leader = Веди карательный режим. Верни честь своему дому. Сотри Лигу.
+job-description-unionfall-dsm-officer = Веди небольшие отряды. Обеспечь сплочённость. Слушай Рыцаря-баннерета.
+job-description-unionfall-dsm-doctor = Держи своих людей в живых.
+job-description-unionfall-dsm-rifleman = Будь рядовым строя. Пилотируй истребители и ультралайты. Слушай старших.
+job-description-unionfall-dsm-cadet = Слушай старших. Держи голову ниже и учись.

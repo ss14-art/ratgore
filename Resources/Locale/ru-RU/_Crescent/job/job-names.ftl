@@ -7,16 +7,16 @@ job-name-utility-ipc = NT Engineer IPC
 
 job-name-ncwl-faction-leader = Майор
 job-name-ncwl-kommissar = Комиссар
-job-name-ncwl-mvd-officer = Kommissar Cadet
-job-name-ncwl-mvd-grunt = Kommissar Aide
-job-name-ncwl-fleetkapitan = Флоткапитан
+job-name-ncwl-mvd-officer = Курсант комиссариата
+job-name-ncwl-mvd-grunt = Помощник Комиссара
+job-name-ncwl-fleetkapitan = Капитан Флота
 job-name-ncwl-partisan = Партизан
-job-name-ncwl-industry-taskmaster = Sindikat Overseer
-job-name-ncwl-industry-artificer = Sindikat Artificer
-job-name-ncwl-medical-director = Alyans Director
-job-name-ncwl-artificer = Мастер
-job-name-ncwl-worker-overboss = Logistics Coordinator
-job-name-ncwl-worker-dockhand = Logistics Crew
+job-name-ncwl-industry-taskmaster = Старшик Инженер
+job-name-ncwl-industry-artificer = Инженер
+job-name-ncwl-medical-director = Главный Врач
+job-name-ncwl-artificer = Оруженный Мастер
+job-name-ncwl-worker-overboss = Начальник Снабжения
+job-name-ncwl-worker-dockhand = Грузчик
 job-name-ncwl-medical-doctor = Санитар
 job-name-ncwl-coordinator = Координатор Союза
 job-name-ncwl-newbie = Рабочий Союза
@@ -41,7 +41,7 @@ job-name-foreman = Бригадир SAW
 
 # empire
 
-job-name-freeholder = Фригольдер
+name-freeholder = Колон
 job-name-levyman = Оруженосец
 job-name-knight = Рыцарь-баннерет
 job-name-ritter = Баронский риттер
@@ -52,9 +52,9 @@ job-name-adjutant = Имперский адъютант
 job-name-archmaester = Архимагистр-писец
 job-name-governor = Лорд-адмирал
 job-name-foremanimp = Имперский бригадир
-job-name-imperialresearch = Имперский писец
-job-name-surgeon = Имперский хирург
-job-name-wealth = Рыцарь-логистикар
+job-name-imperialresearch = Писец
+job-name-surgeon = Полевой медик
+job-name-wealth = Казначей Гарнизона
 job-name-advocatus = Адвокат
 job-name-advocatustemplar = Рыцарь-тамплиер
 
