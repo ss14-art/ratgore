@@ -1,9 +1,9 @@
 # Contraband Exchange Console
-contraband-pallet-console-menu-title = Contraband Exchange
-contraband-console-menu-points-amount = { $amount } slips
-contraband-pallet-menu-no-goods-text = No contraband detected
-contraband-pallet-menu-appraisal-label = Estimated Value:{ " " }
-contraband-pallet-menu-count-label = Number of items:{ " " }
-contraband-pallet-appraise-button = Appraise
-contraband-pallet-sell-button = Sell
-contraband-pallet-disclaimer = Please place all contraband items directly onto the scanner. Items inside other containers are unable to be scanned properly.
+contraband-pallet-console-menu-title = Обмен контрабанды
+contraband-console-menu-points-amount = { $amount } квитанций
+contraband-pallet-menu-no-goods-text = Контрабанда не обнаружена
+contraband-pallet-menu-appraisal-label = Оценочная стоимость:{ " " }
+contraband-pallet-menu-count-label = Количество предметов:{ " " }
+contraband-pallet-appraise-button = Оценить
+contraband-pallet-sell-button = Продать
+contraband-pallet-disclaimer = Пожалуйста, разместите всю контрабанду непосредственно на сканер. Предметы внутри других контейнеров не могут быть отсканированы правильно.
