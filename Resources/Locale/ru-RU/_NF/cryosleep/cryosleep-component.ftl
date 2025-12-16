@@ -1,20 +1,20 @@
 ## UI
 
-cryopod-examine-empty = Empty
-cryopod-examine-occupied = Occupied
-accept-cryo-window-accept-button = Accept
-accept-cryo-window-deny-button = Cancel
-accept-cryo-window-prompt-text-part = Enter cryo sleep and finish your shift?
-accept-cryo-window-title = Cryo Sleep Chamber
-cryo-wakeup-window-title = Waking up
-cryo-wakeup-window-accept-button = Accept
-cryo-wakeup-window-deny-button = Cancel
-cryo-wakeup-window-rules = You are going to try to return from your cryosleep! You do not know anything that happened since the moment you went to sleep. Accept this and continue?
-cryo-wakeup-result-occupied = The cryopod is occupied! Try waiting a bit.
-cryo-wakeup-result-no-cryopod = The cryopod went missing! Uh oh.
-cryo-wakeup-result-no-body = You do not have a cryosleeping body!
-cryo-wakeup-result-disabled = Returning from cryosleep is disabled on this server.
+cryopod-examine-empty = Пусто
+cryopod-examine-occupied = Занято
+accept-cryo-window-accept-button = Принять
+accept-cryo-window-deny-button = Отмена
+accept-cryo-window-prompt-text-part = Войти в криосон и завершить вашу смену?
+accept-cryo-window-title = Камера криосна
+cryo-wakeup-window-title = Пробуждение
+cryo-wakeup-window-accept-button = Принять
+cryo-wakeup-window-deny-button = Отмена
+cryo-wakeup-window-rules = Вы собираетесь вернуться из криосна! Вы не знаете ничего о том, что произошло с момента, когда вы заснули. Принимаете это и продолжаете?
+cryo-wakeup-result-occupied = Криокапсула занята! Попробуйте подождать.
+cryo-wakeup-result-no-cryopod = Криокапсула пропала! Ой-ой.
+cryo-wakeup-result-no-body = У вас нет тела в криосне!
+cryo-wakeup-result-disabled = Возвращение из криосна отключено на этом сервере.
 # Cryopod
-cryopod-refuse-dead = The { $cryopod } refuses to accept dead patients.
-cryopod-refuse-organic = The { $cryopod } refuses to accept more than 1 sentient entity at once.
-cryopod-wake-up = { $entity } returns from cryosleep!
+cryopod-refuse-dead = { $cryopod } отказывается принимать мёртвых пациентов.
+cryopod-refuse-organic = { $cryopod } отказывается принимать более одного разумного существа одновременно.
+cryopod-wake-up = { $entity } возвращается из криосна!
