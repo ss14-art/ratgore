@@ -1,2 +1,2 @@
-department-Frontier = Frontier
-department-Antag = Criminals
+department-Frontier = Приграничье
+department-Antag = Преступники
