@@ -1,2 +1,2 @@
-chat-radio-traffic = Shortwave 500m
-chat-radio-nfsd = Gliessian Sheriffs
+chat-radio-traffic = Короткие волны 500м
+chat-radio-nfsd = Шерифы Глизы
