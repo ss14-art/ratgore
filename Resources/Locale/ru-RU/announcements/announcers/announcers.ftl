@@ -1,6 +1,6 @@
-announcer-HullrotAnnouncer-name = Sector-wide
-announcer-Intern-name = Intern
-announcer-MedBot-name = Automated
-announcer-Michael-name = Michael
-announcer-NEIL-name = N.E.I.L.
-announcer-VoxFem-name = Automated
+announcer-HullrotAnnouncer-name = Секторальный
+announcer-Intern-name = Стажёр
+announcer-MedBot-name = Автоматический
+announcer-Michael-name = Майкл
+announcer-NEIL-name = Н.Э.И.Л.
+announcer-VoxFem-name = Автоматический

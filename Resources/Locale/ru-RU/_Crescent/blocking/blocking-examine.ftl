@@ -1,1 +1,1 @@
-blocking-fraction-armor = The armor's inbuilt shielding blocks [color=lightblue]{ $value }%[/color] of incoming damage and:
+blocking-fraction-armor = Встроенный щит брони блокирует [color=lightblue]{ $value }%[/color] входящего урона и:

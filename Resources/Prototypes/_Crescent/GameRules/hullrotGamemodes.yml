@@ -6,10 +6,10 @@
   id: Adventure #FREEPLAY, DO NOT REMOVE
   alias:
   - adventure
-  - ratbiteadventure
+  - bigratbiteadventure
   name: Свободная игра
   showInVote: true
-  description: Последние дни Тайпана. Длится 2-4 часа.
+  description: Последние дни Тайпана. Длится 2-4 часа. Большая карта.
   rules:
   - Adventure
   - HullrotEventScheduler

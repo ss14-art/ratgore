@@ -1,56 +1,56 @@
-# clarizian
-clarizian_view_imperial_passport = Участник монархического режима, который следует за мёртвым императором.
-clarizian_view_solarian_passport = Участник режима, рождённого из пепла павшей империи.
-clarizian_view_coalition_passport = Участник какой-то захолустной пиратской шайки.
-clarizian_view_union_passport = Участник молодой, наивной нации.
-clarizian_view_american_passport = Участник безжалостной, конкурентной микро-империи. Они могут пригодиться.
-clarizian_view_kul-tanyr_passport = Участник какого-то змеиного захолустья — пустынного мира. Мало интересует.
+# кларизианцы
+clarizian_view_imperial_passport = Член монархистского режима, следующего за мёртвым императором.
+clarizian_view_solarian_passport = Член режима, рождённого из пепла павшей империи.
+clarizian_view_coalition_passport = Член какой-то пиратской шайки из глуши.
+clarizian_view_union_passport = Член молодой, наивной нации.
+clarizian_view_american_passport = Член кровожадной, конкурентной микроимперии. Могут пригодиться.
+clarizian_view_kul-tanyr_passport = Член какой-то змеиной пустынной дыры. Неинтересно.
 
-# american
-american_view_imperial_passport = Участник глупой, дрейфующей развалины государства, всё ещё цепляющейся за старые идеалы.
-american_view_solarian_passport = Участник оппортунистического милитаризованного режима, свергнувшего прежнее монархическое правительство.
-american_view_clarizian_passport = Участник нации матриархальных монархистов.
-american_view_kul-tanyr_passport = Участник какой-то захолустной пустынной племенной общины.
-american_view_union_passport = Участник группы нецивилизованных мятежников и повстанцев.
-american_view_coalition_passport = Часть местной банды пиратов и преступников.
+# американцы
+american_view_imperial_passport = Член глупой выродившейся нации, цепляющейся за старые идеалы.
+american_view_solarian_passport = Член оппортунистического, милитаризованного режима, свергнувшего прежнее монархистское правительство.
+american_view_clarizian_passport = Член нации матриархальных монархистов.
+american_view_kul-tanyr_passport = Член какой-то пустынного племени из глуши.
+american_view_union_passport = Член группы нецивилизованных бунтовщиков и повстанцев.
+american_view_coalition_passport = Часть местной пиратско-бандитской шайки.
 
-# authority
-authority_view_imperial_passport = Участник вымершей, отсталой нации.
-authority_view_coalition_passport = Участник местной террористической ячейки в этой системе.
-authority_view_union_passport = Участник нации, основанной повстанцами, низшим рабочим классом и псами.
-authority_view_kul-tanyr_passport = Участник «империи песчаного шарика», забытой посреди нигде.
-authority_view_american_passport = Участник остатков Нового Американского Протектората.
-authority_view_clarizian_passport = Краунсмен, принадлежащий Дому Клариз.
+# власть
+authority_view_imperial_passport = Член вымершей, отсталой нации.
+authority_view_coalition_passport = Член местной террористической ячейки в этой системе.
+authority_view_union_passport = Член нации, основанной повстанцами, низким рабочим классом и собаками.
+authority_view_kul-tanyr_passport = Член песочного шарика-империи, забытого посреди пустоты.
+authority_view_american_passport = Член остатков Нового Американского Протектората.
+authority_view_clarizian_passport = Королевской крови из Дома Клариз.
 
-# imperial
-imperial_view_union_passport = Участник нации, возникшей в результате вырожденческого плебейского бунта.
-imperial_view_solarian_passport = Участник нации, основанной мятежниками и повстанцами.
-imperial_view_coalition_passport = Участник банды преступников. Отребье.
-imperial_view_kul-tanyr_passport = Участник старых знаменосцев Империи.
-imperial_view_american_passport = Участник остатков Американского Содружества.
-imperial_view_clarizian_passport = Участник мятежного и нелегитимного герцогства Клариз.
+# имперцы
+imperial_view_union_passport = Член нации, основанной в результате близкородственного плебейского бунта.
+imperial_view_solarian_passport = Член нации, основанной бунтовщиками и повстанцами.
+imperial_view_coalition_passport = Член банды преступников. Мразь.
+imperial_view_kul-tanyr_passport = Член старых вассалов Империи.
+imperial_view_american_passport = Член остатков Американского Содружества.
+imperial_view_clarizian_passport = Член мятежного и нелегитимного Герцогства Клариз.
 
-# union
-union_view_authority_passport = Участник нации человеческого превосходства.
-union_view_imperial_passport = Участник фашистского монархического режима.
-union_view_coalition_passport = Участник нелегитимного пиратского королевства.
-union_view_american_passport = Участник заблуждающегося Нового Американского Содружества.
-union_view_kul-tanyr_passport = Участник недавно освобождённой нации лакертанов и унатхи.
-union_view_clarizian_passport = Участник мятежного монархического режима.
+# союз
+union_view_authority_passport = Член нации с человеческим супрематизмом.
+union_view_imperial_passport = Член фашистского монархистского режима.
+union_view_coalition_passport = Член нелегитимного пиратского королевства.
+union_view_american_passport = Член заблудшего Нового Американского Содружества.
+union_view_kul-tanyr_passport = Член недавно освобождённой нации лакертанцев и унати.
+union_view_clarizian_passport = Член мятежного монархистского режима.
 
-# coalition
-coalition_view_authority_passport = Фашистский пёс с Сола.
-coalition_view_imperial_passport = Ничтожный подданный Корон.
-coalition_view_union_passport = Участник местного рабочего союза.
-coalition_view_american_passport = Полнокровный американец. Редкое зрелище в наши дни.
-coalition_view_clarizian_passport = Подданный какого-то заносчивого всезнающего королевского Дома.
-coalition_view_kul-tanyr_passport = Участник какой-то чешуйчатой племенной общины. Имена даже не стоит запоминать.
+# коалиция
+coalition_view_authority_passport = Фашистская соларская собака.
+coalition_view_imperial_passport = Низкий член Корон.
+coalition_view_union_passport = Член местного рабочего профсоюза.
+coalition_view_american_passport = Чистокровный американец. Редкое зрелище в наши дни.
+coalition_view_clarizian_passport = Подданный какой-то высокомерной королевской Дома-умников.
+coalition_view_kul-tanyr_passport = Член какой-то чешуйчатой орды. Никогда не запоминаешь имена.
 
-# friends!
-kul-tanyr_view_kul-tanyr_passport = Ещё один участник Скитальческого флота.
-american_view_american_passport = Кровь с молоком, настоящий американец — как и я.
-clarizian_view_clarizian_passport = Собрат по службе Королеве, Её Светлости Изобель Клариз III.
-coalition_view_coalition_passport = Ещё один вольнопортовец.
-authority_view_authority_passport = Свой, соларианец!
-imperial_view_imperial_passport = Собрат по службе Кайзеру.
-union_view_union_passport = Свой — член Рабочего Союза.
+# свои!
+kul-tanyr_view_kul-tanyr_passport = Ещё один член Бродячего Флота.
+american_view_american_passport = Краснокровый американец, как и я.
+clarizian_view_clarizian_passport = Товарищ по службе Королеве, Её Светлости Изабелле Клариз III.
+coalition_view_coalition_passport = Ещё один вольный портовик.
+authority_view_authority_passport = Товарищ по Солнечной!
+imperial_view_imperial_passport = Товарищ по службе Кайзеру.
+union_view_union_passport = Товарищ по Рабочему Союзу.

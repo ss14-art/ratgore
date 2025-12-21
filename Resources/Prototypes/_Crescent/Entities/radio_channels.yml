@@ -1,7 +1,7 @@
 - type: radioChannel
   id: NCWL
   name: chat-radio-ncwl
-  keycode: "o"
+  keycode: "л"
   frequency: 1985
   color: "#ffd580"
 
@@ -9,84 +9,84 @@
 - type: radioChannel
   id: Imperial
   name: chat-radio-empire
-  keycode: "i"
+  keycode: "и"
   frequency: 6218
   color: "#684871"
 
 - type: radioChannel
   id: Authority
   name: chat-radio-authoritat
-  keycode: "k"
+  keycode: "к"
   frequency: 8218
   color: "#684871"
 
 - type: radioChannel
   id: Hunter
   name: chat-radio-hunter
-  keycode: "a"
+  keycode: "ш"
   frequency: 6219
   color: "#4a6741"
 
 - type: radioChannel
   id: SHI
   name: chat-radio-shi
-  keycode: "w"
+  keycode: "с"
   frequency: 6222
   color: "#535961"
 
 - type: radioChannel
   id: EmpireCiv
   name: chat-radio-empireciv
-  keycode: "j"
+  keycode: "т"
   frequency: 6223
   color: "#cbc3e3"
 
 - type: radioChannel
   id: Gorlex
   name: chat-radio-syndiegorlex
-  keycode: "p"
+  keycode: "г"
   frequency: 6102
   color: "#ff7f7f"
 
 - type: radioChannel
   id: Interdyne
   name: chat-radio-syndieipm
-  keycode: "3"
+  keycode: "ш"
   frequency: 6103
   color: "#f8baba"
 
 - type: radioChannel
   id: Cyberdawn
   name: chat-radio-syndiecyberdawn
-  keycode: "2"
+  keycode: "н"
   frequency: 3103
   color: "#fafafa"
 
 - type: radioChannel
   id: Saws
   name: chat-radio-syndiesaws
-  keycode: "x"
+  keycode: "е"
   frequency: 6105
   color: "#ff5349"
 
 - type: radioChannel
   id: Families
   name: chat-radio-pact
-  keycode: "4"
+  keycode: "ф"
   frequency: 6104
   color: "#50c878"
 
 - type: radioChannel
   id: Clarizian
   name: chat-radio-clarizian
-  keycode: "r"
+  keycode: "а"
   frequency: 6220
   color: "#3b5a72"
 
 - type: radioChannel
   id: NAP
   name: chat-radio-american
-  keycode: "z"
+  keycode: "с"
   frequency: 6221
   color: "#98a150"
 

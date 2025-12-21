@@ -1,0 +1,138 @@
+- type: gamePreset
+  id: RatAdventure
+  alias:
+  - adventure
+  - ratadventure
+  name: Свободная игра
+  showInVote: true
+  description: Последние дни Тайпана. Длится 2-4 часа. Маленькая карта.
+  rules:
+  - RatAdventure
+  - HullrotEventScheduler
+
+- type: entity
+  id: RatAdventure
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: AdventureRule
+    gameMapsByID:
+      PortBalreska:
+        gameMapID: PortBalreska
+        posX: 750
+        posY: -4500
+        IFFColor: Orange
+        IFFFaction: NCWL
+      Dochenskaya:
+        gameMapID: Dochenskaya
+        posX: 2625
+        posY: 3300
+        IFFColor: IndianRed
+        IFFFaction: TFSC
+      GliessSanto:
+        gameMapID: GliessSanto
+        posX: 0
+        posY: 0
+        IFFColor: White
+      Tatsumoto:
+        gameMapID: Tatsumoto
+        posX: 3000
+        posY: 0
+        IFFColor: White
+        IFFFaction: SHI
+      Countsman:
+        gameMapID: Countsman
+        posX: -2400
+        posY: 4500
+        IFFColor: Purple
+        IFFFaction: DSM
+      Refuge:
+        gameMapID: Refuge
+        posX: -4500
+        posY: -1500
+        randomOffsetX: 1500
+        randomOffsetY: 1500
+      Jackal:
+        gameMapID: Jackal
+        posX: -5250
+        posY: -2250
+        IFFColor: IndianRed
+        IFFFaction: TFSC
+      Dawnbreaker:
+        gameMapID: Dawnbreaker
+        posX: -3250
+        posY: -1250
+        IFFColor: IndianRed
+        IFFFaction: TFSC
+      Graveyard:
+        gameMapID: Graveyard
+        posX: 2100
+        posY: 2850
+      StrandedShip:
+        gameMapID: StrandedShip
+        posX: 2137
+        posY: 2715
+        HideIFF: true
+      Fighter1:
+        gameMapID: Fighter1
+        posX: 2497
+        posY: 3165
+        HideIFF: true
+      Fighter2:
+        gameMapID: Fighter2
+        posX: 2491
+        posY: 3262
+        HideIFF: true
+      SolarSailorDerelict:
+        gameMapID: SolarSailorDerelict
+        posX: 2512
+        posY: 2602
+        HideIFF: true
+      ImperialHaulerWreck:
+        gameMapID: ImperialHaulerWreck
+        posX: 2490
+        posY: 3037
+        HideIFF: true
+      FogwreckedDerelict:
+        gameMapID: FogwreckedDerelict
+        posX: 900
+        posY: -5250
+        HideIFF: true
+      Craster:
+        gameMapID: Craster
+        posX: -5250
+        posY: 750
+      Taypan1AsteroidBelt:
+        gameMapID: Taypan1AsteroidBelt
+        posX: -525
+        posY: -3000
+      Taypan2AsteroidBelt:
+        gameMapID: Taypan2AsteroidBelt
+        posX: 2025
+        posY: -1350
+      Marchbelt:
+        gameMapID: Marchbelt
+        posX: -3750
+        posY: 3150
+      Deepbelt:
+        gameMapID: Deepbelt
+        posX: -2400
+        posY: -300
+      FaintSignal:
+        gameMapID: FaintSignal
+        posX: 1500
+        posY: 750
+      TribalScrapyard:
+        gameMapID: TribalScrapyard
+        posX: 1800
+        posY: -2700
+      Hayes:
+        gameMapID: Hayes
+        posX: 2000
+        posY: 1400
+        IFFColor: IndianRed
+        IFFFaction: TFSC
+      AncientBattlefield:
+        gameMapID: AncientBattlefield
+        posX: 300
+        posY: 3750

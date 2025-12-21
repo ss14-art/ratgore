@@ -127,7 +127,7 @@
     рэкетиров и игроков.
   color: "#9FED58"
   weight: 4
-  enabled: true
+  enabled: false
   icon:
     sprite: /Textures/_Crescent/faction_icons.rsi
     state: fourfamilies
