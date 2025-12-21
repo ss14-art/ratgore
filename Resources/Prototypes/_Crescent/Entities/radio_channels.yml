@@ -51,7 +51,7 @@
 - type: radioChannel
   id: Interdyne
   name: chat-radio-syndieipm
-  keycode: "ш"
+  keycode: "ц"
   frequency: 6103
   color: "#f8baba"
 
@@ -86,7 +86,7 @@
 - type: radioChannel
   id: NAP
   name: chat-radio-american
-  keycode: "с"
+  keycode: "ж"
   frequency: 6221
   color: "#98a150"
 
