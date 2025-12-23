@@ -2242,7 +2242,7 @@
   components:
   - type: Sprite
     sprite: Objects/Fun/toys.rsi
-    state: voidborn
+    state: shadowkin
 
 - type: entity
   parent: BasePlushie

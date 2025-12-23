@@ -3,11 +3,10 @@
 - type: localizedDataset
   id: WarVendAds
   values:
-    prefix: advertisement-war-
-    count: 1
+  - advertisement-war-1
+
 
 - type: localizedDataset
   id: ShipVendAds
   values:
-    prefix: advertisement-ship-
-    count: 1
+  - advertisement-ship-1

@@ -121,13 +121,6 @@
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRiflePractice
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Boxes/light_rifle.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: practice
-      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   id: MagazineLightRifleUranium

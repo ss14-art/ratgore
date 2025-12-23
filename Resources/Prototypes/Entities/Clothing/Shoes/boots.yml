@@ -85,10 +85,8 @@
   components:
   - type: Sprite
     sprite: Clothing/Shoes/Boots/combatboots.rsi
-    state: icon
   - type: Clothing
     sprite: Clothing/Shoes/Boots/combatboots.rsi
-    state: icon
 
 - type: entity
   parent: ClothingShoesMilitaryBase

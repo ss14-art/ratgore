@@ -26,7 +26,7 @@
       collection: ShellBulletBounce
 
 - type: entity
-  parent: AmmoProviderShotgunShell
+  parent: BaseAmmoProvider
   id: AmmoProviderShotgunShell4g
   abstract: true
   components:
@@ -79,8 +79,8 @@
       proto: ShellShotgun4gBeanbag
     - type: Sprite
       layers:
-        - state: base
-        - state: beanbag
+        - state: boxwide
+        - state: shellbeanbag
 
 # --------------------- SLUG --------------------------
 
@@ -122,8 +122,8 @@
       proto: ShellShotgun4gSlug
     - type: Sprite
       layers:
-        - state: base
-        - state: slug
+        - state: boxwide
+        - state: shellslug
 
 # --------------------- BUCKSHOT --------------------------
 
@@ -173,8 +173,8 @@
       proto: ShellShotgun4gBuckshot
     - type: Sprite
       layers:
-        - state: base
-        - state: lethal
+        - state: boxwide
+        - state: shelllethal
 
 # --------------------- FLASH --------------------------
 
@@ -185,7 +185,7 @@
   components:
   - type: Sprite
     layers:
-      - state: flare
+      - state: lumen
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: CartridgeAmmo
     proto: PelletShotgunFlashSpread4g
@@ -232,8 +232,8 @@
       proto: ShellShotgun4gFlash
     - type: Sprite
       layers:
-        - state: base
-        - state: uranium
+        - state: boxwide
+        - state: shelluranium
 
 # --------------------- MARKER FLARE --------------------------
 
@@ -287,7 +287,7 @@
   components:
   - type: Sprite
     layers:
-      - state: flare
+      - state: lumen
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: CartridgeAmmo
     proto: PelletShotgunFlashSpread4g
@@ -304,5 +304,5 @@
       proto: ShellShotgun4gMarkerFlare
     - type: Sprite
       layers:
-        - state: base
-        - state: uranium
+        - state: boxwide
+        - state: shelluranium

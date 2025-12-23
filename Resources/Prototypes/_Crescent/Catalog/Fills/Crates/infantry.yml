@@ -325,7 +325,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: C_WeaponLauncherChinaLake
+      - id: WeaponLauncherChinaLake
         amount: 1
 
 - type: entity
