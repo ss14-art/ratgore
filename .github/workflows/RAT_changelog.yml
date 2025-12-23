@@ -1,13 +1,11 @@
 name: RAT Changelog Update
 
 on:
-  # Обрабатываем закрытие PR (merged)
   pull_request:
     types: [closed]
     branches:
       - master
       - main
-  # Обрабатываем прямые пуши (не merge-коммиты)
   push:
     branches:
       - master
@@ -16,7 +14,6 @@ on:
 jobs:
   update-changelog:
     runs-on: ubuntu-latest
-    # Условия для фильтрации
     if: |
       (github.event_name == 'pull_request' && github.event.pull_request.merged == true) ||
       (github.event_name == 'push' && !contains(github.event.head_commit.message, 'Merge pull request') && !contains(github.event.head_commit.message, 'Merge branch'))
@@ -38,20 +35,18 @@ jobs:
         run: npm install js-yaml
 
       - name: Update RAT changelog
+        id: changelog
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
             const yaml = require('js-yaml');
             
-            let commitMessage, commitAuthor, commitDate, prUrl;
+            let commitMessage, commitAuthor, commitDate, prUrl, commitUrl;
             
-            // Определяем источник события
             if (context.eventName === 'pull_request') {
-              // Обработка PR
               const pr = context.payload.pull_request;
               
-              // Используем последний коммит из PR (не merge-коммит)
               const commits = await github.rest.pulls.listCommits({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -63,10 +58,10 @@ jobs:
               commitAuthor = lastCommit.author?.login || lastCommit.commit.author.name;
               commitDate = lastCommit.commit.author.date;
               prUrl = pr.html_url;
+              commitUrl = lastCommit.html_url;
               
               console.log('Processing PR #' + pr.number);
             } else {
-              // Обработка прямого коммита
               const { data: commit } = await github.rest.repos.getCommit({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -77,6 +72,7 @@ jobs:
               commitAuthor = commit.author?.login || commit.commit.author.name;
               commitDate = commit.commit.author.date;
               prUrl = null;
+              commitUrl = commit.html_url;
               
               console.log('Processing direct commit');
             }
@@ -85,7 +81,6 @@ jobs:
             console.log('Commit author:', commitAuthor);
             console.log('Commit date:', commitDate);
             
-            // Проверяем игнорируемые теги
             if (commitMessage.includes('[AUTO]') || 
                 commitMessage.toLowerCase().includes('[maps]') || 
                 commitMessage.includes('[IGNORE]')) {
@@ -96,7 +91,6 @@ jobs:
             let changeType = 'Tweak';
             let message = commitMessage.split('\n')[0];
             
-            // Детект тегов в квадратных скобках [ADD], [FIX], etc.
             const bracketRegex = /^\[([^\]]+)\]/;
             const bracketMatch = message.match(bracketRegex);
             
@@ -104,9 +98,7 @@ jobs:
               const typeString = bracketMatch[1].toUpperCase();
               message = message.replace(bracketRegex, '').trim();
               
-              if (typeString.includes('ADD')) {
-                changeType = 'Add';
-              } else if (typeString.includes('FIX')) {
+              if (typeString.includes('FIX')) {
                 changeType = 'Fix';
               } else if (typeString.includes('REMOVE') || typeString.includes('RMV')) {
                 changeType = 'Remove';
@@ -114,17 +106,14 @@ jobs:
                 changeType = 'Tweak';
               }
             } else {
-              // Детект тегов без скобок с запятой
-              const plainRegex = /^(Add|Fix|Remove|Rmv|Tweak|Upd|Update),\s*/i;
+              const plainRegex = /^(Fix|Remove|Rmv|Tweak|Upd|Update),\s*/i;
               const plainMatch = message.match(plainRegex);
               
               if (plainMatch) {
                 const typeString = plainMatch[1].toUpperCase();
                 message = message.replace(plainRegex, '').trim();
                 
-                if (typeString === 'ADD') {
-                  changeType = 'Add';
-                } else if (typeString === 'FIX') {
+                if (typeString === 'FIX') {
                   changeType = 'Fix';
                 } else if (typeString === 'REMOVE' || typeString === 'RMV') {
                   changeType = 'Remove';
@@ -180,6 +169,12 @@ jobs:
             fs.writeFileSync(changelogPath, formattedYaml, 'utf8');
             
             console.log('RAT changelog updated successfully');
+            
+            core.setOutput('change_type', changeType);
+            core.setOutput('message', message);
+            core.setOutput('author', commitAuthor);
+            core.setOutput('commit_date', commitDate);
+            core.setOutput('commit_url', commitUrl);
 
       - name: Commit and push changes
         run: |
@@ -192,3 +187,56 @@ jobs:
             git commit -m "[AUTO] Update Changelog"
             git push
           fi
+
+      - name: Send Discord notification
+        if: steps.changelog.outputs.change_type != ''
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DS_WEBHOOK }}
+        run: |
+          CHANGE_TYPE="${{ steps.changelog.outputs.change_type }}"
+          MESSAGE="${{ steps.changelog.outputs.message }}"
+          AUTHOR="${{ steps.changelog.outputs.author }}"
+          COMMIT_DATE="${{ steps.changelog.outputs.commit_date }}"
+          COMMIT_URL="${{ steps.changelog.outputs.commit_url }}"
+          
+          case "$CHANGE_TYPE" in
+            "Add")
+              EMOJI="🆕"
+              COLOR=65280
+              ;;
+            "Fix")
+              EMOJI="🐛"
+              COLOR=15631086
+              ;;
+            "Tweak")
+              EMOJI="⚒️"
+              COLOR=16744272
+              ;;
+            "Remove")
+              EMOJI="❌"
+              COLOR=16711680
+              ;;
+            *)
+              EMOJI="📝"
+              COLOR=3447003
+              ;;
+          esac
+          
+          PAYLOAD=$(cat <<EOF
+          {
+            "embeds": [
+              {
+                "title": "$EMOJI | $CHANGE_TYPE: $MESSAGE",
+                "color": $COLOR,
+                "author": {
+                  "name": "$AUTHOR",
+                  "url": "$COMMIT_URL"
+                },
+                "timestamp": "$COMMIT_DATE"
+              }
+            ]
+          }
+          EOF
+          )
+          
+          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
