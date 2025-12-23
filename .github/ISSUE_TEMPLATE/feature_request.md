@@ -1,6 +1,6 @@
 ---
-name: Request a feature
-about: "Please outline your request in Discord first if you aren't a maintainer."
+name: Запросить что-то новое
+about: "Пожалуйста, сначала опишите ваш запрос в Discord, если вы не являетесь мейнтейнером."
 title: ''
 labels: ["Type: Feature"]
 assignees: ''
@@ -8,20 +8,20 @@ assignees: ''
 ---
 
 <!--
-This is a loose format, write this however you need to
-Remove these comments before submitting
+Это свободный формат — оформляйте запрос так, как считаете нужным
+Удалите эти комментарии перед отправкой
 -->
 
-# Description
+# Описание
 <!--
-Explain your request in as much detail as you can
+Опишите ваш запрос как можно подробнее
 -->
 
-I want Goldfish crackers
+Я хочу сыр косичку
 
-# Media
+# Медиа
 <!--
-If applicable, add images or even a video to help explain your suggestion
+Если применимо, добавьте изображения или даже видео, чтобы наглядно объяснить ваше предложение
 -->
 
-![Example Screenshot](https://example.com/thisimageisntreal.png)
+![Пример скриншота](https://i.postimg.cc/gcTykm48/e07f1cf697803e2204bf7f1b35c865b0.jpg)
