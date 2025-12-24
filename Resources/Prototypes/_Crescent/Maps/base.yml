@@ -5,7 +5,6 @@
     - BaseStationCargo
     - BaseStationJobsSpawning
     - BaseStationRecords
-    - BaseStationShuttles
     - BaseStationAlertLevels
     - BaseStationSiliconLawCrescentStation
     - BaseStationSectorNews
@@ -17,7 +16,6 @@
   id: StandardCrescentPOI #POI
   parent:
     - BaseStation
-    - BaseStationShuttles
     - BaseStationCargo
   categories: [ HideSpawnMenu ]
   components:

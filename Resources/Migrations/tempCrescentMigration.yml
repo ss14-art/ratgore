@@ -109,3 +109,19 @@ DefaultStationBeaconKeep: DefaultStationBeacon
 DefaultStationBeaconQuestions: DefaultStationBeacon
 ReinforcedPlasmaWindowStation: ReinforcedPlasmaWindow
 ComputerShipyard : ComputerShipyardCrescent
+
+#Beacons issue
+DefaultStationBeaconCameraServerRoom: null
+DefaultStationBeaconConferenceRoom: null
+DefaultStationBeaconPsychologist: null
+DefaultStationBeaconFrontierATM: null
+DefaultStationBeaconFrontierCafe: null
+DefaultStationBeaconFrontierConference: null
+DefaultStationBeaconFrontierDock: null
+DefaultStationBeaconFrontierShipyard: null
+DefaultStationBeaconFrontierShops: null
+DefaultStationBeaconFrontierVend: null
+DefaultStationBeaconFrontierCargobayOne: null
+DefaultStationBeaconFrontierCargobayTwo: null
+DefaultStationBeaconFrontierCargobayThree: null
+DefaultStationBeaconFrontierCargobayFour: null
