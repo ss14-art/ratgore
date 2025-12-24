@@ -54,22 +54,6 @@
     state: "beanbag"
 
 - type: entity
-  id: PelletShotgunBeanbag4g
-  name: beanbag (4g)
-  categories: [ HideSpawnMenu ]
-  parent: BaseBullet
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 15
-  - type: StaminaDamageOnCollide
-    damage: 55
-
-- type: entity
   name: 4g beanbag box
   parent: AmmoProviderShotgunShell4g
   id: BoxBeanbag4g
@@ -99,20 +83,6 @@
     state: "slug"
 
 - type: entity
-  id: PelletShotgunSlug4g
-  name: pellet (4g slug)
-  categories: [ HideSpawnMenu ]
-  parent: BaseBullet
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: slug
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 100
-
-- type: entity
   name: 4g slug box
   parent: AmmoProviderShotgunShell4g
   id: BoxShotgunSlug4g
@@ -138,20 +108,6 @@
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: CartridgeAmmo
     proto: PelletShotgunSpread4g
-
-- type: entity
-  id: PelletShotgun4g
-  name: pellet (4g buckshot)
-  categories: [ HideSpawnMenu ]
-  parent: BaseBullet
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 24 # 24 x 10 = 240
 
 - type: entity
   id: PelletShotgunSpread4g

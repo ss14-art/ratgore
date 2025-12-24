@@ -47,19 +47,6 @@
       collection: LightBulletBounce
 
 - type: entity
-  id: BulletHeavyPistol
-  name: bullet (11mm PSTF)
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 24
-    harmorPenetration: 6.5
-    stoppingPower : 2
-
-- type: entity
   id: MagazinePistolHeavy
   name: 15-round pistol magazine (11mm PSTF auto)
   parent: BaseMagazinePistol
