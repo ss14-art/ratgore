@@ -4,7 +4,7 @@
 
 **A Space Station 14 fork with unique mechanics and custom content**
 
-[![Discord](https://img.shields.io/discord/1318776836599320657?style=for-the-badge&logo=discord&logoColor=white&label=Discord&labelColor=%237289da&color=%23424549)](https://discord.gg/3FMFTxYQYJ)
+[![Discord](https://img.shields.io/discord/1318776836599320657?style=for-the-badge&logo=discord&logoColor=white&label=Discord&color=%237289da)](https://discord.gg/3FMFTxYQYJ)
 [![GitHub License](https://img.shields.io/github/license/odleer/ratbite?style=for-the-badge)](./LEGAL.md)
 [![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?&style=for-the-badge)](https://dotnet.microsoft.com/)
 

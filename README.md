@@ -4,8 +4,8 @@
 
 **Форк Space Station 14 с уникальными механиками и контентом**
 
-[![Discord](https://img.shields.io/discord/1318776836599320657?style=for-the-badge&logo=discord&logoColor=white&label=Discord&labelColor=%237289da&color=%23424549)](https://discord.gg/3FMFTxYQYJ)
-[![GitHub License](https://img.shields.io/github/license/odleer/ratbite?style=for-the-badge)](./LEGAL-RU.md)
+[![Discord](https://img.shields.io/discord/1318776836599320657?style=for-the-badge&logo=discord&logoColor=white&label=Discord&color=%237289da)](https://discord.gg/3FMFTxYQYJ)
+[![GitHub License](https://img.shields.io/github/license/odleer/ratgore?style=for-the-badge)](./LEGAL-RU.md)
 [![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?&style=for-the-badge)](https://dotnet.microsoft.com/)
 
 [Discord сервер](https://discord.gg/3FMFTxYQYJ) • [Лицензия](./LEGAL-RU.md) • [English](./README-EN.md)
@@ -29,8 +29,8 @@
 
 ```
 # 1. Клонируйте репозиторий
-git clone https://github.com/odleer/ratbite.git
-cd Ratbite
+git clone https://github.com/Odleer/Ratgore.git
+cd ratgore
 
 # 2. Загрузите движок
 git submodule update --init --recursive
@@ -48,8 +48,8 @@ Scripts\bat\runQuickAll.bat
 
 ```
 # 1. Клонируйте репозиторий
-git clone https://github.com/odleer/ratbite.git
-cd ratbite
+git clone https://github.com/Odleer/Ratgore.git
+cd ratgore
 
 # 2. Загрузите движок
 git submodule update --init --recursive
