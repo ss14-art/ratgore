@@ -1,7 +1,8 @@
 ent-BaseKudzu = { "" }
     .desc = { "" }
-ent-Kudzu = kudzu
-    .desc = A rapidly growing, dangerous plant. WHY ARE YOU STOPPING TO LOOK AT IT?!
+ent-Kudzu = кудзу
+    .desc = Быстрорастущее, опасное растение. ЗАЧЕМ ВЫ ВСТАЛИ, ЧТОБЫ ПОСМОТРЕТЬ НА НЕГО?!
+    .suffix = { "" }
 ent-WeakKudzu = { ent-Kudzu }
     .suffix = Weak
     .desc = { ent-Kudzu.desc }

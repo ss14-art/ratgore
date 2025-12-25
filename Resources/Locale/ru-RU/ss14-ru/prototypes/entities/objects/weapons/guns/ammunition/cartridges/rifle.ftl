@@ -1,12 +1,12 @@
-ent-BaseCartridgeRifle = cartridge (.20 rifle)
+ent-BaseCartridgeRifle = патрон (.20 винтовочный)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgeRifle = cartridge (7.62x51mm USM)
+ent-CartridgeRifle = патрон (.20 винтовочный)
     .desc = { ent-BaseCartridgeRifle.desc }
-ent-CartridgeRiflePractice = cartridge (7.62x51mm practice)
+ent-CartridgeRiflePractice = патрон (.20 винтовочный учебный)
     .desc = { ent-BaseCartridgeRifle.desc }
-ent-CartridgeRifleIncendiary = cartridge (7.62x51mm USM incendiary)
+ent-CartridgeRifleIncendiary = патрон (.20 винтовочный зажигательный)
     .desc = { ent-BaseCartridgeRifle.desc }
-ent-CartridgeRifleUranium = cartridge (7.62x51mm USM black-tip)
+ent-CartridgeRifleUranium = патрон (.20 винтовочный урановый)
     .desc = { ent-BaseCartridgeRifle.desc }
 ent-CartridgeRifleShrapnel = cartridge (7.62x51mm USM shrapnel)
     .desc = { ent-BaseCartridgeRifle.desc }

@@ -1,5 +1,5 @@
-ent-ActionRevertPolymorph = Revert
-    .desc = Revert back into your original form.
+ent-ActionRevertPolymorph = Вернуться
+    .desc = Вернитесь в свою изначальную форму.
 ent-ActionPolymorph = { "" }
     .desc = { "" }
 ent-ActionPolymorphWizardSpider = Spider Polymorph

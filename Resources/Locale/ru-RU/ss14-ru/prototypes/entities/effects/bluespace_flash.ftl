@@ -1,5 +1,6 @@
 ent-EffectFlashBluespace = { "" }
     .desc = { "" }
+    .suffix = { "" }
 ent-EffectFlashTelekineticPulse = { "" }
     .desc = { "" }
 ent-EffectFlashShadeskip = { "" }

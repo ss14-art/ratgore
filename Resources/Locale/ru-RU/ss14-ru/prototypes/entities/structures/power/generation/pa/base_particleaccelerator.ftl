@@ -1,5 +1,6 @@
 ent-ParticleAcceleratorBase = { "" }
     .desc = { "" }
+    .suffix = { "" }
 ent-ParticleAcceleratorFinishedPart = { ent-ParticleAcceleratorBase }
     .desc = { ent-ParticleAcceleratorBase.desc }
 ent-ParticleAcceleratorUnfinishedBase = { ent-ParticleAcceleratorBase }

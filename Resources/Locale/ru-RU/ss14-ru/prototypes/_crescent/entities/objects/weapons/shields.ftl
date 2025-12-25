@@ -1,2 +1,2 @@
-ent-NCWLRiotShield = homeguard polyplast shield
-    .desc = In order to reduce material waste, this shield is made primarily out of layered, hardened plastics that allows League enforcers to endure thrown rocks, molotovs, hurled insults from riotous proles, small calibre pistol rounds and even stern rebukes from their own Kommissar. Someone clever has carved "THIS SIDE TOWARD YOU" on the inside.
+ent-NCWLRiotShield = Домобранский полипластиковый щит
+    .desc = Чтобы сократить расход материалов, этот щит изготовлен в основном из слоистых закалённых пластиков, что позволяет стражам Лиги выдерживать летящие камни, коктейли Молотова, оскорбления бунтующих пролетариев, пули малого пистолетного калибра и даже суровые выговоры от собственного комиссара. Кто-то умник выгравировал на внутренней стороне: «ЭТОЙ СТОРОНОЙ К ВРАГУ».

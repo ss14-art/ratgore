@@ -1,4 +1,5 @@
-ent-ForensicPad = forensic pad
-    .desc = A forensic pad for collecting fingerprints or fibers.
+ent-ForensicPad = пластинка криминалистического сканера
+    .desc = Пластинка криминалистического сканера, для снятия отпечатков пальцев или сбора волокон.
+    .suffix = { "" }
 ent-ScentTrackEffect = { "" }
     .desc = { "" }

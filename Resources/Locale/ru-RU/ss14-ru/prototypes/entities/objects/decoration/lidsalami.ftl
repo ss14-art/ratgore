@@ -1,2 +1,3 @@
-ent-LidSalami = salami lid
-    .desc = Ain't gon' fit, won't fit.
+ent-LidSalami = крышка коробки салями
+    .desc = Крышка для салями. Не влезет.
+    .suffix = { "" }

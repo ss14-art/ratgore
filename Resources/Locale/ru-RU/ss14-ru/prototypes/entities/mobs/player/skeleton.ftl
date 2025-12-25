@@ -1,8 +1,11 @@
 ent-MobSkeletonPerson = { ent-BaseMobSkeletonPerson }
     .desc = { ent-BaseMobSkeletonPerson.desc }
-ent-MobSkeletonPirate = skeleton pirate
+    .suffix = { "" }
+ent-MobSkeletonPirate = скелет-пират
     .desc = { ent-MobSkeletonPerson.desc }
-ent-MobSkeletonBiker = skeleton biker
+    .suffix = { "" }
+ent-MobSkeletonBiker = скелет-байкер
     .desc = { ent-MobSkeletonPerson.desc }
+    .suffix = { "" }
 ent-MobSkeletonCloset = closet skeleton
     .desc = { ent-MobSkeletonPerson.desc }

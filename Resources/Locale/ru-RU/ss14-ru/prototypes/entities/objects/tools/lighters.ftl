@@ -1,8 +1,11 @@
-ent-Lighter = basic lighter
-    .desc = A simple plastic cigarette lighter.
-ent-CheapLighter = cheap lighter
-    .desc = A dangerously inexpensive plastic lighter, don't burn your thumb!
-ent-FlippoLighter = flippo lighter
-    .desc = A rugged metal lighter, lasts quite a while.
+ent-Lighter = простая зажигалка
+    .desc = Простая пластмассовая зажигалка.
+    .suffix = { "" }
+ent-CheapLighter = дешёвая зажигалка
+    .desc = Опасно дешёвая пластиковая зажигалка, не обожгите большой палец!
+    .suffix = { "" }
+ent-FlippoLighter = зажигалка флиппо
+    .desc = Прочная металлическая зажигалка, служит довольно долго.
+    .suffix = { "" }
 ent-FlippoEngravedLighter = flippo engraved lighter
     .desc = A rugged golden lighter, lasts quite a while. Engravings serve no tactical advantage whatsoever.

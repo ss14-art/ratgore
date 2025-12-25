@@ -1,7 +1,9 @@
-ent-PinpointerBase = pinpointer
-    .desc = A handheld tracking device. While typically far more capable, this one has been configured to lock onto certain signals. Keep upright to retain accuracy.
-ent-PinpointerNuclear = pinpointer
+ent-PinpointerBase = поисковый навигатор
+    .desc = Портативное устройство слежения, которое фиксирует определенные сигналы.
+    .suffix = { "" }
+ent-PinpointerNuclear = поисковый навигатор
     .desc = { ent-PinpointerBase.desc }
+    .suffix = { "" }
 ent-PinpointerSyndicateNuclear = syndicate pinpointer
     .desc = Produced specifically for nuclear operative missions, get that disk!
 ent-PinpointerUniversal = universal pinpointer

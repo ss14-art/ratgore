@@ -1,7 +1,9 @@
-ent-RipleyCentralElectronics = ripley central control module
-    .desc = The electrical control center for the ripley mech.
-ent-RipleyPeripheralsElectronics = ripley peripherals control module
-    .desc = The electrical peripherals control for the ripley mech.
+ent-RipleyCentralElectronics = центральный модуль управления Рипли
+    .desc = Центральный управляющий модуль меха Рипли.
+    .suffix = { "" }
+ent-RipleyPeripheralsElectronics = модуль управления периферией Рипли
+    .desc = Модуль управления периферией меха Рипли.
+    .suffix = { "" }
 ent-HonkerCentralElectronics = H.O.N.K. central control module
     .desc = The electrical control center for the H.O.N.K. mech.
 ent-HonkerPeripheralsElectronics = H.O.N.K. peripherals control module

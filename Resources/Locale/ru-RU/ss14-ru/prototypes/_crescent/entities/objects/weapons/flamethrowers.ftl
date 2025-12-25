@@ -1,4 +1,4 @@
-ent-WeaponIRMCauteriezrFlamethrower = IRM FLAM-40 Cauterizer
-    .desc = A large and simple flametrower designed by Olywir Armaments. Uses compressed boriatic fuel as ammo.
-ent-WeaponHPSterilizerFlamethrower = HP FLM-21Min Sterilizer
-    .desc = A compact flamethrower made by Hunter's Pride merchant's guild. Uses compressed boriatic fuel as ammo.
+ent-WeaponIRMCauteriezrFlamethrower = БМС Флам-40 Катализатор
+    .desc = Крупный и простой огнемёт конструкции Olywir Armaments. В качестве боеприпасов использует сжатое боратное топливо.
+ent-WeaponHPSterilizerFlamethrower = ГО ФЛМ-21Мин Стерелизация
+    .desc = Компактный огнемёт производства торговой гильдии Гордость Охотника. В качестве боеприпасов использует сжатое боратное топливо.

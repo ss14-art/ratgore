@@ -1,2 +1,3 @@
-ent-BrbSign = brb sign
-    .desc = Lets others know you are away.
+ent-BrbSign = табличка "Обед"
+    .desc = Сообщает всем, что вы ненадолго отошли.
+    .suffix = { "" }

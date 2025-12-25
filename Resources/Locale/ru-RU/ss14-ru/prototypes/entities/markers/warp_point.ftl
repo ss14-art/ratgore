@@ -1,5 +1,6 @@
 ent-WarpPoint = warp point
     .desc = { ent-MarkerBase.desc }
+    .suffix = { "" }
 ent-WarpPointBeacon = warp point (beacon)
     .desc = { ent-WarpPoint.desc }
 ent-WarpPointBombing = warp point

@@ -1,3 +1,3 @@
-ent-MobPathfindDummy = pathfind dummy
-    .suffix = NPC
+ent-MobPathfindDummy = дурачок ищущий путь
     .desc = { ent-MobXenoRouny.desc }
+    .suffix = Дебаг, Поиск пути

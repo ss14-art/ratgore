@@ -1,9 +1,11 @@
-ent-BaseBorgChassis = cyborg
-    .desc = A man-machine hybrid that assists in station activity. They love being asked to state their laws over and over.
+ent-BaseBorgChassis = киборг
+    .desc = Человеко-машинный гибрид, помогающий в работе станции. Они обожают, когда их просят снова и снова зачитывать свои законы.
+    .suffix = { ent-BaseMob.suffix }
 ent-BaseBorgTransponder = { "" }
     .desc = { "" }
 ent-BaseBorgChassisNT = { ent-BaseBorgChassis }
     .desc = { ent-BaseBorgChassis.desc }
+    .suffix = { ent-BaseBorgChassis.suffix }
 ent-BaseBorgChassisSyndicate = { ent-BaseBorgChassis }
     .desc = { ent-BaseBorgChassis.desc }
 ent-BaseBorgChassisDerelict = { ent-BaseBorgChassis }

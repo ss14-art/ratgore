@@ -1,7 +1,9 @@
-ent-HolosignWetFloor = wet floor sign
-    .desc = The words flicker as if they mean nothing.
-ent-HoloFan = holofan
-    .desc = A barrier of hard light that blocks air, but nothing else.
+ent-HolosignWetFloor = знак "мокрый пол"
+    .desc = Слова мерцают, как будто ничего не значат.
+    .suffix = { "" }
+ent-HoloFan = атмосферный барьер
+    .desc = Барьер из твёрдого света, который блокирует воздух, и ничего более.
+    .suffix = { "" }
 ent-HolosignSecurity = holographic barrier
     .desc = A barrier of hard light that blocks movement, but pretty weak.
 ent-HolosignForcefield = holographic force field

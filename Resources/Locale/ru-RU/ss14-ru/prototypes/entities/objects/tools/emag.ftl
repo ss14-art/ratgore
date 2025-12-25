@@ -1,6 +1,6 @@
-ent-EmagUnlimited = cryptographic sequencer
-    .desc = A red circuit board with a charge indicator.
-    .suffix = Unlimited
-ent-Emag = { ent-EmagUnlimited }
-    .suffix = Limited
-    .desc = { ent-EmagUnlimited.desc }
+ent-EmagUnlimited = криптографический секвенсор
+    .desc = Модифицированная карта доступа, обвешанная электроникой и мигающими индикаторами.
+    .suffix = Емаг, Бесконечный
+ent-Emag = криптографический секвенсор
+    .desc = Модифицированная карта доступа, обвешанная электроникой и мигающими индикаторами.
+    .suffix = Емаг

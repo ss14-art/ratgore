@@ -1,3 +1,3 @@
-ent-MobHumanPathDummy = pathfinding dummy
-    .desc = A miserable pile of secrets.
-    .suffix = AI
+ent-MobHumanPathDummy = дурачок ищущий путь
+    .desc = Идущий к реке.
+    .suffix = Дебаг, Искатель пути

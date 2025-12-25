@@ -1,3 +1,2 @@
-ent-FlashlightEmp = flashlight
-    .desc = It lights the way to freedom.
-    .suffix = EMP
+ent-FlashlightEmp = фонарик
+    .desc = Он озаряет путь к свободе.

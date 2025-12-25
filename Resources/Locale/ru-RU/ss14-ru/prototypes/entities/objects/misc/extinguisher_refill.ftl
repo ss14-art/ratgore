@@ -1,2 +1,2 @@
-ent-EnvirosuitExtinguisherRefill = envirosuit extinguisher refill
-    .desc = A cartridge loaded with a compressed extinguisher mix, used to refill the self-extinguisher on plasma envirosuits.
+ent-EnvirosuitExtinguisherRefill = пополнение огнетушителя для защитного костюма
+    .desc = Картридж, наполненный сжатой огнетушащей смесью, используемый для заправки самогасителя в плазменных костюмах.

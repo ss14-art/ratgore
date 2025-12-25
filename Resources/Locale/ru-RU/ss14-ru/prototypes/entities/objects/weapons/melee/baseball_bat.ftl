@@ -1,6 +1,7 @@
-ent-BaseBallBat = baseball bat
-    .desc = A robust baseball bat.
+ent-BaseBallBat = бейсбольная бита
+    .desc = Прочная бейсбольная бита.
 ent-IncompleteBaseBallBat = incomplete baseball bat
     .desc = A few planks of wood stuck together.
-ent-WeaponMeleeKnockbackStick = knockback stick
-    .desc = And then he spleefed all over.
+ent-WeaponMeleeKnockbackStick = палка отдачи
+    .desc = И вдруг он засплифил.
+    .suffix = НЕ МАППИТЬ

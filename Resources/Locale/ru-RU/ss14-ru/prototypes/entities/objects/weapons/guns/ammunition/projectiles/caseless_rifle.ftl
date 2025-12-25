@@ -1,6 +1,6 @@
-ent-BulletCaselessRifle = bullet (9x39mm caseless)
+ent-BulletCaselessRifle = пуля (.25 безгильзовая)
     .desc = { ent-BaseBullet.desc }
-ent-BulletCaselessRiflePractice = bullet (9x39mm caseless practice)
+ent-BulletCaselessRiflePractice = пуля (.25 безгильзовая учебная)
     .desc = { ent-BaseBulletPractice.desc }
 ent-BulletCaselessRifleIncendiary = bullet (9x39mm caseless incendiary)
     .desc = { ent-BaseBulletIncendiary.desc }

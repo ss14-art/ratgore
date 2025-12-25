@@ -1,2 +1,3 @@
-ent-MobVox = Urist McVox
+ent-MobVox = Вокс
     .desc = { ent-BaseMobVox.desc }
+    .suffix = { "" }

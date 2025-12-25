@@ -1,5 +1,6 @@
-ent-CableTerminal = cable terminal
-    .desc = You see a small warning on the red cables in grungy black ink. "CONNECT RED TO BATTERY FOR CHARGE."
+ent-CableTerminal = кабельный терминал
+    .desc = На красных кабелях вы видите небольшое предупреждение. "ПОДКЛЮЧИТЬ КРАСНЫМ К АККУМУЛЯТОРУ ДЛЯ ЕГО ЗАРЯДКИ".
+    .suffix = { "" }
 ent-CableTerminalUncuttable = { ent-CableTerminal }
     .suffix = uncuttable
     .desc = { ent-CableTerminal.desc }

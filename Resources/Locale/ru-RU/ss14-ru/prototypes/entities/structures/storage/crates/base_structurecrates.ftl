@@ -1,10 +1,12 @@
-ent-CrateGeneric = crate
-    .desc = A large container for items.
+ent-CrateGeneric = ящик
+    .desc = Большой контейнер для предметов.
+    .suffix = { "" }
 ent-CrateBaseWeldable = { ent-CrateGeneric }
     .desc = { ent-CrateGeneric.desc }
+    .suffix = { "" }
 ent-CrateBaseSecure = { ent-CrateBaseWeldable }
-    .suffix = Secure
     .desc = { ent-CrateBaseWeldable.desc }
+    .suffix = Защищённый
 ent-CrateBaseSecureReinforced = { ent-CrateBaseSecure }
-    .suffix = Secure, Reinforced
     .desc = { ent-CrateBaseSecure.desc }
+    .suffix = Защищённый, Усиленный

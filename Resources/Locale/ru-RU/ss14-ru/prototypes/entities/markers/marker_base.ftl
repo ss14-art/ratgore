@@ -1,2 +1,3 @@
 ent-MarkerBase = { "" }
     .desc = { "" }
+    .suffix = { "" }

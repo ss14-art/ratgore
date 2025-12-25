@@ -1,12 +1,12 @@
-ent-BulletMagnum = bullet (.327 Imperial)
+ent-BulletMagnum = пуля (.45 магнум)
     .desc = { ent-BaseBullet.desc }
-ent-BulletMagnumPractice = bullet (.327 Imperial practice)
+ent-BulletMagnumPractice = пуля (.45 магнум учебная)
     .desc = { ent-BaseBulletPractice.desc }
-ent-BulletMagnumIncendiary = bullet (.327 Imperial incendiary)
+ent-BulletMagnumIncendiary = пуля (.45 магнум зажигательная)
     .desc = { ent-BaseBulletIncendiary.desc }
-ent-BulletMagnumAP = bullet (.327 Imperial armor-piercing)
+ent-BulletMagnumAP = пуля (.45 магнум бронебойная)
     .desc = { ent-BaseBulletAP.desc }
-ent-BulletMagnumUranium = bullet (.327 Imperial AP-DU)
+ent-BulletMagnumUranium = пуля (.45 магнум урановая)
     .desc = { ent-BaseBulletUranium.desc }
 ent-BulletMagnumShrapnel = bullet (.327 Imperial shrapnel)
     .desc = { ent-BaseBullet.desc }

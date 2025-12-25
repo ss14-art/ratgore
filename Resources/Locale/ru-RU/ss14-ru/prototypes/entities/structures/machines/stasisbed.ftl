@@ -1,2 +1,3 @@
-ent-StasisBed = stasis bed
-    .desc = A bed that massively slows down the patient's metabolism and prevents bodily decay, allowing more time to administer a proper treatment for stabilization.
+ent-StasisBed = стазисная кровать
+    .desc = Кровать, в которой метаболизм пациента сильно замедляется, что позволяет выиграть время для лечения и стабилизации состояния.
+    .suffix = { "" }

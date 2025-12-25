@@ -1,4 +1,6 @@
-ent-PlantAnalyzer = plant analyzer
-    .desc = A scanner used to evaluate a plant's various areas of growth, genetic traits and chemicals.
-ent-PlantAnalyzerReportPaper = plant analyzer report
-    .desc = A printout from a plant analyzer.
+ent-PlantAnalyzer = анализатор растений
+    .desc = Сканер, используемый для оценки различных областей роста растения, его генетических особенностей и химических веществ.
+    .suffix = { "" }
+ent-PlantAnalyzerReportPaper = отчёт анализатора растений
+    .desc = Распечатка с анализатора растений.
+    .suffix = { "" }

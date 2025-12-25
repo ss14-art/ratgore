@@ -1,10 +1,10 @@
 ent-BaseCurtains = curtains
     .desc = Hides what others shouldn't see.
-ent-HospitalCurtains = { ent-BaseCurtains }
-    .desc = Contains less than 1% mercury.
-    .suffix = Hospital
+ent-HospitalCurtains = шторы
+    .desc = Содержат менее 1% ртути.
+    .suffix = { "" }
 ent-HospitalCurtainsOpen = { ent-HospitalCurtains }
-    .suffix = Open, Hospital
+    .suffix = Открытый
     .desc = { ent-HospitalCurtains.desc }
 ent-CurtainsBlack = { ent-BaseCurtains }
     .suffix = Fancy black

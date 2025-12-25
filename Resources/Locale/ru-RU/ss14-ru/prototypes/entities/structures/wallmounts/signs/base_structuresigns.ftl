@@ -1,2 +1,3 @@
-ent-BaseSign = base sign
+ent-BaseSign = ВЫ НЕ ДОЛЖНЫ ЭТОГО ВИДЕТЬ
     .desc = { "" }
+    .suffix = { "" }

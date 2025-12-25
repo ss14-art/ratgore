@@ -1,9 +1,11 @@
 ent-ClothingNeckMedalBase = medal
     .desc = not given to anyone
-ent-ClothingNeckBronzeheart = bronzeheart medal
-    .desc = Given to crewmates for exemplary bravery in the face of danger.
-ent-ClothingNeckGoldmedal = gold medal of crewmanship
-    .desc = Given to crewmates who display excellent crewmanship.
+ent-ClothingNeckBronzeheart = медаль бронзовое сердце
+    .desc = Выдается членам экипажа за проявленную храбрость перед лицом опасности.
+    .suffix = { "" }
+ent-ClothingNeckGoldmedal = золотая медаль мастерства экипажа
+    .desc = Выдается членам экипажа, проявившим отличные навыки работы в команде.
+    .suffix = { "" }
 ent-ClothingNeckCargomedal = logistics medal
     .desc = Whether it's for superior accountancy, courageous salvage work, or just being a friendly technician - this medal is to be assigned only for the best work in the logistics department.
 ent-ClothingNeckEngineermedal = engineer medal

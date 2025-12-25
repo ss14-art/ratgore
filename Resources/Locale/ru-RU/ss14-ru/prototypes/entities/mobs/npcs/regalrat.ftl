@@ -1,10 +1,12 @@
-ent-MobRatKing = rat king
-    .desc = He's da rat. He make da roolz.
+ent-MobRatKing = крысиный король
+    .desc = Он крысюк и он тут босс.
+    .suffix = { "" }
 ent-MobRatKingBuff = { ent-MobRatKing }
-    .suffix = Buff
+    .suffix = Качок
     .desc = { ent-MobRatKing.desc }
-ent-MobRatServant = rat servant
-    .desc = He's da mini rat. He don't make da roolz.
+ent-MobRatServant = крысиный слуга
+    .desc = Он мини-крысюк и он тут не босс.
+    .suffix = { "" }
 ent-ActionRatKingRaiseArmy = Raise Army
     .desc = Spend some hunger to summon an allied rat to help defend you.
 ent-ActionRatKingDomain = Rat King's Domain

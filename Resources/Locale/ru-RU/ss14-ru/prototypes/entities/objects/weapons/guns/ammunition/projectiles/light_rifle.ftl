@@ -1,10 +1,10 @@
-ent-BulletLightRifle = bullet (5.56x45mm Imperial)
+ent-BulletLightRifle = пуля (.20 винтовочная)
     .desc = { ent-BaseBullet.desc }
-ent-BulletLightRiflePractice = bullet (5.56x45mm Imperial practice)
+ent-BulletLightRiflePractice = пуля (.20 винтовочная учебная)
     .desc = { ent-BaseBulletPractice.desc }
-ent-BulletLightRifleIncendiary = bullet (5.56x45mm Imperial dragon's breath)
+ent-BulletLightRifleIncendiary = пуля (.20 винтовочная зажигательная)
     .desc = { ent-BaseBulletIncendiary.desc }
-ent-BulletLightRifleUranium = bullet (5.56x45mm Imperial black-tip)
+ent-BulletLightRifleUranium = пуля (.20 винтовочная урановая)
     .desc = { ent-BaseBulletUranium.desc }
 ent-BulletLightRifleShrapnel = bullet (5.56x45mm Imperial shrapnel)
     .desc = { ent-BaseBullet.desc }

@@ -1,5 +1,6 @@
-ent-BikeHorn = bike horn
-    .desc = A horn off of a bicycle.
+ent-BikeHorn = велосипедный клаксон
+    .desc = Клаксон с велосипеда. Хонк!
+    .suffix = { "" }
 ent-CluwneHorn = broken bike horn
     .desc = A broken horn off of a bicycle.
 ent-GoldenBikeHorn = golden honker

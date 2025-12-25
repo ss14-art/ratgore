@@ -1,2 +1,3 @@
-ent-trayScanner = t-ray scanner
-    .desc = A high-tech scanning device that uses Terahertz Radiation to detect subfloor infrastructure.
+ent-trayScanner = т-лучевой сканер
+    .desc = { ent-BaseItem.desc }
+    .suffix = { "" }

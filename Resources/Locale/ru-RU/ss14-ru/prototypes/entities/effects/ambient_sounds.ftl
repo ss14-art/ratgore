@@ -1,2 +1,3 @@
 ent-AmbientSoundSourceFlies = { "" }
     .desc = { "" }
+    .suffix = { "" }

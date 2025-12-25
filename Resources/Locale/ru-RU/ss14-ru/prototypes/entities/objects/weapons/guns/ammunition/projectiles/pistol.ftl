@@ -1,10 +1,10 @@
-ent-BulletPistol = bullet (9x19mm PSTF)
+ent-BulletPistol = пуля (.35 авто)
     .desc = { ent-BaseBullet.desc }
-ent-BulletPistolPractice = bullet (9x19mm PSTF practice)
+ent-BulletPistolPractice = пуля (.35 авто учебная)
     .desc = { ent-BaseBulletPractice.desc }
-ent-BulletPistolIncendiary = bullet (9x19mm PSTF incendiary)
+ent-BulletPistolIncendiary = пуля (.35 авто зажигательная)
     .desc = { ent-BaseBulletIncendiary.desc }
-ent-BulletPistolUranium = bullet (9x19mm PSTF AP-DU)
+ent-BulletPistolUranium = пуля (.35 авто урановая)
     .desc = { ent-BaseBulletUranium.desc }
 ent-BulletPistolShrapnel = bullet (9x19mm PSTF shrapnel)
     .desc = { ent-BaseBullet.desc }

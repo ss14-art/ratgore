@@ -1,6 +1,9 @@
 ent-BaseHandheldInstrument = { ent-BaseItem }
-    .desc = That's an instrument.
+    .desc = Это музыкальный инструмент.
+    .suffix = { "" }
 ent-BasePlaceableInstrument = baseinstrument
     .desc = { ent-BaseStructureDynamic.desc }
+    .suffix = { "" }
 ent-BasePlaceableInstrumentRotatable = baseinstrumentrotatable
     .desc = { ent-BasePlaceableInstrument.desc }
+    .suffix = { "" }

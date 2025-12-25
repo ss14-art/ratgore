@@ -1,4 +1,6 @@
-ent-BaseMobReptilian = Urisst' Mzhand
-    .desc = { ent-BaseMobSpeciesOrganic.desc }
-ent-MobReptilianDummy = { ent-BaseSpeciesDummy }
-    .desc = A dummy reptilian meant to be used in character setup.
+ent-BaseMobReptilian = Урист МакЯщер
+    .desc = { ent-BaseMobOrganic.desc }
+    .suffix = { "" }
+ent-MobReptilianDummy = Урист МакЯщер
+    .desc = Манекен-ящер, используемый при создании персонажа.
+    .suffix = { "" }

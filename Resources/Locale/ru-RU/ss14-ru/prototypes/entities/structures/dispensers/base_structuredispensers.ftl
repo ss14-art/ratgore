@@ -1,2 +1,3 @@
-ent-ReagentDispenserBase = { ent-SmallConstructibleMachine }
-    .desc = { ent-SmallConstructibleMachine.desc }
+ent-ReagentDispenserBase = { ent-ConstructibleMachine }
+    .desc = { ent-ConstructibleMachine.desc }
+    .suffix = { "" }

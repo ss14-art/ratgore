@@ -1,8 +1,9 @@
-ent-PaperWrittenAMEScribbles = { ent-Paper }
-    .suffix = AME scribbles
-    .desc = { ent-Paper.desc }
-ent-HoloparasiteInfo = holoparasite terms and conditions
-    .desc = A tiny volumetric display for documents, makes one wonder if Cybersun's legal budget is way too high.
+ent-PaperWrittenAMEScribbles = { ent-PaperWritten }
+    .suffix = записки о ДАМ
+    .desc = { ent-PaperWritten.desc }
+ent-HoloparasiteInfo = Условия пользования голопаразитом
+    .desc = Крошечный объемный экран для просмотра документов заставляет задуматься, не слишком ли большой бюджет у юридического отдела Cybersun.
+    .suffix = { "" }
 ent-PaperAgrichemManual = NT "AgriChem Is Fun" manual
     .desc = The single sheet of instructions that came in the kit.
 ent-PaperWrittenCombatBakeryKit = combat bakery kit instructions

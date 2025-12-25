@@ -1,2 +1,3 @@
-ent-Bookshelf = bookshelf
-    .desc = Mostly filled with books.
+ent-Bookshelf = книжный шкаф
+    .desc = Преимущественно наполнен эротикой.
+    .suffix = { "" }
