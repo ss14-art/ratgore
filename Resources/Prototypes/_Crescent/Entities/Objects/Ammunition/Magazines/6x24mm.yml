@@ -33,19 +33,6 @@
   - type: CartridgeAmmo
     proto: Bullet6x24mmCharge
 
-- type: entity
-  id: Bullet6x24mmCharge
-  name: bullet (6x24mm charge)
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 22
-        Shock: 4
-    harmorPenetration: 29
-    stoppingPower: 5
 #---------- The uranium ammo of 6x24mm ----------
 - type: entity
   id: Cartridge6x24mmConcentrated
@@ -61,19 +48,6 @@
   - type: SpentAmmoVisuals
     state: "red"
 
-- type: entity
-  id: Bullet6x24mmConcentrated
-  name: bullet (6x24mm concentrated)
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 18
-        Shock: 8
-    harmorPenetration: 39
-    stoppingPower: 3
 #---------- Anti-mech/cyborg ammo ----------
 - type: entity
   id: Cartridge6x24mmIon
@@ -89,20 +63,6 @@
   - type: SpentAmmoVisuals
     state: "blue"
 
-- type: entity
-  id: Bullet6x24mmIon
-  name: bullet (6x24mm ion)
-  parent: BaseBulletTrigger
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 2
-        Shock: 20
-  - type: EmpOnTrigger
-    range: 0.50
-    energyConsumption: 25
 #---------- Incendiary ammo ----------
 - type: entity
   id: Cartridge6x24mmIncendiary
@@ -118,27 +78,6 @@
   - type: SpentAmmoVisuals
     state: "orange"
 
-- type: entity
-  id: Bullet6x24mmIncendiary
-  name: bullet (6x24mm incendiary)
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 10
-        Heat: 15
-    harmorPenetration: 29
-    stoppingPower: 5
-  - type: PointLight
-    enabled: true
-    color: "#ff4300"
-    radius: 2.0
-    energy: 7.0
-  - type: IgniteOnCollide
-    fireStacks: 0.25
-
 #---------- Less-lethal ammo ----------
 - type: entity
   id: Cartridge6x24mmShock
@@ -153,20 +92,6 @@
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: SpentAmmoVisuals
     state: "green"
-
-- type: entity
-  id: Bullet6x24mmShock
-  name: bullet (6x24mm shock)
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 2
-        Shock: 5
-  - type: StaminaDamageOnCollide
-    damage: 15
 
 #---------- 6x24mm (empty) ----------
 - type: entity
@@ -210,7 +135,7 @@
   - type: EmitSoundOnDrop
     sound: /Audio/_Crescent/Weapons/Interact/mag_drop.ogg
 
-#---------- 6x24mm Railgun (Charge) ----------  
+#---------- 6x24mm Railgun (Charge) ----------
 - type: entity
   id: Magazine6x24mmCharge
   name: "25-round magazine (6x24mm Charge)"
@@ -219,7 +144,7 @@
   - type: BallisticAmmoProvider
     proto: Cartridge6x24mmCharge
 
-#---------- 6x24mm Railgun (Concentrated) ----------  
+#---------- 6x24mm Railgun (Concentrated) ----------
 - type: entity
   id: Magazine6x24mmConcentrated
   name: "25-round magazine (6x24mm Concentrated)"
@@ -228,7 +153,7 @@
   - type: BallisticAmmoProvider
     proto: Cartridge6x24mmConcentrated
 
-#---------- 6x24mm Railgun (Ion) ----------  
+#---------- 6x24mm Railgun (Ion) ----------
 - type: entity
   id: Magazine6x24mmIon
   name: "25-round magazine (6x24mm Ion)"
@@ -237,7 +162,7 @@
   - type: BallisticAmmoProvider
     proto: Cartridge6x24mmIon
 
-#---------- 6x24mm Railgun (Incendiary) ----------  
+#---------- 6x24mm Railgun (Incendiary) ----------
 - type: entity
   id: Magazine6x24mmIncendiary
   name: "25-round magazine (6x24mm Incendiary)"
@@ -245,8 +170,8 @@
   components:
   - type: BallisticAmmoProvider
     proto: Cartridge6x24mmIncendiary
-      
-#---------- 6x24mm Railgun (Shock) ----------  
+
+#---------- 6x24mm Railgun (Shock) ----------
 - type: entity
   id: Magazine6x24mmShock
   name: "25-round magazine (6x24mm Shock)"

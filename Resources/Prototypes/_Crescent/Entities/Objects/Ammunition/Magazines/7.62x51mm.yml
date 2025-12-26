@@ -43,7 +43,7 @@
   components:
   - type: BallisticAmmoProvider
     proto: null
-      
+
 - type: entity
   id: MagazineRifleDrum
   name: "80-round drum magazine (7.62x51mm USM)"
@@ -133,7 +133,7 @@
   components:
   - type: BallisticAmmoProvider
     proto: null
-      
+
 - type: entity
   id: MagazineRiflePan
   name: "47-round pan magazine (7.62x51mm USM)"

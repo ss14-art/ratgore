@@ -69,19 +69,6 @@
     sound: /Audio/_Crescent/Weapons/Interact/mag_drop.ogg
 
 - type: entity
-  id: Bullet12mm
-  name: bullet (12mm auto)
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 26 #only 2 more than 11mm to balance out the higher capacity magazines and common sense
-    harmorPenetration: 10 #Depleted uranium core and bigger caliber
-    stoppingPower: 10 
-
-- type: entity
   id: CartridgePistol12mm
   name: cartridge (12mm)
   parent: BaseCartridgePistol
