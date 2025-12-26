@@ -84,6 +84,15 @@
       - NpcStationAiRammer
 
 - type: entity
+  name: smart rammer core spawner
+  id: SpawnMobRammerCoreSmart
+  parent: SpawnMobRammerCore
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - NpcStationAiRammerSmart
+
+- type: entity
   name: approacher core spawner
   id: SpawnMobApproacherCore
   parent: SpawnMobRammerCore
@@ -91,3 +100,12 @@
   - type: ConditionalSpawner
     prototypes:
       - NpcStationAiApproacher
+
+- type: entity
+  name: attacker core spawner
+  id: SpawnMobAttackerCoreSmart
+  parent: SpawnMobRammerCore
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+      - NpcStationAiAttacker
