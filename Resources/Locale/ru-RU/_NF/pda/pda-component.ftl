@@ -1,1 +1,1 @@
-comp-pda-ui-balance = Balance: [color=white]{ $balance }[/color]
+comp-pda-ui-balance = Баланс: [color=white]{ $balance }[/color]

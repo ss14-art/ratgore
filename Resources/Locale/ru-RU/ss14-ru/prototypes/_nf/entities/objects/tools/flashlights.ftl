@@ -1,2 +1,2 @@
-ent-FlashlightNfsdLite = nfsdlite
-    .desc = A robust flashlight used by the nfsd.
+ent-FlashlightNfsdLite = фонарик ДСБФ
+    .desc = Робастный фонарик, используемый сотрудниками ДСБФ.

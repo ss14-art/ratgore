@@ -1,2 +1,2 @@
-ent-NFPosterLegitMagnusWatching = Always Watching
-    .desc = This poster depicts an ethereal judge. You think you hear a 'BWOINK,' but it is just your imagination, right?
+ent-NFPosterLegitMagnusWatching = Всегда Следим
+    .desc = На этом постере изображён божественный судья, который не упустит ни одной мелочи. Слышите таинственный "Боньк"? Возможно, это ваш страх быть пойманным. Или судья действительно следит за вами?

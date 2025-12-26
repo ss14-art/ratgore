@@ -1,7 +1,7 @@
-ent-CultistMessengerGiftBox = blood cultist bundle
-    .desc = Loot boxes? Here?
-    .suffix = NPC Loot
-ent-ClothingBackpackBloodCultZealotLootA = cultist gear bundle
+ent-CultistMessengerGiftBox = набор кровавого культиста
+    .desc = Лутбоксы? Тут?
+    .suffix = Лут НПС
+ent-ClothingBackpackBloodCultZealotLootA = набор снаряжения культиста
     .desc = { ent-CultistMessengerGiftBox.desc }
 ent-ClothingBackpackBloodCultZealotLootB = { ent-ClothingBackpackBloodCultZealotLootA }
     .desc = { ent-ClothingBackpackBloodCultZealotLootA.desc }

@@ -1,3 +1,3 @@
-ent-ClothingBeltPunkRandomized = punk belt
-    .desc = A webbing with functional pockets.
-    .suffix = Random visuals
+ent-ClothingBeltPunkRandomized = РПС панка
+    .desc = Ременно-плечевая система тактических ремней с удобными карманами.
+    .suffix = Случайный

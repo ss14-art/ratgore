@@ -1,12 +1,12 @@
 ent-BoxSurvivalNFOxygen = { ent-BoxSurvival }
-    .suffix = Oxygen
+    .suffix = Кислород
     .desc = { ent-BoxSurvival.desc }
 ent-BoxSurvivalNFNitrogen = { ent-BoxSurvival }
-    .suffix = Nitrogen
+    .suffix = Азот
     .desc = { ent-BoxSurvival.desc }
 ent-BoxSurvivalNFOxygenExtended = { ent-BoxSurvivalEngineering }
-    .suffix = Oxygen
+    .suffix = Кислород
     .desc = { ent-BoxSurvivalEngineering.desc }
 ent-BoxSurvivalNFNitrogenExtended = { ent-BoxSurvivalEngineering }
-    .suffix = Nitrogen
+    .suffix = Азот
     .desc = { ent-BoxSurvivalEngineering.desc }

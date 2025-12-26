@@ -1,4 +1,4 @@
-id-card-access-level-frontier = Frontier
-id-card-access-level-pilot = Pilot
-id-card-access-level-mercenary = Mercenary
-id-card-access-level-stc = Station Traffic Controller
+id-card-access-level-frontier = Фронтир
+id-card-access-level-pilot = Пилот
+id-card-access-level-mercenary = Наёмник
+id-card-access-level-stc = Диспетчер

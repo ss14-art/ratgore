@@ -1,4 +1,4 @@
-action-name-spider-bite = Укусить за кровь
-no-blood-warning = Здесь нет крови!
+action-name-spider-bite = Испей крови!
+no-blood-warning = Нет крови!
 no-good-blood = Вы не можете пить эту кровь!
-spider-biting = { THE($UsernameName) } начинает кусать { THE($targetName) } за его кровь!
+spider-biting = { THE($UsernameName) } начинает высасывать у { THE($targetName) } кровь!

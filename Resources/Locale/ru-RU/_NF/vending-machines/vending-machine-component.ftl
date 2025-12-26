@@ -1,3 +1,3 @@
 ##  VendingMachineComponent
 
-vending-machine-component-try-eject-access-abused = Защита торгового автомата активна
+vending-machine-component-try-eject-access-abused = Механизм защиты активирован

@@ -1,2 +1,2 @@
-ent-ContrabandPallet = contraband exchange pallet
-    .desc = Designates valid items to exchange with CentCom for security crystals
+ent-ContrabandPallet = поддон обмена контрабанды
+    .desc = Передаёт предметы для передачи ЦентКому в обмен на Таможенные Кредиты.

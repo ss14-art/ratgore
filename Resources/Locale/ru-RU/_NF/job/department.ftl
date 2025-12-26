@@ -1,2 +1,2 @@
-department-Frontier = Приграничье
-department-Antag = Преступники
+department-Frontier = Фронтир
+department-Antag = Криминал

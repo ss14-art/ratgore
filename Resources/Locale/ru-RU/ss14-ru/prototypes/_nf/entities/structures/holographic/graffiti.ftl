@@ -1,8 +1,8 @@
-ent-SpawnerHoloGraffitiRandom = holograffiti
-    .suffix = Random
+ent-SpawnerHoloGraffitiRandom = голограффити
+    .suffix = Случайное
     .desc = { ent-MarkerBase.desc }
-ent-HoloGraffiti = holograffiti
-    .desc = A graffiti composed of hard light. Can be easily removed by force.
+ent-HoloGraffiti = голограффити
+    .desc = Граффити из твердого света. Легко удаляется силой.
 ent-HoloGraffitiSimple01 = { ent-HoloGraffiti }
     .desc = { ent-HoloGraffiti.desc }
 ent-HoloGraffitiSimple02 = { ent-HoloGraffiti }

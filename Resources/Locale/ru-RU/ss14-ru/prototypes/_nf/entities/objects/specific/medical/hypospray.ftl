@@ -1,6 +1,6 @@
-ent-HypoMini = SHI hypospray
-    .desc = A commercial hypospray developed by Shinohara Heavy Industries. It has two built in safety features for the consumer market, a small chemical reservoir and an injection delay.
-ent-HypoBrigmedic = IPM RMA-2 hypospray
-    .desc = A hypospray designed by Interdyne Phramaceuticals. An advanced design configured to store a larger chemical reservoir and have seamless injection experience.
-ent-HypoMiniLimitedEdition = IRM-103 hypospray
-    .desc = A hypospray designed for use by the divine mandate's surgeons. An advanced design configured to take in a larger chemical reservoir than usual.
+ent-HypoMini = гипоспрей NTCS-101
+    .desc = Коммерческая версия стандартного гипоспрея NT, разработанная для внешнего рынка. В отличии от стандартного гипоспрея, оснащен системой задержки ввода лекарств.
+ent-HypoBrigmedic = гипоспрей NTCS-102
+    .desc = Коммерческая версия стандартного гипоспрея NT, разработанная для внешнего рынка. В отличии от стандартного гипоспрея, оснащен системой задержки ввода лекарств. Используется представителями службы безопасности.
+ent-HypoMiniLimitedEdition = гипоспрей NTCS-103
+    .desc = Коммерческая версия стандартного гипоспрея NT, разработанная для внешнего рынка. В отличии от стандартного гипоспрея, оснащен системой задержки ввода лекарств. Выглядит как коллекционный образец, тебе повезло!

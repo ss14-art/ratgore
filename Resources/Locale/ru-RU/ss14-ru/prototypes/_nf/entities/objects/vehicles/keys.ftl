@@ -1,2 +1,2 @@
-ent-VehicleKeyHoverbikeNF = hoverbike keys
-    .desc = Cute bibelot.
+ent-VehicleKeyHoverbikeNF = ключ от ховербайка
+    .desc = Оснащен симпатичным брелком.

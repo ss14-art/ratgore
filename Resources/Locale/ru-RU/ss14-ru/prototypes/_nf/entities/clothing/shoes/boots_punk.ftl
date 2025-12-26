@@ -1,3 +1,3 @@
-ent-ClothingShoesBootsPunkRandomized = punk boots
-    .desc = Deez boots were made for stompin', an' stompin' on ya bucket dey'll do.
-    .suffix = Random visuals
+ent-ClothingShoesBootsPunkRandomized = Панковские ботинки
+    .desc = Эти ботинки были созданы для того, чтобы топать, и топать по тому месту, куда они подойдут.
+    .suffix = Случайный цвет

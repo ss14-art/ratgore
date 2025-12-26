@@ -1,2 +1,2 @@
-ent-BaseMobXenoExpeditions = xeno
-    .desc = They mostly come at night. Mostly.
+ent-BaseMobXenoExpeditions = ксеноморф
+    .desc = Они приходят, когда ночь поглощает свет, и их шёпот слышен только в темноте. Всегда будь настороже.

@@ -1,6 +1,6 @@
 ent-BulletRocketEmp = rocket
     .desc = { ent-BaseBulletTrigger.desc }
-ent-CartridgeRocketEmp = PG-7VL emp
-    .desc = A 1.5 emp warhead designed for the RPG-7 launcher. Has tubular shape.
-ent-GrenadeEmp = emp grenade
+ent-CartridgeRocketEmp = PG-7VL эми
+    .desc = Боевая ракета с ЭМИ-классом 1.5, предназначенная для использования с гранатомётом РПГ-7. Имеет трубчатую форму.
+ent-GrenadeEmp = эми граната
     .desc = { ent-BaseGrenade.desc }

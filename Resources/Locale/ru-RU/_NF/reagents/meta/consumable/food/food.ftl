@@ -1,2 +1,2 @@
-reagent-name-flavorol = flavorol
-reagent-desc-flavorol = All the vitamins, minerals, and carbohydrates the body needs in pure form.
+reagent-name-flavorol = флаворол
+reagent-desc-flavorol = Заряд энергии и здоровья в одном флаконе. Витамины, минералы и углеводы, собранные из самых уголков природы, для вашего благополучия.

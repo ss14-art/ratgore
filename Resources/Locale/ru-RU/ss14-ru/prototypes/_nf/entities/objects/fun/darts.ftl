@@ -1,2 +1,2 @@
-ent-TargetDartsFlatpack = dartboard
-    .desc = A flatpack used for constructing a dart board.
+ent-TargetDartsFlatpack = упакованный дартс
+    .desc = Упаковка, при помощи которой можно создать доску для дартса

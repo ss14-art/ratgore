@@ -1,2 +1,2 @@
-ent-RubberStampSr = station representative's rubber stamp
+ent-RubberStampSr = штамп представителя фронтира
     .desc = { ent-RubberStampHop.desc }

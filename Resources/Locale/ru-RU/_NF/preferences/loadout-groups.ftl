@@ -1,19 +1,19 @@
 # Contractor
 
-loadout-group-contractor-gloves = gloves
-loadout-group-contractor-head = head
-loadout-group-contractor-jumpsuit = jumpsuit
-loadout-group-contractor-outerclothing = outer clothing
-loadout-group-contractor-belt = belt
-loadout-group-contractor-shoes = shoes
-loadout-group-contractor-neck = neck
-loadout-group-contractor-id = ID
-loadout-group-contractor-backpack = backpack
-loadout-group-contractor-glasses = glasses
-loadout-group-contractor-face = mask
-loadout-group-contractor-utility = tools
-loadout-group-contractor-fun = fun
-loadout-group-contractor-trinkets = trinkets
-loadout-group-contractor-survival-box = survival box
-loadout-group-contractor-encryption-key = encryption keys
-loadout-group-contractor-implanter = implanters
+loadout-group-contractor-gloves = перчатки
+loadout-group-contractor-head = головные уборы
+loadout-group-contractor-jumpsuit = униформа
+loadout-group-contractor-outerclothing = верхняя одежда
+loadout-group-contractor-belt = пояса
+loadout-group-contractor-shoes = обувь
+loadout-group-contractor-neck = плащи
+loadout-group-contractor-id = КПК
+loadout-group-contractor-backpack = рюкзаки
+loadout-group-contractor-glasses = очки
+loadout-group-contractor-face = маски
+loadout-group-contractor-utility = инструменты
+loadout-group-contractor-fun = приколы
+loadout-group-contractor-trinkets = безделушки
+loadout-group-contractor-survival-box = наборы выживания
+loadout-group-contractor-encryption-key = ключи шифрования
+loadout-group-contractor-implanter = импланты

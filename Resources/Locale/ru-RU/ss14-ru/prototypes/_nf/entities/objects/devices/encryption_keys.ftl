@@ -1,5 +1,5 @@
-ent-EncryptionKeyTraffic = traffic control encryption key
-    .desc = An encryption key for the space traffic control channel.
-ent-EncryptionKeyNfsd = nfsd encryption key
-    .desc = An encryption key for the new frontier security department channel.
+ent-EncryptionKeyTraffic = ключ шифрования диспетчерского канала
+    .desc = Ключ шифрования для канала управления космическим движением.
+ent-EncryptionKeyNfsd = ключ шифрования дсбф
+    .desc = Ключ шифрования для канала ДСБФ. Надёжный барьер для защиты ваших секретов от космических пиратов и хакеров.
     .suffix = DO NOT MAP

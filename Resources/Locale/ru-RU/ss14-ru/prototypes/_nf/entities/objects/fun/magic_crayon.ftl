@@ -1,2 +1,2 @@
-ent-CrayonMagic = magic crayon
-    .desc = Specially blended with bluespace crystals and certified non-toxic.
+ent-CrayonMagic = волшебный мелок
+    .desc = Специально обогащённый кристаллами блюспейс и сертифицирован как нетоксичный.

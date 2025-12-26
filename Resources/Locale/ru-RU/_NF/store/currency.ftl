@@ -1,1 +1,1 @@
-store-currency-display-security-telecrystal = Slips
+store-currency-display-security-telecrystal = ТК

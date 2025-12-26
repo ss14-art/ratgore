@@ -1,9 +1,9 @@
-ent-SyndieDuffelGiftBox = syndicate naval operative bundle
-    .desc = Loot boxes? Here?
-    .suffix = NPC Loot
-ent-SyndieMessengerGiftBox = syndicate naval operative bundle
-    .desc = Loot boxes? Here?
-    .suffix = NPC Loot
+ent-SyndieDuffelGiftBox = набор оперативника синдиката
+    .desc = Лутбоксы? Тут?
+    .suffix = Лут НПС
+ent-SyndieMessengerGiftBox = набор оперативника синдиката
+    .desc = Лутбоксы? Тут?
+    .suffix = Лут НПС
 ent-ClothingBackpackSyndicateCaptainLootA = { ent-SyndieMessengerGiftBox }
     .desc = { ent-SyndieMessengerGiftBox.desc }
 ent-ClothingBackpackSyndicateCaptainLootB = { ent-ClothingBackpackSyndicateCaptainLootA }

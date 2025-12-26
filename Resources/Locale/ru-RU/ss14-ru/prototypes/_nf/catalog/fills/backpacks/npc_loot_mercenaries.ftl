@@ -1,9 +1,9 @@
-ent-MercenaryDuffelGiftBox = mercanary gear bundle
-    .desc = Loot boxes? Here?
-    .suffix = NPC Loot
-ent-MercenaryWebbingBox = mercanary ammo bundle
-    .desc = Loot boxes? Here?
-    .suffix = NPC Loot
+ent-MercenaryDuffelGiftBox = набор наёмника
+    .desc = Лутбоксы? Тут?
+    .suffix = Лут НПС
+ent-MercenaryWebbingBox = набор боеприпасов наёмника
+    .desc = Лутбоксы? Тут?
+    .suffix = Лут НПС
 ent-ClothingBackpackDuffelMecranaryTier1Pistol = { ent-MercenaryDuffelGiftBox }
     .desc = { ent-MercenaryDuffelGiftBox.desc }
 ent-ClothingBeltWebbingMecranaryTier1Pistol = { ent-MercenaryWebbingBox }

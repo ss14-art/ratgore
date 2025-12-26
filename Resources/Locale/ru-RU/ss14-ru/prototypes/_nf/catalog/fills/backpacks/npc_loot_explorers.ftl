@@ -1,5 +1,5 @@
-ent-ExplorerDuffelGiftBox = explorer's bundle
-    .suffix = NPC Loot
+ent-ExplorerDuffelGiftBox = набор исследователя
+    .suffix = Лут НПС
     .desc = { ent-SyndieDuffelGiftBox.desc }
 ent-ClothingBackpackExplorerMeleeT1 = { ent-ExplorerDuffelGiftBox }
     .desc = { ent-ExplorerDuffelGiftBox.desc }

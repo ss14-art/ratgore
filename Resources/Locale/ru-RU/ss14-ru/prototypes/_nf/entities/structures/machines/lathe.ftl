@@ -1,4 +1,4 @@
-ent-SalvageTechfabNF = salvage techfab
-    .desc = Prints equipment for salvagers.
-ent-NfsdTechFab = nfsd techfab
-    .desc = Prints equipment for use by nfsd.
+ent-SalvageTechfabNF = утилизационный техфаб
+    .desc = Печатает снаряжение необходимое каждому утилизатору.
+ent-NfsdTechFab = техфаб ДСБФ
+    .desc = Печатает снаряжение необходимое ДСБФ.

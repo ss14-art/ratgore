@@ -1,9 +1,9 @@
-ent-ClothingOuterArmorSrCarapace = station representative's carapace
-    .desc = A premium armored chestpiece that provides above average protection for its size. It offers maximum mobility and flexibility thanks to the premium composite materials. Issued only to the station representative.
-ent-ClothingOuterBioArmoredSyndicate = bio suit
-    .desc = Favorite protective gear of any syndicate chemical warfare enjoyers.
-    .suffix = Syndicate
-ent-ClothingOuterArmorNfsd = nfsd armor
-    .desc = get shot, maybe survive?
+ent-ClothingOuterArmorSrCarapace = панцирь представителя
+    .desc = Бронированный нагрудник, обеспечивающий защиту и при этом обладающий мобильностью и гибкостью. Выдается только лучшим представителям станции.
+ent-ClothingOuterBioArmoredSyndicate = биозащитный костюм
+    .desc = Продвинутый костюм, защищающий от биологического заражения, для любителей военных преступлений.
+    .suffix = Синдикат
+ent-ClothingOuterArmorNfsd = бронежилет ДСБФ
+    .desc = Позволяет выжить получив пулю. Возможно.
 ent-ClothingOuterVestWebMercenaryBlack = { ent-ClothingOuterVestWebMercenary }
     .desc = { ent-ClothingOuterVestWebMercenary.desc }

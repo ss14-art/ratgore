@@ -1,2 +1,2 @@
-ent-MedicalTrackingImplanter = medical tracking implanter
+ent-MedicalTrackingImplanter = медицинский имплантер отслеживания
     .desc = { ent-BaseImplantOnlyImplanter.desc }

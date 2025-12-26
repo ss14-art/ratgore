@@ -1,3 +1,3 @@
-ent-BaseMothershipComputer = { ent-BaseStructureDisableToolUse }
-    .desc = Used on motherships to purchase and sell ships without returning to a station.
-    .suffix = Mothership
+ent-BaseMothershipComputer = { ent-ComputerShipyard }
+    .desc = Используется на флагманах для покупки и продажи шаттлов, не возвращаясь на станцию.
+    .suffix = Флагман

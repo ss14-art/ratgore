@@ -1,3 +1,3 @@
-ent-WallWeaponCapacitorRechargerOmnidirectional = wall recharger
-    .suffix = Omnidirectional
+ent-WallWeaponCapacitorRechargerOmnidirectional = настенный зарядник
+    .suffix = Всенаправленный
     .desc = { ent-WallWeaponCapacitorRecharger.desc }

@@ -1,2 +1,2 @@
-ent-RogueAiNode = rogue ai node
-    .desc = Contains portion of rogue AI database. CAUTION! EXPLOSIVE!
+ent-RogueAiNode = узел мятежного ИИ
+    .desc = Содержит часть базы данных мятежного ИИ. Берегитесь, этот узел может быть опасен!

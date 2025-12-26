@@ -1,6 +1,6 @@
 ent-FaxMachineShip = { ent-FaxMachineBase }
-    .suffix = Ship
+    .suffix = Шаттл
     .desc = { ent-FaxMachineBase.desc }
 ent-FaxMachineShipAntag = { ent-FaxMachineShip }
-    .suffix = Ship, Antag
+    .suffix = Шаттл, Антаг
     .desc = { ent-FaxMachineShip.desc }

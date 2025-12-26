@@ -1,4 +1,4 @@
-ent-ConstructionBag = construction bag
-    .desc = A robust bag for construction specialists and engineers alike to carry large amounts of construction materials. Magnetises any nearby construction materials when attached to a belt.
-ent-ConstructionBagOfHolding = construction bag of holding
-    .desc = A robust bag of holding for rich construction specialists and engineers alike to carry large amounts of construction materials. Magnetises any nearby construction materials when attached to a belt.
+ent-ConstructionBag = строительная сумка
+    .desc = Прочная сумка для специалистов-строителей и инженеров, позволяющая перевозить большое количество строительных материалов. При прикреплении к поясу намагничивает любые строительные материалы, находящиеся поблизости.
+ent-ConstructionBagOfHolding = строительная сумка хранения
+    .desc = { ent-ConstructionBag.desc }

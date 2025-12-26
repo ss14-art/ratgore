@@ -1,2 +1,2 @@
-reagent-name-salicylicacid = salicylic acid
-reagent-desc-salicylicacid = A powdery substance used for dermatological treatments.
+reagent-name-salicylicacid = салициловая кислота
+reagent-desc-salicylicacid = Порошкообразное вещество, являющееся ключевым ингредиентом в дерматологических средствах.

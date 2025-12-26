@@ -1,4 +1,4 @@
-ent-DrinkKegPlasticKetchup = ketchup keg
-    .desc = { ent-DrinkKegPlastic.desc }
-ent-DrinkKegPlasticMustard = mustard keg
-    .desc = { ent-DrinkKegPlastic.desc }
+ent-DrinkKegPlasticKetchup = кега с кетчупом
+    .desc = Наполненная томатным блаженством, эта кега — верный спутник каждого праздничного стола.
+ent-DrinkKegPlasticMustard = кега с горчицей
+    .desc = Эта кега с горчицей добавляет пикантности и остроты, превращая любое блюдо в гастрономический праздник.

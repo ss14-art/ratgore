@@ -1,4 +1,4 @@
-ent-WeaponEmpEmitter = emp emitter
-    .desc = Releases electromagnetic pulses that disrupt or damage many electronic devices or drain power cells, has a slow self charging nuclear powered battery.
-ent-WeaponLaserTurboNF = turbo laser mk3
-    .desc = A turbo laser ripped from the guardian unit. Appears to be a rather old model. Doesn't seem to be working properly. Supposedly highly illegal.
+ent-WeaponEmpEmitter = электромагнитный излучатель
+    .desc = Испускает электромагнитные импульсы, которые выводят из строя или повреждают электронные устройства и разряжают элементы питания. Способен самостоятельно заряжаться.
+ent-WeaponLaserTurboNF = Турболазер Мk3
+    .desc = Турболазер, снятый с неисправного "Защитника". Судя по всему, это довольно старая модель, и похоже, что он не работает должным образом. Предположительно, он должен быть запрещён законом.

@@ -1,2 +1,2 @@
-chat-radio-traffic = Короткие волны 500м
-chat-radio-nfsd = Шерифы Глизы
+chat-radio-traffic = Диспетчерская
+chat-radio-nfsd = ДСБФ

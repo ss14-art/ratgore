@@ -1,12 +1,12 @@
 ent-AnomalyRockBananium = { ent-AnomalyRockBase }
-    .suffix = Rock, Bananium
+    .suffix = Камень, Бананиум
     .desc = { ent-AnomalyRockBase.desc }
 ent-AnomalyRockCoal = { ent-AnomalyRockBase }
-    .suffix = Rock, Coal
+    .suffix = Камень, Уголь
     .desc = { ent-AnomalyRockBase.desc }
 ent-AnomalyRockGold = { ent-AnomalyRockBase }
-    .suffix = Rock, Gold
+    .suffix = Камень, Золото
     .desc = { ent-AnomalyRockBase.desc }
 ent-AnomalyRockPlasma = { ent-AnomalyRockBase }
-    .suffix = Rock, Plasma
+    .suffix = Камень, Плазма
     .desc = { ent-AnomalyRockBase.desc }

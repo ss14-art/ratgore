@@ -1,6 +1,6 @@
-ent-ClothingBackpackDuffelSyndicateFilledEmpGrenadeLauncher = China-Lake EMP bundle
-    .desc = An old China-Lake grenade launcher bundled with 8 rounds of EMP.
-ent-ClothingBackpackDuffelSurgeryImpovFilled = improvised surgical duffel bag
-    .desc = This looks like set of improvised surgical tools put together by someone.
-ent-ClothingBackpackDuffelSurgeryAdvancedFilled = advanced surgical duffel bag
-    .desc = A large duffel bag for holding extra medical supplies - this one seems to be designed for holding advanced surgical tools.
+ent-ClothingBackpackDuffelSyndicateFilledEmpGrenadeLauncher = набор "China-Lake ЭМИ"
+    .desc = Старый гранатомёт China-Lake, оснащённый 8 гранатами, которые при контакте генерируют электромагнитный импульс (ЭМИ).
+ent-ClothingBackpackDuffelSurgeryImpovFilled = импровизированный хирургический набор
+    .desc = Сумка, в которой собраны самые примитивные хирургические инструменты, сделанные вручную.
+ent-ClothingBackpackDuffelSurgeryAdvancedFilled = продвинутый  хирургический набор
+    .desc = Большая сумка для хранения медицинских принадлежностей, специально разработанная для сложных хирургических инструментов.

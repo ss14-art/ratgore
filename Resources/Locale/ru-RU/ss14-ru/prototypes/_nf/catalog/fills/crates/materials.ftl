@@ -1,2 +1,2 @@
-ent-CrateMaterials = materials crate
-    .desc = 1 stack of glass, plastic, steel, plasma and plasteel.
+ent-CrateMaterials = ящик с материалами
+    .desc = 1 полный набор стекла, пластика, стали, плазмы и пластали.

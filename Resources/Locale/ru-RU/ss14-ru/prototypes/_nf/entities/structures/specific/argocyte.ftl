@@ -1,2 +1,2 @@
-ent-ArgocyteEgg = argocyte egg
-    .desc = Looks more like a fossil than egg.
+ent-ArgocyteEgg = яйцо аргоцита
+    .desc = Скорее похоже на окаменелость, чем на яйцо. Или это доисторическая драгоценность?

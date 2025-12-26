@@ -1,18 +1,21 @@
 ## UI
 
-adventure-list-start = Государственный банк NCWL
+adventure-list-start = [color=gold]Галактический Банк NT[/color]
 adventure-mode-profit-text = получил общую прибыль в: { " " }
 adventure-mode-loss-text = потерял в общей сложности: { " " }
 adventure-list-high = Лучшие заработки сегодня:
 adventure-list-low = Крупнейшие траты сегодня:
 currency = Кредиты
-shipyard-rules-default1 = Добро пожаловать назад, агент.
+shipyard-rules-default1 =
+    Благодарим Вас за присоединение к ДСБФ.
+    Покупая шаттл вы соглашаетесь со всеми
+    положениями Космического Закона.
 shipyard-rules-default2 =
-    Вам выдаётся корпоративное судно.
-    От вас ожидается соблюдение корпоративного закона
-    до мелочей.
-shuttle-ftl-proximity = Слишком близко к крупной массе для СВС-прыжка!
-changelog-tab-title-Upstream = Upstream список изменений
-multiauth-already-connected = Уже подключено к официальным серверам Frontier.
-public-transit-departure = Отправляемся в { $destination }. Предполагаемое время в пути: { $flytime } секунд.
-public-transit-arrival = Спасибо, что выбрали общественный транспорт NCWL. Следующая пересадка до { $destination } отправляется через { $waittime } секунд.
+    Любые действия, совершаемые вами или вашим экипажем, нарушающие
+    Космический Закон, приведут к административным мерам.
+    Благодарим за выбор Департамента Службы Безопасности Фронтира.
+shuttle-ftl-proximity = Массивный объект блокирует блюспейс перемещение!
+changelog-tab-title-Upstream = Журнал изменений
+multiauth-already-connected = Уже подключены к серверу Фронтира.
+public-transit-departure = Транспорт направляется в { $destination }. Ориентировочное время в пути: { $flytime } секунд.
+public-transit-arrival = Благодарим за выбор общественного транспорта NT. Следующий шаттл до { $destination } отправляется через { $waittime } секунд.

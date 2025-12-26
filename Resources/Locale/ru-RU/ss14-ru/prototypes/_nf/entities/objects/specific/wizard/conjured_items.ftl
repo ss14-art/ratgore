@@ -1,11 +1,11 @@
 ent-ConjuredObject10 = { "" }
-    .desc = A magically created entity, that'll vanish from existence eventually.
-    .suffix = Conjured
-ent-SoapConjured = soap
-    .desc = { ent-BaseBullet.desc }
-ent-SoapletBloodCult = soaplet
+    .desc = Магически созданный объект, который рано или поздно исчезнет.
+    .suffix = Наколдованный
+ent-SoapConjured = мыло
+    .desc = { ent-Soap.desc }
+ent-SoapletBloodCult = мыльница
     .desc = { ent-SoapConjured.desc }
-ent-SoapConjuredBloodCultCluster = soap
+ent-SoapConjuredBloodCultCluster = мыло
     .desc = { ent-Soap.desc }
 ent-ShellSoapConjuredBloodCultCluster = { ent-SoapConjured }
     .desc = { ent-SoapConjured.desc }

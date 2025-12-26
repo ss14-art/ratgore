@@ -1,6 +1,6 @@
-guide-entry-nf14 = New Crescent
-guide-entry-bank = NCWL State Bank
-guide-entry-shipyard = Shipyard
+guide-entry-nf14 = Руководство Фронтира
+guide-entry-bank = NT Галактический банк
+guide-entry-shipyard = Верфи
 guide-entry-shipyard-ambition = Ambition
 guide-entry-shipyard-brigand = Brigand
 guide-entry-shipyard-ceres = Ceres

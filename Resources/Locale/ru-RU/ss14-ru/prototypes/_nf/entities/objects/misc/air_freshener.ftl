@@ -1,2 +1,2 @@
-ent-AirFreshener = air freshener
-    .desc = Removes bad odors, keep it in your pocket.
+ent-AirFreshener = освежитель воздуха
+    .desc = Устраняет неприятные запахи, держите его своём в кармане.

@@ -1,9 +1,9 @@
 ent-ComputerShipyardCrescent = shipyard console
     .desc = Used to purchase and sell shuttles
     .suffix = Crescent
-ent-ComputerShipyardSecurity = security shipyard console
-    .desc = Used to enlist into Nanotrasen Security Forces
-ent-ComputerShipyardExpedition = expedition shipyard console
-    .desc = Used to buy ships outfitted for planetary expeditions
-ent-ComputerShipyardScrap = scrapyard console
-    .desc = Used to purchase and sell "shuttles"
+ent-ComputerShipyardSecurity = консоль приёма в ДСБФ
+    .desc = Откройте для себя путь в элиту безопасности! Эта консоль позволяет вам вступить в Департамент Службы Безопасности Фронтира, обеспечив вас надежным шаттлом для патрулирования галактики. Станьте частью героической команды защитников и держите космическое пространство в безопасности.
+ent-ComputerShipyardExpedition = консоль экспедиционной верфи
+    .desc = Для искателей приключений и исследователей неизведанных миров — эта консоль предлагает шаттлы, специально оборудованные для планетарных экспедиций. Подготовьтесь к открытиям, исследуйте новые горизонты и оставьте свой след в истории Фронтира!
+ent-ComputerShipyardScrap = консоль свалки
+    .desc = Добро пожаловать на свалку, где старые шаттлы находят новую жизнь! Здесь можно приобрести и продать "шаттлы", которые уже списаны с баланса, но все еще способны удивить. Великолепная возможность для тех, кто ищет дешевые, но верные решения для своих нужд.

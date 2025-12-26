@@ -1,3 +1,3 @@
-ent-FoodBakedCookieDivine = divine cookie
-    .desc = This cookie looks incredibly delicious. Whoever made it must really appreciate you.
-    .suffix = DO NOT MAP
+ent-FoodBakedCookieDivine = божественное печенье
+    .desc = Это печенье выглядит невероятно аппетитно, словно его приготовили сами небеса. Каждый кусочек обещает настоящий гастрономический экстаз, а его аромат завораживает и пробуждает все чувства. Тот, кто создал это кулинарное чудо, безусловно, питает к вам глубокую признательность и восхищение. Еда богов, принесенная прямо к вашему столу.
+    .suffix = НЕ МАППИТЬ

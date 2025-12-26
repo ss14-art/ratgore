@@ -1,2 +1,2 @@
-ent-ExplorersLootRadar = salvage radar
-    .desc = Essential tool for any looter.
+ent-ExplorersLootRadar = экспедиционный радар
+    .desc = Незаменимый инструмент для любого искателя приключений и охотника за сокровищами. С этим радаром вы сможете найти все скрытые тайники и спрятанные богатства!

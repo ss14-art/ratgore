@@ -1,3 +1,3 @@
-ent-ClothingMaskPunkHalf = punk halfmask
-    .desc = A close-fitting breathing mask with gamer lights!
-    .suffix = Random visuals
+ent-ClothingMaskPunkHalf = Панковская полумаска
+    .suffix = Случайный цвет
+    .desc = Плотно прилегающая дыхательная маска с геймерской подсветкой!
