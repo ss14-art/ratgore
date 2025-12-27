@@ -36,3 +36,10 @@ Entries:
   id: 5
   time: '2025-12-26T11:57:25Z'
   url: null
+- author: Odleer
+  changes:
+    - message: Upstream
+      type: Tweak
+  id: 6
+  time: '2025-12-27T11:01:19Z'
+  url: null
