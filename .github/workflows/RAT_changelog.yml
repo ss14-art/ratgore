@@ -91,34 +91,56 @@ jobs:
             let changeType = 'Tweak';
             let message = commitMessage.split('\n')[0];
             
-            const bracketRegex = /^\[([^\]]+)\]/;
-            const bracketMatch = message.match(bracketRegex);
+            const colonRegex = /^(Add|Fix|Remove|Rmv|Tweak|Upd|Update):\s*/i;
+            const colonMatch = message.match(colonRegex);
             
-            if (bracketMatch) {
-              const typeString = bracketMatch[1].toUpperCase();
-              message = message.replace(bracketRegex, '').trim();
+            if (colonMatch) {
+              const typeString = colonMatch[1].toUpperCase();
+              message = message.replace(colonRegex, '').trim();
               
-              if (typeString.includes('FIX')) {
+              if (typeString === 'ADD') {
+                changeType = 'Add';
+              } else if (typeString === 'FIX') {
                 changeType = 'Fix';
-              } else if (typeString.includes('REMOVE') || typeString.includes('RMV')) {
+              } else if (typeString === 'REMOVE' || typeString === 'RMV') {
                 changeType = 'Remove';
-              } else if (typeString.includes('TWEAK') || typeString.includes('UPD') || typeString.includes('UPDATE')) {
+              } else if (typeString === 'TWEAK' || typeString === 'UPD' || typeString === 'UPDATE') {
                 changeType = 'Tweak';
               }
             } else {
-              const plainRegex = /^(Fix|Remove|Rmv|Tweak|Upd|Update),\s*/i;
-              const plainMatch = message.match(plainRegex);
+              const commaRegex = /^(Add|Fix|Remove|Rmv|Tweak|Upd|Update),\s*/i;
+              const commaMatch = message.match(commaRegex);
               
-              if (plainMatch) {
-                const typeString = plainMatch[1].toUpperCase();
-                message = message.replace(plainRegex, '').trim();
+              if (commaMatch) {
+                const typeString = commaMatch[1].toUpperCase();
+                message = message.replace(commaRegex, '').trim();
                 
-                if (typeString === 'FIX') {
+                if (typeString === 'ADD') {
+                  changeType = 'Add';
+                } else if (typeString === 'FIX') {
                   changeType = 'Fix';
                 } else if (typeString === 'REMOVE' || typeString === 'RMV') {
                   changeType = 'Remove';
                 } else if (typeString === 'TWEAK' || typeString === 'UPD' || typeString === 'UPDATE') {
                   changeType = 'Tweak';
+                }
+              } else {
+                const bracketRegex = /^\[([^\]]+)\]\s*/;
+                const bracketMatch = message.match(bracketRegex);
+                
+                if (bracketMatch) {
+                  const typeString = bracketMatch[1].toUpperCase();
+                  message = message.replace(bracketRegex, '').trim();
+                  
+                  if (typeString === 'ADD') {
+                    changeType = 'Add';
+                  } else if (typeString === 'FIX' || typeString.includes('FIX')) {
+                    changeType = 'Fix';
+                  } else if (typeString === 'REMOVE' || typeString === 'RMV' || typeString.includes('REMOVE') || typeString.includes('RMV')) {
+                    changeType = 'Remove';
+                  } else if (typeString === 'TWEAK' || typeString === 'UPD' || typeString === 'UPDATE' || typeString.includes('TWEAK') || typeString.includes('UPD') || typeString.includes('UPDATE')) {
+                    changeType = 'Tweak';
+                  }
                 }
               }
             }
