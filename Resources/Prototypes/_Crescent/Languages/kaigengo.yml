@@ -3,7 +3,6 @@
   isVisibleLanguage: true
   speech:
     color: "#61afab"
-    fontId: Iceberg
   obfuscation:
     !type:SyllableObfuscation
     minSyllables: 1

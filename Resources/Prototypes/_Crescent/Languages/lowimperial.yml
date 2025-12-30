@@ -3,7 +3,6 @@
   isVisibleLanguage: true
   speech:
     color: "#908fe2"
-    fontId: Lymphatic
   obfuscation:
     !type:SyllableObfuscation
     minSyllables: 1

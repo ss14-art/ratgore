@@ -3,7 +3,6 @@
   isVisibleLanguage: true
   speech:
     color: "#ffa53f"
-    fontId: SpecialElite
   obfuscation:
     !type:SyllableObfuscation
     minSyllables: 1

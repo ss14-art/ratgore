@@ -12,8 +12,6 @@
 - type: language
   id: RobotTalk
   isVisibleLanguage: true
-  speech:
-    fontId: Monospace
   obfuscation:
     !type:SyllableObfuscation
     minSyllables: 1
@@ -25,8 +23,6 @@
 - type: language
   id: DroneTalk
   isVisibleLanguage: true
-  speech:
-    fontId: Monospace
   obfuscation:
     !type:SyllableObfuscation
     minSyllables: 1
@@ -296,7 +292,6 @@
     allowRadio: false
     requireSpeech: false
     color: "#aaaaaa"
-    fontId: Silkscreen
     messageWrapOverrides:
       Speak: chat-sign-language-message-wrap
       Whisper: chat-sign-language-whisper-wrap
@@ -317,7 +312,6 @@
   id: Psychomantic
   speech:
     color: "#C29EFF" # a nice psychic purple, a bit lighter than Ya'ssa
-    fontId: Megrim # Experimental and alien, but still hopefully clean enough to read
     speechVerbOverrides:
     - chat-speech-verb-Psychomantic-1
     - chat-speech-verb-Psychomantic-2
