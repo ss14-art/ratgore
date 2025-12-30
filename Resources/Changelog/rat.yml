@@ -43,3 +43,10 @@ Entries:
   id: 6
   time: '2025-12-27T11:01:19Z'
   url: null
+- author: Odleer
+  changes:
+    - message: Фикс
+      type: Tweak
+  id: 7
+  time: '2025-12-30T09:34:57Z'
+  url: null
