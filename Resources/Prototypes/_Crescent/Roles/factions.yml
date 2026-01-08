@@ -22,7 +22,7 @@
     этого страдают нианы, над которыми потешаются даже унатхи.
   color: "#9FED58"
   weight: 8
-  enabled: false
+  enabled: true
   icon:
     sprite: /Textures/_Crescent/faction_icons.rsi
     state: dsm
@@ -49,7 +49,7 @@
 
   color: "#9FED58"
   weight: 7
-  enabled: false
+  enabled: true
   icon:
     sprite: /Textures/_Crescent/faction_icons.rsi
     state: ncwl
