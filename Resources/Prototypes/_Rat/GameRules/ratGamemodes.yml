@@ -52,12 +52,12 @@
 #        posY: -3001
 #        randomOffsetX: 3000
 #        randomOffsetY: 3000
-      TribalHideout:
-        gameMapID: TribalHideout
-        posX: -4801
-        posY: -3601
-        randomOffsetX: 2000
-        randomOffsetY: 2000
+#      TribalHideout:
+#        gameMapID: TribalHideout
+#        posX: -4801
+#        posY: -3601
+#        randomOffsetX: 2000
+#        randomOffsetY: 2000
       #      Aasim: #reenable whenever TAP is gameplay ready
       #        gameMapID: Aasim
       #        posX: 4500
