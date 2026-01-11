@@ -78,7 +78,7 @@
     сохранения корпоративных интересов» и «Управления конкурентным партнёрством».
   color: "#9FED58"
   weight: 5
-  enabled: false
+  enabled: 
   icon:
     sprite: /Textures/_Crescent/faction_icons.rsi
     state: shi

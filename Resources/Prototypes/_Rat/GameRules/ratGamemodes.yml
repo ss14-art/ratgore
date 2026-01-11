@@ -23,12 +23,6 @@
         posY: -6000
         IFFColor: Orange
         IFFFaction: NCWL
-      Dochenskaya:
-        gameMapID: Dochenskaya
-        posX: 5249
-        posY: 6599
-        IFFColor: IndianRed
-        IFFFaction: TFSC
       GliessSanto:
         gameMapID: GliessSanto
         posX: 0
@@ -66,18 +60,6 @@
       #        gameMapID: Wisp #CyberdawnMothership
       #        posX: 1500
       #        posY: 3600
-      Jackal:
-        gameMapID: Jackal
-        posX: -8501
-        posY: -4501
-        IFFColor: IndianRed
-        IFFFaction: TFSC
-      Dawnbreaker:
-        gameMapID: Dawnbreaker
-        posX: -6501
-        posY: -2501
-        IFFColor: IndianRed
-        IFFFaction: TFSC
       Graveyard:
         gameMapID: Graveyard
         posX: 4199
@@ -140,12 +122,6 @@
         gameMapID: TribalScrapyard
         posX: 3500
         posY: -5401
-      Hayes:
-        gameMapID: Hayes
-        posX: 3999
-        posY: 2799
-        IFFColor: IndianRed
-        IFFFaction: TFSC
       AncientBattlefield:
         gameMapID: AncientBattlefield
         posX: 599
