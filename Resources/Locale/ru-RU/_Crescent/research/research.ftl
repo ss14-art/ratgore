@@ -19,9 +19,9 @@ research-technology-compakt = Лазерный гатлинг
 
 # precursor
 
-research-technology-weaponsnanolarge = Тяжёлое вооружение NanoTrasen
-research-technology-weaponsnanosmall = Лёгкое вооружение NanoTrasen
-research-technology-shuttleweps = Корабельное вооружение NanoTrasen
+research-technology-weaponsnanolarge = Тяжёлое вооружение НаноТрейзен
+research-technology-weaponsnanosmall = Лёгкое вооружение НаноТрейзен
+research-technology-shuttleweps = Корабельное вооружение НаноТрейзен
 
 # syndicate
 
@@ -37,7 +37,7 @@ research-technology-wolf = Линкор каперов
 
 # commie
 
-research-technology-commieclothes = Стандартные текстильные изделия Союза
+research-technology-commieclothes = Текстильные изделия Союза
 research-technology-commiearmor = Стандартная броня Союза
 research-technology-heavycommiearmor = Тяжёлая броня Союза
 research-technology-commielightarms = Лёгкое оружие Союза
@@ -73,16 +73,16 @@ research-technology-anathema = Имперский лёгкий авианосе�
 # shi
 
 research-technology-corpavionics = Корпоративная авиация
-research-technology-corpbudgetarms = Бюджетная линия вооружения
-research-technology-corpmining = Корпоративные решения для добычи
-research-technology-corpshuttleweapons = Корпоративная линия вооружения шаттлов
-research-technology-corphev = Костюм для опасных сред Shinohara
-research-technology-corpcorpsec = Линия CORPSEC Shinohara
-research-technology-corpballistics = Баллистическая линия Shinohara
-research-technology-corpartillery = Тяжёлая артиллерия Shinohara
-research-technology-corphighsec = Линия HIGHSEC Shinohara
-research-technology-corpsmartgun = Линия умных пистолетов Shinohara
-research-technology-corpsword = Линия ледяных клинков Shinohara
+research-technology-corpbudgetarms = Бюджетное вооружение
+research-technology-corpmining = Корпоративная добыча ресурсов
+research-technology-corpshuttleweapons = Корпоративное вооружение шаттлов
+research-technology-corphev = Костюм для опасных сред Синогары
+research-technology-corpcorpsec = КорпБез Синогары
+research-technology-corpballistics = Баллистическа Синогары
+research-technology-corpartillery = Тяжёлая артиллерия Синогары
+research-technology-corphighsec = ТяжБез Синогары
+research-technology-corpsmartgun = Пистолеты Синогары
+research-technology-corpsword = Клинки Синогары
 
 # civ
 

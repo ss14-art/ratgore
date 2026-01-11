@@ -80,7 +80,18 @@
       enum.RevivalContractUiKey.Key: # Goobstation - Devil
         type: RevivalContractBoundUserInterface
         requireInputValidation: false
-
+# Rat start
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: RadarConsole
+    maxRange: 1024
+    followEntity: true
+    keepWorldAligned: true
+  - type: IntrinsicUI
+    uis:
+      enum.RadarConsoleUiKey.Key:
+        toggleAction: ActionAGhostShowRadar
+# Rat end
 
 # proto for player ghosts specifically
 - type: entity

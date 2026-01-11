@@ -1,44 +1,44 @@
 shuttle-pilot-start = Пилотирование начато
 shuttle-pilot-end = Пилотирование прекращено
-shuttle-console-in-ftl = Невозможно войти в БСС когда уже в БСС!
-shuttle-console-mass = Too large to FTL
-shuttle-console-prevent = Вы не можете управлять этим кораблём.
+shuttle-console-in-ftl = В данный момент в БСС
+shuttle-console-mass = Слишком большая дистанция для БСС
+shuttle-console-prevent = Вы не можете пилотировать этот корабль
 
-# NAV
+# NAV (Навигация)
 
 shuttle-console-display-label = Дисплей
-shuttle-console-position = Местопол:
-shuttle-console-orientation = Ориент:
-shuttle-console-linear-velocity = Линейн. скр:
-shuttle-console-angular-velocity = Угл. скр:
+shuttle-console-position = Позиция:
+shuttle-console-orientation = Ориентация:
+shuttle-console-linear-velocity = Линейная:
+shuttle-console-angular-velocity = Угловая:
 shuttle-console-unknown = Неизвестно
-shuttle-console-iff-label = "{ $name } ({ $distance }м)
-shuttle-console-exclusion = Exclusion area
-shuttle-console-nav-settings = Settings
-shuttle-console-iff-toggle = Показать "свой-чужой"
-shuttle-console-dock-toggle = Показать стыковку
+shuttle-console-iff-label = {$name} ({$distance} м)
+shuttle-console-exclusion = Запретная зона
+shuttle-console-nav-settings = Настройки
+shuttle-console-iff-toggle = Показывать «свой-чужой»
+shuttle-console-dock-toggle = Показывать стыковку
 
-# MAP
+# MAP (Карта)
 
-shuttle-console-ftl-label = FTL Status
-shuttle-console-ftl-state-Available = Available
-shuttle-console-ftl-state-Starting = Starting
-shuttle-console-ftl-state-Travelling = Travelling
-shuttle-console-ftl-state-Arriving = Arriving
-shuttle-console-ftl-state-Cooldown = Cooldown
-shuttle-console-map-settings = Settings
-shuttle-console-ftl-button = FTL
-shuttle-console-map-rebuild = Scan for objects
-shuttle-console-map-beacons = Show beacons
-shuttle-console-no-signal = No signal
-shuttle-console-map-objects = Sector objects
+shuttle-console-ftl-label = Статус БСС
+shuttle-console-ftl-state-Available = Доступен
+shuttle-console-ftl-state-Starting = Запуск
+shuttle-console-ftl-state-Travelling = В пути
+shuttle-console-ftl-state-Arriving = Прибытие
+shuttle-console-ftl-state-Cooldown = Охлаждение
+shuttle-console-map-settings = Настройки
+shuttle-console-ftl-button = БСС
+shuttle-console-map-rebuild = Сканировать объекты
+shuttle-console-map-beacons = Показывать маяки
+shuttle-console-no-signal = Нет сигнала
+shuttle-console-map-objects = Объекты сектора
 
-# DOCK
+# DOCK (Стыковка)
 
-shuttle-console-docked = { $index } (Пристыкован)
-shuttle-console-view = View
-shuttle-console-undock = Отстыковать
-shuttle-console-dock = Dock
-shuttle-console-docks-label = Docks
-shuttle-console-undock-fail = Undocking failed
-shuttle-console-dock-fail = Docking failed
+shuttle-console-docked = Пристыкованные объекты
+shuttle-console-view = Вид
+shuttle-console-undock = Отстыковаться
+shuttle-console-dock = Пристыковаться
+shuttle-console-docks-label = Стыковочные места
+shuttle-console-undock-fail = Ошибка отстыковки
+shuttle-console-dock-fail = Ошибка стыковки

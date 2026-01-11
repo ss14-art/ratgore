@@ -7,7 +7,7 @@ examine-headset-default-channel =
         [Supply] Снабжение
         [Command] Командование
         [CentCom] ЦентКом
-        [Common] Общий
+        [Common] Длинная волна 2,5 км
         [Engineering] Инженерный
         [Science] Научный
         [Medical] Медицинский
@@ -15,7 +15,7 @@ examine-headset-default-channel =
         [Service] Сервисный
        *[other] _
     }[/color].
-chat-radio-common = Общий
+chat-radio-common = Длинная волна 2,5 км
 chat-radio-centcom = ЦентКом
 chat-radio-command = Командование
 chat-radio-engineering = Инженерный

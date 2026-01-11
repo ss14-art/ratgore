@@ -23,7 +23,7 @@
 - type: radioChannel
   id: Hunter
   name: chat-radio-hunter
-  keycode: "ш"
+  keycode: "х"
   frequency: 6219
   color: "#4a6741"
 
@@ -37,7 +37,7 @@
 - type: radioChannel
   id: EmpireCiv
   name: chat-radio-empireciv
-  keycode: "т"
+  keycode: "м"
   frequency: 6223
   color: "#cbc3e3"
 

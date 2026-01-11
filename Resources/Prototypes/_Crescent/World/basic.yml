@@ -96,8 +96,8 @@
   priority: 9000
   minX: 7
   maxX: 16
-  minY: -75
-  maxY: -66
+  minY: -50
+  maxY: -40
   noiseRanges: {}
   chunkComponents:
   - type: DebrisFeaturePlacerController
