@@ -148,3 +148,10 @@ Entries:
   id: 21
   time: '2026-01-11T14:50:27Z'
   url: null
+- author: Odleer
+  changes:
+    - message: Поправил цены
+      type: Tweak
+  id: 22
+  time: '2026-01-13T06:47:03Z'
+  url: null
