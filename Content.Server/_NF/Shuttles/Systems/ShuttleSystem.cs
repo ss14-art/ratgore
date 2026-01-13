@@ -15,6 +15,7 @@ public sealed partial class ShuttleSystem
     private void NfInitialize()
     {
         SubscribeLocalEvent<ShuttleConsoleComponent, SetInertiaDampeningRequest>(OnSetInertiaDampening);
+        SubscribeLocalEvent<ShuttleConsoleComponent, SetMaxShuttleSpeedRequest>(OnSetMaxShuttleSpeed);
         _spaceFrictionStrength = _cfg.GetCVar(CCVars.SpaceFrictionStrength);
         _anchorDampeningStrength = _cfg.GetCVar(CCVars.AnchorDampeningStrength);
     }
@@ -48,6 +49,29 @@ public sealed partial class ShuttleSystem
 
         _physics.SetLinearDamping(transform.GridUid.Value, physicsComponent, linearDampeningStrength);
         _physics.SetAngularDamping(transform.GridUid.Value, physicsComponent, angularDampeningStrength);
+        _console.RefreshShuttleConsoles(transform.GridUid.Value);
+    }
+
+    private void OnSetMaxShuttleSpeed(EntityUid uid, ShuttleConsoleComponent component, SetMaxShuttleSpeedRequest args)
+    {
+        // Ensure that the entity requested is a valid shuttle
+        if (!EntityManager.TryGetComponent(uid, out TransformComponent? transform) ||
+            !transform.GridUid.HasValue ||
+            !EntityManager.TryGetComponent(transform.GridUid, out ShuttleComponent? shuttleComponent))
+        {
+            return;
+        }
+
+        // Mono - fix
+        var maxSpeed = Math.Max(args.MaxSpeed, 0f);
+        
+        // Don't do anything if the value didn't change
+        if (Math.Abs(shuttleComponent.SetMaxVelocity - maxSpeed) < 0.01f)
+            return;
+            
+        shuttleComponent.SetMaxVelocity = maxSpeed;
+        
+        // Refresh the shuttle consoles to update the UI
         _console.RefreshShuttleConsoles(transform.GridUid.Value);
     }
 

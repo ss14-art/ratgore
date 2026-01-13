@@ -10,9 +10,13 @@ namespace Content.Client.Shuttles.UI
     {
         private readonly ButtonGroup _buttonGroup = new();
         public event Action<NetEntity?, InertiaDampeningMode>? OnInertiaDampeningModeChanged;
+        public event Action<NetEntity?, float>? OnMaxShuttleSpeedChanged;
 
         private void NfInitialize()
         {
+
+            MaximumShuttleSpeedValue.GetChild(0).GetChild(1).Margin = new Thickness(8, 0, 0, 0);
+            MaximumShuttleSpeedValue.OnValueChanged += args => OnMaxSpeedChanged(args);
 
             DampenerOff.OnPressed += _ => SwitchDampenerMode(InertiaDampeningMode.Off);
             DampenerOn.OnPressed += _ => SwitchDampenerMode(InertiaDampeningMode.Dampened);
@@ -37,6 +41,12 @@ namespace Content.Client.Shuttles.UI
             DampenerOff.Pressed = NavRadar.DampeningMode == InertiaDampeningMode.Off;
             DampenerOn.Pressed = NavRadar.DampeningMode == InertiaDampeningMode.Dampened;
             AnchorOn.Pressed = NavRadar.DampeningMode == InertiaDampeningMode.Anchored;
+        }
+
+        private void OnMaxSpeedChanged(int value)
+        {
+            _entManager.TryGetNetEntity(_shuttleEntity, out var shuttle);
+            OnMaxShuttleSpeedChanged?.Invoke(shuttle, value);
         }
     }
 }

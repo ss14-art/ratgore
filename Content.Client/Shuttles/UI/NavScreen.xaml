@@ -123,5 +123,16 @@
                                      Text="{controls:Loc 'Renaming mode'}"
                                      TextAlign="Center"
                                      ToggleMode="True"/>
+
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumShuttleSpeedBox">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-maximum-speed'}"/>
+                        <controls:SliderIntInput Name="MaximumShuttleSpeedValue"
+                                                 Access="Public"
+                                                 MinValue="0"
+                                                 MaxValue="50"
+                                                 Value="50"
+                                                 HorizontalExpand="True"/>
                     </controls:BoxContainer>
+                    
                 </controls:BoxContainer>
+</controls:BoxContainer>
