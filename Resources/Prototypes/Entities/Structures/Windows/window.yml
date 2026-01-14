@@ -13,7 +13,7 @@
       Brute:
         collection: GlassSmack
   - type: WallMount
-    arc: 360 # interact despite grilles
+    arc: 360
   - type: Tag
     tags:
       - ForceFixRotations
@@ -22,9 +22,7 @@
   - type: Sprite
     drawdepth: WallTops
     sprite: _Crescent/Structures/newWindow.rsi
-  - type: Icon
-    sprite: _Crescent/Structures/newWindow.rsi
-    state: windowfull
+    state: window
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -50,7 +48,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+        damage: 150
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -91,6 +89,7 @@
   - type: InteractionVerbs
     allowedVerbs:
     - KnockOn
+
 
 - type: entity
   parent: Window
