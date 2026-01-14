@@ -9,9 +9,6 @@
   - type: SpeedLoader
   - type: BallisticAmmoProvider
     mayTransfer: true
-    whitelist:
-      tags:
-        - CartridgeLightRifle
     capacity: 5
     proto: CartridgeLightRifle
   - type: Sprite
