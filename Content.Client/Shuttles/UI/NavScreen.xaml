@@ -2,129 +2,220 @@
               HorizontalExpand="True"
               xmlns:controls="https://spacestation14.io"
               xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
-              xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls">
-                <ui:ShuttleNavControl Name="NavRadar"
-                                 MouseFilter="Stop"
-                                 VerticalAlignment="Stretch"
-                                 VerticalExpand="True"
-                                 HorizontalExpand="True"
-                                 Margin="5 4 10 5"/>
-                <!-- Nav controls -->
-                <controls:BoxContainer Name="RightDisplayNav"
-                      VerticalAlignment="Top"
-                      HorizontalAlignment="Right"
-                      VerticalExpand="True"
-                      MinWidth="256"
-                      MaxWidth="256"
-                      Margin="5 0 5 5"
-                      Orientation="Vertical">
-                    <controls1:StripeBack
-                        MinSize="48 48">
-                        <controls:Label Name="NavDisplayLabel" Text="{controls:Loc 'shuttle-console-display-label'}"
-                               VerticalExpand="True"
-                               HorizontalAlignment="Center"/>
-                    </controls1:StripeBack>
-                    <controls:GridContainer Columns="2"
-                                   HorizontalAlignment="Stretch"
-                                   VerticalAlignment="Top"
+              xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
+              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    
+    <ui:ShuttleNavControl Name="NavRadar"
+                     MouseFilter="Stop"
+                     VerticalAlignment="Stretch"
+                     VerticalExpand="True"
+                     HorizontalExpand="True"
+                     Margin="3 3 3 3"/>
+    
+    <!-- Nav controls -->
+    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="3 3 3 3">
+        <controls:PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BorderThickness="3" BorderColor="#525252" BackgroundColor="#3d474d"/>
+        </controls:PanelContainer.PanelOverride>
+        
+        <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="3 3 3 3">
+            <controls:PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BorderThickness="3" BorderColor="#333333" BackgroundColor="#181818"/>
+            </controls:PanelContainer.PanelOverride>
+            
+            <controls:BoxContainer Name="RightDisplayNav"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center"
+                  VerticalExpand="True"
+                  MinWidth="256"
+                  MaxWidth="256"
+                  Margin="3 3 3 3"
+                  Orientation="Vertical">
+                
+                <!-- Display Label -->
+                <controls1:StripeBack MinSize="32 32">
+                    <controls:Label Name="NavDisplayLabel" Text="{controls:Loc 'shuttle-console-display-label'}"
+                           HorizontalAlignment="Center"/>
+                </controls1:StripeBack>
+                
+                <!-- Information Display with nested borders -->
+                <controls:PanelContainer HorizontalExpand="True" Margin="3 3 3 3">
+                    <controls:PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="3" BorderColor="#333333" BackgroundColor="#141414"/>
+                    </controls:PanelContainer.PanelOverride>
+                    
+                    <controls:PanelContainer HorizontalExpand="True" Margin="3 3 3 3">
+                        <controls:PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="3" BorderColor="#151515" BackgroundColor="#050505"/>
+                        </controls:PanelContainer.PanelOverride>
+                        
+                        <controls:GridContainer Columns="2"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Top"
+                                       HorizontalExpand="True"
+                                       Margin="3 3 3 3"
+                                       VSeparationOverride="3"
+                                       Name="ReadonlyDisplay">
+                            <controls:Label Text="Ship IFF:" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="ShipName"
+                                    Text="No IFF"
+                                    HorizontalExpand="True"
+                                    Align="Right"
+                                    FontColorOverride="#00ff2a"/>
+                            <controls:Label Text="{controls:Loc 'shuttle-console-position'}" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="GridPosition"
+                                   Text="0.0, 0.0"
                                    HorizontalExpand="True"
-                                   Margin="3"
-                                   Name="ReadonlyDisplay">
-                        <controls:Label Text="Ship IFF:"/>
-                        <controls:Label Name="ShipName"
-                                        Text="No IFF"
-                                        HorizontalExpand="True"
-                                        Align="Right"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-position'}"/>
-                        <controls:Label Name="GridPosition"
-                               Text="0.0, 0.0"
-                               HorizontalExpand="True"
-                               Align="Right"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-orientation'}"/>
-                        <controls:Label Name="GridOrientation"
-                               Text="0.0"
-                               HorizontalExpand="True"
-                               Align="Right"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-linear-velocity'}"/>
-                        <controls:Label Name="GridLinearVelocity"
-                               Text="0.0, 0.0"
-                               HorizontalExpand="True"
-                               Align="Right"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-angular-velocity'}"/>
-                        <controls:Label Name="GridAngularVelocity"
-                               Text="0.0"
-                               HorizontalExpand="True"
-                               Align="Right"/>
-                    </controls:GridContainer>
-                    <controls1:StripeBack
-                        MinSize="48 48">
-                        <controls:Label Name="NavSettingsLabel" Text="{controls:Loc 'shuttle-console-nav-settings'}"
-                               VerticalExpand="True"
-                               HorizontalAlignment="Center"/>
-                    </controls1:StripeBack>
-                    <controls:Button Name="IFFToggle"
-                            Text="{controls:Loc 'shuttle-console-iff-toggle'}"
-                            TextAlign="Center"
-                            ToggleMode="True"/>
-                    <controls:Button Name="DockToggle"
-                            Text="{controls:Loc 'shuttle-console-dock-toggle'}"
-                            TextAlign="Center"
-                            ToggleMode="True"/>
-                    <!-- Frontier - Inertia dampener controls-->
+                                   Align="Right"
+                                   FontColorOverride="#00ff2a"/>
+                            <controls:Label Text="{controls:Loc 'shuttle-console-orientation'}" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="GridOrientation"
+                                   Text="0.0"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   FontColorOverride="#00ff2a"/>
+                            <controls:Label Text="{controls:Loc 'shuttle-console-linear-velocity'}" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="GridLinearVelocity"
+                                   Text="0.0, 0.0"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   FontColorOverride="#00ff2a"/>
+                            <controls:Label Text="{controls:Loc 'shuttle-console-angular-velocity'}" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="GridAngularVelocity"
+                                   Text="0.0"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   FontColorOverride="#00ff2a"/>
+                        </controls:GridContainer>
+                    </controls:PanelContainer>
+                </controls:PanelContainer>
+                
+                <!-- Settings Label -->
+                <controls1:StripeBack MinSize="32 32">
+                    <controls:Label Name="NavSettingsLabel" Text="{controls:Loc 'shuttle-console-nav-settings'}"
+                           HorizontalAlignment="Center"/>
+                </controls1:StripeBack>
+                
+                <!-- IFF and Dock Toggles -->
+                <controls:PanelContainer HorizontalExpand="True" Margin="3 3 3 3">
+                    <controls:PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="3" BorderColor="#333333" BackgroundColor="#181818"/>
+                    </controls:PanelContainer.PanelOverride>
+                    
+                    <controls:BoxContainer Orientation="Vertical" Margin="3 3 3 3">
+                        <controls:Button Name="IFFToggle"
+                                Text="{controls:Loc 'shuttle-console-iff-toggle'}"
+                                TextAlign="Center"
+                                StyleClasses="ButtonSquare"
+                                ToggleMode="True"
+                                MinSize="0 24"/>
+                        <controls:Button Name="DockToggle"
+                                Text="{controls:Loc 'shuttle-console-dock-toggle'}"
+                                TextAlign="Center"
+                                StyleClasses="ButtonSquare"
+                                ToggleMode="True"
+                                MinSize="0 24"/>
+                    </controls:BoxContainer>
+                </controls:PanelContainer>
+                
+                <!-- Inertia Dampener Controls -->
+                <controls:PanelContainer HorizontalExpand="True" Margin="3 3 3 3">
+                    <controls:PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="3" BorderColor="#333333" BackgroundColor="#181818"/>
+                    </controls:PanelContainer.PanelOverride>
+                    
                     <controls:BoxContainer Name="DampenerModeButtons"
                                   Orientation="Horizontal"
-                                  HorizontalAlignment="Stretch"
-                                  Margin="5">
+                                  Margin="3 3 3 3">
                         <controls:Button Name="DampenerOff"
                                          Text="{controls:Loc 'nav-screen-free'}"
                                          TextAlign="Center"
                                          ToggleMode="True"
-                                         MinWidth="82"
-                                         MaxWidth="82"/>
+                                         StyleClasses="ButtonSquare"
+                                         HorizontalExpand="True"
+                                         MinSize="60 24"/>
                         <controls:Button Name="DampenerOn"
                                          Text="{controls:Loc 'nav-screen-dampen'}"
                                          TextAlign="Center"
                                          ToggleMode="True"
-                                         MinWidth="82"
-                                         MaxWidth="82"/>
+                                         StyleClasses="ButtonSquare"
+                                         HorizontalExpand="True"
+                                         MinSize="60 24"/>
                         <controls:Button Name="AnchorOn"
                                          Text="{controls:Loc 'nav-screen-anchor'}"
                                          TextAlign="Center"
                                          ToggleMode="True"
-                                         MinWidth="82"
-                                         MaxWidth="82"/>
+                                         StyleClasses="ButtonSquare"
+                                         HorizontalExpand="True"
+                                         MinSize="60 24"/>
                     </controls:BoxContainer>
-                    <!--end Inertia dampener controls-->
-                    <!-- hullrot modules -->
-                    <controls:BoxContainer Name ="ButtonHolder" VerticalExpand="True" HorizontalExpand="False" Orientation="Vertical">
+                </controls:PanelContainer>
+                
+                <!-- Hullrot Modules -->
+                <controls:PanelContainer HorizontalExpand="True" Margin="3 3 3 3">
+                    <controls:PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="3" BorderColor="#333333" BackgroundColor="#181818"/>
+                    </controls:PanelContainer.PanelOverride>
+                    
+                    <controls:BoxContainer Name="ButtonHolder" 
+                                  Orientation="Vertical"
+                                  Margin="3 3 3 3">
                         <controls:Button Name="Group1"
                                          Text="{controls:Loc 'Module A'}"
                                          TextAlign="Center"
-                                         ToggleMode="False"/>
+                                         StyleClasses="ButtonSquare"
+                                         ToggleMode="False"
+                                         MinSize="0 24"/>
                         <controls:Button Name="Group2"
                                          Text="{controls:Loc 'Module B'}"
                                          TextAlign="Center"
-                                         ToggleMode="False"/>
+                                         StyleClasses="ButtonSquare"
+                                         ToggleMode="False"
+                                         MinSize="0 24"/>
                         <controls:Button Name="Group3"
                                          Text="{controls:Loc 'Module C'}"
                                          TextAlign="Center"
-                                         ToggleMode="False"/>
+                                         StyleClasses="ButtonSquare"
+                                         ToggleMode="False"
+                                         MinSize="0 24"/>
                         <controls:Button Name="Group4"
                                          Text="{controls:Loc 'Module D'}"
                                          TextAlign="Center"
-                                         ToggleMode="False"/>
+                                         StyleClasses="ButtonSquare"
+                                         ToggleMode="False"
+                                         MinSize="0 24"/>
                         <controls:Button Name="Group5"
                                          Text="{controls:Loc 'Module E'}"
                                          TextAlign="Center"
-                                         ToggleMode="False"/>
+                                         StyleClasses="ButtonSquare"
+                                         ToggleMode="False"
+                                         MinSize="0 24"/>
                     </controls:BoxContainer>
-
-                    <controls:Button Name="RenameButton"
-                                     Text="{controls:Loc 'Renaming mode'}"
-                                     TextAlign="Center"
-                                     ToggleMode="True"/>
-
-                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumShuttleSpeedBox">
+                </controls:PanelContainer>
+                
+                <!-- Rename Button -->
+                <controls:PanelContainer HorizontalExpand="True" Margin="3 3 3 3">
+                    <controls:PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="3" BorderColor="#333333" BackgroundColor="#181818"/>
+                    </controls:PanelContainer.PanelOverride>
+                    
+                    <controls:BoxContainer Orientation="Vertical" Margin="3 3 3 3">
+                        <controls:Button Name="RenameButton"
+                                         Text="{controls:Loc 'Renaming mode'}"
+                                         TextAlign="Center"
+                                         StyleClasses="ButtonSquare"
+                                         ToggleMode="True"
+                                         MinSize="0 24"/>
+                    </controls:BoxContainer>
+                </controls:PanelContainer>
+                
+                <!-- Maximum Shuttle Speed -->
+                <controls:PanelContainer HorizontalExpand="True" Margin="3 3 3 3">
+                    <controls:PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="3" BorderColor="#333333" BackgroundColor="#181818"/>
+                    </controls:PanelContainer.PanelOverride>
+                    
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumShuttleSpeedBox" Margin="3 3 3 3">
                         <controls:Label Text="{controls:Loc 'shuttle-console-maximum-speed'}"/>
                         <controls:SliderIntInput Name="MaximumShuttleSpeedValue"
                                                  Access="Public"
@@ -133,6 +224,9 @@
                                                  Value="50"
                                                  HorizontalExpand="True"/>
                     </controls:BoxContainer>
-                    
-                </controls:BoxContainer>
+                </controls:PanelContainer>
+                
+            </controls:BoxContainer>
+        </controls:PanelContainer>
+    </controls:PanelContainer>
 </controls:BoxContainer>
