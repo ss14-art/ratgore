@@ -32,7 +32,7 @@
       machine_parts: !type:Container
   - type: Gun
     fireOnDropChance: 0
-    projectileSpeed: 250
+    projectileSpeed: 95
     fireRate: 1.2
     selectedMode: FullAuto
     availableModes:
@@ -99,7 +99,7 @@
       machine_parts: !type:Container
   - type: Gun
     fireOnDropChance: 0
-    projectileSpeed: 200
+    projectileSpeed: 65
     fireRate: 5
     selectedMode: SemiAuto
     angleDecay: 45
@@ -166,7 +166,7 @@
       machine_parts: !type:Container
   - type: Gun
     fireOnDropChance: 0
-    projectileSpeed: 250
+    projectileSpeed: 95
     fireRate: 2.4
     selectedMode: SemiAuto
     angleDecay: 45
@@ -236,7 +236,7 @@
       ballistic-ammo: !type:Container
   - type: Gun
     fireOnDropChance: 0
-    projectileSpeed: 150
+    projectileSpeed: 30
     fireRate: 0.4
     angleDecay: 45
     minAngle: 0
@@ -320,7 +320,7 @@
       ballistic-ammo: !type:Container
   - type: Gun
     fireOnDropChance: 0
-    projectileSpeed: 300
+    projectileSpeed: 135
     fireRate: 1
     angleDecay: 45
     minAngle: 0
@@ -403,7 +403,7 @@
       gun_magazine: !type:ContainerSlot
   - type: Gun
     fireOnDropChance: 0
-    projectileSpeed: 250
+    projectileSpeed: 100
     fireRate: 0.3
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
@@ -494,7 +494,7 @@
   - type: Gun
     fireOnDropChance: 0
     fireRate: 2
-    projectileSpeed: 200
+    projectileSpeed: 80
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/50cal.ogg
     soundEmpty:
@@ -586,7 +586,7 @@
   - type: Gun
     fireOnDropChance: 0
     fireRate: 0.7
-    projectileSpeed: 200
+    projectileSpeed: 70
     selectedMode: Burst
     availableModes:
     - Burst
@@ -683,7 +683,7 @@
   - type: Gun
     fireOnDropChance: 0
     fireRate: 4
-    projectileSpeed: 250
+    projectileSpeed: 95
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
     soundEmpty:
@@ -760,7 +760,7 @@
   - type: Gun
     fireOnDropChance: 0
     fireRate: 0.1
-    projectileSpeed: 450
+    projectileSpeed: 135
     soundGunshot:
       path: /Audio/Effects/railfire.ogg
     soundEmpty:
@@ -859,7 +859,7 @@
   - type: Gun
     fireOnDropChance: 0
     fireRate: 12
-    projectileSpeed: 300
+    projectileSpeed: 135
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/vulcan.ogg
     soundEmpty:
@@ -960,7 +960,7 @@
     fireRate: 36
     maxAngle: 4
     minAngle: 0
-    projectileSpeed: 300
+    projectileSpeed: 135
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/vulcan.ogg
     soundEmpty:
@@ -1054,7 +1054,7 @@
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
   - type: Gun
     fireOnDropChance: 0
-    projectileSpeed: 250
+    projectileSpeed: 60
     fireRate: 3.4
     selectedMode: FullAuto
     availableModes:
