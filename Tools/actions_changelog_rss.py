@@ -30,7 +30,7 @@ CHANGELOG_RSS_KEY = os.environ.get("CHANGELOG_RSS_KEY")
 
 # Change these to suit your server settings
 # https://docs.fabfile.org/en/stable/getting-started.html#run-commands-via-connections-and-run
-SSH_HOST = "336929.senko.network"  # ИЗМЕНИТЕ: используйте IP или домен вашего сервера
+SSH_HOST = "rss.ss14.art"
 SSH_USER = "changelog-rss"
 SSH_PORT = 22
 RSS_FILE = "changelog.xml"
