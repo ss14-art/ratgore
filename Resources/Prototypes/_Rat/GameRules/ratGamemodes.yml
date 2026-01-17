@@ -32,7 +32,7 @@
       Countsman:
         gameMapID: Countsman
         posX: -4800
-        posY: 9000
+        posY: 6000
         IFFColor: Purple
         IFFFaction: DSM
       Dochenskaya:
@@ -134,6 +134,12 @@
         gameMapID: AncientBattlefield
         posX: 599
         posY: 7499
+      GliessSanto:
+        gameMapID: GliessSanto
+        posX: 0
+        posY: 0
+        IFFColor: White
+
 
 - type: gamePreset
   id: NcwlAndDsm
