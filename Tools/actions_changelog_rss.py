@@ -47,7 +47,7 @@ FEED_LANGUAGE    = "en-US"
 FEED_GUID_PREFIX = "ratgore-changelog-"
 FEED_URL         = "https://rss.ss14.art/changelog.xml"
 
-CHANGELOG_FILE = "Resources/Changelog/Changelog.yml"
+CHANGELOG_FILE = "Resources/Changelog/rat.yml"
 
 TYPES_TO_EMOJI = {
     "Fix":    "🐛",
