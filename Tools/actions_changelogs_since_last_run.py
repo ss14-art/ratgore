@@ -2,8 +2,7 @@
 
 """
 Sends updates to a Discord webhook for new changelog entries since the last GitHub Actions publish run.
-
-Automatically figures out the last run and changelog contents with the GitHub API.
+If there are no previous successful runs, it sends the entire changelog.
 """
 
 import itertools
@@ -19,7 +18,7 @@ DEBUG = False
 DEBUG_CHANGELOG_FILE_OLD = Path("Resources/Changelog/Old.yml")
 GITHUB_API_URL = os.environ.get("GITHUB_API_URL", "https://api.github.com")
 
-# https://discord.com/developers/docs/resources/webhook
+# Discord webhook settings
 DISCORD_SPLIT_LIMIT = 2000
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 
@@ -29,19 +28,14 @@ TYPES_TO_EMOJI = {"Fix": "🐛", "Add": "🆕", "Remove": "❌", "Tweak": "⚒�
 
 ChangelogEntry = dict[str, Any]
 
-
 def main():
     if not DISCORD_WEBHOOK_URL:
         print("Не найден URL вебхука Discord, пропускаем отправку")
         return
 
     if DEBUG:
-        # для отладки этого скрипта локально можно использовать
-        # отдельный локальный файл как старый ченджлог
         last_changelog_stream = DEBUG_CHANGELOG_FILE_OLD.read_text()
     else:
-        # при нормальном запуске в GitHub Actions workflow
-        # он получит старый ченджлог из GitHub API
         last_changelog_stream = get_last_changelog()
 
     last_changelog = yaml.safe_load(last_changelog_stream)
@@ -52,19 +46,15 @@ def main():
     message_lines = changelog_entries_to_message_lines(diff)
     send_message_lines(message_lines)
 
-
 def get_most_recent_workflow(
     sess: requests.Session, github_repository: str, github_run: str
 ) -> Any:
     workflow_run = get_current_run(sess, github_repository, github_run)
     past_runs = get_past_runs(sess, workflow_run)
-    for run in past_runs["workflow_runs"]:
-        # Первый успешный прошлый запуск, который не является текущим
-        if run["id"] == workflow_run["id"]:
-            continue
-
-        return run
-
+    for run in past_runs.get("workflow_runs", []):
+        if run["id"] != workflow_run["id"] and run["conclusion"] == "success":
+            return run
+    return None
 
 def get_current_run(
     sess: requests.Session, github_repository: str, github_run: str
@@ -75,16 +65,11 @@ def get_current_run(
     resp.raise_for_status()
     return resp.json()
 
-
 def get_past_runs(sess: requests.Session, current_run: Any) -> Any:
-    """
-    Получить все успешные запуски workflow до текущего
-    """
     params = {"status": "success", "created": f"<={current_run['created_at']}"}
     resp = sess.get(f"{current_run['workflow_url']}/runs", params=params)
     resp.raise_for_status()
     return resp.json()
-
 
 def get_last_changelog() -> str:
     github_repository = os.environ["GITHUB_REPOSITORY"]
@@ -93,28 +78,27 @@ def get_last_changelog() -> str:
 
     session = requests.Session()
     session.headers["Authorization"] = f"Bearer {github_token}"
-    session.headers["Accept"] = "Accept: application/vnd.github+json"
+    session.headers["Accept"] = "application/vnd.github+json"
     session.headers["X-GitHub-Api-Version"] = "2022-11-28"
 
-    most_recent = get_most_recent_workflow(session, github_repository, github_run)
-    last_sha = most_recent["head_commit"]["id"]
-    print(f"Последний успешный publish job был {most_recent['id']}: {last_sha}")
-    last_changelog_stream = get_last_changelog_by_sha(
-        session, last_sha, github_repository
-    )
+    try:
+        most_recent = get_most_recent_workflow(session, github_repository, github_run)
+        if most_recent is None:
+            print("::warning ::Нет предыдущих успешных запусков. Будем использовать пустой changelog.")
+            return yaml.safe_dump({"Entries": []})
 
-    return last_changelog_stream
-
+        last_sha = most_recent["head_commit"]["id"]
+        print(f"Последний успешный publish job был {most_recent['id']}: {last_sha}")
+        last_changelog_stream = get_last_changelog_by_sha(session, last_sha, github_repository)
+        return last_changelog_stream
+    except Exception as e:
+        print(f"::warning ::Не удалось получить предыдущий changelog: {e}. Будем использовать пустой changelog.")
+        return yaml.safe_dump({"Entries": []})
 
 def get_last_changelog_by_sha(
     sess: requests.Session, sha: str, github_repository: str
 ) -> str:
-    """
-    Использовать GitHub API для получения предыдущей версии ченджлога YAML (сборки Actions загружаются с поверхностным клонированием)
-    """
-    params = {
-        "ref": sha,
-    }
+    params = {"ref": sha}
     headers = {"Accept": "application/vnd.github.raw"}
 
     resp = sess.get(
@@ -125,26 +109,19 @@ def get_last_changelog_by_sha(
     resp.raise_for_status()
     return resp.text
 
-
 def diff_changelog(
     old: dict[str, Any], cur: dict[str, Any]
 ) -> Iterable[ChangelogEntry]:
-    """
-    Найти все новые записи, отсутствующие в предыдущей публикации
-    """
-    old_entry_ids = {e["id"] for e in old["Entries"]}
+    old_entries = old.get("Entries", [])
+    old_entry_ids = {e["id"] for e in old_entries}
     return (e for e in cur["Entries"] if e["id"] not in old_entry_ids)
-
 
 def get_discord_body(content: str):
     return {
         "content": content,
-        # Не разрешать никакие упоминания
         "allowed_mentions": {"parse": []},
-        # SUPPRESS_EMBEDS
         "flags": 1 << 2,
     }
-
 
 def send_discord_webhook(lines: list[str]):
     content = "".join(lines)
@@ -167,9 +144,7 @@ def send_discord_webhook(lines: list[str]):
         print(f"Не удалось отправить сообщение: {e}")
         exit(1)
 
-
 def changelog_entries_to_message_lines(entries: Iterable[ChangelogEntry]) -> list[str]:
-    """Преобразовать структурированные записи ченджлога в список строк для форматированного сообщения"""
     message_lines = []
 
     for contributor_name, group in itertools.groupby(entries, lambda x: x["author"]):
@@ -185,7 +160,6 @@ def changelog_entries_to_message_lines(entries: Iterable[ChangelogEntry]) -> lis
                 emoji = TYPES_TO_EMOJI.get(change["type"], "❓")
                 message = change["message"]
 
-                # если одна строка длиннее лимита, её нужно обрезать
                 if len(message) > DISCORD_SPLIT_LIMIT:
                     message = message[: DISCORD_SPLIT_LIMIT - 100].rstrip() + " [...]"
 
@@ -199,9 +173,7 @@ def changelog_entries_to_message_lines(entries: Iterable[ChangelogEntry]) -> lis
 
     return message_lines
 
-
 def send_message_lines(message_lines: list[str]):
-    """Объединить список строк сообщения в фрагменты, каждый из которых меньше лимита длины сообщения Discord, и отправить их"""
     chunk_lines = []
     chunk_length = 0
 
@@ -222,7 +194,6 @@ def send_message_lines(message_lines: list[str]):
     if chunk_lines:
         print("Отправка финального ченджлога в Discord")
         send_discord_webhook(chunk_lines)
-
 
 if __name__ == "__main__":
     main()
