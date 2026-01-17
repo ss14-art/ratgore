@@ -29,22 +29,22 @@ CHANGELOG_RSS_KEY = os.environ.get("CHANGELOG_RSS_KEY")
 
 # Change these to suit your server settings
 # https://docs.fabfile.org/en/stable/getting-started.html#run-commands-via-connections-and-run
-SSH_HOST = "centcomm.spacestation14.io"
+SSH_HOST = "rss.ss14.art"
 SSH_USER = "changelog-rss"
 SSH_PORT = 22
 RSS_FILE = "changelog.xml"
 XSL_FILE = "stylesheet.xsl"
 HOST_KEYS = [
-    "AAAAC3NzaC1lZDI1NTE5AAAAIEE8EhnPjb3nIaAPTXAJHbjrwdGGxHoM0f1imCK0SygD"
+    "AAAAC3NzaC1lZDI1NTE5AAAAIGyqTLxqJlSzLyXSmvOO3fFGSMBJWizUw8by228syOps"
 ]
 
 # RSS feed parameters, change these
-FEED_TITLE       = "Space Station 14 Changelog"
-FEED_LINK        = "https://github.com/space-wizards/space-station-14/"
-FEED_DESCRIPTION = "Changelog for the official Wizard's Den branch of Space Station 14."
+FEED_TITLE       = "Ratgore Changelog"
+FEED_LINK        = "https://github.com/ss14-art/ratgore/"
+FEED_DESCRIPTION = "Changelog for the Ratgore branch of Space Station 14."
 FEED_LANGUAGE    = "en-US"
-FEED_GUID_PREFIX = "ss14-changelog-wizards-"
-FEED_URL         = "https://central.spacestation14.io/changelog.xml"
+FEED_GUID_PREFIX = "ratgore-changelog-"
+FEED_URL         = "https://rss.ss14.art/changelog.xml"
 
 CHANGELOG_FILE = "Resources/Changelog/Changelog.yml"
 
