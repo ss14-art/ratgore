@@ -15,7 +15,7 @@
 - type: startingGear
   id: LawyerGear
   subGear:
-  - LawyerPlasmamanGear
+   - LawyerPlasmamanGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitLawyerBlack  # TODO change jumpsuit to randomiser of the 4 variants
     back: ClothingBackpackLawyerFilled #DeltaV - stamp included
@@ -24,7 +24,7 @@
     ears: ClothingHeadsetSecurity
     pocket1: BookSecurity
     inhand:
-    - BriefcaseBrownFilled
+     - BriefcaseBrownFilled
     innerClothingSkirt: ClothingUniformJumpskirtLawyerBlack
     satchel: ClothingBackpackSatchelLawyerFilled #DeltaV - stamp included
     duffelbag: ClothingBackpackDuffelLawyerFilled #DeltaV - stamp included
