@@ -270,5 +270,14 @@
   id: 35
   time: '2026-01-17T19:14:03.0000000+00:00'
   url: https://github.com/ss14-art/ratgore/pull/2
+- author: cryals
+  changes:
+  - message: "\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u0430\u044F \u0441\u043A\
+      \u043E\u0440\u043E\u0441\u0442\u044C \u0430\u0434\u043C\u0438\u043D \u0433\u043E\
+      \u0441\u0442\u0430"
+    type: Tweak
+  id: 36
+  time: '2026-01-18T15:09:16.0000000+00:00'
+  url: https://github.com/ss14-art/ratgore/pull/3
 Name: Rat
 Order: -1
