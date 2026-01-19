@@ -1,0 +1,16 @@
+﻿- type: worldgenConfig
+  id: RatWorld
+  components:
+  - type: WorldController
+  - type: BiomeSelection
+    biomes:
+    - Failsafe
+    - RatAsteroidsStandardTaypanOne
+    - RatAsteroidsStandardTaypanTwo
+    - RatGraveyardWrecks
+    - RatBalreskaWrecks
+    - RatAncientBattlefieldWrecks
+    - RatHeartlandsWrecks
+    #- RatCraster
+    #- RatMarchbelt
+    #- RatDeepbelt

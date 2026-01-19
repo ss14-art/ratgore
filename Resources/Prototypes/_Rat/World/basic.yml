@@ -1,0 +1,527 @@
+﻿- type: spaceBiome
+  id: RatGliessSantoExclusionZone
+  priority: 10000
+  minX: -5
+  maxX: 5
+  minY: -5
+  maxY: 5
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityGraveyard
+    densityClip: false
+    randomCancelChance: 1.0
+
+- type: spaceBiome
+  id: RatGraveyardWrecks
+  priority: 9000
+  minX: 40
+  maxX: 52
+  minY: -30
+  maxY: -18
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityGraveyard
+  - type: NoiseDrivenDebrisSelector
+    noiseChannel: WreckGraveyard
+    debrisTable:
+    - id: ScrapDebrisSmall
+      prob: 1
+    - id: ScrapDebrisMedium
+      prob: 1
+    - id: ScrapDebrisLarge
+      prob: 1
+    - id: GargutWreckFull
+      prob: 1
+    - id: TriumWreck1
+      prob: 1
+    - id: TriumWreck2
+      prob: 1
+    - id: SuzWreck1
+      prob: 1
+    - id: SuzWreck2
+      prob: 1
+    - id: SuzWreck3
+      prob: 1
+    - id: NemWreck1
+      prob: 1
+    - id: NemWreck2
+      prob: 1
+    - id: IvarWreck1
+      prob: 1
+    - id: ClemWreck1
+      prob: 1
+    - id: ClemWreck2
+      prob: 1
+    - id: ClemWreck3
+      prob: 1
+    - id: ExhumerGag
+      prob: 1
+    - id: GazWreck1
+      prob: 1
+    - id: GazWreck2
+      prob: 1
+    - id: HamWreck1
+      prob: 1
+    - id: HindWreck1
+      prob: 1
+    - id: LodkWreck
+      prob: 1
+    - id: PraxWreck1
+      prob: 1
+    - id: QianWreck1
+      prob: 1
+    - id: SternWreck1
+      prob: 1
+    - id: WereGood
+      prob: 1
+    - id: MoloWreck1
+      prob: 1
+    - id: MusiWreck1
+      prob: 1
+    - id: RadAtee
+      prob: 0.1
+    - id: CorvWreck1
+      prob: 1
+    - id: CocWreck1
+      prob: 1
+  - type: NoiseRangeCarver
+    ranges:
+    - 0.4, 0.6
+    noiseChannel: Carver
+
+- type: spaceBiome
+  id: RatBalreskaWrecks
+  priority: 9000
+  minX: -35
+  maxX: -25
+  minY: -45
+  maxY: -35
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityGraveyard
+  - type: NoiseDrivenDebrisSelector
+    noiseChannel: WreckGraveyard
+    debrisTable:
+    - id: ScrapDebrisSmall
+      prob: 1
+    - id: ScrapDebrisMedium
+      prob: 1
+    - id: ScrapDebrisLarge
+      prob: 1
+    - id: GargutWreckFull
+      prob: 1
+    - id: TriumWreck1
+      prob: 1
+    - id: TriumWreck2
+      prob: 1
+    - id: SuzWreck1
+      prob: 1
+    - id: SuzWreck2
+      prob: 1
+    - id: SuzWreck3
+      prob: 1
+    - id: NemWreck1
+      prob: 1
+    - id: NemWreck2
+      prob: 1
+    - id: IvarWreck1
+      prob: 1
+    - id: ClemWreck1
+      prob: 1
+    - id: ClemWreck2
+      prob: 1
+    - id: ClemWreck3
+      prob: 1
+    - id: ExhumerGag
+      prob: 1
+    - id: GazWreck1
+      prob: 1
+    - id: GazWreck2
+      prob: 1
+    - id: HamWreck1
+      prob: 1
+    - id: HindWreck1
+      prob: 1
+    - id: LodkWreck
+      prob: 1
+    - id: PraxWreck1
+      prob: 1
+    - id: QianWreck1
+      prob: 1
+    - id: SternWreck1
+      prob: 1
+    - id: WereGood
+      prob: 1
+    - id: MoloWreck1
+      prob: 1
+    - id: MusiWreck1
+      prob: 1
+    - id: RadAtee
+      prob: 0.1
+    - id: CorvWreck1
+      prob: 1
+    - id: CocWreck1
+      prob: 1
+  - type: NoiseRangeCarver
+    ranges:
+    - 0.4, 0.6
+    noiseChannel: Carver
+
+- type: spaceBiome
+  id: RatAncientBattlefieldWrecks
+  priority: 9000
+  minX: 17
+  maxX: 21
+  minY: 20
+  maxY: 26
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityGraveyard
+  - type: NoiseDrivenDebrisSelector
+    noiseChannel: WreckGraveyard
+    debrisTable:
+    - id: GargutWreckFull
+      prob: 1
+    - id: TriumWreck1
+      prob: 1
+    - id: TriumWreck2
+      prob: 1
+    - id: SuzWreck1
+      prob: 1
+    - id: SuzWreck2
+      prob: 1
+    - id: SuzWreck3
+      prob: 1
+    - id: NemWreck1
+      prob: 1
+    - id: NemWreck2
+      prob: 1
+    - id: IvarWreck1
+      prob: 1
+    - id: ClemWreck1
+      prob: 1
+    - id: ClemWreck2
+      prob: 1
+    - id: ClemWreck3
+      prob: 1
+    - id: ExhumerGag
+      prob: 1
+    - id: GazWreck1
+      prob: 1
+    - id: GazWreck2
+      prob: 1
+    - id: HamWreck1
+      prob: 1
+    - id: HindWreck1
+      prob: 1
+    - id: LodkWreck
+      prob: 1
+    - id: PraxWreck1
+      prob: 1
+    - id: QianWreck1
+      prob: 1
+    - id: SternWreck1
+      prob: 1
+    - id: WereGood
+      prob: 1
+    - id: MoloWreck1
+      prob: 1
+    - id: MusiWreck1
+      prob: 1
+    - id: RadAtee
+      prob: 0.1
+    - id: CorvWreck1
+      prob: 1
+    - id: CocWreck1
+      prob: 1
+  - type: NoiseRangeCarver
+    ranges:
+    - 0.4, 0.6
+    noiseChannel: Carver
+
+- type: spaceBiome
+  id: RatHeartlandsWrecks
+  priority: 9000
+  minX: -33
+  maxX: -23
+  minY: -15
+  maxY: -5
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityGraveyard
+  - type: NoiseDrivenDebrisSelector
+    noiseChannel: WreckGraveyard
+    debrisTable:
+    - id: ScrapDebrisLarge
+      prob: 1
+    - id: GargutWreckFull
+      prob: 1
+    - id: TriumWreck1
+      prob: 1
+    - id: TriumWreck2
+      prob: 1
+    - id: SuzWreck1
+      prob: 1
+    - id: SuzWreck2
+      prob: 1
+    - id: SuzWreck3
+      prob: 1
+    - id: NemWreck1
+      prob: 1
+    - id: NemWreck2
+      prob: 1
+    - id: IvarWreck1
+      prob: 1
+    - id: ClemWreck1
+      prob: 1
+    - id: ClemWreck2
+      prob: 1
+    - id: ClemWreck3
+      prob: 1
+    - id: ExhumerGag
+      prob: 1
+    - id: GazWreck1
+      prob: 1
+    - id: GazWreck2
+      prob: 1
+    - id: HamWreck1
+      prob: 1
+    - id: HindWreck1
+      prob: 1
+    - id: LodkWreck
+      prob: 1
+    - id: PraxWreck1
+      prob: 1
+    - id: QianWreck1
+      prob: 1
+    - id: SternWreck1
+      prob: 1
+    - id: WereGood
+      prob: 1
+    - id: MoloWreck1
+      prob: 1
+    - id: MusiWreck1
+      prob: 1
+    - id: RadAtee
+      prob: 0.1
+    - id: CorvWreck1
+      prob: 1
+    - id: CocWreck1
+      prob: 1
+  - type: NoiseRangeCarver
+    ranges:
+    - 0.4, 0.6
+    noiseChannel: Carver
+
+- type: spaceBiome
+  id: RatAsteroidsStandardTaypanOne
+  priority: 9000
+  minX: -12
+  maxX: -2
+  minY: -25
+  maxY: -15
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: Density
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: AsteroidDebrisNFIceMedium
+      prob: 0.1
+    - id: AsteroidDebrisNFLarge
+      prob: 0.2
+    - id: AsteroidDebrisNFChromiteLarge
+      prob: 0.1
+    - id: AsteroidRockDebrisNFLarger
+      prob: 0.1
+    - id: AsteroidRockDebrisNFHuge
+      prob: 0.2
+    - id: AsteroidDebrisNFLarger
+      prob: 0.3
+    - id: AsteroidDebrisNFIceLarger
+      prob: 0.3
+    - id: AsteroidDebrisNFHuge
+      prob: 0.15
+    - id: AsteroidDebrisNFIceHuge
+      prob: 0.15
+    - id: AsteroidSalvageNFSmall
+      prob: 0.1
+    - id: AsteroidSalvageNFIceSmall
+      prob: 0.1
+    - id: AsteroidSalvageNFMedium
+      prob: 0.08
+    - id: AsteroidSalvageNFChromiteMedium
+      prob: 0.08
+    - id: AsteroidSalvageNFLarge
+      prob: 0.05
+    - id: AsteroidSalvageNFIceLarge
+      prob: 0.05
+    - id: AsteroidSalvageNFHuge
+      prob: 0.03
+    - id: AsteroidSalvageNFIceHuge
+      prob: 0.03
+    - id: ExhumerGag
+      prob: 0.01
+
+- type: spaceBiome
+  id: RatAsteroidsStandardTaypanTwo
+  priority: 9000
+  minX: -20
+  maxX: -10
+  minY: 15
+  maxY: 25
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: Density
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: AsteroidDebrisNFIceMedium
+      prob: 0.1
+    - id: AsteroidDebrisNFLarge
+      prob: 0.2
+    - id: AsteroidDebrisNFChromiteLarge
+      prob: 0.1
+    - id: AsteroidRockDebrisNFLarger
+      prob: 0.1
+    - id: AsteroidRockDebrisNFHuge
+      prob: 0.2
+    - id: AsteroidDebrisNFLarger
+      prob: 0.3
+    - id: AsteroidDebrisNFIceLarger
+      prob: 0.3
+    - id: AsteroidDebrisNFHuge
+      prob: 0.15
+    - id: AsteroidDebrisNFIceHuge
+      prob: 0.15
+    - id: AsteroidSalvageNFSmall
+      prob: 0.1
+    - id: AsteroidSalvageNFIceSmall
+      prob: 0.1
+    - id: AsteroidSalvageNFMedium
+      prob: 0.08
+    - id: AsteroidSalvageNFChromiteMedium
+      prob: 0.08
+    - id: AsteroidSalvageNFLarge
+      prob: 0.05
+    - id: AsteroidSalvageNFIceLarge
+      prob: 0.05
+    - id: AsteroidSalvageNFHuge
+      prob: 0.03
+    - id: AsteroidSalvageNFIceHuge
+      prob: 0.03
+    - id: ExhumerGag
+      prob: 0.01
+
+- type: spaceBiome
+  id: RatCraster
+  priority: 9000
+  minX: -87
+  maxX: -78
+  minY: 7
+  maxY: 16
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: Density
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: AsteroidDebrisNFChromiteLarge
+      prob: 0.6
+    - id: AsteroidDebrisNFChromiteLarger
+      prob: 0.3
+    - id: AsteroidDebrisNFChromiteHuge
+      prob: 0.15
+    - id: AsteroidSalvageNFChromiteSmall
+      prob: 0.1
+    - id: AsteroidSalvageNFChromiteMedium
+      prob: 0.08
+    - id: AsteroidSalvageNFChromiteLarge
+      prob: 0.05
+    - id: AsteroidSalvageNFChromiteHuge
+      prob: 0.03
+    - id: ExhumerGag
+      prob: 0.01
+
+- type: spaceBiome
+  id: RatMarchbelt
+  priority: 9000
+  minX: -62
+  maxX: -56
+  minY: 46
+  maxY: 52
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: Density
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: AsteroidDebrisNFIceMedium
+      prob: 0.5
+    - id: AsteroidSalvageNFSmall
+      prob: 0.5
+    - id: AsteroidSalvageNFIceSmall
+      prob: 0.5
+    - id: AsteroidSalvageNFMedium
+      prob: 0.5
+    - id: AsteroidSalvageNFHuge
+      prob: 0.03
+    - id: AsteroidSalvageNFIceHuge
+      prob: 0.03
+    - id: ExhumerGag
+      prob: 0.01
+
+- type: spaceBiome
+  id: RatDeepbelt
+  priority: 9000
+  minX: -20
+  maxX: -10
+  minY: -7
+  maxY: -1
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: Density
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: AsteroidDebrisNFIceMedium
+      prob: 0.1
+    - id: AsteroidDebrisNFLarge
+      prob: 0.2
+    - id: AsteroidDebrisNFChromiteLarge
+      prob: 0.1
+    - id: AsteroidRockDebrisNFLarger
+      prob: 0.1
+    - id: AsteroidRockDebrisNFHuge
+      prob: 0.2
+    - id: AsteroidDebrisNFLarger
+      prob: 0.3
+    - id: AsteroidDebrisNFIceLarger
+      prob: 0.3
+    - id: AsteroidDebrisNFChromiteHuge
+      prob: 0.15
+    - id: AsteroidSalvageNFChromiteSmall
+      prob: 0.1
+    - id: AsteroidSalvageNFChromiteMedium
+      prob: 0.08
+    - id: AsteroidSalvageNFIceSmall
+      prob: 0.1
+    - id: AsteroidSalvageNFMedium
+      prob: 0.08
+    - id: AsteroidSalvageNFChromiteMedium
+      prob: 0.08
+    - id: AsteroidSalvageNFLarge
+      prob: 0.05
+    - id: AsteroidSalvageNFIceLarge
+      prob: 0.05
+    - id: AsteroidSalvageNFHuge
+      prob: 0.03
+    - id: AsteroidSalvageNFIceHuge
+      prob: 0.03
+    - id: ExhumerGag
+      prob: 0.01
