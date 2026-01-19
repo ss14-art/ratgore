@@ -5,7 +5,7 @@
   - ratadventure
   name: Свободная игра
   showInVote: true
-  description: Последние дни Тайпана. Длится 2-4 часа. Маленькая карта.
+  description: Последние дни Тайпана. Длится 2-4 часа. 
   rules:
   - RatAdventure
   - HullrotEventScheduler
@@ -19,234 +19,104 @@
     gameMapsByID:
       PortBalreska:
         gameMapID: PortBalreska
-        posX: 1499
-        posY: -6000
+        posX: -4000
+        posY: -5000
         IFFColor: Orange
         IFFFaction: NCWL
-      Tatsumoto:
-        gameMapID: Tatsumoto
-        posX: 3000
-        posY: 0
-        IFFColor: White
-        IFFFaction: SHI
       Countsman:
         gameMapID: Countsman
-        posX: -4800
-        posY: 6000
-        IFFColor: Purple
+        posX: 3000
+        posY: 5000
+        IFFColor: "#C677A5"
         IFFFaction: DSM
+      GliessSanto:
+        gameMapID: GliessSanto
+        posX: 0
+        posY: 0
+        IFFColor: White
+      Tatsumoto:
+        gameMapID: Tatsumoto
+        posX: -4600
+        posY: 2000
+        IFFColor: White
+        IFFFaction: SHI
       Dochenskaya:
         gameMapID: Dochenskaya
-        posX: 5250
-        posY: 6600
+        posX: 4400
+        posY: -2000
         IFFColor: IndianRed
         IFFFaction: TFSC
       Jackal:
         gameMapID: Jackal
-        posX: -10500
+        posX: 6000
+        posY: -1000
+        IFFColor: IndianRed
+        IFFFaction: TFSC
+      Dawnbreaker:
+        gameMapID: Dawnbreaker
+        posX: 2500
+        posY: -6000
+        IFFColor: IndianRed
+        IFFFaction: TFSC
+      Hayes:
+        gameMapID: Hayes
+        posX: 5000
         posY: -4500
         IFFColor: IndianRed
         IFFFaction: TFSC
-
-#      Refuge:
-#        gameMapID: Refuge
-#        posX: -9001
-#        posY: -3001
-#        randomOffsetX: 3000
-#        randomOffsetY: 3000
-#      TribalHideout:
-#        gameMapID: TribalHideout
-#        posX: -4801
-#        posY: -3601
-#        randomOffsetX: 2000
-#        randomOffsetY: 2000
-      #      Aasim: #reenable whenever TAP is gameplay ready
-      #        gameMapID: Aasim
-      #        posX: 4500
-      #        posY: -4500
-      #      Wisp: #CyberdawnMothership whenever we have the map
-      #        gameMapID: Wisp #CyberdawnMothership
-      #        posX: 1500
-      #        posY: 3600
-      Graveyard:
-        gameMapID: Graveyard
-        posX: 4199
-        posY: 5699
-      StrandedShip:
-        gameMapID: StrandedShip
-        posX: 4274
-        posY: 5429
-        HideIFF: true
-      Fighter1:
-        gameMapID: Fighter1
-        posX: 4994
-        posY: 6329
-        HideIFF: true
-      Fighter2:
-        gameMapID: Fighter2
-        posX: 4981
-        posY: 6524
-        HideIFF: true
-      SolarSailorDerelict:
-        gameMapID: SolarSailorDerelict
-        posX: 5024
-        posY: 5204
-        HideIFF: true
-      ImperialHaulerWreck:
-        gameMapID: ImperialHaulerWreck
-        posX: 4979
-        posY: 6074
-        HideIFF: true
-      FogwreckedDerelict:
-        gameMapID: FogwreckedDerelict
-        posX: 1799
-        posY: -10501
-        HideIFF: true
-      Craster:
-        gameMapID: Craster
-        posX: -10501
-        posY: 1499
       Taypan1AsteroidBelt:
         gameMapID: Taypan1AsteroidBelt
         posX: -1000
-        posY: -6001
+        posY: -2500
       Taypan2AsteroidBelt:
         gameMapID: Taypan2AsteroidBelt
-        posX: 4049
-        posY: -2701
-      Marchbelt:
-        gameMapID: Marchbelt
-        posX: -7501
-        posY: 6299
-      Deepbelt:
-        gameMapID: Deepbelt
-        posX: -4801
-        posY: -601
-      FaintSignal:
-        gameMapID: FaintSignal
-        posX: 2999
-        posY: 1499
-      TribalScrapyard:
-        gameMapID: TribalScrapyard
+        posX: -2000
+        posY: 2600
+      TribalHideout:
+        gameMapID: TribalHideout
         posX: 3500
-        posY: -5401
+        posY: -2500
+        randomOffsetX: 1000
+        randomOffsetY: 1000
+      ImperialHaulerWreck:
+        gameMapID: ImperialHaulerWreck
+        posX: -2000
+        posY: 4000
+        HideIFF: true
+      Fighter1:
+        gameMapID: Fighter1
+        posX: 6330
+        posY: 4995
+        HideIFF: true
+      Fighter2:
+        gameMapID: Fighter2
+        posX: 6525
+        posY: 4982
+        HideIFF: true
       AncientBattlefield:
         gameMapID: AncientBattlefield
-        posX: 599
-        posY: 7499
-      GliessSanto:
-        gameMapID: GliessSanto
-        posX: 0
-        posY: 0
-        IFFColor: White
-
-
-- type: gamePreset
-  id: NcwlAndDsm
-  alias:
-  - ncwlanddsm
-  name: ЛРНП и БМС
-  showInVote: true
-  description: Последние дни Тайпана. Длится 2-4 часа. Маленькая карта.
-  rules:
-  - NcwlAndDsm
-  - HullrotEventScheduler
-
-- type: entity
-  id: NcwlAndDsm
-  parent: BaseGameRule
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: AdventureRule
-    gameMapsByID:
-      GliessSanto:
-        gameMapID: GliessSanto
-        posX: 0
-        posY: 0
-        IFFColor: White
-      PortBalreska:
-        gameMapID: PortBalreska
-        posX: 3000
-        posY: -6000
-        IFFColor: Orange
-        IFFFaction: NCWL
-      Countsman:
-        gameMapID: Countsman
-        posX: 5000
+        posX: 2500
+        posY: 3000
+      SolarSailorDerelict:
+        gameMapID: SolarSailorDerelict
+        posX: -4000
         posY: 1000
-        IFFColor: "#C677A5"
-        IFFFaction: DSM
-#      Refuge:
-#        gameMapID: Refuge
-#        posX: -9001
-#        posY: -3001
-#        randomOffsetX: 3000
-#        randomOffsetY: 3000
-#      TribalHideout:
-#        gameMapID: TribalHideout
-#        posX: -4801
-#        posY: -3601
-#        randomOffsetX: 2000
-#        randomOffsetY: 2000
-      #      Aasim: #reenable whenever TAP is gameplay ready
-      #        gameMapID: Aasim
-      #        posX: 4500
-      #        posY: -4500
-      #      Wisp: #CyberdawnMothership whenever we have the map
-      #        gameMapID: Wisp #CyberdawnMothership
-      #        posX: 1500
-      #        posY: 3600
-      Graveyard:
-        gameMapID: Graveyard
-        posX: 4199
-        posY: 5699
+        HideIFF: true
       StrandedShip:
         gameMapID: StrandedShip
-        posX: 4274
-        posY: 5429
-        HideIFF: true
-      Fighter1:
-        gameMapID: Fighter1
-        posX: 4994
-        posY: 6329
-        HideIFF: true
-      Fighter2:
-        gameMapID: Fighter2
-        posX: 4981
-        posY: 6524
-        HideIFF: true
-      SolarSailorDerelict:
-        gameMapID: SolarSailorDerelict
-        posX: 5024
-        posY: 5204
-        HideIFF: true
-      ImperialHaulerWreck:
-        gameMapID: ImperialHaulerWreck
-        posX: 4979
-        posY: 6074
+        posX: -1000
+        posY: -1000
         HideIFF: true
       FogwreckedDerelict:
         gameMapID: FogwreckedDerelict
-        posX: 1799
-        posY: -10501
+        posX: -10500
+        posY: 1800
         HideIFF: true
-      Taypan1AsteroidBelt:
-        gameMapID: Taypan1AsteroidBelt
-        posX: -1000
-        posY: -6001
-      Taypan2AsteroidBelt:
-        gameMapID: Taypan2AsteroidBelt
-        posX: 4049
-        posY: -2701
-      FaintSignal:
-        gameMapID: FaintSignal
-        posX: 2999
-        posY: 1499
       TribalScrapyard:
         gameMapID: TribalScrapyard
-        posX: 3500
-        posY: -5401
-      AncientBattlefield:
-        gameMapID: AncientBattlefield
-        posX: 599
-        posY: 7499
+        posX: -3500
+        posY: -1400
+      Graveyard:
+        gameMapID: Graveyard
+        posX: 6000
+        posY: -3000
