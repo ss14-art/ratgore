@@ -111,8 +111,8 @@
         Heat: 15
         Caustic: 15
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.9
+    sprintModifier: 0.9
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitMidshipman
   - type: StaticPrice
@@ -154,14 +154,14 @@
 
 - type: entity
   parent: [ClothingOuterHardsuitBase, StreeCredRedeemableLow]
-  id: ClothingOuterHardsuitCMMNew
-  name: new suit
+  id: ClothingOuterHardsuitCMMEnsing
+  name: Ensign Hardsuit
   description: new suit desc.
   components:
   - type: Sprite
-    sprite: _Crescent/Clothing/CMM/OuterClothing/new.rsi
+    sprite: _Crescent/Clothing/CMM/OuterClothing/ensign.rsi
   - type: Clothing
-    sprite: _Crescent/Clothing/CMM/OuterClothing/new.rsi
+    sprite: _Crescent/Clothing/CMM/OuterClothing/ensign.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -182,6 +182,6 @@
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitCMMNew
+    clothingPrototype: ClothingHeadHelmetHardsuitCMMEnsign
   - type: StaticPrice
     price: 1500

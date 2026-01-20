@@ -9,6 +9,7 @@ research-discipline-cyberdawn = Cyberdawn
 research-discipline-communard = Communard
 research-discipline-imperial = Imperial
 research-discipline-corporate = Shinohara
+research-discipline-minutemen = Minutemen
 
 # Node Names
 
@@ -36,6 +37,13 @@ research-technology-electronics-translators = Translators
 research-technology-electronics-materials = Basic Components
 research-technology-electronics-defense = Civilian Defense Pistols
 research-technology-electronics-terminus = Ogre Shocktrooper Armaments
+
+# MINUTEMEN
+research-technology-minutemen-hybrid-corvette = minutemen hybrid corvette
+research-technology-minutemen-light-crafts = minutemen light crafts
+research-technology-minutemen-heavy-artillery-destroyer = minutemen artillery destroyer
+research-technology-minutemen-light-missile-destroyer = minutemen missile destroyer
+research-technology-minutemen-hardsuit = minutemen combat EVA
 
 # INTERDYNE
 research-technology-interdyne-clothing = Basic Clothing

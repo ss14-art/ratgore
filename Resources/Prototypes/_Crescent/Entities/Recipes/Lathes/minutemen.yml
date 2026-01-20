@@ -1,27 +1,71 @@
+#SHIPS
 - type: latheRecipe
   id: ArbiterLPC
   result: ShipVoucherArbiter
   completetime: 1
   materials:
-    StarshipEngineComponents: 4000
-    ShipComponents: 3000
+    StarshipEngineComponents: 4500
+    ShipComponents: 5000
     ShipHull: 5000
 
 - type: latheRecipe
   id: CorsairLPC
   result: ShipVoucherCorsair
   completetime: 1
-  materials: #PLACEHOLDER PRICE
-    StarshipEngineComponents: 4000
-    ShipComponents: 3000
-    ShipHull: 5000
+  materials:
+    StarshipEngineComponents: 5000
+    ShipComponents: 6000
+    ShipHull: 6000
 
 - type: latheRecipe
   id: MinutemanLPC
   result: ShipVoucherMinuteman
   completetime: 1
-  materials: #PLACEHOLDER PRICE
+  materials:
     StarshipEngineComponents: 4000
-    ShipComponents: 3000
-    ShipHull: 5000
+    ShipComponents: 3500
+    ShipHull: 4000
+
+- type: latheRecipe
+  id: ObjectionLPC
+  result: ShipVoucherObjection
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 1000
+    ShipComponents: 1500
+    ShipHull: 1000
+
+- type: latheRecipe
+  id: AttorneyLPC
+  result: ShipVoucherAttorney
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 2000
+    ShipComponents: 2000
+    ShipHull: 2000
+
+- type: latheRecipe
+  id: AdjudicatorLPC
+  result: ShipVoucherAdjudicator
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 1000
+    ShipComponents: 1000
+    ShipHull: 1000
+
+#HARDSUITS
+
+- type: latheRecipe
+  id: ClothingOuterHardsuitMinutemenEnsign
+  result: ClothingOuterHardsuitCMMEnsing
+  completetime: 1
+  materials:
+    Steel: 2500
+    HardsuitElectronics: 500
+    Tungsten: 500
+    Durathread: 500
+
+#WEAPONS
+
+#MISC
 

@@ -1205,7 +1205,7 @@
   - type: ShipVoucher
     ship: Wreck
 
-#cmm
+#CMM OLD
 
 - type: entity
   parent: BaseItem
@@ -1294,23 +1294,6 @@
 
 - type: entity
   parent: BaseItem
-  id: ShipVoucherAdjudicator
-  name: TSP 'Adjudicator' pattern LPC fabprint disk
-  description: An LPC fabprint disk loaded with TSP 'Adjudicator' attack shuttle. Has to be redeemed at a shipyard console.
-  components:
-  - type: Item
-    size: Small
-  - type: Sprite
-    sprite: _Crescent/Objects/Misc/lpcchip.rsi
-    layers:
-    - state: icon
-  - type: StaticPrice
-    price: 14000
-  - type: ShipVoucher
-    ship: Adjudicator
-
-- type: entity
-  parent: BaseItem
   id: ShipVoucherExecutioner
   name: TS 'Executioner' pattern LPC fabprint disk
   description: An LPC fabprint disk loaded with a Gliessian Executioner-class advanced gunship. Has to be redeemed at a shipyard console.
@@ -1325,6 +1308,25 @@
     price: 100000
   - type: ShipVoucher
     ship: Executioner
+
+#CMM NEW
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherAdjudicator
+  name: TSP 'Adjudicator' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with TSP 'Adjudicator' attack shuttle. Has to be redeemed at a shipyard console.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 14000
+  - type: ShipVoucher
+    ship: Adjudicator
 
 - type: entity
   parent: BaseItem

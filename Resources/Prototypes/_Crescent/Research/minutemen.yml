@@ -21,29 +21,56 @@
   recipeUnlocks:
   - MinutemanLPC
 
+- type: technology
+  id: MinutemenLightCrafts
+  name: research-technology-minutemen-light-crafts
+  icon:
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    state: icon
+  discipline: Minutemen
+  tier: 1
+  cost: 12000
+  recipeUnlocks:
+  - AdjudicatorLPC
+  - ObjectionLPC
+  - AttorneyLPC
+
 #tier 2
+
+- type: technology
+  id: MinutemenHardsuit
+  name: research-technology-minutemen-hardsuit
+  icon:
+    sprite: _Crescent/Clothing/CMM/OuterClothing/ensign.rsi
+    state: icon
+  discipline: Minutemen
+  tier: 2
+  cost: 6000
+  recipeUnlocks:
+  - ClothingOuterHardsuitMinutemenEnsign
+
 - type: technology
   id: MinutemenHeavyDestroyer
-  name: research-technology-minutemen-light-artillery-destroyer
+  name: research-technology-minutemen-heavy-artillery-destroyer
   icon:
     sprite: _Crescent/Objects/Misc/lpcchip.rsi
     state: icon
   discipline: Minutemen
   tier: 2
-  cost: 6000
+  cost: 8000
   recipeUnlocks:
   - ArbiterLPC
   
 - type: technology
   id: MinutemenLightMissileDestroyer
-  name: research-technology-minutemen-light-missile-corvette
+  name: research-technology-minutemen-light-missile-destroyer
   icon:
     sprite: _Crescent/Objects/Misc/lpcchip.rsi
     state: icon
   discipline: Minutemen
   tier: 2
-  cost: 6000
+  cost: 8000
   recipeUnlocks:
   - CorsairLPC
-# (unused hardsuit sprite)
-# (one or two okay guns maybe)
+
+# (Krammer and some other gun in the future maybe)

@@ -84,16 +84,16 @@
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
-  id: ClothingHeadHelmetHardsuitCMMNew
+  id: ClothingHeadHelmetHardsuitCMMEnsign
   categories: [ HideSpawnMenu ]
   name: minuteman's patrolsuit
-  description: New suit. A Minuteman design.
+  description: Ensign helmet. A Minuteman design.
   components:
   - type: BreathMask
   - type: Sprite
-    sprite: _Crescent/Clothing/CMM/Head/new.rsi
+    sprite: _Crescent/Clothing/CMM/Head/ensign.rsi
   - type: Clothing
-    sprite: _Crescent/Clothing/CMM/Head/new.rsi
+    sprite: _Crescent/Clothing/CMM/Head/ensign.rsi
   - type: PointLight
     radius: 6
     color: "#add8e6"

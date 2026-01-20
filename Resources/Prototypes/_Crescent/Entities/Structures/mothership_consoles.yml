@@ -161,10 +161,9 @@
   components:
   - type: ShipyardListing
     shuttles:
-    - Provost
+    - Objection
     - Adjudicator
-    - Warden
-    - Jury
+    - Attorney
 
 - type: entity
   id: RefugeMothershipComputer

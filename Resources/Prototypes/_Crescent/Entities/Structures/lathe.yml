@@ -362,6 +362,10 @@
       - MinutemanLPC
       - CorsairLPC
       - ArbiterLPC
+      - ObjectionLPC
+      - AttorneyLPC
+      - AdjudicatorLPC
+      - ClothingOuterHardsuitMinutemenEnsign
       #MinutemenEnd
       - CreoleTranslator
       - LowImperialTranslator
