@@ -3,7 +3,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Humanoid.Markings
 {
-    [Prototype("marking")]
+    [Prototype]
     public sealed partial class MarkingPrototype : IPrototype
     {
         [IdDataField]
@@ -12,37 +12,26 @@ namespace Content.Shared.Humanoid.Markings
         public string Name { get; private set; } = default!;
 
         [DataField("bodyPart", required: true)]
-        public HumanoidVisualLayers BodyPart { get; private set; }
-
-        [DataField("markingCategory", required: true)]
-        public MarkingCategories MarkingCategory { get; private set; }
-
-        [DataField("speciesRestriction")]
-        public List<string>? SpeciesRestrictions { get; private set; }
+        public HumanoidVisualLayers BodyPart { get; private set; } = default!;
 
         [DataField]
-        public bool InvertSpeciesRestriction { get; private set; }
+        public List<ProtoId<MarkingsGroupPrototype>>? GroupWhitelist;
 
-        [DataField]
+        [DataField("sexRestriction")]
         public Sex? SexRestriction { get; private set; }
 
-        [DataField]
-        public bool InvertSexRestriction { get; private set; }
+        [DataField("forcedColoring")]
+        public bool ForcedColoring { get; private set; } = false;
 
-        [DataField]
-        public bool FollowSkinColor { get; private set; }
-
-        [DataField]
-        public bool ForcedColoring { get; private set; }
-
-        [DataField]
+        [DataField("coloring")]
         public MarkingColors Coloring { get; private set; } = new();
 
+        /// <summary>
+        /// Do we need to apply any displacement maps to this marking? Set to false if your marking is incompatible
+        /// with a standard human doll, and is used for some special races with unusual shapes
+        /// </summary>
         [DataField]
-        public Dictionary<string, string>? Shaders { get; private set; }
-
-        [DataField]
-        public string PreviewDirection { get; private set; } = "South";
+        public bool CanBeDisplaced { get; private set; } = true;
 
         [DataField("sprites", required: true)]
         public List<SpriteSpecifier> Sprites { get; private set; } = default!;

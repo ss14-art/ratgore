@@ -7,6 +7,7 @@ namespace Content.Shared.Body;
 public sealed class InitialBodySystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

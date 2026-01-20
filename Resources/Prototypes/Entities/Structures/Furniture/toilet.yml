@@ -30,13 +30,13 @@
   - type: Strap
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
   - type: DisposalUnit
     autoEngageEnabled: false
     noUI: true
     blacklist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
       - Plunger
       - SolutionTransfer
     whitelist:
