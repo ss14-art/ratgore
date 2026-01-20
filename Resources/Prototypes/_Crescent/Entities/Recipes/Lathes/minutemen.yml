@@ -61,7 +61,7 @@
     StarshipEngineComponents: 3500
     ShipComponents: 6000
     ShipHull: 3500
-    NanotrasenElectronics: 1000
+    NanotrasenElectronics: 500
 
 #HARDSUITS
 
