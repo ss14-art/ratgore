@@ -78,51 +78,6 @@ Scripts/sh/runQuickAll.sh
 
 **Done!** Connect to **localhost** in the client and start playing 🎮
 
-## 🤝 Contributing
-
-We welcome contributions to the project! Before getting started, please familiarize yourself with our commit formatting rules.
-
-### 📝 Commit Format
-
-The changelog is updated **automatically** via GitHub Actions.  
-Use the correct prefixes to ensure proper categorization of changes.
-
-#### Bracketed format
-
-```
-
-[ADD] Added a new rat mechanic
-[FIX] Fixed a cheese-related bug
-[REMOVE] Removed an obsolete system
-[TWEAK] Improved weapon balance
-
-```
-
-#### Non-bracketed format (with colon or comma)
-
-```
-
-Add: added a new rat mechanic
-Fix: fixed a cheese-related bug
-Tweak: improved weapon balance
-
-```
-
-#### Change Types
-
-- **Add** — new features, mechanics, content
-- **Fix** — bug fixes and error corrections
-- **Remove** — removal of obsolete code or content
-- **Tweak** — balance changes, improvements, optimization
-
-#### Ignored Commits
-
-The following prefixes **do not appear** in the changelog:
-
-- `[AUTO]` — automated updates
-- `[MAPS]` / `[maps]` — map and shuttle changes
-- `[IGNORE]` — technical commits, refactoring
-
 ## 📜 License
 
 The project code is licensed under **GNU AGPLv3**.  
