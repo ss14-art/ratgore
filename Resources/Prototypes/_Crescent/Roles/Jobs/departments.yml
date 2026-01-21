@@ -7,7 +7,7 @@
   roles:
   - CommandantNCWL
   - KommissarNCWL
-  - MVDGruntNCWL
+#  - MVDGruntNCWL
   - FleetkapitanNCWL
   - PartisanNCWL
   - DirectorNCWL
@@ -24,7 +24,7 @@
   name: department-NCSP
   description: department-NCSP-description
   color: "#DC143C"
-  weight: 90
+  weight: 85
   roles:
   - RingleaderNCSP
   - LieutenantNCSP
@@ -45,7 +45,7 @@
   name: department-DSM
   description: department-DSM-description
   color: "#684871"
-  weight: 85
+  weight: 90
   roles:
   - FreeholderDSM
   - LevymanDSM
@@ -57,7 +57,7 @@
   - TemplarDSM
   - SurgeonDSM
   - LaborDSM
-  - CourtierDSM
+#  - CourtierDSM
   - AdjutantDSM
   - GovernorDSM
   - AdvocatusDSM
@@ -76,7 +76,7 @@
   - HunterSRM
   - MontagneSRM
   - OverseerSRM
-  editorHidden: false # i just like to see them for the numbers , SPCR 2025
+  editorHidden: true # i just like to see them for the numbers , SPCR 2025
 
 - type: department
   id: SHI
@@ -141,7 +141,7 @@
   - BeltrunnerTAP
   - DraugrTAP
   - ServileTAP
-  editorHidden: false
+  editorHidden: true
 
 - type: department
   id: ATH

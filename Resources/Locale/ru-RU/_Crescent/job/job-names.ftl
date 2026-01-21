@@ -11,10 +11,10 @@ job-name-ncwl-mvd-officer = Курсант комиссариата
 job-name-ncwl-mvd-grunt = Помощник Комиссара
 job-name-ncwl-fleetkapitan = Капитан Флота
 job-name-ncwl-partisan = Партизан
-job-name-ncwl-industry-taskmaster = Старшик Инженер
+job-name-ncwl-industry-taskmaster = Старший Инженер
 job-name-ncwl-industry-artificer = Инженер
 job-name-ncwl-medical-director = Главный Врач
-job-name-ncwl-artificer = Оруженный Мастер
+job-name-ncwl-artificer = Исследователь
 job-name-ncwl-worker-overboss = Начальник Снабжения
 job-name-ncwl-worker-dockhand = Грузчик
 job-name-ncwl-medical-doctor = Санитар
@@ -42,20 +42,20 @@ ghost-role-information-syndicate-cyborg-saboteur-name-c = CS 3201 Sun Wukong Com
 # empire
 
 job-name-freeholder = Колон
-job-name-levyman = Оруженосец
-job-name-knight = Рыцарь-баннерет
-job-name-ritter = Баронский риттер
+job-name-levyman = Ополченец
+job-name-knight = Рыцарь-командор 
+job-name-ritter = Рыцарь-риттер 
 job-name-courtier = Придворный
-job-name-ministerlabor = Министр труда
-job-name-logisticsofficer = Министр казны
-job-name-adjutant = Имперский адъютант
-job-name-archmaester = Писарь
+job-name-ministerlabor = Министр Промышленности
+job-name-logisticsofficer = Министр Финансов
+job-name-adjutant = Адъютант
+job-name-archmaester = Верховный Технолог
 job-name-governor = Лорд-адмирал
 job-name-foremanimp = Надсмотрщик
-job-name-imperialresearch = Имперский писарь
-job-name-surgeon = Санитар
+job-name-imperialresearch = Технолог
+job-name-surgeon = Хирург
 job-name-wealth = Рыцарь-снабженец
-job-name-advocatus = Защитник
+job-name-advocatus = Следователь
 job-name-advocatustemplar = Рыцарь-тамплиер
 
 # srm
@@ -116,10 +116,10 @@ job-name-arbeiter = Арбайтер
 
 job-name-antiquarian = Антиквар Izdari
 job-name-spacer = Космонавт
-job-name-gliess-dockhand = Доковый рабочий Gliess
-job-name-gliess-sheriff = Шериф Gliess
-job-name-gliess-deputy = Заместитель шерифа Gliess
-job-name-gliess-dockmaster = Докмастер Gliess
+job-name-gliess-dockhand = Доковый рабочий
+job-name-gliess-sheriff = Шериф
+job-name-gliess-deputy = Заместитель шерифа
+job-name-gliess-dockmaster = Докмастер
 
 # conscript-ncwl - for PLANETFALL
 
