@@ -286,5 +286,12 @@
   id: 37
   time: '2026-01-19T18:04:39.0000000+00:00'
   url: https://github.com/ss14-art/ratgore/pull/4
+- author: cryals
+  changes:
+  - message: "MD \u0444\u0430\u0439\u043B\u044B"
+    type: Tweak
+  id: 38
+  time: '2026-01-21T16:41:28.0000000+00:00'
+  url: https://github.com/ss14-art/ratgore/pull/6
 Name: Rat
 Order: -1
