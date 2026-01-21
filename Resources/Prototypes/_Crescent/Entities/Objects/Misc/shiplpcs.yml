@@ -1,4 +1,4 @@
-#dsm
+# #dsm
 
 - type: entity
   parent: BaseItem
@@ -1292,6 +1292,8 @@
   - type: ShipVoucher
     ship: WhiteBastion
 
+#CMM NEW
+
 - type: entity
   parent: BaseItem
   id: ShipVoucherExecutioner
@@ -1308,8 +1310,6 @@
     price: 100000
   - type: ShipVoucher
     ship: Executioner
-
-#CMM NEW
 
 - type: entity
   parent: BaseItem
@@ -1381,9 +1381,9 @@
 
 - type: entity
   parent: BaseItem
-  id: ShipVoucherObjection
-  name: TS 'Objection' pattern LPC fabprint disk
-  description: An LPC fabprint disk loaded with a Gliessian Objection-class hybrid fighter. Has to be redeemed at a shipyard console.
+  id: ShipVoucherSentry
+  name: TS 'Sentry' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a Gliessian Sentry-class hybrid fighter. Has to be redeemed at a shipyard console.
   components:
   - type: Item
     size: Small
@@ -1394,13 +1394,13 @@
   - type: StaticPrice
     price: 8000
   - type: ShipVoucher
-    ship: Objection
+    ship: Sentry
 
 - type: entity
   parent: BaseItem
-  id: ShipVoucherAttorney
-  name: TS 'Attorney' pattern LPC fabprint disk
-  description: An LPC fabprint disk loaded with a Gliessian Attorney-class ballistic corvette. Has to be redeemed at a shipyard console.
+  id: ShipVoucherRespondant
+  name: TS 'Respondant' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a Gliessian Respondant-class ballistic corvette. Has to be redeemed at a shipyard console.
   components:
   - type: Item
     size: Small
@@ -1411,7 +1411,24 @@
   - type: StaticPrice
     price: 16000
   - type: ShipVoucher
-    ship: Attorney
+    ship: Respondant
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherGuard
+  name: TS 'Guard' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a Gliessian Guard-class fighter. Has to be redeemed at a shipyard console.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 5000
+  - type: ShipVoucher
+    ship: Guard
 
 #SRM
 

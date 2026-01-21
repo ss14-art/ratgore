@@ -362,8 +362,9 @@
       - MinutemanLPC
       - CorsairLPC
       - ArbiterLPC
-      - ObjectionLPC
-      - AttorneyLPC
+      - SentryLPC
+      - RespondantLPC
+      - GuardLPC
       - AdjudicatorLPC
       - ExecutionerLPC
       - ClothingOuterHardsuitMinutemenEnsign

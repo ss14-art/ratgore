@@ -27,8 +27,8 @@
     ShipHull: 4000
 
 - type: latheRecipe
-  id: ObjectionLPC
-  result: ShipVoucherObjection
+  id: SentryLPC
+  result: ShipVoucherSentry
   completetime: 1
   materials:
     StarshipEngineComponents: 1000
@@ -36,13 +36,22 @@
     ShipHull: 1000
 
 - type: latheRecipe
-  id: AttorneyLPC
-  result: ShipVoucherAttorney
+  id: RespondantLPC
+  result: ShipVoucherRespondant
   completetime: 1
   materials:
     StarshipEngineComponents: 2000
     ShipComponents: 2000
     ShipHull: 2000
+
+- type: latheRecipe
+  id: GuardLPC
+  result: ShipVoucherGuard
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 500
+    ShipComponents: 500
+    ShipHull: 500
 
 - type: latheRecipe
   id: AdjudicatorLPC

@@ -2,8 +2,8 @@
 # Discord: the_inbetwixt
 
 - type: vessel
-  id: Objection
-  name: TS Objection
+  id: Sentry
+  name: TS Sentry
   description: |
     A swift and small fighter featuring plasma gatlings. Can handle shields and armor but at close range.
     LOADOUT: 2x 150cc 'Starburst' plasma gatling
@@ -12,15 +12,15 @@
   price: 20000
   category: Small
   group: None
-  path: /Maps/_Crescent/Shuttles/CMM/objection.yml
+  path: /Maps/_Crescent/Shuttles/CMM/sentry.yml
 
 - type: gameMap
-  id: Objection
-  mapName: 'TS Objection'
-  mapPath: /Maps/_Crescent/Shuttles/CMM/objection.yml
+  id: Sentry
+  mapName: 'TS Sentry'
+  mapPath: /Maps/_Crescent/Shuttles/CMM/sentry.yml
   minPlayers: 0
   stations:
-    Objection:
+    Sentry:
       stationProto: StandardCrescentExpeditionVessel
       components:
         - type: VesselIcon
@@ -28,7 +28,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: fighter
         - type: StationNameSetup
-          mapNameTemplate: 'TS Objection {1}'
+          mapNameTemplate: 'TS Sentry {1}'
           nameGenerator:
            !type:NanotrasenNameGenerator
             prefixCreator: '14'

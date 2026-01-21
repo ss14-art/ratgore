@@ -31,9 +31,10 @@
   tier: 1
   cost: 12000
   recipeUnlocks:
+  - RespondantLPC
   - AdjudicatorLPC
-  - ObjectionLPC
-  - AttorneyLPC
+  - SentryLPC
+  - GuardLPC
 
 #tier 2
 

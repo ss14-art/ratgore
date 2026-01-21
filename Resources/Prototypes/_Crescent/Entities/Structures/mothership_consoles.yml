@@ -161,9 +161,10 @@
   components:
   - type: ShipyardListing
     shuttles:
-    - Objection
+    - Respondant
     - Adjudicator
-    - Attorney
+    - Sentry
+    - Guard
 
 - type: entity
   id: RefugeMothershipComputer
