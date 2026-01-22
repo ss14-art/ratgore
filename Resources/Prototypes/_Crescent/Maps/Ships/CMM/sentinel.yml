@@ -25,7 +25,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: Corvette
+            state: corvette
         - type: StationNameSetup
           mapNameTemplate: 'TS Sentinel {1}'
           nameGenerator:
