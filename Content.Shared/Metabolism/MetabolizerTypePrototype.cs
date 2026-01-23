@@ -1,10 +1,7 @@
-﻿using Robust.Shared.Prototypes;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Metabolism;
 
-/// <summary>
-/// Metabolizer identifier used to determine if a specific entity can metabolize a specific reagent effect.
-/// </summary>
 [Prototype]
 public sealed partial class MetabolizerTypePrototype : IPrototype
 {

@@ -1,6 +1,5 @@
-﻿using Content.Shared.Body.Components;
+using Content.Shared.Body.Components;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -9,14 +8,13 @@ namespace Content.Shared.Metabolism;
 /// <summary>
 ///     Handles metabolizing various reagents with given effects.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState, AutoGenerateComponentPause, Access(typeof(MetabolizerSystem))]
+[RegisterComponent, AutoGenerateComponentPause, Access(typeof(MetabolizerSystem))]
 public sealed partial class MetabolizerComponent : Component
 {
     /// <summary>
     ///     The next time that reagents will be metabolized.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    [DataField, AutoPausedField]
     public TimeSpan NextUpdate;
 
     /// <summary>
@@ -29,7 +27,7 @@ public sealed partial class MetabolizerComponent : Component
     /// <summary>
     /// Multiplier applied to <see cref="UpdateInterval"/> for adjusting based on metabolic rate multiplier.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float UpdateIntervalMultiplier = 1f;
 
     /// <summary>
@@ -40,8 +38,6 @@ public sealed partial class MetabolizerComponent : Component
 
     /// <summary>
     ///     From which solution will this metabolizer attempt to metabolize chemicals for a given stage
-    ///     This typically does not change and as such isn't networked.
-    ///     TODO: Entity relations :(
     /// </summary>
     [DataField]
     public Dictionary<ProtoId<MetabolismStagePrototype>, MetabolismSolutionEntry> Solutions = new()
