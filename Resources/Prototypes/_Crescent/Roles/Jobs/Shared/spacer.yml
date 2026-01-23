@@ -40,5 +40,5 @@
     jumpsuit: ClothingUniformSpacer
     back: ClothingBackpackFilled
     shoes: ClothingShoesColorBlack
-  satchel: ClothingBackpackSatchelFilled
-  duffelbag: ClothingBackpackDuffelFilled
+    satchel: ClothingBackpackSatchelFilled
+    duffelbag: ClothingBackpackDuffelFilled
