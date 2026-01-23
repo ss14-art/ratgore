@@ -7,5 +7,5 @@ stalker-discord-auth-text = Авторизоваться
 stalker-discord-auth-dlink = Discord
 stalker-discord-auth-link = https://discord.gg/3FMFTxYQYJ
 stalker-discord-auth-browser-btn = Сервер Discord
-stalker-discord-auth-skip = Пропустить
+stalker-discord-auth-skip = Пропустить (Может не работать)
 stalker-discord-auth-skip-confirm = Вы уверены?
