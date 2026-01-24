@@ -1,4 +1,4 @@
-Entries:
+﻿Entries:
 - author: Odleer
   changes:
   - message: Update README.md
@@ -305,5 +305,12 @@ Entries:
   id: 39
   time: '2026-01-21T18:57:22.0000000+00:00'
   url: https://github.com/ss14-art/ratgore/pull/7
+- author: cryals
+  changes:
+  - message: "CDN \u043F\u0443\u0431\u043B\u0438\u043A\u0430\u0446\u0438\u044F"
+    type: Tweak
+  id: 40
+  time: '2026-01-24T14:09:18.0000000+00:00'
+  url: https://github.com/ss14-art/ratgore/pull/10
 Name: Rat
 Order: -1
