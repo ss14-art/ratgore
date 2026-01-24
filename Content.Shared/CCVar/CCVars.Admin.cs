@@ -165,7 +165,7 @@ public sealed partial class CCVars
     ///     If false, then admins will not be considered when checking whether the playercount is already above the soft player cap
     /// </summary>
     public static readonly CVarDef<bool> AdminsCountForMaxPlayers =
-        CVarDef.Create("admin.admins_count_for_max_players", false, CVar.SERVERONLY);
+        CVarDef.Create("admin.admins_count_for_max_players", true, CVar.SERVERONLY);
 
     public static readonly CVarDef<bool> BanHardwareIds =
         CVarDef.Create("ban.hardware_ids", true, CVar.SERVERONLY);
