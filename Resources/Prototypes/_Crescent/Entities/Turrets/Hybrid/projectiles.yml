@@ -12,7 +12,7 @@
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 100
+        Structural: 500
         Radiation: 90
   - type: PointLight
     radius: 3.5
@@ -44,7 +44,7 @@
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 150
+        Structural: 250
         Radiation: 110
   - type: ExplodeOnTrigger
   - type: Explosive
@@ -78,7 +78,7 @@
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 500
+        Structural: 150
         Radiation: 120
   - type: ExplodeOnTrigger
   - type: Explosive
