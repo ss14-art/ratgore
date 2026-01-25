@@ -1,4 +1,7 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "ru-RU"
 reviews:
-  auto_review: true
+  auto_review:
+    enabled: true
   review_status: true
   required_labels: []

@@ -82,6 +82,7 @@ def get_last_changelog() -> str:
     session.headers["X-GitHub-Api-Version"] = "2022-11-28"
 
     try:
+        # First try to get the last successful run from the workflow
         most_recent = get_most_recent_workflow(session, github_repository, github_run)
         if most_recent is None:
             print("::warning ::Нет предыдущих успешных запусков. Будем использовать пустой changelog.")
@@ -91,9 +92,42 @@ def get_last_changelog() -> str:
         print(f"Последний успешный publish job был {most_recent['id']}: {last_sha}")
         last_changelog_stream = get_last_changelog_by_sha(session, last_sha, github_repository)
         return last_changelog_stream
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 401:
+            # Если токен не имеет доступа к API, используем альтернативный метод
+            print("::warning ::Токен не имеет доступа к GitHub API. Пытаемся альтернативный метод...")
+            return get_last_changelog_fallback()
+        else:
+            print(f"::warning ::Не удалось получить предыдущий changelog: {e}. Будем использовать пустой changelog.")
+            return yaml.safe_dump({"Entries": []})
     except Exception as e:
         print(f"::warning ::Не удалось получить предыдущий changelog: {e}. Будем использовать пустой changelog.")
         return yaml.safe_dump({"Entries": []})
+
+def get_last_changelog_fallback() -> str:
+    """Альтернативный метод получения предыдущего ченджлога через git diff"""
+    try:
+        # Получаем последний коммит из текущей ветки
+        import subprocess
+        result = subprocess.run(
+            ["git", "log", "--oneline", "-n", "1", "--skip=1"],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        if result.stdout:
+            # Получаем предыдущую версию файла
+            result = subprocess.run(
+                ["git", "show", f"HEAD~1:{CHANGELOG_FILE}"],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            return result.stdout
+    except Exception as e:
+        print(f"::warning ::Не удалось получить предыдущий changelog через git: {e}")
+    
+    return yaml.safe_dump({"Entries": []})
 
 def get_last_changelog_by_sha(
     sess: requests.Session, sha: str, github_repository: str
@@ -119,12 +153,17 @@ def diff_changelog(
 def get_discord_body(content: str):
     return {
         "content": content,
-        "allowed_mentions": {"parse": []},
+        "allowed_mentions": {"parse": ["roles"]},
         "flags": 1 << 2,
     }
 
-def send_discord_webhook(lines: list[str]):
+def send_discord_webhook(lines: list[str], ping_role: bool = False):
     content = "".join(lines)
+    
+    # Добавляем пинг роли в начало, если нужно
+    if ping_role:
+        content = f"<@&1318776836599320663>\n{content}"
+    
     body = get_discord_body(content)
     retry_attempt = 0
 
@@ -140,14 +179,23 @@ def send_discord_webhook(lines: list[str]):
             time.sleep(retry_after)
             response = requests.post(DISCORD_WEBHOOK_URL, json=body, timeout=10)
         response.raise_for_status()
+        print(f"Успешно отправлено в Discord: {len(content)} символов")
     except requests.exceptions.RequestException as e:
         print(f"Не удалось отправить сообщение: {e}")
         exit(1)
 
 def changelog_entries_to_message_lines(entries: Iterable[ChangelogEntry]) -> list[str]:
     message_lines = []
-
-    for contributor_name, group in itertools.groupby(entries, lambda x: x["author"]):
+    
+    # Собираем все записи в список для сортировки по автору
+    entries_list = list(entries)
+    if not entries_list:
+        return message_lines
+    
+    # Сортируем по автору для группировки
+    entries_list.sort(key=lambda x: x["author"])
+    
+    for contributor_name, group in itertools.groupby(entries_list, lambda x: x["author"]):
         message_lines.append("\n")
         message_lines.append(f"**{contributor_name}** обновил:\n")
 
@@ -174,26 +222,45 @@ def changelog_entries_to_message_lines(entries: Iterable[ChangelogEntry]) -> lis
     return message_lines
 
 def send_message_lines(message_lines: list[str]):
+    if not message_lines:
+        print("Нет новых изменений для отправки")
+        return
+    
+    # Проверяем, есть ли изменения в ченджлоге
+    has_entries = any(line.strip() and not line.startswith("**") and "обновил:" not in line 
+                     for line in message_lines if line.strip())
+    
+    if not has_entries:
+        print("Ченджлог не содержит записей (только заголовки авторов)")
+        return
+    
     chunk_lines = []
     chunk_length = 0
-
+    chunks = []
+    
+    # Разбиваем на части для Discord
     for line in message_lines:
         line_length = len(line)
         new_chunk_length = chunk_length + line_length
 
-        if new_chunk_length > DISCORD_SPLIT_LIMIT:
-            print("Разделение ченджлога и отправка в Discord")
-            send_discord_webhook(chunk_lines)
-
-            new_chunk_length = line_length
-            chunk_lines.clear()
-
-        chunk_lines.append(line)
-        chunk_length = new_chunk_length
+        if new_chunk_length > DISCORD_SPLIT_LIMIT - 50:  # Оставляем место для пинга
+            if chunk_lines:
+                chunks.append(chunk_lines.copy())
+            chunk_lines = [line]
+            chunk_length = line_length
+        else:
+            chunk_lines.append(line)
+            chunk_length = new_chunk_length
 
     if chunk_lines:
-        print("Отправка финального ченджлога в Discord")
-        send_discord_webhook(chunk_lines)
+        chunks.append(chunk_lines)
+    
+    # Отправляем части с пингом только в первой части
+    for i, chunk in enumerate(chunks):
+        if i == 0:
+            send_discord_webhook(chunk, ping_role=True)
+        else:
+            send_discord_webhook(chunk, ping_role=False)
 
 if __name__ == "__main__":
     main()
