@@ -29,6 +29,15 @@ logger = logging.getLogger(__name__)
 class NoDatesSafeLoader(yaml.SafeLoader):
     @classmethod
     def remove_implicit_resolver(cls, tag_to_remove):
+        """
+        Remove an implicit resolver tag from a YAML loader class's implicit resolvers.
+        
+        This mutates the class-level `yaml_implicit_resolvers` mapping so any resolver entries whose tag equals `tag_to_remove` are removed for all first-letter keys. If the class does not yet have its own `yaml_implicit_resolvers` dict, a shallow copy of the existing mapping is created before modification to avoid altering parent classes' resolvers.
+        
+        Parameters:
+            cls (type): YAML loader class (typically a subclass of `yaml.SafeLoader`) whose implicit resolvers will be modified.
+            tag_to_remove (str): The resolver tag (e.g., `'tag:yaml.org,2002:timestamp'`) to remove from the implicit resolvers.
+        """
         if not 'yaml_implicit_resolvers' in cls.__dict__:
             cls.yaml_implicit_resolvers = cls.yaml_implicit_resolvers.copy()
 
@@ -41,7 +50,19 @@ class NoDatesSafeLoader(yaml.SafeLoader):
 NoDatesSafeLoader.remove_implicit_resolver('tag:yaml.org,2002:timestamp')
 
 def load_yaml_file(file_path: str) -> Optional[Any]:
-    """Load and parse a YAML file with detailed error handling."""
+    """
+    Load and parse a YAML file using a loader that disables implicit timestamp parsing.
+    
+    Parameters:
+        file_path (str): Path to the YAML file. The file is opened with UTF-8 with BOM support.
+    
+    Returns:
+        The parsed YAML content (Python objects), or `None` if the file is empty.
+    
+    Raises:
+        yaml.YAMLError: If the YAML content cannot be parsed.
+        IOError: If the file cannot be read.
+    """
     try:
         logger.debug(f"Attempting to load YAML file: {file_path}")
         with open(file_path, "r", encoding="utf-8-sig") as f:
@@ -58,7 +79,17 @@ def load_yaml_file(file_path: str) -> Optional[Any]:
         raise
 
 def save_yaml_file(file_path: str, data: Any) -> None:
-    """Save data to a YAML file with detailed logging."""
+    """
+    Write a Python object to a YAML file using UTF-8 with BOM and log success or failure.
+    
+    Parameters:
+        file_path (str): Path to the output YAML file.
+        data (Any): YAML-serializable object; if it contains an "Entries" list, its length is logged.
+    
+    Raises:
+        IOError: If the file cannot be written.
+        Exception: On unexpected errors during serialization or file operations.
+    """
     try:
         logger.debug(f"Attempting to save YAML file: {file_path}")
         with open(file_path, "w", encoding="utf-8-sig") as f:
@@ -74,8 +105,16 @@ def save_yaml_file(file_path: str, data: Any) -> None:
 
 def process_changelog_part(part_path: str, category_filter: str, current_max_id: int) -> Optional[dict]:
     """
-    Process a single changelog part file.
-    Returns new entry data if successful, None if skipped.
+    Convert a changelog part YAML file into a normalized changelog entry when it matches the given category.
+    
+    Parameters:
+        part_path (str): Filesystem path to the changelog part YAML file.
+        category_filter (str): Category name required for the part to be accepted.
+        current_max_id (int): Highest existing entry ID; used to compute the new entry's `id`.
+    
+    Returns:
+        dict: A new entry with keys `author`, `time` (ISO 8601 string), `changes` (list), `id` (int), and optional `url` when the part is accepted and valid.
+        None: If the part is empty, invalid, missing required fields, has no changes, its category does not match `category_filter`, or an error occurs during processing.
     """
     logger.info(f"Processing changelog part: {part_path}")
     
@@ -136,7 +175,11 @@ def process_changelog_part(part_path: str, category_filter: str, current_max_id:
         return None
 
 def main():
-    """Main function to process changelog parts and update main changelog."""
+    """
+    Merge YAML changelog part files from a directory into the main changelog YAML file and save the updated changelog.
+    
+    Processes every `.yml` file in the configured parts directory, converts valid part files into new changelog entries (filtered by category), appends them to the existing "Entries" list (or creates one if missing), removes successfully processed part files, enforces a maximum number of entries by dropping the oldest when necessary, preserves other top-level metadata keys from the original changelog, and writes the resulting data back to the main changelog file. Exits the process if the provided changelog file or parts directory does not exist.
+    """
     parser = argparse.ArgumentParser(
         description="Merge changelog parts into main changelog YAML file."
     )
