@@ -1,0 +1,433 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DirectionalTilingSystem
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DirectionalTilingSystem
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Content.Server._Crescent.DirectionalTilingSystem">
+  
+  
+  <h1 id="Content_Server__Crescent_DirectionalTilingSystem" data-uid="Content.Server._Crescent.DirectionalTilingSystem" class="text-break">Class DirectionalTilingSystem
+  </h1>
+  <div class="markdown level0 summary"><p>SPCR/MLGTASTICa 2025
+Handles creating the decals to create the illusion of directional tiles.
+Based off the System used by the Eris SS13 Codebase.
+This file is licensed under MIT. Feel free to do whatever.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">DirectionalTilingSystem</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Content.Server._Crescent.html">Content.Server._Crescent</a></h6>
+  <h6><strong>Assembly</strong>: Content.Server.dll</h6>
+  <h5 id="Content_Server__Crescent_DirectionalTilingSystem_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class DirectionalTilingSystem : EntitySystem</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem_dirMapping.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem.dirMapping%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L45">View Source</a>
+  </span>
+  <h4 id="Content_Server__Crescent_DirectionalTilingSystem_dirMapping" data-uid="Content.Server._Crescent.DirectionalTilingSystem.dirMapping">dirMapping</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly FrozenDictionary&lt;Vector2i, DirectionFlag&gt; dirMapping</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FrozenDictionary</span>&lt;<span class="xref">Vector2i</span>, <span class="xref">DirectionFlag</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem_dirToString.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem.dirToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L69">View Source</a>
+  </span>
+  <h4 id="Content_Server__Crescent_DirectionalTilingSystem_dirToString" data-uid="Content.Server._Crescent.DirectionalTilingSystem.dirToString">dirToString</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly FrozenDictionary&lt;DirectionFlag, string&gt; dirToString</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FrozenDictionary</span>&lt;<span class="xref">DirectionFlag</span>, <span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem_vectorMapping.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem.vectorMapping%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L57">View Source</a>
+  </span>
+  <h4 id="Content_Server__Crescent_DirectionalTilingSystem_vectorMapping" data-uid="Content.Server._Crescent.DirectionalTilingSystem.vectorMapping">vectorMapping</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly FrozenDictionary&lt;DirectionFlag, Vector2i&gt; vectorMapping</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">FrozenDictionary</span>&lt;<span class="xref">DirectionFlag</span>, <span class="xref">Vector2i</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem_DeleteDirectionalDecals_Robust_Shared_Map_EntityCoordinates_.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem.DeleteDirectionalDecals(Robust.Shared.Map.EntityCoordinates)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L170">View Source</a>
+  </span>
+  <a id="Content_Server__Crescent_DirectionalTilingSystem_DeleteDirectionalDecals_" data-uid="Content.Server._Crescent.DirectionalTilingSystem.DeleteDirectionalDecals*"></a>
+  <h4 id="Content_Server__Crescent_DirectionalTilingSystem_DeleteDirectionalDecals_Robust_Shared_Map_EntityCoordinates_" data-uid="Content.Server._Crescent.DirectionalTilingSystem.DeleteDirectionalDecals(Robust.Shared.Map.EntityCoordinates)">DeleteDirectionalDecals(EntityCoordinates)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeleteDirectionalDecals(EntityCoordinates tileCoordinates)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Robust.Shared.Map.EntityCoordinates</span></td>
+        <td><span class="parametername">tileCoordinates</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem_GridInitialize_GridInitializeEvent_.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem.GridInitialize(GridInitializeEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L106">View Source</a>
+  </span>
+  <a id="Content_Server__Crescent_DirectionalTilingSystem_GridInitialize_" data-uid="Content.Server._Crescent.DirectionalTilingSystem.GridInitialize*"></a>
+  <h4 id="Content_Server__Crescent_DirectionalTilingSystem_GridInitialize_GridInitializeEvent_" data-uid="Content.Server._Crescent.DirectionalTilingSystem.GridInitialize(GridInitializeEvent)">GridInitialize(GridInitializeEvent)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GridInitialize(GridInitializeEvent args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GridInitializeEvent</span></td>
+        <td><span class="parametername">args</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem_Initialize.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L94">View Source</a>
+  </span>
+  <a id="Content_Server__Crescent_DirectionalTilingSystem_Initialize_" data-uid="Content.Server._Crescent.DirectionalTilingSystem.Initialize*"></a>
+  <h4 id="Content_Server__Crescent_DirectionalTilingSystem_Initialize" data-uid="Content.Server._Crescent.DirectionalTilingSystem.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Initialize()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem_OnTileChanged_TileChangedEvent__.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem.OnTileChanged(TileChangedEvent%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L139">View Source</a>
+  </span>
+  <a id="Content_Server__Crescent_DirectionalTilingSystem_OnTileChanged_" data-uid="Content.Server._Crescent.DirectionalTilingSystem.OnTileChanged*"></a>
+  <h4 id="Content_Server__Crescent_DirectionalTilingSystem_OnTileChanged_TileChangedEvent__" data-uid="Content.Server._Crescent.DirectionalTilingSystem.OnTileChanged(TileChangedEvent@)">OnTileChanged(ref TileChangedEvent)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTileChanged(ref TileChangedEvent tileEvent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TileChangedEvent</span></td>
+        <td><span class="parametername">tileEvent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem_OnTileSingularChanged_TileChangedEntry_EntityUid_.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem.OnTileSingularChanged(TileChangedEntry%2CEntityUid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L151">View Source</a>
+  </span>
+  <a id="Content_Server__Crescent_DirectionalTilingSystem_OnTileSingularChanged_" data-uid="Content.Server._Crescent.DirectionalTilingSystem.OnTileSingularChanged*"></a>
+  <h4 id="Content_Server__Crescent_DirectionalTilingSystem_OnTileSingularChanged_TileChangedEntry_EntityUid_" data-uid="Content.Server._Crescent.DirectionalTilingSystem.OnTileSingularChanged(TileChangedEntry,EntityUid)">OnTileSingularChanged(TileChangedEntry, EntityUid)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTileSingularChanged(TileChangedEntry entry, EntityUid tileGrid)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TileChangedEntry</span></td>
+        <td><span class="parametername">entry</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">tileGrid</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem_TileInitialize_Content_Shared_Entry_PostInitEvent__.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem.TileInitialize(Content.Shared.Entry.PostInitEvent%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L123">View Source</a>
+  </span>
+  <a id="Content_Server__Crescent_DirectionalTilingSystem_TileInitialize_" data-uid="Content.Server._Crescent.DirectionalTilingSystem.TileInitialize*"></a>
+  <h4 id="Content_Server__Crescent_DirectionalTilingSystem_TileInitialize_Content_Shared_Entry_PostInitEvent__" data-uid="Content.Server._Crescent.DirectionalTilingSystem.TileInitialize(Content.Shared.Entry.PostInitEvent@)">TileInitialize(ref PostInitEvent)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TileInitialize(ref PostInitEvent placementEvent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="../Content.Shared/Content.Shared.Entry.PostInitEvent.html">PostInitEvent</a></td>
+        <td><span class="parametername">placementEvent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server__Crescent_DirectionalTilingSystem.md&amp;value=---%0Auid%3A%20Content.Server._Crescent.DirectionalTilingSystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/_Crescent/Misc/DirectionalTilingSystem.cs/#L27" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="toggle-mode">
+                <div class="icon">
+                  <i aria-hidden="true">☀</i>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="switch-style">
+                  <span class="slider round"></span>
+                </label>
+                <div class="icon">
+                  <i aria-hidden="true">☾</i>
+                </div>
+              </div>
+          
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <h5>In This Article</h5>
+              <div></div>
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <div class="pull-left">
+              
+              <span>Generated by <strong>DocFX</strong></span>
+            </div>
+            <div class="toggle-mode pull-right visible-sm visible-xs">
+              <div class="icon">
+                <i aria-hidden="true">☀</i>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="switch-style-m">
+                <span class="slider round"></span>
+              </label>
+              <div class="icon">
+                <i aria-hidden="true">☾</i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="../../styles/toggle-theme.js"></script>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
