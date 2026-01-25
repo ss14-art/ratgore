@@ -2,7 +2,8 @@
 
 import sys
 import os
-from typing import List, Any
+import logging
+from typing import List, Any, Optional
 import yaml
 import argparse
 import datetime
@@ -13,6 +14,16 @@ HEADER_RE = r"(?::cl:|🆑) *\r?\n(.+)$"
 ENTRY_RE = r"^ *[*-]? *(\S[^\n\r]+)\r?$"
 
 CATEGORY_MAIN = "Main"
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stderr)  # Log to stderr for GitHub Actions
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # From https://stackoverflow.com/a/37958106/4678631
 class NoDatesSafeLoader(yaml.SafeLoader):
@@ -26,83 +37,221 @@ class NoDatesSafeLoader(yaml.SafeLoader):
                                                          for tag, regexp in mappings
                                                          if tag != tag_to_remove]
 
-# Hrm yes let's make the fucking default of our serialization library to PARSE ISO-8601
-# but then output garbage when re-serializing.
+# Disable automatic timestamp parsing to avoid serialization issues
 NoDatesSafeLoader.remove_implicit_resolver('tag:yaml.org,2002:timestamp')
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("changelog_file")
-    parser.add_argument("parts_dir")
-    parser.add_argument("--category", default=CATEGORY_MAIN)
+def load_yaml_file(file_path: str) -> Optional[Any]:
+    """Load and parse a YAML file with detailed error handling."""
+    try:
+        logger.debug(f"Attempting to load YAML file: {file_path}")
+        with open(file_path, "r", encoding="utf-8-sig") as f:
+            content = f.read()
+            logger.debug(f"File read successfully, size: {len(content)} bytes")
+            parsed = yaml.load(content, Loader=NoDatesSafeLoader)
+            logger.debug(f"YAML parsed successfully")
+            return parsed
+    except yaml.YAMLError as e:
+        logger.error(f"Failed to parse YAML file {file_path}: {e}")
+        raise
+    except IOError as e:
+        logger.error(f"Failed to read file {file_path}: {e}")
+        raise
 
-    args = parser.parse_args()
+def save_yaml_file(file_path: str, data: Any) -> None:
+    """Save data to a YAML file with detailed logging."""
+    try:
+        logger.debug(f"Attempting to save YAML file: {file_path}")
+        with open(file_path, "w", encoding="utf-8-sig") as f:
+            yaml.safe_dump(data, f)
+        logger.info(f"Successfully saved YAML file: {file_path}")
+        logger.debug(f"Data structure saved: {len(data.get('Entries', []))} entries")
+    except IOError as e:
+        logger.error(f"Failed to write file {file_path}: {e}")
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error while saving YAML file: {e}")
+        raise
 
-    category = args.category
-
-    with open(args.changelog_file, "r", encoding="utf-8-sig") as f:
-        current_data = yaml.load(f, Loader=NoDatesSafeLoader)
-
-    entries_list: List[Any]
-    if current_data is None:
-        entries_list = []
-    else:
-        entries_list = current_data["Entries"]
-
-    max_id = max(map(lambda e: e["id"], entries_list), default=0)
-
-    for partname in os.listdir(args.parts_dir):
-        if not partname.endswith(".yml"):
-            continue
-
-        partpath = os.path.join(args.parts_dir, partname)
-        print(partpath)
-
-        with open(partpath, "r", encoding="utf-8-sig") as f:
-            partyaml = yaml.load(f, Loader=NoDatesSafeLoader)
-
+def process_changelog_part(part_path: str, category_filter: str, current_max_id: int) -> Optional[dict]:
+    """
+    Process a single changelog part file.
+    Returns new entry data if successful, None if skipped.
+    """
+    logger.info(f"Processing changelog part: {part_path}")
+    
+    try:
+        partyaml = load_yaml_file(part_path)
+        if not partyaml:
+            logger.warning(f"Part file {part_path} is empty or invalid")
+            return None
+        
+        # Validate required fields
+        required_fields = ['author', 'changes']
+        for field in required_fields:
+            if field not in partyaml:
+                logger.error(f"Part file {part_path} missing required field: {field}")
+                return None
+        
+        # Check category
         part_category = partyaml.get("category", CATEGORY_MAIN)
-        if part_category != category:
-            print(f"Skipping: wrong category ({part_category} vs {category})")
-            continue
-
+        if part_category != category_filter:
+            logger.info(f"Skipping {part_path}: category mismatch ({part_category} vs {category_filter})")
+            return None
+        
+        # Prepare entry data
         author = partyaml["author"]
         time = partyaml.get(
-            "time", datetime.datetime.now(datetime.timezone.utc).isoformat()
+            "time", 
+            datetime.datetime.now(datetime.timezone.utc).isoformat()
         )
         changes = partyaml["changes"]
         url = partyaml.get("url")
-
+        
+        # Normalize changes to list
         if not isinstance(changes, list):
             changes = [changes]
+        
+        logger.debug(f"Part details - Author: {author}, Time: {time}, "
+                    f"Changes count: {len(changes)}, URL: {url}")
+        
+        if len(changes) == 0:
+            logger.warning(f"Part {part_path} has no changes, skipping")
+            return None
+        
+        # Create new entry
+        new_id = current_max_id + 1
+        entry = {
+            "author": author,
+            "time": time,
+            "changes": changes,
+            "id": new_id,
+            "url": url
+        }
+        
+        logger.info(f"Created new changelog entry with ID: {new_id}")
+        return entry
+        
+    except Exception as e:
+        logger.error(f"Error processing part {part_path}: {e}")
+        return None
 
-        if len(changes):
-            # Don't add empty changelog entries...
-            max_id += 1
-            new_id = max_id
-
-            entries_list.append(
-                {"author": author, "time": time, "changes": changes, "id": new_id, "url": url}
-            )
-
-        os.remove(partpath)
-
-    print(f"Have {len(entries_list)} changelog entries")
-
+def main():
+    """Main function to process changelog parts and update main changelog."""
+    parser = argparse.ArgumentParser(
+        description="Merge changelog parts into main changelog YAML file."
+    )
+    parser.add_argument("changelog_file", help="Path to main changelog YAML file")
+    parser.add_argument("parts_dir", help="Directory containing changelog part files")
+    parser.add_argument("--category", default=CATEGORY_MAIN,
+                       help=f"Category filter for parts (default: {CATEGORY_MAIN})")
+    
+    args = parser.parse_args()
+    
+    logger.info(f"Starting changelog processing")
+    logger.info(f"Changelog file: {args.changelog_file}")
+    logger.info(f"Parts directory: {args.parts_dir}")
+    logger.info(f"Category filter: {args.category}")
+    
+    # Validate inputs
+    if not os.path.exists(args.changelog_file):
+        logger.error(f"Changelog file not found: {args.changelog_file}")
+        sys.exit(1)
+    
+    if not os.path.exists(args.parts_dir):
+        logger.error(f"Parts directory not found: {args.parts_dir}")
+        sys.exit(1)
+    
+    # Load current changelog data
+    logger.info("Loading current changelog data")
+    current_data = load_yaml_file(args.changelog_file)
+    
+    if current_data is None:
+        logger.info("No existing changelog data found, initializing new structure")
+        entries_list = []
+        current_data = {}
+    else:
+        entries_list = current_data.get("Entries", [])
+        logger.info(f"Loaded {len(entries_list)} existing entries")
+    
+    # Calculate current maximum ID
+    max_id = max(map(lambda e: e["id"], entries_list), default=0)
+    logger.debug(f"Current maximum entry ID: {max_id}")
+    
+    # Process each part file
+    processed_count = 0
+    skipped_count = 0
+    error_count = 0
+    
+    part_files = [f for f in os.listdir(args.parts_dir) if f.endswith('.yml')]
+    logger.info(f"Found {len(part_files)} YAML part files to process")
+    
+    for partname in part_files:
+        partpath = os.path.join(args.parts_dir, partname)
+        
+        try:
+            new_entry = process_changelog_part(partpath, args.category, max_id)
+            
+            if new_entry:
+                entries_list.append(new_entry)
+                max_id = new_entry["id"]  # Update max_id for next iteration
+                processed_count += 1
+                
+                # Remove processed part file
+                try:
+                    os.remove(partpath)
+                    logger.debug(f"Removed processed part file: {partpath}")
+                except OSError as e:
+                    logger.warning(f"Failed to remove part file {partpath}: {e}")
+            else:
+                skipped_count += 1
+                
+        except Exception as e:
+            logger.error(f"Failed to process part file {partname}: {e}")
+            error_count += 1
+    
+    logger.info(f"Processing complete - Added: {processed_count}, "
+                f"Skipped: {skipped_count}, Errors: {error_count}")
+    
+    # Log current state
+    logger.info(f"Total entries before cleanup: {len(entries_list)}")
+    
+    # Sort entries by ID
     entries_list.sort(key=lambda e: e["id"])
-
+    logger.debug("Entries sorted by ID")
+    
+    # Apply overflow limit
     overflow = len(entries_list) - MAX_ENTRIES
     if overflow > 0:
-        print(f"Removing {overflow} old entries.")
+        logger.info(f"Removing {overflow} old entries (limit: {MAX_ENTRIES})")
         entries_list = entries_list[overflow:]
-
+        logger.info(f"Remaining entries after cleanup: {len(entries_list)}")
+    else:
+        logger.debug(f"No overflow detected (current: {len(entries_list)}, limit: {MAX_ENTRIES})")
+    
+    # Prepare new data structure
     new_data = {"Entries": entries_list}
-    for key, value in current_data.items():
-        if key != "Entries":
-            new_data[key] = value
+    
+    # Copy all other keys from original data
+    original_keys = [k for k in current_data.keys() if k != "Entries"]
+    for key in original_keys:
+        new_data[key] = current_data[key]
+        logger.debug(f"Preserved metadata key: {key}")
+    
+    # Save updated changelog
+    logger.info(f"Saving updated changelog with {len(entries_list)} entries")
+    save_yaml_file(args.changelog_file, new_data)
+    
+    # Summary
+    logger.info("Changelog update completed successfully")
+    logger.info(f"Final statistics: Total entries: {len(entries_list)}, "
+                f"Processed: {processed_count}, Skipped: {skipped_count}, Errors: {error_count}")
 
-    with open(args.changelog_file, "w", encoding="utf-8-sig") as f:
-        yaml.safe_dump(new_data, f)
-
-
-main()
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        logger.info("Process interrupted by user")
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"Unhandled exception in main: {e}")
+        sys.exit(1)
