@@ -1046,7 +1046,7 @@ entities:
     - type: VesselIcon
       iffIcon:
         sprite: _Crescent/ShipIcons/ifficons.rsi
-        state: industrial
+        state: civilian
     - type: BecomesStation
       id: Shanty
     - type: SelfDeleteGrid
