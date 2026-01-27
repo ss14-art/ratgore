@@ -358,6 +358,21 @@
       - TradebandTranslator
       - ClothingBeltSalvageWebbing
     dynamicRecipes:
+      #Minutemen
+      - MinutemanLPC
+      - CorsairLPC
+      - ArbiterLPC
+      - SentryLPC
+      - RespondantLPC
+      - GuardLPC
+      - AdjudicatorLPC
+      - ExecutionerLPC
+      - JudgeLPC
+      - SentinelLPC
+      - ClothingOuterHardsuitMinutemenEnsign
+      - WeaponRifleCMMNimrod
+      - WeaponShotgunKammerer
+      #MinutemenEnd
       - CreoleTranslator
       - LowImperialTranslator
       - FreespeakTranslator
@@ -658,15 +673,12 @@
       - WeaponSubMachineGunNCWLWatchdog
       - ClothingOuterHardsuitNCWLInfantry
       - VanguardLPC
-      - ZorniyLPC
       - LodkaLPC
-      - CherenzikovLPC
       - MolotLPC
       - KrechetLPC
       - IvarodLPC
       - HindLPC
       - GargutLPC
-      - VanguardMarkTwoLPC
       - SternLPC
       - BogatyrLPC
       - SunderLPC
@@ -845,7 +857,6 @@
       - RPED
       - ClothingShoesBootsMag
       - ClothingShoesBootsMoon
-      - ClothingShoesBootsSpeed
       - ClothingShoesBootsMagAdv
       - NodeScanner
       - HolofanProjector
