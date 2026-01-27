@@ -1,4 +1,4 @@
-ent-StarshipEngineComponents = компонент двигателя шаттла
+ent-StarshipEngineComponents = компоненты двигателя шаттла
     .desc = Разнообразные компоненты двигателя, изготовленные из смеси разных минералов или восстановленного лома.
     .suffix = Полный
 ent-StarshipEngineComponents1 = { ent-StarshipEngineComponents }
@@ -10,7 +10,7 @@ ent-StarshipElectronics = электроника шаттла
 ent-StarshipElectronics1 = { ent-StarshipElectronics }
     .suffix = Один
     .desc = { ent-StarshipElectronics.desc }
-ent-StarshipHull = детали корпуса шаттла
+ent-StarshipHull = обшивка шаттла
     .desc = Сложенные и отсортированные бронепластины обшивки для шаттлов. Прочный вибропласталевый сплав.
     .suffix = Полный
 ent-StarshipHull1 = { ent-StarshipHull }

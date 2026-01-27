@@ -2322,7 +2322,7 @@ entities:
       pos: 2.5,1.5
       parent: 1
     - type: WarpPoint
-      location: Oris Mining Outpost
+      location: Пояс Астероидов "Тайпан-2"
 - proto: WaterCooler
   entities:
   - uid: 76

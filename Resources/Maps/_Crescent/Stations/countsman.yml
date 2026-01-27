@@ -110816,7 +110816,7 @@ entities:
       parent: 1
     - type: WarpPoint
       netsync: False
-      location: The Countsman
+      location: БМС Ревизор
 - proto: WaterTankFull
   entities:
   - uid: 8427

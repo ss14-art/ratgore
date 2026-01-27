@@ -10604,7 +10604,7 @@ entities:
       pos: 0.5,-25.5
       parent: 2
     - type: WarpPoint
-      location: Graveyard
+      location: Кладбище Кораблей
 - proto: WeaponCapacitorRecharger
   entities:
   - uid: 997

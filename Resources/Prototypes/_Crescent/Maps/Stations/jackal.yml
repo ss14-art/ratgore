@@ -1,6 +1,6 @@
 - type: gameMap
   id: Jackal
-  mapName: 'МГ Шпиль'
+  mapName: 'МГ Гидра'
   mapPath: /Maps/_Crescent/Stations/jackal.yml
   minPlayers: 0
   stations:
@@ -10,7 +10,7 @@
         - type: BlockShipWeaponProjectileGrid
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Шпиль'
+          mapNameTemplate: 'МГ Гидра'
         - type: VesselDesignation
           designation: vessel-designation-headquarters
         - type: VesselMusic
@@ -23,5 +23,5 @@
           availableJobs: #12 total
             RingleaderNCSP: [ 1, 1 ]
             LieutenantNCSP: [ 1, 1 ]
-            InfanteerNCSP: [ 8, 8 ]
+            InfanteerNCSP: [ 5, 5 ]
             TechnicianNCSP: [ 2, 2 ]

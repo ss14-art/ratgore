@@ -1,6 +1,6 @@
 ## UI
 
-bank-atm-menu-title = Государственный банк NCWL
+bank-atm-menu-title = Государственный банк
 bank-atm-menu-balance-label = Баланс счёта:{ " " }
 bank-atm-menu-no-bank = Нет банковского счёта!
 bank-atm-menu-withdraw-button = Снять

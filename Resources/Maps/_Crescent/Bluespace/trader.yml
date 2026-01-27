@@ -7196,7 +7196,7 @@ entities:
       pos: 0.5,-7.5
       parent: 1
     - type: WarpPoint
-      location: PTA Gu Tian X-312 [TRADER SHIP]
+      location: ОПТ Тиан  [TRADER SHIP]
 - proto: WaterTankFull
   entities:
   - uid: 528

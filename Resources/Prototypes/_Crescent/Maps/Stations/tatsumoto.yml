@@ -1,6 +1,6 @@
 - type: gameMap
   id: Tatsumoto
-  mapName: 'СТП Татсумо'
+  mapName: 'СТП Татсумото'
   mapPath: /Maps/_Crescent/Stations/tatsumoto.yml
   minPlayers: 0
   stations:

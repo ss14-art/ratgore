@@ -1,6 +1,6 @@
 - type: gameMap
   id: Hayes
-  mapName: 'БИ Эпитафия»'
+  mapName: 'БИ Эпитафия'
   mapPath: /Maps/_Crescent/Stations/hayes.yml
   minPlayers: 0
   stations:
@@ -8,7 +8,7 @@
       stationProto: StandardCrescentStation
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'БИ Эпитафия»'
+          mapNameTemplate: 'БИ Эпитафия'
         - type: VesselDesignation
           designation: vessel-designation-outpost
         - type: StationJobs
@@ -16,4 +16,4 @@
           availableJobs:
             CoordinatorNCSP: [ 1, 1 ]
             RipperdocNCSP: [ 2, 2 ]
-            TraumasecNCSP: [ 6, 6 ]
+            TraumasecNCSP: [ 5, 5 ]

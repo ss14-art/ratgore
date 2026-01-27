@@ -116871,7 +116871,7 @@ entities:
       pos: 0.5,-4.5
       parent: 1
     - type: WarpPoint
-      location: Gliess Santo
+      location: Глисс Санто
 - proto: WaterCooler
   entities:
   - uid: 9205

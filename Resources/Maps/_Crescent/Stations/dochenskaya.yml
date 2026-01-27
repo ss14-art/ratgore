@@ -47079,7 +47079,7 @@ entities:
       pos: 0.5,37.5
       parent: 1
     - type: WarpPoint
-      location: Dochenskaya Engineering Outpost
+      location: ПК Гидра
 - proto: WeaponCapacitorRecharger
   entities:
   - uid: 2999

@@ -1,6 +1,6 @@
 - type: gameMap
   id: Dochenskaya
-  mapName: 'КВ Гидра'
+  mapName: 'ПК Доченская'
   mapPath: /Maps/_Crescent/Stations/dochenskaya.yml
   minPlayers: 0
   stations:
@@ -8,7 +8,7 @@
       stationProto: StandardCrescentStation
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'КВ Гидра'
+          mapNameTemplate: 'ПК Доченская'
         - type: VesselMusic
           ambientMusicPrototype: DochenskayaMusic
         - type: Grammar
@@ -20,7 +20,7 @@
           overflowJobs: []
           availableJobs: #10 total
             ForemanNCSP: [ 1, 1 ]
-            ShipbreakerNCSP: [ 9, 9 ]
+            ShipbreakerNCSP: [ 5, 5 ]
 
 
 
