@@ -6,8 +6,8 @@
   name: ШТ Груша МКII
   description: |
     "Груша МКII" — это боеспособная модернизация, сделанная из обломка "Груши". Ее вооружение собрано из пушек, добытых на заброшенных кораблях.
-    ВООРУЖЕНИЕ: 1x 88-мм зенитная пушка "Принц", 1x 180-мм торпеда "Идна", 1x Стационарная универсальная точка крепления
-    МИНИМАЛЬНЫЙ ЭКИПАЖ: 1x Пилот, 1x Стрелок/Заряжающий
+    LOADOUT: 1x 90mm 'Gistum' artillery cannon, 1x 48mm 'Shortbow' rocket pod, 1x Fixed Universal Hardpoint
+    MINIMUM CREW: 1x Pilot, 1x Gunner/Loader
   price: 24000
   category: Small
   group: Scrap

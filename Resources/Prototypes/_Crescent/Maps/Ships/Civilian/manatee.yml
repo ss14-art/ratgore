@@ -24,7 +24,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: industrial
+            state: hauler
         - type: StationNameSetup
           mapNameTemplate: 'ГПИ Ламантин {1}'
           nameGenerator:

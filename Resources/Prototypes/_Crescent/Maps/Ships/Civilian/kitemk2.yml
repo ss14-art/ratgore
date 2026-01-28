@@ -6,8 +6,8 @@
   name: ШТ Коршун МКII
   description: |
     Боеспособная модернизация "Коршуна". Его корпус был вырезан, чтобы освободить место для модификаций, в результате чего крылья оказались открытыми вакууму.
-    ВООРУЖЕНИЕ: 2x 180-мм торпеды "Идна", 2x Стационарные универсальные точки крепления
-    МИНИМАЛЬНЫЙ ЭКИПАЖ: 1x Пилот, 1x Заряжающий
+    LOADOUT: 2x 48mm 'Shortbow' rocket pods, 2x Fixed Universal Hardpoints
+    MINIMUM CREW: 1x Pilot, 1x Gun Loader
   price: 37000
   category: Small
   group: Scrap

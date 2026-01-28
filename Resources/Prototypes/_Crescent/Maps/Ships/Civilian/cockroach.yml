@@ -6,7 +6,8 @@
   name: ШТ Таракан
   description: |
     "Таракан" — это грузовое судно значительного размера, проворное и маневренное, но его грузовой отсек полностью открыт в космос. Рекомендуется сопровождение, так как это делает корабль уязвимым для атак пиратов.
-    МИНИМАЛЬНЫЙ ЭКИПАЖ: 1x Пилот
+    LOADOUT: 6x 20mm 'Screamer' light autocannons
+    MINIMUM CREW: 1x Captain, 2x Miner Crew
   price: 85000
   category: Large
   group: Scrap
@@ -24,7 +25,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: bigindustrial
+            state: large_industrial
         - type: StationNameSetup
           mapNameTemplate: 'Таракан {1}'
           nameGenerator:

@@ -22,7 +22,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: frigate
+            state: corvette
         - type: StationNameSetup
           mapNameTemplate: 'ТК Тайпан {1}'
           nameGenerator:

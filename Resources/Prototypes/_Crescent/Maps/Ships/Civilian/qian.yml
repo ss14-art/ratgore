@@ -6,8 +6,8 @@
   name: ОПТ Цянь
   description: |
     "Цянь" — крупнотоннажный грузовой перевозчик, модернизированный для выживания, способный перевозить огромные объемы грузов, чтобы обогатить любого капитана. Оснащен генератором щита, а также набором баллистических скорострельных орудий ПВО для самозащиты.
-    ВООРУЖЕНИЕ: 10x 20x135-мм скорострельных орудий ПВО СТП
-    МИНИМАЛЬНЫЙ ЭКИПАЖ: 1x Пилот, 1x Грузчик
+    LOADOUT: 10x 20mm 'Screamer' light autocannons
+    MINIMUM CREW: 1x Pilot, 1x Cargo Worker
   price: 130000
   category: Medium
   group: Civilian
@@ -25,7 +25,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: bigindustrial
+            state: large_industrial
         - type: StationNameSetup
           mapNameTemplate: 'ОПТ Цянь {1}'
           nameGenerator:

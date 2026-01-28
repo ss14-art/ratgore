@@ -4,7 +4,10 @@
 - type: vessel
   id: Rockchipper
   name: ПК Кабитель
-  description: Шаттл собранный из разрушенных "Термитов". Создана для интенсивных горных работ.
+  description: |
+    Шаттл собранный из разрушенных "Термитов". Создана для интенсивных горных работ.
+    LOADOUT: 2x 250c Exhumer mining guns
+    MINIMUM CREW: 1x Pilot
   price: 19000
   category: Small
   group: None
@@ -22,7 +25,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: corvette
+            state: miner
         - type: StationNameSetup
           mapNameTemplate: 'ПК Кабитель {1}'
           nameGenerator:

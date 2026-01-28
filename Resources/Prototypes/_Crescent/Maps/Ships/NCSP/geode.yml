@@ -4,7 +4,10 @@
 - type: vessel
   id: Geode
   name: ПК Жеода
-  description: Легкобронированный корвет с бортовым залпом.
+  description: |
+    Легкобронированный корвет с бортовым залпом.
+    LOADOUT: 4x 20mm 'Screamer' light carbine reapeater cannons, 4x 50mm 'Whistler' light autocannons, 2x 90mm 'Gistum' tri-barreled repeater
+    MINIMUM CREW: 1x Pilot, 1x Gunner
   price: 82000
   category: Medium
   group: None
@@ -22,7 +25,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: corvette
+            state: destroyer
         - type: StationNameSetup
           mapNameTemplate: 'ПК Жеода {1}'
           nameGenerator:

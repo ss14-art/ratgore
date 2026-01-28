@@ -6,8 +6,8 @@
   name: ОПТ Молотоголов
   description: |
     Распространенный боевой корабль, разработанный "Пан Тай", задуманный как универсальный корабль передовой линии, имеющий медицинские, грузовые, добывающие и охранные модули.
-    ВООРУЖЕНИЕ: 6x 20x135-мм скорострельных орудий ПВО, 2x 100-мм ракетные установки "Лансер"
-    МИНИМАЛЬНЫЙ ЭКИПАЖ: 1x Пилот, 1x Стрелок
+    LOADOUT: 6x 20mm 'Screamer' light autocannons, 2x 48mm 'Shortbow' rocket pods, 2x 120mm 'Pithatis' mono-barreled artillery cannons
+    MINIMUM CREW: 1x Pilot, 1x Gunner
   price: 160000
   category: Large
   group: Civilian
@@ -25,7 +25,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: cruiser
+            state: large_industrial
         - type: StationNameSetup
           mapNameTemplate: 'PTA Hammerhead {1}'
           nameGenerator:

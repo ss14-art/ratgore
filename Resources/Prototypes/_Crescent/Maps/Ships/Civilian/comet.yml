@@ -6,8 +6,8 @@
   name: ГПИ Комета
   description: |
     Средняя по размеру личная роскошная "яхта", модули включают: бар/кухню, библиотеку, медотсек, спальню на двоих и незначительные средства самообороны.  
-    СНАРЯЖЕНИЕ: 2x SHI 400c плазменные болтовые репитеры, 4x SHI 180c "Факел" гатлинг высокого давления  
-    МИНИМАЛЬНЫЙ ЭКИПАЖ: 1 пилот, 1 стрелок  
+    LOADOUT: 2x 200cc 'Retribution' laser gattling cannons, 2x 20mm 'Screamer' light autocannons, 2x 48mm 'Shortbow' rocket pods
+    MINIMUM CREW: 1x Pilot, 1x Gunner
   price: 90000
   category: Medium
   group: Civilian
@@ -25,7 +25,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: industrial
+            state: civilian
         - type: StationNameSetup
           mapNameTemplate: 'ГПИ Комета {1}'
           nameGenerator:

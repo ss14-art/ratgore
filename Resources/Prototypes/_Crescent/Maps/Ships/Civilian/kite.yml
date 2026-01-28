@@ -5,9 +5,9 @@
   id: Kite
   name: ГПИ Возмей  
   description: |
-    Малый универсальный шаттл с возможностями для экспедиций, предназначенный для новичков-пилотов. Вооружён парой плазмомётов.  
-    СНАРЯЖЕНИЕ: 2x SHI 400c плазменных болтовых репитера  
-    МИНИМАЛЬНЫЙ ЭКИПАЖ: 1 пилот  
+    Малый универсальный шаттл с возможностями для экспедиций, предназначенный для новичков-пилотов.
+    LOADOUT: 2x 20mm 'Screamer' light autocannons
+    MINIMUM CREW: 1x Pilot
   price: 35000
   category: Small
   group: Civilian
@@ -22,6 +22,10 @@
     Kite:
       stationProto: StandardCrescentExpeditionVessel
       components:
+        - type: VesselIcon
+          iffIcon:
+            sprite: _Crescent/ShipIcons/ifficons.rsi
+            state: civilian
         - type: StationNameSetup
           mapNameTemplate: 'ГПИ Возмей {1}'
           nameGenerator:

@@ -19,7 +19,7 @@
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: industrial
+            state: civilian
         - type: StationNameSetup
           mapNameTemplate: 'СТП Зонд {1}'
           nameGenerator:
