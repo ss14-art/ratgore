@@ -78,6 +78,10 @@
     - sprite: Mobs/Silicon/station_ai.rsi
       state: default
   - type: ShowJobIcons
+  - type: ShowCrewIcons
+  - type: DamagedSiliconAccent
+    startPowerCorruptionAtCharIdx: 4
+    maxPowerCorruptionAtCharIdx: 20
 
 - type: entity
   id: AiHeldIntellicard
@@ -99,6 +103,8 @@
     interfaces:
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
+  - type: ShowJobIcons
+  - type: ShowCrewIcons
 
 # Ai
 - type: entity

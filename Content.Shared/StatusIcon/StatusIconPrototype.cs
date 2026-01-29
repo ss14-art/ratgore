@@ -63,6 +63,18 @@ public partial class StatusIconData : IComparable<StatusIconData>
     public StatusIconLayer Layer = StatusIconLayer.Base;
 
     /// <summary>
+    /// Offset of the status icon, up and down only.
+    /// </summary>
+    [DataField]
+    public int Offset = 0;
+
+    /// <summary>
+    /// Offset of the status icon, left and right only.
+    /// </summary>
+    [DataField]
+    public int OffsetHorizontal = 0;
+
+    /// <summary>
     /// Sets if the icon should be rendered with or without the effect of lighting.
     /// </summary>
     [DataField]
@@ -113,6 +125,12 @@ public sealed partial class JobIconPrototype : StatusIconPrototype, IInheritingP
     /// </summary>
     [DataField]
     public bool AllowSelection = true;
+
+    /// <summary>
+    /// Should this job icon be considered a crew job for silicons?
+    /// </summary>
+    [DataField]
+    public bool IsCrewJob = true;
 }
 
 /// <summary>
