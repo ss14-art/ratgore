@@ -16,7 +16,7 @@ shuttle-console-iff-label = {$name} ({$distance} м)
 shuttle-console-exclusion = Запретная зона
 shuttle-console-nav-settings = Настройки
 shuttle-console-iff-toggle = Показывать «свой-чужой»
-shuttle-console-iff-search = Поиск Iff
+shuttle-console-iff-search = Поиск IFF
 shuttle-console-dock-toggle = Показывать стыковку
 
 # MAP (Карта)
