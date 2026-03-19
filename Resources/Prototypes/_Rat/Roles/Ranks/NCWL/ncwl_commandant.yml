@@ -1,18 +1,18 @@
 - type: rank
   id: RatRankCommandantSenior
-  name: Гененерал-полковник
-  prefix: Гененерал-полк.
+  name: Генерал-полковник
+  prefix: Генерал-полк.
   paygrade: О6
 
 - type: rank
   id: RatRankCommandantMiddle
-  name: Гененерал-лейтенант
-  prefix: Гененерал-лейт.
+  name: Генерал-лейтенант
+  prefix: Генерал-лейт.
   paygrade: О5
 
 - type: rank
   id: RatRankCommandantJunior
-  name: Гененерал-майор
-  prefix: Гененерал-майор
+  name: Генерал-майор
+  prefix: Генерал-майор
   paygrade: О4
 

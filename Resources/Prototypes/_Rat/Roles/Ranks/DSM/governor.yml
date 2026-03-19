@@ -1,0 +1,17 @@
+- type: rank
+  id: RatRankGovernorSenior
+  name: Эрцгерцог
+  prefix: Эрцгерцог
+  paygrade: Г3
+
+- type: rank
+  id: RatRankGovernorMiddle
+  name: Герцог
+  prefix: Герцог
+  paygrade: Г2
+
+- type: rank
+  id: RatRankGovernorJunior
+  name: Маркграф
+  prefix: Маркграф
+  paygrade: Г1

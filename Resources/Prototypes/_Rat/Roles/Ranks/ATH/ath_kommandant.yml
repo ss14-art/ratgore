@@ -1,0 +1,18 @@
+- type: rank
+  id: RatRankKommandantSenior
+  name: Гранд-адмирал
+  prefix: Гранд-адмирал
+  paygrade: C3
+
+- type: rank
+  id: RatRankKommandantMiddle
+  name: Адмирал
+  prefix: Адмирал
+  paygrade: C2
+
+- type: rank
+  id: RatRankKommandantJunior
+  name: Контр-адмирал
+  prefix: Контр-адмирал
+  paygrade: C1
+

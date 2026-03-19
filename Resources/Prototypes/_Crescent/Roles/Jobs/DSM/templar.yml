@@ -4,15 +4,15 @@
   description: job-description-advocatustemplar
   playTimeTracker: JobTemplarDSM
   ranks:
-    RatRankKnightSenior:
+    RatRankTemplarSenior:
     - !type:CharacterPlaytimeRequirement
       tracker: JobKnightDSM
       min: 72000 # 20 hours
-    RatRankKnightMiddle:
+    RatRankTemplarMiddle:
     - !type:CharacterPlaytimeRequirement
       tracker: JobKnightDSM
       min: 360000 # 10 hours
-    RatRankKnightJunior: []
+    RatRankTemplarJunior: []
   weight: 97
   startingGear: TemplarGear
   alwaysUseSpawner: true

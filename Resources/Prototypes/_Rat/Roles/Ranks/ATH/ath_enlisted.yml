@@ -1,0 +1,58 @@
+- type: rank
+  id: RatRankATHEnlistedFirst
+  name: Штабсфанрих
+  prefix: Штабсфанрих
+  paygrade: E10
+
+- type: rank
+  id: RatRankATHEnlistedSecond
+  name: Оберфанрих
+  prefix: Оберфанрих
+  paygrade: E9
+
+- type: rank
+  id: RatRankATHEnlistedThird
+  name: Фанрих
+  prefix: Фанрих
+  paygrade: E8
+
+- type: rank
+  id: RatRankATHEnlistedBased
+  name: Штабс-фельдфебель
+  prefix: Штабс-фельдфебель
+  paygrade: E7
+
+- type: rank
+  id: RatRankATHEnlistedHigh
+  name: Обер-фельдфебель
+  prefix: Обер-фельдфебель
+  paygrade: E6
+- type: rank
+  id: RatRankATHEnlistedLead
+  name: Фельдфебель
+  prefix: Фельдфебель
+  paygrade: E5
+
+- type: rank
+  id: RatRankATHEnlistedSenior
+  name: Штабс-ефрейтор
+  prefix: Штабс-ефрейтор
+  paygrade: E4
+
+- type: rank
+  id: RatRankATHEnlistedMiddle
+  name: Обер-ефрейтор
+  prefix: Обер-ефрейтор
+  paygrade: E3
+
+- type: rank
+  id: RatRankATHEnlistedJunior
+  name: Ефрейтор
+  prefix: Ефрейтор
+  paygrade: E2
+
+- type: rank
+  id: RatRankATHEnlistedNovice
+  name: Матрос
+  prefix: Матрос
+  paygrade: E1

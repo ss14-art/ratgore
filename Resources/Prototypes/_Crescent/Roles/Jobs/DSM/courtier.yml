@@ -4,6 +4,10 @@
   description: job-description-courtier
   playTimeTracker: JobCourtierDSM
   ranks:
+    RatRankCourtierFirst:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobCourtierDSM
+      min: 180000 # 50 hours
     RatRankCourtierHead:
     - !type:CharacterPlaytimeRequirement
       tracker: JobCourtierDSM
@@ -19,7 +23,7 @@
     RatRankCourtierMiddle:
     - !type:CharacterPlaytimeRequirement
       tracker: JobCourtierDSM
-      min: 360000 # 10 hours
+      min: 36000 # 10 hours
     RatRankCourtierJunior: []
   weight: 52
   startingGear: CourtierGear

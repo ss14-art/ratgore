@@ -1,4 +1,10 @@
 - type: rank
+  id: RatRankCourtierFirst
+  name: Герцог
+  prefix: Герцог
+  paygrade: П6
+
+- type: rank
   id: RatRankCourtierHead
   name: Маркиз
   prefix: Маркиз

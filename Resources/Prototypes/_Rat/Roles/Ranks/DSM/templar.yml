@@ -1,0 +1,17 @@
+- type: rank
+  id: RatRankTemplarSenior
+  name: Ординатор
+  prefix: Ординатор
+  paygrade: Т3
+
+- type: rank
+  id: RatRankTemplarMiddle
+  name: Претор
+  prefix: Претор
+  paygrade: Т2
+
+- type: rank
+  id: RatRankTemplarJunior
+  name: Экзекутор
+  prefix: Экзекутор
+  paygrade: Т1

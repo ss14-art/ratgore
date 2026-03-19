@@ -1,0 +1,30 @@
+- type: rank
+  id: RatRankATHOfficerHigh
+  name: Коммодор
+  prefix: Коммодор
+  paygrade: O5
+
+- type: rank
+  id: RatRankATHOfficerLead
+  name: Капитан
+  prefix: Капитан
+  paygrade: O4
+
+- type: rank
+  id: RatRankATHOfficerSenior
+  name: Капитан-лейтенант
+  prefix: Капитан-лейтенант
+  paygrade: O3
+
+- type: rank
+  id: RatRankATHOfficerMiddle
+  name: Оберлейтенант
+  prefix: Оберлейтенант
+  paygrade: O2
+
+- type: rank
+  id: RatRankATHOfficerJunior
+  name: Лейтенант
+  prefix: Лейтенант
+  paygrade: O1
+
