@@ -2,34 +2,34 @@
   id: RatRankCourtierFirst
   name: Герцог
   prefix: Герцог
-  paygrade: П6
+  paygrade: Д6
 
 - type: rank
   id: RatRankCourtierHead
-  name: Маркиз
-  prefix: Маркиз
-  paygrade: П5
+  name: Маркграф
+  prefix: Маркграф
+  paygrade: Д5
 
 - type: rank
   id: RatRankCourtierLead
   name: Граф
   prefix: Граф
-  paygrade: П4
+  paygrade: Д4
 
 - type: rank
   id: RatRankCourtierSenior
   name: Виконт
   prefix: Виконт
-  paygrade: П3
+  paygrade: Д3
 
 - type: rank
   id: RatRankCourtierMiddle
   name: Барон
   prefix: Барон
-  paygrade: П2
+  paygrade: Д2
 
 - type: rank
   id: RatRankCourtierJunior
   name: Патриций
   prefix: Патриций
-  paygrade: П1
+  paygrade: Д1

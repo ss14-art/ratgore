@@ -3,7 +3,7 @@
   name: job-name-kommandant
   description: job-description-kommandant
   playTimeTracker: JobKommandantATH
-   ranks:
+  ranks:
     RatRankKommandantSenior:
     - !type:CharacterPlaytimeRequirement
       tracker: JobKommandantATH

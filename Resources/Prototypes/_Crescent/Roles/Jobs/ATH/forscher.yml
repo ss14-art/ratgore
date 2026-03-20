@@ -17,7 +17,7 @@
       tracker: JobForscherATH
       min: 36000 # 10 hours
     RatRankATHEnlistedSenior: []
-  weight: 98
+  weight: 15
   startingGear: ForscherGear
   alwaysUseSpawner: true
   requireAdminNotify: true

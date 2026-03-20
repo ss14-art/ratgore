@@ -21,7 +21,7 @@
       tracker: JobHandelsATH
       min: 36000 # 10 hours
     RatRankATHEnlistedSenior: []
-  weight: 96
+  weight: 20
   startingGear: HandelsGear
   alwaysUseSpawner: true
   requireAdminNotify: true

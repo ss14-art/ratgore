@@ -2,16 +2,16 @@
   id: RatRankGovernorSenior
   name: Эрцгерцог
   prefix: Эрцгерцог
-  paygrade: Г3
+  paygrade: Д6
 
 - type: rank
   id: RatRankGovernorMiddle
   name: Герцог
   prefix: Герцог
-  paygrade: Г2
+  paygrade: Д5
 
 - type: rank
   id: RatRankGovernorJunior
   name: Маркграф
   prefix: Маркграф
-  paygrade: Г1
+  paygrade: Д4

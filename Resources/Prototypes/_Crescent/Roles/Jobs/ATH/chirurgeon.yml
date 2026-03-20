@@ -17,7 +17,7 @@
       tracker: JobChirurgeonATH
       min: 36000 # 10 hours
     RatRankATHEnlistedJunior: []
-  weight: 97
+  weight: 10
   startingGear: ChirurgeonGear
   alwaysUseSpawner: true
   requireAdminNotify: true

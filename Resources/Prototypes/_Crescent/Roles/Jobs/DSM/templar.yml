@@ -6,11 +6,11 @@
   ranks:
     RatRankTemplarSenior:
     - !type:CharacterPlaytimeRequirement
-      tracker: JobKnightDSM
+      tracker: JobTemplarDSM
       min: 72000 # 20 hours
     RatRankTemplarMiddle:
     - !type:CharacterPlaytimeRequirement
-      tracker: JobKnightDSM
+      tracker: JobTemplarDSM
       min: 36000 # 10 hours
     RatRankTemplarJunior: []
   weight: 97

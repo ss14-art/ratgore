@@ -29,7 +29,7 @@
       tracker: JobSanitatATH
       min: 36000 # 10 hours
     RatRankATHEnlistedJunior: []
-  weight: 3
+  weight: 4
   startingGear: SanitatGear
   alwaysUseSpawner: true
   requireAdminNotify: true

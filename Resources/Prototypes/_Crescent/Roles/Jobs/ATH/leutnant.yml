@@ -17,7 +17,7 @@
       tracker: JobLeutnantATH
       min: 54000 # 15 hours
     RatRankATHOfficerJunior: []
-  weight: 50
+  weight: 97
   startingGear: LeutnantGear
   alwaysUseSpawner: true
   requireAdminNotify: true

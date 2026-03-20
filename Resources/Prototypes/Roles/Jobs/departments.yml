@@ -205,7 +205,7 @@
   - BeltrunnerTAP
   - DraugrTAP
   - ServileTAP
-  editorHidden: true
+  editorHidden: false
 
 - type: department
   id: ATH
@@ -226,7 +226,7 @@
   - ChirurgeonATH
   - VorarbeiterATH
   - ArbeiterATH
-  editorHidden: true # i just like to see them for the numbers , SPCR 2025
+  editorHidden: false # I just like to see them
   primary: false
 
   # CONSCRIPT

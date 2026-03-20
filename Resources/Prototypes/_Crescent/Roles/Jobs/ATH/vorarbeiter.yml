@@ -21,7 +21,7 @@
       tracker: JobVorarbeiterATH
       min: 72000 # 20 hours
     RatRankATHEnlistedMiddle: []
-  weight: 93
+  weight: 2
   startingGear: VorarbeiterGear
   alwaysUseSpawner: true
   icon: "JobIconVorarbeiter"

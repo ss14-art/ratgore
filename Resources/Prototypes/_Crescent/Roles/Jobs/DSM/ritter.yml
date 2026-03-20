@@ -6,11 +6,11 @@
   ranks:
     RatRankKnightSenior:
     - !type:CharacterPlaytimeRequirement
-      tracker: JobKnightDSM
+      tracker: JobRitterDSM
       min: 72000 # 20 hours
     RatRankKnightMiddle:
     - !type:CharacterPlaytimeRequirement
-      tracker: JobKnightDSM
+      tracker: JobRitterDSM
       min: 360000 # 10 hours
     RatRankKnightJunior: []
   weight: 51

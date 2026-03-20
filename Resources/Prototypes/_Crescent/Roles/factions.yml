@@ -154,32 +154,33 @@
     state: srm
 
 - type: faction
-  name: "Central Sol Authority"
+  name: "Центральная Власть Солнца"
   id: ATH
   descriptionPrefix: |
-    MINIMUM PLAYTIME: 10 HOURS / 3 ROUNDS
-    This faction is only very rarely present in the Taypan system.
-    Restricted to Special Midround Spawns
+    МИНИМАЛЬНОЕ ВРЕМЯ ИГРЫ: 10 ЧАСОВ / 3 РАУНДА
+    Осколок экспедиционного флота Авторитата.
+    Занимается отлавливанием псиоников и борьбой со всеми, кто их поддерживает.
+    Другие фракции могут относиться с подозрением или быть сразу враждебны.
   buttonColor: Black
   description: |
-    An oligarchic authoritarian regime, the successor state to the old Mandate, that could now be best described as fascist.
-    They are held responsible for the death of the old Kaiser and have been fighting a civil war for decades.
-    Often known as simply the Authoritat, they were born out of the greed of the former Imperial court. Led by the Jovian
-    ideals of psionic purity, the Authoritat has minimal interest in feudal reign like their precursors, instead focusing on
-    controlling the populace and on violent conquests made to eradicate species and communities that they've found to be linked
-    to the Boundary, Taypan, and other psionic phenomena. It is believed by Authoritat officials that the source of the
-    Boundary itself comes from the combined, manifested thought of all psionically-enabled people in the Imperial Supercluster,
-    and with every spell cast, every psionicist born, it only becomes larger and more aggressive, threatening to consume the galaxy.
+    Олигархический авторитарный режим, правопреемник старого мандата, который сейчас лучше всего можно охарактеризовать как фашистский.
+    Они несут ответственность за смерть старого кайзера и десятилетиями ведут гражданскую войну.
+    Часто известные как просто Авторитат, они были порождены жадностью бывшего императорского двора. Руководствуясь юпитерианскими
+    идеалами псионической чистоты, Авторитат, как и их предшественники, не проявляет особого интереса к феодальному правлению, вместо этого сосредоточившись на
+    контролируя население и совершая насильственные завоевания с целью уничтожения видов и сообществ, которые, как они обнаружили, связаны
+    с Границей, Тайпанами и другими псионическими явлениями. Официальные лица считают, что источник самой
+    Границы проистекает из объединенной, проявленной мысли всех обладающих псионическими способностями людей в Имперском Сверхскоплении,
+    и с каждым произнесенным заклинанием, с каждым рожденным псиоником она становится только больше и агрессивнее, угрожая поглотить галактику.
 
-    Effectively, the prime superpower of all of humanity, the Authoritat allows for a good amount of economic freedom for its
-    non-psionic populace and promotes loyalty in a manner not too dissimilar to the Prussian traditions of old Earth,
-    with aspiring members climbing up the military ladder of different units, such as the 43rd Battlegroup of the Sol system.
-    Dissenters who think they can speak up against the current regime quickly find themselves screened and detained.
-    Tight information control prevents widespread dissent, and officials often rewrite history itself to suit the needs of the
-    Authoritat.
+    По сути, являясь главной сверхдержавой всего человечества, Авторитат предоставляет значительную экономическую свободу своему
+    непсионическому населению и поощряет лояльность в манере, не слишком отличающейся от прусских традиций старой Земли,
+    когда начинающие бойцы поднимаются по военной лестнице в различных подразделениях, таких как 43-я боевая группа из Солнечной системы.
+    Несогласных, которые думают, что могут выступить против нынешнего режима, быстро проверяют и задерживают.
+    Жесткий информационный контроль предотвращает широкое распространение инакомыслия, и чиновники часто сами переписывают историю в соответствии с потребностями
+    Авторитата.
   color: "#ffffed"
   weight: 2
-  enabled: false
+  enabled: true
   icon:
     sprite: /Textures/_Crescent/faction_icons.rsi
     state: csa

@@ -29,7 +29,7 @@
       tracker: JobKanoneerATH
       min: 36000 # 10 hours
     RatRankATHEnlistedSenior: []
-  weight: 2
+  weight: 5
   startingGear: KanoneerGear
   alwaysUseSpawner: true
   requireAdminNotify: false
