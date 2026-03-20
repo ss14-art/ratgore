@@ -3,6 +3,32 @@
   name: job-name-kanoneer
   description: job-description-kanoneer
   playTimeTracker: JobKanoneerATH
+  ranks:
+    RatRankATHEnlistedFirst:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobKanoneerATH
+      min: 270000 # 75 hours
+    RatRankATHEnlistedSecond:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobKanoneerATH
+      min: 198000 # 55 hours
+    RatRankATHEnlistedThird:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobKanoneerATH
+      min: 162000 # 45 hours
+    RatRankATHEnlistedBased:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobKanoneerATH
+      min: 108000 # 30 hours
+    RatRankATHEnlistedHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobKanoneerATH
+      min: 72000 # 20 hours
+    RatRankATHEnlistedLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobKanoneerATH
+      min: 36000 # 10 hours
+    RatRankATHEnlistedSenior: []
   weight: 2
   startingGear: KanoneerGear
   alwaysUseSpawner: true

@@ -3,6 +3,20 @@
   name: job-name-leutnant
   description: job-description-leutnant
   playTimeTracker: JobLeutnantATH
+  ranks:
+    RatRankATHOfficerLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobLeutnantATH
+      min: 180000 # 50 hours
+    RatRankATHOfficerSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobLeutnantATH
+      min: 108000 # 30 hours
+    RatRankATHOfficerMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobLeutnantATH
+      min: 54000 # 15 hours
+    RatRankATHOfficerJunior: []
   weight: 50
   startingGear: LeutnantGear
   alwaysUseSpawner: true

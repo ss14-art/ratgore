@@ -2,7 +2,17 @@
   id: StewardATH
   name: job-name-steward
   description: job-description-steward
-  playTimeTracker: ConscriptDSM
+  playTimeTracker: JobStewartATH
+  ranks:
+    RatRankATHOfficerHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobStewartATH
+      min: 144000 # 40 hours
+    RatRankATHOfficerLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobStewartATH
+      min: 72000 # 20 hours
+    RatRankATHOfficerSenior: []
   weight: 99
   startingGear: StewardGear
   alwaysUseSpawner: true

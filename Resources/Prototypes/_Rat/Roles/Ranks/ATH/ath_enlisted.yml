@@ -27,6 +27,7 @@
   name: Обер-фельдфебель
   prefix: Обер-фельдфебель
   paygrade: E6
+  
 - type: rank
   id: RatRankATHEnlistedLead
   name: Фельдфебель
@@ -56,3 +57,4 @@
   name: Матрос
   prefix: Матрос
   paygrade: E1
+  

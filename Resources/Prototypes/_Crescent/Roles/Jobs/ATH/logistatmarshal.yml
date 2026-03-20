@@ -3,6 +3,16 @@
   name: job-name-logistat
   description: job-description-logistat
   playTimeTracker: JobLogistatATH
+  ranks:
+    RatRankATHOfficerSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobLogistatATH
+      min: 108000 # 30 hours
+    RatRankATHOfficerMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobLogistatATH
+      min: 54000 # 15 hours
+    RatRankATHOfficerJunior: []
   weight: 95
   startingGear: LogistatGear
   alwaysUseSpawner: true

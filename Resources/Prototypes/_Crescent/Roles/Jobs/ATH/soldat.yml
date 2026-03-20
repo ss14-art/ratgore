@@ -3,6 +3,32 @@
   name: job-name-soldat
   description: job-description-soldat
   playTimeTracker: JobSoldatATH
+  ranks:
+    RatRankATHEnlistedBased:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSoldatATH
+      min: 270000 # 75 hours
+    RatRankATHEnlistedHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSoldatATH
+      min: 198000 # 55 hours
+    RatRankATHEnlistedLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSoldatATH
+      min: 162000 # 45 hours   
+    RatRankATHEnlistedSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSoldatATH
+      min: 108000 # 30 hours
+    RatRankATHEnlistedMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSoldatATH
+      min: 72000 # 20 hours
+    RatRankATHEnlistedJunior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSoldatATH
+      min: 36000 # 10 hours
+    RatRankATHEnlistedNovice: []
   weight: 4
   startingGear: SoldatGear
   alwaysUseSpawner: true

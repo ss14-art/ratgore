@@ -43,7 +43,7 @@ ghost-role-information-syndicate-cyborg-saboteur-name-c = CS 3201 Sun Wukong Com
 
 job-name-freeholder = Колон
 job-name-levyman = Легионер
-job-name-knight = Рыцарь-командор
+job-name-knight = Рыцарь-баннерет
 job-name-ritter = Рыцарь-прелат
 job-name-courtier = Придворный
 job-name-ministerlabor = Министр Промышленности
@@ -54,7 +54,7 @@ job-name-governor = Лорд-адмирал
 job-name-foremanimp = Надсмотрщик
 job-name-imperialresearch = Писарь
 job-name-surgeon = Медикатус
-job-name-wealth = Рыцарь-снабженец
+job-name-wealth = Рыцарь-логистикар
 job-name-advocatus = Министр Просвящения
 job-name-advocatustemplar = Рыцарь-тамплиер
 
@@ -100,8 +100,8 @@ job-name-servile = Слуга Аль'Сеик
 job-name-antiquarian = Антиквар Издари
 
 # ath
-job-name-kommandant = Контр-адмирал
-job-name-leutnant = Лейтнант
+job-name-kommandant = Коммандант
+job-name-leutnant = Флот-офицер
 job-name-soldat = Егерь
 job-name-sanitatATH = Санитат
 job-name-kanoneer = Канонир

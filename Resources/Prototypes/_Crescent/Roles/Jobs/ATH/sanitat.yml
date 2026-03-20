@@ -3,6 +3,32 @@
   name: job-name-sanitatATH
   description: job-description-sanitat
   playTimeTracker: JobSanitatATH
+  ranks:
+    RatRankATHEnlistedThird:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSanitatATH
+      min: 270000 # 75 hours
+    RatRankATHEnlistedBased:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSanitatATH
+      min: 198000 # 55 hours
+    RatRankATHEnlistedHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSanitatATH
+      min: 162000 # 45 hours
+    RatRankATHEnlistedLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSanitatATH
+      min: 108000 # 30 hours
+    RatRankATHEnlistedSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSanitatATH
+      min: 72000 # 20 hours
+    RatRankATHEnlistedMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobSanitatATH
+      min: 36000 # 10 hours
+    RatRankATHEnlistedJunior: []
   weight: 3
   startingGear: SanitatGear
   alwaysUseSpawner: true

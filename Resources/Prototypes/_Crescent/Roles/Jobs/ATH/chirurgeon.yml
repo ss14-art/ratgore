@@ -3,6 +3,20 @@
   name: job-name-chirurgeon
   description: job-description-chirurgeon
   playTimeTracker: JobChirurgeonATH
+  ranks:
+    RatRankATHEnlistedLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobChirurgeonATH
+      min: 108000 # 30 hours
+    RatRankATHEnlistedSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobChirurgeonATH
+      min: 72000 # 20 hours
+    RatRankATHEnlistedMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobChirurgeonATH
+      min: 36000 # 10 hours
+    RatRankATHEnlistedJunior: []
   weight: 97
   startingGear: ChirurgeonGear
   alwaysUseSpawner: true

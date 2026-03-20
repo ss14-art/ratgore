@@ -3,6 +3,24 @@
   name: job-name-vorarbeiter
   description: job-description-vorarbeiter
   playTimeTracker: JobVorarbeiterATH
+  ranks:
+    RatRankATHEnlistedBased:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobVorarbeiterATH
+      min: 198000 # 55 hours 
+    RatRankATHEnlistedHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobVorarbeiterATH
+      min: 162000 # 45 hours
+    RatRankATHEnlistedLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobVorarbeiterATH
+      min: 108000 # 30 hours
+    RatRankATHEnlistedSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobVorarbeiterATH
+      min: 72000 # 20 hours
+    RatRankATHEnlistedMiddle: []
   weight: 93
   startingGear: VorarbeiterGear
   alwaysUseSpawner: true

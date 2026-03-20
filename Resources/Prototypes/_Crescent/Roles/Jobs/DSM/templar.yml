@@ -11,7 +11,7 @@
     RatRankTemplarMiddle:
     - !type:CharacterPlaytimeRequirement
       tracker: JobKnightDSM
-      min: 360000 # 10 hours
+      min: 36000 # 10 hours
     RatRankTemplarJunior: []
   weight: 97
   startingGear: TemplarGear

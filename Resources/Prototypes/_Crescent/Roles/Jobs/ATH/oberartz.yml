@@ -3,6 +3,16 @@
   name: job-name-oberartz
   description: job-description-oberartz
   playTimeTracker: JobOberartzATH
+  ranks:
+    RatRankATHOfficerSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobOberartzATH
+      min: 108000 # 30 hours
+    RatRankATHOfficerMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobOberartzATH
+      min: 54000 # 15 hours
+    RatRankATHOfficerJunior: []
   weight: 94
   startingGear: OberartzGear
   alwaysUseSpawner: true

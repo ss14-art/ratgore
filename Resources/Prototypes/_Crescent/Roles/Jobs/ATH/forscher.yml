@@ -3,6 +3,20 @@
   name: job-name-forscher
   description: job-description-forscher
   playTimeTracker: JobForscherATH
+  ranks:
+    RatRankATHEnlistedBased:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobForscherATH
+      min: 108000 # 30 hours
+    RatRankATHEnlistedHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobForscherATH
+      min: 72000 # 20 hours
+    RatRankATHEnlistedLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobForscherATH
+      min: 36000 # 10 hours
+    RatRankATHEnlistedSenior: []
   weight: 98
   startingGear: ForscherGear
   alwaysUseSpawner: true

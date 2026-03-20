@@ -2,17 +2,17 @@
   id: RatRankKommandantSenior
   name: Гранд-адмирал
   prefix: Гранд-адмирал
-  paygrade: C3
+  paygrade: O8
 
 - type: rank
   id: RatRankKommandantMiddle
   name: Адмирал
   prefix: Адмирал
-  paygrade: C2
+  paygrade: O7
 
 - type: rank
   id: RatRankKommandantJunior
   name: Контр-адмирал
   prefix: Контр-адмирал
-  paygrade: C1
+  paygrade: O6
 

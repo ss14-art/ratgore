@@ -3,6 +3,20 @@
   name: job-name-arbeiter
   description: job-description-arbeiter
   playTimeTracker: JobArbeiterATH
+  ranks: 
+    RatRankATHEnlistedSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobArbeiterATH
+      min: 108000 # 30 hours
+    RatRankATHEnlistedMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobArbeiterATH
+      min: 72000 # 20 hours
+    RatRankATHEnlistedJunior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobArbeiterATH
+      min: 36000 # 10 hours
+    RatRankATHEnlistedNovice: []
   weight: 1
   startingGear: ArbeiterGear
   alwaysUseSpawner: true

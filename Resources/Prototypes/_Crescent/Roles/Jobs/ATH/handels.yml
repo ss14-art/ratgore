@@ -3,6 +3,24 @@
   name: job-name-handels
   description: job-description-handels
   playTimeTracker: JobHandelsATH
+  ranks:
+    RatRankATHEnlistedThird:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobHandelsATH
+      min: 162000 # 45 hours
+    RatRankATHEnlistedBased:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobHandelsATH
+      min: 108000 # 30 hours
+    RatRankATHEnlistedHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobHandelsATH
+      min: 72000 # 20 hours
+    RatRankATHEnlistedLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobHandelsATH
+      min: 36000 # 10 hours
+    RatRankATHEnlistedSenior: []
   weight: 96
   startingGear: HandelsGear
   alwaysUseSpawner: true

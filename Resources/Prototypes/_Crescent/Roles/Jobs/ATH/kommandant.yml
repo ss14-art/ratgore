@@ -3,6 +3,16 @@
   name: job-name-kommandant
   description: job-description-kommandant
   playTimeTracker: JobKommandantATH
+   ranks:
+    RatRankKommandantSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobKommandantATH
+      min: 270000 # 75 hours
+    RatRankKommandantMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobKommandantATH
+      min: 144000 # 40 hours
+    RatRankKommandantJunior: []
   weight: 100
   startingGear: KommandantGear
   alwaysUseSpawner: true
