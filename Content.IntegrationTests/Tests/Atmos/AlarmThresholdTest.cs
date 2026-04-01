@@ -1,3 +1,4 @@
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Atmos.Monitor;
 using Robust.Shared.Prototypes;
 
@@ -5,7 +6,7 @@ namespace Content.IntegrationTests.Tests.Atmos
 {
     [TestFixture]
     [TestOf(typeof(AtmosAlarmThreshold))]
-    public sealed class AlarmThresholdTest
+    public sealed class AlarmThresholdTest : GameTest
     {
         [TestPrototypes]
         private const string Prototypes = @"
@@ -24,7 +25,7 @@ namespace Content.IntegrationTests.Tests.Atmos
         [Test]
         public async Task TestAlarmThreshold()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             var prototypeManager = server.ResolveDependency<IPrototypeManager>();
@@ -134,7 +135,6 @@ namespace Content.IntegrationTests.Tests.Atmos
                     Assert.That(alarmType, Is.EqualTo(AtmosAlarmType.Normal));
                 }
             });
-            await pair.CleanReturnAsync();
         }
     }
 }

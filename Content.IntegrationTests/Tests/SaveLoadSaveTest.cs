@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
@@ -16,12 +17,12 @@ namespace Content.IntegrationTests.Tests
     ///     Tests that a grid's yaml does not change when saved consecutively.
     /// </summary>
     [TestFixture]
-    public sealed class SaveLoadSaveTest
+    public sealed class SaveLoadSaveTest : GameTest
     {
         [Test]
         public async Task CreateSaveLoadSaveGrid()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var entManager = server.ResolveDependency<IEntityManager>();
             var mapLoader = entManager.System<MapLoaderSystem>();
@@ -85,18 +86,17 @@ namespace Content.IntegrationTests.Tests
                 }
             });
             testSystem.Enabled = false;
-            await pair.CleanReturnAsync();
         }
 
-        private const string TestMap = "Maps/pebble.yml";
+        private new const string TestMap = "Maps/bagel.yml";
 
         /// <summary>
         ///     Loads the default map, runs it for 5 ticks, then assert that it did not change.
         /// </summary>
         [Test]
-        public async Task LoadSaveTicksSavePebble()
+        public async Task LoadSaveTicksSaveBagel()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var mapLoader = server.ResolveDependency<IEntitySystemManager>().GetEntitySystem<MapLoaderSystem>();
             var mapSys = server.System<SharedMapSystem>();
@@ -110,7 +110,7 @@ namespace Content.IntegrationTests.Tests
             var cfg = server.ResolveDependency<IConfigurationManager>();
             Assert.That(cfg.GetCVar(CCVars.GridFill), Is.False);
 
-            // Load pebble.yml as uninitialized map, and save it to ensure it's up to date.
+            // Load bagel.yml as uninitialized map, and save it to ensure it's up to date.
             server.Post(() =>
             {
                 var path = new ResPath(TestMap);
@@ -167,7 +167,6 @@ namespace Content.IntegrationTests.Tests
 
             testSystem.Enabled = false;
             await server.WaitPost(() => mapSys.DeleteMap(mapId));
-            await pair.CleanReturnAsync();
         }
 
         /// <summary>
@@ -177,13 +176,13 @@ namespace Content.IntegrationTests.Tests
         /// <remarks>
         ///     Should ensure that entities do not perform randomization prior to initialization and should prevents
         ///     bugs like the one discussed in github.com/space-wizards/RobustToolbox/issues/3870. This test is somewhat
-        ///     similar to <see cref="LoadSaveTicksSavePebble"/> and <see cref="SaveLoadSave"/>, but neither of these
+        ///     similar to <see cref="LoadSaveTicksSaveBagel"/> and <see cref="SaveLoadSave"/>, but neither of these
         ///     caught the mentioned bug.
         /// </remarks>
         [Test]
-        public async Task LoadTickLoadPebble()
+        public async Task LoadTickLoadBagel()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             var mapLoader = server.System<MapLoaderSystem>();
@@ -241,7 +240,6 @@ namespace Content.IntegrationTests.Tests
             testSystem.Enabled = false;
             await server.WaitPost(() => mapSys.DeleteMap(mapId1));
             await server.WaitPost(() => mapSys.DeleteMap(mapId2));
-            await pair.CleanReturnAsync();
         }
 
         /// <summary>

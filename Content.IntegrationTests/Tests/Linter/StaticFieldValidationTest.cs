@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Reflection;
@@ -11,12 +12,12 @@ namespace Content.IntegrationTests.Tests.Linter;
 /// Verify that the yaml linter successfully validates static fields
 /// </summary>
 [TestFixture]
-public sealed class StaticFieldValidationTest
+public sealed class StaticFieldValidationTest : GameTest
 {
     [Test]
     public async Task TestStaticFieldValidation()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var protoMan = pair.Server.ProtoMan;
 
         var protos = new Dictionary<Type, HashSet<string>>();
@@ -45,8 +46,6 @@ public sealed class StaticFieldValidationTest
         Assert.That(protoMan.ValidateStaticFields(typeof(ProtoIdListInvalid), protos), Has.Count.EqualTo(2));
         Assert.That(protoMan.ValidateStaticFields(typeof(ProtoIdSetInvalid), protos), Has.Count.EqualTo(2));
         Assert.That(protoMan.ValidateStaticFields(typeof(PrivateProtoIdArrayInvalid), protos), Has.Count.EqualTo(2));
-
-        await pair.CleanReturnAsync();
     }
 
     [TestPrototypes]
