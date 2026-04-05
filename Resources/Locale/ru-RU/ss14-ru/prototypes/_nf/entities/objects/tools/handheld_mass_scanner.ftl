@@ -1,2 +1,2 @@
-ent-HandHeldMassScanner = handheld mass scanner
-    .desc = A hand-held mass scanner.
+ent-HandHeldMassScanner = ручной масс-сканер
+    .desc = Ручной сканер масс-спектрометра.

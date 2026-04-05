@@ -1,12 +1,15 @@
-voidborn-power-examined-other = { CAPITALIZE(SUBJECT($target)) } seems to be { $powerType }.
-voidborn-power-examined-self = I have { $power }/{ $powerMax } energy, I am { $powerType }.
-voidborn-power-5 = energetic
-voidborn-power-4 = great
-voidborn-power-3 = good
-voidborn-power-2 = okay
-voidborn-power-1 = exhausted
-voidborn-power-0 = drained
-examine-mindbroken-voidborn-message = { CAPITALIZE($entity) } seems to be a blackeye.
-identity-eye-voidborn = { $color }-eye
-voidborn-blackeye = I feel my power draining away...
-voidborn-tired = I don't have the energy for that.
+voidborn-power-examined-other = { CAPITALIZE(SUBJECT($target)) } кажется { $powerType }.
+voidborn-power-examined-self = У меня { $power }/{ $powerMax } энергии, я { $powerType }.
+
+voidborn-power-5 = энергичен
+voidborn-power-4 = в отличной форме
+voidborn-power-3 = в норме
+voidborn-power-2 = в порядке
+voidborn-power-1 = измотан
+voidborn-power-0 = истощён
+
+examine-mindbroken-voidborn-message = { CAPITALIZE($entity) } кажется сломленным.
+
+identity-eye-voidborn = { $color }-глаз
+voidborn-blackeye = Я чувствую, как моя сила утекает...
+voidborn-tired = У меня не хватает энергии на это.

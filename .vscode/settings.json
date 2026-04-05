@@ -7,5 +7,6 @@
             "url": "https://raw.githubusercontent.com/Simple-Station/Einstein-Engines/master/.github/rsi-schema.json"
         }
     ],
-    "workbench.colorCustomizations": {}
+    "workbench.colorCustomizations": {},
+    "dotnet.preferCSharpExtension": true
 }

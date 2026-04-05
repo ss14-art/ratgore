@@ -90,6 +90,10 @@ public sealed class MaterialStorageMagnetPickupSystem : EntitySystem
             if (!comp.MagnetEnabled)
                 continue;
 
+            // Skip if range is invalid
+            if (comp.Range <= 0)
+                continue;
+
             var parentUid = xform.ParentUid;
 
             foreach (var near in _lookup.GetEntitiesInRange(uid, comp.Range, LookupFlags.Dynamic | LookupFlags.Sundries))

@@ -1,2 +1,2 @@
-ent-Ashtray = ashtray
-    .desc = Proven by scientists to improve the smoking experience by 37%!
+ent-Ashtray = пепельница
+    .desc = Ученые доказали, что это средство улучшает качество курения на 37%!
