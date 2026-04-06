@@ -46,6 +46,9 @@ public sealed class DragDropSystem : SharedDragDropSystem
     [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     // how often to recheck possible targets (prevents calling expensive
     // check logic each update)
@@ -87,7 +90,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
     /// </summary>
     private bool _isReplaying;
 
-    private float _deadzone;
+    public float Deadzone;
 
     private DragState _state = DragState.NotDragging;
 
@@ -119,7 +122,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
 
     private void SetDeadZone(float deadZone)
     {
-        _deadzone = deadZone;
+        Deadzone = deadZone;
     }
 
     public override void Shutdown()
@@ -175,7 +178,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
 
     private bool OnUseMouseDown(in PointerInputCmdHandler.PointerInputCmdArgs args)
     {
-        if (args.Session?.AttachedEntity is not {Valid: true} dragger ||
+        if (args.Session?.AttachedEntity is not { Valid: true } dragger ||
             _combatMode.IsInCombatMode())
         {
             return false;
@@ -209,7 +212,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
 
         _draggedEntity = entity;
         _state = DragState.MouseDown;
-        _mouseDownScreenPos = _inputManager.MouseScreenPosition;
+        _mouseDownScreenPos = args.ScreenCoordinates;
         _mouseDownTime = 0;
 
         // don't want anything else to process the click,
@@ -237,18 +240,23 @@ public sealed class DragDropSystem : SharedDragDropSystem
 
         if (TryComp<SpriteComponent>(_draggedEntity, out var draggedSprite))
         {
+            var screenPos = _inputManager.MouseScreenPosition;
+            // No _draggedEntity in null window (Happens in tests)
+            if (!screenPos.IsValid)
+                return;
+
             // pop up drag shadow under mouse
-            var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition);
+            var mousePos = _eyeManager.PixelToMap(screenPos);
             _dragShadow = EntityManager.SpawnEntity("dragshadow", mousePos);
             var dragSprite = Comp<SpriteComponent>(_dragShadow.Value);
-            dragSprite.CopyFrom(draggedSprite);
+            _sprite.CopySprite((_draggedEntity.Value, draggedSprite), (_dragShadow.Value, dragSprite));
             dragSprite.RenderOrder = EntityManager.CurrentTick.Value;
-            dragSprite.Color = dragSprite.Color.WithAlpha(0.7f);
+            _sprite.SetColor((_dragShadow.Value, dragSprite), dragSprite.Color.WithAlpha(0.7f));
             // keep it on top of everything
-            dragSprite.DrawDepth = (int) DrawDepth.Overlays;
+            _sprite.SetDrawDepth((_dragShadow.Value, dragSprite), (int)DrawDepth.Overlays);
             if (!dragSprite.NoRotation)
             {
-                Transform(_dragShadow.Value).WorldRotation = Transform(_draggedEntity.Value).WorldRotation;
+                _transformSystem.SetWorldRotationNoLerp(_dragShadow.Value, _transformSystem.GetWorldRotation(_draggedEntity.Value));
             }
 
             // drag initiated
@@ -426,11 +434,9 @@ public sealed class DragDropSystem : SharedDragDropSystem
         var bounds = new Box2(mousePos.Position - expansion, mousePos.Position + expansion);
         var pvsEntities = _lookup.GetEntitiesIntersecting(mousePos.MapId, bounds);
 
-        var spriteQuery = GetEntityQuery<SpriteComponent>();
-
         foreach (var entity in pvsEntities)
         {
-            if (!spriteQuery.TryGetComponent(entity, out var inRangeSprite) ||
+            if (!_spriteQuery.TryGetComponent(entity, out var inRangeSprite) ||
                 !inRangeSprite.Visible ||
                 entity == _draggedEntity)
             {
@@ -515,6 +521,9 @@ public sealed class DragDropSystem : SharedDragDropSystem
         if (dropEv2.Handled)
             return dropEv2.CanDrop;
 
+        if (dropEv.Handled && dropEv.CanDrop)
+            return true;
+
         return null;
     }
 
@@ -528,7 +537,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
             case DragState.MouseDown:
             {
                 var screenPos = _inputManager.MouseScreenPosition;
-                if ((_mouseDownScreenPos!.Value.Position - screenPos.Position).Length() > _deadzone)
+                if ((_mouseDownScreenPos!.Value.Position - screenPos.Position).Length() > Deadzone)
                 {
                     StartDrag();
                 }
@@ -549,7 +558,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
         if (Exists(_dragShadow))
         {
             var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition);
-            Transform(_dragShadow.Value).WorldPosition = mousePos.Position;
+            _transformSystem.SetWorldPosition(_dragShadow.Value, mousePos.Position);
         }
     }
 }

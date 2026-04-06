@@ -26,6 +26,8 @@ public sealed class TargetOutlineSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     private bool _enabled = false;
 
@@ -33,6 +35,11 @@ public sealed class TargetOutlineSystem : EntitySystem
     ///     Whitelist that the target must satisfy.
     /// </summary>
     public EntityWhitelist? Whitelist = null;
+
+    /// <summary>
+    ///     Blacklist that the target must satisfy.
+    /// </summary>
+    public EntityWhitelist? Blacklist = null;
 
     /// <summary>
     ///     Predicate the target must satisfy.
@@ -89,15 +96,16 @@ public sealed class TargetOutlineSystem : EntitySystem
         RemoveHighlights();
     }
 
-    public void Enable(float range, bool checkObstructions, Func<EntityUid, bool>? predicate, EntityWhitelist? whitelist, CancellableEntityEventArgs? validationEvent)
+    public void Enable(float range, bool checkObstructions, Func<EntityUid, bool>? predicate, EntityWhitelist? whitelist, EntityWhitelist? blacklist, CancellableEntityEventArgs? validationEvent)
     {
         Range = range;
         CheckObstruction = checkObstructions;
         Predicate = predicate;
         Whitelist = whitelist;
+        Blacklist = blacklist;
         ValidationEvent = validationEvent;
 
-        _enabled = Predicate != null || Whitelist != null || ValidationEvent != null;
+        _enabled = Predicate != null || Whitelist != null || Blacklist != null || ValidationEvent != null;
     }
 
     public override void Update(float frameTime)
@@ -122,12 +130,11 @@ public sealed class TargetOutlineSystem : EntitySystem
         // TODO: Duplicated in SpriteSystem and DragDropSystem. Should probably be cached somewhere for a frame?
         var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition).Position;
         var bounds = new Box2(mousePos - LookupVector, mousePos + LookupVector);
-        var pvsEntities = _lookup.GetEntitiesIntersecting(_eyeManager.CurrentMap, bounds, LookupFlags.Approximate | LookupFlags.Static);
-        var spriteQuery = GetEntityQuery<SpriteComponent>();
+        var pvsEntities = _lookup.GetEntitiesIntersecting(_eyeManager.CurrentEye.Position.MapId, bounds, LookupFlags.Approximate | LookupFlags.Static);
 
         foreach (var entity in pvsEntities)
         {
-            if (!spriteQuery.TryGetComponent(entity, out var sprite) || !sprite.Visible)
+            if (!_spriteQuery.TryGetComponent(entity, out var sprite) || !sprite.Visible)
                 continue;
 
             // Check the predicate
@@ -162,8 +169,8 @@ public sealed class TargetOutlineSystem : EntitySystem
                 valid = _interactionSystem.InRangeUnobstructed(player, entity, Range);
             else if (Range >= 0)
             {
-                var origin = Transform(player).WorldPosition;
-                var target = Transform(entity).WorldPosition;
+                var origin = _transformSystem.GetWorldPosition(player);
+                var target = _transformSystem.GetWorldPosition(entity);
                 valid = (origin - target).LengthSquared() <= Range;
             }
 
