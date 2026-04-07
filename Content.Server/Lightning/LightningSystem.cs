@@ -59,67 +59,10 @@ public sealed class LightningSystem : SharedLightningSystem
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /// <summary>
     /// Looks for objects with a LightningTarget component in the radius, prioritizes them, and hits the highest priority targets with lightning.
     /// </summary>
     /// <param name="user">Where the lightning fires from</param>
-
-
 
     /// <param name="range">Targets selection radius</param>
     /// <param name="boltCount">Number of lightning bolts</param>
@@ -148,42 +91,17 @@ public sealed class LightningSystem : SharedLightningSystem
             if (count >= targets.Count) { break; }
             var curTarget = targets[count];
 
-
-
-
-
-
             // Chance to ignore target
             if (!_random.Prob(curTarget.Comp.HitProbability))
-
-
-
-
-
-
-
-
-
                 continue;
 
-
             ShootLightning(user, targets[count].Owner, lightningPrototype, triggerLightningEvents);
-
 
             if (arcDepth - targets[count].Comp.LightningResistance > 0)
                 ShootRandomLightnings(targets[count].Owner, range, 1, lightningPrototype, arcDepth - targets[count].Comp.LightningResistance, triggerLightningEvents);
 
 
             shotCount++;
-
-
-
-
-
-
-
-
-
 
         }
     }
