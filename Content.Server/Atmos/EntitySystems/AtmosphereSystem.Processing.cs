@@ -493,14 +493,14 @@ namespace Content.Server.Atmos.EntitySystems
                 atmosphere.DeltaPressureDamageResults.Clear();
             }
 
-            var remaining = count - atmosphere.DeltaPressureCursor;
             var batchSize = Math.Max(50, DeltaPressureParallelProcessPerIteration);
-            var toProcess = Math.Min(batchSize, remaining);
 
             var timeCheck1 = 0;
             while (atmosphere.DeltaPressureCursor < count)
             {
+                var remaining = count - atmosphere.DeltaPressureCursor;
                 var job = new DeltaPressureParallelJob(this,
+                    var toProcess = Math.Min(batchSize, remaining);
                     atmosphere,
                     atmosphere.DeltaPressureCursor,
                     DeltaPressureParallelBatchSize);
@@ -712,18 +712,6 @@ namespace Content.Server.Atmos.EntitySystems
                     }
 
                     atmosphere.ProcessingPaused = false;
-                    // SunRise-start
-                    atmosphere.State = AtmosphereProcessingState.ChargedElectrovae;
-                    return AtmosphereProcessingCompletionState.Continue;
-                case AtmosphereProcessingState.ChargedElectrovae:
-                    if (!ProcessChargedElectrovaeTiles(ent))
-                    {
-                        atmosphere.ProcessingPaused = true;
-                        return AtmosphereProcessingCompletionState.Return;
-                    }
-
-                    atmosphere.ProcessingPaused = false;
-                    // SunRise-end
 
                     // Next state depends on whether monstermos equalization is enabled or not.
                     // Note: We do this here instead of on the tile equalization step to prevent ending it early.

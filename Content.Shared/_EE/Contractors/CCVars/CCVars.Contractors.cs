@@ -5,7 +5,7 @@ namespace Content.Shared.CCVar;
 /// <summary>
 /// Contains all the CVars used by Contractors.
 /// </summary>
-public sealed partial class CCVars
+public static partial class CCVars
 {
     /// <summary>
     ///     Will CharacterNationalityRequirements, CharacterEmployerRequirements and CharacterLifepathRequirements restrict other things?

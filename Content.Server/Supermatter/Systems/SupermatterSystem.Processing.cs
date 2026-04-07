@@ -222,7 +222,9 @@ public sealed partial class SupermatterSystem
             break;
         }
 
-        var damage = Math.Min(sm.DamageArchived + sm.DamageHardcap * sm.DamageDelaminationPoint, totalDamage);
+        var damage = Math.Min(
+            sm.DamageArchived + totalDamage,
+            sm.DamageArchived + sm.DamageHardcap * sm.DamageDelaminationPoint);
 
         // Prevent it from going negative
         sm.Damage = Math.Clamp(damage, 0, float.PositiveInfinity);

@@ -62,7 +62,7 @@ public sealed partial class SupermatterSystem : EntitySystem
         foreach (var sm in EntityManager.EntityQuery<SupermatterComponent>())
         {
             if (!sm.Activated)
-                return;
+                continue;
 
             var uid = sm.Owner;
             sm.UpdateAccumulator += frameTime;

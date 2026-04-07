@@ -3,7 +3,7 @@ using Robust.Shared.Configuration;
 // ReSharper disable once CheckNamespace
 namespace Content.Shared.CCVar;
 
-public sealed partial class CCVars
+public static partial class CCVars
 {
     /// <summary>
     ///     Should the Lavaland roundstart generation be enabled.
