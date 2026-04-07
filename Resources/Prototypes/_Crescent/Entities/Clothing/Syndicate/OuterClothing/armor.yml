@@ -287,13 +287,13 @@
     sprite: _Crescent/Clothing/Syndicate/OuterClothing/syndieforeman.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: ClothingOuterArmorSyndicateArmorvest
     armorRepair: Kevlar
     initialModifiers:
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 25
+        Piercing: 45
         Heat: 15
         Caustic: 15
   - type: ClothingSpeedModifier
@@ -322,13 +322,13 @@
     sprite: _Crescent/Clothing/Syndicate/OuterClothing/ipm_jacket.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: Kevlar
     initialModifiers:
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 25
+        Piercing: 45
         Heat: 15
         Caustic: 15
   - type: ClothingSpeedModifier
@@ -405,14 +405,14 @@
   - type: Clothing
     sprite: _Crescent/Clothing/Syndicate/OuterClothing/ipm_arpon.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 500
-    armorType: Metallic
+    armorMaxHealth: 750
+    armorType: Ceramic
     armorRepair: Kevlar
     initialModifiers:
       flatReductions:
         Blunt: 10
         Slash: 15
-        Piercing: 20
+        Piercing: 40
         Heat: 15
         Caustic: 25
   - type: ClothingSpeedModifier
@@ -440,7 +440,7 @@
   - type: Clothing
     sprite: _Crescent/Clothing/Syndicate/OuterClothing/syndiearmor.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 650
+    armorMaxHealth: 850
     armorType: Ceramic
     armorRepair: NTCeramic
     initialModifiers:
@@ -477,13 +477,13 @@
     sprite: _Crescent/Clothing/Syndicate/OuterClothing/ipm_vest.rsi
   - type: DegradeableArmor
     armorMaxHealth: 750
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: SteelPlate
     initialModifiers:
       flatReductions:
-        Blunt: 10
-        Slash: 10
-        Piercing: 45
+        Blunt: 15
+        Slash: 15
+        Piercing: 55
         Heat: 10
         Caustic: 10
   - type: ClothingSpeedModifier
@@ -513,13 +513,13 @@
     sprite: _Crescent/Clothing/Syndicate/OuterClothing/ringmaster.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: NTPolymer
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 15
-        Piercing: 25
+        Blunt: 25
+        Slash: 25
+        Piercing: 55
         Heat: 15
         Caustic: 15
   - type: ClothingSpeedModifier
@@ -549,13 +549,13 @@
     sprite: _Crescent/Clothing/Syndicate/OuterClothing/syndicatelieutenant.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: NTPolymer
     initialModifiers:
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 30
+        Piercing: 55
         Heat: 15
         Caustic: 15
   - type: ClothingSpeedModifier
@@ -584,13 +584,13 @@
     sprite: _Crescent/Clothing/Syndicate/OuterClothing/patriarchcoat.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: Durathread
     initialModifiers:
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 25
+        Piercing: 45
         Heat: 15
         Caustic: 15
   - type: ClothingSpeedModifier

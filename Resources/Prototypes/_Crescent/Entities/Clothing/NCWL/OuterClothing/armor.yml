@@ -10,13 +10,13 @@
     sprite: _Crescent/Clothing/NCWL/OuterClothing/kommissarcoat.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: HomelandAlloy
     initialModifiers:
       flatReductions:
-        Blunt: 10
-        Slash: 10
-        Piercing: 35
+        Blunt: 15
+        Slash: 15
+        Piercing: 65
         Heat: 15
         Caustic: 15
   - type: ClothingSpeedModifier
@@ -46,16 +46,16 @@
   - type: Clothing
     sprite: _Crescent/Clothing/NCWL/OuterClothing/opremecoat.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 1000
-    armorType: Metallic
+    armorMaxHealth: 1500
+    armorType: Ceramic
     armorRepair: HomelandAlloy
     initialModifiers:
       flatReductions:
-        Blunt: 20
-        Slash: 20
-        Piercing: 35
-        Heat: 20
-        Caustic: 25
+        Blunt: 15
+        Slash: 15
+        Piercing: 45
+        Heat: 5
+        Caustic: 10
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
@@ -84,13 +84,13 @@
     sprite: _Crescent/Clothing/NCWL/OuterClothing/heavy.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
-    armorRepair: HomelandAlloy
+    armorType: Ceramic
+    armorRepair: NTCeramic
     initialModifiers:
       flatReductions:
         Blunt: 25
         Slash: 25
-        Piercing: 45
+        Piercing: 65
         Heat: 25
         Caustic: 25
   - type: ClothingSpeedModifier
@@ -123,15 +123,15 @@
   - type: Clothing
     sprite: _Crescent/Clothing/NCWL/OuterClothing/commsofficercoat.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
-    armorType: Metallic
+    armorMaxHealth: 1000
+    armorType: Ceramic
     armorRepair: HomelandAlloy
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 15
-        Piercing: 35
-        Heat: 10
+        Blunt: 25
+        Slash: 25
+        Piercing: 65
+        Heat: 25
         Caustic: 25
   - type: ClothingSpeedModifier
     walkModifier: 1.0
@@ -159,14 +159,14 @@
   - type: Clothing
     sprite: _Crescent/Clothing/NCWL/OuterClothing/doktorlabcoat.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
-    armorType: Metallic
+    armorMaxHealth: 1000
+    armorType: Ceramic
     armorRepair: Kevlar
     initialModifiers:
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 25
+        Piercing: 45
         Heat: 15
         Caustic: 25
   - type: ClothingSpeedModifier
@@ -197,16 +197,16 @@
   - type: Clothing
     sprite: _Crescent/Clothing/NCWL/OuterClothing/light.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 800
-    armorType: Metallic
+    armorMaxHealth: 1000
+    armorType: Ceramic
     armorRepair: HomelandAlloy
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 10
-        Piercing: 30
-        Heat: 10
-        Caustic: 10
+        Blunt: 25
+        Slash: 25
+        Piercing: 45
+        Heat: 20
+        Caustic: 20
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 1
@@ -236,14 +236,14 @@
   - type: Clothing
     sprite: _Crescent/Clothing/NCWL/OuterClothing/engijacket.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
-    armorType: Metallic
+    armorMaxHealth: 1000
+    armorType: Ceramic
     armorRepair: Kevlar
     initialModifiers:
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 25
+        Piercing: 45
         Heat: 15
         Caustic: 25
   - type: ClothingSpeedModifier
@@ -273,14 +273,14 @@
   - type: Clothing
     sprite: _Crescent/Clothing/NCWL/OuterClothing/engijacket.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
-    armorType: Metallic
+    armorMaxHealth: 1250
+    armorType: Ceramic
     armorRepair: Kevlar
     initialModifiers:
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 25
+        Piercing: 45
         Heat: 15
         Caustic: 25
   - type: ClothingSpeedModifier
@@ -310,13 +310,13 @@
   - type: Clothing
     sprite: _Crescent/Clothing/NCWL/OuterClothing/medicheadcoat.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
-    armorType: Metallic
+    armorMaxHealth: 1250w
+    armorType: Ceramic
     armorRepair: Kevlar
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 15
+        Blunt: 25
+        Slash: 25
         Piercing: 45
         Heat: 15
         Caustic: 25
@@ -349,13 +349,13 @@
     sprite: _Crescent/Clothing/NCWL/OuterClothing/mediclabcoat.rsi
   - type: DegradeableArmor
     armorMaxHealth: 750
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: Kevlar
     initialModifiers:
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 25
+        Piercing: 45
         Heat: 15
         Caustic: 25
   - type: ClothingSpeedModifier

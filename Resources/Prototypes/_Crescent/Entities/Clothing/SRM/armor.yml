@@ -75,14 +75,14 @@
   - type: Clothing
     sprite: _Crescent/Clothing/SRM/OuterClothing/huntercoat.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
-    armorType: Metallic
+    armorMaxHealth: 1000
+    armorType: Ceramic
     armorRepair: PlasteelEncasedKevlar
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 15
-        Piercing: 35
+        Blunt: 35
+        Slash: 35
+        Piercing: 65
         Heat: 20
         Caustic: 15
   - type: ClothingSpeedModifier
@@ -103,14 +103,14 @@
   - type: Clothing
     sprite: _Crescent/Clothing/SRM/OuterClothing/kevlarvest.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
-    armorType: Metallic
+    armorMaxHealth: 1000
+    armorType: Ceramic
     armorRepair: PlasteelEncasedKevlar
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 15
-        Piercing: 35
+        Blunt: 30
+        Slash: 30
+        Piercing: 65
         Heat: 20
         Caustic: 15
   - type: ClothingSpeedModifier
@@ -138,7 +138,7 @@
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 25
+        Piercing: 35
         Heat: 20
         Caustic: 35
   - type: ClothingSpeedModifier
@@ -160,13 +160,13 @@
     sprite: _Crescent/Clothing/SRM/OuterClothing/montagnecoat.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: NTPolymer
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 15
-        Piercing: 30
+        Blunt: 25
+        Slash: 25
+        Piercing: 65
         Heat: 20
         Caustic: 35
   - type: ClothingSpeedModifier
@@ -187,14 +187,14 @@
   - type: Clothing
     sprite: _Crescent/Clothing/SRM/OuterClothing/overseercoat.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
-    armorType: Metallic
+    armorMaxHealth: 1000
+    armorType: Ceramic
     armorRepair: NTPolymer
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 15
-        Piercing: 35
+        Blunt: 35
+        Slash: 35
+        Piercing: 70
         Heat: 20
         Caustic: 35
   - type: ClothingSpeedModifier

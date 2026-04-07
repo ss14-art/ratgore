@@ -308,15 +308,15 @@
     sprite: _Crescent/Clothing/SHI/OuterClothing/hosvest.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: PlasteelEncasedKevlar
     initialModifiers:
       flatReductions:
-        Blunt: 10
-        Slash: 10
-        Piercing: 30
-        Heat: 20
-        Caustic: 15
+        Blunt: 30
+        Slash: 30
+        Piercing: 65
+        Heat: 25
+        Caustic: 25
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
@@ -343,15 +343,15 @@
     sprite: _Crescent/Clothing/SHI/OuterClothing/securityvest.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: PlasteelEncasedKevlar
     initialModifiers:
       flatReductions:
-        Blunt: 10
-        Slash: 10
-        Piercing: 30
-        Heat: 20
-        Caustic: 15
+        Blunt: 30
+        Slash: 30
+        Piercing: 65
+        Heat: 25
+        Caustic: 25
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
@@ -380,13 +380,13 @@
     sprite: _Crescent/Clothing/SHI/OuterClothing/highsec.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: NTPolymer
     initialModifiers:
       flatReductions:
         Blunt: 35
         Slash: 35
-        Piercing: 55
+        Piercing: 75
         Heat: 35
         Caustic: 35
   - type: ClothingSpeedModifier
