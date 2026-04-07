@@ -2,7 +2,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
-public sealed partial class CCVars
+public static partial class CCVars
 {
     /// <summary>
     ///     When true, Jetpacks can be enabled anywhere, even in gravity.

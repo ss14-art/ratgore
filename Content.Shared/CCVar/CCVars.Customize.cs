@@ -2,7 +2,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
-public sealed partial class CCVars
+public static partial class CCVars
 {
     /// <summary>
     ///     Allow players to add extra pronouns to their examine window.

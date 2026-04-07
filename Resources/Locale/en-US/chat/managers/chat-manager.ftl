@@ -173,10 +173,6 @@ chat-speech-verb-marish = Mars
 
 chat-speech-verb-saintspact = forebodingly
 
-chat-speech-verb-name-supermatter = Supermatter
-chat-speech-verb-supermatter = states
-
-
 chat-speech-verb-Psychomantic-1 = resonates
 chat-speech-verb-Psychomantic-2 = projects
 chat-speech-verb-Psychomantic-3 = impresses

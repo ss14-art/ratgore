@@ -2,7 +2,7 @@
 
 namespace Content.Shared.CCVar;
 
-public sealed partial class CCVars
+public static partial class CCVars
 {
     public static readonly CVarDef<bool> CombatMusicEnabled =
         CVarDef.Create("ambience.combat_music_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);

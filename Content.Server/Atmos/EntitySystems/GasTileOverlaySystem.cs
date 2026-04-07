@@ -1,6 +1,3 @@
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Content.Server.Atmos.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
@@ -15,23 +12,29 @@ using Robust.Server.Player;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
+using Robust.Shared.IoC;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Threading;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Runtime.CompilerServices;
 
 // ReSharper disable once RedundantUsingDirective
 
 namespace Content.Server.Atmos.EntitySystems
 {
+
     [UsedImplicitly]
     public sealed class GasTileOverlaySystem : SharedGasTileOverlaySystem
     {
+        [Robust.Shared.IoC.Dependency] private readonly IConfigurationManager _cfg = default!;
+        private int _thermalDirtyThreshold = 1;
+
         [Robust.Shared.IoC.Dependency] private readonly IGameTiming _gameTiming = default!;
         [Robust.Shared.IoC.Dependency] private readonly IPlayerManager _playerManager = default!;
         [Robust.Shared.IoC.Dependency] private readonly IMapManager _mapManager = default!;
-        [Robust.Shared.IoC.Dependency] private readonly IConfigurationManager _confMan = default!;
         [Robust.Shared.IoC.Dependency] private readonly IParallelManager _parMan = default!;
         [Robust.Shared.IoC.Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
         [Robust.Shared.IoC.Dependency] private readonly ChunkingSystem _chunkingSys = default!;
@@ -60,11 +63,15 @@ namespace Content.Server.Atmos.EntitySystems
         private float _updateInterval;
 
         private int _thresholds;
+        private EntityQuery<MapGridComponent> _gridQuery;
         private EntityQuery<GasTileOverlayComponent> _query;
 
         public override void Initialize()
         {
             base.Initialize();
+
+            _query = GetEntityQuery<GasTileOverlayComponent>();
+            _gridQuery = GetEntityQuery<MapGridComponent>();
 
             _updateJob = new UpdatePlayerJob()
             {
@@ -76,16 +83,15 @@ namespace Content.Server.Atmos.EntitySystems
                 MapManager = _mapManager,
                 ChunkViewerPool = _chunkViewerPool,
                 LastSentChunks = _lastSentChunks,
+                GridQuery = _gridQuery,
             };
 
             _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
-            Subs.CVar(_confMan, CCVars.NetGasOverlayTickRate, UpdateTickRate, true);
-            Subs.CVar(_confMan, CCVars.GasOverlayThresholds, UpdateThresholds, true);
-            Subs.CVar(_confMan, CVars.NetPVS, OnPvsToggle, true);
+
+            InitializeCVars();
 
             SubscribeLocalEvent<RoundRestartCleanupEvent>(Reset);
             SubscribeLocalEvent<GasTileOverlayComponent, ComponentStartup>(OnStartup);
-            _query = GetEntityQuery<GasTileOverlayComponent>();
         }
 
         private void OnStartup(EntityUid uid, GasTileOverlayComponent component, ComponentStartup args)
@@ -122,7 +128,7 @@ namespace Content.Server.Atmos.EntitySystems
             }
 
             // PVS was turned off, ensure data gets sent to all clients.
-            var query = EntityQueryEnumerator<GasTileOverlayComponent, MetaDataComponent>();
+            var query = AllEntityQuery<GasTileOverlayComponent, MetaDataComponent>();
             while (query.MoveNext(out var uid, out var grid, out var meta))
             {
                 grid.ForceTick = _gameTiming.CurTick;
@@ -170,7 +176,16 @@ namespace Content.Server.Atmos.EntitySystems
 
         public GasOverlayData GetOverlayData(GasMixture? mixture)
         {
-            var data = new GasOverlayData(0, new byte[VisibleGasId.Length]);
+            ThermalByte byteTemp;
+            if (mixture == null)
+            {
+                byteTemp = new();
+                byteTemp.SetVacuum();
+            }
+            else
+                byteTemp = new(mixture.Temperature);
+
+            var data = new GasOverlayData(0, new byte[VisibleGasId.Length], byteTemp);
 
             for (var i = 0; i < VisibleGasId.Length; i++)
             {
@@ -210,15 +225,29 @@ namespace Content.Server.Atmos.EntitySystems
             }
 
             var changed = false;
+
+            ThermalByte newByteTemp = new();
+
+            if (tile.Hotspot.Valid)
+                newByteTemp.SetTemperature(tile.Hotspot.Temperature);
+            else if (!tile.Space && tile.Air?.TotalMoles <= 5f)
+                newByteTemp.SetVacuum();
+            else if (!tile.Space && tile.Air != null)
+                newByteTemp = new(tile.Air.Temperature);
+
             if (oldData.Equals(default))
             {
                 changed = true;
-                oldData = new GasOverlayData(tile.Hotspot.State, new byte[VisibleGasId.Length]);
+                oldData = new GasOverlayData(tile.Hotspot.State, new byte[VisibleGasId.Length], newByteTemp);
             }
-            else if (oldData.FireState != tile.Hotspot.State)
+            else if (
+                oldData.FireState != tile.Hotspot.State ||
+                Math.Abs(newByteTemp.Value - oldData.ByteGasTemperature.Value) > _thermalDirtyThreshold ||
+                (oldData.ByteGasTemperature.Value != newByteTemp.Value &&
+                 newByteTemp.Value > ThermalByte.TempResolution))
             {
                 changed = true;
-                oldData = new GasOverlayData(tile.Hotspot.State, oldData.Opacity);
+                oldData = new GasOverlayData(tile.Hotspot.State, oldData.Opacity, newByteTemp);
             }
 
             if (tile is {Air: not null, NoGridTile: false})
@@ -269,7 +298,7 @@ namespace Content.Server.Atmos.EntitySystems
         private void UpdateOverlayData()
         {
             // TODO parallelize?
-            var query = EntityQueryEnumerator<GasTileOverlayComponent, GridAtmosphereComponent, MetaDataComponent>();
+            var query = AllEntityQuery<GasTileOverlayComponent, GridAtmosphereComponent, MetaDataComponent>();
             while (query.MoveNext(out var uid, out var overlay, out var gam, out var meta))
             {
                 var changed = false;
@@ -375,6 +404,8 @@ namespace Content.Server.Atmos.EntitySystems
             public Dictionary<ICommonSession, Dictionary<NetEntity, HashSet<Vector2i>>> LastSentChunks;
             public List<ICommonSession> Sessions;
 
+            public EntityQuery<MapGridComponent> GridQuery;
+
             public void Execute(int index)
             {
                 var playerSession = Sessions[index];
@@ -391,7 +422,7 @@ namespace Content.Server.Atmos.EntitySystems
                         previouslySent.Remove(netGrid);
 
                         // If grid was deleted then don't worry about sending it to the client.
-                        if (!EntManager.TryGetEntity(netGrid, out var gridId) || !MapManager.IsGrid(gridId.Value))
+                        if (!EntManager.TryGetEntity(netGrid, out var gridId) || GridQuery.HasComp(gridId.Value))
                             ev.RemovedChunks[netGrid] = oldIndices;
                         else
                         {
@@ -458,5 +489,13 @@ namespace Content.Server.Atmos.EntitySystems
         }
 
         #endregion
+
+        private void InitializeCVars()
+        {
+            Subs.CVar(ConfMan, CCVars.NetGasOverlayTickRate, UpdateTickRate, true);
+            Subs.CVar(ConfMan, CCVars.GasOverlayThresholds, UpdateThresholds, true);
+            Subs.CVar(ConfMan, CVars.NetPVS, OnPvsToggle, true);
+            Subs.CVar(_cfg, CCVars.GasOverlayThermalDirtyThreshold, v => _thermalDirtyThreshold = v, true);
+        }
     }
 }

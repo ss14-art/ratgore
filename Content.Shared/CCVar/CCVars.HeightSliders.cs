@@ -2,7 +2,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
-public sealed partial class CCVars
+public static partial class CCVars
 {
     /// <summary>
     ///     Whether height & width sliders adjust a character's Fixture Component

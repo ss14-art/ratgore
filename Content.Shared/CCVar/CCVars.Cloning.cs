@@ -2,7 +2,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
-public sealed partial class CCVars
+public static partial class CCVars
 {
     /// <summary>
     ///     How much should the cost to clone an entity be multiplied by.

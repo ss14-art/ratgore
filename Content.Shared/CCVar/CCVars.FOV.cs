@@ -2,7 +2,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
-public sealed partial class CCVars
+public static partial class CCVars
 {
     /// <summary>
     ///     The number by which the current FOV size is divided for each level.

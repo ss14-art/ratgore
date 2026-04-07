@@ -5,7 +5,7 @@ using Robust.Shared.Physics.Components;
 
 namespace Content.Shared.CCVar;
 
-public sealed partial class CCVars
+public static partial class CCVars
 {
     // Look this is technically eye behavior but its main impact is shuttles so I just dumped it here.
     /// <summary>

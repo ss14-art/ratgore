@@ -2,7 +2,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
-public sealed partial class CCVars
+public static partial class CCVars
 {
     /// Enables the automatic voting system.
     public static readonly CVarDef<bool> AutoVoteEnabled =
