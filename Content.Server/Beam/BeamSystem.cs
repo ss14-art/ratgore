@@ -83,11 +83,6 @@ public sealed class BeamSystem : SharedBeamSystem
         if (!TryComp<PhysicsComponent>(ent, out var physics) || !TryComp<BeamComponent>(ent, out var beam))
             return;
 
-
-
-
-
-
         FixturesComponent? manager = null;
         _fixture.TryCreateFixture(
             ent,
@@ -154,32 +149,6 @@ public sealed class BeamSystem : SharedBeamSystem
         var userMapPos = _transform.GetMapCoordinates(user);
         var targetMapPos = _transform.GetMapCoordinates(target);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //The distance between the target and the user.
         var calculatedDistance = targetMapPos.Position - userMapPos.Position;
         var userAngle = calculatedDistance.ToWorldAngle();
@@ -193,29 +162,6 @@ public sealed class BeamSystem : SharedBeamSystem
         //Don't divide by zero
         if (calculatedDistance.Length() == 0)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             return;
 
         if (controller != null && TryComp<BeamComponent>(controller, out var controllerBeamComp))
@@ -224,32 +170,11 @@ public sealed class BeamSystem : SharedBeamSystem
             controllerBeamComp.HitTargets.Add(target);
         }
 
-
         var distanceCorrection = calculatedDistance - calculatedDistance.Normalized();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         CreateBeam(bodyPrototype, userAngle, calculatedDistance, beamStartPos, distanceCorrection, controller, bodyState, shader);
 
-
-
-
         var ev = new CreateBeamSuccessEvent(user, target);
         RaiseLocalEvent(user, ev);
-
     }
 }
