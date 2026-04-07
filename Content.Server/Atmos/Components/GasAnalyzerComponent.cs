@@ -1,5 +1,3 @@
-namespace Content.Server.Atmos.Components;
-
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
