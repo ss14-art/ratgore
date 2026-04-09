@@ -42,6 +42,7 @@ using Content.Server.Construction.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Robust.Shared.Utility;
+using Content.Shared.Temperature.Components;
 
 namespace Content.Server.Kitchen.EntitySystems
 {

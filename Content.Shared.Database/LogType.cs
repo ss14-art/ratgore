@@ -20,7 +20,7 @@ public enum LogType
     RoundStartJoin = 14,
     LateJoin = 15,
     ChemicalReaction = 17,
-    ReagentEffect = 18,
+    EntityEffect = 18,
     CanisterValve = 20,
     CanisterPressure = 21,
     CanisterPurged = 22,
