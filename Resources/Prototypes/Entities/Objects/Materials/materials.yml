@@ -11,7 +11,7 @@
     size: Normal
   - type: Tag
     tags:
-      - RawMaterial
+    - RawMaterial
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -46,10 +46,6 @@
     - state: cardboard_3
       map: ["base"]
   - type: Appearance
-  - type: Tag
-    tags:
-      - RawMaterial
-      - MaterialCardboard
   - type: Extractable
     grindableSolutionName: cardboard
   - type: SolutionContainerManager
@@ -58,6 +54,8 @@
         reagents:
         - ReagentId: Cellulose
           Quantity: 6
+  - type: Item
+    heldPrefix: cardboard
 
 - type: entity
   parent: MaterialCardboard
@@ -87,7 +85,7 @@
   components:
   - type: Healing
     damageContainers:
-      - Biological
+    - Biological
     damage:
       types:
         Slash: -0.5
@@ -95,8 +93,14 @@
     bloodlossModifier: -4
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
   - type: Stack
     stackType: Cloth
     baseLayer: base
@@ -119,7 +123,7 @@
     - state: cloth_3
       map: ["base"]
   - type: Appearance
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: FlavorProfile
     flavors:
@@ -133,12 +137,14 @@
           Quantity: 5
   - type: Tag
     tags:
-      - ClothMade
-      - Gauze
-      - RawMaterial
+    - ClothMade
+    - Gauze
+    - RawMaterial
   - type: Construction
     graph: WebObjects # not sure if I should either keep this here or just make another prototype. Will keep it here just in case.
     node: cloth
+  - type: Item
+    heldPrefix: cloth
 
 - type: entity
   parent: MaterialCloth
@@ -186,7 +192,7 @@
   - type: Construction
     graph: Durathread
     node: MaterialDurathread
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
@@ -197,20 +203,10 @@
           Quantity: 5
   - type: Tag
     tags:
-      - ClothMade
-      - RawMaterial
+    - ClothMade
+    - RawMaterial
   - type: Item
     heldPrefix: durathread
-
-- type: entity
-  parent: MaterialDurathread
-  id: MaterialDurathread10
-  suffix: Single
-  components:
-  - type: Sprite
-    state: durathread
-  - type: Stack
-    count: 10
 
 - type: entity
   parent: MaterialDurathread
@@ -333,7 +329,7 @@
     sprite: Clothing/Head/Misc/hides.rsi
     equippedPrefix: bear
     slots:
-      - HEAD
+    - HEAD
   - type: PointLight
     radius: 1.2
     energy: 1.5
@@ -350,8 +346,7 @@
     sprite: Objects/Materials/materials.rsi
     state: corgihide
   - type: Item
-    sprite: Clothing/Head/Misc/hides.rsi
-    heldPrefix: corgi
+    heldPrefix: corgihide
   - type: Clothing
     sprite: Clothing/Head/Misc/hides.rsi
     equippedPrefix: corgi2
@@ -394,6 +389,10 @@
   - type: PhysicalComposition
     materialComposition:
       Diamond: 100
+  - type: Tag
+    tags:
+    - RawMaterial
+    - Diamond
 
 - type: entity
   parent: MaterialDiamond
@@ -422,7 +421,7 @@
     - state: cotton_3
       map: ["base"]
   - type: Appearance
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: FlavorProfile
     flavors:
@@ -441,10 +440,16 @@
         Quantity: 3
   - type: Tag
     tags:
-      - ClothMade
-      - RawMaterial
+    - ClothMade
+    - RawMaterial
+    - Boll
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Cotton: 100
   - type: Item
     heldPrefix: cotton
+
 
 - type: entity
   parent: MaterialCotton
@@ -475,7 +480,7 @@
     - state: pyrotton_3
       map: ["base"]
   - type: Appearance
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
@@ -495,8 +500,10 @@
         Quantity: 3
   - type: Tag
     tags:
-      - ClothMade
-      - RawMaterial
+    - ClothMade
+    - RawMaterial
+  - type: Item
+    heldPrefix: pyrotton
 
 - type: entity
   parent: MaterialPyrotton
@@ -528,14 +535,12 @@
     count: 10
     baseLayer: base
     layerStates:
-      - bananium
-      - bananium_1
-  - type: RadiationSource #Delta V - Adds radiation
-    intensity: 0.1
+    - bananium
+    - bananium_1
   - type: FlavorProfile
     flavors:
-      - banana
-  - type: Food
+    - banana
+  - type: Edible
     trash:
     - TrashBananiumPeel
   - type: BadFood
@@ -558,6 +563,8 @@
       - ReagentId: Honk
         Quantity: 5
   - type: Appearance
+  - type: Item
+    heldPrefix: bananium
 
 - type: entity
   parent: MaterialBananium
@@ -576,7 +583,6 @@
   description: A webby material.
   suffix: Full
   components:
-  - type: Material
   - type: PhysicalComposition
     materialComposition:
       WebSilk: 100
@@ -586,13 +592,13 @@
   - type: Stack
     count: 50
     stackType: WebSilk
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: FlavorProfile
     flavors:
-      - cobwebs
+    - cobwebs
     ignoreReagents:
-      - Fiber
+    - Fiber
   - type: Extractable
     juiceSolution:
       reagents:
@@ -607,8 +613,11 @@
           Quantity: 3
   - type: Tag
     tags:
-      - ClothMade
-      - RawMaterial
+    - ClothMade
+    - RawMaterial
+  - type: Item
+    sprite: Objects/Materials/silk.rsi
+    heldPrefix: silk
 
 - type: entity
   parent: MaterialWebSilk
@@ -645,7 +654,7 @@
     - state: cotton_3
       map: ["base"]
   - type: Appearance
-  - type: Food
+  - type: Edible
   - type: BadFood
   - type: SolutionContainerManager
     solutions:
@@ -654,6 +663,8 @@
         reagents:
         - ReagentId: Vitamin
           Quantity: 3
+  - type: Item
+    heldPrefix: bones
 
 - type: entity
   parent: MaterialBones
@@ -708,8 +719,13 @@
     - goliath_hide_3
   - type: Item
     size: Large
+    heldPrefix: goliathhide
+    sprite: Objects/Materials/hide.rsi
     shape:
     - 0,0,2,2
+  - type: Tag
+    tags:
+    - GoliathPlate
 
 - type: entity
   parent: MaterialGoliathHide

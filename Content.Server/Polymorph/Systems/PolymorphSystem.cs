@@ -1,11 +1,9 @@
 using Content.Server.Actions;
 using Content.Server.Humanoid;
 using Content.Server.Inventory;
-using Content.Server.Mind.Commands;
-using Content.Server.Nutrition;
 using Content.Server.Polymorph.Components;
-using Content.Shared.Actions;
 using Content.Shared.Buckle;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.Hands.EntitySystems;
@@ -13,14 +11,13 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Nutrition;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -28,11 +25,9 @@ namespace Content.Server.Polymorph.Systems;
 
 public sealed partial class PolymorphSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFact = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
@@ -58,11 +53,9 @@ public sealed partial class PolymorphSystem : EntitySystem
         SubscribeLocalEvent<PolymorphableComponent, PolymorphActionEvent>(OnPolymorphActionEvent);
         SubscribeLocalEvent<PolymorphedEntityComponent, RevertPolymorphActionEvent>(OnRevertPolymorphActionEvent);
 
-        SubscribeLocalEvent<PolymorphedEntityComponent, BeforeFullyEatenEvent>(OnBeforeFullyEaten);
         SubscribeLocalEvent<PolymorphedEntityComponent, BeforeFullySlicedEvent>(OnBeforeFullySliced);
         SubscribeLocalEvent<PolymorphedEntityComponent, DestructionEventArgs>(OnDestruction);
 
-        InitializeCollide();
         InitializeMap();
     }
 
@@ -90,8 +83,6 @@ public sealed partial class PolymorphSystem : EntitySystem
                 Revert((uid, comp));
             }
         }
-
-        UpdateCollide();
     }
 
     private void OnComponentStartup(Entity<PolymorphableComponent> ent, ref ComponentStartup args)
@@ -113,8 +104,8 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         if (_actions.AddAction(uid, ref component.Action, out var action, RevertPolymorphId))
         {
-            action.EntityIcon = component.Parent;
-            action.UseDelay = TimeSpan.FromSeconds(component.Configuration.Delay);
+            _actions.SetEntityIcon((component.Action.Value, action), component.Parent);
+            _actions.SetUseDelay(component.Action.Value, TimeSpan.FromSeconds(component.Configuration.Delay));
         }
     }
 
@@ -132,16 +123,6 @@ public sealed partial class PolymorphSystem : EntitySystem
         ref RevertPolymorphActionEvent args)
     {
         Revert((ent, ent));
-    }
-
-    private void OnBeforeFullyEaten(Entity<PolymorphedEntityComponent> ent, ref BeforeFullyEatenEvent args)
-    {
-        var (_, comp) = ent;
-        if (comp.Configuration.RevertOnEat)
-        {
-            args.Cancel();
-            Revert((ent, ent));
-        }
     }
 
     private void OnBeforeFullySliced(Entity<PolymorphedEntityComponent> ent, ref BeforeFullySlicedEvent args)
@@ -178,15 +159,18 @@ public sealed partial class PolymorphSystem : EntitySystem
     }
 
     /// <summary>
-    /// Polymorphs the target entity into another
+    /// Polymorphs the target entity into another.
     /// </summary>
     /// <param name="uid">The entity that will be transformed</param>
-    /// <param name="configuration">Polymorph data</param>
-    /// <returns></returns>
+    /// <param name="configuration">The new polymorph configuration</param>
+    /// <returns>The new entity, or null if the polymorph failed.</returns>
     public EntityUid? PolymorphEntity(EntityUid uid, PolymorphConfiguration configuration)
     {
-        // if it's already morphed, don't allow it again with this condition active.
-        if (!configuration.AllowRepeatedMorphs && HasComp<PolymorphedEntityComponent>(uid))
+        // If they're morphed, check their current config to see if they can be
+        // morphed again
+        if (!configuration.IgnoreAllowRepeatedMorphs
+            && TryComp<PolymorphedEntityComponent>(uid, out var currentPoly)
+            && !currentPoly.Configuration.AllowRepeatedMorphs)
             return null;
 
         // If this polymorph has a cooldown, check if that amount of time has passed since the
@@ -201,24 +185,20 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         var targetTransformComp = Transform(uid);
 
+        if (configuration.PolymorphSound != null)
+            _audio.PlayPvs(configuration.PolymorphSound, targetTransformComp.Coordinates);
+
         var child = Spawn(configuration.Entity, _transform.GetMapCoordinates(uid, targetTransformComp), rotation: _transform.GetWorldRotation(uid));
 
-        // Copy specified components over
-        foreach (var compName in configuration.CopiedComponents)
-        {
-            if (!_compFact.TryGetRegistration(compName, out var reg)
-                || !EntityManager.TryGetComponent(uid, reg.Idx, out var comp))
-                continue;
+        if (configuration.PolymorphPopup != null)
+            _popup.PopupEntity(Loc.GetString(configuration.PolymorphPopup,
+                ("parent", Identity.Entity(uid, EntityManager)),
+                ("child", Identity.Entity(child, EntityManager))),
+                child);
 
-            var copy = _serialization.CreateCopy(comp, notNullableOverride: true);
-            copy.Owner = child;
-            AddComp(child, copy, true);
-        }
+        _mindSystem.MakeSentient(child);
 
-        // Ensure the resulting entity is sentient (why? this sucks)
-        MakeSentientCommand.MakeSentient(child, EntityManager);
-
-        var polymorphedComp = _compFact.GetComponent<PolymorphedEntityComponent>();
+        var polymorphedComp = Factory.GetComponent<PolymorphedEntityComponent>();
         polymorphedComp.Parent = uid;
         polymorphedComp.Configuration = configuration;
         AddComp(child, polymorphedComp);
@@ -263,7 +243,7 @@ public sealed partial class PolymorphSystem : EntitySystem
             }
         }
 
-        if (configuration.TransferName && TryComp<MetaDataComponent>(uid, out var targetMeta))
+        if (configuration.TransferName && TryComp(uid, out MetaDataComponent? targetMeta))
             _metaData.SetEntityName(child, targetMeta.EntityName);
 
         if (configuration.TransferHumanoidAppearance)
@@ -278,6 +258,14 @@ public sealed partial class PolymorphSystem : EntitySystem
         EnsurePausedMap();
         if (PausedMap != null)
             _transform.SetParent(uid, targetTransformComp, PausedMap.Value);
+
+        // Raise an event to inform anything that wants to know about the entity swap
+        var ev = new PolymorphedEvent(uid, child, false);
+        RaiseLocalEvent(uid, ref ev);
+
+        // visual effect spawn
+        if (configuration.EffectProto != null)
+            SpawnAttachedTo(configuration.EffectProto, child.ToCoordinates());
 
         return child;
     }
@@ -302,6 +290,9 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         var uidXform = Transform(uid);
         var parentXform = Transform(parent);
+
+        if (component.Configuration.ExitPolymorphSound != null)
+            _audio.PlayPvs(component.Configuration.ExitPolymorphSound, uidXform.Coordinates);
 
         _transform.SetParent(parent, parentXform, uidXform.ParentUid);
         _transform.SetCoordinates(parent, parentXform, uidXform.Coordinates, uidXform.LocalRotation);
@@ -348,10 +339,19 @@ public sealed partial class PolymorphSystem : EntitySystem
         // if an item polymorph was picked up, put it back down after reverting
         _transform.AttachToGridOrMap(parent, parentXform);
 
-        _popup.PopupEntity(Loc.GetString("polymorph-revert-popup-generic",
+        // Raise an event to inform anything that wants to know about the entity swap
+        var ev = new PolymorphedEvent(uid, parent, true);
+        RaiseLocalEvent(uid, ref ev);
+
+        // visual effect spawn
+        if (component.Configuration.EffectProto != null)
+            SpawnAttachedTo(component.Configuration.EffectProto, parent.ToCoordinates());
+
+        if (component.Configuration.ExitPolymorphPopup != null)
+            _popup.PopupEntity(Loc.GetString(component.Configuration.ExitPolymorphPopup,
                 ("parent", Identity.Entity(uid, EntityManager)),
                 ("child", Identity.Entity(parent, EntityManager))),
-            parent);
+                parent);
         QueueDel(uid);
 
         return parent;
@@ -383,20 +383,19 @@ public sealed partial class PolymorphSystem : EntitySystem
         _metaData.SetEntityName(actionId.Value, Loc.GetString("polymorph-self-action-name", ("target", entProto.Name)), metaDataCache);
         _metaData.SetEntityDescription(actionId.Value, Loc.GetString("polymorph-self-action-description", ("target", entProto.Name)), metaDataCache);
 
-        if (!_actions.TryGetActionData(actionId, out var baseAction))
+        if (_actions.GetAction(actionId) is not {} action)
             return;
 
-        baseAction.Icon = new SpriteSpecifier.EntityPrototype(polyProto.Configuration.Entity);
-        if (baseAction is InstantActionComponent action)
-            action.Event = new PolymorphActionEvent(id);
+        _actions.SetIcon((action, action.Comp), new SpriteSpecifier.EntityPrototype(polyProto.Configuration.Entity));
+        _actions.SetEvent(action, new PolymorphActionEvent(id));
     }
 
     public void RemovePolymorphAction(ProtoId<PolymorphPrototype> id, Entity<PolymorphableComponent> target)
     {
-        if (target.Comp.PolymorphActions == null)
+        if (target.Comp.PolymorphActions is not {} actions)
             return;
 
-        if (target.Comp.PolymorphActions.TryGetValue(id, out var val))
-            _actions.RemoveAction(target, val);
+        if (actions.TryGetValue(id, out var action))
+            _actions.RemoveAction(target.Owner, action);
     }
 }

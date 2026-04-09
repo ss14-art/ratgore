@@ -14,7 +14,10 @@
     solution: drink
   - type: SolutionTransfer
     canChangeTransferAmount: true
-  - type: Drink
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
   - type: Sprite
     state: icon
   - type: MeleeWeapon
@@ -2073,7 +2076,10 @@
   id: DrinkTomatoJuice
   suffix: tomato juice
   components:
-  - type: Drink
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -2191,7 +2197,10 @@
         reagents:
         - ReagentId: Water
           Quantity: 30
-  - type: Drink
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
   - type: Sprite
     sprite: Objects/Consumable/Drinks/water.rsi
 
@@ -2328,7 +2337,10 @@
   name: blue milkshake
   description: ''
   components:
-  - type: Drink
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
   - type: Sprite
     sprite: Objects/Consumable/Drinks/shake-blue.rsi
 
@@ -2338,7 +2350,10 @@
   name: shakeempty
   description: ''
   components:
-  - type: Drink
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
   - type: Sprite
     sprite: Objects/Consumable/Drinks/shake-empty.rsi
 
@@ -2348,7 +2363,10 @@
   name: meat shake
   description: ''
   components:
-  - type: Drink
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
   - type: Sprite
     sprite: Objects/Consumable/Drinks/shake-meat.rsi
 
@@ -2358,7 +2376,10 @@
   name: robo shake
   description: ''
   components:
-  - type: Drink
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
   - type: Sprite
     sprite: Objects/Consumable/Drinks/shake-robo.rsi
 
@@ -2368,7 +2389,10 @@
   name: white shake
   description: ''
   components:
-  - type: Drink
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
   - type: Sprite
     sprite: Objects/Consumable/Drinks/shake-white.rsi
 

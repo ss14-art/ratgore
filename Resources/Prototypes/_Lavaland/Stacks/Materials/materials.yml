@@ -47,7 +47,6 @@
   spawn: UraniumOre1Unprocessed
   maxCount: 30
 
-
 - type: stack
   id: BananiumOreUnprocessed
   name: unprocessed bananium ore

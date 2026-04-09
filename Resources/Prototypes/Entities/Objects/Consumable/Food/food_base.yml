@@ -9,7 +9,7 @@
   - type: FlavorProfile
     flavors:
       - food
-  - type: Food
+  - type: Edible
   - type: SpaceGarbage
   - type: Sprite
   - type: StaticPrice

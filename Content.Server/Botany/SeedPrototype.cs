@@ -1,5 +1,6 @@
 using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
+using Content.Server.EntityEffects;
 using Content.Shared.Atmos;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Audio;
@@ -80,7 +81,7 @@ public partial struct SeedChemQuantity
 
 // TODO reduce the number of friends to a reasonable level. Requires ECS-ing things like plant holder component.
 [Virtual, DataDefinition]
-[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem))]
+[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffectSystem), typeof(MutationSystem))]
 public partial class SeedData
 {
     #region Tracking

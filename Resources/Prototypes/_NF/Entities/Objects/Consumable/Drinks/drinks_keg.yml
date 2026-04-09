@@ -21,10 +21,10 @@
     solutions:
       drink:
         maxVol: 600
-  - type: Drink
-#  - type: Openable
-#    sound:
-#      collection: bottleOpenSounds
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
   - type: DrawableSolution
     solution: drink
   - type: RefillableSolution
