@@ -1,4 +1,4 @@
-﻿using Content.Server.Botany.Components;
+using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects.Botany.PlantAttributes;
@@ -14,7 +14,7 @@ public sealed partial class PlantAdjustMutationLevelEntityEffectSystem : EntityE
         if (entity.Comp.Seed == null || entity.Comp.Dead)
             return;
 
-        entity.Comp.Health += args.Effect.Amount;
+        entity.Comp.MutationLevel += args.Effect.Amount * entity.Comp.MutationMod;
         _plantHolder.CheckHealth(entity, entity.Comp);
     }
 }
