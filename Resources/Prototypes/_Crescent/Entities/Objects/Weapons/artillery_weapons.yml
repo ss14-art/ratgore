@@ -1,0 +1,3 @@
+# This file is not in use - all actual weapon turrets are already defined in the game engine
+# Personal weapons (Harba, Cobra) are defined separately in military_misc.yml
+# Weapon flatpacks all reference existing WeaponTurret* entities

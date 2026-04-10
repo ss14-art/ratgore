@@ -447,3 +447,47 @@
             node: machineFrame
     - type: Machine
       board: SRMWarshipCircuitBoard
+
+# High-Impulse TAP Thruster
+
+- type: entity
+  id: ThrusterHighImpulseTAP
+  parent: Thruster
+  name: high-impulse thruster
+  suffix: TAP, High-Impulse
+  components:
+    - type: Damageable
+      damageContainer: StructuralInorganic
+      damageModifierSet: StructuralMetallicStrong
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 300
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+          - !type:ChangeConstructionNodeBehavior
+            node: machineFrame
+    - type: Machine
+      board: HighImpulseThrusterCircuitBoard
+    - type: Thruster
+      baseThrust: 350
+      thrust: 350
+
+- type: entity
+  id: HighImpulseThrusterCircuitBoard
+  parent: BaseMachineCircuitboard
+  name: high-impulse thruster circuit board
+  description: A machine printed circuit board for a high-impulse thruster.
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: ThrusterHighImpulseTAP
+      requirements:
+        MatterBin: 3
+        Manipulator: 3

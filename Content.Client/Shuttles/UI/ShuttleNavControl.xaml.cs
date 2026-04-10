@@ -462,6 +462,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         {
             var northRot = ourEntRot + _rotation.Value;
             DrawNorthLine(handle, northRot);
+			DrawAzimuthScale(handle, northRot);
         }
 
         var movementVector = bodyQuery.GetComponent(_coordinates.Value.EntityId).LinearVelocity;

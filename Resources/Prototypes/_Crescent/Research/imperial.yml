@@ -144,16 +144,16 @@
   - WeaponMechCombatImperialAutolaser
 
 - type: technology
-  id: ImperialRedemptor
-  name: research-technology-imperial-redemptor
+  id: ImperialPraetorian
+  name: research-technology-imperial-praetorian
   icon:
     sprite: _Crescent/Objects/Misc/lpcchip.rsi
     state: icon
   discipline: Imperial
   tier: 1
-  cost: 2500
+  cost: 5000
   recipeUnlocks:
-  - RedemptorLPC
+  - PraetorianLPC
 
 - type: technology
   id: ImperialCovetor
@@ -168,16 +168,17 @@
   - CovetorLPC
 
 - type: technology
-  id: ImperialIbis
-  name: research-technology-imperial-ibis
+  id: ImperialFighter
+  name: research-technology-imperial-fighters
   icon:
     sprite: _Crescent/Objects/Misc/lpcchip.rsi
     state: icon
   discipline: Imperial
   tier: 1
-  cost: 5000
+  cost: 7500
   recipeUnlocks:
   - IbisLPC
+  - RedemptorLPC
 
 - type: technology
   id: ImperialTorturer

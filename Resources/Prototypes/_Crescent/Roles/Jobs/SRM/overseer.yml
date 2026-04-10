@@ -28,8 +28,6 @@
     - !type:CharacterSpeciesRequirement
       species:
         - Human
-    - !type:CharacterOverallTimeRequirement
-      min: 500000
     - !type:SexRequirement
       sex: Male
     - !type:CharacterTraitRequirement

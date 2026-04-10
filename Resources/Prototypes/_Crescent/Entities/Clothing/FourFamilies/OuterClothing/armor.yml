@@ -4,7 +4,7 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitDraugr
   name: DRAUGR mk.I pressurized combat exosuit
-  description: A combat hardsuit of antiquated make. Tribal fetishes adorn the dented breastplate. Used by many Pacters belonging to the Al'Seik family.
+  description: A quiet, light combat hardsuit. The constantly renewed outer layers contrast with the worn, bloodied interior fabric.
   components:
   - type: Sprite
     sprite: _Crescent/Clothing/FourFamilies/OuterClothing/draugrexo.rsi
@@ -16,19 +16,19 @@
   - type: ExplosionResistance
     damageCoefficient: 0.6
   - type: DegradeableArmor
-    armorMaxHealth: 1000
-    armorType: Metallic
-    armorRepair: SteelPlate
+    armorMaxHealth: 510
+    armorType: Ceramic
+    armorRepair: NTCeramic
     initialModifiers:
       flatReductions:
         Blunt: 35
         Slash: 35
-        Piercing: 50
+        Piercing: 80
         Heat: 20
         Caustic: 5
   - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.90
+    walkModifier: 1
+    sprintModifier: 1
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitDraugr
   - type: StaticPrice
@@ -39,6 +39,9 @@
       - ClothingOuterHardsuitDraugr
       - ClothingOuterHardsuitIzdari
       - ClothingOuterHardsuitThukker
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSilent
 
 - type: entity
   parent: ClothingOuterHardsuitBase
@@ -56,7 +59,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.6
   - type: DegradeableArmor
-    armorMaxHealth: 750
+    armorMaxHealth: 600
     armorType: Metallic
     armorRepair: PlasteelPlate
     initialModifiers:
@@ -90,7 +93,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.6
   - type: DegradeableArmor
-    armorMaxHealth: 750
+    armorMaxHealth: 650
     armorType: Metallic
     armorRepair: SteelPlate
     initialModifiers:
@@ -201,7 +204,7 @@
   - type: StaticPrice
     price: 250
   - type: ReverseEngineering
-    recipes: 
+    recipes:
       - ClothingOuterArmorServileAlseik
       - ClothingHeadHatServile
       - ClothingOuterArmorDraugrAlseik
@@ -238,7 +241,7 @@
   - type: StaticPrice
     price: 500
   - type: ReverseEngineering
-    recipes: 
+    recipes:
       - ClothingOuterArmorDraugrAlseik
       - ClothingHeadHatDraugr
       - ClothingOuterArmorServileAlseik

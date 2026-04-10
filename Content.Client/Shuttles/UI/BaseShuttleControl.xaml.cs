@@ -21,6 +21,16 @@ namespace Content.Client.Shuttles.UI;
 [Virtual]
 public partial class BaseShuttleControl : MapGridControl
 {
+    // Azimuth scale constants  
+    private const int AzimuthMinorTickStepDegrees = 10;  
+    private const int AzimuthMajorTickInterval = 3;  
+    private const int AzimuthCardinalTickInterval = 9;  
+    private static readonly string[] AzimuthLabels =  
+    [  
+        "000", "030", "060", "090", "120", "150",  
+        "180", "210", "240", "270", "300", "330"  
+    ];  
+
     [Dependency] private readonly IParallelManager _parallel = default!;
     protected readonly SharedMapSystem Maps;
 
@@ -123,6 +133,79 @@ public partial class BaseShuttleControl : MapGridControl
             handle.DrawLine(origin - aExtent, origin + aExtent, lineColor);
         }
     }
+
+    protected void DrawAzimuthScale(DrawingHandleScreen handle, Angle rotation)  
+    {  
+        const float minorTickLength = 5f;  
+        const float majorTickLength = 9f;  
+        const float cardinalTickLength = 12f;  
+        const float labelOffset = 17f;  
+        const float regularLabelScale = 0.62f;  
+        const float cardinalLabelScale = 0.72f;  
+  
+        var baseAngle = rotation;  
+        var origin = MidPointVector;  
+        var ringRadius = MathF.Max(ScaledMinimapRadius - 2f, 24f);  
+        var labelRadius = ringRadius - labelOffset;  
+  
+        var subtleGray = Color.FromHex("#676767");  
+        var baseTickColor = subtleGray.WithAlpha(0.34f);  
+        var majorTickColor = subtleGray.WithAlpha(0.5f);  
+        var cardinalTickColor = subtleGray.WithAlpha(0.68f);  
+        var regularLabelColor = subtleGray.WithAlpha(0.76f);  
+        var cardinalLabelColor = subtleGray.WithAlpha(0.9f);  
+  
+        for (var step = 0; step < 360 / AzimuthMinorTickStepDegrees; step++)  
+        {  
+            var degrees = step * AzimuthMinorTickStepDegrees;  
+            var direction = GetAzimuthDirection(baseAngle, degrees);  
+            var isCardinal = step % AzimuthCardinalTickInterval == 0;  
+            var isMajor = step % AzimuthMajorTickInterval == 0;  
+            var tickLength = isCardinal  
+                ? cardinalTickLength  
+                : isMajor  
+                    ? majorTickLength  
+                    : minorTickLength;  
+  
+            // Project onto square boundary instead of circle  
+            var outer = origin + ProjectOntoSquare(direction, ringRadius);  
+            var inner = outer - direction * tickLength;  
+  
+            handle.DrawLine(inner, outer, isCardinal ? cardinalTickColor : isMajor ? majorTickColor : baseTickColor);  
+  
+            if (!isMajor)  
+                continue;  
+  
+            var label = AzimuthLabels[step / AzimuthMajorTickInterval];  
+            var labelScale = isCardinal ? cardinalLabelScale : regularLabelScale;  
+            var labelColor = isCardinal ? cardinalLabelColor : regularLabelColor;  
+            var labelSize = handle.GetDimensions(Font, label, labelScale);  
+            var labelCenter = origin + ProjectOntoSquare(direction, labelRadius);  
+            var labelPosition = labelCenter - labelSize * 0.5f;  
+            handle.DrawString(Font, labelPosition, label, labelScale, labelColor);  
+        }  
+    }  
+  
+    /// <summary>  
+    /// Projects a normalized direction vector onto the boundary of a square  
+    /// with half-size <paramref name="halfSize"/> (L∞ projection).  
+    /// </summary>  
+    private static Vector2 ProjectOntoSquare(Vector2 direction, float halfSize)  
+    {  
+        var absX = MathF.Abs(direction.X);  
+        var absY = MathF.Abs(direction.Y);  
+        var maxComponent = MathF.Max(absX, absY);  
+        if (maxComponent < 1e-6f)  
+            return Vector2.Zero;  
+        return direction * (halfSize / maxComponent);  
+    }  
+  
+    private static Vector2 GetAzimuthDirection(Angle baseAngle, float azimuthDegrees)  
+    {  
+        var angle = baseAngle + Angle.FromDegrees(azimuthDegrees);  
+        var radians = (float) angle.Theta - MathF.PI / 2f;  
+        return new Vector2(MathF.Cos(radians), MathF.Sin(radians));  
+    }  
 
     protected void DrawGrid(DrawingHandleScreen handle, Matrix3x2 matrix, Entity<MapGridComponent> grid, Color color, float alpha = 0.01f)
     {

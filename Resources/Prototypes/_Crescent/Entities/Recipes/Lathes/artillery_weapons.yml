@@ -1,0 +1,199 @@
+# Artillery-related recipes for custom TAP faction items
+
+# Auxiliary Artillery - Tier 1 (minor weapons, ~20x craftable)
+
+- type: latheRecipe
+  id: WeaponTurretSmallMachinegunFlatpack
+  result: WeaponTurretSmallMachinegunFlatpack
+  category: Devices
+  completetime: 20
+  materials:
+    Steel: 50
+    Copper: 30
+    Glass: 40
+    Plasma: 10
+
+- type: latheRecipe
+  id: WeaponTurretMediumMachinegunFlatpack
+  result: WeaponTurretMediumMachinegunFlatpack
+  category: Devices
+  completetime: 25
+  materials:
+    Steel: 70
+    Copper: 35
+    Glass: 60
+    Plasma: 15
+
+- type: latheRecipe
+  id: BaseWeaponTurretShortbowFlatpack
+  result: BaseWeaponTurretShortbowFlatpack
+  category: Devices
+  completetime: 30
+  materials:
+    Steel: 80
+    Copper: 40
+    Glass: 100
+    Plasma: 30
+
+# Primary Artillery - Tier 2 (medium-high weapons)
+
+- type: latheRecipe
+  id: WeaponTurretSmallArtilleryFlatpack
+  result: WeaponTurretSmallArtilleryFlatpack
+  category: Devices
+  completetime: 28
+  materials:
+    Steel: 60
+    Copper: 30
+    Glass: 80
+    Plasma: 25
+
+- type: latheRecipe
+  id: WeaponTurretLargeMachinegunFlatpack
+  result: WeaponTurretLargeMachinegunFlatpack
+  category: Devices
+  completetime: 35
+  materials:
+    Steel: 200
+    Copper: 100
+    Glass: 150
+    Plasma: 100
+    TungstenCarbide: 45
+    Gold: 60
+
+- type: latheRecipe
+  id: BaseWeaponTurretAzimuthFlatpack
+  result: BaseWeaponTurretAzimuthFlatpack
+  category: Devices
+  completetime: 40
+  materials:
+    Steel: 140
+    Copper: 70
+    Glass: 80
+    Plasma: 60
+    TungstenCarbide: 20
+
+- type: latheRecipe
+  id: BaseWeaponTurretArbalestFlatpack
+  result: BaseWeaponTurretArbalestFlatpack
+  category: Devices
+  completetime: 38
+  materials:
+    Steel: 220
+    Copper: 110
+    Glass: 160
+    Plasma: 120
+    TungstenCarbide: 50
+    Gold: 70
+
+# Exotic Weaponry - Tier 3 (high-end specialized weapons)
+
+- type: latheRecipe
+  id: BaseWeaponTurretRetributionFlatpack
+  result: BaseWeaponTurretRetributionFlatpack
+  category: Devices
+  completetime: 32
+  materials:
+    Steel: 100
+    Copper: 50
+    Glass: 120
+    Plasma: 40
+
+- type: latheRecipe
+  id: BaseWeaponTurretGlareFlatpack
+  result: BaseWeaponTurretGlareFlatpack
+  category: Devices
+  completetime: 42
+  materials:
+    Steel: 180
+    Copper: 90
+    Glass: 140
+    Plasma: 80
+    TungstenCarbide: 30
+    Gold: 40
+
+- type: latheRecipe
+  id: BaseWeaponTurretStarburstFlatpack
+  result: BaseWeaponTurretStarburstFlatpack
+  category: Devices
+  completetime: 45
+  materials:
+    Steel: 160
+    Copper: 80
+    Glass: 140
+    Plasma: 75
+    TungstenCarbide: 25
+    Gold: 35
+
+- type: latheRecipe
+  id: BaseWeaponTurretBolterFlatpack
+  result: BaseWeaponTurretBolterFlatpack
+  category: Devices
+  completetime: 42
+  materials:
+    Steel: 150
+    Copper: 75
+    Glass: 100
+    Plasma: 70
+    TungstenCarbide: 25
+
+# Pact weaponry
+
+- type: latheRecipe
+  id: WeaponShotgunHarba
+  result: WeaponShotgunHarba
+  category: Weapons
+  completetime: 15
+  materials:
+    Steel: 2000
+    Brass: 500
+    Plastic: 800
+
+# Autonomous Vehicle flatpacks
+
+- type: latheRecipe
+  id: FlatpackComputerDroneControl
+  result: FlatpackComputerDroneControl
+  category: Devices
+  completetime: 45
+  materials:
+    Steel: 8000
+    Glass: 3000
+    Plasma: 2000
+    Gold: 1500
+
+- type: latheRecipe
+  id: FlatpackDroneController
+  result: FlatpackDroneController
+  category: Devices
+  completetime: 40
+  materials:
+    Steel: 7000
+    Glass: 2500
+    Plasma: 1500
+    Gold: 1000
+
+# Plastic Explosives
+
+- type: latheRecipe
+  id: CompositionC4
+  result: C4
+  category: Explosives
+  completetime: 10
+  materials:
+    Plastic: 2000
+    Plasma: 1000
+    Carbon: 500
+
+# High-Impulse Thruster
+
+- type: latheRecipe
+  id: ThrusterHighImpulseTAP
+  result: ThrusterHighImpulseTAP
+  category: Devices
+  completetime: 60
+  materials:
+    Steel: 15000
+    Glass: 3000
+    Plasma: 5000
+    Gold: 2000

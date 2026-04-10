@@ -458,13 +458,12 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             shuttleStation = _station.InitializeNewStation(stationProto.Stations[vessel.ID], gridUids);
             var metaData = MetaData((EntityUid) shuttleStation);
             name = metaData.EntityName;
-            _shuttle.SetIFFColor(shuttle.Owner, new Color
-            {
-                R = 10,
-                G = 50,
-                B = 100,
-                A = 100
-            });
+
+            var iffColor = new Color { R = 10, G = 50, B = 100, A = 100 };
+            if (TryComp<ShipyardListingComponent>(uid, out var listing) && listing.IffColor.HasValue)
+                iffColor = listing.IffColor.Value;
+
+            _shuttle.SetIFFColor(shuttle.Owner, iffColor);
             _shuttle.AddIFFFlag(shuttle.Owner, IFFFlags.IsPlayerShuttle);
 
             // match our IFF faction with our spawner's
@@ -986,13 +985,12 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             shuttleStation = _station.InitializeNewStation(stationProto.Stations[vessel.ID], gridUids);
             var metaData = MetaData((EntityUid) shuttleStation);
             name = metaData.EntityName;
-            _shuttle.SetIFFColor(shuttle.Owner, new Color
-            {
-                R = 10,
-                G = 50,
-                B = 100,
-                A = 100
-            });
+
+            var iffColor = new Color { R = 10, G = 50, B = 100, A = 100 };
+            if (TryComp<ShipyardListingComponent>(uid, out var listing) && listing.IffColor.HasValue)
+                iffColor = listing.IffColor.Value;
+
+            _shuttle.SetIFFColor(shuttle.Owner, iffColor);
             _shuttle.AddIFFFlag(shuttle.Owner, IFFFlags.IsPlayerShuttle);
             var comp = EnsureComp<ShipPriceMultiplierComponent>(shuttle.Owner);
             comp.priceMultiplier = 0.50f;

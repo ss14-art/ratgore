@@ -6,6 +6,7 @@
   weight: 2
   startingGear: ForemanGear
   alwaysUseSpawner: true
+  whitelisted: true # Rat
   requireAdminNotify: true
   icon: "JobIconSyndieForeman"
   supervisors: You're the leader of the SAW. You answer to your own interests

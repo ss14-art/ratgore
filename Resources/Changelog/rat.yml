@@ -579,5 +579,54 @@ Entries:
     id: 76
     time: '2026-04-05T17:28:38.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/110
+  - author: EmperorStukov
+    changes:
+      - type: Add
+        message: Добавлен корпоративный автомат со снаряжением для ТПШ
+      - type: Add
+        message: Добавлены ранги ролям ТПШ
+      - type: Tweak
+        message: 'На Глисс-Санто и Татсумо появились стойки со снаряжением: минитменов и корпсека соответственно'
+      - type: Fix
+        message: ~~Теперь национальности БМС, ЛРНП и КВСТ в паспортах дают их языки~~ Добавлены таймлоки по наигранному времени во фракции на большинство ролей крупных фракций (БМС, ЛРНП, ТПШ) + лидеры подфракций КВСТ теперь под ВЛом
+      - type: Fix
+        message: ТПШ Буффало теперь работает как надо
+      - type: Add
+        message: На Доченскую добавлены два плазменных резака
+      - type: Add
+        message: Добавлен один диск шаттла "Паук" в ОСР Убежище
+      - type: Tweak
+        message: Изменены статы брони охотников
+      - type: Tweak
+        message: Повышены цены на оружие и снаряжение охотников
+      - type: Fix
+        message: Убраны таймлоки с ролей охотников
+      - type: Tweak
+        message: Теперь все роли СРМ под ВЛом
+      - type: Remove
+        message: Фелиниды вырезаны полностью
+      - type: Add
+        message: Теперь у Они есть собственные части тела, а не человеческие
+    id: 77
+    time: '2026-04-09T15:34:48.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/117
+  - author: EmperorStukov
+    changes:
+      - type: Add
+        message: Т2 скафандр Горлекса в их вендомат (статы Жуньгуо)
+      - type: Add
+        message: Рубашка "бесконечное Джерси" в лодаут для любого
+      - type: Fix
+        message: Немного исправлены отображения иконок скафандров Синдиката
+    id: 78
+    time: '2026-04-10T09:54:07.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/122
+  - author: nabegator220
+    changes:
+      - type: Tweak
+        message: TAP rework.
+    id: 79
+    time: '2026-04-10T10:08:28.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/123
 Name: Rat
 Order: -1

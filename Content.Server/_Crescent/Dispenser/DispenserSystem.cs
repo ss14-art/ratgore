@@ -61,7 +61,7 @@ public sealed class DispenserSystem : SharedDispenserSystem
         if (TryComp<MetaDataComponent>(uid, out var meta) &&
             meta.EntityPrototype?.ID == "HuntersBounty")
         {
-            if (!IsValidBountyHead(used))
+            if (HasComp<BodyPartComponent>(used) && !IsValidBountyHead(used))
             {
                 _popup.PopupEntity(
                     Loc.GetString("hunters-bounty-invalid-head"),

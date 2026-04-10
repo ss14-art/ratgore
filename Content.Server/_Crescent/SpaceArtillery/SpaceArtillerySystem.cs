@@ -10,6 +10,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Camera;
+using Content.Shared.DeviceLinking;
 using Content.Server.DeviceLinking.Events;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Weapons.Ranged.Systems;
@@ -147,7 +148,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
                         _combat.SetInCombatMode(uid, true, combat);
                         component.IsArmed = true;
 
-                        if (component.IsCapableOfSendingSignal == true)
+                        if (component.IsCapableOfSendingSignal == true && TryComp<DeviceLinkSourceComponent>(uid, out _))
                             _deviceLink.SendSignal(uid, component.SpaceArtilleryDetectedSafetyChangePort, true);
                     }
                     else
@@ -155,7 +156,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
                         _combat.SetInCombatMode(uid, false, combat);
                         component.IsArmed = false;
 
-                        if (component.IsCapableOfSendingSignal == true)
+                        if (component.IsCapableOfSendingSignal == true && TryComp<DeviceLinkSourceComponent>(uid, out _))
                             _deviceLink.SendSignal(uid, component.SpaceArtilleryDetectedSafetyChangePort, true);
                     }
                 }
@@ -164,7 +165,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
             {
                 if (TryComp<CombatModeComponent>(uid, out var combat))
                 {
-                    if (combat.IsInCombatMode == true && component.IsCapableOfSendingSignal == true)
+                    if (combat.IsInCombatMode == true && component.IsCapableOfSendingSignal == true && TryComp<DeviceLinkSourceComponent>(uid, out _))
                         _deviceLink.SendSignal(uid, component.SpaceArtilleryDetectedSafetyChangePort, true);
 
                     _combat.SetInCombatMode(uid, false, combat);
@@ -176,7 +177,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
             {
                 if (TryComp<CombatModeComponent>(uid, out var combat))
                 {
-                    if (combat.IsInCombatMode == false && component.IsCapableOfSendingSignal == true)
+                    if (combat.IsInCombatMode == false && component.IsCapableOfSendingSignal == true && TryComp<DeviceLinkSourceComponent>(uid, out _))
                         _deviceLink.SendSignal(uid, component.SpaceArtilleryDetectedSafetyChangePort, true);
 
                     _combat.SetInCombatMode(uid, true, combat);
@@ -381,7 +382,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
 
             var xformGridUid = Transform(uid).GridUid;
 
-            if (component.IsCapableOfSendingSignal == true)
+            if (component.IsCapableOfSendingSignal == true && TryComp<DeviceLinkSourceComponent>(uid, out _))
                 _deviceLink.SendSignal(uid, component.SpaceArtilleryDetectedFiringPort, true);
 
             if (component.IsPowerRequiredToFire == true)
@@ -402,7 +403,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
 
     private void OnMalfunction(EntityUid uid, SpaceArtilleryComponent component)
     {
-        if (component.IsCapableOfSendingSignal == true)
+        if (component.IsCapableOfSendingSignal == true && TryComp<DeviceLinkSourceComponent>(uid, out _))
             _deviceLink.SendSignal(uid, component.SpaceArtilleryDetectedMalfunctionPort, true);
     }
 

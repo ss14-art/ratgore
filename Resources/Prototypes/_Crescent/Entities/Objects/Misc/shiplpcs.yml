@@ -19,6 +19,26 @@
 
 - type: entity
   parent: BaseItem
+  id: ShipVoucherPraetorian
+  name: DSM 'Praetorian' LPC
+  description: An LPC fabprint disk loaded with an Imperial Praetorian bombardmant ship.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: Praetorian
+  - type: ReverseEngineering # Sector Crescent
+    recipes:
+      - PraetorianLPC
+
+- type: entity
+  parent: BaseItem
   id: ShipVoucherGnosis
   name: DSM 'Gnosis' pattern LPC fabprint disk
   description: An LPC fabprint disk loaded with an Imperial Gnosis-class personal shuttle. Has to be redeemed at a shipyard console.
@@ -2162,6 +2182,106 @@
   - type: ReverseEngineering # SectorCrescent
     recipes:
       - BeelzebubLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherTAPYanbue
+  name: TAP 'Yanbue' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a small IFF cloaked shuttle hull.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: Yanbue
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - YanbueLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherTAPQasr
+  name: TAP 'Qasr' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a large IFF cloaked shuttle hull.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: Qasr
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - QasrLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherTAPHanaq
+  name: TAP 'Hanaq' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a medium IFF cloaked warship.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: Hanaq
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - HanaqLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherTAPBaghl
+  name: TAP 'Baghl' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a multirole cloaked transport.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: Baghl
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - BaghlLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherTAPAlkhuld
+  name: TAP 'Alkhuld' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a cloaked mining and scrapping shuttle.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: Alkhuld
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - AlkhuldLPC
 
 #Cyberdawn CD ships
 

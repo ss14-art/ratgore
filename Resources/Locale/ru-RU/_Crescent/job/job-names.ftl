@@ -24,7 +24,7 @@ job-name-ncwl-newbie = Рабочий
 # syndicate
 
 job-name-ringleader = Главарь Горлекс
-job-name-lieutenant = Сержант Горлекс
+job-name-lieutenant = Лейтенант Горлекс
 job-name-infanteer = Пехотинец Горлекс
 job-name-technician = Новобранец Горлекс
 job-name-coordinator = Координатор Интердайн
@@ -70,10 +70,10 @@ job-name-overseer = Надзиратель охоты
 
 job-name-executive = Даймё
 job-name-board = Помощник даймё
-job-name-corpsec = Агент корпоративной безопасности
-job-name-highsec = Агент корпоративной ликвидации
+job-name-corpsec = Агент службы безопасности
+job-name-highsec = Агент службы ликвидации
 job-name-boardhr = Специалист по кадрам
-job-name-hos-shi = Начальник корпоративной безопасности
+job-name-hos-shi = Начальник службы безопасности
 job-name-employee = Клерк
 job-name-medtech = Исследователь МедТех
 

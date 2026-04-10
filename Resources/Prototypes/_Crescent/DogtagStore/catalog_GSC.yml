@@ -340,11 +340,11 @@
   - StoreCategoryGSCSuits
 
 - type: listing
-  id: StoreListingGSCZhongyao
-  name: NCSP mk.IV "Zhongyao" tacsuit
-  description: An advanced tacsuit manufactured by Cyberdawn Technologies and provided to GSC at a discount.
-  icon: { sprite: /Textures/_Impstation/Clothing/OuterClothing/Hardsuits/syndicate_agent.rsi, state: icon }
-  productEntity: ClothingOuterHardsuitSyndieMedic
+  id: StoreListingGSCInfanteermk2
+  name: Bulwark MK.III Infanteer
+  description: An advanced battlesuit manufactured by Stukov Industies and provided to GSC at a discount.
+  icon: { sprite: /Textures/_Crescent/Clothing/Syndicate/OuterClothing/syndicatesbg2.rsi, state: icon }
+  productEntity: ClothingOuterHardsuitSyndicateBG2
   cost:
     PlunderGSC: 10
   categories:

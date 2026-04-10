@@ -1,0 +1,53 @@
+﻿- type: body
+  id: Oni
+  name: "oni"
+  root: torso
+  slots:
+    head:
+      part: HeadOni
+      connections:
+      - torso
+      organs:
+        brain: OrganHumanBrain
+        eyes: OrganHumanEyes
+        head_implant: OrganCrescentDummy # Seriously. Why.
+    torso:
+      part: TorsoOni
+      connections:
+      - right arm
+      - left arm
+      - right leg
+      - left leg
+      - head # Shitmed
+      organs:
+        heart: OrganHumanHeart
+        lungs: OrganHumanLungs
+        stomach: OrganHumanStomach
+        liver: OrganHumanLiver
+        kidneys: OrganHumanKidneys
+        spine: OrganCrescentDummy # Why do you need to do this to add an empty organ slot.
+        dermis: OrganCrescentDummy # Why do you need to do this to add an empty organ slot.
+    right arm:
+      part: RightArmOni
+      connections:
+      - right hand
+    left arm:
+      part: LeftArmOni
+      connections:
+      - left hand
+    right hand:
+      part: RightHandOni
+    left hand:
+      part: LeftHandOni
+    right leg:
+      part: RightLegOni
+      connections:
+      - right foot
+    left leg:
+      part: LeftLegOni
+      connections:
+      - left foot
+    right foot:
+      part: RightFootOni
+    left foot:
+      part: LeftFootOni

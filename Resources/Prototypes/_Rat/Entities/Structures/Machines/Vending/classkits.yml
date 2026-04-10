@@ -189,3 +189,76 @@
         name: 18-зарядный пистолетный магазин (9x19 мм PSTF auto)
       - id: SpeedLoaderMagnum
         name: спидлоадер (.45 магнум)
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechEquipmentSHI
+  name: автоматическая стойка снаряжения корпорации
+  description: Автоматизированный стеллаж, соединенный с колоссальным хранилищем стандартного снаряжения корпоративной безопасности Шиногары.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Structures/syndicatearmory.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - EmployeeSHI
+    - MedtechSHI
+    - CorpsecSHI
+    - HighsecSHI
+    - HosSHI
+    - BoardSHI
+    - BoardHRSHI
+    - ExecutiveSHI
+    sections:
+    - name: Стандартный набор
+      choices: { CMClass: 1 }
+      entries:
+      - id: CMVendorBundleCorpSecApparel
+        name: стандартный корпоративный набор
+        recommended: true
+    - name: Броня
+      choices: { CMArmour: 1 }
+      entries:
+      - id: ClothingOuterHardsuitHighsec
+        name: боевой скафандр "Шиногара" SVBT-2
+      - id: ClothingOuterHardsuitHighsecUA
+        name: боевой скафандр "Шиногара" SVBT-2-UA
+        recommended: true  
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponRifleLecter
+        name: ТПШ Лектер
+        recommended: true
+      - id: WeaponRifleHoundMarksman
+        name: ТПШ М215 "Хаунд" 5.56х45
+      - id: WeaponSubMachineGunMP49
+        name: ТПШ MP49 "Надзиратель" 9x19mm
+    - name: Дополнительное оружие
+      choices: { CMPistol: 1 }
+      entries:
+      - id: WeaponPistolHimehabu
+        name: ТПШ М002 "Химехабу" 9х19
+        recommended: true
+      - id: ClothingBeltSheathSHIKatanaFilled
+        name: Ножны для катаны (катана в комплекте)
+    - name: Утилиты
+      choices: { CMUtilities: 3 }
+      entries:
+      - id: ExGrenade
+        name: разрывная граната
+      - id: EmpGrenade
+        name: ЭМИ Граната
+      - id: BreachingCharge
+        name: Прорывной заряд
+      - id: HandHeldMassScannerEE
+        name: портативный сканер масс
+        recommended: true 
+    - name: Боеприпасы
+      choices: { CMAmmo: 4 }
+      entries:
+      - id: MagazinePistolSubMachineGun
+        name: 35-зарядный магазин для пистолета-пулемета (9x19 мм PSTF auto)
+      - id: MagazineLightRifle
+        name: 30-зарядный магазин (5,56х45 мм Imperial)
+      - id: MagazinePistol
+        name: 18-зарядный пистолетный магазин (9x19 мм PSTF auto)

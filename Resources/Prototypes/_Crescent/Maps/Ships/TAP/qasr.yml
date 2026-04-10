@@ -1,0 +1,29 @@
+- type: vessel
+  id: Qasr
+  name: TAP Qasr
+  description: A large shuttle hull designed for construction. Comes with the bare minimum to fly.
+  price: 30000
+  category: Small
+  group: None
+  path: /Maps/_Crescent/Shuttles/TAP/qasr.yml
+
+- type: gameMap
+  id: Qasr
+  mapName: 'TAP Qasr'
+  mapPath: /Maps/_Crescent/Shuttles/TAP/qasr.yml
+  minPlayers: 0
+  stations:
+    Qasr:
+      stationProto: StandardCrescentVessel
+      components:
+        - type: VesselIcon
+          iffIcon:
+            sprite: _Crescent/ShipIcons/ifficons.rsi
+            state: cruiser
+        - type: StationNameSetup
+          mapNameTemplate: 'TAP Qasr {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: VesselDesignation
+          designation: vessel-designation-warship

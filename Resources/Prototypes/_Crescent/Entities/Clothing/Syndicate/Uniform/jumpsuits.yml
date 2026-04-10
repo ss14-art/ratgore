@@ -175,3 +175,19 @@
     sprite: _Crescent/Clothing/Syndicate/Uniform/syndiebunny.rsi
   - type: Clothing
     sprite: _Crescent/Clothing/Syndicate/Uniform/syndiebunny.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitInfinityJersey
+  name: infinity jersey
+  description: Arrived from the abyss on the wreckage of the merchant ship "KUNG", and beckon with their ugliness. KILLKILLKILLKILLKILLKILLKILLKILL. This is the first step of infinity.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/Syndicate/Uniform/infinity_jersey.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/Syndicate/Uniform/infinity_jersey.rsi
+  - type: StaticPrice
+    price: 100
+  - type: ReverseEngineering # Sector Crescent
+    recipes:
+      - ClothingUniformJumpsuitSyndicate

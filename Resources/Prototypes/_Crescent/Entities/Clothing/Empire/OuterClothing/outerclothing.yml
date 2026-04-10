@@ -63,12 +63,12 @@
       flatReductions:
         Blunt: 25
         Slash: 25
-        Piercing: 50
-        Heat: 25
-        Caustic: 25
+        Piercing: 65
+        Heat: 15
+        Caustic: 10
   - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.90
+    walkModifier: 0.85
+    sprintModifier: 0.85
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitInspector
   - type: StaticPrice
@@ -376,13 +376,13 @@
     sprite: _Crescent/Clothing/Empire/OuterClothing/mandatearmor.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: PlasteelPlate
     initialModifiers:
       flatReductions:
         Blunt: 25
         Slash: 25
-        Piercing: 45
+        Piercing: 55
         Heat: 25
         Caustic: 25
   - type: ExplosionResistance
@@ -411,13 +411,13 @@
     sprite: _Crescent/Clothing/Empire/OuterClothing/clarizebodyarmor.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: NTPolymer
     initialModifiers:
       flatReductions:
         Blunt: 20
         Slash: 20
-        Piercing: 45
+        Piercing: 55
         Heat: 25
         Caustic: 25
   - type: ExplosionResistance
@@ -445,13 +445,13 @@
     sprite: _Crescent/Clothing/Empire/OuterClothing/mandatearmorprestige.rsi
   - type: DegradeableArmor
     armorMaxHealth: 1000
-    armorType: Metallic
+    armorType: Ceramic
     armorRepair: NTPolymer
     initialModifiers:
       flatReductions:
         Blunt: 20
         Slash: 20
-        Piercing: 45
+        Piercing: 55
         Heat: 25
         Caustic: 25
   - type: ExplosionResistance

@@ -18,7 +18,7 @@ public sealed class ForgeVars
         CVarDef.Create("jerry.discord_auth_enabled", false, CVar.CONFIDENTIAL | CVar.SERVERONLY);
 
     public static readonly CVarDef<string> DiscordGuildID =
-        CVarDef.Create("jerry.discord_guildId", "", CVar.CONFIDENTIAL | CVar.SERVERONLY);
+        CVarDef.Create("jerry.discord_guildId", "1318776836599320657", CVar.CONFIDENTIAL | CVar.SERVERONLY);
 
     public static readonly CVarDef<string> ApiKey =
         CVarDef.Create("jerry.discord_apikey", "", CVar.CONFIDENTIAL | CVar.SERVERONLY);

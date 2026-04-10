@@ -1,0 +1,29 @@
+- type: vessel
+  id: Alkhuld
+  name: TAP Alkhuld
+  description: A mining/scrapping vessel. Comes standard with an IFF cloak and an antiquated self defense gun.
+  price: 40000
+  category: Small
+  group: None
+  path: /Maps/_Crescent/Shuttles/TAP/alkhuld.yml
+
+- type: gameMap
+  id: Alkhuld
+  mapName: 'TAP Alkhuld'
+  mapPath: /Maps/_Crescent/Shuttles/TAP/alkhuld.yml
+  minPlayers: 0
+  stations:
+    Alkhuld:
+      stationProto: StandardCrescentVessel
+      components:
+        - type: VesselIcon
+          iffIcon:
+            sprite: _Crescent/ShipIcons/ifficons.rsi
+            state: miner
+        - type: StationNameSetup
+          mapNameTemplate: 'TAP Alkhuld {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: VesselDesignation
+          designation: vessel-designation-mining

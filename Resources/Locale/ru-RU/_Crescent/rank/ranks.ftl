@@ -65,7 +65,7 @@ crescent-rank-ncwl-worker = Товарищ
 # syn
 
 crescent-rank-synadmin = Главарь
-crescent-rank-boss = Сержант
+crescent-rank-boss = Лейтенант
 crescent-rank-patriarch = Патриарх
 crescent-rank-operative = Оперативник
 crescent-rank-op = Кпл.

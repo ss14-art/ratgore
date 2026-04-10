@@ -209,8 +209,8 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: ChamberMagazineAmmoProvider
   - type: Gun
-    damageModifier: 1.25 # "Extra Robust" despite having an underpowered cartridge.
-    fireRate: 4
+    damageModifier: 1.35 # "Extra Robust" despite having an underpowered cartridge.
+    fireRate: 5
     soundGunshot:
       path: /Audio/_Crescent/Weapons/Guns/supressed_1/supressed_gunshot_2.ogg
       params:
@@ -242,7 +242,7 @@
       gun_chamber: !type:ContainerSlot
   - type: ExtendDescription
     descriptionList:
-      - description: This pistol comes with a muzzle booster. It deals 25% higher damage per shot.
+      - description: This pistol comes with a muzzle booster. It deals 35% higher damage per shot.
         fontSize: 12
         color: "#ff4f00"
         requireDetailRange: false

@@ -24,6 +24,9 @@
       - Voidborn
   - !type:CharacterOverallTimeRequirement
     min: 20000
+  - !type:CharacterDepartmentTimeRequirement
+      department: NCWL
+      min: 54000 # 15 hours
   - !type:FactionRequirement
     factionID: "NCWL"
   - !type:CharacterTraitRequirement

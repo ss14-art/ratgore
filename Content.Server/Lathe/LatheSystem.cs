@@ -385,7 +385,8 @@ namespace Content.Server.Lathe
             if (_proto.TryIndex(args.ID, out LatheRecipePrototype? recipe))
             {
                 var count = 0;
-                for (var i = 0; i < args.Quantity; i++)
+                var clampedQuantity = Math.Min(args.Quantity, 100);
+                for (var i = 0; i < clampedQuantity; i++)
                 {
                     if (TryAddToQueue(uid, recipe, component))
                         count++;

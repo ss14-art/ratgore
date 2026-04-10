@@ -436,6 +436,7 @@
       HeadMoth: PietyRedeemableHigh
       HeadReptilian: PietyRedeemable
       HeadVoidborn: PietyRedeemableHigh
+      HeadOni: PietyRedeemableHigh
   - type: Sprite
     sprite: _Crescent/Structures/hunter.rsi
     layers:

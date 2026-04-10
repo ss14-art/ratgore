@@ -3,6 +3,24 @@
   name: job-name-highsec
   description: job-description-highsec
   playTimeTracker: JobHighsecSHI
+  ranks:
+    RatRankSHICorpSecHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobHighsecSHI
+      min: 144000 # 40 hours
+    RatRankSHICorpSecLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobHighsecSHI
+      min: 108000 # 30 hours
+    RatRankSHICorpSecSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobHighsecSHI
+      min: 72000 # 20 hours
+    RatRankSHICorpSecMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobHighsecSHI
+      min: 36000 # 10 hours
+    RatRankSHICorpSecJunior: []
   weight: 4
   startingGear: HighsecGear
   alwaysUseSpawner: true
@@ -14,6 +32,9 @@
     - !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 35000
+    - !type:CharacterDepartmentTimeRequirement
+      department: SHI
+      min: 43200 # 12 hours
     - !type:FactionRequirement
       factionID: "SHI"
     - !type:CharacterTraitRequirement
@@ -26,8 +47,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-      - type: ChatRank
-        rank: crescent-rank-shi-corpsec
       - type: HullrotFaction
         faction: SHI
       - type: LanguageAdder
@@ -71,6 +90,8 @@
   name: job-name-hos-shi
   description: job-description-hos-shi
   playTimeTracker: JobHosSHI
+  ranks:
+    RatRankSHICorpSecChief: []
   weight: 5
   startingGear: HosGear
   alwaysUseSpawner: true
@@ -86,6 +107,9 @@
     - !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 35000
+    - !type:CharacterDepartmentTimeRequirement
+      department: SHI
+      min: 54000 # 15 hours
     - !type:FactionRequirement
       factionID: "SHI"
     - !type:CharacterTraitRequirement
@@ -98,8 +122,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-      - type: ChatRank
-        rank: crescent-rank-shi-board
       - type: LanguageAdder
         addSpoken:
           - Kaishago

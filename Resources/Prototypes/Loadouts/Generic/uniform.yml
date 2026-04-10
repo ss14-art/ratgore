@@ -575,3 +575,16 @@
       inverted: true
       departments:
         - Command
+
+- type: loadout
+  id: LoadoutUniformInfinityJersey
+  category: Uniform
+  cost: 0
+  exclusive: true
+  customColorTint: false
+  canBeHeirloom: true
+  requirements:
+    - !type:CharacterItemGroupRequirement
+      group: LoadoutUniformsCivilian
+  items:
+    - ClothingUniformJumpsuitInfinityJersey

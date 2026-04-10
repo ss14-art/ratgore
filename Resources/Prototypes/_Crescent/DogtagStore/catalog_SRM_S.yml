@@ -32,7 +32,7 @@
   icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
   productEntity: ShipVoucherSpider
   cost:
-    PietySRM: 20
+    PietySRM: 10
   categories:
   - StoreCategorySRMLPC
 
@@ -150,7 +150,7 @@
   icon: { sprite: Clothing/Eyes/Goggles/nightvision.rsi, state: icon }
   productEntity: ClothingEyesNightVisionGoggles
   cost:
-    PietySRM: 8
+    PietySRM: 10
   categories:
   - StoreCategorySRMSupport
 
@@ -161,7 +161,7 @@
   icon: { sprite: Clothing/Eyes/Goggles/medical_nightvision.rsi, state: icon }
   productEntity: ClothingEyesNightVisionMedicalGoggles
   cost:
-    PietySRM: 10
+    PietySRM: 12
   categories:
   - StoreCategorySRMSupport
 
@@ -172,7 +172,7 @@
   icon: { sprite: Clothing/Eyes/Goggles/security_nightvision.rsi, state: icon }
   productEntity: ClothingEyesNightVisionSecurityGoggles
   cost:
-    PietySRM: 10
+    PietySRM: 12
   categories:
   - StoreCategorySRMSupport
 
@@ -205,7 +205,7 @@
   icon: { sprite: Objects/Specific/Medical/healthanalyzer.rsi, state: icon }
   productEntity: HandheldHealthAnalyzer
   cost:
-    PietySRM: 0
+    PietySRM: 1
   categories:
   - StoreCategorySRMSupport
 
@@ -216,7 +216,7 @@
   icon: { sprite: Objects/Consumable/Food/bay_food.rsi, state: meatmre }
   productEntity: BoxMRE
   cost:
-    PietySRM: 0
+    PietySRM: 1
   categories:
   - StoreCategorySRMSupport
 
@@ -227,7 +227,7 @@
   icon: { sprite: _Nuclear14/Structures/Storage/Crates/woodencrates.rsi, state: army_crate }
   productEntity: CrateSRMNLHuntSupplies
   cost:
-    PietySRM: 5
+    PietySRM: 8
   categories:
   - StoreCategorySRMSupport
 
@@ -238,7 +238,7 @@
   icon: { sprite: _Nuclear14/Structures/Storage/Crates/woodencrates.rsi, state: army_crate }
   productEntity: CrateSRMBolaShipment
   cost:
-    PietySRM: 2
+    PietySRM: 3
   categories:
   - StoreCategorySRMSupport
 

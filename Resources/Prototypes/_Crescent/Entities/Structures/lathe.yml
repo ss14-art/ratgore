@@ -637,6 +637,7 @@
       - LargeMissileHardpointFlatpack
       - MediumMissileHardpointFlatpack
       - SmallMissileHardpointFlatpack
+      - SmallEnergyHardpointFlatpack #tap additions, dont know where else to put em
       - WeaponTurretSmallMachinegunFlatpack
       - WeaponTurretMediumMachinegunFlatpack
       - WeaponTurretSmallArtilleryFlatpack
@@ -714,6 +715,11 @@
       - PlasHalberd
       - Plashammer
       - BeelzebubLPC
+      - YanbueLPC
+      - QasrLPC
+      - HanaqLPC
+      - BaghlLPC
+      - AlkhuldLPC
       # TAP end
       # DSM start
       - ClothingMaskImperialCombatGasmask
@@ -767,6 +773,7 @@
       - WeaponPistolComplianceImperial
       - CovetorLPC
       - IbisLPC
+      - PraetorianLPC
       - TorturerLPC
       - MagnateLPC
       - SunesisLPC
@@ -1630,7 +1637,17 @@
       - NaiserAutoinjector
       - JV102AutoInjector
       - ExileminusAutoinjector
-      - FallAutoinjector 
+      - FallAutoinjector
+      # Military Research Recipes - TAP Research
+      - BaseWeaponTurretRetributionFlatpack
+      - BaseWeaponTurretGlareFlatpack
+      - BaseWeaponTurretStarburstFlatpack
+      - BaseWeaponTurretBolterFlatpack
+      - WeaponShotgunHarba
+      - CompositionC4
+      - FlatpackComputerDroneControl
+      - FlatpackDroneController
+      - ThrusterHighImpulseTAP
   - type: MaterialStorageMagnetPickup
     magnetEnabled: True
 

@@ -32,7 +32,7 @@
   icon: { sprite: _Crescent/Clothing/SRM/Belt/sheath.rsi, state: sheath-sabre }
   productEntity: ClothingBeltSheathKhopeshFilled
   cost:
-    PietySRM: 15
+    PietySRM: 25
   categories:
   - StoreCategorySRMWeapons
 
@@ -43,7 +43,7 @@
   icon: { sprite: _Crescent/Clothing/SRM/Belt/sheath.rsi, state: sheath-sabre }
   productEntity: CrateSRMDuelingKhopesh
   cost:
-    PietySRM: 2
+    PietySRM: 3
   categories:
   - StoreCategorySRMWeapons
 
@@ -54,7 +54,7 @@
   icon: { sprite: _Crescent/Objects/Weapons/Guns/hunter.rsi, state: icon }
   productEntity: CrateSRMHunterDMR
   cost:
-    PietySRM: 4
+    PietySRM: 3
   categories:
   - StoreCategorySRMWeapons
 
@@ -76,7 +76,7 @@
   icon: { sprite: _Crescent/Objects/Weapons/Guns/imperator.rsi, state: icon }
   productEntity: CrateSRMImperatorIRM
   cost:
-    PietySRM: 4
+    PietySRM: 7
   categories:
   - StoreCategorySRMWeapons
 
@@ -109,7 +109,7 @@
   icon: { sprite: _Crescent/Objects/Weapons/Guns/dominion.rsi, state: icon }
   productEntity: CrateSRMDominatorLMGShipment
   cost:
-    PietySRM: 3
+    PietySRM: 10
   categories:
   - StoreCategorySRMWeapons
 
@@ -120,7 +120,7 @@
   icon: { sprite: _Crescent/Objects/Weapons/Guns/disposablerpg.rsi, state: icon }
   productEntity: CrateSRMLauncher
   cost:
-    PietySRM: 4
+    PietySRM: 6
   categories:
   - StoreCategorySRMWeapons
 
@@ -249,7 +249,7 @@
   icon: { sprite: _Crescent/Clothing/SRM/OuterClothing/hardsuitelite.rsi, state: icon }
   productEntity: ClothingOuterHardsuitHunterElite
   cost:
-    PietySRM: 15
+    PietySRM: 20
   categories:
   - StoreCategorySRMSuits
 

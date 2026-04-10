@@ -3,6 +3,28 @@
   name: job-name-medtech
   description: job-description-medtech
   playTimeTracker: JobMedtechSHI
+  ranks:
+    RatRankSHIBoardMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobMedtechSHI
+      min: 180000 # 50 hours
+    RatRankSHIBoardJunior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobMedtechSHI
+      min: 144000 # 40 hours
+    RatRankSHIMedTechLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobMedtechSHI
+      min: 108000 # 30 hours
+    RatRankSHIMedTechHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobMedtechSHI
+      min: 72000 # 20 hours
+    RatRankSHIMedTechMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobMedtechSHI
+      min: 36000 # 10 hours
+    RatRankSHIMedTechJunior: []
   weight: 2
   startingGear: MedtechGear
   alwaysUseSpawner: true
@@ -30,8 +52,6 @@
       - type: CPRTraining
       - type: SurgerySpeedModifier
         speedModifier: 1.75
-      - type: ChatRank
-        rank: crescent-rank-shi-medtech
       - type: HullrotFaction
         faction: SHI
       - type: LanguageAdder

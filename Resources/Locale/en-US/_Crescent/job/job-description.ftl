@@ -86,15 +86,15 @@ job-description-marshal = Coordinate the Minutemen. Oversee martial and civil co
 
 # tap
 
-job-description-prophet = Lead your flock into the light. Ensure order within the Families.
-job-description-acolytetap = Follow your Prophet. Ensure their safety.
-job-description-tinkerer = Tend to the always-ailing Aasim. Ensure things are always operational. Research new technologies.
-job-description-hangartech = Tend to the Thukker storefront, move freight, mind the cargo hold of the Aasim.
-job-description-techminer = Go scavenging for scrap. Find artifacts and lost technology for the Tinkerers.
-job-description-beltrunner = Move the Izdari product from the Aasim to relevant parties. Ensure the security of your family's operations.
-job-description-draugr = Assert your superiority over the Serviles. Protect the war-freighter. Listen to the Prophet. Their word is law.
-job-description-servile = Listen to your Draugrs - earn your stay in the family. Make a name for yourself.
-job-description-antiquarian = Fulfill the system's blackmarketing needs. Make sure your office stays in one piece.
+job-description-prophet = Lead the Four Families. Delve deep into the scientific and spiritual alike.
+job-description-acolytetap = Research, tend to wounds, be a mouth through which the Prophet speaks.
+job-description-tinkerer = Craft equipment, build and refit ships within the safety of the Hideout.
+job-description-hangartech = Construct grand vessels in the name of the Pact.
+job-description-techminer = Gather anything you can get your hands on. Aid the tinkerer in his efforts.
+job-description-beltrunner = Obey the Antiquarian. Defend him against pirates. Move freight.
+job-description-draugr = Fend off pirates, unruly customers, plug leaks and sabotage the enemies of the Pact.
+job-description-servile = Aid your draugr in protecting what remains of the Four Families.
+job-description-antiquarian = Strike trade deals, make money, represent the Pact.
 
 # ath
 
@@ -170,7 +170,7 @@ job-description-ncwl-conscript-event = Conscript from the NCWL ground forces mil
 job-description-ncwl-conscript-event-SMG = Conscript from the NCWL ground forces militia. Armed with an SMG and a dream.
 job-description-ncwl-spetsnaz-event-SMG = Operator from the 109th Chengridz Special Operations Forces. Given the best equipment the Union has to offer. Let no one stand in your way.
 job-description-ncwl-spetsnaz-event = Operator from the 209th Chengridz Special Operations Forces. Given the best equipment the Union has to offer. Let your aim be true.
-job-description-ncwl-spetsnaz-event-kapitan = Commissioned officer from the 209th Chengridz Special Operations Forces. Given the best equipment and the best men the Union has to offer. Let your way of life prove righteous. 
+job-description-ncwl-spetsnaz-event-kapitan = Commissioned officer from the 209th Chengridz Special Operations Forces. Given the best equipment and the best men the Union has to offer. Let your way of life prove righteous.
 job-description-dsm-conscript-event = Conscript from the Imperial Shield Ground Forces. Armed with a semi automatic rifle and the strongest of loyalties.
 job-description-dsm-conscript-event-SMG = Conscript from the Imperial Shield Ground Forces. Armed with an SMG and the strongest of loyalties.
 job-description-dsm-specops-event = Kommando from the 4th Imperial Shield's special operating forces. Given access to the most advanced stockpiled equipment. Bring honor to your house.

@@ -14,4 +14,7 @@ public sealed partial class ShipyardListingComponent : Component
     /// </summary>
     [ViewVariables, DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<VesselPrototype>))]
     public List<string> Shuttles = new();
+
+    [ViewVariables, DataField]
+    public Color? IffColor;
 }

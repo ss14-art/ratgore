@@ -3,7 +3,21 @@
   name: job-name-board
   description: job-description-board
   playTimeTracker: JobBoardSHI
-  weight: 6
+  ranks:
+    RatRankSHIBoardTop:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobBoardSHI
+      min: 108000 # 30 hours
+    RatRankSHIBoardHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobBoardSHI
+      min: 72000 # 20 hours
+    RatRankSHIBoardLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobBoardSHI
+      min: 36000 # 10 hours
+    RatRankSHIBoardSenior: []
+  weight: 7
   startingGear: BoardGear
   alwaysUseSpawner: true
   requireAdminNotify: true
@@ -18,6 +32,9 @@
     - !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 18000
+    - !type:CharacterDepartmentTimeRequirement
+      department: SHI
+      min: 108000 # 30 hours
     - !type:FactionRequirement
       factionID: "SHI"
     - !type:CharacterTraitRequirement
@@ -29,8 +46,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-      - type: ChatRank
-        rank: crescent-rank-shi-board
       - type: HullrotFaction
         faction: SHI
       - type: LanguageAdder
@@ -68,7 +83,21 @@
   name: job-name-boardhr
   description: job-description-boardhr
   playTimeTracker: JobBoardHRSHI
-  weight: 7
+  ranks:
+    RatRankSHIBoardHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobBoardHRSHI
+      min: 108000 # 30 hours
+    RatRankSHIBoardLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobBoardHRSHI
+      min: 72000 # 20 hours
+    RatRankSHIBoardSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobBoardHRSHI
+      min: 36000 # 10 hours
+    RatRankSHIBoardMiddle: []
+  weight: 6
   startingGear: BoardHRGear
   alwaysUseSpawner: true
   requireAdminNotify: true
@@ -83,6 +112,9 @@
     - !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 14400
+    - !type:CharacterDepartmentTimeRequirement
+      department: SHI
+      min: 72000 # 20 hours
     - !type:FactionRequirement
       factionID: "SHI"
     - !type:CharacterTraitRequirement
@@ -94,8 +126,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-      - type: ChatRank
-        rank: crescent-rank-shi-board
       - type: LanguageAdder
         addSpoken:
           - Kaishago

@@ -468,7 +468,7 @@
 - type: entity
   parent: BaseFlatpack
   id: LargeMissileHardpointFlatpack
-  name: large ballistic hardpoint flatpack
+  name: large missile hardpoint flatpack
   description:  Parts used to build a large missile hardpoint.
   components:
   - type: Flatpack
@@ -1039,9 +1039,9 @@
     entity: WeaponTurretSmallArtillery
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 900
   - type: ReverseEngineering # Sector Crescent
     difficulty: 2
     recipes:
@@ -1057,9 +1057,9 @@
     entity: WeaponTurretMediumMachinegun
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 750
   - type: ReverseEngineering # Sector Crescent
     difficulty: 2
     recipes:
@@ -1075,9 +1075,9 @@
     entity: WeaponTurretSmallMachinegun
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 500
   - type: ReverseEngineering # Sector Crescent
     difficulty: 2
     recipes:
@@ -1111,9 +1111,9 @@
     entity: WeaponTurretLargeMachinegun
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 1250
   - type: ReverseEngineering # Sector Crescent
     difficulty: 2
     recipes:
@@ -1176,9 +1176,9 @@
     entity: BaseWeaponTurretShortbow
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 850
   - type: ReverseEngineering # Sector Crescent
     difficulty: 2
     recipes:
@@ -1194,9 +1194,9 @@
     entity: BaseWeaponTurretAzimuth
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 1100
   - type: ReverseEngineering # Sector Crescent
     difficulty: 2
     recipes:
@@ -1212,9 +1212,9 @@
     entity: BaseWeaponTurretArbalest
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 1400
   - type: ReverseEngineering # Sector Crescent
     difficulty: 2
     recipes:
@@ -1253,30 +1253,30 @@
 - type: entity
   parent: BaseFlatpack
   id: BaseWeaponTurretRetributionFlatpack
-  name: 200cc 'Absolution' hardlight cannon Flatpack
-  description: Parts used to build a 200cc 'Absolution' hardlight cannon Flatpack. Activate with a multitool to deploy.
+  name: 200cc 'Retribution' hardlight cannon Flatpack
+  description: Parts used to build a 200cc 'Retribution' hardlight cannon. Activate with a multitool to deploy.
   components:
   - type: Flatpack
     entity: WeaponTurretRetribution
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
     price: 1000
 
 - type: entity
   parent: BaseFlatpack
-  id: BaseWeaponTurretAbsolutionFlatpack
-  name: 350cc 'Absolution' hardlight cannon Flatpack
-  description: Parts used to build a 350cc 'Absolution' hardlight cannon. Activate with a multitool to deploy.
+  id: BaseWeaponTurretGlareFlatpack
+  name: 350cc 'Glare' Burst Laser Flatpack
+  description: Parts used to build a 350cc 'Glare' Burst Laser. Activate with a multitool to deploy.
   components:
   - type: Flatpack
     entity: WeaponTurretAbsolution
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 1100
 
 - type: entity
   parent: BaseFlatpack
@@ -1304,9 +1304,9 @@
     entity: WeaponTurretStarburst
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 1050
 
 - type: entity
   parent: BaseFlatpack
@@ -1318,9 +1318,9 @@
     entity: WeaponTurretBolter
   - type: Sprite
     layers:
-    - state: ame-part
+    - state: emitter
   - type: StaticPrice
-    price: 1000
+    price: 1075
 
 - type: entity
   parent: BaseFlatpack
@@ -1335,3 +1335,52 @@
     - state: ame-part
   - type: StaticPrice
     price: 1000
+
+- type: entity
+  parent: BaseFlatpack
+  id: SmallEnergyHardpointFlatpack
+  name: small energy hardpoint flatpack
+  description:  Parts used to build a small Energy hardpoint.
+  components:
+  - type: Flatpack
+    entity: AAAHardpointSmallEnergy
+  - type: Sprite
+    layers:
+    - state: ame-part
+  - type: StaticPrice
+    price: 1500
+  - type: ReverseEngineering # Sector Crescent
+    difficulty: 2
+    recipes:
+      - SmallEnergyHardpointFlatpack
+
+
+# TAP Drone Control Systems
+
+- type: entity
+  parent: BaseFlatpack
+  id: FlatpackComputerDroneControl
+  name: drone control computer flatpack
+  description: Parts used to build a drone control computer. Activate with a multitool to deploy.
+  components:
+  - type: Flatpack
+    entity: ComputerDroneControl
+  - type: Sprite
+    layers:
+    - state: ame-part
+  - type: StaticPrice
+    price: 2000
+
+- type: entity
+  parent: BaseFlatpack
+  id: FlatpackDroneController
+  name: drone controller flatpack
+  description: Parts used to build a drone controller device. Activate with a multitool to deploy.
+  components:
+  - type: Flatpack
+    entity: DroneController
+  - type: Sprite
+    layers:
+    - state: ame-part
+  - type: StaticPrice
+    price: 1500

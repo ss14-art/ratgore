@@ -24,3 +24,5 @@ ent-ClothingUniformJumpsuitSyndicateSoldierCyberdawn = комбинезон со
     .desc = Стандартная полевая одежда сотрудников Cyberdawn.
 ent-ClothingUniformJumpsuitSyndicateBunnysuit = кроличий костюм Синдиката
     .desc = Стандартный кроличий костюм для подчинённых Синдиката.
+ent-ClothingUniformJumpsuitInfinityJersey = бесконечное Джерси
+    .desc = Прибывшие из бездны на обломках торгового суда "KUNG", так и манят своим уродством. KILLKILLKILLKILLKILLKILLKILLKILL. Это первая ступень бесконечности.

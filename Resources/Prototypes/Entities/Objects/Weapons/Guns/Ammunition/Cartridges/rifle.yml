@@ -10,6 +10,7 @@
       - CartridgeRifle
   - type: CartridgeAmmo
     proto: BulletRifle
+    deleteOnSpawn: false
   - type: Sprite
     sprite: _Crescent/Objects/Weapons/Ammunition/Casings/rifle.rsi
     layers:

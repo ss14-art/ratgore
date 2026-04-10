@@ -3,6 +3,28 @@
   name: job-name-employee
   description: job-description-employee
   playTimeTracker: JobEmployeeSHI
+  ranks:
+    RatRankSHIBoardMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobEmployeeSHI
+      min: 180000 # 50 hours
+    RatRankSHIBoardJunior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobEmployeeSHI
+      min: 144000 # 40 hours
+    RatRankSHIWorkerLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobEmployeeSHI
+      min: 108000 # 30 hours
+    RatRankSHIWorkerHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobEmployeeSHI
+      min: 72000 # 20 hours
+    RatRankSHIWorkerMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobEmployeeSHI
+      min: 36000 # 10 hours
+    RatRankSHIWorkerJunior: []
   weight: 1
   startingGear: EmployeeGear
   alwaysUseSpawner: true
@@ -27,8 +49,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-      - type: ChatRank
-        rank: crescent-rank-shi-employee
       - type: HullrotFaction
         faction: SHI
       - type: LanguageAdder

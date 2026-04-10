@@ -1,0 +1,29 @@
+- type: vessel
+  id: Hanaq
+  name: TAP Hanaq
+  description: A disproportionately expensive Pact warship. Comes with the best the thukkers can produce.
+  price: 30000
+  category: Small
+  group: None
+  path: /Maps/_Crescent/Shuttles/TAP/hanaq.yml
+
+- type: gameMap
+  id: Hanaq
+  mapName: 'TAP Hanaq'
+  mapPath: /Maps/_Crescent/Shuttles/TAP/hanaq.yml
+  minPlayers: 0
+  stations:
+    Hanaq:
+      stationProto: StandardCrescentVessel
+      components:
+        - type: VesselIcon
+          iffIcon:
+            sprite: _Crescent/ShipIcons/ifficons.rsi
+            state: destroyer
+        - type: StationNameSetup
+          mapNameTemplate: 'TAP Hanaq {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: VesselDesignation
+          designation: vessel-designation-gunship

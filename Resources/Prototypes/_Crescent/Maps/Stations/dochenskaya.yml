@@ -6,9 +6,6 @@
   stations:
     Dochenskaya:
       stationProto: StandardCrescentStation
-      gridComponents:
-        - type: MapIcon
-          iconType: Station
       components:
         - type: StationNameSetup
           mapNameTemplate: 'ПК Доченская'

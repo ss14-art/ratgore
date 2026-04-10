@@ -22,10 +22,10 @@
           overflowJobs: []
           availableJobs:
             ProphetTAP: [ 1, 1 ]
-            AcolyteTAP: [ 1, 1 ]
+            #AcolyteTAP: [ 1, 1 ]
             TinkererTAP: [ 1, 1 ]
             TechminerTAP: [ 1, 1 ]
-            HangarTechTAP: [ 1, 1 ]
+            #HangarTechTAP: [ 1, 1 ]
             DraugrTAP: [ 1, 1 ]
             ServileTAP: [ 1, 1 ]
             BeltrunnerTAP: [ 1, 1 ]

@@ -1,0 +1,171 @@
+- type: technology
+  id: FamiliesHardpoints
+  name: research-technology-families-hardpoints
+  icon:
+    sprite: _Crescent/Structures/fixedHardpoint.rsi
+    state: large
+  discipline: Families
+  tier: 1
+  cost: 15000
+  recipeUnlocks:
+  - SmallBallisticHardpointFlatpack
+  - MediumBallisticHardpointFlatpack
+  - SmallEnergyHardpointFlatpack
+  - MediumEnergyHardpointFlatpack
+  - SmallMissileHardpointFlatpack
+  - MediumMissileHardpointFlatpack
+  - FixedHardpointFlatpack
+
+- type: technology
+  id: FamiliesShips
+  name: research-technology-families-ships
+  icon:
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    state: icon
+  discipline: Families
+  tier: 1
+  cost: 15000
+  recipeUnlocks:
+  - HanaqLPC
+  - BaghlLPC
+  - QasrLPC
+  - AlkhuldLPC
+  - YanbueLPC
+
+- type: technology
+  id: FamiliesShieldEmitter
+  name: research-technology-families-emitter
+  icon:
+    sprite: _Crescent/Structures/shieldemittersmall.rsi
+    state: icon
+  discipline: Families
+  tier: 2
+  cost: 5000
+  recipeUnlocks:
+  - ShieldEmitterSmallFlatpack
+
+# TAP - Auxiliary Artillery - Tier 1
+- type: technology
+  id: FamiliesAuxiliaryArtillery
+  name: research-technology-families-auxiliary-artillery
+  icon:
+    sprite: _Crescent/Objects/Turrets/Projectile/machinegun.rsi
+    state: machinegun
+  discipline: Families
+  tier: 1
+  cost: 20000
+  recipeUnlocks:
+    - WeaponTurretSmallMachinegunFlatpack
+    - WeaponTurretMediumMachinegunFlatpack
+    - BaseWeaponTurretShortbowFlatpack
+
+# TAP - Primary Artillery - Tier 2
+- type: technology
+  id: FamiliesPrimaryArtillery
+  name: research-technology-families-primary-artillery
+  icon:
+    sprite: _Crescent/Objects/Turrets/Missile/arbalest.rsi
+    state: arbalest
+  discipline: Families
+  tier: 2
+  cost: 20000
+  recipeUnlocks:
+    - WeaponTurretSmallArtilleryFlatpack
+    - WeaponTurretLargeMachinegunFlatpack
+    - BaseWeaponTurretArbalestFlatpack
+    - BaseWeaponTurretAzimuthFlatpack
+
+# TAP - Exotic Weaponry - Tier 3
+- type: technology
+  id: FamiliesExoticWeaponry
+  name: research-technology-families-exotic-weaponry
+  icon:
+    sprite: _Crescent/Objects/Turrets/Laser/curse.rsi
+    state: curse
+  discipline: Families
+  tier: 3
+  cost: 20000
+  recipeUnlocks:
+    - BaseWeaponTurretRetributionFlatpack
+    - BaseWeaponTurretGlareFlatpack
+    - BaseWeaponTurretStarburstFlatpack
+
+# TAP - Pact Clothing - Tier 1
+- type: technology
+  id: FamiliesPactClothing
+  name: research-technology-families-pact-clothing
+  icon:
+    sprite: _Crescent/Clothing/FourFamilies/OuterClothing/draugrexo.rsi
+    state: equipped-OUTERCLOTHING
+  discipline: Families
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+    - ClothingUniformJumpsuitBeltrunner
+    - ClothingUniformJumpsuitAntiquarianFamilies
+    - ClothingUniformJumpsuitTechminer
+    - ClothingUniformJumpsuitServile
+    - ClothingUniformJumpsuitDraugr
+    - ClothingOuterArmorServileAlseik
+    - ClothingHeadHatServile
+    - ClothingOuterArmorDraugrAlseik
+    - ClothingHeadHatDraugr
+    - ClothingOuterHardsuitThukker
+    - ClothingOuterHardsuitIzdari
+    - ClothingOuterHardsuitDraugr
+
+# TAP - Pact Weaponry - Tier 2
+- type: technology
+  id: FamiliesPactWeaponry
+  name: research-technology-families-pact-weaponry
+  icon:
+    sprite: _Crescent/Objects/Weapons/Guns/harba.rsi
+    state: icon
+  discipline: Families
+  tier: 2
+  cost: 15000
+  recipeUnlocks:
+    - WeaponShotgunHarba
+    - EnergySwordFamilies
+    - PlasHalberd
+    - Plashammer
+
+# TAP - Plastic Explosives - Tier 3
+- type: technology
+  id: FamiliesPlasticExplosives
+  name: research-technology-families-plastic-explosives
+  icon:
+    sprite: Objects/Weapons/Bombs/c4.rsi
+    state: icon
+  discipline: Families
+  tier: 3
+  cost: 20000
+  recipeUnlocks:
+    - CompositionC4
+
+# TAP - Autonomous Combat Vehicles - Tier 1
+- type: technology
+  id: FamiliesAutonomousCombatVehicles
+  name: research-technology-families-drone-control
+  icon:
+    sprite: Structures/Machines/telecomms.rsi
+    state: icon
+  discipline: Families
+  tier: 1
+  cost: 15000
+  recipeUnlocks:
+    - FlatpackComputerDroneControl
+    - FlatpackDroneController
+
+# TAP - High-Impulse Thrusters - Tier 2
+- type: technology
+  id: FamiliesHighImpulseThrusters
+  name: research-technology-families-high-impulse-thrusters
+  icon:
+    sprite: Structures/Shuttles/thruster.rsi
+    state: base
+  discipline: Families
+  tier: 2
+  cost: 20000
+  recipeUnlocks:
+    - ThrusterHighImpulseTAP

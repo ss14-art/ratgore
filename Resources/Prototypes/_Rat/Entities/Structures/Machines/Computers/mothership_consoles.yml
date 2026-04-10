@@ -1,0 +1,514 @@
+- type: entity
+  name: shipyard console
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, BaseStructureComputer]
+  id: RatComputerShipyardCrescent
+  description: Used to purchase and sell shuttles
+  suffix: Crescent
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: MetalGlassBreak
+  - type: Computer
+    board: ShipyardComputerCircuitboard
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ExtensionCableReceiver
+  - type: ActivatableUIRequiresPower
+  - type: Sprite
+    netsync: false
+    noRot: true
+    sprite: _NF/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: shipyard
+    - map: ["computerLayerKeys"]
+      state: telesci_key
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true, shader: shaded }
+  - type: LitOnPowered
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+    enabled: false
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    offset: "0, 0.4" # shine from the top, not bottom of the computer
+    castShadows: false
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: Keyboard
+  - type: ShipyardConsole
+    targetIdSlot:
+      name: id-card-console-target-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: true
+      whitelist:
+        components:
+        - ShuttleDeed
+  - type: ActivatableUI
+    singleUser: true
+    key: enum.ShipyardConsoleUiKey.Shipyard
+  - type: UserInterface
+    interfaces:
+      enum.ShipyardConsoleUiKey.Shipyard:
+        type: ShipyardConsoleBoundUserInterface
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+      ShipyardConsole-targetId: !type:ContainerSlot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Pai
+  - type: ShipyardListing
+    shuttles:
+    - Exhumer
+    - Gorn
+    - Homesteader
+    - Comet
+    - Kite
+    - Mercury
+    - Paracelsus
+    - Qian
+    - Pear
+    - Birdie
+    - Termite
+    - Manatee
+    - Cockroach
+# Hardcoded consoles
+- type: entity
+  id: RatComputerShipyardSecurity
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, ComputerShipyardCrescent]
+  name: security shipyard console
+  description: Used to enlist into Nanotrasen Security Forces
+  components:
+  - type: Sprite
+    sprite: _NF/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: shipyard_security
+    - map: ["computerLayerKeys"]
+      state: telesci_key
+  - type: ActivatableUI
+    key: enum.ShipyardConsoleUiKey.Security
+  - type: UserInterface
+    interfaces:
+      enum.ShipyardConsoleUiKey.Security:
+        type: ShipyardConsoleBoundUserInterface
+
+- type: entity
+  id: RatComputerShipyardExpedition
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, ComputerShipyardCrescent]
+  name: expedition shipyard console
+  description: Used to buy ships outfitted for planetary expeditions
+  components:
+  - type: ActivatableUI
+    key: enum.ShipyardConsoleUiKey.Expedition
+  - type: UserInterface
+    interfaces:
+      enum.ShipyardConsoleUiKey.Expedition:
+       type: ShipyardConsoleBoundUserInterface
+  - type: Sprite
+    sprite: _NF/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer_blackmarket
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: shipyard_blackmarket
+    - map: ["computerLayerKeys"]
+      state: blackmarket_key
+
+- type: entity
+  id: RatComputerShipyardScrap
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, ComputerShipyardCrescent]
+  name: scrapyard console
+  description: Used to purchase and sell "shuttles"
+  components:
+  - type: ActivatableUI
+    key: enum.ShipyardConsoleUiKey.Scrap
+  - type: UserInterface
+    interfaces:
+      enum.ShipyardConsoleUiKey.Scrap:
+        type: ShipyardConsoleBoundUserInterface
+  - type: Sprite
+    sprite: _NF/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer_blackmarket
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: shipyard_blackmarket
+    - map: ["computerLayerKeys"]
+      state: blackmarket_key
+  - type: ShipyardListing
+    shuttles:
+    - Anthead
+    - Cockroach
+    - Warthog
+    - Hive
+    - Kitemk2
+    - Exhumermk2
+    - Pearmk2
+    - Termitemk2
+    - Slug
+    - Caterpillar
+
+- type: entity
+  id: RatNCWLMothershipComputer
+  parent: BaseMothershipComputer
+  name: NCWL shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: Orange
+    shuttles:
+    - Vanguard
+    - Lodka
+    #- Ivarod
+    #- Stern
+    #- Gargut
+    - Hind
+    - Vasinya
+    - Krechet
+    - Psoglav
+
+- type: entity
+  id: RatNCWLLightCarrierComputer
+  parent: BaseMothershipComputer
+  name: homeguard light carrier fab console
+  components:
+  - type: ShipyardListing
+    iffColor: Orange
+    shuttles:
+    - HornetDrone
+    - Rapier
+    - Nova
+
+- type: entity
+  id: RatDSMLightCarrierComputer
+  parent: BaseMothershipComputer
+  name: imperial garrison light carrier fab console
+  components:
+  - type: ShipyardListing
+    iffColor: "#C677A5"
+    shuttles:
+    - ValorDrone
+    - Khan
+    - Perigale
+
+- type: entity
+  id: RatJackalMothershipComputer
+  parent: BaseMothershipComputer
+  name: GSC shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: IndianRed
+    shuttles:
+    - Reaver
+    - Itch
+    - Sinn
+    - Cerberus
+    - Corvax
+    - Ouroboros
+    - Cleaver
+
+- type: entity
+  id: RatCountsmanMothershipComputer
+  parent: BaseMothershipComputer
+  name: imperial shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: "#C677A5"
+    shuttles:
+    - Redemptor
+    - Ibis
+    - Impel
+    - Covetor
+    - Gnosis
+    - Praxis
+    - Praetorian
+    - Laelaps
+    #- Torturer
+
+- type: entity
+  id: RatNemesisMothershipComputer
+  parent: BaseMothershipComputer
+  name: nemesis internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: "#C677A5"
+    shuttles:
+    - Redemptor
+    - Imparator
+    - Perigale
+
+- type: entity
+  id: RatUnionfallNemesisMothershipComputer
+  parent: BaseMothershipComputer
+  name: nemesis internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: "#C677A5"
+    shuttles:
+    - UnionfallConquest
+    - UnionfallValor
+
+
+- type: entity
+  id: RatInterdyneMothershipComputer
+  parent: BaseMothershipComputer
+  name: interdyne internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: IndianRed
+    shuttles:
+    - Hulk
+    - Meatwagon
+    - Harpy
+    - Matabele
+    - Fridge
+
+- type: entity
+  id: RatSawsMothershipComputer
+  parent: BaseMothershipComputer
+  name: SAWs internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: IndianRed
+    shuttles:
+    - Shanty
+    - Rockchipper
+    - Hyena
+    - Scabrak
+    - Geode
+    - Thanapod
+    - Mercurymk2
+
+- type: entity
+  id: RatTatsumotoMothershipComputer
+  parent: BaseMothershipComputer
+  name: shinohara internal shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - buffalo
+    - gazpachov
+    - Musinyane
+    - Chanchu
+    - Nazaar
+
+- type: entity
+  id: RatRamziMothershipComputer
+  parent: BaseMothershipComputer
+  name: ramzi internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: IndianRed
+    shuttles:
+    - Velator
+    - Taipan
+    - Wreck
+    - Spriggan
+    - Lungspot
+
+- type: entity
+  id: RatZhipovMothershipComputer
+  parent: BaseMothershipComputer
+  name: zhipov internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: Orange
+    shuttles:
+    - HornetDrone
+    #- Khopesh
+    #- Broadsword
+
+- type: entity
+  id: RatUnionfallClementineMothershipComputer
+  parent: BaseMothershipComputer
+  name: clementine internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: Orange
+    shuttles:
+    - UnionfallKhopesh
+    - UnionfallBroadsword
+
+- type: entity
+  id: RatJackalCarrierMothershipComputer
+  parent: BaseMothershipComputer
+  name: jackal internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: IndianRed
+    shuttles:
+    - Reaver
+    - Piranha
+    - Scuttlefish
+
+- type: entity
+  id: RatCMMMothershipComputer
+  parent: BaseMothershipComputer
+  name: Gliessian internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: "#36B500"
+    shuttles:
+    - Respondant
+    - Adjudicator
+    - Sentry
+    - Minuteman #instead of guard for now
+    - Sentinel
+    #- Guard --uncomment when we get an UL
+
+- type: entity
+  id: RatRefugeMothershipComputer
+  parent: BaseMothershipComputer
+  name: refuge shipyard
+  components:
+  - type: ShipyardListing
+
+- type: entity
+  id: RatAnathemaMothershipComputer
+  parent: BaseMothershipComputer
+  name: anathema internal shipyard
+  components:
+  - type: ShipyardListing
+
+- type: entity
+  id: RatAlseikMothershipComputer
+  parent: BaseMothershipComputer
+  name: alseik tribal shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - Svipul
+    - Einherji
+    - Glaive
+    - Bhaalgorn
+
+- type: entity
+  id: RatAuthorityMothershipComputer
+  parent: BaseMothershipComputer
+  name: authority shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - Archon
+    - Carrum
+    - Khorkoi
+
+- type: entity
+  id: RatThukkerMothershipComputer
+  parent: BaseMothershipComputer
+  name: thukker tribal shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - Hearth
+
+- type: entity
+  id: RatIzdariMothershipComputer
+  parent: BaseMothershipComputer
+  name: izdari tribal shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - Lucifer
+    - Fadeem
+
+- type: entity
+  id: RatOuroborosMothershipComputer
+  parent: BaseMothershipComputer
+  name: ouroboros internal shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - Tick
+    - Gnat
+    - Piranha
+    - Scuttlefish
+
+- type: entity
+  id: RatNAPMothershipComputer
+  parent: BaseMothershipComputer
+  name: NAP military shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - Phantom
+    - Falcon
+
+- type: entity
+  id: RatTrashcanMothershipComputer
+  parent: BaseMothershipComputer
+  name: trashcan internal shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - Wasp
+    - Bee
+    - Hornet
+
+- type: entity
+  id: RatCockroachMothershipComputer
+  parent: BaseMothershipComputer
+  name: cockroach internal shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - Roachling
+    - Dungbeetle
+
+- type: entity
+  id: RatFadeemMothershipComputer
+  parent: BaseMothershipComputer
+  name: fadeem internal shipyard
+  components:
+  - type: ShipyardListing
+    shuttles:
+    - Caravan
+
+- type: entity
+  id: RatPsoglavMothershipComputer
+  parent: BaseMothershipComputer
+  name: psoglav internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: Orange
+    shuttles:
+    - Cog
+
+- type: entity
+  id: RatCovetorMothershipComputer
+  parent: BaseMothershipComputer
+  name: covetor internal shipyard
+  components:
+  - type: ShipyardListing
+    iffColor: "#C677A5"
+    shuttles:
+    - Peasant

@@ -1,0 +1,29 @@
+- type: vessel
+  id: Baghl
+  name: TAP Baghl
+  description: A fast, cloaked transport vessel.
+  price: 15000
+  category: Small
+  group: None
+  path: /Maps/_Crescent/Shuttles/TAP/baghl.yml
+
+- type: gameMap
+  id: Baghl
+  mapName: 'TAP Baghl'
+  mapPath: /Maps/_Crescent/Shuttles/TAP/baghl.yml
+  minPlayers: 0
+  stations:
+    Baghl:
+      stationProto: StandardCrescentVessel
+      components:
+        - type: VesselIcon
+          iffIcon:
+            sprite: _Crescent/ShipIcons/ifficons.rsi
+            state: hauler
+        - type: StationNameSetup
+          mapNameTemplate: 'TAP Baghl {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: VesselDesignation
+          designation: vessel-designation-utility

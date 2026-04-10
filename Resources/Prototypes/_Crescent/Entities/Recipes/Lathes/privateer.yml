@@ -758,6 +758,27 @@
     Steel: 1500
     Copper: 500
 
+- type: latheRecipe
+  id: MediumEnergyHardpointFlatpack
+  result: MediumEnergyHardpointFlatpack
+  completetime: 1.5
+  materials:
+    AdvancedMechatronics: 500
+    BasicElectronics: 1000
+    Steel: 3000
+    Copper: 1000
+    Gold: 500
+    Silver: 500
+
+- type: latheRecipe
+  id: SmallEnergyHardpointFlatpack
+  result: SmallEnergyHardpointFlatpack
+  completetime: 1.5
+  materials:
+    BasicMechatronics: 500
+    BasicElectronics: 500
+    Steel: 1500
+    Copper: 500
 
 - type: latheRecipe
   id: EinsteinFlatpack
@@ -780,114 +801,6 @@
     Plastic: 1000
     Gold: 500
     Silver: 500
-
-- type: latheRecipe
-  id: WeaponTurretSmallMachinegunFlatpack
-  result: WeaponTurretSmallMachinegunFlatpack
-  completetime: 1.5
-  materials:
-    BasicMechatronics: 500
-    BasicElectronics: 500
-    Steel: 1000
-    Plastic: 500
-    BallisticCycler: 1000
-
-- type: latheRecipe
-  id: WeaponTurretMediumMachinegunFlatpack
-  result: WeaponTurretMediumMachinegunFlatpack
-  completetime: 1.5
-  materials:
-    BasicMechatronics: 1500
-    BasicElectronics: 500
-    Steel: 2000
-    Plastic: 500
-    BallisticCycler: 1500
-
-- type: latheRecipe
-  id: WeaponTurretSmallArtilleryFlatpack
-  result: WeaponTurretSmallArtilleryFlatpack
-  completetime: 1.5
-  materials:
-    BasicMechatronics: 1000
-    BasicElectronics: 1000
-    Steel: 3000
-    Plastic: 500
-    TubeLoader: 500
-
-- type: latheRecipe
-  id: WeaponTurretMediumArtilleryFlatpack
-  result: WeaponTurretMediumArtilleryFlatpack
-  completetime: 1.5
-  materials:
-    AdvancedMechatronics: 500
-    BasicElectronics: 3000
-    Steel: 4000
-    Tungsten: 1500
-    Gold: 500
-    Silver: 500
-    TubeLoader: 1000
-
-- type: latheRecipe
-  id: WeaponTurretLargeMachinegunFlatpack
-  result: WeaponTurretLargeMachinegunFlatpack
-  completetime: 1.5
-  materials:
-    AdvancedMechatronics: 1000
-    AdvancedElectronics: 1000
-    Steel: 6000
-    Tungsten: 1000
-    Uranium: 500
-    BallisticCycler: 500
-    TubeLoader: 1500
-
-- type: latheRecipe
-  id: WeaponTurretLargeArtilleryFlatpack
-  result: WeaponTurretLargeArtilleryFlatpack
-  completetime: 1.5
-  materials:
-    AdvancedMechatronics: 2000
-    AdvancedElectronics: 1000
-    Steel: 9000
-    Tungsten: 3000
-    Uranium: 1500
-    TubeLoader: 2000
-
-- type: latheRecipe
-  id: BaseWeaponTurretShortbowFlatpack
-  result: BaseWeaponTurretShortbowFlatpack
-  completetime: 1.5
-  materials:
-    BasicMechatronics: 1000
-    BasicElectronics: 1000
-    Steel: 1500
-    Plastic: 500
-    Copper: 500
-    TubeLoader: 500
-
-- type: latheRecipe
-  id: BaseWeaponTurretAzimuthFlatpack
-  result: BaseWeaponTurretAzimuthFlatpack
-  completetime: 1.5
-  materials:
-    BasicMechatronics: 2500
-    BasicElectronics: 1500
-    Steel: 2000
-    Plastic: 500
-    Tungsten: 500
-    TubeLoader: 1000
-
-- type: latheRecipe
-  id: BaseWeaponTurretArbalestFlatpack
-  result: BaseWeaponTurretArbalestFlatpack
-  completetime: 1.5
-  materials:
-    BasicMechatronics: 3000
-    AdvancedElectronics: 500
-    Steel: 3000
-    Tungsten: 1000
-    Gold: 500
-    Silver: 500
-    TubeLoader: 1500
 
 # MARK: Melee
 

@@ -3,6 +3,28 @@
   name: job-name-executive
   description: job-description-executive
   playTimeTracker: JobExecutiveSHI
+  ranks:
+    RatRankSHIExecutiveTop:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobExecutiveSHI
+      min: 180000 # 50 hours
+    RatRankSHIExecutiveHigh:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobExecutiveSHI
+      min: 144000 # 40 hours
+    RatRankSHIExecutiveLead:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobExecutiveSHI
+      min: 108000 # 30 hours
+    RatRankSHIExecutiveSenior:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobExecutiveSHI
+      min: 72000 # 20 hours
+    RatRankSHIExecutiveMiddle:
+    - !type:CharacterPlaytimeRequirement
+      tracker: JobExecutiveSHI
+      min: 36000 # 10 hours
+    RatRankSHIExecutiveJunior: []
   weight: 8
   startingGear: ExecutiveGear
   alwaysUseSpawner: true
@@ -30,8 +52,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-      - type: ChatRank
-        rank: crescent-rank-shi-executive
       - type: HullrotFaction
         faction: SHI
       - type: LanguageAdder

@@ -30,6 +30,9 @@
       factionID: "DSM"
     - !type:CharacterOverallTimeRequirement
       min: 30000
+    - !type:CharacterDepartmentTimeRequirement
+      department: DSM
+      min: 54000 # 15 hours
     - !type:CharacterSpeciesRequirement
       species:
       - Human

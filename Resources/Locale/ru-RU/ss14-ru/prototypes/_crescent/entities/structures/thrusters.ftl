@@ -37,3 +37,6 @@ ent-ThrusterDSMWarship = { ent-Thruster }
 ent-ThrusterSRMWarship = { ent-Thruster }
     .suffix = SRM, Warship
     .desc = { ent-Thruster.desc }
+ent-ThrusterHighImpulseTAP = высокоимпульсный { ent-Thruster }
+    .suffix = TAP, High-Impulse
+    .desc = { ent-Thruster.desc }

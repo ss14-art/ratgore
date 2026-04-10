@@ -641,3 +641,29 @@
   - type: Gun
     shotgunSpreadMultiplier: 1.2
     damageModifier: 1.3
+
+- type: entity
+  name: TAP Harba 12g
+  parent: [BaseWeaponShotgun, BaseGunWieldable, StreeCredRedeemable]
+  id: WeaponShotgunHarba
+  description: An artisanal, highly accurate silenced shotgun. The design can be traced back to the SHI Nimrod because of part commonality.
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,3,1
+    sprite: _Crescent/Objects/Weapons/Guns/harba.rsi
+  - type: Sprite
+    sprite: _Crescent/Objects/Weapons/Guns/harba.rsi
+  - type: Clothing
+    sprite: _Crescent/Objects/Weapons/Guns/harba.rsi
+  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  - type: BallisticAmmoProvider
+    capacity: 4
+  - type: Wieldable
+  - type: Gun
+    fireRate: 4
+    projectileSpeed: 45
+    shotgunSpreadMultiplier: 0.15
+    soundGunshot:
+      path: /Audio/_Crescent/Weapons/Guns/supressed_shotgun/suppressed_shotgun_fire.ogg

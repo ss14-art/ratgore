@@ -4,6 +4,7 @@
   name: NCWL shipyard
   components:
   - type: ShipyardListing
+    iffColor: Orange
     shuttles:
     - Vanguard
     - Lodka
@@ -21,6 +22,7 @@
   name: homeguard light carrier fab console
   components:
   - type: ShipyardListing
+    iffColor: Orange
     shuttles:
     - HornetDrone
     - Rapier
@@ -32,6 +34,7 @@
   name: imperial garrison light carrier fab console
   components:
   - type: ShipyardListing
+    iffColor: "#C677A5"
     shuttles:
     - ValorDrone
     - Khan
@@ -43,6 +46,7 @@
   name: GSC shipyard
   components:
   - type: ShipyardListing
+    iffColor: IndianRed
     shuttles:
     - Reaver
     - Itch
@@ -58,6 +62,7 @@
   name: imperial shipyard
   components:
   - type: ShipyardListing
+    iffColor: "#C677A5"
     shuttles:
     - Redemptor
     - Ibis
@@ -75,6 +80,7 @@
   name: nemesis internal shipyard
   components:
   - type: ShipyardListing
+    iffColor: "#C677A5"
     shuttles:
     - Redemptor
     - Imparator
@@ -86,6 +92,7 @@
   name: nemesis internal shipyard
   components:
   - type: ShipyardListing
+    iffColor: "#C677A5"
     shuttles:
     - UnionfallConquest
     - UnionfallValor
@@ -97,6 +104,7 @@
   name: interdyne internal shipyard
   components:
   - type: ShipyardListing
+    iffColor: IndianRed
     shuttles:
     - Hulk
     - Meatwagon
@@ -110,6 +118,7 @@
   name: SAWs internal shipyard
   components:
   - type: ShipyardListing
+    iffColor: IndianRed
     shuttles:
     - Shanty
     - Rockchipper
@@ -138,6 +147,7 @@
   name: ramzi internal shipyard
   components:
   - type: ShipyardListing
+    iffColor: IndianRed
     shuttles:
     - Velator
     - Taipan
@@ -151,6 +161,7 @@
   name: zhipov internal shipyard
   components:
   - type: ShipyardListing
+    iffColor: Orange
     shuttles:
     - HornetDrone
     #- Khopesh
@@ -162,6 +173,7 @@
   name: clementine internal shipyard
   components:
   - type: ShipyardListing
+    iffColor: Orange
     shuttles:
     - UnionfallKhopesh
     - UnionfallBroadsword
@@ -172,6 +184,7 @@
   name: jackal internal shipyard
   components:
   - type: ShipyardListing
+    iffColor: IndianRed
     shuttles:
     - Reaver
     - Piranha
@@ -183,6 +196,7 @@
   name: Gliessian internal shipyard
   components:
   - type: ShipyardListing
+    iffColor: "#36B500"
     shuttles:
     - Respondant
     - Adjudicator
@@ -244,8 +258,10 @@
   components:
   - type: ShipyardListing
     shuttles:
-    - Lucifer
-    - Fadeem
+    - Yanbue
+    - Alkhuld
+    - Beelzebub
+    - Baghl
 
 - type: entity
   id: OuroborosMothershipComputer

@@ -1,0 +1,84 @@
+# GSC Ranks
+## GSC - Ringleader
+
+- type: rank
+  id: RatRankGSCRingleaderSenior
+  name: Военачальник ордена
+  prefix: Военачальник
+  paygrade: GSC-R3
+
+- type: rank
+  id: RatRankGSCRingleaderMiddle
+  name: Магистр ордена
+  prefix: Магистр
+  paygrade: GSC-R2
+
+- type: rank
+  id: RatRankGSCRingleaderJunior
+  name: Главарь ордена
+  prefix: Главарь
+  paygrade: GSC-R1
+
+## GSC - Officer
+
+- type: rank
+  id: RatRankGSCOfficerSenior
+  name: Рыцарь-коммандор ордена
+  prefix: Рыцарь-ком.
+  paygrade: GSC-O3
+
+- type: rank
+  id: RatRankGSCOfficerMiddle
+  name: Рыцарь-капитан ордена
+  prefix: Рыцарь-кап.
+  paygrade: GSC-O2
+
+- type: rank
+  id: RatRankGSCOfficerJunior
+  name: Рыцарь-лейтенант ордена
+  prefix: Рыцарь-лейт.
+  paygrade: GSC-O1
+
+## GSC - Soldiers
+
+- type: rank
+  id: RatRankGSCSoldierTop
+  name: Рыцарь-сержант ордена
+  prefix: Рыцарь-серж.
+  paygrade: GSC7
+
+- type: rank
+  id: RatRankGSCSoldierHead
+  name: Рыцарь-ветеран ордена
+  prefix: Рыцарь
+  paygrade: GSC6
+
+- type: rank
+  id: RatRankGSCSoldierSrLead
+  name: Рыцарь ордена
+  prefix: Рыцарь
+  paygrade: GSC5
+
+- type: rank
+  id: RatRankGSCSoldierLead
+  name: Младший рыцарь ордена
+  prefix: Мл. рыцарь
+  paygrade: GSC4
+
+- type: rank
+  id: RatRankGSCSoldierHigh
+  name: Оруженосец ордена
+  prefix: Сквайр
+  paygrade: GSC3
+
+- type: rank
+  id: RatRankGSCSoldierMiddle
+  name: Воин ордена
+  prefix: Воин
+  paygrade: GSC2
+
+- type: rank
+  id: RatRankGSCSoldierJunior
+  name: Новобранец ордена
+  prefix: Послушник
+  paygrade: GSC1

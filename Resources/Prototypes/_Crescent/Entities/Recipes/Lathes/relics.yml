@@ -117,6 +117,51 @@
     ShipComponents: 4000
     ShipHull: 1500
 
+- type: latheRecipe
+  id: YanbueLPC
+  result: ShipVoucherTAPYanbue
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 1000
+    ShipComponents: 1000
+    ShipHull: 1000
+
+- type: latheRecipe
+  id: QasrLPC
+  result: ShipVoucherTAPQasr
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 1000
+    ShipComponents: 1500
+    ShipHull: 3000
+
+- type: latheRecipe
+  id: HanaqLPC
+  result: ShipVoucherTAPHanaq
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 7000
+    ShipComponents: 6000
+    ShipHull: 11000
+
+- type: latheRecipe
+  id: BaghlLPC
+  result: ShipVoucherTAPBaghl
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 1000
+    ShipComponents: 3000
+    ShipHull: 1500
+
+- type: latheRecipe
+  id: AlkhuldLPC
+  result: ShipVoucherTAPAlkhuld
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 1000
+    ShipComponents: 2500
+    ShipHull: 3000
+
 # MARK: Melee
 
 - type: latheRecipe

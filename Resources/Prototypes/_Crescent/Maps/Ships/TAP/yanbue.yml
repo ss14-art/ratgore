@@ -1,0 +1,29 @@
+- type: vessel
+  id: Yanbue
+  name: TAP Yanbue
+  description: A small, cloaked shuttle hull. Comes with the bare minimum to fly, and nothing else.
+  price: 12000
+  category: Small
+  group: None
+  path: /Maps/_Crescent/Shuttles/TAP/yanbue.yml
+
+- type: gameMap
+  id: Yanbue
+  mapName: 'TAP Yanbue'
+  mapPath: /Maps/_Crescent/Shuttles/TAP/yanbue.yml
+  minPlayers: 0
+  stations:
+    Yanbue:
+      stationProto: StandardCrescentVessel
+      components:
+        - type: VesselIcon
+          iffIcon:
+            sprite: _Crescent/ShipIcons/ifficons.rsi
+            state: fighter
+        - type: StationNameSetup
+          mapNameTemplate: 'TAP Yanbue {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: VesselDesignation
+          designation: vessel-designation-fighter

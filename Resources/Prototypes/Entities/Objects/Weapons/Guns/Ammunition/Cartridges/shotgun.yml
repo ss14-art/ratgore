@@ -9,6 +9,7 @@
     - Cartridge
     - ShellShotgun
   - type: CartridgeAmmo
+    deleteOnSpawn: false
     soundEject:
       collection: ShellEject
   - type: Sprite
