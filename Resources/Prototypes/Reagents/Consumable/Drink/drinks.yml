@@ -268,7 +268,7 @@
         factor: 4
       - !type:HealthChange
         conditions:
-        - !type:OrganType
+        - !type:MetabolizerTypeCondition
           type: Plasmaman
         damage:
           groups:
@@ -279,7 +279,7 @@
             Caustic: -0.30
       - !type:ChemAddMoodlet
         conditions:
-        - !type:OrganType
+        - !type:MetabolizerTypeCondition
           type: Plasmaman
         - !type:ReagentThreshold
           reagent: Milk

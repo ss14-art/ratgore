@@ -18,5 +18,5 @@
       effects:
       - !type:ActivateArtifact
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           min: 5
