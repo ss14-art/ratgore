@@ -5,13 +5,13 @@ using Robust.Shared.GameStates;
 
 namespace Content.Client.Atmos.EntitySystems;
 
-public sealed partial class AtmosphereSystem : SharedAtmosphereSystem // Sunrise edit
+public sealed partial class AtmosphereSystem : SharedAtmosphereSystem // Ratgore edit
 {
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<MapAtmosphereComponent, ComponentHandleState>(OnMapHandleState);
-        InitializeCVars(); // Sunrise edit
+        InitializeCVars(); // Ratgore edit
     }
 
     private void OnMapHandleState(EntityUid uid, MapAtmosphereComponent component, ref ComponentHandleState args)
