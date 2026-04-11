@@ -35,7 +35,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!; // Shitmed Change
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!; // Shitmed Change
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
@@ -213,8 +213,8 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         }
         else
         {
-            var (targetType, targetSymmetry) = _bodySystem.ConvertTargetBodyPart(args.BodyPart.Value);
-            if (_bodySystem.GetBodyChildrenOfType(owner.Value, targetType, symmetry: targetSymmetry) is { } part)
+            var (targetType, targetSymmetry) = _internalsSystem.ConvertTargetBodyPart(args.BodyPart.Value);
+            if (_internalsSystem.GetBodyChildrenOfType(owner.Value, targetType, symmetry: targetSymmetry) is { } part)
                 BeginAnalyzingEntity(healthAnalyzer, owner.Value, part.FirstOrDefault().Id);
         }
     }
@@ -254,7 +254,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         // Shitmed Change Start
         Dictionary<TargetBodyPart, TargetIntegrity>? body = null;
         if (HasComp<TargetingComponent>(target))
-            body = _bodySystem.GetBodyPartStatus(target);
+            body = _internalsSystem.GetBodyPartStatus(target);
         // Shitmed Change End
 
         _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(

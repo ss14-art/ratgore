@@ -1,6 +1,6 @@
 using System.Numerics;
-using Content.Server.Atmos.Components;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.CCVar;
 using JetBrains.Annotations;
@@ -103,6 +103,7 @@ namespace Content.Server.Atmos.EntitySystems
                 tile.GridIndices,
                 tile.Air?.Temperature ?? default,
                 tile.Air?.Moles,
+                tile.PressureDirection,
                 tile.LastPressureDirection,
                 tile.AirtightData.BlockedDirections,
                 tile.ExcitedGroup?.GetHashCode(),

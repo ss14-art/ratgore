@@ -1,4 +1,4 @@
-﻿namespace Content.Shared.EntityEffects;
+namespace Content.Shared.EntityEffects;
 
 /// <summary>
 /// An Event carrying an entity effect.

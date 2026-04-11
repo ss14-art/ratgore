@@ -7,7 +7,7 @@ using Content.Shared.Body.Part;
 namespace Content.Server._Shitmed.Targeting;
 public sealed class TargetingSystem : SharedTargetingSystem
 {
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!;
 
     public override void Initialize()
     {
@@ -42,7 +42,7 @@ public sealed class TargetingSystem : SharedTargetingSystem
         }
         else if (args.OldMobState == MobState.Dead && (args.NewMobState == MobState.Alive || args.NewMobState == MobState.Critical))
         {
-            component.BodyStatus = _bodySystem.GetBodyPartStatus(uid);
+            component.BodyStatus = _internalsSystem.GetBodyPartStatus(uid);
             changed = true;
         }
 

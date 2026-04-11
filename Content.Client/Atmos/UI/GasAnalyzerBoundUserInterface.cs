@@ -1,4 +1,4 @@
-﻿using Robust.Client.UserInterface;
+using Robust.Client.UserInterface;
 using Content.Shared.Atmos.Components;
 
 namespace Content.Client.Atmos.UI;

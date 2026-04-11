@@ -29,7 +29,7 @@ public abstract class SharedAutodocSystem : EntitySystem
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly SharedInternalsSystem _internals = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedLabelSystem _label = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
@@ -278,7 +278,7 @@ public abstract class SharedAutodocSystem : EntitySystem
 
     public EntityUid? FindPart(EntityUid patient, BodyPartType type, BodyPartSymmetry? symmetry)
     {
-        foreach (var ent in _body.GetBodyChildrenOfType(patient, type, symmetry: symmetry))
+        foreach (var ent in _internals.GetBodyChildrenOfType(patient, type, symmetry: symmetry))
         {
             return ent.Id;
         }

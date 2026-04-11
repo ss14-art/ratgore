@@ -15,7 +15,7 @@ public sealed partial class PerishableComponent : Component
     /// How long it takes after death to start rotting.
     /// </summary>
     [DataField]
-    public TimeSpan RotAfter = TimeSpan.FromMinutes(30);
+    public TimeSpan RotAfter = TimeSpan.FromMinutes(10);
 
     /// <summary>
     /// How much rotting has occured
@@ -45,6 +45,12 @@ public sealed partial class PerishableComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Stage;
+
+    /// <summary>
+    /// If true, rot will always progress.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ForceRotProgression;
 }
 
 

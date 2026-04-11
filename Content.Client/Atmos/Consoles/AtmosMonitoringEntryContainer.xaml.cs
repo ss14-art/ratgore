@@ -20,14 +20,14 @@ public sealed partial class AtmosMonitoringEntryContainer : BoxContainer
 
     private readonly IEntityManager _entManager;
     private readonly IResourceCache _cache;
-    private readonly SharedAtmosphereSystem _atmosphereSystem;
+    private readonly SharedAtmosphereSystem _atmosphereSystem; // Sunrise edit
 
     public AtmosMonitoringEntryContainer(AtmosMonitoringConsoleEntry data)
     {
         RobustXamlLoader.Load(this);
         _entManager = IoCManager.Resolve<IEntityManager>();
         _cache = IoCManager.Resolve<IResourceCache>();
-        _atmosphereSystem = _entManager.System<SharedAtmosphereSystem>();
+        _atmosphereSystem = _entManager.System<SharedAtmosphereSystem>(); // Sunrise edit
 
         Data = data;
 

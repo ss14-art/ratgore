@@ -1,7 +1,8 @@
 using Content.Server.Atmos.Components;
-using Content.Server.Atmos.Piping.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Atmos.EntitySystems;
+using Content.Shared.Atmos.Piping.Components;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -68,12 +69,7 @@ namespace Content.Server.Atmos.EntitySystems
             {
                 atmosphere.CurrentRunInvalidatedTiles.Clear();
                 atmosphere.CurrentRunInvalidatedTiles.EnsureCapacity(atmosphere.InvalidatedCoords.Count);
-
-                var snapshot = new Vector2i[atmosphere.InvalidatedCoords.Count];
-                atmosphere.InvalidatedCoords.CopyTo(snapshot);
-                atmosphere.InvalidatedCoords.Clear();
-
-                foreach (var indices in snapshot)
+                foreach (var indices in atmosphere.InvalidatedCoords)
                 {
                     var tile = GetOrNewTile(uid, atmosphere, indices, invalidateNew: false);
                     atmosphere.CurrentRunInvalidatedTiles.Enqueue(tile);
@@ -81,6 +77,7 @@ namespace Content.Server.Atmos.EntitySystems
                     // Update tile.IsSpace and tile.MapAtmosphere, and tile.AirtightData.
                     UpdateTileData(ent, mapAtmos, tile);
                 }
+                atmosphere.InvalidatedCoords.Clear();
 
                 if (_simulationStopwatch.Elapsed.TotalMilliseconds >= AtmosMaxProcessTime)
                     return false;
@@ -213,8 +210,6 @@ namespace Content.Server.Atmos.EntitySystems
                     (tile.Air, tile.Space) = GetDefaultMapAtmosphere(mapAtmos);
                     tile.MapAtmosphere = true;
                     ent.Comp1.MapTiles.Add(tile);
-                    UpdateAdjacentTiles(ent, tile, activate: true);
-                    InvalidateVisuals(ent, tile);
                 }
 
                 DebugTools.AssertNotNull(tile.Air);
@@ -491,16 +486,16 @@ namespace Content.Server.Atmos.EntitySystems
             {
                 atmosphere.DeltaPressureCursor = 0;
                 atmosphere.DeltaPressureDamageResults.Clear();
+                _deltaPressureInvalidEntityQueue.Clear();
             }
-
-            var batchSize = Math.Max(50, DeltaPressureParallelProcessPerIteration);
 
             var timeCheck1 = 0;
             while (atmosphere.DeltaPressureCursor < count)
             {
                 var remaining = count - atmosphere.DeltaPressureCursor;
-                var job = new DeltaPressureParallelJob(this,
-                    var toProcess = Math.Min(batchSize, remaining);
+                var toProcess = Math.Min(DeltaPressureParallelProcessPerIteration, remaining);
+
+                var job = new DeltaPressureParallelBulkJob(this,
                     atmosphere,
                     atmosphere.DeltaPressureCursor,
                     DeltaPressureParallelBatchSize);
@@ -532,6 +527,13 @@ namespace Content.Server.Atmos.EntitySystems
                 {
                     return false;
                 }
+            }
+
+            // Ents may have been invalidated (missing AirtightComp) during parallel processing.
+            // Since we can't touch the ent list during parallel processing, we queue them up here to be removed.
+            while (_deltaPressureInvalidEntityQueue.TryDequeue(out var invalidEnt))
+            {
+                TryRemoveDeltaPressureEntity(ent.AsNullable(), invalidEnt);
             }
 
             return true;
@@ -849,20 +851,5 @@ namespace Content.Server.Atmos.EntitySystems
         /// Method is finished with the GridAtmosphere.
         /// </summary>
         Finished,
-    }
-
-    public enum AtmosphereProcessingState : byte
-    {
-        Revalidate,
-        TileEqualize,
-        ActiveTiles,
-        ExcitedGroups,
-        HighPressureDelta,
-        DeltaPressure,
-        Hotspots,
-        Superconductivity,
-        PipeNet,
-        AtmosDevices,
-        NumStates
     }
 }

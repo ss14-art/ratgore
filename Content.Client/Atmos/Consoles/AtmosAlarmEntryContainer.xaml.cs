@@ -42,6 +42,21 @@ public sealed partial class AtmosAlarmEntryContainer : BoxContainer
         [Gas.Plasma] = "P",
         [Gas.Tritium] = "T",
         [Gas.WaterVapor] = "H₂O",
+        //Sunrise - Start
+        [Gas.BZ] = "BZ",
+        [Gas.Healium] = "F₃BZ",
+        [Gas.Nitrium] = "N",
+        [Gas.Pluoxium] = "Pl₂",
+        [Gas.Hydrogen] = "H₂",
+        [Gas.HyperNoblium] = "HN₂",
+        [Gas.ProtoNitrate] = "PN₂",
+        [Gas.Zauker] = "Z₂",
+        [Gas.Halon] = "Ha₂",
+        [Gas.Helium] = "He₂",
+        [Gas.AntiNoblium] = "AN₂",
+        [Gas.Electrovae] = "E",
+        [Gas.ChargedElectrovae] = "E₂"
+        //Sunrise - End
     };
 
     public AtmosAlarmEntryContainer(NetEntity uid, EntityCoordinates? coordinates)
@@ -136,8 +151,9 @@ public sealed partial class AtmosAlarmEntryContainer : BoxContainer
                 GasGridContainer.RemoveAllChildren();
 
                 var gasData = focusData.Value.GasData.Where(g => g.Key != Gas.Oxygen);
+                var keyValuePairs = gasData.ToList();
 
-                if (gasData.Count() == 0)
+                if (keyValuePairs.Count == 0)
                 {
                     // No other gases
                     var gasLabel = new Label()
@@ -158,14 +174,15 @@ public sealed partial class AtmosAlarmEntryContainer : BoxContainer
                 else
                 {
                     // Add an entry for each gas
-                    foreach ((var gas, (var mol, var percent, var alert)) in gasData)
+                    foreach ((var gas, (var mol, var percent, var alert)) in keyValuePairs)
                     {
                         FixedPoint2 gasPercent = percent * 100f;
-                        var gasAbbreviation = Atmospherics.GasAbbreviations.GetValueOrDefault(gas, Loc.GetString("gas-unknown-abbreviation"));
+
+                        var gasShorthand = _gasShorthands.GetValueOrDefault(gas, "X");
 
                         var gasLabel = new Label()
                         {
-                            Text = Loc.GetString("atmos-alerts-window-other-gases-value", ("shorthand", gasAbbreviation), ("value", gasPercent)),
+                            Text = Loc.GetString("atmos-alerts-window-other-gases-value", ("shorthand", gasShorthand), ("value", gasPercent)),
                             FontOverride = normalFont,
                             FontColorOverride = GetAlarmStateColor(alert),
                             HorizontalAlignment = HAlignment.Center,

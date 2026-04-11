@@ -8,7 +8,7 @@ namespace Content.Server._Shitmed.Body.Organ;
 
 public sealed class CerebralImplantSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!;
 
     public override void Initialize()
     {

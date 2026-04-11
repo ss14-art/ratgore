@@ -8,7 +8,7 @@ namespace Content.Server._Shitmed.Body.Organ;
 
 public sealed class HeartSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -31,7 +31,7 @@ public sealed class HeartSystem : EntitySystem
         if (TerminatingOrDeleted(uid) || TerminatingOrDeleted(args.Body))
             return;
 
-        if (_bodySystem.TryGetBodyOrganComponents<BrainComponent>(args.Body, out var _))
+        if (_internalsSystem.TryGetBodyOrganComponents<BrainComponent>(args.Body, out var _))
             RemComp<DelayedDeathComponent>(args.Body);
     }
     // Shitmed-End

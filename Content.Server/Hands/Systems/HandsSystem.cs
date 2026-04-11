@@ -39,7 +39,7 @@ namespace Content.Server.Hands.Systems
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
         [Dependency] private readonly PullingSystem _pullingSystem = default!;
         [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-        [Dependency] private readonly SharedBodySystem _bodySystem = default!; // Shitmed Change
+        [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!; // Shitmed Change
         public override void Initialize()
         {
             base.Initialize();
@@ -123,7 +123,7 @@ namespace Content.Server.Hands.Systems
             };
 
             if (part.Comp.Enabled
-                && _bodySystem.TryGetParentBodyPart(part, out var _, out var parentPartComp)
+                && _internalsSystem.TryGetParentBodyPart(part, out var _, out var parentPartComp)
                 && parentPartComp.Enabled)
                 AddHand(uid, slot, location);
         }
@@ -142,7 +142,7 @@ namespace Content.Server.Hands.Systems
         }
 
         private void HandleBodyPartEnabled(EntityUid uid, HandsComponent component, ref BodyPartEnabledEvent args) =>
-            TryAddHand(uid, component, args.Part, SharedBodySystem.GetPartSlotContainerId(args.Part.Comp.ParentSlot?.Id ?? string.Empty));
+            TryAddHand(uid, component, args.Part, SharedInternalsSystem.GetPartSlotContainerId(args.Part.Comp.ParentSlot?.Id ?? string.Empty));
 
         private void HandleBodyPartDisabled(EntityUid uid, HandsComponent component, ref BodyPartDisabledEvent args)
         {
@@ -151,7 +151,7 @@ namespace Content.Server.Hands.Systems
                 || args.Part.Comp.PartType != BodyPartType.Hand)
                 return;
 
-            RemoveHand(uid, SharedBodySystem.GetPartSlotContainerId(args.Part.Comp.ParentSlot?.Id ?? string.Empty));
+            RemoveHand(uid, SharedInternalsSystem.GetPartSlotContainerId(args.Part.Comp.ParentSlot?.Id ?? string.Empty));
         }
 
         // Shitmed Change End

@@ -26,7 +26,7 @@ using Content.Shared.Inventory;
 // Namespace has set accessors, leaving it on the default.
 namespace Content.Shared.Body.Systems;
 
-public partial class SharedBodySystem
+public partial class SharedInternalsSystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -39,15 +39,15 @@ public partial class SharedBodySystem
     private readonly JobQueue _integrityJobQueue = new(IntegrityJobTime);
     public sealed class IntegrityJob : Job<object>
     {
-        private readonly SharedBodySystem _self;
+        private readonly SharedInternalsSystem _self;
         private readonly Entity<BodyPartComponent> _ent;
-        public IntegrityJob(SharedBodySystem self, Entity<BodyPartComponent> ent, double maxTime, CancellationToken cancellation = default) : base(maxTime, cancellation)
+        public IntegrityJob(SharedInternalsSystem self, Entity<BodyPartComponent> ent, double maxTime, CancellationToken cancellation = default) : base(maxTime, cancellation)
         {
             _self = self;
             _ent = ent;
         }
 
-        public IntegrityJob(SharedBodySystem self, Entity<BodyPartComponent> ent, double maxTime, IStopwatch stopwatch, CancellationToken cancellation = default) : base(maxTime, stopwatch, cancellation)
+        public IntegrityJob(SharedInternalsSystem self, Entity<BodyPartComponent> ent, double maxTime, IStopwatch stopwatch, CancellationToken cancellation = default) : base(maxTime, stopwatch, cancellation)
         {
             _self = self;
             _ent = ent;

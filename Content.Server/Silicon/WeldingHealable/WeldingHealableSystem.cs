@@ -20,7 +20,7 @@ public sealed class WeldingHealableSystem : SharedWeldingHealableSystem
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<WeldingHealableComponent, InteractUsingEvent>(Repair);
@@ -107,8 +107,8 @@ public sealed class WeldingHealableSystem : SharedWeldingHealableSystem
         if (!TryComp(user, out TargetingComponent? targeting))
             return false;
 
-        var (targetType, targetSymmetry) = _bodySystem.ConvertTargetBodyPart(targeting.Target);
-        foreach (var part in _bodySystem.GetBodyChildrenOfType(damageable, targetType, symmetry: targetSymmetry))
+        var (targetType, targetSymmetry) = _internalsSystem.ConvertTargetBodyPart(targeting.Target);
+        foreach (var part in _internalsSystem.GetBodyChildrenOfType(damageable, targetType, symmetry: targetSymmetry))
             if (TryComp<DamageableComponent>(part.Id, out var damageablePart))
                 foreach (var type in healable.Damage.DamageDict)
                     if (damageablePart.Damage.DamageDict[type.Key].Value > 0)

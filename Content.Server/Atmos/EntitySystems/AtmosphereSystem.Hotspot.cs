@@ -132,7 +132,7 @@ public sealed partial class AtmosphereSystem
                     cleanable: true);
             }
 
-            if (tile.Air?.Temperature > Atmospherics.FireMinimumTemperatureToSpread)
+            if (tile.Air.Temperature > Atmospherics.FireMinimumTemperatureToSpread)
             {
                 var radiatedTemperature = tile.Air.Temperature * Atmospherics.FireSpreadRadiosityScale;
                 foreach (var otherTile in tile.AdjacentTiles)
@@ -204,7 +204,7 @@ public sealed partial class AtmosphereSystem
         if (!IsMixtureOxidizer(tile.Air))
             return;
 
-        var isFlammable = IsMixtureIgnitable(tile.Air);
+        var isFlammable = IsMixtureFuel(tile.Air);
 
         if (tile.Hotspot.Valid)
         {

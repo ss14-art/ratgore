@@ -1,4 +1,4 @@
-﻿using Content.Shared.Body.Events;
+using Content.Shared.Body.Events;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Medical;

@@ -1,4 +1,4 @@
-﻿using Content.Shared.EntityConditions;
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects.Effects;
 using Robust.Shared.Prototypes;
 

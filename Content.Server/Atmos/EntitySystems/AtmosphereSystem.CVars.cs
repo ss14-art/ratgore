@@ -1,4 +1,3 @@
-using System;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 
@@ -55,16 +54,6 @@ namespace Content.Server.Atmos.EntitySystems
             Subs.CVar(_cfg, CCVars.AtmosMaxProcessTime, value => AtmosMaxProcessTime = value, true);
             Subs.CVar(_cfg, CCVars.AtmosTickRate, value => AtmosTickRate = value, true);
             Subs.CVar(_cfg, CCVars.AtmosSpeedup, value => Speedup = value, true);
-            Subs.CVar(_cfg, CCVars.AtmosHeatScale, value =>
-            {
-                if (value <= 0f)
-                {
-                    Log.Error($"AtmosHeatScale must be greater than 0, but got {value}. Keeping previous value.");
-                    return;
-                }
-                HeatScale = value;
-                InitializeGases();
-            }, true);
             Subs.CVar(_cfg, CCVars.ExcitedGroups, value => ExcitedGroups = value, true);
             Subs.CVar(_cfg, CCVars.ExcitedGroupsSpaceIsAllConsuming, value => ExcitedGroupsSpaceIsAllConsuming = value, true);
             Subs.CVar(_cfg, CCVars.DeltaPressureDamage, value => DeltaPressureDamage = value, true);

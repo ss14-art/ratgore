@@ -9,7 +9,7 @@ namespace Content.Shared._Shitmed.BodyEffects.Subsystems;
 
 public sealed class GenerateChildPartSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     public override void Initialize()
     {
@@ -41,9 +41,9 @@ public sealed class GenerateChildPartSystem : EntitySystem
             if (!TryComp(childPart, out BodyPartComponent? childPartComp))
                 return;
 
-            var slotName = _bodySystem.GetSlotFromBodyPart(childPartComp);
-            _bodySystem.TryCreatePartSlot(uid, slotName, childPartComp.PartType, out var _);
-            _bodySystem.AttachPart(uid, slotName, childPart, partComp, childPartComp);
+            var slotName = _internalsSystem.GetSlotFromBodyPart(childPartComp);
+            _internalsSystem.TryCreatePartSlot(uid, slotName, childPartComp.PartType, out var _);
+            _internalsSystem.AttachPart(uid, slotName, childPart, partComp, childPartComp);
             component.ChildPart = childPart;
             component.Active = true;
             Dirty(childPart, childPartComp);
@@ -56,7 +56,7 @@ public sealed class GenerateChildPartSystem : EntitySystem
         if (!TryComp(uid, out BodyPartComponent? partComp))
             return;
 
-        _bodySystem.DropSlotContents((uid, partComp));
+        _internalsSystem.DropSlotContents((uid, partComp));
         var ev = new BodyPartDroppedEvent((uid, partComp));
         RaiseLocalEvent(uid, ref ev);
         QueueDel(uid);

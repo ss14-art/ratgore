@@ -1,12 +1,13 @@
-using Content.Server.Body.Systems;
+using Content.Shared.Body.Systems;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Chemistry.Components;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.Body.Components;
+namespace Content.Shared.Body.Components;
 
-[RegisterComponent, Access(typeof(LungSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(LungSystem))]
 public sealed partial class LungComponent : Component
 {
     [DataField]
@@ -34,10 +35,4 @@ public sealed partial class LungComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<AlertPrototype> Alert = "LowOxygen";
-
-    [DataField]
-    public float MaxVolume = 100f;
-
-    [DataField]
-    public bool CanReact = false; // No Dexalin lungs... right?
 }

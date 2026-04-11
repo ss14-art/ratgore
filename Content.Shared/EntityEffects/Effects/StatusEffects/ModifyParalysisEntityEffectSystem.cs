@@ -43,8 +43,8 @@ public sealed partial class ModifyParalysis : BaseStatusEntityEffect<ModifyParal
         Time == null
             ? null // Not gonna make a whole new looc for something that shouldn't ever exist.
             : Loc.GetString(
-                "entity-effect-guidebook-paralyze",
-                ("chance", Probability),
-                ("time", Time.Value.TotalSeconds)
-            );
+            "entity-effect-guidebook-paralyze",
+            ("chance", Probability),
+            ("time", Time.Value.TotalSeconds)
+        );
 }

@@ -1,4 +1,4 @@
-﻿using Content.Shared.Destructible;
+using Content.Shared.Destructible;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.EntityEffects.Effects.MetaData;

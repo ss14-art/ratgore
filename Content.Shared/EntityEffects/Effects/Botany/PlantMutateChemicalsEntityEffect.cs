@@ -1,4 +1,4 @@
-﻿using Content.Shared.Localizations;
+using Content.Shared.Localizations;
 using Content.Shared.Random;
 using Robust.Shared.Prototypes;
 

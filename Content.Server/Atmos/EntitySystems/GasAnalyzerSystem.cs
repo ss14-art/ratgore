@@ -63,7 +63,7 @@ public sealed class GasAnalyzerSystem : EntitySystem
     private void OnAfterInteract(Entity<GasAnalyzerComponent> entity, ref AfterInteractEvent args)
     {
         var target = args.Target;
-        if (target != null && !_interactionSystem.InRangeUnobstructed(args.User, target.Value))
+        if (target != null && !_interactionSystem.InRangeUnobstructed((args.User, null), (target.Value, null)))
         {
             target = null; // if the target is out of reach, invalidate it
         }
@@ -144,7 +144,7 @@ public sealed class GasAnalyzerSystem : EntitySystem
             // Listen! Even if you don't want the Gas Analyzer to work on moving targets, you should use
             // this code to determine if the object is still generally in range so that the check is consistent with the code
             // in OnAfterInteract() and also consistent with interaction code in general.
-            if (component.User == null || !_interactionSystem.InRangeUnobstructed(component.User.Value, component.Target.Value))
+            if (!_interactionSystem.InRangeUnobstructed((component.User, null), (component.Target.Value, null)))
             {
                 if (component.User is { } userId && component.Enabled)
                     _popup.PopupEntity(Loc.GetString("gas-analyzer-object-out-of-range"), userId, userId);
@@ -266,7 +266,7 @@ public sealed class GasAnalyzerSystem : EntitySystem
             if (mixture != null)
             {
                 var gasName = Loc.GetString(gas.Name);
-                gases.Add(new GasEntry((Gas)i, mixture[i]));
+                gases.Add(new GasEntry(gasName, mixture[i], gas.Color));
             }
         }
 

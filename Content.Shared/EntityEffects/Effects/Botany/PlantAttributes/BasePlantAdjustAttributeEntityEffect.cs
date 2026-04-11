@@ -30,8 +30,8 @@ public abstract partial class BasePlantAdjustAttribute<T> : EntityEffectBase<T> 
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
         Loc.GetString("entity-effect-guidebook-plant-attribute",
-            ("attribute", Loc.GetString(GuidebookAttributeName)),
-            ("amount", Amount.ToString("0.00")),
-            ("positive", GuidebookIsAttributePositive),
-            ("chance", Probability));
+        ("attribute", Loc.GetString(GuidebookAttributeName)),
+        ("amount", Amount.ToString("0.00")),
+        ("positive", GuidebookIsAttributePositive),
+        ("chance", Probability));
 }

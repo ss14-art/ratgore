@@ -36,7 +36,7 @@ public sealed class SharedLoadoutSystem : EntitySystem
         base.Initialize();
 
         // Wait until the character has all their organs before we give them their loadout to activate internals
-        SubscribeLocalEvent<LoadoutComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedBodySystem)]);
+        SubscribeLocalEvent<LoadoutComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedInternalsSystem)]);
 
         _sawmill = _log.GetSawmill("loadouts");
     }

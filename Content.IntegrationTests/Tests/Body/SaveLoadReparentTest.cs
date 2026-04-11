@@ -32,7 +32,7 @@ public sealed class SaveLoadReparentTest
         var entities = server.ResolveDependency<IEntityManager>();
         var maps = server.ResolveDependency<IMapManager>();
         var mapLoader = entities.System<MapLoaderSystem>();
-        var bodySystem = entities.System<SharedBodySystem>();
+        var bodySystem = entities.System<SharedInternalsSystem>();
         var containerSystem = entities.System<SharedContainerSystem>();
         var mapSys = entities.System<SharedMapSystem>();
 
@@ -77,7 +77,7 @@ public sealed class SaveLoadReparentTest
                     {
                         Assert.That(slot.Id, Is.EqualTo(slotId));
                         var container =
-                            containerSystem.GetContainer(id, SharedBodySystem.GetPartSlotContainerId(slotId));
+                            containerSystem.GetContainer(id, SharedInternalsSystem.GetPartSlotContainerId(slotId));
                         Assert.That(container.ContainedEntities, Is.Not.Empty);
                     });
                 }
@@ -155,7 +155,7 @@ public sealed class SaveLoadReparentTest
                         {
                             Assert.That(slot.Id, Is.EqualTo(slotId));
                             var container =
-                                containerSystem.GetContainer(id, SharedBodySystem.GetPartSlotContainerId(slotId));
+                                containerSystem.GetContainer(id, SharedInternalsSystem.GetPartSlotContainerId(slotId));
                             Assert.That(container.ContainedEntities, Is.Not.Empty);
                         });
                     }

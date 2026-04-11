@@ -1,4 +1,4 @@
-﻿using Content.Shared.Flash;
+using Content.Shared.Flash;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 

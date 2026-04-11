@@ -1,4 +1,4 @@
-﻿namespace Content.Shared.EntityEffects.Effects.Botany;
+namespace Content.Shared.EntityEffects.Effects.Botany;
 
 /// <summary>
 /// See serverside system.

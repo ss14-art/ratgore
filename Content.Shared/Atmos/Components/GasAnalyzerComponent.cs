@@ -13,13 +13,11 @@ public sealed partial class GasAnalyzerComponent : Component
     /// <summary>
     /// The target entity currently being analyzed.
     /// </summary>
-    [DataField]
     public EntityUid? Target;
 
     /// <summary>
     /// The current user of the gas analyzer.
     /// </summary>
-    [DataField]
     public EntityUid? User;
 
     /// <summary>
@@ -103,4 +101,3 @@ public enum GasAnalyzerVisuals : byte
 {
     Enabled,
 }
-

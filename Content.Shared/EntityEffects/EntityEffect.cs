@@ -1,4 +1,4 @@
-﻿using Content.Shared.Database;
+using Content.Shared.Database;
 using Content.Shared.EntityConditions;
 using Robust.Shared.Prototypes;
 

@@ -20,7 +20,7 @@ public sealed class DispenserSystem : SharedDispenserSystem
     [Dependency] private readonly StationTradeMarketSystem _marketSystem = default!;
     [Dependency] private readonly Stack.StackSystem _stackSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
   
     public override void Initialize()  

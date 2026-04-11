@@ -3,7 +3,6 @@ using System.Linq;
 using Content.Shared.FixedPoint;
 using System.Text.Json.Serialization;
 using Content.Shared.Chemistry.Reaction;
-using Content.Shared.Contraband;
 using Content.Shared.EntityEffects;
 using Content.Shared.Localizations;
 using Content.Shared.Metabolism;
@@ -55,13 +54,6 @@ namespace Content.Shared.Chemistry.Reagent
 
         [ViewVariables(VVAccess.ReadOnly)]
         public string LocalizedPhysicalDescription => Loc.GetString(PhysicalDescription);
-
-        /// <summary>
-        ///     The degree of contraband severity this reagent is considered to have.
-        ///     If AllowedDepartments or AllowedJobs are set, they take precedent and override this value.
-        /// </summary>
-        [DataField]
-        public ProtoId<ContrabandSeverityPrototype>? ContrabandSeverity = null;
 
         /// <summary>
         ///     Which departments is this reagent restricted to, if any?
@@ -123,12 +115,6 @@ namespace Content.Shared.Chemistry.Reagent
 
         [DataField]
         public bool MetamorphicChangeColor { get; private set; } = true;
-
-        /// <summary>
-        /// If not null, makes something slippery. Also defines slippery interactions like stun time and launch mult.
-        /// </summary>
-        [DataField]
-        public SlipperyEffectEntry? SlipData;
 
         /// <summary>
         /// The speed at which the reagent evaporates over time.

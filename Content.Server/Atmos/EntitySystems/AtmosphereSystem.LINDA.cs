@@ -54,7 +54,7 @@ namespace Content.Server.Atmos.EntitySystems
                     }
 
                     shouldShareAir = true;
-                } else if (CompareExchange(tile.Air, enemyTile.Air) != GasCompareResult.NoExchange)
+                } else if (CompareExchange(tile, enemyTile) != GasCompareResult.NoExchange)
                 {
                     AddActiveTile(gridAtmosphere, enemyTile);
                     if (ExcitedGroups)
@@ -80,11 +80,20 @@ namespace Content.Server.Atmos.EntitySystems
 
                 if (shouldShareAir)
                 {
-                    Share(tile, enemyTile, adjacentTileLength);
+                    var difference = Share(tile, enemyTile, adjacentTileLength);
 
                     // Monstermos already handles this, so let's not handle it ourselves.
                     if (!MonstermosEqualization)
-                        ConsiderPressureDifference(gridAtmosphere, enemyTile);
+                    {
+                        if (difference >= 0)
+                        {
+                            ConsiderPressureDifference(gridAtmosphere, tile, direction, difference);
+                        }
+                        else
+                        {
+                            ConsiderPressureDifference(gridAtmosphere, enemyTile, i.ToOppositeDir(), -difference);
+                        }
+                    }
 
                     LastShareCheck(tile);
                 }
@@ -108,9 +117,8 @@ namespace Content.Server.Atmos.EntitySystems
         private void Archive(TileAtmosphere tile, int fireCount)
         {
             if (tile.Air != null)
-                tile.Air.Moles.AsSpan().CopyTo(tile.MolesArchived.AsSpan());
+                tile.AirArchived = new GasMixture(tile.Air);
 
-            tile.TemperatureArchived = tile.Temperature;
             tile.ArchivedCycle = fireCount;
         }
 
@@ -121,9 +129,16 @@ namespace Content.Server.Atmos.EntitySystems
 
             switch (tile.LastShare)
             {
+                // Refresh this tile's suspension cooldown if it had significant sharing.
                 case > Atmospherics.MinimumAirToSuspend:
                     ExcitedGroupResetCooldowns(tile.ExcitedGroup);
                     break;
+
+                // If this tile moved a very small amount of air, but not enough to matter,
+                // we set the dismantle cooldown to 0.
+                // This dissolves the group without performing an equalization as we expect
+                // the group to be mostly equalized already if we're moving around miniscule
+                // amounts of air.
                 case > Atmospherics.MinimumMolesDeltaToMove:
                     tile.ExcitedGroup.DismantleCooldown = 0;
                     break;
@@ -175,10 +190,10 @@ namespace Content.Server.Atmos.EntitySystems
         /// </summary>
         public float GetHeatCapacityArchived(TileAtmosphere tile)
         {
-            if (tile.Air == null)
+            if (tile.AirArchived == null)
                 return tile.HeatCapacity;
 
-            return GetHeatCapacityCalculation(tile.MolesArchived!, tile.Space);
+            return GetHeatCapacity(tile.AirArchived);
         }
 
         /// <summary>
@@ -186,10 +201,11 @@ namespace Content.Server.Atmos.EntitySystems
         /// </summary>
         public float Share(TileAtmosphere tileReceiver, TileAtmosphere tileSharer, int atmosAdjacentTurfs)
         {
-            if (tileReceiver.Air is not {} receiver || tileSharer.Air is not {} sharer)
+            if (tileReceiver.Air is not {} receiver || tileSharer.Air is not {} sharer ||
+                    tileReceiver.AirArchived == null || tileSharer.AirArchived == null)
                 return 0f;
 
-            var temperatureDelta = tileReceiver.TemperatureArchived - tileSharer.TemperatureArchived;
+            var temperatureDelta = tileReceiver.AirArchived.Temperature - tileSharer.AirArchived.Temperature;
             var absTemperatureDelta = Math.Abs(temperatureDelta);
             var oldHeatCapacity = 0f;
             var oldSharerHeatCapacity = 0f;
@@ -240,12 +256,12 @@ namespace Content.Server.Atmos.EntitySystems
                 // Transfer of thermal energy (via changed heat capacity) between self and sharer.
                 if (!receiver.Immutable && newHeatCapacity > Atmospherics.MinimumHeatCapacity)
                 {
-                    receiver.Temperature = ((oldHeatCapacity * receiver.Temperature) - (heatCapacityToSharer * tileReceiver.TemperatureArchived) + (heatCapacitySharerToThis * tileSharer.TemperatureArchived)) / newHeatCapacity;
+                    receiver.Temperature = ((oldHeatCapacity * receiver.Temperature) - (heatCapacityToSharer * tileReceiver.AirArchived.Temperature) + (heatCapacitySharerToThis * tileSharer.AirArchived.Temperature)) / newHeatCapacity;
                 }
 
                 if (!sharer.Immutable && newSharerHeatCapacity > Atmospherics.MinimumHeatCapacity)
                 {
-                    sharer.Temperature = ((oldSharerHeatCapacity * sharer.Temperature) - (heatCapacitySharerToThis * tileSharer.TemperatureArchived) + (heatCapacityToSharer * tileReceiver.TemperatureArchived)) / newSharerHeatCapacity;
+                    sharer.Temperature = ((oldSharerHeatCapacity * sharer.Temperature) - (heatCapacitySharerToThis * tileSharer.AirArchived.Temperature) + (heatCapacityToSharer * tileReceiver.AirArchived.Temperature)) / newSharerHeatCapacity;
                 }
 
                 // Thermal energy of the system (self and sharer) is unchanged.
@@ -264,7 +280,7 @@ namespace Content.Server.Atmos.EntitySystems
             var moles = receiver.TotalMoles;
             var theirMoles = sharer.TotalMoles;
 
-            return (tileReceiver.TemperatureArchived * (moles + movedMoles)) - (tileSharer.TemperatureArchived * (theirMoles - movedMoles)) * Atmospherics.R / receiver.Volume;
+            return (tileReceiver.AirArchived.Temperature * (moles + movedMoles)) - (tileSharer.AirArchived.Temperature * (theirMoles - movedMoles)) * Atmospherics.R / receiver.Volume;
         }
 
         /// <summary>
@@ -272,10 +288,11 @@ namespace Content.Server.Atmos.EntitySystems
         /// </summary>
         public float TemperatureShare(TileAtmosphere tileReceiver, TileAtmosphere tileSharer, float conductionCoefficient)
         {
-            if (tileReceiver.Air is not { } receiver || tileSharer.Air is not { } sharer)
+            if (tileReceiver.Air is not { } receiver || tileSharer.Air is not { } sharer ||
+                    tileReceiver.AirArchived == null || tileSharer.AirArchived == null)
                 return 0f;
 
-            var temperatureDelta = tileReceiver.TemperatureArchived - tileSharer.TemperatureArchived;
+            var temperatureDelta = tileReceiver.AirArchived.Temperature - tileSharer.AirArchived.Temperature;
             if (MathF.Abs(temperatureDelta) > Atmospherics.MinimumTemperatureDeltaToConsider)
             {
                 var heatCapacity = GetHeatCapacityArchived(tileReceiver);
@@ -301,10 +318,10 @@ namespace Content.Server.Atmos.EntitySystems
         /// </summary>
         public float TemperatureShare(TileAtmosphere tileReceiver, float conductionCoefficient, float sharerTemperature, float sharerHeatCapacity)
         {
-            if (tileReceiver.Air is not {} receiver)
+            if (tileReceiver.Air is not {} receiver || tileReceiver.AirArchived == null)
                 return 0;
 
-            var temperatureDelta = tileReceiver.TemperatureArchived - sharerTemperature;
+            var temperatureDelta = tileReceiver.AirArchived.Temperature - sharerTemperature;
             if (MathF.Abs(temperatureDelta) > Atmospherics.MinimumTemperatureDeltaToConsider)
             {
                 var heatCapacity = GetHeatCapacityArchived(tileReceiver);

@@ -1,4 +1,4 @@
-﻿using Content.Shared.Localizations;
+using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.EntityEffects.Effects;

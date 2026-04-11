@@ -28,7 +28,7 @@ public sealed class GrabbingItemSystem : EntitySystem
 
         SubscribeLocalEvent<BeingGrabbedComponent, BeingPulledAttemptEvent>(OnBeingPulledAttempt);
         SubscribeLocalEvent<BeingGrabbedComponent, AttemptStopPullingEvent>(OnAttemptStopPulling,
-            after: new[] { typeof(SharedBodySystem), typeof(SharedCuffableSystem) });
+            after: new[] { typeof(SharedInternalsSystem), typeof(SharedCuffableSystem) });
         SubscribeLocalEvent<BeingGrabbedComponent, GrabBreakDoAfterEvent>(OnGrabBreak);
         SubscribeLocalEvent<BeingGrabbedComponent, PullStoppedMessage>(OnStopPull);
     }

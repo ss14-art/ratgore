@@ -37,7 +37,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly SharedInternalsSystem _internals = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -195,7 +195,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
-        var organSlotIdToOrgan = _body.GetPartOrgans(args.Part, part).ToDictionary(o => o.Item2.SlotId, o => o.Item2);
+        var organSlotIdToOrgan = _internals.GetPartOrgans(args.Part, part).ToDictionary(o => o.Item2.SlotId, o => o.Item2);
 
         var allOnAddFound = true;
         var zeroOnAddFound = true;
@@ -258,7 +258,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         foreach (var reg in ent.Comp.Organ.Values)
         {
-            if (_body.TryGetBodyPartOrgans(args.Part, reg.Component.GetType(), out var organs)
+            if (_internals.TryGetBodyPartOrgans(args.Part, reg.Component.GetType(), out var organs)
                 && organs.Count > 0)
             {
                 if (ent.Comp.Inverse
@@ -267,20 +267,20 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                     && !organs.Any(organ => HasComp<OrganReattachedComponent>(organ.Id))))
                     args.Cancelled = true;
             }
-            else if (!ent.Comp.Inverse || !_container.TryGetContainer(args.Part, SharedBodySystem.GetOrganContainerId(ent.Comp.SlotId), out _))
+            else if (!ent.Comp.Inverse || !_container.TryGetContainer(args.Part, SharedInternalsSystem.GetOrganContainerId(ent.Comp.SlotId), out _))
                 args.Cancelled = true;
         }
     }
 
     private void OnPartRemovedConditionValid(Entity<SurgeryPartRemovedConditionComponent> ent, ref SurgeryValidEvent args)
     {
-        if (!_body.CanAttachToSlot(args.Part, ent.Comp.Connection))
+        if (!_internals.CanAttachToSlot(args.Part, ent.Comp.Connection))
         {
             args.Cancelled = true;
             return;
         }
 
-        var results = _body.GetBodyChildrenOfType(args.Body, ent.Comp.Part, symmetry: ent.Comp.Symmetry).ToList();
+        var results = _internals.GetBodyChildrenOfType(args.Body, ent.Comp.Part, symmetry: ent.Comp.Symmetry).ToList();
         if (results is not { } || !results.Any())
             return;
 

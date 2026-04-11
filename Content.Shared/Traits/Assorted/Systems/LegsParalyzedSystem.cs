@@ -11,7 +11,7 @@ public sealed class LegsParalyzedSystem : EntitySystem
 {
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
     [Dependency] private readonly StandingStateSystem _standingSystem = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!;
 
     public override void Initialize()
     {
@@ -32,7 +32,7 @@ public sealed class LegsParalyzedSystem : EntitySystem
     private void OnShutdown(EntityUid uid, Components.LegsParalyzedComponent component, ComponentShutdown args)
     {
         _standingSystem.Stand(uid);
-        _bodySystem.UpdateMovementSpeed(uid);
+        _internalsSystem.UpdateMovementSpeed(uid);
     }
 
     private void OnBuckled(EntityUid uid, Components.LegsParalyzedComponent component, ref BuckledEvent args) => _standingSystem.Stand(uid);

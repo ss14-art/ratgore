@@ -39,7 +39,7 @@ public abstract partial class SharedAtmosphereSystem
     public virtual ReactionResult React(GasMixture mixture, IGasMixtureHolder? holder)
         => ReactionResult.NoReaction;
 
-    /// Ratgore start
+    /// Sunrise start
     // ---- Test-visible aliases / shared heat-capacity API ---- //
 
     /// <summary>
@@ -67,5 +67,5 @@ public abstract partial class SharedAtmosphereSystem
         var raw = GetHeatCapacityCalculation(mixture.Moles, mixture.Immutable);
         return applyScaling && HeatScale > 0f ? raw / HeatScale : raw;
     }
-    /// Ratgore end
+    /// Sunrise end
 }

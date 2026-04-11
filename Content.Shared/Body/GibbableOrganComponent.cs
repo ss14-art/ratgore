@@ -1,4 +1,4 @@
-﻿using Content.Shared.Gibbing;
+using Content.Shared.Gibbing;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Body;

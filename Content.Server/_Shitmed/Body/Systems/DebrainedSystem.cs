@@ -15,7 +15,7 @@ namespace Content.Server._Shitmed.Body.Systems;
 /// </summary>
 public sealed class DebrainedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly StandingStateSystem _standingSystem = default!;
     public override void Initialize()
@@ -45,7 +45,7 @@ public sealed class DebrainedSystem : EntitySystem
 
         RemComp<DelayedDeathComponent>(uid);
         RemComp<StunnedComponent>(uid);
-        if (_bodySystem.TryGetBodyOrganComponents<HeartComponent>(uid, out var _))
+        if (_internalsSystem.TryGetBodyOrganComponents<HeartComponent>(uid, out var _))
             RemComp<DelayedDeathComponent>(uid);
     }
 

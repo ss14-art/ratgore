@@ -45,7 +45,7 @@ public abstract class SharedMagicSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly SharedInternalsSystem _internals = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -441,7 +441,7 @@ public abstract class SharedMagicSystem : EntitySystem
         if (!TryComp<BodyComponent>(ev.Target, out var body))
             return;
 
-        _body.GibBody(ev.Target, true, body);
+        _internals.GibBody(ev.Target, true, body);
     }
     // End Smite Spells
     #endregion

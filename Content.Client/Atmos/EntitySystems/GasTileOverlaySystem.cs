@@ -30,7 +30,7 @@ public sealed class GasTileOverlaySystem : SharedGasTileOverlaySystem
             case GasTileOverlayDeltaState delta:
             {
                 modifiedChunks = delta.ModifiedChunks;
-                foreach (var index in comp.Chunks.Keys.ToArray())
+                foreach (var index in comp.Chunks.Keys)
                 {
                     if (!delta.AllChunks.Contains(index))
                         comp.Chunks.Remove(index);
@@ -41,7 +41,7 @@ public sealed class GasTileOverlaySystem : SharedGasTileOverlaySystem
             case GasTileOverlayState state:
             {
                 modifiedChunks = state.Chunks;
-                foreach (var index in comp.Chunks.Keys.ToArray())
+                foreach (var index in comp.Chunks.Keys.ToArray()) // Sunrise edit
                 {
                     if (!state.Chunks.ContainsKey(index))
                         comp.Chunks.Remove(index);

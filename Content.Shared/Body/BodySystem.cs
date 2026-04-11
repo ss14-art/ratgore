@@ -1,4 +1,4 @@
-﻿using Content.Shared.DragDrop;
+using Content.Shared.DragDrop;
 using Robust.Shared.Containers;
 
 namespace Content.Shared.Body;

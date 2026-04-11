@@ -1,4 +1,4 @@
-﻿using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Shared.Body;
 

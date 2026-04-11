@@ -20,7 +20,7 @@ namespace Content.Server.Atmos.EntitySystems
         /// </summary>
         public IEnumerable<GasReactionPrototype> GasReactions => _gasReactions;
 
-        protected override void InitializeGases()
+        public override void InitializeGases()
         {
             base.InitializeGases();
 
@@ -41,7 +41,7 @@ namespace Content.Server.Atmos.EntitySystems
             NumericsHelpers.Multiply(moles, GasSpecificHeats, tmp);
             // Adjust heat capacity by speedup, because this is primarily what
             // determines how quickly gases heat up/cool.
-            return MathF.Max(NumericsHelpers.HorizontalAdd(tmp) / MathF.Max(HeatScale, 1e-6f), Atmospherics.MinimumHeatCapacity); // Ratgore edit
+            return MathF.Max(NumericsHelpers.HorizontalAdd(tmp), Atmospherics.MinimumHeatCapacity);
         }
 
         public override bool IsMixtureFuel(GasMixture mixture, float epsilon = Atmospherics.Epsilon)
@@ -524,35 +524,6 @@ namespace Content.Server.Atmos.EntitySystems
             NumericsHelpers.Add(mixture.Moles, molsToAdd);
             NumericsHelpers.Max(mixture.Moles, 0f);
         }
-
-        // ---- Ratgore shim API ---- //
-
-        public float GetThermalEnergy(GasMixture mixture)
-            => mixture.Temperature * GetHeatCapacity(mixture);
-
-        public float GetThermalEnergy(GasMixture mixture, float cachedHeatCapacity)
-            => mixture.Temperature * cachedHeatCapacity;
-
-        public void Merge(GasMixture receiver, GasMixture giver)
-        {
-            if (receiver.Immutable)
-                return;
-
-            if (MathF.Abs(receiver.Temperature - giver.Temperature) > Atmospherics.MinimumTemperatureDeltaToConsider)
-            {
-                var rHC = GetHeatCapacity(receiver);
-                var gHC = GetHeatCapacity(giver);
-                var combined = rHC + gHC;
-                if (combined > Atmospherics.MinimumHeatCapacity)
-                    receiver.Temperature = (GetThermalEnergy(receiver, rHC) + GetThermalEnergy(giver, gHC)) / combined;
-            }
-            NumericsHelpers.Add(receiver.Moles, giver.Moles);
-        }
-
-        public bool IsMixtureIgnitable(GasMixture mixture)
-            => IsMixtureFuel(mixture) && IsMixtureOxidizer(mixture);
-
-    // ---- End Ratgore shim API ---- //
 
         public enum GasCompareResult
         {

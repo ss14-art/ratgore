@@ -24,7 +24,7 @@ public sealed class SacrificialAltarSystem : SharedSacrificialAltarSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly SharedInternalsSystem _internals = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -59,7 +59,7 @@ public sealed class SacrificialAltarSystem : SharedSacrificialAltarSystem
 
         // finally gib the targets old body
         if (TryComp<BodyComponent>(target, out var body))
-            _body.GibBody(target, gibOrgans: false, body, launchGibs: true);
+            _internals.GibBody(target, gibOrgans: false, body, launchGibs: true);
         else
             QueueDel(target);
     }

@@ -40,7 +40,7 @@ public sealed class HealingSystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!; // Shitmed Change
+    [Dependency] private readonly SharedInternalsSystem _internalsSystem = default!; // Shitmed Change
 
     public override void Initialize()
     {
@@ -147,8 +147,8 @@ public sealed class HealingSystem : EntitySystem
         if (!TryComp(user, out TargetingComponent? targeting))
             return false;
 
-        var (targetType, targetSymmetry) = _bodySystem.ConvertTargetBodyPart(targeting.Target);
-        foreach (var part in _bodySystem.GetBodyChildrenOfType(target, targetType, symmetry: targetSymmetry))
+        var (targetType, targetSymmetry) = _internalsSystem.ConvertTargetBodyPart(targeting.Target);
+        foreach (var part in _internalsSystem.GetBodyChildrenOfType(target, targetType, symmetry: targetSymmetry))
             if (TryComp<DamageableComponent>(part.Id, out var damageable)
                 && damageable.TotalDamage > part.Component.MinIntegrity)
                 return true;

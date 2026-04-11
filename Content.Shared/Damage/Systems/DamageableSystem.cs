@@ -24,7 +24,7 @@ namespace Content.Shared.Damage
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly INetManager _netMan = default!;
-        [Dependency] private readonly SharedBodySystem _body = default!; // Shitmed Change
+        [Dependency] private readonly SharedInternalsSystem _internals = default!; // Shitmed Change
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
 
         private EntityQuery<AppearanceComponent> _appearanceQuery;
@@ -273,7 +273,7 @@ namespace Content.Shared.Damage
             // Shitmed Change Start
             if (HasComp<TargetingComponent>(uid))
             {
-                foreach (var (part, _) in _body.GetBodyChildren(uid))
+                foreach (var (part, _) in _internals.GetBodyChildren(uid))
                 {
                     if (!TryComp(part, out DamageableComponent? damageComp))
                         continue;
@@ -307,7 +307,7 @@ namespace Content.Shared.Damage
             if (!HasComp<TargetingComponent>(uid))
                 return;
 
-            foreach (var (part, _) in _body.GetBodyChildren(uid))
+            foreach (var (part, _) in _internals.GetBodyChildren(uid))
             {
                 if (!TryComp(part, out DamageableComponent? damageComp))
                     continue;

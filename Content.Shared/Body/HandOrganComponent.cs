@@ -1,4 +1,4 @@
-﻿using Content.Shared.Hands.Components;
+using Content.Shared.Hands.Components;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Body;

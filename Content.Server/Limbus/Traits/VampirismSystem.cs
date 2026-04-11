@@ -8,7 +8,7 @@ namespace Content.Server.Limbus.Traits;
 
 public sealed class VampirismSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly SharedInternalsSystem _internals = default!;
 
     public override void Initialize()
     {
@@ -20,7 +20,7 @@ public sealed class VampirismSystem : EntitySystem
         EnsureBloodSucker(ent);
 
         if (!TryComp<BodyComponent>(ent, out var body)
-		    || !_body.TryGetBodyOrganComponents<MetabolizerComponent>(ent, out var comps, body))
+		    || !_internals.TryGetBodyOrganComponents<MetabolizerComponent>(ent, out var comps, body))
             return;
 
         foreach (var (metabolizer, organ) in comps)

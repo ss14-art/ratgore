@@ -44,8 +44,6 @@ public sealed partial class AtmosphereSystem
 
     private void OnGridAtmosphereInit(EntityUid uid, GridAtmosphereComponent component, ComponentInit args)
     {
-        base.Initialize();
-
         EnsureComp<GasTileOverlayComponent>(uid);
         foreach (var tile in component.Tiles.Values)
         {
@@ -74,7 +72,7 @@ public sealed partial class AtmosphereSystem
                 newGridAtmos = AddComp<GridAtmosphereComponent>(newGrid);
 
             // We assume the tiles on the new grid have the same coordinates as they did on the old grid...
-            var enumerator = mapGrid.GetAllTilesEnumerator();
+            var enumerator = _mapSystem.GetAllTilesEnumerator(newGrid, mapGrid);
 
             while (enumerator.MoveNext(out var tile))
             {
@@ -95,6 +93,8 @@ public sealed partial class AtmosphereSystem
                 newTileAtmosphere.Hotspot = tileAtmosphere.Hotspot;
                 newTileAtmosphere.HeatCapacity = tileAtmosphere.HeatCapacity;
                 newTileAtmosphere.Temperature = tileAtmosphere.Temperature;
+                newTileAtmosphere.PressureDifference = tileAtmosphere.PressureDifference;
+                newTileAtmosphere.PressureDirection = tileAtmosphere.PressureDirection;
 
                 // TODO ATMOS: Somehow force GasTileOverlaySystem to perform an update *right now, right here.*
                 // The reason why is that right now, gas will flicker until the next GasTileOverlay update.
@@ -174,7 +174,7 @@ public sealed partial class AtmosphereSystem
         tile.AdjacentBits = AtmosDirection.Invalid;
         for (var i = 0; i < Atmospherics.Directions; i++)
         {
-            var direction = (AtmosDirection) (1 << i);
+            var direction = (AtmosDirection)(1 << i);
             var adjacentIndices = tile.GridIndices.Offset(direction);
 
             TileAtmosphere? adjacent;
@@ -194,7 +194,7 @@ public sealed partial class AtmosphereSystem
                 AddActiveTile(atmos, adjacent);
 
             var oppositeIndex = i.ToOppositeIndex();
-            var oppositeDirection = (AtmosDirection) (1 << oppositeIndex);
+            var oppositeDirection = (AtmosDirection)(1 << oppositeIndex);
 
             if (adjBlockDirs.IsFlagSet(oppositeDirection) || blockedDirs.IsFlagSet(direction))
             {
@@ -267,8 +267,8 @@ public sealed partial class AtmosphereSystem
     private void GridFixTileVacuum(TileAtmosphere tile)
     {
         DebugTools.AssertNotNull(tile.Air);
-        DebugTools.Assert(tile.Air?.Immutable == false );
-        Array.Clear(tile.MolesArchived);
+        DebugTools.Assert(tile.Air?.Immutable == false);
+        tile.AirArchived = null;
         tile.ArchivedCycle = 0;
 
         var count = 0;
