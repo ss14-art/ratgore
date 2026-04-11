@@ -126,6 +126,20 @@
         Manipulator: 1
 
 - type: entity
+  id: AmmoTechFabTAPCircuitboard
+  parent: BaseMachineCircuitboard
+  name: ammo techfab circuit board
+  description: A machine printed circuit board for an ammo techfab
+  components:
+    - type: Sprite
+      state: security
+    - type: MachineBoard
+      prototype: AmmoTechFabTAP
+      requirements:
+        MatterBin: 1
+        Manipulator: 1
+
+- type: entity
   id: MedicalTechFabCircuitboard
   parent: BaseMachineCircuitboard
   name: medical techfab machine board

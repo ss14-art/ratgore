@@ -4,6 +4,9 @@
   name: автоматическая стойка снаряжения коммунаров
   description: Автоматизированный стеллаж, соединенный с колоссальным хранилищем стандартного снаряжения лиги.
   components:
+  - type: AccessReader
+    access:
+    - [ "NCWLGeneral" ]
   - type: Sprite
     sprite: _Crescent/Structures/syndicatearmory.rsi
   - type: CMAutomatedVendor
@@ -24,21 +27,9 @@
         recommended: true    
       - id: ClothingOuterArmorNCWLHeavyCarapace
         name: бронежилет ЛРНП
-    - name: Основное оружие
-      choices: { CMWeapon: 1 }
-      entries:
-      - id: WeaponRifleFAL
-        name: НКВЛ МК-2 Фалин 5.56x45 мм
-        recommended: true    
-      - id: WeaponShotgunProletar
-        name: НКВЛ Тоз-97 Пролетарий 12 кал
-      - id: WeaponSubMachineGunNCWLWatchdog
-        name: НКВЛ ДС1 Страж 9x19mm
     - name: Утилиты
       choices: { CMUtilities: 2 }
       entries:
-      - id: ExGrenade
-        name: разрывная граната 
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
@@ -62,6 +53,9 @@
   name: автоматическая стойка снаряжения империи
   description: Автоматизированный стеллаж, соединенный с колоссальным хранилищем стандартного снаряжения имперцев.
   components:
+  - type: AccessReader
+    access:
+    - [ "EmpireSoldier" ]
   - type: Sprite
     sprite: _Crescent/Structures/syndicatearmory.rsi
   - type: CMAutomatedVendor
@@ -82,21 +76,9 @@
         recommended: true    
       - id: ClothingOuterArmorImperialTrooperArmor
         name: бронежилет БМС
-    - name: Основное оружие
-      choices: { CMWeapon: 1 }
-      entries:
-      - id: WeaponShotgunReno
-        name: БМС ДА-13 Рено 12 кал.
-      - id: WeaponRifleMiller
-        name: БМС ДА-8 Миллер 5.56x45 мм
-        recommended: true
-      - id: WeaponSubMachineGunBeetle
-        name: ХП Мак-11 Жук 9x19 мм
     - name: Утилиты
       choices: { CMUtilities: 2 }
       entries:
-      - id: ExGrenade
-        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
@@ -120,6 +102,9 @@
   name: автоматическая стойка снаряжения минитменов
   description: Автоматизированный стеллаж, соединенный с колоссальным хранилищем стандартного снаряжения минитменов.
   components:
+  - type: AccessReader
+    access:
+    - [ "GliessSheriff" ]
   - type: Sprite
     sprite: _Crescent/Structures/syndicatearmory.rsi
   - type: CMAutomatedVendor
@@ -146,16 +131,6 @@
         recommended: true    
       - id: ClothingOuterArmorCMM
         name: кираса патрульного
-    - name: Основное оружие
-      choices: { CMWeapon: 1 }
-      entries:
-      - id: WeaponShotgunSHIDoubleBarreled4g
-        name: SHI M135 Двустволка 12g
-      - id: WeaponRifleCMMNimrod
-        name: КММ M32 Нимрод 7.62x51mm
-        recommended: true
-      - id: WeaponSubMachineGunMP5
-        name: НТ MP5 9x19mm
     - name: Дополнительное оружие
       choices: { CMPistol: 1 }
       entries:
@@ -167,8 +142,6 @@
     - name: Утилиты
       choices: { CMUtilities: 2 }
       entries:
-      - id: ExGrenade
-        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
@@ -196,6 +169,9 @@
   name: автоматическая стойка снаряжения корпорации
   description: Автоматизированный стеллаж, соединенный с колоссальным хранилищем стандартного снаряжения корпоративной безопасности Шиногары.
   components:
+  - type: AccessReader
+    access:
+    - [ "Shinohara" ]
   - type: Sprite
     sprite: _Crescent/Structures/syndicatearmory.rsi
   - type: CMAutomatedVendor
@@ -223,16 +199,6 @@
       - id: ClothingOuterHardsuitHighsecUA
         name: боевой скафандр "Шиногара" SVBT-2-UA
         recommended: true  
-    - name: Основное оружие
-      choices: { CMWeapon: 1 }
-      entries:
-      - id: WeaponRifleLecter
-        name: ТПШ Лектер
-        recommended: true
-      - id: WeaponRifleHoundMarksman
-        name: ТПШ М215 "Хаунд" 5.56х45
-      - id: WeaponSubMachineGunMP49
-        name: ТПШ MP49 "Надзиратель" 9x19mm
     - name: Дополнительное оружие
       choices: { CMPistol: 1 }
       entries:
@@ -243,6 +209,70 @@
         name: Ножны для катаны (катана в комплекте)
     - name: Утилиты
       choices: { CMUtilities: 3 }
+      entries:
+      - id: EmpGrenade
+        name: ЭМИ Граната
+      - id: BreachingCharge
+        name: Прорывной заряд
+      - id: HandHeldMassScannerEE
+        name: портативный сканер масс
+        recommended: true 
+    - name: Боеприпасы
+      choices: { CMAmmo: 3 }
+      entries:
+      - id: MagazinePistolSubMachineGun
+        name: 35-зарядный магазин для пистолета-пулемета (9x19 мм PSTF auto)
+      - id: MagazineLightRifle
+        name: 30-зарядный магазин (5,56х45 мм Imperial)
+      - id: MagazinePistol
+        name: 18-зарядный пистолетный магазин (9x19 мм PSTF auto)
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechEquipmentGSC
+  name: автоматическая стойка снаряжения наёмников
+  description: Автоматизированный стеллаж, соединенный с колоссальным хранилищем стандартного снаряжения вольных наёмников.
+  components:
+  - type: AccessReader
+    access:
+    - [ "SyndicateGorlex" ]
+  - type: Sprite
+    sprite: _Crescent/Structures/syndicatearmory.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RingleaderNCSP
+    - LieutenantNCSP
+    - InfanteerNCSP
+    - TechnicianNCSP
+    sections:
+    - name: Стандартный набор
+      choices: { CMClass: 1 }
+      entries:
+      - id: CMVendorBundleGSCApparel
+        name: стандартный набор наёмника
+        recommended: true
+    - name: Броня
+      choices: { CMArmour: 1 }
+      entries:
+      - id: ClothingOuterHardsuitSyndicateBG
+        name: скафандр штурмовика BULWARK mk.II
+        recommended: true  
+      - id: ClothingOuterHardsuitSyndicateSellsword
+        name: модифицированный скафандр SELLSWORD mk.IIB
+      - id: ClothingOuterHardsuitSyndicateFreiritter
+        name: кастомный скафандр FREIRITTER mkIIC
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponRifleAk
+        name: АКМС
+        recommended: true
+      - id: WeaponSubMachineGunAtreides
+        name: ПП Атрейдес
+      - id: WeaponShotgunKammerer
+        name: Каммерер
+    - name: Утилиты
+      choices: { CMUtilities: 4 }
       entries:
       - id: ExGrenade
         name: разрывная граната
@@ -258,7 +288,7 @@
       entries:
       - id: MagazinePistolSubMachineGun
         name: 35-зарядный магазин для пистолета-пулемета (9x19 мм PSTF auto)
-      - id: MagazineLightRifle
-        name: 30-зарядный магазин (5,56х45 мм Imperial)
-      - id: MagazinePistol
-        name: 18-зарядный пистолетный магазин (9x19 мм PSTF auto)
+      - id: MagazineRifle
+        name: 25-зарядный магазин (7,62х51 мм USM)
+      - id: BoxLethalshot
+        name: коробка ружейных патронов (.50 летальные)

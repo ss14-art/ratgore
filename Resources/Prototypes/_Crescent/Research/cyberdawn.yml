@@ -250,6 +250,7 @@
   cost: 10000
   recipeUnlocks:
   - ClothingOuterHardsuitCybersunStealthCyberdawn
+  - ClothingOuterHardsuitCybersunDreadnoughtCyberdawn
 
 - type: technology
   id: CyberdawnPsybreaker

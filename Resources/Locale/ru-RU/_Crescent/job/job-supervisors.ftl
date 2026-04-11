@@ -31,3 +31,8 @@ job-supervisors-cmm-deputy = Колониальному маршалу
 job-supervisors-cmm-officer = Колониальному маршалу и его заместителю
 job-supervisors-cmm-sergeant = Колониальным офицерам и вышестоящим
 job-supervisors-cmm-minuteman = Колониальным блюстителям, Колониальным офицерам и старшим по званию ополчения
+
+job-supervisors-gsc-ringleader = руководствуетесь деньгами и личными интересами. Вы - фактический лидер Коалиции Вольных Станций Тайпана, будь то благодаря обаянию или страху перед вашей огневой мощью. 
+job-supervisors-gsc-officer = главарю Горлекс
+job-supervisors-gsc-infanteer = главарю Горлекс, его офицеру и Gorlex Security Consulting
+job-supervisors-gsc-newbie = старшим по рангу, и всему Gorlex Security Consulting в целом

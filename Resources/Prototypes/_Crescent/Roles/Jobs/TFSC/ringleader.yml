@@ -9,14 +9,13 @@
   whitelisted: true # Rat
   requireAdminNotify: true
   icon: "JobIconSyndieRingleader"
-  supervisors: You're the defacto leader of the Taypani Free Stations Coalition, whether by charm or by firepower. You answer to money and personal interests.
+  supervisors: job-supervisors-gsc-ringleader
   canBeAntag: false
   requirements:
     - !type:CharacterSpeciesRequirement
       inverted: true
       species:
         - Voidborn
-    - !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 10800
     - !type:FactionRequirement

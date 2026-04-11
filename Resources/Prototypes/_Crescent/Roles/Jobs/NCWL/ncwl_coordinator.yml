@@ -23,9 +23,6 @@
   requirements:
     - !type:CharacterOverallTimeRequirement
       min: 28800
-    - !type:CharacterDepartmentTimeRequirement
-      department: NCWL
-      min: 54000 # 15 hours
     - !type:FactionRequirement
       factionID: "NCWL"
     - !type:CharacterSpeciesRequirement

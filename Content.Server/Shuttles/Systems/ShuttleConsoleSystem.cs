@@ -635,6 +635,9 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         var query = EntityQueryEnumerator<ProjectileIFFComponent, MetaDataComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var projectileIFF, out var metadata, out var transform))
         {
+            if (HasComp<RadarPingerComponent>(uid) && !_ui.IsUiOpen(uid, RadarConsoleUiKey.Key))
+                continue;
+			
             if ((consolePosition - _transform.GetWorldPosition(uid)).Length() > range)
             {
                 continue;

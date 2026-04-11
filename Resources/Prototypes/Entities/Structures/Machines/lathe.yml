@@ -1326,6 +1326,131 @@
           - Gauze
           - Metal
 
+- type: entity
+  id: AmmoTechFabTAP #tap rework
+  parent: AmmoTechFab
+  name: ammo techfab
+  description: Prints the bare minimum of bullets that any budget military or armory could need. Nothing fancy.
+  components:
+    - type: Machine
+      board: AmmoTechFabTAPCircuitboard
+    - type: Lathe
+      idleState: icon
+      runningState: icon
+      staticRecipes:
+        #- SluggieHE
+        #- SluggieAP
+        #- SluggieEMP
+        #- IdnaTorpedoRecipe
+        #- Automortar90
+        #- MagazineGrenadeEmpty
+        #- Needler60
+        #- MagazineVulcan
+        #- MagazineFlak
+        #- 48mmEMPRocket
+        #- 48mmHighYieldRocket
+        #- 48mmLowYieldRocket
+        #- RocketMagazineEmpty
+        #- LensInfaredRecipe
+        #- LensPlasmaRecipe
+        #- LensXrayRecipe
+        # NEW SHIPGUN AMMO RECIPIES START
+        - Screamer20mmRegularRecipe
+        - Screamer20mmGyrostableRecipe
+        - Scout35mmRegularRecipe
+        - Scout35mmGyrostableRecipe
+        - Striker50mmRegularRecipe
+        - Striker50mmGyrostableRecipe
+        - Striker50mmPlasmaRecipe
+        - 88mmFlakRegularRecipe
+        - Resolute90mmRegularRecipe
+        - Resolute90mmGyrostableRecipe
+        - Resolute90mmPlasmaRecipe
+        - Anvil120mmRegularRecipe
+        - Anvil120mmGyrostableRecipe
+        - Anvil120mmPlasmaRecipe
+        - Leviathan300mmRecipe
+        - Shortbow48mmRegularRecipe
+        - Shortbow48mmGorlexRecipe
+        - Azimuth60mmRegularRecipe
+        - Azimuth60mmGorlexRecipe
+        - Azimuth60mmNCWLRecipe
+        - Azimuth60mmAdvancedRecipe
+        - Arbalest95mmRegularRecipe
+        - Arbalest95mmNCWLRecipe
+        - Arbalest95mmGorlexRecipe
+        - Gargoyle240mmRegularRecipe
+        - Gargoyle240mmNCWLRecipe
+        - Catapult330mmRegularRecipe
+        #NEW SHIPGUN AMMO RECIPIES END
+        - Cartridge40mmFrag
+        - Cartridge40mmCan
+        - Cartridge40mmHEDP
+        - Cartridge40mmEMP
+        - Cartridge40mmSmoke
+        - Cartridge40mmThermobaric
+        - MagazineBoxImperialRifleBig
+        - MagazineHeavyRifleSmall
+        #Hullrot edit start
+        - BaseCartridgeRailgun15mm
+        - MagazineClip18gBuck
+        - MagazinePulse470Fmj
+        - MagazinePulse470
+        - MagazinePulse350Fmj
+        - MagazinePulse350
+        - DrumMagazineShotgunSlug
+        - DrumMagazineShotgunEmpty
+        - DrumMagazineShotgunBuck
+        - MagazineSmgSmartgun
+        - MagazineHeavyRifleBoxmag
+        - MagazinePistolHeavy
+        - MagazineBoxHeavyPistol
+        - SpeedLoader27mmAutocannonHE
+        - MagazineBoxAntiMateriel
+        - MagazineBoxHeavyRifle
+        - MagazineBoxRifle
+        - MagazineBoxLightRifle
+        - MagazineBoxCaselessRifle
+        - MagazineBoxCaselessRifleBig
+        - BoxShotgunFlash4g
+        - BoxShotgunSlug4g
+        - BoxLethalshot4g
+        - BoxBeanbag4g
+        - BoxLethalshot
+        - BoxShotgunSlug
+        - BoxShotgunLumen
+        - BoxShotgunFlare
+        - MagazineBoxMagnum
+        - MagazineBoxPistol
+        - MagazineAntiMateriel
+        - MagazineHeavyRifle
+        - MagazineRifleDrum
+        - MagazineRifle
+        - MagazineLightRifle
+        - MagazineShotgunSlug
+        - MagazineShotgun
+        - SpeedLoader127x99
+        - SpeedLoaderMagnum
+        - MagazineMagnumSub
+        - MagazineMagnum
+        - MagazinePistolSubMachineGunHeavy
+        - MagazinePistolSubMachineGun
+        - MagazinePistol6mmSmg
+        - MagazinePistolSmartgun
+        - MagazinePistol
+        - MagazinePistol6mm
+        - MagazinePistolSubMachineGunTopMounted
+        #Hullrot edit end
+    - type: MaterialStorage
+      whitelist:
+        tags:
+          - Sheet
+          - RawMaterial
+          - Ingot
+          - Wooden
+          - ClothMade
+          - Gauze
+          - Metal
 
 - type: entity
   id: MedicalTechFab

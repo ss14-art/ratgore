@@ -8,7 +8,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: true
   icon: "JobIconSyndieLieutenant"
-  supervisors: You answer to the Ringleader.
+  supervisors: job-supervisors-gsc-officer
   canBeAntag: false
   requirements:
     - !type:CharacterSpeciesRequirement

@@ -8,7 +8,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconSyndiePrivateer"
-  supervisors: You answer to the Ringleader and Gorlex Security Lieutenants
+  supervisors: job-supervisors-gsc-infanteer
   canBeAntag: false
   requirements:
     - !type:CharacterSpeciesRequirement

@@ -21,12 +21,8 @@
   supervisors: job-supervisors-ncwl-mvd
   canBeAntag: false
   requirements:
-    - !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 30000
-    - !type:CharacterDepartmentTimeRequirement
-      department: NCWL
-      min: 64800 # 18 hours
     - !type:FactionRequirement
       factionID: "NCWL"
     - !type:CharacterSpeciesRequirement

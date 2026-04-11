@@ -35,9 +35,6 @@
         - Voidborn
     - !type:CharacterOverallTimeRequirement
       min: 16000
-    - !type:CharacterDepartmentTimeRequirement
-      department: SHI
-      min: 21600 # 6 hours
     - !type:FactionRequirement
       factionID: "SHI"
     - !type:CharacterTraitRequirement

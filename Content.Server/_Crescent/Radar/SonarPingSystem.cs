@@ -40,7 +40,7 @@ public sealed class SonarPingSystem : EntitySystem
 
         ActivationVerb verb = new()
         {
-            Text = $"Toggle Alert Pinging",
+            Text = Loc.GetString("sonar-ping-verb-toggle"),
             Act = () =>
             {
                 comp.alertOnPing = !comp.alertOnPing;
@@ -106,7 +106,9 @@ public sealed class SonarPingSystem : EntitySystem
                     closest = distance;
                 }
 
-                var message = $"Notice: Mass scanner pings detected in local space! Detecting {set.Count()} scanners! Closest scanner at {Math.Round(closest)} meters!";
+                var message = Loc.GetString("sonar-ping-alert-message",
+                    ("count", set.Count()),
+                    ("distance", Math.Round(closest)));
                 _chatSystem.TrySendInGameICMessage(key, message, InGameICChatType.Speak, ChatTransmitRange.Normal);
                 comp.lastAlert = worldTime + alertCooldown;
             }

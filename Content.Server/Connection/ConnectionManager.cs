@@ -289,7 +289,7 @@ namespace Content.Server.Connection
             }
 
             // DeltaV - Replace existing softwhitelist implementation
-            if (false)//if (_cfg.GetCVar(CCVars.WhitelistEnabled) && adminData is null)
+            if (_cfg.GetCVar(CCVars.WhitelistEnabled) && adminData is null)
             {
                 if (_whitelists is null)
                 {
@@ -320,7 +320,7 @@ namespace Content.Server.Connection
 
             // DeltaV - Soft whitelist improvements
             // TODO: replace this with a whitelist config prototype with a connected whitelisted players condition
-            if (_cfg.GetCVar(CCVars.WhitelistEnabled))
+            if (false)//if (_cfg.GetCVar(CCVars.WhitelistEnabled))
             {
                 var connectedPlayers = _plyMgr.PlayerCount;
                 var connectedWhitelist = _connectedWhitelistedPlayers.Count;
@@ -436,11 +436,11 @@ namespace Content.Server.Connection
         public async Task<bool> HavePrivilegedJoin(NetUserId userId)
         {
             var adminBypass = _cfg.GetCVar(CCVars.AdminBypassMaxPlayers) && await _db.GetAdminDataForAsync(userId) != null;
-            //var havePriorityJoin = _sponsors
+            var isSponsor = _sponsorMan.Sponsors.ContainsKey(userId); // Forge-Change
             var wasInGame = EntitySystem.TryGet<GameTicker>(out var ticker) &&
                             ticker.PlayerGameStatuses.TryGetValue(userId, out var status) &&
                             status == PlayerGameStatus.JoinedGame;
-            return adminBypass || wasInGame;
+            return adminBypass || isSponsor || wasInGame;
         }
 
         /// <summary>

@@ -8,7 +8,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconSyndieNewblood"
-  supervisors: You answer to the Ringleader of the Gorlex Security Consulting.
+  supervisors: job-supervisors-gsc-newbie
   canBeAntag: false
   requirements:
     - !type:CharacterSpeciesRequirement

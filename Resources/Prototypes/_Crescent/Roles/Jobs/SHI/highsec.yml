@@ -29,12 +29,8 @@
   supervisors: job-supervisors-shi
   canBeAntag: false
   requirements:
-    - !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 35000
-    - !type:CharacterDepartmentTimeRequirement
-      department: SHI
-      min: 43200 # 12 hours
     - !type:FactionRequirement
       factionID: "SHI"
     - !type:CharacterTraitRequirement
@@ -104,7 +100,6 @@
       inverted: true
       species:
         - Voidborn
-    - !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 35000
     - !type:CharacterDepartmentTimeRequirement

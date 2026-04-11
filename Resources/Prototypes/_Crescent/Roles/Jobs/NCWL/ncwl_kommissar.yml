@@ -25,12 +25,8 @@
   supervisors: job-supervisors-ncwl-kommissar
   canBeAntag: false
   requirements:
-    - !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 30000
-    - !type:CharacterDepartmentTimeRequirement
-      department: NCWL
-      min: 108000 # 30 hours
     - !type:FactionRequirement
       factionID: "NCWL"
     - !type:CharacterSpeciesRequirement

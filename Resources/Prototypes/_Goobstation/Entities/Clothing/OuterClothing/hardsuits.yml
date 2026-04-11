@@ -125,15 +125,17 @@
     damageCoefficient: 0.3 # chinalake meta would go hard
   - type: FireProtection
     reduction: 0.9 # atmos fire suit is 0.8, so i guess this is fine? Reduction goes the opossite way right?
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.1
-        Slash: 0.1 # holy shit bruv
-        Piercing: 0.1
-        Heat: 0.1
-        Radiation: 0.25 # do people even know rad ammo exists? anyway making rad its weakness is kinda fair
-        Caustic: 0.4
+  - type: DegradeableArmor
+    armorMaxHealth: 3000
+    armorType: Ceramic
+    armorRepair: HomelandAlloy
+    initialModifiers:
+      flatReductions:
+        Blunt: 75
+        Slash: 75
+        Piercing: 90
+        Heat: 55
+        Caustic: 65
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.5
@@ -141,12 +143,14 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitDreadnought
+  - type: ClothingAddFaction
+    faction: TFSC
   - type: ClothingGrantComponent
     component:
     - type: DamageOverTime
       damage:
         types:
-          Piercing: 0.3
+          Piercing: 0.4
       interval: 1.0
       ignoreResistances: true
   - type: StaminaDamageResistance

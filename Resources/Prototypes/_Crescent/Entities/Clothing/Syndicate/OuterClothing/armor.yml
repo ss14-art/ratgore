@@ -244,16 +244,16 @@
 
 - type: entity
   parent: ClothingOuterHardsuitSyndieMedic
-  id: ClothingOuterHardsuitSyndicateBG2
+  id: ClothingOuterHardsuitSyndicateBulwar
   name: BULWARK mk.III frontliner hardsuit
   description: An upgraded modular hardsuit painted in the colors of the Syndicate. Bulky plasteel pads the titanium skeleton, shielding flimsy electronics and the fleshy operator underneath. This seems more durable and technological. On back of this suit is carved a logo "S.I.".
   components:
   - type: Sprite
-    sprite: _Crescent/Clothing/Syndicate/OuterClothing/syndicatesbg2.rsi
+    sprite: _Crescent/Clothing/Syndicate/OuterClothing/syndicatesbulwar.rsi
   - type: Clothing
-    sprite: _Crescent/Clothing/Syndicate/OuterClothing/syndicatesbg2.rsi
+    sprite: _Crescent/Clothing/Syndicate/OuterClothing/syndicatesbulwar.rsi
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitSyndicateBattlegroup2
+    clothingPrototype: ClothingHeadHelmetHardsuitSyndicateBattlegroupBulwar
   - type: ReverseEngineering # Sector Crescent
     difficulty: 4
     recipes:

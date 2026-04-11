@@ -30,7 +30,6 @@
       inverted: true
       species:
         - Voidborn
-    - !type:CharacterWhitelistRequirement
     - !type:CharacterTraitRequirement
       inverted: true
       traits:

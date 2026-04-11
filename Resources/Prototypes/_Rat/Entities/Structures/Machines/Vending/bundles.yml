@@ -71,3 +71,21 @@
     - JetpackBlackFilled
     - ClothingShoesBootsMagCombat
     - Stunbaton
+
+- type: entity
+  id: CMVendorBundleGSCApparel
+  name: базовое снаряжение вольного наёмника
+  description: базовое снаряжение вольных наёмников Горлекс. Включает в себя ГПС, джетпак, магнитные сапоги и остальное.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite:  _Crescent/Structures/syndicatearmory.rsi
+    state: "off"
+  - type: CMVendorBundle
+    bundle:
+    - ClothingHandsGlovesCombat
+    - ClothingMaskGasSyndicate
+    - HandheldGPSBasic
+    - DoubleEmergencyOxygenTankFilled
+    - JetpackBlackFilled
+    - ClothingShoesBootsMagSyndie

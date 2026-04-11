@@ -205,18 +205,18 @@
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitCybersunSuit
-  id: ClothingHeadHelmetHardsuitSyndicateBattlegroup2
+  id: ClothingHeadHelmetHardsuitSyndicateBattlegroupBulwar
   categories: [ HideSpawnMenu ]
   name: frontliner combat hardsuit helmet mk.II
   description: Spaceworthy protection for your fragile skull. A Syndicate design.
   components:
   - type: Sprite
-    sprite: _Crescent/Clothing/Syndicate/Head/syndicatesbg2.rsi
+    sprite: _Crescent/Clothing/Syndicate/Head/syndicatesbulwar.rsi
   - type: Clothing
-    sprite: _Crescent/Clothing/Syndicate/Head/syndicatesbg2.rsi
+    sprite: _Crescent/Clothing/Syndicate/Head/syndicatesbulwar.rsi
   - type: PointLight
     radius: 6
-    color: "#ffffed"
+    color: "#90ee90"
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitSyndicateBattlegroup

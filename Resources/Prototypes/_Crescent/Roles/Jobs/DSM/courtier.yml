@@ -33,7 +33,6 @@
   supervisors: job-supervisors-imperial
   canBeAntag: false
   requirements:
-    - !type:CharacterWhitelistRequirement
     - !type:FactionRequirement
       factionID: "DSM"
     - !type:CharacterOverallTimeRequirement

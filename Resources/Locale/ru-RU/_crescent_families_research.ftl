@@ -12,6 +12,7 @@ research-technology-families-high-impulse-thrusters = Высокоимпульс
 research-technology-families-hardpoints = Точки крепления
 research-technology-families-ships = Корабли
 research-technology-families-emitter = Технология экранирования
+research-technology-families-craftcomps = Компоненты
 
 ## Descriptions
 research-technology-families-auxiliary-artillery-description = Легкое и среднее автоматическое оружие
@@ -25,3 +26,4 @@ research-technology-families-high-impulse-thrusters-description = Продвин
 research-technology-families-hardpoints-description = Точки крепления
 research-technology-families-ships-description = Корабли Пакта
 research-technology-families-emitter-description = Источник щита «Errant»
+research-technology-families-craftcomps-description = Компоненты

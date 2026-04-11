@@ -628,5 +628,25 @@ Entries:
     id: 79
     time: '2026-04-10T10:08:28.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/123
+  - author: freycyik
+    changes:
+      - type: Add
+        message: Добавлен джаггернаут КВСТ, он доступен в изучениях Кибердонов. Он наносит владельцу урон взамен - даёт большую защиту
+    id: 80
+    time: '2026-04-11T09:48:07.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/126
+  - author: EmperorStukov
+    changes:
+      - type: Add
+        message: Добавлены стойки со снаряжением для Горлекс
+      - type: Fix
+        message: Теперь все шкафы со снаряжением требуют спец.доступов. Никаких больше общедоступных шкафов.
+      - type: Tweak
+        message: Стойки со снарягой Горлы добавлены на Гидру
+      - type: Fix
+        message: Исправлено отображение Т2 скафандров Горлекс
+    id: 81
+    time: '2026-04-11T12:07:18.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/127
 Name: Rat
 Order: -1

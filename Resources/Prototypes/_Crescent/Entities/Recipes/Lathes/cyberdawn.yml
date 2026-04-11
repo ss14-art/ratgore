@@ -81,6 +81,17 @@
     NanotrasenElectronics: 1000
     Steel: 1500
 
+- type: latheRecipe
+  id: ClothingOuterHardsuitCybersunDreadnoughtCyberdawn
+  result: ClothingOuterHardsuitCybersunDreadnought
+  completetime: 1.5
+  materials:
+    HardsuitElectronics: 500
+    Silver: 750
+    Durathread: 2500
+    NanotrasenElectronics: 500
+    Steel: 1500
+
 # MARK: Equipment
 
 - type: latheRecipe

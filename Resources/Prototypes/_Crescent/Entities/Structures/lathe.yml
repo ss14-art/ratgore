@@ -1648,6 +1648,7 @@
       - FlatpackComputerDroneControl
       - FlatpackDroneController
       - ThrusterHighImpulseTAP
+      - ClothingOuterHardsuitCybersunDreadnoughtCyberdawn
   - type: MaterialStorageMagnetPickup
     magnetEnabled: True
 

@@ -33,6 +33,23 @@
   - YanbueLPC
 
 - type: technology
+  id: FamiliesCraftComps
+  name: research-technology-families-craftcomps
+  icon:
+    sprite: _Crescent/Objects/Materials/materials.rsi
+    state: tubeloaderrobotics
+  discipline: Families
+  tier: 2
+  cost: 15000
+  recipeUnlocks:
+  - BallisticCycler1Craft
+  - TubeLoader1Craft
+  - AdvancedMechatronics1Craft
+  - AdvancedElectronics1Craft
+  - LaserLocus1Craft
+  - HardlightGenerator1Craft
+
+- type: technology
   id: FamiliesShieldEmitter
   name: research-technology-families-emitter
   icon:
