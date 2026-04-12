@@ -1,35 +1,28 @@
 - type: entity
-  id: BaseCartridgeHeavyRifle
-  name: cartridge (12.7×99mm USM)
-  parent: BaseCartridge
   abstract: true
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: BaseCartridgeHeavyRifle
+  name: cartridge (.10 rifle)
   components:
   - type: Tag
     tags:
-      - Cartridge
-      - CartridgeHeavyRifle
+    - CartridgeHeavyRifle
   - type: CartridgeAmmo
     proto: BulletHeavyRifle
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Ammunition/Casings/rifle.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
   - type: StaticPrice
-    price: 0
-  - type: EmitSoundOnLand
-    sound:
-      collection: HeavyBulletBounce
-  - type: EmitSoundOnCollide
-    sound:
-      collection: HeavyBulletBounce
+    price: 10
 
 - type: entity
+  parent: BaseCartridgeHeavyRifle
   id: CartridgeMinigun
   name: cartridge (.10 rifle)
-  parent: BaseCartridgeHeavyRifle
   components:
   - type: CartridgeAmmo
     proto: BulletMinigun

@@ -1,44 +1,39 @@
 - type: entity
-  id: BaseCartridgeCaselessRifle
-  name: cartridge (9x39mm rifle)
-  parent: BaseCartridge
   abstract: true
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: BaseCartridgeCaselessRifle
+  name: cartridge (.25 caseless)
   components:
   - type: Tag
     tags:
-      - Cartridge
       - CartridgeCaselessRifle
   - type: CartridgeAmmo
     deleteOnSpawn: true
   - type: Sprite
     noRot: false
-    sprite: _Crescent/Objects/Weapons/Ammunition/Casings/caseless.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
   - type: StaticPrice
-    price: 0
-  - type: EmitSoundOnLand
-    sound:
-      collection: MediumBulletBounce
-  - type: EmitSoundOnCollide
-    sound:
-      collection: MediumBulletBounce
+    price: 10
 
 - type: entity
-  id: CartridgeCaselessRifle
-  name: cartridge (9x39mm caseless)
   parent: BaseCartridgeCaselessRifle
+  id: CartridgeCaselessRifle
+  name: cartridge (.25 caseless)
+  description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: CartridgeAmmo
     proto: BulletCaselessRifle
 
 - type: entity
-  id: CartridgeCaselessRiflePractice
-  name: cartridge (9x39mm caseless practice)
   parent: BaseCartridgeCaselessRifle
+  id: CartridgeCaselessRiflePractice
+  name: cartridge (.25 caseless practice)
+  description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo
     proto: BulletCaselessRiflePractice
@@ -49,63 +44,3 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#dbdbdb"
-
-- type: entity
-  id: CartridgeCaselessRifleRubber
-  name: cartridge (9x39mm caseless rubber)
-  parent: BaseCartridgeCaselessRifle
-  components:
-  - type: CartridgeAmmo
-    proto: BulletCaselessRifleRubber
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#43c4f7"
-
-- type: entity
-  id: CartridgeCaselessRifleIncendiary
-  name: cartridge (9x39mm caseless incendiary)
-  parent: BaseCartridgeCaselessRifle
-  components:
-  - type: CartridgeAmmo
-    proto: BulletCaselessRifleIncendiary
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#ff6e52"
-
-- type: entity
-  id: CartridgeCaselessRifleUranium
-  name: cartridge (9x39mm caseless uranium)
-  parent: BaseCartridgeCaselessRifle
-  components:
-  - type: CartridgeAmmo
-    proto: BulletCaselessRifleUranium
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#65fe08"
-
-- type: entity
-  id: CartridgeCaselessRifleShrapnel
-  name: cartridge (9x39mm caseless shrapnel)
-  parent: BaseCartridgeCaselessRifle
-  components:
-  - type: CartridgeAmmo
-    proto: BulletCaselessRifleShrapnelSpread
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#FF00FF"

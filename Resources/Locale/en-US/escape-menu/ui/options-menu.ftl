@@ -1,15 +1,19 @@
 ## General stuff
 
 ui-options-title = Game Options
+ui-options-tab-accessibility = Accessibility
+ui-options-tab-admin = Admin
 ui-options-tab-graphics = Graphics
 ui-options-tab-controls = Controls
 ui-options-tab-audio = Audio
 ui-options-tab-network = Network
 ui-options-tab-misc = General
 
-ui-options-apply = Apply
-ui-options-reset-all = Reset All
-ui-options-default = Default
+ui-options-apply = Save & apply
+ui-options-reset-all = Reset changed
+ui-options-default = Reset to defaults
+
+ui-options-value-percent = { TOSTRING($value, "P0") }
 
 # Misc/General menu
 
@@ -91,7 +95,8 @@ ui-options-hud-theme-retro = Retro
 ui-options-hud-theme-minimalist = Minimalist
 ui-options-hud-theme-ashen = Ashen
 ui-options-vp-stretch = Stretch viewport to fit game window
-ui-options-vp-scale = Fixed viewport scale: x{ $scale }
+ui-options-vp-scale = Fixed viewport scale:
+ui-options-vp-scale-value = x{ $scale }
 ui-options-vp-integer-scaling = Prefer integer scaling (might cause black bars/clipping)
 ui-options-vp-integer-scaling-tooltip = If this option is enabled, the viewport will be scaled using an integer value
                                         at specific resolutions. While this results in crisp textures, it also often
@@ -104,8 +109,7 @@ ui-options-vp-vertical-fit-tooltip = When enabled, the main viewport will ignore
 ui-options-vp-low-res = Low-resolution viewport
 ui-options-parallax-low-quality = Low-quality Parallax (background)
 ui-options-fps-counter = Show FPS counter
-ui-options-mood-visual-effects = Enable the mood system's visual effects
-ui-options-vp-width = Viewport width: { $width }
+ui-options-vp-width = Viewport width:
 ui-options-hud-layout = HUD layout:
 
 ## Controls menu
@@ -131,14 +135,14 @@ ui-options-header-dev = Development
 ui-options-header-general = General
 
 ui-options-hotkey-keymap = Use US QWERTY Keys
-ui-options-hotkey-toggle-walk = Toggle Speed
-ui-options-hotkey-default-walk = Walk by default
+ui-options-hotkey-toggle-walk = Toggle Walk
 
 ui-options-function-move-up = Move Up
 ui-options-function-move-left = Move Left
 ui-options-function-move-down = Move Down
 ui-options-function-move-right = Move Right
-ui-options-function-walk = Change Speed
+ui-options-function-walk = Walk
+ui-options-function-toggle-knockdown = Toggle Crawling
 
 ui-options-function-camera-rotate-left = Rotate left
 ui-options-function-camera-rotate-right = Rotate right
@@ -176,13 +180,9 @@ ui-options-function-try-pull-object = Pull object
 ui-options-function-move-pulled-object = Move pulled object
 ui-options-function-release-pulled-object = Release pulled object
 ui-options-function-point = Point at location
-
-ui-options-function-target-head = Target head
-ui-options-function-target-torso = Target torso
-ui-options-function-target-left-arm = Target left arm
-ui-options-function-target-right-arm = Target right arm
-ui-options-function-target-left-leg = Target left leg
-ui-options-function-target-right-leg = Target right leg
+ui-options-function-rotate-object-clockwise = Rotate clockwise
+ui-options-function-rotate-object-counterclockwise = Rotate counterclockwise
+ui-options-function-flip-object = Flip
 
 ui-options-function-focus-chat-input-window = Focus chat
 ui-options-function-focus-local-chat-window = Focus chat (IC)
@@ -299,7 +299,58 @@ ui-options-net-pvs-leave-tooltip = This limits the rate at which the client will
 cmd-options-desc = Opens options menu, optionally with a specific tab selected.
 cmd-options-help = Usage: options [tab]
 
-## Combat Options
-ui-options-function-look-up = Look up/Take aim
-ui-options-function-auto-get-up = Automatically get up after falling
-ui-options-function-hold-look-up = Hold down the key to aim
+## Accessibility menu
+
+ui-options-accessability-header-visuals = Visuals
+ui-options-accessability-header-content = Content
+
+ui-options-enable-color-name = Add colors to character names
+ui-options-colorblind-friendly = Colorblind friendly mode
+ui-options-reduced-motion = Reduce motion of visual effects
+ui-options-screen-shake-intensity = Screen shake intensity
+
+ui-options-chat-window-opacity = Chat window opacity
+ui-options-speech-bubble-text-opacity = Speech bubble text opacity
+ui-options-speech-bubble-speaker-opacity = Speech bubble speaker opacity
+ui-options-speech-bubble-background-opacity = Speech bubble background opacity
+
+ui-options-censor-nudity = Censor character nudity
+
+## Admin menu
+
+ui-options-admin-player-panel = Admin Menu Players List
+
+ui-options-admin-player-tab-symbol-setting = Character column antag symbols
+ui-options-admin-player-tab-symbol-setting-off = No antag symbol
+ui-options-admin-player-tab-symbol-setting-basic = Show standard antag symbol
+ui-options-admin-player-tab-symbol-setting-specific = Show specific antag symbol
+
+ui-options-admin-player-tab-role-setting = Role display settings
+ui-options-admin-player-tab-role-setting-roletype = Show role type
+ui-options-admin-player-tab-role-setting-subtype = Show subtype
+ui-options-admin-player-tab-role-setting-roletypesubtype = Show role type and subtype
+ui-options-admin-player-tab-role-setting-subtyperoletype = Show subtype and role type
+
+ui-options-admin-player-tab-color-setting = Color settings
+ui-options-admin-player-tab-color-setting-off = I hate colors
+ui-options-admin-player-tab-color-setting-character = Colorize antag character names
+ui-options-admin-player-tab-color-setting-roletype = Colorize all role types
+ui-options-admin-player-tab-color-setting-both = Colorize both
+
+ui-options-admin-overlay-title = Admin Overlay
+
+ui-options-admin-overlay-antag-format = Antag label style
+ui-options-admin-overlay-antag-format-binary = Show antag status
+ui-options-admin-overlay-antag-format-roletype = Show role type
+ui-options-admin-overlay-antag-format-subtype = Show subtype
+
+ui-options-admin-overlay-antag-symbol = Antag symbol style
+ui-options-admin-overlay-antag-symbol-off = No antag symbol
+ui-options-admin-overlay-antag-symbol-basic = Show standard antag symbol
+ui-options-admin-overlay-antag-symbol-specific = Show specific antag symbol
+
+ui-options-admin-enable-overlay-playtime = Show playtime
+ui-options-admin-enable-overlay-starting-job = Show starting job
+ui-options-admin-overlay-merge-distance = Stack merge distance
+ui-options-admin-overlay-ghost-fade-distance = Ghost overlay fade range from mouse
+ui-options-admin-overlay-ghost-hide-distance = Ghost overlay hide range from mouse

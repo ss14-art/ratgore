@@ -1,44 +1,36 @@
 - type: entity
-  id: BaseCartridgeRifle
-  name: cartridge (7.62x51mm USM rifle)
-  parent: BaseCartridge
   abstract: true
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: BaseCartridgeRifle
+  name: cartridge (.20 rifle)
   components:
   - type: Tag
     tags:
-      - Cartridge
       - CartridgeRifle
   - type: CartridgeAmmo
     proto: BulletRifle
-    deleteOnSpawn: false
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Ammunition/Casings/rifle.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
-  - type: StaticPrice
-    price: 0
-  - type: EmitSoundOnLand
-    sound:
-      collection: MediumBulletBounce
-  - type: EmitSoundOnCollide
-    sound:
-      collection: MediumBulletBounce
 
 - type: entity
-  id: CartridgeRifle
-  name: cartridge (7.62x51mm USM)
   parent: BaseCartridgeRifle
+  id: CartridgeRifle
+  name: cartridge (.20 rifle)
+  description: A modern intermediate cartridge for combat rifles. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: CartridgeAmmo
     proto: BulletRifle
 
 - type: entity
-  id: CartridgeRiflePractice
-  name: cartridge (7.62x51mm practice)
   parent: BaseCartridgeRifle
+  id: CartridgeRiflePractice
+  name: cartridge (.20 rifle practice)
+  description: A modern intermediate cartridge for combat rifles. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo
     proto: BulletRiflePractice
@@ -50,26 +42,11 @@
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#dbdbdb"
 
-
 - type: entity
-  id: CartridgeRifleRubber
-  name: cartridge (7.62x51mm USM rubber-tip)
   parent: BaseCartridgeRifle
-  components:
-  - type: CartridgeAmmo
-    proto: BulletRifleRubber
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#43c4f7"
-
-- type: entity
   id: CartridgeRifleIncendiary
-  name: cartridge (7.62x51mm USM incendiary)
-  parent: BaseCartridgeRifle
+  name: cartridge (.20 rifle incendiary)
+  description: A modern intermediate cartridge for combat rifles. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
   components:
   - type: CartridgeAmmo
     proto: BulletRifleIncendiary
@@ -82,9 +59,10 @@
         color: "#ff6e52"
 
 - type: entity
-  id: CartridgeRifleUranium
-  name: cartridge (7.62x51mm USM black-tip)
   parent: BaseCartridgeRifle
+  id: CartridgeRifleUranium
+  name: cartridge (.20 rifle uranium)
+  description: A modern intermediate cartridge for combat rifles. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
   components:
   - type: CartridgeAmmo
     proto: BulletRifleUranium
@@ -95,18 +73,3 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#65fe08"
-
-- type: entity
-  id: CartridgeRifleShrapnel
-  name: cartridge (7.62x51mm USM shrapnel)
-  parent: BaseCartridgeRifle
-  components:
-  - type: CartridgeAmmo
-    proto: BulletRifleShrapnelSpread
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#FF00FF"

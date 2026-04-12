@@ -3,17 +3,14 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
-    lifetime: 0.16
+    lifetime: 0.4
   - type: Sprite
-    drawdepth: Effects
-    offset: 0.15, 0
+    drawdepth: BelowMobs
     layers:
     - shader: unshaded
       map: ["enum.EffectLayers.Unshaded"]
-      sprite: _Crescent/Objects/Effects/Muzzleflash/medium.rsi
-      state: flash
-    - sprite: _Crescent/Objects/Effects/Muzzleflash/medium.rsi
-      state: smoke
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_bullet
   - type: EffectVisuals
   - type: Tag
     tags:
@@ -56,27 +53,37 @@
   abstract: true
   components:
   - type: Reflective
+  - type: FlyBySound
   - type: Clickable
   - type: Sprite
     noRot: false
-    sprite: _Crescent/Objects/Weapons/Projectiles/ballistic.rsi
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
-    - state: medium
+    - state: bullet
       shader: unshaded
   - type: Physics
     bodyType: Dynamic
-    linearDamping: 0
-    angularDamping: 0
+  - type: TileFrictionModifier
+    modifier: 0
   - type: Fixtures
     fixtures:
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.1,0.1,0.1"
+          bounds: "-0.1,-0.10,0.1,0.30"
         hard: false
         mask:
         - Impassable
         - BulletImpassable
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: False
   - type: Projectile
     impactEffect: BulletImpactEffect
     damage:
@@ -86,12 +93,6 @@
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn
     lifetime: 10
-  - type: LagCompensation
-  - type: PointLight
-    enabled: true
-    color: "#ffe3c4"
-    radius: 1.25
-    energy: 5.0
 
 - type: entity
   id: BaseBulletTrigger # Trigger-on-collide bullets
@@ -100,6 +101,7 @@
   components:
   - type: TriggerOnCollide
     fixtureID: projectile
+    maxTriggers: 1
   - type: Projectile
     damage:
       types:
@@ -114,6 +116,7 @@
         mask:
         - Impassable
         - BulletImpassable
+      fly-by: *flybyfixture
 
 - type: entity
   id: BaseBulletPractice
@@ -131,28 +134,6 @@
         Blunt: 1
 
 - type: entity
-  id: BaseBulletRubber
-  name: base bullet rubber
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    layers:
-    - state: rubber
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 3
-    soundHit:
-      path: /Audio/Weapons/Guns/Hits/snap.ogg
-  - type: StaminaDamageOnCollide
-    damage: 22 # 5 hits to stun sounds reasonable
-  - type: Tag
-    tags:
-    - BulletRubber
-
-- type: entity
   id: BaseBulletIncendiary
   name: base bullet incendiary
   parent: BaseBullet
@@ -161,7 +142,13 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 14
+        Piercing: 10
+        Heat: 4
+  - type: PointLight
+    enabled: true
+    color: "#ff4300"
+    radius: 2.0
+    energy: 7.0
   - type: IgniteOnCollide
     fireStacks: 0.25
 
@@ -191,6 +178,11 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: uranium
+      shader: unshaded
+ # - type: PointLight // Too resource intensive for what little effect it has, one day...
+ #   enabled: true
+ #   color: "#059919"
+ #   radius: 2.0
   - type: Projectile
     damage:
       types:
@@ -224,18 +216,56 @@
           bounds: "-0.15,-0.45,0.15,0.15"
         hard: false
         mask:
-          - Impassable
-          - BulletImpassable
+        - Opaque
+        - Impassable
+        - BulletImpassable
+      fly-by: *flybyfixture
   - type: Ammo
   - type: Projectile
     damage:
       types:
-        Shock: 5
+        Shock: 0
     soundHit:
       path: "/Audio/Weapons/Guns/Hits/taser_hit.ogg"
     forceSound: true
-  - type: StaminaDamageOnCollide
-    damage: 34
+  - type: TimedDespawn
+    lifetime: 0.170 # Very short range
+  - type: StunOnCollide
+    stunAmount: 0
+    knockdownAmount: 2.5 # Enough to subdue and follow up with a stun baton
+    drop: false #Ranged KD and item drop are too strong in one package
+    slowdownAmount: 2.5
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
+
+- type: entity
+  parent: BulletTaser
+  id: BulletTaserSuper
+  categories: [ HideSpawnMenu ]
+  name: taser bolt
+  description: If you can see this, you've probably been stun-meta'd
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Structures/Power/Generation/Tesla/energy_miniball.rsi
+    color: "#ffff33"
+    layers:
+    - state: tesla_projectile
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#ffff33"
+    radius: 2.0
+    energy: 7.01
+  - type: TimedDespawn
+    lifetime: 1.0 # Not so short range
+  - type: StunOnCollide
+    stunAmount: 5
+    drop: true # this is the evil taser
+    knockdownAmount: 10
+    slowdownAmount: 10
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
 
 - type: entity
   name : disabler bolt
@@ -265,57 +295,18 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-        - Opaque # WWDP allow shooting through windows
-  - type: Ammo
-  - type: StaminaDamageOnCollide
-    damage: 30
-  - type: Projectile
-    impactEffect: BulletImpactEffectDisabler
-    damage:
-      types:
-        Shock: 2
-    soundHit:
-      collection: WeakHit
-    forceSound: true
-
-- type: entity
-  name : disabler bolt
-  id: BulletCivilianDisabler
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Reflective
-    reflective:
-    - Energy
-  - type: FlyBySound
-    sound:
-      collection: EnergyMiss
-      params:
-        volume: 3
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
-    layers:
-    - state: omnilaser_weak
-      shader: unshaded
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.15,-0.3,0.15,0.3"
-        hard: false
-        mask:
+        - Opaque
         - Impassable
         - BulletImpassable
+      fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 20
+    damage: 33
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Shock: 0.3
+        Heat: 0
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -345,7 +336,10 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-        - Opaque # WWDP allow shooting through windows
+        - Opaque
+        - Impassable
+        - BulletImpassable
+      fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
     damage: 1
@@ -353,7 +347,7 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Shock: 1
+        Heat: 0
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -381,14 +375,12 @@
         hard: false
         mask:
         - Opaque
-  - type: Reflective # Goobstation - Make emitter bolts reflect as energy
-    reflective:
-    - Energy
+      fly-by: *flybyfixture
   - type: Projectile
 #   soundHit:  Waiting on serv3
     damage:
       types:
-        Shock: 14
+        Heat: 14
   # mining laser real
   - type: GatheringProjectile
   - type: Tag
@@ -414,7 +406,7 @@
     - state: omnilaser
       shader: unshaded
   - type: Ammo
-    muzzleFlash: null
+    muzzleFlash: MuzzleFlashEffectOmnilaser
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -425,8 +417,29 @@
         hard: false
         mask:
         - Opaque
-  - type: StaminaDamageOnCollide
-    damage: 40
+        - Impassable
+        - BulletImpassable
+      fly-by: *flybyfixture
+  - type: Projectile
+    #   soundHit:  Waiting on serv3
+    impactEffect: BulletImpactEffectDisabler
+    damage:
+      types:
+        Cold: 0
+  - type: TimedDespawn
+    lifetime: 3
+  - type: ChangeTemperatureOnCollide
+    heat: -50000
+
+- type: entity
+  name: freezing bolt
+  id: BoltTempgunCold
+  parent: WatcherBolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Reflective
+    reflective:
+    - Energy
   - type: Projectile
     #   soundHit:  Waiting on serv3
     impactEffect: BulletImpactEffectDisabler
@@ -435,11 +448,13 @@
         Cold: 10
   - type: TimedDespawn
     lifetime: 3
+  - type: ChangeTemperatureOnCollide
+    heat: -100000
 
 - type: entity
   name: magmawing watcher bolt
   id: WatcherBoltMagmawing
-  parent: BaseBullet
+  parent: WatcherBolt
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -448,12 +463,73 @@
     - state: omnilaser_greyscale
       shader: unshaded
       color: orangered
+  - type: Ammo
+    muzzleFlash: MuzzleFlashEffectHeavyLaser
+  - type: Projectile
+    #   soundHit:  Waiting on serv3
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 0
+  - type: ChangeTemperatureOnCollide
+    heat: 50000
+
+- type: entity
+  name: scorching bolt
+  id: BoltTempgunHot
+  parent: WatcherBoltMagmawing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Reflective
+    reflective:
+    - Energy
   - type: Projectile
     #   soundHit:  Waiting on serv3
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
         Heat: 10
+  - type: ChangeTemperatureOnCollide
+    heat: 100000 #This may be a bit underpowered, but in testing, 130000 was RIDICULOUS and killed in seconds.
+
+- type: entity
+  parent: BaseBullet
+  id: BasiliskRay
+  name: basilisk ray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: ice
+      shader: unshaded
+  - type: Ammo
+    muzzleFlash: null
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.05,-0.05,0.05,0.05"
+        hard: false
+        mask:
+        - Opaque
+      fly-by: *flybyfixture
+  - type: Projectile
+    impactEffect: BulletImpactEffectDisabler
+    damage:
+      types:
+        Cold: 5
+  - type: TimedDespawn
+    lifetime: 3
+  - type: ChangeTemperatureOnCollide
+    heat: -50000
 
 - type: entity
   id: BulletKinetic
@@ -475,11 +551,39 @@
     impactEffect: BulletImpactEffectKinetic
     damage:
       types:
-        Blunt: 40 # Hullrot change, same as the default PKA damage
-        Structural: 30 # Lavaland/Eris change: Yes easy break ins
+        Blunt: 15
+        Structural: 30
   # Short lifespan
   - type: TimedDespawn
-    lifetime: 0.170 # Lavaland Change
+    lifetime: 0.22 # roughly 5.5 tiles
+  - type: GatheringProjectile
+
+- type: entity
+  id: BulletKineticShuttle
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: false
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: chronobolt
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 30
+        Structural: 35
+  - type: Ammo
+    muzzleFlash: HitscanEffect
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: PointLight
+    radius: 2.5
+    color: white
+    energy: 0.5
+  - type: GatheringProjectile
 
 - type: entity
   id: BulletCharge
@@ -499,14 +603,13 @@
         shader: unshaded
   - type: GatheringProjectile
   - type: DamageMarkerOnCollide
-    onlyWorkOnFauna: false # Lavaland Change
     whitelist:
       components:
         - MobState
     damage:
       types:
-        Blunt: 20
-        Slash: 5
+        Blunt: 18
+        Slash: 4
   - type: Projectile
     impactEffect: BulletImpactEffectKinetic
     damage:
@@ -515,6 +618,21 @@
   # Short lifespan
   - type: TimedDespawn
     lifetime: 0.4
+
+  # Deals less damage, glaive has better HP recovery
+- type: entity
+  id: BulletChargeGlaive
+  name: leech bolt
+  parent: BulletCharge
+  components:
+  - type: DamageMarkerOnCollide
+    whitelist:
+      components:
+        - MobState
+    damage:
+      types:
+        Blunt: 1
+        Slash: 5
 
 - type: entity
   parent: BaseBullet
@@ -546,6 +664,7 @@
         hard: false
         mask:
         - Opaque
+      fly-by: *flybyfixture
   - type: Projectile
     damage:
       types:
@@ -699,9 +818,9 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    maxIntensity: 10
-    intensitySlope: 3
-    totalIntensity: 120
+    maxIntensity: 40
+    intensitySlope: 6
+    totalIntensity: 200
     maxTileBreak: 1
   - type: PointLight
     radius: 3.5
@@ -732,52 +851,27 @@
 
 - type: entity
   id: BulletGrenadeBaton
-  name: low-yield rocket
-  parent: BaseBulletTrigger
+  name: baton grenade
+  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
-  - type: ShipWeaponProjectile
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
       - state: grenade
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: Default
-    totalIntensity: 320
-    intensitySlope: 2
-    maxIntensity: 320
-  - type: ProjectileIFF
-    visualType: SquareReticle
-    color: Red
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.15,-0.45,0.15,0.15"
-        layer:
-        - BulletImpassable
-        mask:
-        - Impassable
-        - BulletImpassable
-        hard: true
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 250
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:ExplodeBehavior
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Blunt: 1
+    soundHit:
+      path: /Audio/Effects/gen_hit.ogg
+  - type: StaminaDamageOnCollide
+    damage: 80
 
 - type: entity
   id: BulletGrenadeBlast
-  name: high-yield rocket
+  name: blast grenade
   parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
@@ -785,44 +879,17 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
       - state: grenade
-  - type: ShipWeaponProjectile
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    totalIntensity: 650
-    intensitySlope: 25
-    maxIntensity: 650
-  - type: ProjectileIFF
-    visualType: SquareReticle
-    color: Red
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.15,-0.45,0.15,0.15"
-        layer:
-        - BulletImpassable
-        mask:
-        - Impassable
-        - BulletImpassable
-        hard: true
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 250
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:ExplodeBehavior
+    totalIntensity: 150 # a ~2 tile radius
+    intensitySlope: 5
+    maxIntensity: 10
+    canCreateVacuum: false
 
 - type: entity
   id: BulletGrenadeFlash
-  name: flash rocket
+  name: flash grenade
   parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
@@ -831,49 +898,17 @@
     layers:
       - state: grenade
   - type: FlashOnTrigger
-    range: 9
+    range: 7
   - type: SpawnOnTrigger
     proto: GrenadeFlashEffect
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
   - type: DeleteOnTrigger
-  - type: ShipWeaponProjectile
-  - type: ProjectileIFF
-    visualType: SquareReticle
-    color: Red
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.15,-0.45,0.15,0.15"
-        layer:
-        - BulletImpassable
-        mask:
-        - Impassable
-        - BulletImpassable
-        hard: true
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 250
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:ExplodeBehavior
 
-# This is supposed to spawn shrapnel and stuff so uhh... TODO?
 - type: entity
   id: BulletGrenadeFrag
-  name: fragmentation rocket
+  name: frag grenade
   parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
-  - type: ShipWeaponProjectile
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
@@ -881,9 +916,46 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    totalIntensity: 125 # about a ~6 tile radius
+    totalIntensity: 50
     intensitySlope: 1
-    maxIntensity: 10
+    maxIntensity: 5
+    canCreateVacuum: false
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ProjectileGrenade
+    triggerKey: trigger
+    fillPrototype: PelletClusterLessLethal
+    capacity: 30
+
+- type: entity
+  parent: BaseBulletTrigger
+  id: BulletGrenadeCleanade
+  name: cleanade grenade round
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: cleanade
+  - type: SmokeOnTrigger
+    duration: 3.5
+    spreadAmount: 30
+    smokePrototype: Foam
+    solution:
+      reagents:
+      - ReagentId: SpaceCleaner
+        Quantity: 30
+  - type: EmitSoundOnTrigger
+    sound: /Audio/Items/smoke_grenade_smoke.ogg
+    positional: true
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 0.01 # a little pop
+    intensitySlope: 1
+    maxIntensity: 0.01
+    tileBreakScale: 0.01
 
 - type: entity
   id: BulletGrenadeEMP
@@ -897,90 +969,14 @@
       - state: frag
   - type: EmpOnTrigger
     range: 5
-    energyConsumption: 5000
-    disableDuration: 8
+    energyConsumption: 50000
+    disableDuration: 10
   - type: Ammo
     muzzleFlash: null
   - type: PointLight
     radius: 3.5
     color: blue
     energy: 0.5
-  - type: ProjectileIFF
-
-- type: entity
-  id: BulletGrenadeSpreadBeanbag
-  categories: [ HideSpawnMenu ]
-  parent: PelletShotgun
-  components:
-  - type: ProjectileSpread
-    proto: PelletShotgunBeanbag
-    count: 8
-    spread: 25
-
-- type: entity
-  id: BulletGrenadeSpreadBirdshot
-  categories: [ HideSpawnMenu ]
-  parent: PelletShotgun
-  components:
-  - type: ProjectileSpread
-    proto: BulletGrenadeBirdshot
-    count: 50
-    spread: 25
-
-- type: entity
-  id: BulletGrenadeBirdshot
-  categories: [ HideSpawnMenu ]
-  parent: PelletShotgun
-  components:
-  - type: Sprite
-    scale: 0.5, 0.5
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 10
-
-- type: entity
-  id: BulletGrenadeSpread00Buckshot
-  categories: [ HideSpawnMenu ]
-  parent: PelletShotgun
-  components:
-  - type: ProjectileSpread
-    proto: PelletShotgun00Buckshot
-    count: 32
-    spread: 25
-
-- type: entity
-  id: BulletGrenadeSpread0000Buckshot
-  categories: [ HideSpawnMenu ]
-  parent: PelletShotgun
-  components:
-  - type: ProjectileSpread
-    proto: PelletShotgun0000Buckshot
-    count: 24
-    spread: 25
-
-- type: entity
-  id: BulletGrenadeSlug
-  name: baton grenade
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    layers:
-      - state: grenade
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 250 # At this point you're firing a cannon shell at someone.
-        Structural: 800 # Will instantly destroy pretty much any structure it hits.
-    forceSound: true
-    soundHit:
-      path: /Audio/DeltaV/Misc/reducedtoatmos.ogg
-  - type: StaminaDamageOnCollide
-    damage: 150 # JUST IN CASE THEY SOMEHOW SURVIVE IT.
 
 - type: entity
   id: BulletCap
@@ -989,7 +985,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: Objects/Fun/capgun.rsi
     layers:
       - state: capbullet
   - type: Projectile
@@ -1023,8 +1019,8 @@
   - type: Clickable
   - type: Physics
     bodyType: Dynamic
-    linearDamping: 0
-    angularDamping: 0
+  - type: TileFrictionModifier
+    modifier: 0
   - type: TimedDespawn
     lifetime: 10
   - type: Projectile
@@ -1054,8 +1050,20 @@
         - BulletImpassable
   - type: Vapor
     active: true
+    transferAmountPercentage: 1
   - type: Appearance
   - type: VaporVisuals
+
+- type: entity
+  id: BulletHivebot
+  name: hivebot bullet
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
 
 - type: entity
   id: BulletCannonBall
@@ -1079,40 +1087,51 @@
     color: orange
     energy: 0.5
 
-# - type: entity
-#   id: GrapplingHook
-#   name: grappling hook
-#   categories: [ HideSpawnMenu ]
-#   components:
-#     - type: EmbeddableProjectile
-#       deleteOnRemove: true
-#     - type: Clickable
-#     - type: InteractionOutline
-#     - type: Sprite
-#       noRot: false
-#       sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
-#       layers:
-#         - state: hook
-#     - type: Physics
-#       bodyType: Dynamic
-#       linearDamping: 0
-#       angularDamping: 0
-#     - type: Projectile
-#       deleteOnCollide: false
-#       damage:
-#         types:
-#           Blunt: 0
-#     - type: Fixtures
-#       fixtures:
-#         projectile:
-#           shape:
-#             !type:PhysShapeAabb
-#             bounds: "-0.1,-0.1,0.1,0.1"
-#           hard: false
-#           mask:
-#             - Impassable
-#             - HighImpassable
-#    - type: GrapplingProjectile
+- type: entity
+  id: GrapplingHook
+  name: grappling hook
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: EmbeddableProjectile
+      deleteOnRemove: true
+    - type: Clickable
+    - type: InteractionOutline
+    - type: Sprite
+      noRot: false
+      sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+      layers:
+        - state: hook
+    - type: Physics
+      bodyType: Dynamic
+    - type: TileFrictionModifier
+      modifier: 0
+    - type: Projectile
+      deleteOnCollide: false
+      damage:
+        types:
+          Blunt: 0
+    - type: Fixtures
+      fixtures:
+        projectile:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.1,-0.1,0.1,0.1"
+          hard: false
+          mask:
+            - Impassable
+            - HighImpassable
+    - type: GrapplingProjectile
+
+- type: entity
+  parent: GrapplingHook
+  id: StickyHandPalm
+  name: sticky hand palm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Launchers/sticky_hand.rsi
+  - type: Ammo
+    muzzleFlash: null
 
 - type: entity
   name : disabler bolt smg
@@ -1142,15 +1161,18 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-        - Opaque # WWDP allow shooting through windows
+        - Opaque
+        - Impassable
+        - BulletImpassable
+      fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 20
+    damage: 15
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Shock: 2
+        Heat: 0
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -1184,6 +1206,7 @@
         hard: false
         mask:
         - Opaque
+      fly-by: *flybyfixture
   - type: Ammo
 
 - type: entity
@@ -1195,20 +1218,15 @@
   - type: Ammo
     muzzleFlash: MuzzleFlashEffectHeavyLaser
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Projectiles/Laser/medium.rsi
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
-    - state: icon
+    - state: heavylaser
       shader: unshaded
-  - type: PointLight
-    enabled: true
-    color: "#ff4300"
   - type: Projectile
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
         Heat: 28
-        Structural: 375
-  - type: ProjectileIFF
 
 - type: entity
   name : disabler bolt
@@ -1229,7 +1247,7 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Shock: 0
+        Heat: 0
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -1267,49 +1285,6 @@
     tags:
       - HideContextMenu
 
-# DeltaV projectiles
-# For whatever magical reasons, I cannot put those in the DeltaV folders without having errors.
-
-# Because Hitscan lasers aren't fun to shoot in my opinion, we give the HoS pistol a special lethal laser that moves
-- type: entity
-  name: energy bolt
-  id: BulletEnergyGunLaser
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Reflective
-    reflective:
-    - Energy
-  - type: FlyBySound
-    sound:
-      collection: EnergyMiss
-      params:
-        volume: 5
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
-    layers:
-    - state: omnilaser_greyscale
-      shader: unshaded
-      color: red
-  - type: Ammo
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        hard: false
-        mask:
-        - Opaque
-  - type: Projectile
-    impactEffect: BulletImpactEffectRedDisabler
-    damage:
-      types:
-        Heat: 20 # Slightly more damage than the 17heat from the Captain's Hitscan lasgun
-    soundHit:
-      collection: MeatLaserImpact
-
 - type: entity
   name: laser bolt
   id: BulletLaser
@@ -1338,188 +1313,136 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-        - Opaque # WWDP allow shooting through windows
+        - Opaque
+        - Impassable
+        - BulletImpassable
+      fly-by: *flybyfixture
   - type: Ammo
   - type: Projectile
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 10
-    soundHit:
-      collection: WeakHit
-    forceSound: true
+        Heat: 13
 
 - type: entity
-  name: laser barrage
+  name: wide laser barrage
   id: BulletLaserSpread
-  parent: BulletLaser
   categories: [ HideSpawnMenu ]
+  parent: BulletLaser
   components:
   - type: ProjectileSpread
     proto: BulletLaser
-    count: 6 # 60 heat damage if you hit all your shots, but wide spread
-    spread: 25
+    count: 5 #65 heat damage if you hit all your shots, but wide spread
+    spread: 30
 
 - type: entity
-  name: laser slug
-  id: BulletLaserSpreadSlug
-  parent: BulletLaserHeavy
+  name: lethal laser barrage
+  id: BulletLaserSpreadNarrow
   categories: [ HideSpawnMenu ]
+  parent: BulletLaser
   components:
   - type: ProjectileSpread
     proto: BulletLaser
-    count: 4 #60 heat damage, 20 blunt damage, and a high energy cost per shot.
-    spread: 0
-
-- type: entity
-  name : heavy laser bolt
-  id: BulletLaserHeavy
-  parent: BulletLaser
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Heat: 15
-        Blunt: 5
-
-- type: entity
-  name: narrow laser barrage
-  id: BulletLaserHeavySpread
-  parent: BulletLaser
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ProjectileSpread
-    proto: BulletLaser
-    count: 3 # 45 heat damage if you hit all your shots, but narrower spread
+    count: 4 #52 heat damage if you hit all your shots, but narrower spread
     spread: 10
 
 - type: entity
-  name: disabler laser barrage
+  name: disabling laser barrage
   id: BulletDisablerSmgSpread
-  parent: BulletDisablerSmg
   categories: [ HideSpawnMenu ]
+  parent: BulletDisablerSmg
   components:
   - type: ProjectileSpread
     proto: BulletDisablerSmg
-    count: 3 # bit stronger than a disabler if you hit your shots you goober, still not a 2 hit stun though
+    count: 3 #bit stronger than a disabler if you hit your shots you goober, still not a 2 hit stun though
     spread: 9
 
-- type: entity # Goobstation, put here so the X-01 stuff isnt spread everywhere.
-  name: magnum bolt
-  id: BulletEnergyGunMagnum
-  parent: BaseBullet
+- type: entity
+  name: magnum laser bolt
+  id: BulletLaserMagnum
   categories: [ HideSpawnMenu ]
+  parent: BulletLaser
   components:
-  - type: Reflective
-    reflective:
-    - Energy
-  - type: FlyBySound
-    sound:
-      collection: EnergyMiss
-      params:
-        volume: 5
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_magnum.rsi
     layers:
-    - state: heavylaser
+    - state: magnum
       shader: unshaded
-  - type: Ammo
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        hard: false
-        mask:
-        - Opaque
+  - type: PointLight
+    enabled: true
+    color: "#ff4300"
   - type: Projectile
-    impactEffect: BulletImpactEffectRedDisabler
+    impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Blunt: 3
-        Heat: 15
-    soundHit:
-      collection: MeatLaserImpact
+        Heat: 30
 
 - type: entity
-  id: ShipGrappleProjectile
-  name: ship grappling hook
-  parent: BaseBullet
+  name: magnum window-piercing bolt
+  id: BulletLaserWindowPiercingMagnum
   categories: [ HideSpawnMenu ]
+  parent: BulletLaser
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_magnum.rsi
     layers:
-    - state: hook
-  - type: Ammo
-    muzzleFlash: null
-  - type: Physics
-    bodyType: Dynamic
-    linearDamping: 0
-    angularDamping: 0
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
-        hard: false
-        mask:
-        - Impassable
-        - BulletImpassable
+    - state: magnum_piercing
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#ff4300"
   - type: Projectile
-    deleteOnCollide: false
-    ignoreWeaponGrid: true
+    impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Blunt: 0
-  - type: ShipWeaponProjectile
-  - type: ProjectileIFF
-    visualType: SolidCircle
-    color: "#FFCC66"
-    scale: 1.0
-  - type: ShipGrappleProjectile
-  - type: TimedDespawn
-    lifetime: 1.6667
-
-- type: entity #Goobstation, put here so the X-01 stuff isnt spread everywhere.
-  name: ion bolt
-  id: BulletEnergyGunIon
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Reflective
-    reflective:
-    - Energy
-  - type: FlyBySound
-    sound:
-      collection: EnergyMiss
-      params:
-        volume: 5
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
-    layers:
-    - state: omnilaser_greyscale
-      shader: unshaded
-      color: blue
-  - type: Ammo
-  - type: Physics
+        Heat: 20
   - type: Fixtures
     fixtures:
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
+          bounds: "-0.1,-0.1,0.1,0.1"
         hard: false
         mask:
         - Opaque
+
+- type: entity
+  parent: BaseBullet
+  id: EnergyCrossbowBolt
+  categories: [ HideSpawnMenu ]
+  name: energy bolt
+  description: This'll hurt.
+  components:
+  - type: Reflective
+    reflective:
+    - NonEnergy
+  - type: Ammo
+    muzzleFlash: null
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: crossbowbolt
+      shader: unshaded
   - type: Projectile
-    impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Shock: 20
-    soundHit:
-      collection: MeatLaserImpact
+        Piercing: 2
+  - type: StunOnCollide #somewhat mirror to taser stats, meant to be tot 'sidegrade'
+    stunAmount: 0
+    knockdownAmount: 2.5
+    slowdownAmount: 2.5
+    walkSpeedModifier: 0.2
+    sprintSpeedModifier: 0.2
+    drop: false
+  - type: StaminaDamageOnCollide #additional stam damage to make repeated pushups less of a viable counter
+    damage: 45
+  - type: SolutionContainerManager
+    solutions:
+      bolt:
+        maxVol: 1.5
+        reagents:
+        - ReagentId: Toxin
+          Quantity: 1.5
+  - type: SolutionInjectOnProjectileHit
+    transferAmount: 1.5
+    solution: bolt

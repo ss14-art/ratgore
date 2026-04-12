@@ -1,8 +1,8 @@
 - type: entity
   abstract: true
-  parent: BaseMagazineBox
+  parent: BaseItem
   id: BaseMagazineBoxLightRifle
-  name: ammunition box (5.56x45mm Imperial)
+  name: ammunition box (.30 rifle)
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -20,81 +20,20 @@
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/light_rifle.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 2
+    steps: 4
     zeroVisible: false
   - type: Appearance
-  - type: StaticPrice
-    price: 0
 
 # Boxes
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleBig
-  name: bulk ammunition box (5.56x45mm Imperial)
+  name: ammunition box (.30 rifle)
+  suffix: Big
   components:
   - type: BallisticAmmoProvider
     capacity: 200
     proto: CartridgeLightRifle
-  - type: Sprite
-    layers:
-    - state: base-b
-      map: ["enum.GunVisualLayers.Base"]
-    - state: magb-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: magb
-    steps: 2
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
-  parent: MagazineBoxLightRifleBig
-  id: MagazineBoxLightRifleBigPractice
-  name: bulk ammunition box (5.56x45mm Imperial practice)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRiflePractice
-
-- type: entity
-  parent: MagazineBoxLightRifleBig
-  id: MagazineBoxLightRifleBigRubber
-  name: bulk ammunition box (5.56x45mm Imperial rubber)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleRubber
-
-- type: entity
-  parent: MagazineBoxLightRifleBig
-  id: MagazineBoxLightRifleBigIncendiary
-  name: bulk ammunition box (5.56x45mm Imperial incendiary)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleIncendiary
-
-- type: entity
-  parent: MagazineBoxLightRifleBig
-  id: MagazineBoxLightRifleBigUranium
-  name: bulk ammunition box (5.56x45mm Imperial black-tip)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleUranium
-
-- type: entity
-  parent: MagazineBoxLightRifleBig
-  id: MagazineBoxLightRifleBigShrapnel
-  name: bulk ammunition box (5.56x45mm Imperial shrapnel)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleShrapnel
-
-- type: entity
-  parent: BaseMagazineBoxLightRifle
-  id: MagazineBoxLightRifleSurplus
-  name: surplus ammunition box (5.56x45mm Imperial)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifle
-    capacity: 24
   - type: Sprite
     layers:
     - state: base
@@ -105,7 +44,8 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifle
-  name: ammunition box (5.56x45mm Imperial)
+  name: ammunition box (.30 rifle)
+  description: A cardboard box of .30 rifle rounds. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRifle
@@ -119,7 +59,8 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRiflePractice
-  name: ammunition box (5.56x45mm Imperial practice)
+  name: ammunition box (.30 rifle practice)
+  description: A cardboard box of .30 rifle rounds. Intended to hold harmless practice ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRiflePractice
@@ -133,23 +74,9 @@
 
 - type: entity
   parent: BaseMagazineBoxLightRifle
-  id: MagazineBoxLightRifleRubber
-  name: ammunition box (5.56x45mm Imperial rubber)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleRubber
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: rubber
-
-- type: entity
   id: MagazineBoxLightRifleIncendiary
-  parent: BaseMagazineBoxLightRifle
-  name: ammunition box (5.56x45mm Imperial incendiary)
+  name: ammunition box (.30 rifle incendiary)
+  description: A cardboard box of .30 rifle rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRifleIncendiary
@@ -164,7 +91,8 @@
 - type: entity
   parent: BaseMagazineBoxLightRifle
   id: MagazineBoxLightRifleUranium
-  name: ammunition box (5.56x45mm Imperial black-tip)
+  name: ammunition box (.30 rifle uranium)
+  description: A cardboard box of .30 rifle rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRifleUranium
@@ -175,11 +103,3 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: uranium
-
-- type: entity
-  parent: MagazineBoxLightRifle
-  id: MagazineBoxLightRifleShrapnel
-  name: ammunition box (5.56x45mm Imperial shrapnel)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleShrapnel

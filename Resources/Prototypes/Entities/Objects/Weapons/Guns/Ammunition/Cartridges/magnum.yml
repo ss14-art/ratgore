@@ -1,43 +1,36 @@
 - type: entity
-  id: BaseCartridgeMagnum
-  name: cartridge (.327 Imperial magnum)
-  parent: BaseCartridge
   abstract: true
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: BaseCartridgeMagnum
+  name: cartridge (.45 magnum)
   components:
   - type: Tag
     tags:
-      - Cartridge
       - CartridgeMagnum
   - type: CartridgeAmmo
     proto: BulletMagnum
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Ammunition/Casings/pistol.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
-  - type: StaticPrice
-    price: 0
-  - type: EmitSoundOnLand
-    sound:
-      collection: LightBulletBounce
-  - type: EmitSoundOnCollide
-    sound:
-      collection: LightBulletBounce
 
 - type: entity
-  id: CartridgeMagnum
-  name: cartridge (.327 Imperial magnum)
   parent: BaseCartridgeMagnum
+  id: CartridgeMagnum
+  name: cartridge (.45 magnum)
+  description: Heavy magnum cartridge mostly used by revolvers. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnum
 
 - type: entity
-  id: CartridgeMagnumPractice
-  name: cartridge (.327 Imperial practice)
   parent: BaseCartridgeMagnum
+  id: CartridgeMagnumPractice
+  name: cartridge (.45 magnum practice)
+  description: Heavy magnum cartridge mostly used by revolvers. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumPractice
@@ -50,24 +43,10 @@
         color: "#dbdbdb"
 
 - type: entity
-  id: CartridgeMagnumRubber
-  name: cartridge (.327 Imperial rubber)
   parent: BaseCartridgeMagnum
-  components:
-  - type: CartridgeAmmo
-    proto: BulletMagnumRubber
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#43c4f7"
-
-- type: entity
   id: CartridgeMagnumIncendiary
-  name: cartridge (.327 Imperial incendiary)
-  parent: BaseCartridgeMagnum
+  name: cartridge (.45 magnum incendiary)
+  description: Heavy magnum cartridge mostly used by revolvers. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumIncendiary
@@ -80,9 +59,10 @@
         color: "#ff6e52"
 
 - type: entity
-  id: CartridgeMagnumAP
-  name: cartridge (.327 Imperial armor-piercing)
   parent: BaseCartridgeMagnum
+  id: CartridgeMagnumAP
+  name: cartridge (.45 magnum armor-piercing)
+  description: Heavy magnum cartridge mostly used by revolvers. Armor-piercing ammunition is renowned for its ability to cut straight through body armor.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumAP
@@ -95,9 +75,10 @@
         color: "#0a0a0a"
 
 - type: entity
-  id: CartridgeMagnumUranium
-  name: cartridge (.327 Imperial uranium)
   parent: BaseCartridgeMagnum
+  id: CartridgeMagnumUranium
+  name: cartridge (.45 magnum uranium)
+  description: Heavy magnum cartridge mostly used by revolvers. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
   components:
   - type: CartridgeAmmo
     proto: BulletMagnumUranium
@@ -108,18 +89,3 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#65fe08"
-
-- type: entity
-  id: CartridgeMagnumShrapnel
-  name: cartridge (.327 Imperial shrapnel)
-  parent: BaseCartridgeMagnum
-  components:
-  - type: CartridgeAmmo
-    proto: BulletMagnumShrapnelSpread
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#FF00FF"

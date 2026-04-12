@@ -8,13 +8,10 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem
 {
-    protected const string MagazineSlot = "gun_magazine";
-
     protected virtual void InitializeMagazine()
     {
         SubscribeLocalEvent<MagazineAmmoProviderComponent, MapInitEvent>(OnMagazineMapInit);
         SubscribeLocalEvent<MagazineAmmoProviderComponent, TakeAmmoEvent>(OnMagazineTakeAmmo);
-        SubscribeLocalEvent<MagazineAmmoProviderComponent, CheckShootPrototypeEvent>(OnMagazineCheckProto); // Mono
         SubscribeLocalEvent<MagazineAmmoProviderComponent, GetAmmoCountEvent>(OnMagazineAmmoCount);
         SubscribeLocalEvent<MagazineAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnMagazineVerb);
         SubscribeLocalEvent<MagazineAmmoProviderComponent, EntInsertedIntoContainerMessage>(OnMagazineSlotChange);
@@ -39,6 +36,8 @@ public abstract partial class SharedGunSystem
 
     private void OnMagazineUse(EntityUid uid, MagazineAmmoProviderComponent component, UseInHandEvent args)
     {
+        // not checking for args.Handled or marking as such because we only relay the event to the magazine entity
+
         var magEnt = GetMagazineEntity(uid);
 
         if (magEnt == null)
@@ -144,26 +143,17 @@ public abstract partial class SharedGunSystem
         FinaliseMagazineTakeAmmo(uid, component, ammoEv.Count, ammoEv.Capacity, args.User, appearance);
     }
 
-    // Mono
-    private void OnMagazineCheckProto(Entity<MagazineAmmoProviderComponent> ent, ref CheckShootPrototypeEvent args)
-    {
-        var magEntity = GetMagazineEntity(ent);
-        if (magEntity == null)
-            return;
-
-        RaiseLocalEvent(magEntity.Value, ref args);
-    }
-
     private void FinaliseMagazineTakeAmmo(EntityUid uid, MagazineAmmoProviderComponent component, int count, int capacity, EntityUid? user, AppearanceComponent? appearance)
     {
         // If no ammo then check for autoeject
-        if (component.AutoEject && count == 0)
+        var ejectMag = component.AutoEject && count == 0;
+        if (ejectMag)
         {
             EjectMagazine(uid, component);
             Audio.PlayPredicted(component.SoundAutoEject, uid, user);
         }
 
-        UpdateMagazineAppearance(uid, appearance, true, count, capacity);
+        UpdateMagazineAppearance(uid, appearance, !ejectMag, count, capacity);
     }
 
     private void UpdateMagazineAppearance(EntityUid uid, MagazineAmmoProviderComponent component, EntityUid magEnt)

@@ -11,24 +11,26 @@
         map: ["enum.GunVisualLayers.Base"]
   - type: Item
     size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
     sprite: Objects/Weapons/Guns/Shotguns/flaregun.rsi
   - type: ItemSlots
     slots:
       gun_chamber:
         name: Chamber
-        startingItem: Flare
+        startingItem: ShellShotgunFlare
         priority: 1
         whitelist:
           tags: ## TODO: Add a risk of the gun blowing up if using non-light shotgun shells, and then re-enable them.
             ## - ShellShotgun
             - ShellShotgunLight
-            - Flare
   - type: ContainerContainer
     containers:
       gun_chamber: !type:ContainerSlot
   - type: ChamberMagazineAmmoProvider
     autoCycle: false
-    boltClosed: true
+    boltClosed: false
     canRack: false
     soundBoltClosed: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
     soundBoltOpened: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
@@ -47,14 +49,11 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
-  - type: EmitSoundOnPickup
-    sound: /Audio/_Crescent/Weapons/Interact/gun_pick.ogg
-  - type: EmitSoundOnDrop
-    sound: /Audio/_Crescent/Weapons/Interact/gun_drop.ogg
+
 
 - type: entity
   name: security shell gun
-  parent: WeaponFlareGun
+  parent: [WeaponFlareGun, BaseSecurityContraband]
   id: WeaponFlareGunSecurity
   description: A modified flare gun originally designed to be used by security to launch non-lethal shotgun shells, however it can also fire lethal shells without risk.
   components:

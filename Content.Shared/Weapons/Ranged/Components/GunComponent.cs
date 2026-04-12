@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -8,6 +9,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared.Weapons.Ranged.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
+[Access(typeof(SharedGunSystem))]
 public sealed partial class GunComponent : Component
 {
     #region Sound
@@ -210,7 +212,7 @@ public sealed partial class GunComponent : Component
     /// The base value for how fast the projectile moves.
     /// </summary>
     [DataField]
-    public float ProjectileSpeed = 25f;
+    public float ProjectileSpeed = SharedGunSystem.ProjectileSpeed;
 
     /// <summary>
     /// How fast the projectile moves.
@@ -223,16 +225,10 @@ public sealed partial class GunComponent : Component
     /// When the gun is next available to be shot.
     /// Can be set multiple times in a single tick due to guns firing faster than a single tick time.
     /// </summary>
-    [DataField(customTypeSerializer:typeof(TimeOffsetSerializer))]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoNetworkedField]
     [AutoPausedField]
     public TimeSpan NextFire = TimeSpan.Zero;
-
-    /// <summary>
-    ///   After dealing a melee attack with this gun, the minimum cooldown in seconds before the gun can shoot again.
-    /// </summary>
-    [DataField]
-    public float MeleeCooldown = 0.528f;
 
     /// <summary>
     /// What firemodes can be selected.
@@ -267,50 +263,6 @@ public sealed partial class GunComponent : Component
     /// </summary>
     [DataField]
     public Vector2 DefaultDirection = new Vector2(0, -1);
-
-    /// <summary>
-    ///     The percentage chance of a given gun to accidentally discharge if violently thrown into a wall or person
-    /// </summary>
-    [DataField]
-    public float FireOnDropChance = 0.1f;
-
-    /// <summary>
-    ///     If this weapon is using any kind of "Shotgun-like" ammunition, this applies as a multiplier on the spread arc.
-    //      EG: 1.5 with standard buckshot gives a shotgun arc of 22.5 degrees.
-    /// </summary>
-    [DataField]
-    public float ShotgunSpreadMultiplier = 1f;
-
-    /// <summary>
-    ///     This multiplier will apply per projectile fired by the weapon.
-    /// </summary>
-    [DataField]
-    public float DamageModifier = 1f;
-
-    /// <summary>
-    ///     This multiplier increases the amount of projectiles fired by a shotgun.
-    /// </summary>
-    [DataField]
-    public float ShotgunProjectileCountModifier = 1f;
-
-    /// <summary>
-    ///     If this weapon is using any kind of "Shotgun-like" ammunition, setting this to true makes it use the
-    ///     classic style of "uniform" spread. Whereas when left off, each pellet fires in a uniform arc.
-    /// </summary>
-    [DataField]
-    public bool UniformSpread;
-
-    /// <summary>
-    ///     The amount of Force (in Newtons) to eject spent cartridges with.
-    /// </summary>
-    [DataField]
-    public float EjectionForce = 0.04f;
-
-    [DataField]
-    public float EjectionSpeed = 20f;
-
-    [DataField]
-    public float EjectAngleOffset = 3.7f;
 }
 
 [Flags]

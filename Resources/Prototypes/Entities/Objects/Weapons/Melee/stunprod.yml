@@ -1,6 +1,6 @@
 - type: entity
   name: stun prod
-  parent: BaseItem
+  parent: [BaseItem, BaseMinorContraband]
   id: Stunprod
   description: A stun prod for illegal incapacitation.
   components:
@@ -8,7 +8,7 @@
     sprite: Objects/Weapons/Melee/stunprod.rsi
     layers:
     - state: stunprod_off
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: ItemToggle
     soundActivate:
       collection: sparks
@@ -26,29 +26,22 @@
     activatedDamage:
       types:
         Shock: 5
-  - type: ItemToggleDamageOtherOnHit
   - type: Stunbaton
     energyPerUse: 120
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    attackRate: 1.25
-    range: 1.6
     damage:
       types:
         Blunt: 9
-    heavyDamageBaseModifier: 1
-    heavyStaminaCost: 10
-    heavyRateModifier: 1.25
-    clickPartDamageMultiplier: 2
-    bluntStaminaDamageFactor: 2.0
+    angle: 60
     animation: WeaponArcThrust
-  - type: DamageOtherOnHit
   - type: StaminaDamageOnHit
-    damage: 22
+    damage: 35
     sound: /Audio/Weapons/egloves.ogg
   - type: StaminaDamageOnCollide
-    damage: 22
+    damage: 35
     sound: /Audio/Weapons/egloves.ogg
+  - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
     maxCharge: 360
     startingCharge: 360
@@ -66,8 +59,8 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: stunprod_on}
           False: {state: stunprod_off}
   - type: StaticPrice

@@ -1,11 +1,8 @@
-# Goob edit - energy bola
-
 - type: entity
   name: bola
-  abstract: true
-  id: BaseBola
-  parent: BaseItem
-  description: High velocity entanglement tool.
+  parent: [BaseItem, BaseSecurityContraband]
+  id: Bola
+  description: Linked together with some spare cuffs and metal.
   components:
   - type: Item
     size: Normal
@@ -16,25 +13,6 @@
     sound: /Audio/Weapons/bolathrow.ogg
   - type: EmitSoundOnLand
     sound: /Audio/Effects/snap.ogg
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 5
-  - type: Ensnaring
-    freeTime: 2.0
-    breakoutTime: 3.5
-    walkSpeed: 0.7
-    sprintSpeed: 0.7
-    staminaDamage: 55
-    canThrowTrigger: true
-    canMoveBreakout: true
-
-- type: entity
-  name: bola
-  parent: [BaseBola]
-  id: Bola
-  description: Linked together with some spare cuffs and metal.
-  components:
   - type: Construction
     graph: Bola
     node: bola
@@ -57,26 +35,27 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-
-- type: entity
-  name: energy bola
-  id: BolaEnergy
-  parent: BaseBola
-  description: An advanced hardlight criminal entangling tool. Otherwise known as an expensive piece of string.
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Throwable/energy_bola.rsi
   - type: DamageOnLand
     damage:
       types:
-      Heat: 5
+        Blunt: 5
   - type: Ensnaring
-    destroyOnRemove: true
     freeTime: 2.0
     breakoutTime: 3.5 #all bola should generally be fast to remove
-    walkSpeed: 0.7 #makeshift bola shouldn't slow too much
-    sprintSpeed: 0.7
-    staminaDamage: 55 # Sudden weight increase sapping stamina
+    walkSpeed: 0.5 #makeshift bola shouldn't slow too much
+    sprintSpeed: 0.5
+    staminaDamage: 0 # anything but this is gamebreaking
     canThrowTrigger: true
     canMoveBreakout: true
+    maxEnsnares: 1
   - type: LandAtCursor
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.4
+        density: 20 # derived from base_item
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2

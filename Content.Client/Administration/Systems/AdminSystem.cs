@@ -10,9 +10,16 @@ namespace Content.Client.Administration.Systems
     {
         public event Action<List<PlayerInfo>>? PlayerListChanged;
 
-        public Dictionary<NetUserId, PlayerInfo> PlayerInfos = new();
-        public IReadOnlyList<PlayerInfo> PlayerList =>
-            PlayerInfos != null ? PlayerInfos.Values.ToList() : new List<PlayerInfo>();
+        private Dictionary<NetUserId, PlayerInfo>? _playerList;
+        public IReadOnlyList<PlayerInfo> PlayerList
+        {
+            get
+            {
+                if (_playerList != null) return _playerList.Values.ToList();
+
+                return new List<PlayerInfo>();
+            }
+        }
 
         public override void Initialize()
         {
@@ -33,15 +40,15 @@ namespace Content.Client.Administration.Systems
         {
             if(ev.PlayerInfo == null) return;
 
-            if (PlayerInfos == null) PlayerInfos = new();
+            if (_playerList == null) _playerList = new();
 
-            PlayerInfos[ev.PlayerInfo.SessionId] = ev.PlayerInfo;
-            PlayerListChanged?.Invoke(PlayerInfos.Values.ToList());
+            _playerList[ev.PlayerInfo.SessionId] = ev.PlayerInfo;
+            PlayerListChanged?.Invoke(_playerList.Values.ToList());
         }
 
         private void OnPlayerListChanged(FullPlayerListEvent msg)
         {
-            PlayerInfos = msg.PlayersInfo.ToDictionary(x => x.SessionId, x => x);
+            _playerList = msg.PlayersInfo.ToDictionary(x => x.SessionId, x => x);
             PlayerListChanged?.Invoke(msg.PlayersInfo);
         }
     }

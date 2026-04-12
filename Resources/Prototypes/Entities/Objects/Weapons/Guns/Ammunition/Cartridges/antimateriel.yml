@@ -1,52 +1,20 @@
 - type: entity
-  parent: BaseCartridge
+  parent: [ BaseCartridge, BaseMajorContraband ]
   id: CartridgeAntiMateriel
-  name: cartridge (15.2×169mm)
+  name: cartridge (.60 anti-materiel)
+  description: A high-power cartridge used by high-precision rifles.
   components:
   - type: Tag
     tags:
-    - Cartridge
     - CartridgeAntiMateriel
   - type: CartridgeAmmo
     proto: BulletAntiMateriel
-  - type: Item
-    size: Small
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Ammunition/Casings/large_rifle.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: SpentAmmoVisuals
   - type: StaticPrice
-    price: 0
-  - type: EmitSoundOnLand
-    sound:
-      collection: HeavyBulletBounce
-  - type: EmitSoundOnCollide
-    sound:
-      collection: HeavyBulletBounce
-
-- type: entity
-  parent: CartridgeAntiMateriel
-  id: CartridgeAntiMaterielUranium
-  name: cartridge (15.2×169mm depleted-uranium)
-  components:
-  - type: CartridgeAmmo
-    proto: BulletAntiMaterielUranium
-
-- type: entity
-  parent: CartridgeAntiMateriel
-  id: CartridgeAntiMaterielIncendiary
-  name: cartridge (15.2×169mm incendiary)
-  components:
-  - type: CartridgeAmmo
-    proto: BulletAntiMaterielIncendiary
-
-- type: entity
-  parent: CartridgeAntiMateriel
-  id: CartridgeAntiMaterielShrapnel
-  name: cartridge (.60 anti-personnel shrapnel)
-  components:
-  - type: CartridgeAmmo
-    proto: BulletAntiMaterielShrapnelSpread
+    price: 20

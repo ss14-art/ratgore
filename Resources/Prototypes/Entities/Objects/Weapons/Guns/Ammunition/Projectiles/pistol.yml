@@ -1,21 +1,19 @@
 - type: entity
+  parent: BaseBullet
   id: BulletPistol
-  name: bullet (9x19mm PSTF)
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
+  name: bullet (.35 auto)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 21
-    harmorPenetration: 5
-    stoppingPower : 1
+        Piercing: 16
 
 - type: entity
-  id: BulletPistolPractice
-  name: bullet (9x19mm PSTF practice)
   parent: BaseBulletPractice
+  id: BulletPistolPractice
   categories: [ HideSpawnMenu ]
+  name: bullet (.35 auto practice)
   components:
   - type: Projectile
     damage:
@@ -23,60 +21,25 @@
         Blunt: 2
 
 - type: entity
-  id: BulletPistolRubber
-  name: bullet (9x19mm PSTF rubber)
-  parent: BaseBulletRubber
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 3
-
-- type: entity
-  id: BulletPistolIncendiary
   parent: BaseBulletIncendiary
-  name: bullet (9x19mm PSTF incendiary)
+  id: BulletPistolIncendiary
   categories: [ HideSpawnMenu ]
+  name: bullet (.35 auto incendiary)
   components:
   - type: Projectile
     damage:
       types:
-        Blunt: 2
-        Heat: 14
+        Piercing: 12
+        Heat: 4
 
 - type: entity
-  id: BulletPistolUranium
   parent: BaseBulletUranium
-  name: bullet (9x19mm PSTF AP-DU)
+  id: BulletPistolUranium
   categories: [ HideSpawnMenu ]
+  name: bullet (.35 auto uranium)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 17
-    harmorPenetration: 15
-    stoppingPower : 1
-
-- type: entity
-  id: BulletPistolShrapnel
-  name: bullet (9x19mm PSTF shrapnel)
-  categories: [ HideSpawnMenu ]
-  parent: BaseBullet
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 6.1333
-  - type: Sprite
-    scale: 0.5, 0.5
-
-- type: entity
-  id: BulletPistolShrapnelSpread
-  categories: [ HideSpawnMenu ]
-  parent: BulletPistolShrapnel
-  components:
-  - type: ProjectileSpread
-    proto: BulletPistolShrapnel
-    count: 3
-    spread: 15
+        Radiation: 6
+        Piercing: 10

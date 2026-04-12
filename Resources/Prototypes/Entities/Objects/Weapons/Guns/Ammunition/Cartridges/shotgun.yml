@@ -1,41 +1,31 @@
-﻿- type: entity
-  id: BaseShellShotgun
-  name: shell (12g)
-  parent: BaseCartridge
+- type: entity
   abstract: true
+  parent: BaseCartridge
+  id: BaseShellShotgun
+  name: shell (.50)
   components:
   - type: Tag
     tags:
-    - Cartridge
     - ShellShotgun
   - type: CartridgeAmmo
-    deleteOnSpawn: false
     soundEject:
       collection: ShellEject
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Ammunition/Casings/shotgun.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
     layers:
       - state: base
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: Appearance
   - type: SpentAmmoVisuals
-  - type: StaticPrice
-    price: 0
-  - type: EmitSoundOnLand
-    sound:
-      collection: ShellBulletBounce
-  - type: EmitSoundOnCollide
-    sound:
-      collection: ShellBulletBounce
 
 - type: entity
+  parent: [ BaseShellShotgun, BaseSecurityBartenderContraband ]
   id: ShellShotgunBeanbag
-  name: shell (12g beanbag)
-  parent: BaseShellShotgun
+  name: shell (.50 beanbag)
+  description: The standard cartridge used by most modern shotguns. Beanbag ammunition contains a single less-than-lethal projectile that can stun targets.
   components:
   - type: Tag
     tags:
-    - Cartridge
     - ShellShotgun
     - ShellShotgunLight
   - type: Sprite
@@ -48,9 +38,10 @@
     state: "beanbag"
 
 - type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband]
   id: ShellShotgunSlug
-  name: shell (12g slug)
-  parent: BaseShellShotgun
+  name: shell (.50 slug)
+  description: The standard cartridge used by most modern shotguns. Slug ammunition contains a single high-density projectile effective at longer ranges than pellet ammunition.
   components:
   - type: Sprite
     layers:
@@ -62,27 +53,29 @@
     state: "slug"
 
 - type: entity
-  id: ShellShotgunLumen
-  name: shell (12g Lumenblast)
   parent: BaseShellShotgun
+  id: ShellShotgunFlare
+  name: shell (.50 flare)
+  description: The standard cartridge used by most modern shotguns. Flare ammunition contains a single brightly-burning projectile intended for illumination and signalling, rather than combat.
   components:
   - type: Tag
     tags:
-    - Cartridge
     - ShellShotgun
+    - ShellShotgunLight
   - type: Sprite
     layers:
-      - state: lumen
+      - state: flare
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: CartridgeAmmo
-    proto: PelletShotgunLumen
+    proto: PelletShotgunFlare
   - type: SpentAmmoVisuals
-    state: "lumen"
+    state: "flare"
 
 - type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
   id: ShellShotgun
-  name: shell (12g)
-  parent: BaseShellShotgun
+  name: shell (.50 pellet)
+  description: The standard cartridge used by most modern shotguns. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: Sprite
     layers:
@@ -92,9 +85,10 @@
     proto: PelletShotgunSpread
 
 - type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
   id: ShellShotgunIncendiary
-  name: shell (12g dragon's breath)
-  parent: BaseShellShotgun
+  name: shell (.50 incendiary)
+  description: The standard cartridge used by most modern shotguns. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
   components:
   - type: Sprite
     layers:
@@ -106,9 +100,10 @@
     state: "incendiary"
 
 - type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
   id: ShellShotgunPractice
-  name: shell (12g rubber)
-  parent: BaseShellShotgun
+  name: shell (.50 practice)
+  description: The standard cartridge used by most modern shotguns. Practice ammunition fires chalk pellets that sting a little, but otherwise cause no lasting damage.
   components:
   - type: Sprite
     layers:
@@ -120,18 +115,18 @@
     state: "practice"
 
 - type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
   id: ShellTranquilizer
-  name: shell (12g tranquilizer)
-  parent: BaseShellShotgun
+  name: shell (.50 tranquilizer)
+  description: The standard cartridge used by most modern shotguns. Tranquilizer ammunition contains a single ballistic syringe loaded with a strong sedative that harmlessly puts targets to sleep.
   components:
   - type: Tag
     tags:
-    - Cartridge
     - ShellShotgun
     - ShellShotgunLight
   - type: Sprite
     layers:
-      - state: practice
+      - state: tranquilizer
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: CartridgeAmmo
     proto: PelletShotgunTranquilizer
@@ -145,17 +140,16 @@
   - type: SolutionTransfer
     maxTransferAmount: 7
   - type: SpentAmmoVisuals
-    state: "practice"
+    state: "tranquilizer"
 
 - type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
   id: ShellShotgunImprovised
   name: improvised shotgun shell
-  description: A homemade shotgun shell that shoots painful glass shrapnel. The spread is so wide that it couldn't hit the broad side of a barn.
-  parent: BaseShellShotgun
+  description: A homemade shotgun shell loaded with chunks of glass shrapnel. Surprisingly effective, but the spread is so wide that you couldn't hit the broad side of a barn.
   components:
   - type: Tag
     tags:
-    - Cartridge
     - ShellShotgun
     - ShellShotgunLight
   - type: Sprite
@@ -171,9 +165,10 @@
     state: "improvised"
 
 - type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
   id: ShellShotgunUranium
   name: uranium shotgun shell
-  parent: BaseShellShotgun
+  description: The standard cartridge used by most modern shotguns. Uranium ammunition replaces the lead core of the pellets with fissile material, irradiating targets from the inside.
   components:
     - type: Sprite
       layers:
@@ -183,58 +178,3 @@
       proto: PelletShotgunUraniumSpread
     - type: SpentAmmoVisuals
       state: "depleted-uranium"
-
-- type: entity
-  id: ShellShotgunBirdshot
-  name: shell (12g birdshot)
-  parent: BaseShellShotgun
-  components:
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-  - type: CartridgeAmmo
-    proto: PelletShotgunSpreadBirdshot
-
-- type: entity
-  id: ShellShotgun00Buckshot
-  name: shell (12g 00-Buckshot)
-  parent: BaseShellShotgun
-  components:
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-  - type: CartridgeAmmo
-    proto: PelletShotgunSpread00Buckshot
-
-- type: entity
-  id: ShellShotgun0000Buckshot
-  name: shell (12g 0000-Buckshot)
-  parent: BaseShellShotgun
-  components:
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-  - type: CartridgeAmmo
-    proto: PelletShotgunSpread0000Buckshot
-
-- type: entity
-  id: ShellShotgunFlare
-  name: shell (12g flare)
-  parent: BaseShellShotgun
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - ShellShotgun
-    - ShellShotgunLight
-  - type: Sprite
-    layers:
-      - state: flare
-        map: [ "enum.AmmoVisualLayers.Base" ]
-  - type: CartridgeAmmo
-    proto: PelletShotgunFlare
-  - type: SpentAmmoVisuals
-    state: "flare"

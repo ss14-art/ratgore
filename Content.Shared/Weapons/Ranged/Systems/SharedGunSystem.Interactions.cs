@@ -19,21 +19,7 @@ public abstract partial class SharedGunSystem
             args.PushMarkup(Loc.GetString("gun-selected-mode-examine", ("color", ModeExamineColor),
                 ("mode", GetLocSelector(component.SelectedMode))));
             args.PushMarkup(Loc.GetString("gun-fire-rate-examine", ("color", FireRateExamineColor),
-                ("fireRate", $"{(int) (component.FireRate * 60)}")));
-
-            if (component.DamageModifier != 1f)
-                args.PushMarkup(Loc.GetString("gun-damage-modifier-examine", ("color", FireRateExamineColor),
-                    ("damage", $"{component.DamageModifier.ToString("#.##")}")));
-
-            if (!component.AvailableModes.HasFlag(SelectiveFire.Burst))
-                return;
-
-            if (component.FireRate != component.BurstFireRate)
-                args.PushMarkup(Loc.GetString("gun-burst-fire-rate-examine", ("color", FireRateExamineColor),
-                    ("fireRate", $"{(int) (component.BurstFireRate * 60)}")));
-
-            args.PushMarkup(Loc.GetString("gun-burst-fire-burst-count", ("color", FireRateExamineColor),
-                ("burstcount", $"{component.ShotsPerBurst}")));
+                ("fireRate", $"{component.FireRateModified:0.0}")));
         }
     }
 
@@ -44,7 +30,7 @@ public abstract partial class SharedGunSystem
 
     private void OnAltVerb(EntityUid uid, GunComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || component.SelectedMode == component.AvailableModes)
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || args.Hands == null || component.SelectedMode == component.AvailableModes)
             return;
 
         var nextMode = GetNextMode(component);
@@ -80,7 +66,7 @@ public abstract partial class SharedGunSystem
         if (component.SelectedMode == fire)
             return;
 
-        DebugTools.Assert((component.AvailableModes  & fire) != 0x0);
+        DebugTools.Assert((component.AvailableModes & fire) != 0x0);
         component.SelectedMode = fire;
 
         if (!Paused(uid))
@@ -126,6 +112,12 @@ public abstract partial class SharedGunSystem
 
     private void OnGunSelected(EntityUid uid, GunComponent component, HandSelectedEvent args)
     {
+        if (Timing.ApplyingState)
+            return;
+
+        if (component.FireRateModified <= 0)
+            return;
+
         var fireDelay = 1f / component.FireRateModified;
         if (fireDelay.Equals(0f))
             return;

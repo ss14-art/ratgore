@@ -16,6 +16,7 @@
     shape:
     - 0,0,1,0
     - 0,1,0,1
+    storedOffset: 0,-4
   - type: Tag
     tags:
     - Sidearm
@@ -32,7 +33,7 @@
       - SemiAuto
       - FullAuto
     soundGunshot:
-      path: /Audio/_Crescent/Weapons/Guns/pistol_2/pistol_gunshot_1.ogg
+      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/pistol_cock.ogg
@@ -47,9 +48,10 @@
         whitelist:
           tags:
             - MagazinePistol
+            - MagazinePistolHighCapacity
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
         priority: 1
         whitelist:
           tags:
@@ -58,6 +60,7 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: AmmoCounter
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -65,39 +68,20 @@
   - type: Appearance
   - type: StaticPrice
     price: 500
-  - type: Execution
-  - type: AmmoCounter
-  - type: MeleeWeapon
-    attackRate: 1.2
-    damage:
-      types:
-        Blunt: 7.5
-    swapKeys: true
-    disableHeavy: true
-    animation: WeaponArcThrust
-    wideAnimationRotation: 135
-    soundHit:
-      collection: MetalThud
-  - type: DamageOtherOnHit
-    staminaCost: 5
-  - type: EmitSoundOnPickup
-    sound: /Audio/_Crescent/Weapons/Interact/gun_pick.ogg
-  - type: EmitSoundOnDrop
-    sound: /Audio/_Crescent/Weapons/Interact/gun_drop.ogg
 
 - type: entity
-  name: PTA BA-9 Viper 9x19mm
-  parent: BaseWeaponPistol
+  name: viper
+  parent: [BaseWeaponPistol, BaseSyndicateContraband]
   id: WeaponPistolViper
-  description: A small, easily concealable, but somewhat underpowered gun, produced by a bulk arms manufacturer now defunct for over a century. Uses 9x19mm PSTF ammo.
+  description: A common handgun illegally modified by the Syndicate. The Viper sports a selector switch between semi-auto and ‘rock and roll’. The standard sidearm for any soldier who fights under the three serpents. Feeds from .35 pistol magazines.
   components:
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Guns/viper.rsi
+    sprite: Objects/Weapons/Guns/Pistols/viper.rsi
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistol
+        startingItem: MagazinePistolHighCapacity
         insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
         priority: 2
@@ -105,9 +89,9 @@
           tags:
             - MagazinePistol
             - MagazinePistolHighCapacity
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
         priority: 1
         whitelist:
           tags:
@@ -116,108 +100,70 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: StaticPrice
+    price: 1000
+
+- type: entity
+  name: echis
+  parent: [ BaseItem, BaseSyndicateContraband ]
+  id: WeaponPistolEchis
+  description: A cyborg-mounted weapon system based on the Viper pistol. Creates ammunition on the fly from an internal fabricator, which slowly self-charges.
+  components:
   - type: Gun
     fireRate: 6
     selectedMode: SemiAuto
     availableModes:
-      - SemiAuto
-      - FullAuto
+    - SemiAuto
+    - FullAuto
     soundGunshot:
-      path: /Audio/_Crescent/Weapons/Guns/pistol_2/pistol_gunshot_1.ogg
-    fireOnDropChance: 0.3
-
-- type: entity
-  name: PTA Viper 9x19mm
-  parent: WeaponPistolViper
-  id: WeaponPistolViperEmpty
-  suffix: Empty
-  components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: null
-        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazinePistol
-            - MagazinePistolHighCapacity
-      gun_chamber:
-        name: Chamber
-        startingItem: null
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgePistol
-
-- type: entity
-  name: PTA Viper 9x19mm
-  parent: WeaponPistolViper
-  id: WeaponPistolViperSecurity
-  description: A small, easily concealable, but somewhat underpowered gun, produced by a bulk arms manufacturer now defunct for over a century.
-               Uses 9x19mm PSTF ammo. The serial number on the handguard marks this gun as belonging to some sort of corporate security.
-  suffix: Security Loadouts
-
-- type: entity
-  id: WeaponPistolViperNonLethal
-  parent: WeaponPistolViper
-  suffix: Non-lethal
-  components:
+      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Pistols/vipernl.rsi
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazinePistolRubber
-        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazinePistol
-            - MagazinePistolHighCapacity
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgePistolRubber
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgePistol
+    sprite: Objects/Weapons/Guns/Pistols/viper.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgePistol
+    capacity: 10
+    proto: CartridgePistol
+    cycleable: false # No synthesizing ammo for your syndicate masters.
+  - type: BallisticAmmoSelfRefiller
+    autoRefillRate: 2s
+    affectedByEmp: true
+  - type: AmmoCounter
 
 - type: entity
-  id: PTAViper9x19mm
-  parent: WeaponPistolViperNonLethal
-  suffix: Non-lethal, SecurityLoadouts
-  description: A small, easily concealable, but somewhat underpowered gun, produced by a bulk arms manufacturer now defunct for over a century.
-               Uses 9x19mm PSTF ammo. The serial number on the handguard marks this gun as belonging to some sort of corporate security.
-
-- type: entity
-  name: PTAT2Cobra9x39mm
-  parent: BaseWeaponPistol
+  name: cobra
+  parent: [ BaseWeaponPistol, BaseSyndicateContraband ]
   id: WeaponPistolCobra
-  description: A rugged, robust operator handgun with inbuilt silencer. Uses 9x39mm caseless ammo.
+  description: Integrally suppressed semi-automatic pistol used by the Syndicate, firing caseless subsonic rounds. Favored by any agent who likes to keep things quiet and leave no evidence behind. Feeds from .25 pistol magazines.
   components:
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Guns/cobra.rsi
+    sprite: Objects/Weapons/Guns/Pistols/cobra.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Pistols/cobra.rsi
   - type: ChamberMagazineAmmoProvider
+    boltClosed: null
   - type: Gun
-    damageModifier: 1.35 # "Extra Robust" despite having an underpowered cartridge.
-    fireRate: 5
+    fireRate: 4
     soundGunshot:
-      path: /Audio/_Crescent/Weapons/Guns/supressed_1/supressed_gunshot_2.ogg
+      path: /Audio/Weapons/Guns/Gunshots/silenced.ogg
       params:
-        volume: -10
+        volume: -14
     availableModes:
     - SemiAuto
-    fireOnDropChance: 0.1
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -229,9 +175,9 @@
         whitelist:
           tags:
             - MagazinePistolCaselessRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeCaselessRifle
         priority: 1
         whitelist:
           tags:
@@ -240,159 +186,50 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-  - type: ExtendDescription
-    descriptionList:
-      - description: This pistol comes with a muzzle booster. It deals 35% higher damage per shot.
-        fontSize: 12
-        color: "#ff4f00"
-        requireDetailRange: false
+  - type: StaticPrice
+    price: 1500
 
 - type: entity
-  name: PTA T2 Cobra 9x39mm
-  parent: WeaponPistolCobra
-  id: WeaponPistolCobraEmpty
-  suffix: Empty
-  components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: null
-        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazinePistolCaselessRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: null
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeCaselessRifle
-
-- type: entity
-  name: SHI M008 Hi-Po 6mm
-  parent: BaseWeaponPistol
+  name: mk 58
+  parent: [BaseWeaponPistol, BaseSecurityContraband]
   id: WeaponPistolMk58
-  description: A cheap, oversized, and unreliable pistol. You’d be better off using it to beat someone to death, assuming it doesn’t shatter into 16 pieces after the first hit. Uses small 6mm ammo.
+  description: Designed by Nanotrasen’s Small Arms Division, the Mk58 is a conventional semi-automatic pistol with a simple recoil-operated action and excellent reliability. The standard sidearm of Nanotrasen’s station security and emergency response teams. Feeds from .35 pistol magazines.
   components:
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Guns/tayamura.rsi
+    sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
+  - type: Item
+    storedOffset: 0,-2
   - type: Gun
     fireRate: 5
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_Crescent/Weapons/Guns/pistol_1/pistol_gunshot_3.ogg
-    fireOnDropChance: 0.5
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazinePistol6mm
-        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazinePistol6mm
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgePistol6mm
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgePistol6mm
-  - type: ReverseEngineering # SectorCrescent
-    recipes:
-      - WeaponPistolMk58SHI
+      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+  - type: StealTarget
+    stealGroup: OfficerHandgun
 
 - type: entity
-  name: SHI MK58 Tayamura 9x19mm
-  parent: WeaponPistolMk58
-  id: WeaponPistolMk58Empty
-  suffix: Empty
-  components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: null
-        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazinePistol
-      gun_chamber:
-        name: Chamber
-        startingItem: null
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgePistol
-
-- type: entity
-  name: SHI MK58 Tayamura 9x19mm
-  parent: WeaponPistolMk58
-  id: WeaponPistolMk58Security
-  description: A cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Uses 9x19mm PSTF ammo.
-               The serial number on the handguard marks this gun as belonging to an NT Security Officer.
-  suffix: Security Loadouts
-
-- type: entity
-  id: WeaponPistolMk58Nonlethal
-  parent: WeaponPistolMk58
-  suffix: Non-lethal
+  name: N1984
+  parent: [BaseWeaponPistol, BaseSecurityContraband]
+  id: WeaponPistolN1984
+  description: An exceptionally powerful ‘hand cannon’ designed as part of Nanotrasen's BFG initiative. Chambered in .45, the lord’s caliber, it is generally considered too unwieldy for standard use but has become something of a status symbol among Nanotrasen officials. Feeds from .45 pistol magazines.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Pistols/mk58nl.rsi
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazinePistolRubber
-        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazinePistol
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgePistolRubber
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgePistol
-
-- type: entity
-  id: SHIMK58Tayamura9x19mm
-  parent: WeaponPistolMk58Nonlethal
-  suffix: Non-lethal, Security Loadouts
-  description: A cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Uses 9x19mm PSTF ammo.
-               The serial number on the handguard marks this gun as belonging to an NT Security Officer.
-
-- type: entity
-  name: NT N1984 Marston .327
-  parent: BaseWeaponPistol
-  id: WeaponPistolN1984 # the spaces in description are for formatting.
-  description: The sidearm of any self respecting officer. Comes in .327, the lord's caliber.
-  components:
-  - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Guns/liberty.rsi
+    sprite: Objects/Weapons/Guns/Pistols/N1984.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Pistols/N1984.rsi
   - type: Gun
     minAngle: 1
     maxAngle: 20
@@ -402,8 +239,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_Crescent/Weapons/Guns/M1911/pistol_gunshot_2.ogg
-    fireOnDropChance: 0.6
+      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -415,78 +251,10 @@
         whitelist:
           tags:
             - MagazineMagnum
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnum
         priority: 1
         whitelist:
           tags:
             - CartridgeMagnum
-
-- type: entity
-  name: NT N1984 Marston .327
-  parent: WeaponPistolN1984
-  id: WeaponPistolN1984Empty
-  suffix: Empty
-  components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: null
-        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineMagnum
-      gun_chamber:
-        name: Chamber
-        startingItem: null
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeMagnum
-
-- type: entity
-  name: NT N1984 Marston .327
-  parent: WeaponPistolN1984
-  id: WeaponPistolN1984Security # the spaces in description are for formatting.
-  description: The sidearm of any self respecting officer. Comes in 8.3×33mm, the lord's caliber.
-               The serial number on the handguard marks this gun as belonging to an NT Security Officer.
-  suffix: Security Loadouts
-
-- type: entity
-  name: N1984
-  parent: WeaponPistolN1984
-  id: WeaponPistolN1984NonLethal
-  suffix: Non-lethal
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Pistols/N1984nl.rsi
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineMagnumRubber
-        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineMagnum
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeMagnumRubber
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeMagnum
-
-- type: entity
-  name: NT N1984 Marston .327
-  parent: WeaponPistolN1984NonLethal
-  id: WeaponPistolN1984SecurityNonLethal
-  description: The sidearm of any self respecting officer. Comes in .327, the lord's caliber.
-               The serial number on the handguard marks this gun as belonging to an NT Security Officer.
-  suffix: Security Loadouts

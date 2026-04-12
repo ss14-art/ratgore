@@ -27,10 +27,4 @@ public sealed partial class DamageMarkerOnCollideComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("amount"), AutoNetworkedField]
     public int Amount = 1;
-
-    /// <summary>
-    ///     Lavaland Change: Whether the marker can only be applied to fauna.
-    /// </summary>
-    [DataField]
-    public bool OnlyWorkOnFauna = false;
 }

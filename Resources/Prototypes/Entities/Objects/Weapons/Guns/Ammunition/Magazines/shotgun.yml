@@ -1,13 +1,8 @@
 - type: entity
-  id: MagazineShotgun00Buckshot # I my self hold my self NOT accountable i fully shift the blame on nirub for being a dumbass and mapping this into the SAW station
-  parent: MagazineShotgun
-  categories: [ HideSpawnMenu ]
-
-- type: entity
-  id: BaseMagazineShotgun
-  name: 10-round magazine (12g shells)
-  parent: BaseItem
   abstract: true
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: BaseMagazineShotgun
+  name: ammo drum (.50 shells)
   components:
   - type: Tag
     tags:
@@ -17,16 +12,25 @@
     whitelist:
       tags:
         - ShellShotgun
-    capacity: 10
+    capacity: 8
     soundRack:
       path: /Audio/Weapons/Guns/Cock/smg_cock.ogg
   - type: Item
     size: Small
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#d73307"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#d73307"
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Ammunition/Magazine/shotgun_mag.rsi
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -34,145 +38,100 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 2
     zeroVisible: false
   - type: Appearance
-  - type: EmitSoundOnPickup
-    sound: /Audio/_Crescent/Weapons/Interact/mag_pick.ogg
-  - type: EmitSoundOnDrop
-    sound: /Audio/_Crescent/Weapons/Interact/mag_drop.ogg
-
-- type: entity
-  id: BaseDrumMagazineShotgun
-  name: 18-round drum magazine (12g shells)
-  parent: BaseItem
-  abstract: true
-  components:
-  - type: Tag
-    tags:
-    - MagazineShotgun
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    whitelist:
-      tags:
-        - ShellShotgun
-    capacity: 18
-    soundRack:
-      path: /Audio/Weapons/Guns/Cock/smg_cock.ogg
-  - type: Item
-    size: Normal
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Crescent/Objects/Weapons/Ammunition/Magazine/shotgun_drum.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 19
-    zeroVisible: false
-  - type: Appearance
-  - type: EmitSoundOnPickup
-    sound: /Audio/_Crescent/Weapons/Interact/big_mag_pick.ogg
-  - type: EmitSoundOnDrop
-    sound: /Audio/_Crescent/Weapons/Interact/big_mag_drop.ogg
-
-- type: entity
-  id: DrumMagazineShotgunEmpty
-  name: 18-round drum magazine (12g shells any)
-  suffix: empty
-  parent: BaseDrumMagazineShotgun
-  components:
-  - type: BallisticAmmoProvider
-    proto: null
-
-- type: entity
-  id: DrumMagazineShotgunBuck
-  name: 18-round drum magazine (12g pellet)
-  parent: BaseDrumMagazineShotgun
-  components:
-  - type: BallisticAmmoProvider
-    proto: ShellShotgun
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-
-- type: entity
-  id: DrumMagazineShotgunSlug
-  name: 18-round drum magazine (12g slug)
-  parent: BaseDrumMagazineShotgun
-  components:
-  - type: BallisticAmmoProvider
-    proto: ShellShotgunSlug
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   id: MagazineShotgunEmpty
-  name: 10-round magazine (12g shells any)
+  name: ammo drum (.50 shells any)
   suffix: empty
+  description: A large drum magazine used by some military-grade automatic shotguns.
   parent: BaseMagazineShotgun
   components:
   - type: BallisticAmmoProvider
     proto: null
 
 - type: entity
-  id: MagazineShotgun
-  name: 10-round magazine (12g pellet)
   parent: BaseMagazineShotgun
+  id: MagazineShotgun
+  name: ammo drum (.50 pellet)
+  description: A large drum magazine used by some military-grade automatic shotguns. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: ShellShotgun
   - type: Sprite
     layers:
-    - state: base
+    - state: pellets
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#ba7710"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#ba7710"
 
 - type: entity
-  id: MagazineShotgunBeanbag
-  name: 10-round magazine (12g beanbags)
   parent: BaseMagazineShotgun
+  id: MagazineShotgunBeanbag
+  name: ammo drum (.50 beanbag)
+  description: A large drum magazine used by some military-grade automatic shotguns. Intended to hold less-than-lethal beanbag ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: ShellShotgunBeanbag
   - type: Sprite
     layers:
-    - state: base
+    - state: beanbag
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#30722d"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#30722d"
 
 - type: entity
-  id: MagazineShotgunSlug
-  name: 10-round magazine (12g slug)
   parent: BaseMagazineShotgun
+  id: MagazineShotgunSlug
+  name: ammo drum (.50 slug)
+  description: A large drum magazine used by some military-grade automatic shotguns. Intended to hold long-ranged slug ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: ShellShotgunSlug
   - type: Sprite
     layers:
-    - state: base
+    - state: slug
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#72382d"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#72382d"
 
 - type: entity
-  id: MagazineShotgunIncendiary
-  name: 10-round magazine (12g incendiary)
   parent: BaseMagazineShotgun
+  id: MagazineShotgunIncendiary
+  name: ammo drum (.50 incendiary)
+  description: A large drum magazine used by some military-grade automatic shotguns. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: ShellShotgunIncendiary
@@ -182,31 +141,13 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-
-- type: entity
-  id: MagazineShotgunUranium
-  name: 10-round magazine (12g uranium slug)
-  parent: BaseMagazineShotgun
-  components:
-  - type: BallisticAmmoProvider
-    proto: ShellShotgunUranium
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-
-- type: entity
-  id: MagazineShotgunBirdshot
-  name: 10-round magazine (12g birdshot)
-  parent: BaseMagazineShotgun
-  components:
-  - type: BallisticAmmoProvider
-    proto: ShellShotgunBirdshot
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#72382d"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#72382d"
