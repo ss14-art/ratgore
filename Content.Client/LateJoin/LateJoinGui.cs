@@ -195,8 +195,6 @@ namespace Content.Client.LateJoin
                         jobsAvailable.Add(_prototypeManager.Index<JobPrototype>(jobId));
                     }
 
-                    jobsAvailable.Sort(JobUIComparer.Instance);
-
                     // Do not display departments with no jobs available.
                     if (jobsAvailable.Count == 0)
                         continue;
@@ -260,7 +258,6 @@ namespace Content.Client.LateJoin
                         };
 
                         var jobIcon = _prototypeManager.Index(prototype.Icon);
-                        icon.Texture = _sprites.Frame0(jobIcon.Icon);
                         jobSelector.AddChild(icon);
 
                         jobSelector.AddChild(jobLabel);
@@ -286,27 +283,9 @@ namespace Content.Client.LateJoin
                                 HorizontalAlignment = HAlignment.Right,
                             });
                         }
-                        else if (!_characterRequirements.CheckRequirementsValid(
-                                prototype.Requirements ?? new(),
-                                prototype,
-                                (HumanoidCharacterProfile) (_prefs.Preferences?.SelectedCharacter
-                                                            ?? HumanoidCharacterProfile.DefaultWithSpecies()),
-                                _jobRequirements.GetRawPlayTimeTrackers(),
-                                _jobRequirements.IsWhitelisted(),
-                                prototype,
-                                _entityManager,
-                                _prototypeManager,
-                                _configManager,
-                                out var reasons))
+
                         {
                             jobButton.Disabled = true;
-
-                            if (reasons.Count > 0)
-                            {
-                                var tooltip = new Tooltip();
-                                tooltip.SetMessage(_characterRequirements.GetRequirementsText(reasons));
-                                jobButton.TooltipSupplier = _ => tooltip;
-                            }
 
                             jobSelector.AddChild(new TextureRect
                             {
@@ -316,10 +295,6 @@ namespace Content.Client.LateJoin
                                 HorizontalExpand = true,
                                 HorizontalAlignment = HAlignment.Right,
                             });
-                        }
-                        else if (value == 0)
-                        {
-                            jobButton.Disabled = true;
                         }
 
                         if (!_jobButtons[id].ContainsKey(prototype.ID))

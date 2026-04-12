@@ -28,8 +28,6 @@ internal sealed class AdminNameOverlay : Overlay
     private readonly IPrototypeManager _prototypeManager;
     private readonly Font _font;
     private readonly Font _fontBold;
-    private AdminOverlayAntagFormat _overlayFormat;
-    private AdminOverlayAntagSymbolStyle _overlaySymbolStyle;
     private bool _overlayPlaytime;
     private bool _overlayStartingJob;
     private float _ghostFadeDistance;
@@ -67,30 +65,12 @@ internal sealed class AdminNameOverlay : Overlay
         _font = resourceCache.NotoStack();
         _fontBold = resourceCache.NotoStack(variation: "Bold");
 
-        config.OnValueChanged(CCVars.AdminOverlayAntagFormat, (show) => { _overlayFormat = UpdateOverlayFormat(show); }, true);
-        config.OnValueChanged(CCVars.AdminOverlaySymbolStyle, (show) => { _overlaySymbolStyle = UpdateOverlaySymbolStyle(show); }, true);
         config.OnValueChanged(CCVars.AdminOverlayPlaytime, (show) => { _overlayPlaytime = show; }, true);
         config.OnValueChanged(CCVars.AdminOverlayStartingJob, (show) => { _overlayStartingJob = show; }, true);
         config.OnValueChanged(CCVars.AdminOverlayGhostHideDistance, (f) => { _ghostHideDistance = f; }, true);
         config.OnValueChanged(CCVars.AdminOverlayGhostFadeDistance, (f) => { _ghostFadeDistance = f; }, true);
         config.OnValueChanged(CCVars.AdminOverlayStackMax, (i) => { _overlayStackMax = i; }, true);
         config.OnValueChanged(CCVars.AdminOverlayMergeDistance, (f) => { _overlayMergeDistance = f; }, true);
-    }
-
-    private AdminOverlayAntagFormat UpdateOverlayFormat(string formatString)
-    {
-        if (!Enum.TryParse<AdminOverlayAntagFormat>(formatString, out var format))
-            format = AdminOverlayAntagFormat.Binary;
-
-        return format;
-    }
-
-    private AdminOverlayAntagSymbolStyle UpdateOverlaySymbolStyle(string symbolString)
-    {
-        if (!Enum.TryParse<AdminOverlayAntagSymbolStyle>(symbolString, out var symbolStyle))
-            symbolStyle = AdminOverlayAntagSymbolStyle.Off;
-
-        return symbolStyle;
     }
 
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
@@ -216,59 +196,6 @@ internal sealed class AdminNameOverlay : Overlay
                 args.ScreenHandle.DrawString(_font, screenCoordinates + currentOffset, playerInfo.StartingJob, uiScale, playerInfo.Connected ? color : colorDisconnected);
                 currentOffset += lineoffset;
             }
-
-            // Determine antag symbol
-            string? symbol;
-            switch (_overlaySymbolStyle)
-            {
-                case AdminOverlayAntagSymbolStyle.Specific:
-                    symbol = roleSymbol;
-                    break;
-                case AdminOverlayAntagSymbolStyle.Basic:
-                    symbol = Loc.GetString("player-tab-antag-prefix");
-                    break;
-                default:
-                case AdminOverlayAntagSymbolStyle.Off:
-                    symbol = string.Empty;
-                    break;
-            }
-
-            // Determine antag/role type name
-            string? text;
-            switch (_overlayFormat)
-            {
-                case AdminOverlayAntagFormat.Roletype:
-                    color = roleColor;
-                    symbol = IsFiltered(playerInfo.RoleProto) ? symbol : string.Empty;
-                    text = IsFiltered(playerInfo.RoleProto)
-                        ? Loc.GetString(roleName).ToUpper()
-                        : string.Empty;
-                    break;
-                case AdminOverlayAntagFormat.Subtype:
-                    color = roleColor;
-                    symbol = IsFiltered(playerInfo.RoleProto) ? symbol : string.Empty;
-                    text = IsFiltered(playerInfo.RoleProto)
-                        ? _roles.GetRoleSubtypeLabel(roleName, playerInfo.Subtype).ToUpper()
-                        : string.Empty;
-                    break;
-                default:
-                case AdminOverlayAntagFormat.Binary:
-                    color = Color.OrangeRed;
-                    symbol = playerInfo.Antag ? symbol : string.Empty;
-                    text = playerInfo.Antag ? _antagLabelClassic : string.Empty;
-                    break;
-            }
-
-            // Draw antag label
-            color.A = alpha;
-            var label = !string.IsNullOrEmpty(symbol)
-                ? Loc.GetString("player-tab-character-name-antag-symbol", ("symbol", symbol), ("name", text))
-                : text;
-            args.ScreenHandle.DrawString(_fontBold, screenCoordinates + currentOffset, label, uiScale, color);
-            currentOffset += lineoffset;
-
-            //Save the coordinates and size of the text block, for stack merge check
-            drawnOverlays.Add((screenCoordinatesCenter, currentOffset));
         }
     }
 
