@@ -18,7 +18,7 @@ namespace Content.Shared.Body.Systems;
 /// <summary>
 /// Handles lung breathing with gas tanks for entities.
 /// </summary>
-public abstract class SharedInternalsSystem : EntitySystem
+public partial abstract class SharedInternalsSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
