@@ -1,14 +1,6 @@
-<<<<<<<< HEAD:Content.Server/Body/Systems/MetabolizerSystem.cs
-using Content.Server.Body.Components;
-using Content.Shared.Body.Events;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Prototypes;
-========
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Body.Events;
->>>>>>>> ff1af35afba (Replace metabolism groups with metabolism stages (#42172)):Content.Shared/Metabolism/MetabolizerSystem.cs
-using Content.Shared.Body.Systems;
 using Content.Shared.Body;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -21,9 +13,8 @@ using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects.Body;
 using Content.Shared.EntityEffects.Effects.Solution;
 using Content.Shared.FixedPoint;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Collections;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -35,72 +26,49 @@ public sealed class MetabolizerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedEntityConditionsSystem _entityConditions = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
-    private EntityQuery<OrganComponent> _organQuery;
-    private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;
+    [Dependency] private readonly EntityQuery<OrganComponent> _organQuery = default!;
+    [Dependency] private readonly EntityQuery<SolutionContainerManagerComponent> _solutionQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _organQuery = GetEntityQuery<OrganComponent>();
-        _solutionQuery = GetEntityQuery<SolutionContainerManagerComponent>();
-
         SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<MetabolizerComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
+        SubscribeLocalEvent<MetabolizerComponent, BodyRelayedEvent<ApplyMetabolicMultiplierEvent>>(OnApplyMetabolicMultiplier);
     }
 
     private void OnMapInit(Entity<MetabolizerComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.AdjustedUpdateInterval;
+        Dirty(ent);
     }
 
-<<<<<<<< HEAD:Content.Server/Body/Systems/MetabolizerSystem.cs
-    private void OnMetabolizerInit(Entity<MetabolizerComponent> entity, ref ComponentInit args)
-    {
-        if (!entity.Comp.SolutionOnBody)
-        {
-            _solutionContainerSystem.EnsureSolution(entity.Owner, entity.Comp.SolutionName, out _);
-        }
-        else if (_organQuery.CompOrNull(entity)?.Body is { } body)
-        {
-            _solutionContainerSystem.EnsureSolution(body, entity.Comp.SolutionName, out _);
-        }
-    }
-
-    private void OnApplyMetabolicMultiplier(Entity<MetabolizerComponent> ent, ref ApplyMetabolicMultiplierEvent args)
-========
     private void OnApplyMetabolicMultiplier(Entity<MetabolizerComponent> ent, ref BodyRelayedEvent<ApplyMetabolicMultiplierEvent> args)
->>>>>>>> ff1af35afba (Replace metabolism groups with metabolism stages (#42172)):Content.Shared/Metabolism/MetabolizerSystem.cs
     {
-        ent.Comp.UpdateIntervalMultiplier = args.Multiplier;
+        ent.Comp.UpdateIntervalMultiplier = args.Args.Multiplier;
+        Dirty(ent);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var metabolizers = new ValueList<(EntityUid Uid, MetabolizerComponent Component)>(Count<MetabolizerComponent>());
         var query = EntityQueryEnumerator<MetabolizerComponent>();
 
         while (query.MoveNext(out var uid, out var comp))
         {
-            metabolizers.Add((uid, comp));
-        }
-
-        foreach (var (uid, metab) in metabolizers)
-        {
             // Only update as frequently as it should
-            if (_gameTiming.CurTime < metab.NextUpdate)
+            if (_gameTiming.CurTime < comp.NextUpdate)
                 continue;
 
-            metab.NextUpdate += metab.AdjustedUpdateInterval;
-            TryMetabolize((uid, metab));
+            comp.NextUpdate += comp.AdjustedUpdateInterval;
+            TryMetabolize((uid, comp));
+            Dirty(uid, comp);
         }
     }
 
@@ -172,8 +140,6 @@ public sealed class MetabolizerSystem : EntitySystem
 
         LookupSolution(ent, solutionData, true, out var transferSolution, out var transferSolutionEntity, out _);
 
-<<<<<<<< HEAD:Content.Server/Body/Systems/MetabolizerSystem.cs
-========
         // Copy the solution do not edit the original solution list
         var list = solution.Contents.ToList();
 
@@ -181,33 +147,24 @@ public sealed class MetabolizerSystem : EntitySystem
         var ev = new MetabolismExclusionEvent();
         RaiseLocalEvent(solutionOwner.Value, ref ev);
 
->>>>>>>> ff1af35afba (Replace metabolism groups with metabolism stages (#42172)):Content.Shared/Metabolism/MetabolizerSystem.cs
         // randomize the reagent list so we don't have any weird quirks
         // like alphabetical order or insertion order mattering for processing
-        var list = solution.Contents.ToArray();
-        _random.Shuffle(list);
+        var rand = SharedRandomExtensions.PredictedRandom(_gameTiming, GetNetEntity(ent), GetNetEntity(solutionOwner));
+        rand.Shuffle(list);
 
-<<<<<<<< HEAD:Content.Server/Body/Systems/MetabolizerSystem.cs
-========
         var isDead = _mobStateSystem.IsDead(solutionOwner.Value);
 
->>>>>>>> ff1af35afba (Replace metabolism groups with metabolism stages (#42172)):Content.Shared/Metabolism/MetabolizerSystem.cs
         int reagents = 0;
         foreach (var (reagent, quantity) in list)
         {
             if (!_prototypeManager.TryIndex<ReagentPrototype>(reagent.Prototype, out var proto))
                 continue;
 
-<<<<<<<< HEAD:Content.Server/Body/Systems/MetabolizerSystem.cs
-            var mostToRemove = FixedPoint2.Zero;
-            if (proto.Metabolisms is null)
-========
             // Skip blood reagents
             if (ev.Reagents.Contains(reagent))
                 continue;
 
             if (proto.Metabolisms is null || !proto.Metabolisms.Metabolisms.TryGetValue(stage, out var entry))
->>>>>>>> ff1af35afba (Replace metabolism groups with metabolism stages (#42172)):Content.Shared/Metabolism/MetabolizerSystem.cs
             {
                 var mostToTransfer = FixedPoint2.Clamp(solutionData.TransferRate, 0, quantity);
 
@@ -251,31 +208,8 @@ public sealed class MetabolizerSystem : EntitySystem
                 if (scale < effect.MinScale)
                     continue;
 
-<<<<<<<< HEAD:Content.Server/Body/Systems/MetabolizerSystem.cs
-                var rate = entry.MetabolismRate * group.MetabolismRateModifier;
-
-                // Remove $rate, as long as there's enough reagent there to actually remove that much
-                mostToRemove = FixedPoint2.Clamp(rate, 0, quantity);
-
-                var scale = (float) mostToRemove;
-
-                // TODO: This is a very stupid workaround to lungs heavily relying on scale = reagent quantity. Needs lung and metabolism refactors to remove.
-                // TODO: Lungs just need to have their scale be equal to the mols consumed, scale needs to be not hardcoded either and configurable per metabolizer...
-                if (group.Id != Gas)
-                    scale /= (float) entry.MetabolismRate;
-
-                // if it's possible for them to be dead, and they are,
-                // then we shouldn't process any effects, but should probably
-                // still remove reagents
-                if (TryComp<MobStateComponent>(solutionEntityUid.Value, out var state))
-                {
-                    if (!proto.WorksOnTheDead && _mobStateSystem.IsDead(solutionEntityUid.Value, state))
-                        continue;
-                }
-========
-                if (effect.Probability < 1.0f && !_random.Prob(effect.Probability))
+                if (rand.NextFloat() >= effect.Probability)
                     continue;
->>>>>>>> ff1af35afba (Replace metabolism groups with metabolism stages (#42172)):Content.Shared/Metabolism/MetabolizerSystem.cs
 
                 // See if conditions apply
                 if (effect.Conditions != null && !CanMetabolizeEffect(actualEntity, ent, solutionEntity.Value, effect.Conditions))
@@ -290,34 +224,6 @@ public sealed class MetabolizerSystem : EntitySystem
             {
                 switch (effect)
                 {
-<<<<<<<< HEAD:Content.Server/Body/Systems/MetabolizerSystem.cs
-                    if (scale < effect.MinScale)
-                        continue;
-
-                    // See if conditions apply
-                    if (effect.Conditions != null && !CanMetabolizeEffect(actualEntity, ent, soln.Value, effect.Conditions))
-                        continue;
-
-                    ApplyEffect(effect);
-
-                }
-
-                // TODO: We should have to do this with metabolism. ReagentEffect struct needs refactoring and so does metabolism!
-                void ApplyEffect(EntityEffect effect)
-                {
-                    switch (effect)
-                    {
-                        case ModifyLungGas:
-                            _entityEffects.ApplyEffect(ent, effect, scale);
-                            break;
-                        case AdjustReagent:
-                            _entityEffects.ApplyEffect(soln.Value, effect, scale);
-                            break;
-                        default:
-                            _entityEffects.ApplyEffect(actualEntity, effect, scale);
-                            break;
-                    }
-========
                     case ModifyLungGas:
                         _entityEffects.ApplyEffect(ent, effect, scale);
                         break;
@@ -327,7 +233,6 @@ public sealed class MetabolizerSystem : EntitySystem
                     default:
                         _entityEffects.ApplyEffect(actualEntity, effect, scale);
                         break;
->>>>>>>> ff1af35afba (Replace metabolism groups with metabolism stages (#42172)):Content.Shared/Metabolism/MetabolizerSystem.cs
                 }
             }
 
@@ -403,4 +308,3 @@ public sealed class MetabolizerSystem : EntitySystem
         return true;
     }
 }
-
