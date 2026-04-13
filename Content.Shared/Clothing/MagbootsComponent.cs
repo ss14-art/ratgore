@@ -1,10 +1,12 @@
 using Content.Shared.Alert;
+using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Clothing;
 
 [RegisterComponent, NetworkedComponent]
+[Access(typeof(SharedMagbootsSystem))]
 public sealed partial class MagbootsComponent : Component
 {
     [DataField]
@@ -15,46 +17,4 @@ public sealed partial class MagbootsComponent : Component
     /// </summary>
     [DataField]
     public bool RequiresGrid = true;
-
-    /// <summary>
-    /// Slot the clothing has to be worn in to work.
-    /// </summary>
-    [DataField]
-    public string Slot = "shoes";
-
-    /// <summary>
-    ///     Whether or not activating the magboots changes a sprite.
-    /// </summary>
-    [DataField]
-    public bool ChangeClothingVisuals;
-
-    /// <summary>
-    ///     Whether or not the magboots are currently Active.
-    /// </summary>
-    [DataField]
-    public bool Active;
-
-    /// <summary>
-    ///     Walk speed modifier to use while the magnets are active.
-    /// </summary>
-    [DataField]
-    public float ActiveWalkModifier = 1f;
-
-    /// <summary>
-    ///     Sprint speed modifier to use while the magnets are active.
-    /// </summary>
-    [DataField]
-    public float ActiveSprintModifier = 1f;
-
-    /// <summary>
-    ///     Walk speed modifier to use while the magnets are off.
-    /// </summary>
-    [DataField]
-    public float InactiveWalkModifier = 1f;
-
-    /// <summary>
-    ///     Sprint speed modifier to use while the magnets are off.
-    /// </summary>
-    [DataField]
-    public float InactiveSprintModifier = 1f;
 }
