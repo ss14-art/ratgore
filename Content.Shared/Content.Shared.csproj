@@ -32,7 +32,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <PropertyGroup>
     <!-- Work around https://github.com/dotnet/project-system/issues/4314 -->
     <TargetFramework>$(TargetFramework)</TargetFramework>
-    <LangVersion>12</LangVersion>
+    <LangVersion>14</LangVersion>
     <IsPackable>false</IsPackable>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <WarningsAsErrors>RA0032;nullable</WarningsAsErrors>
@@ -41,21 +41,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="MathNet.Numerics" PrivateAssets="All" />
+    <PackageReference Include="YamlDotNet" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Logging" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Content.Goobstation.Common\Content.Goobstation.Common.csproj" />
     <ProjectReference Include="..\Content.Goobstation.Maths\Content.Goobstation.Maths.csproj" />
     <ProjectReference Include="..\Content.Shared.Database\Content.Shared.Database.csproj" />
-    <ProjectReference Include="..\RobustToolbox\Lidgren.Network\Lidgren.Network.csproj">
-      <Private>false</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\RobustToolbox\Robust.Shared.Maths\Robust.Shared.Maths.csproj">
-      <Private>false</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\RobustToolbox\Robust.Shared\Robust.Shared.csproj">
-      <Private>false</Private>
-    </ProjectReference>
   </ItemGroup>
+  <Import Project="..\RobustToolbox\Imports\Shared.props" />
+  <Import Project="..\RobustToolbox\Imports\Lidgren.props" />
   <ItemGroup>
     <Folder Include="_Crescent\Shuttles\" />
     <None Include="Goobstation\Changeling\Changeling.Actions.cs" />
