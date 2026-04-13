@@ -19,8 +19,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <ItemGroup>
       <ProjectReference Include="..\Content.ModuleManager\Content.ModuleManager.csproj" />
-      <ProjectReference Include="..\RobustToolbox\Robust.Shared\Robust.Shared.csproj" />
     </ItemGroup>
+
+    <Import Project="..\RobustToolbox\Imports\Shared.props" />
 
     <ItemGroup>
       <Folder Include="Temperature\" />
