@@ -6,6 +6,25 @@ using Robust.Shared.Threading;
 using static Content.Server.Power.Pow3r.PowerState;
 
 
+file sealed class TestingParallelManager : System.IDisposable
+{
+    public int Degree { get; }
+    public TestingParallelManager(int degree) => Degree = degree > 0 ? degree : 1;
+
+    public void Run(System.Action action)
+    {
+        if (action is null) throw new System.ArgumentNullException(nameof(action));
+        System.Threading.Tasks.Parallel.For(0, Degree, _ => action());
+    }
+
+    public void Run(System.Action<int> action)
+    {
+        if (action is null) throw new System.ArgumentNullException(nameof(action));
+        System.Threading.Tasks.Parallel.For(0, Degree, action);
+    }
+    public void Dispose() { }
+}
+
 namespace Pow3r
 {
     internal sealed partial class Program

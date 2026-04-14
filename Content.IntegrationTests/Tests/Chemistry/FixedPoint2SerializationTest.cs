@@ -9,10 +9,13 @@ namespace Content.IntegrationTests.Tests.Chemistry
 {
     public sealed class FixedPoint2SerializationTest : SerializationTest
     {
-        protected override Assembly[] Assemblies =>
+        protected Assembly[] Assemblies =>
         [
             typeof(FixedPoint2SerializationTest).Assembly
         ];
+
+        protected override System.Reflection.Assembly[] Assemblies
+            => new[] { typeof(FixedPoint2SerializationTest).Assembly };
 
         [Test]
         public void DeserializeNullTest()

@@ -6,13 +6,7 @@ using Robust.UnitTesting.Shared.Serialization;
 
 namespace Robust.UnitTesting
 {
-    public enum UnitTestProject
-    {
-        Shared = 0,
-        Client = 1,
-        Server = 2,
-        Tools  = 3
-    }
+    public enum UnitTestProject { Shared, Client, Server, Tools }
 
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class)]
     public sealed class UnitTestProjectAttribute : Attribute
@@ -32,7 +26,10 @@ namespace Robust.UnitTesting
 
 namespace Robust.UnitTesting.Shared.Serialization
 {
-    public abstract class SerializationTest { }
+    public abstract class SerializationTest
+    {
+        protected virtual System.Reflection.Assembly[] Assemblies => Array.Empty<System.Reflection.Assembly>();
+    }
 }
 
 namespace Robust.UnitTesting.Shared

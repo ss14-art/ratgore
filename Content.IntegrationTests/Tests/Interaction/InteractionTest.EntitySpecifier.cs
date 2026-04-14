@@ -3,7 +3,7 @@ using Content.Shared.Stacks;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using static Robust.UnitTesting.RobustIntegrationTest;
+using Robust.UnitTesting.RobustIntegrationTest;
 
 namespace Content.IntegrationTests.Tests.Interaction;
 

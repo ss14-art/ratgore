@@ -5,7 +5,7 @@ using Content.Shared.Stacks;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using static Robust.UnitTesting.RobustIntegrationTest;
+using Robust.UnitTesting.RobustIntegrationTest;
 
 namespace Content.IntegrationTests.Tests.Interaction;
 
