@@ -14,7 +14,7 @@ namespace Content.Shared.Decals
     {
         [Access(Other = AccessPermissions.ReadExecute)]
         [DataField(serverOnly: true)]
-        public DecalGridChunkCollection ChunkCollection = new(new ());
+        public DecalGridChunkCollection ChunkCollection = new();
 
         /// <summary>
         ///     Dictionary mapping decals to their corresponding grid chunks.
