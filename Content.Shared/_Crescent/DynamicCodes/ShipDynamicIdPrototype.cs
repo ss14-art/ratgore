@@ -17,7 +17,7 @@ public sealed partial class ShipDynamicAccesMappingPrototype : IPrototype
 {
     /// <inheritdoc/>
     [IdDataField]
-    public string ID { get; } = default!;
+    public string ID { get; set; } = default!;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public Dictionary<string, HashSet<string>> accesIdentifierToEntity = default!;

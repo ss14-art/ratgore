@@ -5,8 +5,8 @@ namespace Content.Shared.Mind;
 /// <summary>
 ///     The core properties of Role Types
 /// </summary>
-[Prototype, Serializable]
-public sealed class RoleTypePrototype : IPrototype
+[Prototype]
+public sealed partial class RoleTypePrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;

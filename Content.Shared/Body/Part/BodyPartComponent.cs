@@ -229,7 +229,7 @@ public sealed partial class BodyPartComponent : Component, ISurgeryToolComponent
 /// Contains metadata about a body part in relation to its slot.
 /// </summary>
 [NetSerializable, Serializable]
-[DataRecord]
+[DataRecord, DataDefinition]
 public partial struct BodyPartSlot
 {
     public string Id;
@@ -246,7 +246,7 @@ public partial struct BodyPartSlot
 /// Contains metadata about an organ part in relation to its slot.
 /// </summary>
 [NetSerializable, Serializable]
-[DataRecord]
+[DataRecord, DataDefinition]
 public partial struct OrganSlot
 {
     public string Id;

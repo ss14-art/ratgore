@@ -18,8 +18,9 @@ SPDX-License-Identifier: MIT
 
   <ItemGroup>
     <ProjectReference Include="..\Content.ModuleManager\Content.ModuleManager.csproj" />
-    <ProjectReference Include="..\RobustToolbox\Robust.Packaging\Robust.Packaging.csproj" />
   </ItemGroup>
+
+  <Import Project="..\RobustToolbox\Imports\Packaging.props" />
 
   <ItemGroup>
     <PackageReference Include="AsmResolver" />

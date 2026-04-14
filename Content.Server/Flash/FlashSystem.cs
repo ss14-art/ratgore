@@ -109,7 +109,7 @@ namespace Content.Server.Flash
                 _popup.PopupEntity(Loc.GetString("flash-component-becomes-empty"), uid);
             }
 
-            uid.SpawnTimer(400, () =>
+            Timer.Spawn(TimeSpan.FromMilliseconds(400), () =>
             {
                 _appearance.SetData(uid, FlashVisuals.Flashing, false);
                 comp.Flashing = false;

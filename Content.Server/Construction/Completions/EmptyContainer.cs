@@ -4,6 +4,7 @@ using Content.Shared.Hands.Components;
 using JetBrains.Annotations;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
+using Robust.Shared.IoC;
 
 namespace Content.Server.Construction.Completions
 {
@@ -21,9 +22,11 @@ namespace Content.Server.Construction.Completions
 
         public void PerformAction(EntityUid uid, EntityUid? userUid, IEntityManager entityManager)
         {
-            if (!entityManager.TryGetComponent(uid, out ContainerManagerComponent? containerManager) ||
-                !containerManager.TryGetContainer(Container, out var container)) return;
-
+            if (!entityManager.TryGetComponent(uid, out ContainerManagerComponent? containerManager))
+                return;
+            var containers = IoCManager.Resolve<SharedContainerSystem>();
+            if (!containers.TryGetContainer(uid, Container, out var container, containerManager))
+                return;
             var containerSys = entityManager.EntitySysManager.GetEntitySystem<ContainerSystem>();
             var handSys = entityManager.EntitySysManager.GetEntitySystem<HandsSystem>();
 

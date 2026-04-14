@@ -8,7 +8,7 @@ namespace Content.Shared.Roles;
 [Prototype("faction")]
 public sealed partial class FactionPrototype : IPrototype
 {
-    [IdDataField] public string ID { get; } = default!;
+    [IdDataField] public string ID { get; private set; } = default!;
 
     [DataField("name", required: true)] public string Name = default!;
 

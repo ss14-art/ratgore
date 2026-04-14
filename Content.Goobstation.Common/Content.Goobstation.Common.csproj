@@ -9,8 +9,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>$(TargetFramework)</TargetFramework>
-        <LangVersion>12</LangVersion>
+        <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>14</LangVersion>
         <IsPackable>false</IsPackable>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <WarningsAsErrors>nullable</WarningsAsErrors>
@@ -19,8 +19,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <ItemGroup>
       <ProjectReference Include="..\Content.ModuleManager\Content.ModuleManager.csproj" />
-      <ProjectReference Include="..\RobustToolbox\Robust.Shared\Robust.Shared.csproj" />
     </ItemGroup>
+
+    <Import Project="..\RobustToolbox\Imports\Shared.props" />
 
     <ItemGroup>
       <Folder Include="Temperature\" />
