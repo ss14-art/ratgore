@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
 using Robust.Shared.Utility;
+using Robust.Shared.IoC;
 
 namespace Content.Server.Construction.Conditions
 {
@@ -39,8 +40,11 @@ namespace Content.Server.Construction.Conditions
 
             var entity = args.Examined;
 
-            if (!IoCManager.Resolve<IEntityManager>().TryGetComponent(entity, out ContainerManagerComponent? containerManager) ||
-                !containerManager.TryGetContainer(Container, out var container)) return false;
+            if (!IoCManager.Resolve<IEntityManager>().TryGetComponent(entity, out ContainerManagerComponent? containerManager))
+                return false;
+            var containers = IoCManager.Resolve<SharedContainerSystem>();
+            if (!containers.TryGetContainer(entity, Container, out var container, containerManager))
+                return false;
 
             if (container.ContainedEntities.Count == 0)
                 return false;
