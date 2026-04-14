@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Robust.UnitTesting.Shared.Serialization;
 
 #pragma warning disable CS0436
 
@@ -29,21 +30,30 @@ namespace Robust.UnitTesting
     }
 }
 
+namespace Robust.UnitTesting.Shared.Serialization
+{
+    public abstract class SerializationTest { }
+}
+
 namespace Robust.UnitTesting.Shared
 {
-            public abstract class SerializationTest { }
+    public abstract class SerializationTest { }
 }
 
 namespace Robust.UnitTesting.RobustIntegrationTest
 {
-        public sealed class ServerIntegrationInstance { }
+    public class IntegrationInstance { }
+    public sealed class ServerIntegrationInstance { }
     public sealed class ClientIntegrationInstance { }
+    public sealed class IntegrationOptions { }
 }
 
 namespace RobustIntegrationTest
 {
+    public class IntegrationInstance { }
     public sealed class ServerIntegrationInstance { }
     public sealed class ClientIntegrationInstance { }
+    public sealed class IntegrationOptions { }
 }
 
 #pragma warning restore CS0436
