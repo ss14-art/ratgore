@@ -6,6 +6,7 @@ using Robust.Shared.CPUJob.JobQueues.Queues;
 using NUnit.Framework;
 using Robust.Shared.Timing;
 using Robust.UnitTesting;
+using NUnit.Framework;
 
 namespace Content.Tests.Server.Jobs
 {
@@ -47,15 +48,18 @@ namespace Content.Tests.Server.Jobs
 
             queue.Process();
             Assert.That(job.Status, Is.EqualTo(JobStatus.Paused));
-            Assert.That((float)job.DebugTime, new ApproxEqualityConstraint(1f));
+            Assert.That(swA.Elapsed, Is.EqualTo(TimeSpan.FromSeconds(1.0)).Within(TimeSpan.FromMilliseconds(1)));
+            Assert.That(swB.Elapsed, Is.EqualTo(TimeSpan.FromSeconds(1.0)).Within(TimeSpan.FromMilliseconds(1)));
             queue.Process();
             Assert.That(job.Status, Is.EqualTo(JobStatus.Paused));
-            Assert.That((float)job.DebugTime, new ApproxEqualityConstraint(2f));
+            Assert.That(swA.Elapsed, Is.EqualTo(TimeSpan.FromSeconds(2.0)).Within(TimeSpan.FromMilliseconds(1)));
+            Assert.That(swB.Elapsed, Is.EqualTo(TimeSpan.FromSeconds(2.0)).Within(TimeSpan.FromMilliseconds(1)));
             queue.Process();
             Assert.That(job.Status, Is.EqualTo(JobStatus.Finished));
 
             Assert.That(job.Result, Is.EqualTo("foo!"));
-            Assert.That((float)job.DebugTime, new ApproxEqualityConstraint(2.4f));
+            Assert.That(swA.Elapsed, Is.EqualTo(TimeSpan.FromSeconds(2.4)).Within(TimeSpan.FromMilliseconds(1)));
+            Assert.That(swB.Elapsed, Is.EqualTo(TimeSpan.FromSeconds(2.4)).Within(TimeSpan.FromMilliseconds(1)));
         }
 
         [Test]
@@ -77,7 +81,8 @@ namespace Content.Tests.Server.Jobs
             cts.Cancel();
             queue.Process();
             Assert.That(job.Status, Is.EqualTo(JobStatus.Finished));
-            Assert.That((float)job.DebugTime, new ApproxEqualityConstraint(2.0f));
+            Assert.That(swA.Elapsed, Is.EqualTo(TimeSpan.FromSeconds(2.0)).Within(TimeSpan.FromMilliseconds(1)));
+            Assert.That(swB.Elapsed, Is.EqualTo(TimeSpan.FromSeconds(2.0)).Within(TimeSpan.FromMilliseconds(1)));
 
             Assert.That(job.Result, Is.Null);
         }
