@@ -52,6 +52,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="MathNet.Numerics" PrivateAssets="All" />
     <PackageReference Include="QRCoder" />
+    <PackageReference Include="prometheus-net" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" />
+    <PackageReference Include="YamlDotNet" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="SixLabors.ImageSharp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Content.Packaging\Content.Packaging.csproj" />

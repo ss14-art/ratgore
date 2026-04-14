@@ -49,6 +49,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <PackageReference Include="Nett" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="MathNet.Numerics" PrivateAssets="All" />
+    <PackageReference Include="YamlDotNet" />
+    <PackageReference Include="SixLabors.ImageSharp" />
+    <PackageReference Include="Pidgin" />
+    <PackageReference Include="prometheus-net" />
+    <PackageReference Include="OpenTK" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Content.Goobstation.Shared\Content.Goobstation.Shared.csproj" />
