@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Content.Server.Power.Pow3r;
 using Robust.Shared.Threading;
-using Robust.UnitTesting;
+// using Robust.UnitTesting; // not needed anymore
 using static Content.Server.Power.Pow3r.PowerState;
 
 
