@@ -16,5 +16,5 @@ public sealed partial class SalvageMapPrototype : IPrototype
     /// <summary>
     /// DeltaV - Used for getting the proper name for the map
     /// </summary>
-    [DataField] public string Size { get; } = "unknown";
+    [DataField] public string Size { get; set; } = "unknown";
 }

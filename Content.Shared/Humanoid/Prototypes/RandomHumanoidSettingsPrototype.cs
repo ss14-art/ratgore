@@ -12,10 +12,10 @@ public sealed partial class RandomHumanoidSettingsPrototype : IPrototype, IInher
     [IdDataField] public string ID { get; private set; } = default!;
 
     [ParentDataField(typeof(PrototypeIdArraySerializer<RandomHumanoidSettingsPrototype>))]
-    public string[]? Parents { get; }
+    public string[]? Parents { get; private set; }
 
     [AbstractDataField]
-    public bool Abstract { get; }
+    public bool Abstract { get; private set; }
 
     /// <summary>
     ///     Whether the humanoid's name should take from the randomized profile or not.
