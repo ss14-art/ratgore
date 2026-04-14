@@ -20,4 +20,7 @@ public sealed partial class ShopInventoryPrototype : IPrototype
 }
 
 [DataRecord, DataDefinition, Serializable]
-public partial record struct ShopListing(EntProtoId Id, uint Cost);
+public partial record struct ShopListing(EntProtoId Id, uint Cost)
+{
+    public ShopListing() : this(default, default) { }
+}

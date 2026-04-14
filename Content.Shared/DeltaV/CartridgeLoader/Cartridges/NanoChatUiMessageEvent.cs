@@ -155,6 +155,8 @@ public readonly partial struct NanoChatData(
     public Dictionary<uint, List<NanoChatMessage>> Messages { get; } = messages;
     public uint? CardNumber { get; } = cardNumber;
     public NetEntity Card { get; } = card;
+
+    public NanoChatData() : this(new(), new(), null, default) { }
 }
 
 /// <summary>
