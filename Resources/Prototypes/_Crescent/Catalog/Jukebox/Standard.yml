@@ -11,35 +11,10 @@
     path: /Audio/_Crescent/Jukebox/title3.ogg
 
 - type: jukebox
-  id: Constellations
-  name: Qwertyquerty - Constellations
-  path:
-    path: /Audio/_Crescent/Jukebox/constellations.ogg
-
-- type: jukebox
-  id: Drifting
-  name: Qwertyquerty - Drifting
-  path:
-    path: /Audio/_Crescent/Jukebox/drifting.ogg
-
-- type: jukebox
-  id: starlight
-  name: Qwertyquerty - Starlight
-  path:
-    path: /Audio/_Crescent/Jukebox/starlight.ogg
-
-
-- type: jukebox
   id: FlipFlap
   name: X-CEED - Flip Flap
   path:
     path: /Audio/_Crescent/Jukebox/flip-flap.ogg
-
-- type: jukebox
-  id: BeHereAWhile
-  name: 311 - I'll Be Here A While
-  path:
-    path: /Audio/_Crescent/Jukebox/behereawhile.ogg
 
 - type: jukebox
   id: BlueMonday
@@ -54,46 +29,16 @@
     path: /Audio/_Crescent/Jukebox/ifoughtthelaw.ogg
 
 - type: jukebox
-  id: MoneyPinkFloyd
-  name: Pink Floyd - Money
-  path:
-    path: /Audio/_Crescent/Jukebox/moneypinkfloydcover.ogg
-
-- type: jukebox
   id: Luftballoons
   name: Nena - Luftballoons
   path:
     path: /Audio/_Crescent/Jukebox/luftballoons.ogg
 
 - type: jukebox
-  id: AllAlong
-  name: Jimi Hendrix - All Along the Watchtower
-  path:
-    path: /Audio/_Crescent/Jukebox/allalong.ogg
-
-- type: jukebox
   id: FeelGood
   name: Thia Megia - Feel Good
   path:
     path: /Audio/_Crescent/Jukebox/feelgood.ogg
-
-- type: jukebox
-  id: Madmen
-  name: Propaganda - Mad Men
-  path:
-    path: /Audio/_Crescent/Jukebox/madmen.ogg
-
-- type: jukebox
-  id: LifeOnMars
-  name: Olivia Kuper Harris - Life on Mars
-  path:
-    path: /Audio/_Crescent/Jukebox/lifeonmars.ogg
-
-- type: jukebox
-  id: Neverhood
-  name: Terry Scott Taylor - Neverhood
-  path:
-    path: /Audio/_Crescent/Jukebox/neverhood.ogg
 
 - type: jukebox
   id: Davai
@@ -106,12 +51,6 @@
   name: Joshua James - Power In The Union
   path:
     path: /Audio/_Crescent/Jukebox/PowerInTheUnion.ogg
-
-- type: jukebox
-  id: WhichSideAreYouOn
-  name: Florence Reece - Which Side Are You On?
-  path:
-    path: /Audio/_Crescent/Jukebox/WhichSideAreYouOn.ogg
 
 - type: jukebox
   id: Quake2QuadMachine
@@ -144,28 +83,10 @@
     path: "/Audio/_Crescent/Jukebox/Break.ogg"
 
 - type: jukebox
-  id: LadikerfosSong
-  name: KEYGEN CHURCH - L A D I K E R F O S
-  path:
-    path: "/Audio/_Crescent/Jukebox/Ladikerfos.ogg"
-
-- type: jukebox
-  id: WitchSong
-  name: Total Dead Center - Witch
-  path:
-    path: "/Audio/_Crescent/Jukebox/Witch.ogg"
-
-- type: jukebox
   id: BadBoysSong
   name: Inner Circle - Bad boys
   path:
     path: "/Audio/_Crescent/Jukebox/badboys.ogg"
-
-- type: jukebox
-  id: BanditSong
-  name: GSC Game World - Bandit radio
-  path:
-    path: "/Audio/_Crescent/Jukebox/bandit.ogg"
 
 - type: jukebox
   id: FreedomSong
@@ -178,18 +99,6 @@
   name: Creedence Clearwater Revival - Fortunate son
   path:
     path: "/Audio/_Crescent/Jukebox/fortunate.ogg"
-
-- type: jukebox
-  id: WhatItsWorthSong
-  name: Buffalo Springfield - For what its worth
-  path:
-    path: "/Audio/_Crescent/Jukebox/whatitsworth.ogg"
-
-- type: jukebox
-  id: WorldOnFireSong
-  name: The Ink Spots - I don't want to set the world on fire
-  path:
-    path: "/Audio/_Crescent/Jukebox/worldonfire.ogg"
 
 - type: jukebox
   id: LittleDarkAgeSong
@@ -208,12 +117,6 @@
   name: Muhamed Brkić - Bonska artiljerija
   path:
     path: "/Audio/_Crescent/Jukebox/artiljerija.ogg"
-
-- type: jukebox
-  id: BeyondTheSeaSong
-  name: Robbie Williams - Beyond the sea
-  path:
-    path: "/Audio/_Crescent/Jukebox/beyondthesea.ogg"
 
 - type: jukebox
   id: AtasSong
@@ -246,12 +149,6 @@
     path: "/Audio/_Crescent/Jukebox/bloodtype.ogg"
 
 - type: jukebox
-  id: BlueMoonSong
-  name: Lorenz Hart - Blue moon
-  path:
-    path: "/Audio/_Crescent/Jukebox/bluemoon.ogg"
-
-- type: jukebox
   id: JingleSong
   name: Frank Loesser - Jingle jangle jingle
   path:
@@ -270,58 +167,10 @@
     path: "/Audio/_Crescent/Jukebox/invisible.ogg"
 
 - type: jukebox
-  id: VolcanicsTheBaronSong
-  name: The Volcanics - The Baron
-  path:
-    path: "/Audio/_Crescent/Jukebox/volcanics_thebaron.ogg"
-
-- type: jukebox
-  id: DeepInHerEyesSong
-  name: Skaven - Deep In Her Eyes
-  path:
-    path: "/Audio/_Crescent/Jukebox/deepinhereyes.ogg"
-
-- type: jukebox
-  id: AmarilloByMorningSong
-  name: George Strait - Amarillo by Morning
-  path:
-    path: "/Audio/_Crescent/Jukebox/amarillobymorning.ogg"
-
-- type: jukebox
-  id: BigJohnSong
-  name: Jimmy Dean - Big John
-  path:
-    path: "/Audio/_Crescent/Jukebox/bigjohn.ogg"
-
-- type: jukebox
-  id: HeStoppedLovingHerTodaySong
-  name: George Jones - He Stopped Loving Her Today
-  path:
-    path: "/Audio/_Crescent/Jukebox/hestoppedlovinghertoday.ogg"
-
-- type: jukebox
-  id: BigIronSong
-  name: Marty Robbins - Big Iron (Texas Red)
-  path:
-    path: "/Audio/_Crescent/Jukebox/bigiron.ogg"
-
-- type: jukebox
-  id: CountryRoadsSong
-  name: John Denver - Take Me Home, Country Roads
-  path:
-    path: "/Audio/_Crescent/Jukebox/countryroads.ogg"
-
-- type: jukebox
   id: EveSong
   name: John Hallur - Below the Asteroids
   path:
     path: "/Audio/_Crescent/Jukebox/belowtheasteroids.ogg"
-
-- type: jukebox
-  id: TruckerSong
-  name: Jerry Reed - Caffein, Nicotine, Benzedrine
-  path:
-    path: "/Audio/_Crescent/Jukebox/benzedrine.ogg"
 
 - type: jukebox
   id: SBismarckSong
@@ -336,28 +185,10 @@
     path: "/Audio/_Crescent/Jukebox/downinahole.ogg"
 
 - type: jukebox
-  id: CadillacSong
-  name: Dwight Yoakam - Guitars, Cadillacs
-  path:
-    path: "/Audio/_Crescent/Jukebox/guitarscadillacs.ogg"
-
-- type: jukebox
   id: CorpoSong
   name: Orange Sector - Farben
   path:
     path: "/Audio/_Crescent/Jukebox/farben.ogg"
-
-- type: jukebox
-  id: HippieSong
-  name: Fleetwood Mac - Rhiannon
-  path:
-    path: "/Audio/_Crescent/Jukebox/rhiannon.ogg"
-
-- type: jukebox
-  id: DSMLarpSong
-  name: Valkyrie Ha
-  path:
-    path: "/Audio/_Crescent/Jukebox/valkyrieha.ogg"
 
 - type: jukebox
   id: SlaughterSong
@@ -371,33 +202,188 @@
   path:
     path: "/Audio/_Crescent/Jukebox/WhirlingInRags.ogg"
 
-
 - type: jukebox
   id: PiosenkaOPrzekonaniach
   name: Adam Mateusz Brozynski - Piosenka o Przekonaniach
   path:
     path: "/Audio/_Crescent/Jukebox/przekonania.ogg"
-    
-- type: jukebox
-  id: ElCarterdelosSaposl
-  name: Ratony Queso - El Carterdelos Saposl
-  path:
-    path: "/Audio/_Crescent/Jukebox/ratonyqueso.ogg"
 
 - type: jukebox
   id: Stalkersong
   name: Unbalanced Pieces - Soulsavers
   path:
     path: "/Audio/_Crescent/Jukebox/unbalancedpieces.ogg"
-    
-- type: jukebox
-  id: acid1
-  name: The Night Creeper - Uncle Acid
-  path:
-    path: "/Audio/_Crescent/Jukebox/thenightcreeper.ogg"
-    
+
 - type: jukebox
   id: acid2
   name: Death's Door - Uncle Acid
   path:
     path: "/Audio/_Crescent/Jukebox/deathsdoor.ogg"
+
+- type: jukebox
+  id: comministsong1
+  name: Commintern - Motherland First
+  path:
+    path: "/Audio/_Crescent/Jukebox/motherlandfirst.ogg"
+
+- type: jukebox
+  id: herosong1
+  name: Hero Cosmic - Temparance
+  path:
+    path: "/Audio/_Crescent/Jukebox/herocosmic.ogg"
+
+- type: jukebox
+  id: herosong2
+  name: Hero Killer - Chase
+  path:
+    path: "/Audio/_Crescent/Jukebox/herokiller.ogg"
+
+- type: jukebox
+  id: herosong3
+  name: Hero Star - Judgement
+  path:
+    path: "/Audio/_Crescent/Jukebox/herostar.ogg"
+
+- type: jukebox
+  id: defenceofmoscow
+  name: Defence of Moscow
+  path:
+    path: "/Audio/_Crescent/Jukebox/defenceofmoscow.ogg"
+
+- type: jukebox
+  id: sbstprimo
+  name: SBST - Primo Victoria
+  path:
+    path: "/Audio/_Crescent/Jukebox/sbstprimovictoria.ogg"
+
+- type: jukebox
+  id: sbstwitches
+  name: SBST - Night Witches
+  path:
+    path: "/Audio/_Crescent/Jukebox/sbstnightwitches.ogg"
+
+- type: jukebox
+  id: yanekazanova1
+  name: Ya Ne Kazanova
+  path:
+    path: "/Audio/_Crescent/Jukebox/yanekazanova.ogg"
+
+- type: jukebox
+  id: rallyfm1
+  name: Rally FM - Rally Station 2
+  path:
+    path: "/Audio/_Crescent/Jukebox/rallyfm.ogg"
+
+- type: jukebox
+  id: taleryn1
+  name: Taleryn Radio - Wasted Affairs
+  path:
+    path: "/Audio/_Crescent/Jukebox/wastedaffairs.ogg"
+
+- type: jukebox
+  id: taleryn2
+  name: Taleryn Radio - Fool Moon
+  path:
+    path: "/Audio/_Crescent/Jukebox/foolmoon.ogg"
+
+- type: jukebox
+  id: taleryn3
+  name: Taleryn Radio - Cool To Be Unhappy
+  path:
+    path: "/Audio/_Crescent/Jukebox/cooltobeunhappy.ogg"
+
+- type: jukebox
+  id: taleryn4
+  name: Taleryn Radio - F song
+  path:
+    path: "/Audio/_Crescent/Jukebox/fsong.ogg"
+
+- type: jukebox
+  id: taleryn5
+  name: Taleryn Radio - We're Getting There
+  path:
+    path: "/Audio/_Crescent/Jukebox/wearegettingthere.ogg"
+
+- type: jukebox
+  id: taleryn6
+  name: Taleryn Radio - Vacations/Telephones
+  path:
+    path: "/Audio/_Crescent/Jukebox/vacationstelephones.ogg"
+
+- type: jukebox
+  id: discoinferno.ogg
+  name: Disco Inferno
+  path:
+    path: /Audio/_Crescent/Jukebox/discoinferno.ogg
+
+- type: jukebox
+  id: drevnerusskomvoine.ogg
+  name: Drevne Russkom - Voine
+  path:
+    path: /Audio/_Crescent/Jukebox/drevnerusskomvoine.ogg
+
+- type: jukebox
+  id: fallenkingdom.ogg
+  name: Fallen Kingdom
+  path:
+    path: /Audio/_Crescent/Jukebox/fallenkingdom.ogg
+
+- type: jukebox
+  id: futureclub.ogg
+  name: Future Club
+  path:
+    path: /Audio/_Crescent/Jukebox/futureclub.ogg
+
+- type: jukebox
+  id: gunhag.ogg
+  name: Gunhag
+  path:
+    path: /Audio/_Crescent/Jukebox/gunhag.ogg
+
+- type: jukebox
+  id: kingofthestreets.ogg
+  name: King of Streets
+  path:
+    path: /Audio/_Crescent/Jukebox/kingofthestreets.ogg
+
+- type: jukebox
+  id: krovzakrov.ogg
+  name: Krovzakrov
+  path:
+    path: /Audio/_Crescent/Jukebox/krovzakrov.ogg
+
+- type: jukebox
+  id: maximuminstinct.ogg
+  name: Maximum Instinct
+  path:
+    path: /Audio/_Crescent/Jukebox/maximuminstinct.ogg
+
+- type: jukebox
+  id: narc.ogg
+  name: Narc
+  path:
+    path: /Audio/_Crescent/Jukebox/narc.ogg
+
+- type: jukebox
+  id: nikita.ogg
+  name: Nikita
+  path:
+    path: /Audio/_Crescent/Jukebox/nikita.ogg
+
+- type: jukebox
+  id: goldenbrown
+  name: Golden Brown
+  path:
+    path: /Audio/_Crescent/Jukebox/goldenbrown.ogg
+
+- type: jukebox
+  id: fullthrottle
+  name: Full Throttle
+  path:
+    path: /Audio/_Crescent/Jukebox/fullthrottle.ogg
+
+- type: jukebox
+  id: darkfantasy
+  name: Dark Fantasy
+  path:
+    path: /Audio/_Crescent/Jukebox/darkfantasy.ogg
