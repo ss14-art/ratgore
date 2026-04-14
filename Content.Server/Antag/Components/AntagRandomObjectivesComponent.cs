@@ -27,8 +27,8 @@ public sealed partial class AntagRandomObjectivesComponent : Component
 /// A set of objectives to try picking.
 /// Difficulty is checked over all sets, but each set has its own probability and pick count.
 /// </summary>
-[DataRecord]
-public record struct AntagObjectiveSet()
+[DataRecord, DataDefinition]
+public partial record struct AntagObjectiveSet()
 {
     /// <summary>
     /// The grouping used by the objective system to pick random objectives.

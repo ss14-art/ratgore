@@ -2,5 +2,5 @@
 namespace Content.Shared.Entry;
 
 [ByRefEvent]
-public class PostInitEvent : EntityEventArgs ;
+public sealed class PostInitEvent : EntityEventArgs ;
 

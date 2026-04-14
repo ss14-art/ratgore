@@ -17,8 +17,8 @@ public sealed partial class GridSpawnComponent : Component
     [DataField(required: true)] public Dictionary<string, GridSpawnGroup> Groups = new();
 }
 
-[DataRecord]
-public record struct GridSpawnGroup
+[DataRecord, DataDefinition]
+public partial record struct GridSpawnGroup
 {
     public List<ResPath> Paths = new();
     public int MinCount = 1;

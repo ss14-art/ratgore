@@ -428,7 +428,7 @@ public abstract class SharedAnomalySystem : EntitySystem
     }
 }
 
-[DataRecord]
+[DataRecord, DataDefinition]
 public partial record struct AnomalySpawnSettings()
 {
     /// <summary>

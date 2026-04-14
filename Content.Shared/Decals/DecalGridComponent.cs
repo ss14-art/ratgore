@@ -54,10 +54,12 @@ namespace Content.Shared.Decals
             }
         }
 
-        [DataRecord, Serializable, NetSerializable]
-        public record DecalGridChunkCollection(Dictionary<Vector2i, DecalChunk> ChunkCollection)
+        [DataRecord, DataDefinition, Serializable, NetSerializable]
+        public partial record DecalGridChunkCollection(Dictionary<Vector2i, DecalChunk> ChunkCollection)
         {
             public uint NextDecalId;
+
+            public DecalGridChunkCollection() : this(new()) {}
         }
     }
 

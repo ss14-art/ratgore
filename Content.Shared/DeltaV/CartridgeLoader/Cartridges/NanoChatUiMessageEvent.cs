@@ -59,8 +59,8 @@ public enum NanoChatUiMessageType : byte
 }
 
 // putting this here because i can
-[Serializable, NetSerializable, DataRecord]
-public struct NanoChatRecipient
+[Serializable, NetSerializable, DataRecord, DataDefinition]
+public partial struct NanoChatRecipient
 {
     /// <summary>
     ///     The recipient's unique NanoChat number.
@@ -98,8 +98,8 @@ public struct NanoChatRecipient
     }
 }
 
-[Serializable, NetSerializable, DataRecord]
-public struct NanoChatMessage
+[Serializable, NetSerializable, DataRecord, DataDefinition]
+public partial struct NanoChatMessage
 {
     public const int MaxContentLength = 256;
 
@@ -144,8 +144,8 @@ public struct NanoChatMessage
 ///     NanoChat log data struct
 /// </summary>
 /// <remarks>Used by the LogProbe</remarks>
-[Serializable, NetSerializable, DataRecord]
-public readonly struct NanoChatData(
+[Serializable, NetSerializable, DataRecord, DataDefinition]
+public readonly partial struct NanoChatData(
     Dictionary<uint, NanoChatRecipient> recipients,
     Dictionary<uint, List<NanoChatMessage>> messages,
     uint? cardNumber,

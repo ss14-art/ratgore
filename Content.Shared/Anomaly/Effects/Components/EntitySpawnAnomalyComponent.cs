@@ -13,7 +13,7 @@ public sealed partial class EntitySpawnAnomalyComponent : Component
     public List<EntitySpawnSettingsEntry> Entries = new();
 }
 
-[DataRecord]
+[DataRecord, DataDefinition]
 public partial record struct EntitySpawnSettingsEntry()
 {
     /// <summary>

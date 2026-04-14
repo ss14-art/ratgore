@@ -7,7 +7,7 @@ namespace Content.Shared.DeltaV.VendingMachines;
 /// Similar to <c>VendingMachineInventoryPrototype</c> but for <see cref="ShopVendorComponent"/>.
 /// </summary>
 [Prototype]
-public sealed class ShopInventoryPrototype : IPrototype
+public sealed partial class ShopInventoryPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;
@@ -19,5 +19,5 @@ public sealed class ShopInventoryPrototype : IPrototype
     public List<ShopListing> Listings = new();
 }
 
-[DataRecord, Serializable]
-public record struct ShopListing(EntProtoId Id, uint Cost);
+[DataRecord, DataDefinition, Serializable]
+public partial record struct ShopListing(EntProtoId Id, uint Cost);

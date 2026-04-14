@@ -14,7 +14,7 @@ public sealed partial class TileSpawnAnomalyComponent : Component
     public List<TileSpawnSettingsEntry> Entries = new();
 }
 
-[DataRecord]
+[DataRecord, DataDefinition]
 public partial record struct TileSpawnSettingsEntry()
 {
     /// <summary>
