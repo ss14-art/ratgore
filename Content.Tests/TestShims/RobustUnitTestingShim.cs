@@ -1,4 +1,4 @@
-﻿// Minimal shims to decouple tests from Robust.UnitTesting engine library
+// Minimal shims to decouple tests from Robust.UnitTesting engine library
 // while preserving the public surface area used by existing tests.
 using System;
 using System.Reflection;
