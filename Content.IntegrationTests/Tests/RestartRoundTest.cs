@@ -26,7 +26,7 @@ namespace Content.IntegrationTests.Tests
                 sysManager.GetEntitySystem<GameTicker>().RestartRound();
             });
 
-            await pair.RunUntilSynced();
+            await RunUntilSynced();
         }
     }
 }

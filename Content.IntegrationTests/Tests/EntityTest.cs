@@ -187,7 +187,7 @@ namespace Content.IntegrationTests.Tests
                 }
             });
 
-            await pair.RunUntilSynced();
+            await RunUntilSynced();
 
             // Make sure the client actually received the entities
             // 500 is completely arbitrary. Note that the client & sever entity counts aren't expected to match.

@@ -30,7 +30,7 @@ namespace Content.IntegrationTests.Tests.Commands
             var entityManager = server.ResolveDependency<IEntityManager>();
             var gameTicker = entityManager.System<GameTicker>();
 
-            await pair.RunUntilSynced();
+            await RunUntilSynced();
 
             GameTick tickBeforeRestart = default;
 
@@ -61,7 +61,7 @@ namespace Content.IntegrationTests.Tests.Commands
                 Assert.That(tickBeforeRestart, Is.LessThan(tickAfterRestart));
             });
 
-            await pair.RunUntilSynced();
+            await RunUntilSynced();
         }
     }
 }
