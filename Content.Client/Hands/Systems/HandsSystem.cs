@@ -30,6 +30,7 @@ namespace Content.Client.Hands.Systems
         [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
         [Dependency] private readonly StrippableSystem _stripSys = default!;
         [Dependency] private readonly ExamineSystem _examine = default!;
+        [Dependency] private readonly DisplacementMapSystem _displacement = default!;
 
         public event Action<string, HandLocation>? OnPlayerAddHand;
         public event Action<string>? OnPlayerRemoveHand;
@@ -381,6 +382,14 @@ namespace Content.Client.Hands.Systems
                 }
 
                 sprite.LayerSetData(index, layerData);
+
+                if (hand.Location == HandLocation.Left && handComp.LeftHandDisplacement is not null)
+                    _displacement.TryAddDisplacement(handComp.LeftHandDisplacement, sprite, index, key, revealedLayers);
+                else if (hand.Location == HandLocation.Right && handComp.RightHandDisplacement is not null)
+                    _displacement.TryAddDisplacement(handComp.RightHandDisplacement, sprite, index, key, revealedLayers);
+                //Fallback to default displacement map
+                else if (handComp.HandDisplacement is not null)
+                    _displacement.TryAddDisplacement(handComp.HandDisplacement, sprite, index, key, revealedLayers);
             }
 
             RaiseLocalEvent(held, new HeldVisualsUpdatedEvent(uid, revealedLayers), true);
