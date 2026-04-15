@@ -144,7 +144,6 @@ namespace Content.IntegrationTests.Tests.Damageable
             });
 
             await server.WaitRunTicks(5);
-
             await server.WaitAssertion(() =>
             {
                 var uid = sDamageableEntity;

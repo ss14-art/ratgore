@@ -58,6 +58,26 @@ namespace Content.Shared.Damage
             _damageableQuery = GetEntityQuery<DamageableComponent>();
         }
 
+        public DamageSpecifier? ChangeDamage(EntityUid uid, DamageSpecifier damage, bool ignoreResistances = false,
+            EntityUid? origin = null)
+            => TryChangeDamage(uid, damage, ignoreResistances, origin: origin);
+
+        public FixedPoint2 GetTotalDamage(Entity<DamageableComponent> ent)
+            => ent.Comp.TotalDamage;
+
+        public DamageSpecifier GetAllDamage(EntityUid uid)
+        {
+            if (!TryComp<DamageableComponent>(uid, out var comp))
+                return new DamageSpecifier();
+            return comp.Damage;
+        }
+
+        public Dictionary<string, FixedPoint2> GetDamagePerGroup(Entity<DamageableComponent> ent)
+            => ent.Comp.DamagePerGroup;
+
+        public void ClearAllDamage(Entity<DamageableComponent> ent)
+            => SetAllDamage(ent.Owner, ent.Comp, FixedPoint2.Zero);
+
         /// <summary>
         ///     Initialize a damageable component
         /// </summary>
@@ -380,6 +400,11 @@ namespace Content.Shared.Damage
                 component.Damage = newDamage;
                 DamageChanged(uid, component, delta);
             }
+        }
+
+        public void SetAllDamage((EntityUid sDamageableEntity, DamageableComponent sDamageableComponent) uid, int component)
+        {
+            throw new NotImplementedException();
         }
     }
 

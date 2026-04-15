@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Diagnostics;
 
-namespace Content.Server.Maps;
+namespace Content.Shared.Maps;
 
 /// <summary>
 /// Prototype data for a game map.
