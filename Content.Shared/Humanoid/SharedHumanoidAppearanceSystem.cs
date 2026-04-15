@@ -58,13 +58,13 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     public const string DefaultLifepath = "Spacer";
 
     // Art-TTS Start
-    public const string DefaultVoice = "zeus_dota_2";
+    public const string DefaultVoice = "Sniper";
 
     public static readonly Dictionary<Sex, string> DefaultSexVoice = new()
     {
-        { Sex.Male, "zeus_dota_2" },
-        { Sex.Female, "lina_dota_2" },
-        { Sex.Unsexed, "gman" },
+        { Sex.Male, "Sniper" },
+        { Sex.Female, "LinaDota2" },
+        { Sex.Unsexed, "Vance" },
     };
     // Art-TTS End
 

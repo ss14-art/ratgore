@@ -109,8 +109,7 @@
     - None
   - type: Dispenser
     defaultItem: TradeDeedStub
-    SalesAccumulator: 2
-    dynamicInventory:  
+    dynamicInventory:
     ### Производство
       # БМС
       TradeGoodWine: 24000
@@ -155,8 +154,7 @@
   components:
   - type: Dispenser
     defaultItem: TradeDeedStub
-    SalesAccumulator: 2
-    dynamicInventory:  
+    dynamicInventory:
     ### Производство
       # ЛРНП
       TradeGoodUnionWeapon: 16000
@@ -201,8 +199,7 @@
   components:
   - type: Dispenser
     defaultItem: TradeDeedStub
-    SalesAccumulator: 2
-    dynamicInventory:  
+    dynamicInventory:
     ### Производство
       # БМС
       TradeGoodWine: 16000
@@ -245,8 +242,7 @@
   components:
   - type: Dispenser
     defaultItem: TradeDeedStub
-    SalesAccumulator: 2
-    dynamicInventory:  
+    dynamicInventory:
     ### Производство
       # БМС
       TradeGoodWine: 16000

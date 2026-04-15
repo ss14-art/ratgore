@@ -5,137 +5,116 @@
 - type: latheRecipe
   id: WeaponTurretSmallMachinegunFlatpack
   result: WeaponTurretSmallMachinegunFlatpack
-  category: Devices
   completetime: 20
   materials:
-    Steel: 50
-    Copper: 30
-    Glass: 40
-    Plasma: 10
+    Steel: 500
+    Copper: 300
+    Glass: 400
+    Plasma: 100
 
 - type: latheRecipe
   id: WeaponTurretMediumMachinegunFlatpack
   result: WeaponTurretMediumMachinegunFlatpack
-  category: Devices
   completetime: 25
   materials:
-    Steel: 70
-    Copper: 35
-    Glass: 60
-    Plasma: 15
+    Steel: 700
+    Copper: 350
+    Glass: 600
+    Plasma: 150
 
 - type: latheRecipe
   id: BaseWeaponTurretShortbowFlatpack
   result: BaseWeaponTurretShortbowFlatpack
-  category: Devices
   completetime: 30
   materials:
-    Steel: 80
-    Copper: 40
-    Glass: 100
-    Plasma: 30
+    Steel: 800
+    Copper: 400
+    Glass: 1000
+    Plasma: 300
 
 # Primary Artillery - Tier 2 (medium-high weapons)
 
 - type: latheRecipe
   id: WeaponTurretSmallArtilleryFlatpack
   result: WeaponTurretSmallArtilleryFlatpack
-  category: Devices
   completetime: 28
   materials:
-    Steel: 60
-    Copper: 30
-    Glass: 80
-    Plasma: 25
+    Steel: 600
+    Copper: 300
+    Glass: 800
+    Plasma: 250
 
 - type: latheRecipe
   id: WeaponTurretLargeMachinegunFlatpack
   result: WeaponTurretLargeMachinegunFlatpack
-  category: Devices
   completetime: 35
   materials:
-    Steel: 200
-    Copper: 100
-    Glass: 150
-    Plasma: 100
-    TungstenCarbide: 45
-    Gold: 60
+    Steel: 2000
+    Copper: 1000
+    Glass: 1500
+    Tungsten: 1000
 
 - type: latheRecipe
   id: BaseWeaponTurretAzimuthFlatpack
   result: BaseWeaponTurretAzimuthFlatpack
-  category: Devices
   completetime: 40
   materials:
-    Steel: 140
-    Copper: 70
-    Glass: 80
-    Plasma: 60
-    TungstenCarbide: 20
+    Steel: 1400
+    Copper: 700
+    Glass: 800
+    Plasma: 600
 
 - type: latheRecipe
   id: BaseWeaponTurretArbalestFlatpack
   result: BaseWeaponTurretArbalestFlatpack
-  category: Devices
   completetime: 38
   materials:
-    Steel: 220
-    Copper: 110
-    Glass: 160
-    Plasma: 120
-    TungstenCarbide: 50
-    Gold: 70
+    Steel: 2200
+    Copper: 1100
+    Glass: 1600
+    Plasma: 1200
+    Gold: 700
 
 # Exotic Weaponry - Tier 3 (high-end specialized weapons)
 
 - type: latheRecipe
   id: BaseWeaponTurretRetributionFlatpack
   result: BaseWeaponTurretRetributionFlatpack
-  category: Devices
   completetime: 32
   materials:
-    Steel: 100
-    Copper: 50
-    Glass: 120
-    Plasma: 40
+    Steel: 1000
+    Copper: 500
+    Glass: 1200
+    Plasma: 400
 
 - type: latheRecipe
   id: BaseWeaponTurretGlareFlatpack
   result: BaseWeaponTurretGlareFlatpack
-  category: Devices
   completetime: 42
   materials:
-    Steel: 180
-    Copper: 90
-    Glass: 140
-    Plasma: 80
-    TungstenCarbide: 30
-    Gold: 40
+    Steel: 1800
+    Copper: 900
+    Glass: 1400
+    Gold: 400
 
 - type: latheRecipe
   id: BaseWeaponTurretStarburstFlatpack
   result: BaseWeaponTurretStarburstFlatpack
-  category: Devices
   completetime: 45
   materials:
-    Steel: 160
-    Copper: 80
-    Glass: 140
-    Plasma: 75
-    TungstenCarbide: 25
-    Gold: 35
+    Steel: 1600
+    Copper: 800
+    Glass: 1400
 
 - type: latheRecipe
   id: BaseWeaponTurretBolterFlatpack
   result: BaseWeaponTurretBolterFlatpack
-  category: Devices
   completetime: 42
   materials:
-    Steel: 150
-    Copper: 75
-    Glass: 100
-    Plasma: 70
-    TungstenCarbide: 25
+    Steel: 1500
+    Copper: 750
+    Glass: 1000
+    Plasma: 300
 
 # Pact weaponry
 
@@ -144,17 +123,16 @@
   result: WeaponShotgunHarba
   category: Weapons
   completetime: 15
-  materials:
-    Steel: 2000
-    Brass: 500
-    Plastic: 800
+  materials: #same as a legi
+    Steel: 2500
+    Silver: 500
+    BallisticCycler: 1000
 
 # Autonomous Vehicle flatpacks
 
 - type: latheRecipe
   id: FlatpackComputerDroneControl
   result: FlatpackComputerDroneControl
-  category: Devices
   completetime: 45
   materials:
     Steel: 8000
@@ -165,7 +143,6 @@
 - type: latheRecipe
   id: FlatpackDroneController
   result: FlatpackDroneController
-  category: Devices
   completetime: 40
   materials:
     Steel: 7000
@@ -178,22 +155,19 @@
 - type: latheRecipe
   id: CompositionC4
   result: C4
-  category: Explosives
   completetime: 10
   materials:
-    Plastic: 2000
-    Plasma: 1000
-    Carbon: 500
+    Plastic: 200
+    Plasma: 100
 
 # High-Impulse Thruster
 
 - type: latheRecipe
   id: ThrusterHighImpulseTAP
   result: ThrusterHighImpulseTAP
-  category: Devices
-  completetime: 60
+  completetime: 20
   materials:
-    Steel: 15000
+    Steel: 1500
     Glass: 3000
-    Plasma: 5000
-    Gold: 2000
+    Plasma: 500
+    Gold: 500

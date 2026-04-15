@@ -7,5 +7,5 @@ namespace Content.Shared._Art.TTS;
 public sealed partial class TTSComponent : Component
 {
     [DataField("voice")]
-    public ProtoId<TTSVoicePrototype>? VoicePrototype = "gman";
+    public ProtoId<TTSVoicePrototype>? VoicePrototype = "Gman";
 }

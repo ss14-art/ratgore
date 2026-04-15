@@ -311,61 +311,61 @@
     path: "/Audio/_Crescent/Jukebox/vacationstelephones.ogg"
 
 - type: jukebox
-  id: discoinferno.ogg
+  id: discoinferno
   name: Disco Inferno
   path:
     path: /Audio/_Crescent/Jukebox/discoinferno.ogg
 
 - type: jukebox
-  id: drevnerusskomvoine.ogg
-  name: Drevne Russkom - Voine
+  id: drevnerusskomvoine
+  name: Ballada o Drevnerusskom Voine
   path:
     path: /Audio/_Crescent/Jukebox/drevnerusskomvoine.ogg
 
 - type: jukebox
-  id: fallenkingdom.ogg
+  id: fallenkingdom
   name: Fallen Kingdom
   path:
     path: /Audio/_Crescent/Jukebox/fallenkingdom.ogg
 
 - type: jukebox
-  id: futureclub.ogg
+  id: futureclub
   name: Future Club
   path:
     path: /Audio/_Crescent/Jukebox/futureclub.ogg
 
 - type: jukebox
-  id: gunhag.ogg
-  name: Gunhag
+  id: gunhag
+  name: Gun Hag
   path:
     path: /Audio/_Crescent/Jukebox/gunhag.ogg
 
 - type: jukebox
-  id: kingofthestreets.ogg
+  id: kingofthestreets
   name: King of Streets
   path:
     path: /Audio/_Crescent/Jukebox/kingofthestreets.ogg
 
 - type: jukebox
-  id: krovzakrov.ogg
-  name: Krovzakrov
+  id: krovzakrov
+  name: Krov za Krov
   path:
     path: /Audio/_Crescent/Jukebox/krovzakrov.ogg
 
 - type: jukebox
-  id: maximuminstinct.ogg
+  id: maximuminstinct
   name: Maximum Instinct
   path:
     path: /Audio/_Crescent/Jukebox/maximuminstinct.ogg
 
 - type: jukebox
-  id: narc.ogg
+  id: narc
   name: Narc
   path:
     path: /Audio/_Crescent/Jukebox/narc.ogg
 
 - type: jukebox
-  id: nikita.ogg
+  id: nikita
   name: Nikita
   path:
     path: /Audio/_Crescent/Jukebox/nikita.ogg

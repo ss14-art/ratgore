@@ -1096,10 +1096,6 @@
     - state: ame-part
   - type: StaticPrice
     price: 1000
-  - type: ReverseEngineering # Sector Crescent
-    difficulty: 2
-    recipes:
-      - WeaponTurretMediumArtilleryFlatpack
 
 - type: entity
   parent: BaseFlatpack
@@ -1132,10 +1128,6 @@
     - state: ame-part
   - type: StaticPrice
     price: 1000
-  - type: ReverseEngineering # Sector Crescent
-    difficulty: 2
-    recipes:
-      - WeaponTurretLargeArtilleryFlatpack
 
 - type: entity
   parent: BaseFlatpack
