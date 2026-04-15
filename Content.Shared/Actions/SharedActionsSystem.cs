@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -644,7 +645,7 @@ public abstract class SharedActionsSystem : EntitySystem
         return !ev.Cancelled;
     }
 
-    public void PerformAction(EntityUid performer, ActionsComponent? component, EntityUid actionId, BaseActionComponent action, BaseActionEvent? actionEvent, TimeSpan curTime, bool predicted = true)
+    public void PerformAction(EntityUid performer, ActionsComponent component, EntityUid actionId, BaseActionComponent action, BaseActionEvent? actionEvent, TimeSpan curTime, bool predicted = true)
     {
         var handled = false;
 

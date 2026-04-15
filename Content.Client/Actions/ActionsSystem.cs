@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Mapping;
 using JetBrains.Annotations;
 using Robust.Client.Player;
@@ -191,7 +192,7 @@ namespace Content.Client.Actions
             return priorityA - priorityB;
         }
 
-        protected override void ActionAdded(EntityUid performer, EntityUid actionId, ActionsComponent comp,
+        protected void ActionAdded(EntityUid performer, EntityUid actionId, ActionsComponent comp,
             BaseActionComponent action)
         {
             if (_playerManager.LocalEntity != performer)
@@ -200,7 +201,7 @@ namespace Content.Client.Actions
             OnActionAdded?.Invoke(actionId);
         }
 
-        protected override void ActionRemoved(EntityUid performer, EntityUid actionId, ActionsComponent comp, BaseActionComponent action)
+        protected void ActionRemoved(EntityUid performer, EntityUid actionId, ActionsComponent comp, BaseActionComponent action)
         {
             if (_playerManager.LocalEntity != performer)
                 return;

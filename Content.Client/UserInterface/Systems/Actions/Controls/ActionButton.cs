@@ -4,6 +4,7 @@ using Content.Client.Actions.UI;
 using Content.Client.Cooldown;
 using Content.Client.Stylesheets;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;

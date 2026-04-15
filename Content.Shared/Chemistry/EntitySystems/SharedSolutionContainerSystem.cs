@@ -395,6 +395,12 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         UpdateChemicals(soln);
     }
 
+    public void SetCanReact(Entity<SolutionComponent> soln, bool canReact)
+    {
+        soln.Comp.Solution.CanReact = canReact;
+        UpdateChemicals(soln);
+    }
+
     /// <summary>
     ///     Adds reagent of an Id to the container.
     /// </summary>

@@ -385,7 +385,7 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     public HumanoidCharacterProfile WithSpawnPriorityPreference(SpawnPriorityPreference spawnPriority) =>
         new(this) { SpawnPriority = spawnPriority };
 
-    public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<string, JobPriority>> jobPriorities) =>
+    public HumanoidCharacterProfile WithJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities) =>
         new(this) { _jobPriorities = new Dictionary<string, JobPriority>(jobPriorities) };
 
     public HumanoidCharacterProfile WithJobPriority(string jobId, JobPriority priority)

@@ -59,7 +59,7 @@ public sealed partial class TestPair
         var prefMan = Server.ResolveDependency<IServerPreferencesManager>();
         var prefs = prefMan.GetPreferences(user);
         var profile = (HumanoidCharacterProfile) prefs.Characters[0];
-        var dictionary = new Dictionary<ProtoId<JobPrototype>, JobPriority>(profile.JobPriorities);
+        var dictionary = new Dictionary<ProtoId<JobPrototype>, JobPriority>((IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>>)profile.JobPriorities);
 
         // Automatic preference resetting only resets slot 0.
         Assert.That(prefs.SelectedCharacterIndex, Is.EqualTo(0));
