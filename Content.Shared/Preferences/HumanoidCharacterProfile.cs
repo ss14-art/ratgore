@@ -23,7 +23,7 @@ namespace Content.Shared.Preferences;
 /// Character profile. Looks immutable, but uses non-immutable semantics internally for serialization/code sanity purposes
 [DataDefinition]
 [Serializable, NetSerializable]
-public sealed partial class HumanoidCharacterProfile : ICharacterProfile, IEnumerable
+public sealed partial class HumanoidCharacterProfile : ICharacterProfile
 {
     private static readonly Regex RestrictedNameRegex = new("[^А-Яа-яёЁ0-9' -]"); // RU-Localization
     private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
