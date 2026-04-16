@@ -239,7 +239,7 @@ public abstract partial class SharedHandsSystem : EntitySystem
         throw new NotImplementedException();
     }
 
-    public bool TryPickup(EntityUid argsUser, Entity<ClothingComponent> removing)
+    public bool TryPickup(EntityUid argsUser, EntityUid removing, HandsComponent handsComp)
     {
         throw new NotImplementedException();
     }
