@@ -24,7 +24,7 @@ namespace Content.Shared.Lock;
 /// Handles (un)locking and examining of Lock components
 /// </summary>
 [UsedImplicitly]
-public sealed class LockSystem : EntitySystem
+public sealed partial class LockSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
@@ -487,24 +487,8 @@ public sealed class LockSystem : EntitySystem
     }
 
     private void LockToggled(EntityUid uid, UIRequiresLockComponent component, LockToggledEvent args)
-    private void OnActivateAttempt(EntityUid uid, ItemToggleRequiresLockComponent component, ref ItemToggleActivateAttemptEvent args)
     {
-        if (args.Cancelled)
-            return;
-
-        if (!TryComp<LockComponent>(uid, out var lockComp) || lockComp.Locked == component.RequireLocked)
-            return;
-
-        if (component.UserInterfaceKeys == null)
-        {
-            _ui.CloseUis(uid);
-            return;
-        }
-
-        foreach (var key in component.UserInterfaceKeys)
-        {
-            _ui.CloseUi(uid, key);
-        }
+        throw new NotImplementedException();
     }
 
     private void OnActivateAttempt(EntityUid uid, ItemToggleRequiresLockComponent component, ref ItemToggleActivateAttemptEvent args)
