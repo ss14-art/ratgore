@@ -487,7 +487,11 @@ public sealed class LockSystem : EntitySystem
     }
 
     private void LockToggled(EntityUid uid, UIRequiresLockComponent component, LockToggledEvent args)
+    private void OnActivateAttempt(EntityUid uid, ItemToggleRequiresLockComponent component, ref ItemToggleActivateAttemptEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (!TryComp<LockComponent>(uid, out var lockComp) || lockComp.Locked == component.RequireLocked)
             return;
 
@@ -511,6 +515,15 @@ public sealed class LockSystem : EntitySystem
         if (!TryComp<LockComponent>(uid, out var lockComp) || lockComp.Locked == component.RequireLocked)
             return;
 
+        args.Cancelled = true;
+
+        if (lockComp.Locked && component.LockedPopup != null)
+        {
+            _sharedPopupSystem.PopupClient(Loc.GetString(component.LockedPopup,
+                    ("target", Identity.Entity(uid, EntityManager))),
+                uid,
+                args.User);
+        }
         args.Cancelled = true;
 
         if (lockComp.Locked && component.LockedPopup != null)
