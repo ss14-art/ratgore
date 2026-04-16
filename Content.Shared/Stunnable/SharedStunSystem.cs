@@ -268,6 +268,26 @@ public abstract class SharedStunSystem : EntitySystem
     }
 
     /// <summary>
+    /// Updates or removes the paralysis duration on an entity.
+    /// If duration is null, the effect is removed.
+    /// </summary>
+    public bool TryUpdateParalyzeDuration(EntityUid uid, TimeSpan? duration,
+        StatusEffectsComponent? status = null)
+    {
+        if (!Resolve(uid, ref status, false))
+            return false;
+
+        if (duration == null)
+            return _statusEffect.TryRemoveStatusEffect(uid, "KnockedDown", status);
+
+        if (_statusEffect.HasStatusEffect(uid, "KnockedDown", status))
+            return _statusEffect.TrySetStatusEffect(uid, "KnockedDown", duration.Value, status);
+
+        return _statusEffect.TryAddStatusEffect<KnockedDownComponent>(uid, "KnockedDown",
+            duration.Value, true, status);
+    }
+
+    /// <summary>
     ///     Slows down the mob's walking/running speed temporarily
     /// </summary>
     public bool TrySlowdown(EntityUid uid, TimeSpan time, bool refresh,

@@ -158,7 +158,7 @@ namespace Content.Shared.Stacks
         }
 
         public virtual void SetCount(
-            (EntityUid ent, StackComponent stackComp) uid,
+            EntityUid uid,
             int amount,
             StackComponent? component = null
         )
