@@ -8,6 +8,9 @@ using Content.Server.Station.Systems;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Examine;
 using Content.Server.Explosion.Components;
+using Robust.Shared.GameObjects; // Rat
+using System.Linq; // Rat
+using System.Diagnostics.CodeAnalysis; // Rat
 
 namespace Content.Server._Crescent.ShipShields;
 public partial class ShipShieldsSystem
@@ -16,17 +19,26 @@ public partial class ShipShieldsSystem
     [Dependency] private readonly TriggerSystem _trigger = default!;
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+	[Dependency] private readonly EntityLookupSystem _lookup = default!; // Rat
     public void InitializeEmitters()
     {
         SubscribeLocalEvent<ShipShieldEmitterComponent, ShieldDeflectedEvent>(OnShieldDeflected);
         SubscribeLocalEvent<ShipShieldEmitterComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<ShipShieldEmitterComponent, ComponentRemove>(OnRemoved);
+		SubscribeLocalEvent<ShipShieldEmitterComponent, ComponentStartup>(OnEmitterStartup); // Rat
     }
 
+    // Rat-start
+    private void OnEmitterStartup(EntityUid uid, ShipShieldEmitterComponent component, ComponentStartup args)
+    {
+        _pvsSys.AddGlobalOverride(uid);
+    }
+    // Rat-end
 
     private void OnRemoved(Entity<ShipShieldEmitterComponent> owner,ref ComponentRemove remove)
     {
-        var parent = Transform(owner.Owner).GridUid;
+        _pvsSys.RemoveGlobalOverride(owner.Owner);
+		var parent = Transform(owner.Owner).GridUid;
         if (parent is null)
             return;
         UnshieldEntity(parent.Value, null);
@@ -55,7 +67,8 @@ public partial class ShipShieldsSystem
             component.Damage += phys.FixturesMass;
         }
 
-        QueueDel(args.Deflected);
+        Dirty(uid, component);
+		QueueDel(args.Deflected);
     }
 
     private void OnExamined(EntityUid uid, ShipShieldEmitterComponent component, ExaminedEvent args)
@@ -73,6 +86,33 @@ public partial class ShipShieldsSystem
 
         args.PushMarkup(Loc.GetString("shield-emitter-examine-damaged", ("percent", ratio)));
     }
+
+    // Rat-start
+    public bool TryGetShieldEmitter(EntityUid grid, [NotNullWhen(true)] out EntityUid? emitter, [NotNullWhen(true)] out ShipShieldEmitterComponent? emitterComp)
+    {
+        emitter = null;
+        emitterComp = null;
+
+        if (TryComp<ShipShieldedComponent>(grid, out var shielded)
+            && shielded.Source != null
+            && TryComp(shielded.Source, out emitterComp))
+        {
+            emitter = shielded.Source.Value;
+            return true;
+        }
+
+        var ents = new HashSet<Entity<ShipShieldEmitterComponent>>();
+        _lookup.GetGridEntities(grid, ents);
+
+        if (ents.Count < 1)
+            return false;
+
+        var emitterEnt = ents.First();
+        emitter = emitterEnt;
+        emitterComp = emitterEnt.Comp;
+        return true;
+    }
+    // Rat-end
 
     // .2 - 2025. commented out because shields draw a fixed amount of power now
     // private void AdjustEmitterLoad(EntityUid uid, ShipShieldEmitterComponent? emitter = null, ApcPowerReceiverComponent? receiver = null)

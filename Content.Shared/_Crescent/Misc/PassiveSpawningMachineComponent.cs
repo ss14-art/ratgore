@@ -20,5 +20,14 @@ public sealed partial class PassiveSpawningMachineComponent : Component
     [DataField]
     public bool requirePower = true;
 
+    [DataField]
+    public bool manualActivation = false;
+
+    [DataField]
+    public float cycleDuration = 60f;
+
+    public bool isActive = false;  
+    public TimeSpan cooldownEndTime = TimeSpan.Zero;
+
     public float passedTime = 0f;
 }

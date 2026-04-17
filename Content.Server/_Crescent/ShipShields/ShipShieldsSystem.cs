@@ -136,6 +136,8 @@ public sealed partial class ShipShieldsSystem : EntitySystem
             }
 
             // SHIELDS POWERING UP / DOWN BECAUSE OF POWER DRAW IS HANDLED SOMEWHERE ELSE
+			
+		    Dirty(uid, emitter); // Rat
 
         }
 

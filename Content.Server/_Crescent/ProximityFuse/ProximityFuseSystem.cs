@@ -1,24 +1,35 @@
 using Content.Server.Explosion.Components;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Projectiles;
-using Robust.Shared.Physics.Components;
 using System.Numerics;
-
 
 namespace Content.Server._Crescent.ProximityFuse;
 
 public sealed class ProximityFuseSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+
+    private EntityQuery<TransformComponent> _xformQuery;
+    private EntityQuery<ProximityFuseTargetComponent> _targetQuery;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        _xformQuery = GetEntityQuery<TransformComponent>();
+        _targetQuery = GetEntityQuery<ProximityFuseTargetComponent>();
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        var query = EntityQueryEnumerator<ProximityFuseComponent, TransformComponent>(); // get all proximity fuse components
-        while (query.MoveNext(out var uid, out var comp, out var xform))
+
+        var query = EntityQueryEnumerator<ProximityFuseComponent, ProjectileComponent, TransformComponent>();
+
+        while (query.MoveNext(out var uid, out var comp, out var projectile, out var xform))
         {
-            if (!TryComp<ProjectileComponent>(uid, out var projectile) ||
-                !TryComp<TransformComponent>(projectile.Shooter, out var shooterTransform))
+            if (!_xformQuery.TryGetComponent(projectile.Shooter, out var shooterTransform))
                 continue;
 
             if (comp.Safety > 0)
@@ -27,46 +38,57 @@ public sealed class ProximityFuseSystem : EntitySystem
                 continue;
             }
 
-            var targetQuery = EntityQueryEnumerator<ProximityFuseTargetComponent, TransformComponent>();
-            while (targetQuery.MoveNext(out var tuid, out var tcomp, out var txform))
+            var ourMapPos = _transform.ToMapCoordinates(xform.Coordinates).Position;
+            var nearby = _lookup.GetEntitiesInRange(uid, comp.MaxRange, LookupFlags.Dynamic | LookupFlags.Sundries);
+
+            List<EntityUid>? toRemove = null;
+            foreach (var key in comp.Targets.Keys)
             {
-                float distance = Vector2.Distance(_transform.ToMapCoordinates(txform.Coordinates).Position, _transform.ToMapCoordinates(xform.Coordinates).Position);
+                if (!nearby.Contains(key))
+                    (toRemove ??= new()).Add(key);
+            }
+            if (toRemove != null)
+                foreach (var key in toRemove)
+                    comp.Targets.Remove(key);
+
+            foreach (var near in nearby)
+            {
+                if (!_targetQuery.HasComponent(near))
+                    continue;
+
+                if (!_xformQuery.TryGetComponent(near, out var txform))
+                    continue;
 
                 if (shooterTransform.GridUid == txform.GridUid)
                     continue;
 
-                PhysicsComponent? theirPhysics = null;
+                var distance = Vector2.Distance(ourMapPos, _transform.ToMapCoordinates(txform.Coordinates).Position);
 
-                if (!TryComp<PhysicsComponent>(uid, out var ourPhysics) ||
-                    (!TryComp(txform.GridUid, out theirPhysics) && !TryComp(tuid, out theirPhysics)))
-                    return;
-
-                // float nextDistance = Vector2.Distance(_transform.ToMapCoordinates(txform.Coordinates).Position + theirPhysics.LinearVelocity, _transform.ToMapCoordinates(xform.Coordinates).Position + ourPhysics.LinearVelocity);
-
-                var t = comp.Targets.Find(x => x.ent == tuid);
-                if (t != null && distance <= comp.MaxRange)
+                if (comp.Targets.TryGetValue(near, out var lastDistance))
                 {
-                    t.LastDistance = t.Distance;
-                    t.Distance = distance;
-                    // if (t.Distance > t.LastDistance || t.Distance < nextDistance)
-                    if (t.Distance > t.LastDistance)
+                    comp.Targets[near] = distance;
+                    if (distance > lastDistance)
+                    {
                         Detonate(uid);
+                        break; 
+                    }
                 }
-                else if (t != null && distance > comp.MaxRange)
-                    comp.Targets.Remove(t);
-                else if (distance <= comp.MaxRange)
-                    comp.Targets.Add(new Target() { ent = tuid, Distance = distance, LastDistance = distance });
+                else
+                {
+                    comp.Targets[near] = distance;
+                }
             }
         }
     }
+
     /// <summary>
-    /// Explodes the entity if it has an explosive component, otherwise, deletes the object
+    /// Explodes the entity if it has an explosive component, otherwise queues it for deletion.
     /// </summary>
     public void Detonate(EntityUid uid)
     {
-        if (TryComp<ExplosiveComponent>(uid, out var explosiveComp))
-            _entMan.System<ExplosionSystem>().TriggerExplosive(uid);
+        if (HasComp<ExplosiveComponent>(uid))
+            _explosion.TriggerExplosive(uid);
         else
-            _entMan.DeleteEntity(uid);
+            QueueDel(uid); 
     }
 }

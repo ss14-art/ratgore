@@ -19,79 +19,67 @@
     gameMapsByID:
       PortBalreska:
         gameMapID: PortBalreska
-        posX: -5000
-        posY: -6000
+        posX: -3000
+        posY: -7000
         IFFColor: Orange
         IFFFaction: NCWL
       AuroraImperialis:
         gameMapID: AuroraImperialis
         posX: 3000
-        posY: 6000
+        posY: 7000
         IFFColor: "#C677A5"
         IFFFaction: DSM
       GliessSanto:
         gameMapID: GliessSanto
-        posX: -6000
-        posY: 0
+        posX: -5000
+        posY: 3000
         IFFColor: "#36B500"
-        randomOffsetX: 3000
-        randomOffsetY: 3000
       Tatsumoto:
         gameMapID: Tatsumoto
         posX: -6000
-        posY: 0
+        posY: 1000
         IFFColor: White
         IFFFaction: SHI
-        randomOffsetX: 3000
-        randomOffsetY: 3000
       Refuge:
         gameMapID: Refuge
-        posX: -7000
+        posX: -3000
         posY: 7000
         IFFColor: Green
         IFFFaction: SRM
-        randomOffsetX: 3000
-        randomOffsetY: 3000
+        randomOffsetX: 2000
+        randomOffsetY: 2000
       Dochenskaya:
         gameMapID: Dochenskaya
         posX: 6000
-        posY: 0
+        posY: 1000
         IFFColor: IndianRed
         IFFFaction: TFSC
-        randomOffsetX: 3000
-        randomOffsetY: 3000
       Jackal:
         gameMapID: Jackal
-        posX: 6000
-        posY: 0
+        posX: 8000
+        posY: -2000
         IFFColor: IndianRed
         IFFFaction: TFSC
-        randomOffsetX: 3000
-        randomOffsetY: 3000
       Dawnbreaker:
         gameMapID: Dawnbreaker
         posX: 6000
-        posY: 0
+        posY: -1000
         IFFColor: IndianRed
         IFFFaction: TFSC
-        randomOffsetX: 3000
-        randomOffsetY: 3000
       Hayes:
         gameMapID: Hayes
-        posX: 6000
-        posY: 0
+        posX: 5000
+        posY: -4000
         IFFColor: IndianRed
         IFFFaction: TFSC
-        randomOffsetX: 3000
-        randomOffsetY: 3000
       TribalHideout:
         gameMapID: TribalHideout
-        posX: -8000
-        posY: -300
+        posX: 2000
+        posY: -7000
         IFFColor: White
         IFFFaction: TAP
-        randomOffsetX: 3000
-        randomOffsetY: 3000
+        randomOffsetX: 2000
+        randomOffsetY: 2000
       Deepbelt:
         gameMapID: Deepbelt
         posX: 0

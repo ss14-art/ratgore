@@ -8,6 +8,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
+using Content.Shared._Crescent.ShipShields; // Rat
 
 namespace Content.Client.Shuttles.UI;
 
@@ -94,6 +95,35 @@ public sealed partial class NavScreen : BoxContainer
         // Get linear velocity relative to the console entity
         GridLinearVelocity.Text = $"{gridVelocity.X + 10f * float.Epsilon:0.0}, {gridVelocity.Y + 10f * float.Epsilon:0.0}";
         GridAngularVelocity.Text = $"{-gridBody.AngularVelocity + 10f * float.Epsilon:0.0}";
-        ShipName.Text = $"{_entManager.GetComponent<MetaDataComponent>(_shuttleEntity.Value).EntityName}";
+
+        // Rat-start
+        var shieldQuery = _entManager.EntityQueryEnumerator<ShipShieldEmitterComponent, TransformComponent>();
+        bool foundShield = false;
+        while (shieldQuery.MoveNext(out _, out var emitter, out var emitterXform))
+        {
+            if (emitterXform.GridUid == _shuttleEntity.Value)
+            {
+                foundShield = true;
+                if (emitter.OverloadAccumulator > 0 || emitter.Damage >= emitter.DamageLimit)
+                {
+                    ShieldStatus.Text = emitter.OverloadAccumulator > 0
+                        ? Loc.GetString("shuttle-console-shield-recharging", ("time", (int)emitter.OverloadAccumulator))
+                        : Loc.GetString("shuttle-console-shield-recharging", ("time", (int)emitter.DamageOverloadTimePunishment));
+                }
+                else
+                {
+                    var remaining = emitter.DamageLimit - emitter.Damage;
+                    ShieldStatus.Text = Loc.GetString("shuttle-console-shield-active",
+                        ("remaining", (int)remaining),
+                        ("limit", (int)emitter.DamageLimit));
+                }
+                break;
+            }
+        }
+        if (!foundShield)
+            ShieldStatus.Text = Loc.GetString("shuttle-console-shield-absent");
+        // Rat-end
+
+		ShipName.Text = $"{_entManager.GetComponent<MetaDataComponent>(_shuttleEntity.Value).EntityName}";
     }
 }

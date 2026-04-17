@@ -30,6 +30,13 @@
                                    HorizontalExpand="True"
                                    Margin="3"
                                    Name="ReadonlyDisplay">
+						<!-- Rat-start-->
+						<controls:Label Text="{controls:Loc 'shuttle-console-shield'}"/>
+						<controls:Label Name="ShieldStatus"
+           						        Text=""
+            						    HorizontalExpand="True"
+             						    Align="Right"/>
+						<!-- Rat-end-->
                         <controls:Label Text="Ship IFF:"/>
                         <controls:Label Name="ShipName"
                                         Text="No IFF"

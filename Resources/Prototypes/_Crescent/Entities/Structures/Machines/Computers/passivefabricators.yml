@@ -7,7 +7,7 @@
   - SheetUranium1
 
 - type: entity
-  parent: MedicalBiofabricator
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
   id: PassiveSpawnerDebugPrototype
   name: Excelsior Material Drop-In Uplink
   suffix: DEBUG, DO NOT MAP
@@ -23,20 +23,60 @@
     entityListProto: excelsiorUplinkDropTable
     spawnDelay: 5
     requirePower: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+          - MachineLayer
 
 #AUTOMINER
 
 - type: entityList
   id: autominerDropTable
   entities:
-  - TungstenOre1
-  - Coal1
-  - UraniumOre1
-  - SilverOre1
-  - PlasmaOre1
-  - GoldOre1
-  - CopperOre1
-  - SteelOre1
+  - TungstenOre
+  - Coal
+  - Coal
+  - Coal
+  - Coal
+  - Coal
+  - Coal
+  - Coal
+  - Coal
+  - UraniumOre
+  - SilverOre
+  - PlasmaOre
+  - GoldOre
+  - CopperOre
+  - CopperOre
+  - CopperOre
+  - CopperOre
+  - SteelOre
+  - SteelOre
+  - SteelOre
+  - SteelOre
+  - SteelOre
+  - SteelOre
+
 
 - type: entity
   parent: PassiveSpawnerDebugPrototype
@@ -51,9 +91,16 @@
     - state: base_machine
   - type: PassiveSpawningMachine
     entityListProto: autominerDropTable
-    spawnDelay: 8
+    spawnDelay: 15
     requirePower: true
-
+    manualActivation: true # Rat
+    cycleDuration: 300 # Rat
+  - type: ActivatableUI
+    key: enum.AutominerUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.AutominerUiKey.Key:
+        type: AutominerBoundUserInterface
 #AUTOFOUNDRY
 
 - type: entityList
