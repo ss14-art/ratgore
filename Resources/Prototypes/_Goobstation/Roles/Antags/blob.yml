@@ -1,6 +1,0 @@
-- type: antag
-  id: Blob
-  name: roles-antag-blob-name
-  antagonist: true
-  setPreference: false
-  objective: roles-antag-blob-objective

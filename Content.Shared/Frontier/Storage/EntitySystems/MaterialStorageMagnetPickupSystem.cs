@@ -69,8 +69,8 @@ public sealed class MaterialStorageMagnetPickupSystem : EntitySystem
     {
         args.PushMarkup(Loc.GetString("magnet-pickup-component-on-examine-main",
                         ("stateText", Loc.GetString(component.MagnetEnabled
-                        ? "magnet-pickup-component-magnet-on"
-                        : "magnet-pickup-component-magnet-off"))));
+                            ? "magnet-pickup-component-magnet-on"
+                            : "magnet-pickup-component-magnet-off"))));
     }
 
     public override void Update(float frameTime)

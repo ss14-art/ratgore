@@ -1,11 +1,14 @@
 using Content.Shared.Construction.Conditions;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+
 
 namespace Content.Shared.Construction.Prototypes;
 
 [Prototype]
-public sealed partial class ConstructionPrototype : IPrototype
+public sealed partial class ConstructionPrototype(IReadOnlyList<SpriteSpecifier> layers, SpriteSpecifier icon)
+    : IPrototype
 {
     [DataField("conditions")] private List<IConstructionCondition> _conditions = new();
 
@@ -92,7 +95,8 @@ public sealed partial class ConstructionPrototype : IPrototype
     public ProtoId<ConstructionPrototype>[] AlternativePrototypes = [];
 
     public IReadOnlyList<IConstructionCondition> Conditions => _conditions;
-    public IReadOnlyList<SpriteSpecifier> Layers => _layers ?? new List<SpriteSpecifier> { Icon };
+    public IReadOnlyList<SpriteSpecifier> Layers => layers ?? new List<SpriteSpecifier> { Icon };
+    public SpriteSpecifier Icon { get; set; } = icon;
 }
 
 public enum ConstructionType
