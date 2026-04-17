@@ -18,6 +18,7 @@ using Content.Server.StationEvents.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;

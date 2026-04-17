@@ -21,6 +21,7 @@ using Robust.Shared.Input;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+
 using ItemToggleComponent = Content.Shared.Item.ItemToggle.Components.ItemToggleComponent;
 
 namespace Content.IntegrationTests.Tests.Interaction;
@@ -28,6 +29,8 @@ namespace Content.IntegrationTests.Tests.Interaction;
 // This partial class defines various methods that are useful for performing & validating interactions
 public abstract partial class InteractionTest
 {
+    private Dictionary<Type, EntitySystem> _listenerCache = new();
+
     /// <summary>
     /// Begin constructing an entity.
     /// </summary>
@@ -85,16 +88,18 @@ public abstract partial class InteractionTest
     }
 
     /// <summary>
-    /// Spawn an entity entity and set it as the target.
+    /// Spawn an entity at the given coordinates and set it as the target.
+    /// If no coordinates are given it will default to <see cref="TargetCoords"/>
     /// </summary>
     [MemberNotNull(nameof(Target), nameof(STarget), nameof(CTarget))]
 #pragma warning disable CS8774 // Member must have a non-null value when exiting.
-    protected async Task<NetEntity> SpawnTarget(string prototype)
+    protected async Task<NetEntity> SpawnTarget(string prototype, NetCoordinates? coords = null)
     {
+        coords ??= TargetCoords;
         Target = NetEntity.Invalid;
         await Server.WaitPost(() =>
         {
-            Target = SEntMan.GetNetEntity(SEntMan.SpawnAtPosition(prototype, SEntMan.GetCoordinates(TargetCoords)));
+            Target = SEntMan.GetNetEntity(SEntMan.SpawnAtPosition(prototype, SEntMan.GetCoordinates(coords.Value)));
         });
 
         await RunTicks(5);
@@ -102,6 +107,24 @@ public abstract partial class InteractionTest
         return Target!.Value;
     }
 #pragma warning restore CS8774 // Member must have a non-null value when exiting.
+
+    /// <summary>
+    /// Spawn an entity entity at the given coordinates without setting it as the target.
+    /// If no coordinates are given it will default to <see cref="TargetCoords"/>
+    /// </summary>
+    protected async Task<NetEntity> Spawn(string prototype, NetCoordinates? coords = null)
+    {
+        coords ??= TargetCoords;
+        var entity = NetEntity.Invalid;
+        await Server.WaitPost(() =>
+        {
+            entity = SEntMan.GetNetEntity(SEntMan.SpawnAtPosition(prototype, SEntMan.GetCoordinates(coords.Value)));
+        });
+
+        await RunTicks(5);
+        AssertPrototype(prototype, entity);
+        return entity;
+    }
 
     /// <summary>
     /// Spawn an entity in preparation for deconstruction
@@ -120,7 +143,7 @@ public abstract partial class InteractionTest
     /// </summary>
     protected async Task DeleteHeldEntity()
     {
-        if (Hands.ActiveHandEntity is { } held)
+        if (HandSys.GetActiveItem((ToServer(Player), Hands)) is { } held)
         {
             await Server.WaitPost(() =>
             {
@@ -131,7 +154,7 @@ public abstract partial class InteractionTest
         }
 
         await RunTicks(1);
-        Assert.That(Hands.ActiveHandEntity, Is.Null);
+        Assert.That(HandSys.GetActiveItem((ToServer(Player), Hands)), Is.Null);
     }
 
     /// <summary>
@@ -152,7 +175,13 @@ public abstract partial class InteractionTest
     /// <param name="enableToggleable">Whether or not to automatically enable any toggleable items</param>
     protected async Task<NetEntity> PlaceInHands(EntitySpecifier entity, bool enableToggleable = true)
     {
-        if (Hands.ActiveHand == null)
+        if (Hands == null)
+        {
+            Assert.Fail("No HandsComponent");
+            return default;
+        }
+
+        if (Hands.ActiveHandId == null)
         {
             Assert.Fail("No active hand");
             return default;
@@ -169,7 +198,7 @@ public abstract partial class InteractionTest
         {
             var playerEnt = SEntMan.GetEntity(Player);
 
-            Assert.That(HandSys.TryPickup(playerEnt, item, Hands.ActiveHand, false, false, Hands));
+            Assert.That(Hands.ActiveHand != null && HandSys.TryPickup(playerEnt, item, Hands.ActiveHand, false, false, Hands));
 
             // turn on welders
             if (enableToggleable && SEntMan.TryGetComponent(item, out itemToggle) && !itemToggle.Activated)
@@ -179,7 +208,7 @@ public abstract partial class InteractionTest
         });
 
         await RunTicks(1);
-        Assert.That(Hands.ActiveHandEntity, Is.EqualTo(item));
+        Assert.That(HandSys.GetActiveItem((ToServer(Player), Hands)), Is.EqualTo(item));
         if (enableToggleable && itemToggle != null)
             Assert.That(itemToggle.Activated);
 
@@ -193,7 +222,13 @@ public abstract partial class InteractionTest
     {
         entity ??= Target;
 
-        if (Hands.ActiveHand == null)
+        if (Hands == null)
+        {
+            Assert.Fail("No HandsComponent");
+            return;
+        }
+
+        if (Hands.ActiveHandId == null)
         {
             Assert.Fail("No active hand");
             return;
@@ -212,11 +247,11 @@ public abstract partial class InteractionTest
 
         await Server.WaitPost(() =>
         {
-            Assert.That(HandSys.TryPickup(SEntMan.GetEntity(Player), uid.Value, Hands.ActiveHand, false, false, Hands, item));
+            Assert.That(Hands.ActiveHand != null && HandSys.TryPickup(SEntMan.GetEntity(Player), uid.Value, Hands.ActiveHand, false, false, Hands, item));
         });
 
         await RunTicks(1);
-        Assert.That(Hands.ActiveHandEntity, Is.EqualTo(uid));
+        Assert.That(HandSys.GetActiveItem((ToServer(Player), Hands)), Is.EqualTo(uid));
     }
 
     /// <summary>
@@ -224,7 +259,7 @@ public abstract partial class InteractionTest
     /// </summary>
     protected async Task Drop()
     {
-        if (Hands.ActiveHandEntity == null)
+        if (HandSys.GetActiveItem((ToServer(Player), Hands)) == null)
         {
             Assert.Fail("Not holding any entity to drop");
             return;
@@ -236,7 +271,7 @@ public abstract partial class InteractionTest
         });
 
         await RunTicks(1);
-        Assert.That(Hands.ActiveHandEntity, Is.Null);
+        Assert.That(HandSys.GetActiveItem((ToServer(Player), Hands)), Is.Null);
     }
 
     #region Interact
@@ -246,7 +281,7 @@ public abstract partial class InteractionTest
     /// </summary>
     protected async Task UseInHand()
     {
-        if (Hands.ActiveHandEntity is not { } target)
+        if (HandSys.GetActiveItem((ToServer(Player), Hands)) is not { } target)
         {
             Assert.Fail("Not holding any entity");
             return;
@@ -264,9 +299,10 @@ public abstract partial class InteractionTest
     /// <param name="id">The entity or stack prototype to spawn and place into the users hand</param>
     /// <param name="quantity">The number of entities to spawn. If the prototype is a stack, this sets the stack count.</param>
     /// <param name="awaitDoAfters">Whether or not to wait for any do-afters to complete</param>
-    protected async Task InteractUsing(string id, int quantity = 1, bool awaitDoAfters = true)
+    /// <param name="altInteract">If true, perform an alternate interaction instead of a standard one.
+    protected async Task InteractUsing(string id, int quantity = 1, bool awaitDoAfters = true, bool altInteract = false)
     {
-        await InteractUsing((id, quantity), awaitDoAfters);
+        await InteractUsing((id, quantity), awaitDoAfters, altInteract);
     }
 
     /// <summary>
@@ -274,7 +310,8 @@ public abstract partial class InteractionTest
     /// </summary>
     /// <param name="entity">The entity type & quantity to spawn and place into the users hand</param>
     /// <param name="awaitDoAfters">Whether or not to wait for any do-afters to complete</param>
-    protected async Task InteractUsing(EntitySpecifier entity, bool awaitDoAfters = true)
+    /// <param name="altInteract">If true, perform an alternate interaction instead of a standard one.
+    protected async Task InteractUsing(EntitySpecifier entity, bool awaitDoAfters = true, bool altInteract = false)
     {
         // For every interaction, we will also examine the entity, just in case this breaks something, somehow.
         // (e.g., servers attempt to assemble construction examine hints).
@@ -284,18 +321,19 @@ public abstract partial class InteractionTest
         }
 
         await PlaceInHands(entity);
-        await Interact(awaitDoAfters);
+        await Interact(awaitDoAfters, altInteract);
     }
 
     /// <summary>
     /// Interact with an entity using the currently held entity.
     /// </summary>
     /// <param name="awaitDoAfters">Whether or not to wait for any do-afters to complete</param>
-    protected async Task Interact(bool awaitDoAfters = true)
+    /// <param name="altInteract">If true, performs an alternate interaction instead of a standard one.
+    protected async Task Interact(bool awaitDoAfters = true, bool altInteract = false)
     {
         if (Target == null || !Target.Value.IsClientSide())
         {
-            await Interact(Target, TargetCoords, awaitDoAfters);
+            await Interact(Target, TargetCoords, awaitDoAfters, altInteract);
             return;
         }
 
@@ -311,23 +349,23 @@ public abstract partial class InteractionTest
         await CheckTargetChange();
     }
 
-    /// <inheritdoc cref="Interact(EntityUid?,EntityCoordinates,bool)"/>
-    protected async Task Interact(NetEntity? target, NetCoordinates coordinates, bool awaitDoAfters = true)
+    /// <inheritdoc cref="Interact(EntityUid?,EntityCoordinates,bool,bool)"/>
+    protected async Task Interact(NetEntity? target, NetCoordinates coordinates, bool awaitDoAfters = true, bool altInteract = false)
     {
         Assert.That(SEntMan.TryGetEntity(target, out var sTarget) || target == null);
         var coords = SEntMan.GetCoordinates(coordinates);
         Assert.That(coords.IsValid(SEntMan));
-        await Interact(sTarget, coords, awaitDoAfters);
+        await Interact(sTarget, coords, awaitDoAfters, altInteract);
     }
 
     /// <summary>
     /// Interact with an entity using the currently held entity.
     /// </summary>
-    protected async Task Interact(EntityUid? target, EntityCoordinates coordinates, bool awaitDoAfters = true)
+    protected async Task Interact(EntityUid? target, EntityCoordinates coordinates, bool awaitDoAfters = true, bool altInteract = false)
     {
         Assert.That(SEntMan.TryGetEntity(Player, out var player));
 
-        await Server.WaitPost(() => InteractSys.UserInteraction(player!.Value, coordinates, target));
+        await Server.WaitPost(() => InteractSys.UserInteraction(player!.Value, coordinates, target, altInteract: altInteract));
         await RunTicks(1);
 
         if (awaitDoAfters)
@@ -581,7 +619,7 @@ public abstract partial class InteractionTest
                 tile = MapSystem.GetTileRef(gridUid, grid, serverCoords).Tile;
         });
 
-        Assert.That(tile.TypeId, Is.EqualTo(targetTile.TypeId));
+        Assert.That(tile.TypeId, Is.EqualTo(targetTile.TypeId), $"Expected tile at NetCoordinates {coords}: {TileMan[targetTile.TypeId].Name}. But was: {TileMan[tile.TypeId].Name}");
     }
 
     protected void AssertGridCount(int value)
@@ -596,7 +634,6 @@ public abstract partial class InteractionTest
 
         Assert.That(count, Is.EqualTo(value));
     }
-
     #endregion
 
     #region Entity lookups
@@ -727,14 +764,7 @@ public abstract partial class InteractionTest
     /// List of currently active DoAfters on the player.
     /// </summary>
     protected IEnumerable<Shared.DoAfter.DoAfter> ActiveDoAfters
-    {
-        get
-        {
-            if (DoAfters != null)
-                return DoAfters.DoAfters.Values.Where(x => !x.Cancelled && !x.Completed);
-            throw new InvalidOperationException();
-        }
-    }
+        => DoAfters?.DoAfters.Values.Where(x => !x.Cancelled && !x.Completed) ?? [];
 
     #region Component
 
@@ -748,6 +778,18 @@ public abstract partial class InteractionTest
             Assert.Fail("No target specified");
 
         return SEntMan.GetComponent<T>(ToServer(target!.Value));
+    }
+
+    /// <summary>
+    /// Convenience method to check if the target has a component on the server.
+    /// </summary>
+    protected bool HasComp<T>(NetEntity? target = null) where T : IComponent
+    {
+        target ??= Target;
+        if (target == null)
+            Assert.Fail("No target specified");
+
+        return SEntMan.HasComponent<T>(ToServer(target));
     }
 
     /// <inheritdoc cref="Comp{T}"/>
@@ -798,7 +840,7 @@ public abstract partial class InteractionTest
             gridUid = gridEnt;
             gridComp = gridEnt.Comp;
             var gridXform = SEntMan.GetComponent<TransformComponent>(gridUid);
-            Transform.SetWorldPosition(gridXform, pos.Position);
+            Transform.SetWorldPosition((gridUid, gridXform), pos.Position);
             MapSystem.SetTile((gridUid, gridComp), SEntMan.GetCoordinates(coords ?? TargetCoords), tile);
 
             if (!MapMan.TryFindGridAt(pos, out _, out _))
@@ -836,9 +878,9 @@ public abstract partial class InteractionTest
     /// <summary>
     ///     Sends a bui message using the given bui key.
     /// </summary>
-    protected async Task SendBui(Enum key, BoundUserInterfaceMessage msg, EntityUid? _ = null)
+    protected async Task SendBui(Enum key, BoundUserInterfaceMessage msg, NetEntity? target = null)
     {
-        if (!TryGetBui(key, out var bui))
+        if (!TryGetBui(key, out var bui, target))
             return;
 
         await Client.WaitPost(() => bui.SendMessage(msg));
@@ -850,9 +892,9 @@ public abstract partial class InteractionTest
     /// <summary>
     ///     Sends a bui message using the given bui key.
     /// </summary>
-    protected async Task CloseBui(Enum key, EntityUid? _ = null)
+    protected async Task CloseBui(Enum key, NetEntity? target = null)
     {
-        if (!TryGetBui(key, out var bui))
+        if (!TryGetBui(key, out var bui, target))
             return;
 
         await Client.WaitPost(() => bui.Close());
@@ -1017,7 +1059,7 @@ public abstract partial class InteractionTest
         }
 
         Assert.That(control.GetType().IsAssignableTo(typeof(TControl)));
-        return (TControl) control;
+        return (TControl)control;
     }
 
     /// <summary>
@@ -1181,8 +1223,8 @@ public abstract partial class InteractionTest
         {
             var atmosSystem = SEntMan.System<AtmosphereSystem>();
             var moles = new float[Atmospherics.AdjustedNumberOfGases];
-            moles[(int) Gas.Oxygen] = 21.824779f;
-            moles[(int) Gas.Nitrogen] = 82.10312f;
+            moles[(int)Gas.Oxygen] = 21.824779f;
+            moles[(int)Gas.Nitrogen] = 82.10312f;
             atmosSystem.SetMapAtmosphere(target, false, new GasMixture(moles, Atmospherics.T20C));
         });
     }
@@ -1217,11 +1259,12 @@ public abstract partial class InteractionTest
         BoundKeyFunction key,
         BoundKeyState state,
         NetCoordinates? coordinates = null,
-        NetEntity? cursorEntity = null)
+        NetEntity? cursorEntity = null,
+        ScreenCoordinates? screenCoordinates = null)
     {
         var coords = coordinates ?? TargetCoords;
         var target = cursorEntity ?? Target ?? default;
-        ScreenCoordinates screen = default;
+        var screen = screenCoordinates ?? default;
 
         var funcId = InputManager.NetworkBindMap.KeyFunctionID(key);
         var message = new ClientFullInputCmdMessage(CTiming.CurTick, CTiming.TickFraction, funcId)
@@ -1273,14 +1316,24 @@ public abstract partial class InteractionTest
     protected EntityUid? ToServer(NetEntity? nent) => SEntMan.GetEntity(nent);
     protected EntityUid? ToClient(NetEntity? nent) => CEntMan.GetEntity(nent);
     protected EntityUid ToServer(EntityUid cuid) => SEntMan.GetEntity(CEntMan.GetNetEntity(cuid));
-    protected EntityUid ToClient(EntityUid cuid) => CEntMan.GetEntity(SEntMan.GetNetEntity(cuid));
+    protected EntityUid ToClient(EntityUid suid) => CEntMan.GetEntity(SEntMan.GetNetEntity(suid));
     protected EntityUid? ToServer(EntityUid? cuid) => SEntMan.GetEntity(CEntMan.GetNetEntity(cuid));
-    protected EntityUid? ToClient(EntityUid? cuid) => CEntMan.GetEntity(SEntMan.GetNetEntity(cuid));
+    protected EntityUid? ToClient(EntityUid? suid) => CEntMan.GetEntity(SEntMan.GetNetEntity(suid));
 
     protected EntityCoordinates ToServer(NetCoordinates coords) => SEntMan.GetCoordinates(coords);
     protected EntityCoordinates ToClient(NetCoordinates coords) => CEntMan.GetCoordinates(coords);
     protected EntityCoordinates? ToServer(NetCoordinates? coords) => SEntMan.GetCoordinates(coords);
     protected EntityCoordinates? ToClient(NetCoordinates? coords) => CEntMan.GetCoordinates(coords);
+
+    protected NetEntity FromServer(EntityUid suid) => SEntMan.GetNetEntity(suid);
+    protected NetEntity FromClient(EntityUid cuid) => CEntMan.GetNetEntity(cuid);
+    protected NetEntity? FromServer(EntityUid? suid) => SEntMan.GetNetEntity(suid);
+    protected NetEntity? FromClient(EntityUid? cuid) => CEntMan.GetNetEntity(cuid);
+
+    protected NetCoordinates FromServer(EntityCoordinates scoords) => SEntMan.GetNetCoordinates(scoords);
+    protected NetCoordinates FromClient(EntityCoordinates ccoords) => CEntMan.GetNetCoordinates(ccoords);
+    protected NetCoordinates? FromServer(EntityCoordinates? scoords) => SEntMan.GetNetCoordinates(scoords);
+    protected NetCoordinates? FromClient(EntityCoordinates? ccoords) => CEntMan.GetNetCoordinates(ccoords);
 
     #endregion
 
@@ -1294,6 +1347,7 @@ public abstract partial class InteractionTest
 
     protected EntityCoordinates Position(NetEntity uid) => Position(ToServer(uid));
     protected EntityCoordinates Position(EntityUid uid) => Xform(uid).Coordinates;
+    protected NetCoordinates NetPosition(NetEntity uid) => FromServer(Position(uid));
 
     #endregion
 }

@@ -33,15 +33,17 @@ public sealed class PrototypeSaveTest : GameTest
         "HandPlaceholder" // Frontier
     };
 
+    #pragma warning disable NUnit1027
     [Test]
-    public async Task AllItemsHaveSpritesTest()
+    #pragma warning restore NUnit1027
+    public async Task AllItemsHaveSpritesTest(EntityPrototype proto)
     {
         var pair = Pair;
         List<EntityPrototype> badPrototypes = [];
 
         await pair.Client.WaitPost(() =>
         {
-            foreach (var proto in pair.GetPrototypesWithComponent<ItemComponent>(Ignored))
+
             {
                 var dummy = pair.Client.EntMan.Spawn(proto.ID);
                 pair.Client.EntMan.RunMapInit(dummy, pair.Client.MetaData(dummy));

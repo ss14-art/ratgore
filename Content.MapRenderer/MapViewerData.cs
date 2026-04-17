@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
+using Robust.Shared.ContentPack;
 using Robust.Shared.Maths;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -73,6 +74,11 @@ public sealed class LayerGroup
                 }
             }
         };
+    }
+
+    public static LayerGroup DefaultParallax(IResourceManager res, ParallaxOutput parallaxOutput)
+    {
+        throw new System.NotImplementedException();
     }
 }
 

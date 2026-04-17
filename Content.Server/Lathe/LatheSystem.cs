@@ -59,6 +59,10 @@ namespace Content.Server.Lathe
         /// </summary>
         private readonly List<GasMixture> _environments = new();
 
+        public LatheSystem(object inverseRecipes) {
+            InverseRecipes = inverseRecipes;
+        }
+
         public object InverseRecipes { get; }
 
         public override void Initialize()

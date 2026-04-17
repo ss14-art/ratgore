@@ -254,8 +254,8 @@ public abstract partial class SharedBuckleSystem
             if (popup)
             {
                 var message = Loc.GetString(buckleUid == user
-                    ? "buckle-component-already-buckled-message"
-                    : "buckle-component-other-already-buckled-message",
+                        ? "buckle-component-already-buckled-message"
+                        : "buckle-component-other-already-buckled-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
 
                 _popup.PopupClient(message, user);
@@ -277,8 +277,8 @@ public abstract partial class SharedBuckleSystem
             if (popup)
             {
                 var message = Loc.GetString(buckleUid == user
-                    ? "buckle-component-cannot-buckle-message"
-                    : "buckle-component-other-cannot-buckle-message",
+                        ? "buckle-component-cannot-buckle-message"
+                        : "buckle-component-other-cannot-buckle-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
 
                 _popup.PopupClient(message, user);
@@ -292,8 +292,8 @@ public abstract partial class SharedBuckleSystem
             if (popup)
             {
                 var message = Loc.GetString(buckleUid == user
-                    ? "buckle-component-cannot-buckle-message"
-                    : "buckle-component-other-cannot-buckle-message",
+                        ? "buckle-component-cannot-buckle-message"
+                        : "buckle-component-other-cannot-buckle-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
 
                 _popup.PopupClient(message, user);

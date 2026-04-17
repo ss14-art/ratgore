@@ -61,10 +61,10 @@ public class SharedPassportSystem : EntitySystem
         args.PushMarkup(Loc.GetString("passport-year-of-birth", ("year", CurrentYear - component.OwnerProfile.Age)), 46);
         args.PushMarkup(
             Loc.GetString("passport-pid", ("pid", GenerateIdentityString(component.OwnerProfile.Name
-            + component.OwnerProfile.Height
-            + component.OwnerProfile.Age
-            + component.OwnerProfile.Height
-            + component.OwnerProfile.FlavorText))),
+                + component.OwnerProfile.Height
+                + component.OwnerProfile.Age
+                + component.OwnerProfile.Height
+                + component.OwnerProfile.FlavorText))),
             45);
         // Ratgore end
     }

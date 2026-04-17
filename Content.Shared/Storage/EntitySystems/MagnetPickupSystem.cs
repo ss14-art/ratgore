@@ -84,8 +84,8 @@ public sealed class MagnetPickupSystem : EntitySystem
 
         args.PushMarkup(Loc.GetString("magnet-pickup-component-on-examine-main",
                         ("stateText", Loc.GetString(component.MagnetEnabled
-                        ? "magnet-pickup-component-magnet-on"
-                        : "magnet-pickup-component-magnet-off"))));
+                            ? "magnet-pickup-component-magnet-on"
+                            : "magnet-pickup-component-magnet-off"))));
     }
 
     //Toggles the magnet on the ore bag/box

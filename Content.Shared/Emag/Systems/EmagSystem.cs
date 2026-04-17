@@ -126,6 +126,11 @@ public sealed class EmagSystem : EntitySystem
 
         return false;
     }
+
+    public void TryEmagEffect(EntityUid skillchipOwner, EntityUid argsTarget)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 
