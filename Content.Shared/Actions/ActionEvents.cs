@@ -173,7 +173,7 @@ public abstract partial class BaseActionEvent : HandledEntityEventArgs
     /// <summary>
     ///     The action the event belongs to.
     /// </summary>
-    public (EntityUid actionId, BaseActionComponent action) Action;
+    public Entity<ActionComponent> Action;
 
     /// <summary>
     /// Should we toggle the action entity?

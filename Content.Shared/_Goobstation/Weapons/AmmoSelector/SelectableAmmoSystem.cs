@@ -1,6 +1,6 @@
 using System.Linq;
 // using Content.Shared._Goobstation.Wizard.UserInterface;
-using Content.Shared.Changeling;
+
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
@@ -96,9 +96,6 @@ public sealed class SelectableAmmoSystem : EntitySystem
         if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBattery))
             return _protoManager.TryIndex(projectileBattery.Prototype, out var index) ? index.Name : null;
 
-        if (TryComp(uid, out ChangelingChemicalsAmmoProviderComponent? chemicals))
-            return _protoManager.TryIndex(chemicals.Proto, out var index) ? index.Name : null;
-
         // Add more providers if needed
 
         return null;
@@ -125,15 +122,6 @@ public sealed class SelectableAmmoSystem : EntitySystem
             Dirty(uid, projectileBattery);
             var updateClientAmmoEvent = new UpdateClientAmmoEvent();
             RaiseLocalEvent(uid, ref updateClientAmmoEvent);
-            return true;
-        }
-
-        if (TryComp(uid, out ChangelingChemicalsAmmoProviderComponent? chemicals))
-        {
-            chemicals.Proto = proto.ProtoId;
-            if (!ShouldSetFireCost(proto))
-                return true;
-            chemicals.FireCost = proto.FireCost;
             return true;
         }
 
