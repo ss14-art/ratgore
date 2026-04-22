@@ -81,6 +81,9 @@ public abstract class SharedMagicSystem : EntitySystem
         SubscribeLocalEvent<SmiteSpellEvent>(OnSmiteSpell);
         SubscribeLocalEvent<KnockSpellEvent>(OnKnockSpell);
         SubscribeLocalEvent<ChargeSpellEvent>(OnChargeSpell);
+        SubscribeLocalEvent<AnimateSpellEvent>(OnAnimateSpell);
+        SubscribeLocalEvent<RandomGlobalSpawnSpellEvent>(OnRandomGlobalSpawnSpell);
+        SubscribeLocalEvent<MindSwapSpellEvent>(OnMindSwapSpell);
 
         // Spell wishlist
         //  A wishlish of spells that I'd like to implement or planning on implementing in a future PR
@@ -596,7 +599,7 @@ public abstract class SharedMagicSystem : EntitySystem
             return;
 
         ev.Handled = true;
-        //Speak(ev);
+        Speak(ev);
 
         RemoveComponents(ev.Target, ev.RemoveComponents);
         AddComponents(ev.Target, ev.AddComponents);
@@ -624,7 +627,7 @@ public abstract class SharedMagicSystem : EntitySystem
         if (args is not ISpeakSpell speak || string.IsNullOrWhiteSpace(speak.Speech))
             return;
 
-        var ev = new SpeakSpellEvent(args.Performer, speak.Speech);
+        var ev = new SpeakSpellEvent(args.Performer, speak.Speech, speak.ChatType);
         RaiseLocalEvent(ref ev);
     }
 }

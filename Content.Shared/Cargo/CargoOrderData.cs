@@ -1,5 +1,8 @@
 using Robust.Shared.Serialization;
 using System.Text;
+using Content.Shared.Cargo.Prototypes;
+using Robust.Shared.Prototypes;
+
 namespace Content.Shared.Cargo
 {
     [DataDefinition, NetSerializable, Serializable]
@@ -52,7 +55,9 @@ namespace Content.Shared.Cargo
         [DataField]
         public string? Approver;
 
-        public CargoOrderData(int orderId, string productId, string productName, int price, int amount, string requester, string reason)
+        public ProtoId<CargoAccountPrototype> Account;
+
+        public CargoOrderData(int orderId, string productId, string productName, int price, int amount, string requester, string reason, ProtoId<CargoAccountPrototype> account)
         {
             OrderId = orderId;
             ProductId = productId;
@@ -61,6 +66,7 @@ namespace Content.Shared.Cargo
             OrderQuantity = amount;
             Requester = requester;
             Reason = reason;
+            Account = account;
         }
 
         public void SetApproverData(string? approver)

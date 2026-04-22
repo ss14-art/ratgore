@@ -1,4 +1,6 @@
 using Content.Server.Shuttles.Systems;
+using Content.Shared.Dataset;
+using Content.Shared.Procedural;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -43,6 +45,18 @@ public partial record struct GridSpawnGroup
     /// Should we add this to the station's grids (if possible / relevant).
     /// </summary>
     public bool StationGrid = true;
+
+    [DataField]
+    public ProtoId<DatasetPrototype>? NameDataset;
+
+    [DataField]
+    public List<ProtoId<DungeonConfigPrototype>> Protos = new();
+
+    [DataField]
+    public float MinimumDistance = 0f;
+
+    [DataField]
+    public float MaximumDistance = 0f;
 
     public GridSpawnGroup()
     {

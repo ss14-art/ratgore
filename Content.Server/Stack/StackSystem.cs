@@ -26,7 +26,7 @@ namespace Content.Server.Stack
         }
 
         public override void SetCount(
-            (EntityUid ent, StackComponent stackComp) uid,
+            EntityUid uid,
             int amount,
             StackComponent? component = null
         )

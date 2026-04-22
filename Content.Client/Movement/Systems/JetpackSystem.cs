@@ -50,7 +50,7 @@ public sealed class JetpackSystem : SharedJetpackSystem
 
         while (query.MoveNext(out var uid, out var comp, out var xform))
         {
-            if (_transform.InRange(xform.Coordinates, comp.LastCoordinates, comp.MaxDistance))
+            if (xform.Coordinates.InRange(EntityManager, _transform, comp.LastCoordinates, comp.MaxDistance))
             {
                 if (_timing.CurTime < comp.TargetTime)
                     continue;

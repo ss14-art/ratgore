@@ -25,7 +25,6 @@ namespace Content.Server.Cargo.Systems
     {
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
         [Dependency] private readonly EmagSystem _emag = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
 
         private void InitializeConsole()
         {
@@ -325,11 +324,11 @@ namespace Content.Server.Cargo.Systems
             if (!_protoMan.TryIndex(component.Account, out var account))
                 return;
 
-            if (Timing.CurTime < component.NextPrintTime)
+            if (_timing.CurTime < component.NextPrintTime)
                 return;
 
             var label = Spawn(account.AcquisitionSlip, Transform(uid).Coordinates);
-            component.NextPrintTime = Timing.CurTime + component.PrintDelay;
+            component.NextPrintTime = _timing.CurTime + component.PrintDelay;
             _audio.PlayPvs(component.PrintSound, uid);
 
             var paper = EnsureComp<PaperComponent>(label);
@@ -551,6 +550,9 @@ namespace Content.Server.Cargo.Systems
 
         private bool TryAddOrder(EntityUid dbUid, ProtoId<CargoAccountPrototype> account, CargoOrderData data, StationCargoOrderDatabaseComponent component)
         {
+            if (!component.Orders.ContainsKey(account))
+                component.Orders[account] = new List<CargoOrderData>();
+
             component.Orders[account].Add(data);
             UpdateOrders(dbUid);
             return true;
@@ -565,10 +567,13 @@ namespace Content.Server.Cargo.Systems
 
         public void RemoveOrder(EntityUid dbUid, ProtoId<CargoAccountPrototype> account, int index, StationCargoOrderDatabaseComponent orderDB)
         {
-            var sequenceIdx = orderDB.Orders[account].FindIndex(order => order.OrderId == index);
+            if (!orderDB.Orders.TryGetValue(account, out var orders))
+                return;
+
+            var sequenceIdx = orders.FindIndex(order => order.OrderId == index);
             if (sequenceIdx != -1)
             {
-                orderDB.Orders[account].RemoveAt(sequenceIdx);
+                orders.RemoveAt(sequenceIdx);
             }
             UpdateOrders(dbUid);
         }
@@ -583,20 +588,26 @@ namespace Content.Server.Cargo.Systems
 
         private static bool PopFrontOrder(StationCargoOrderDatabaseComponent orderDB, ProtoId<CargoAccountPrototype> account, [NotNullWhen(true)] out CargoOrderData? orderOut)
         {
-            var orderIdx = orderDB.Orders[account].FindIndex(order => order.Approved);
+            if (!orderDB.Orders.TryGetValue(account, out var orders))
+            {
+                orderOut = null;
+                return false;
+            }
+
+            var orderIdx = orders.FindIndex(order => order.Approved);
             if (orderIdx == -1)
             {
                 orderOut = null;
                 return false;
             }
 
-            orderOut = orderDB.Orders[account][orderIdx];
+            orderOut = orders[orderIdx];
             orderOut.NumDispatched++;
 
             if (orderOut.NumDispatched >= orderOut.OrderQuantity)
             {
                 // Order is complete. Remove from the queue.
-                orderDB.Orders[account].RemoveAt(orderIdx);
+                orders.RemoveAt(orderIdx);
             }
             return true;
         }

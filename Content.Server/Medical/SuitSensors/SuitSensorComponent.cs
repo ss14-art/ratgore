@@ -1,4 +1,6 @@
+using Content.Shared.DoAfter;
 using Content.Shared.Medical.SuitSensor;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Medical.SuitSensors;
@@ -93,3 +95,21 @@ public record struct SuitSensorsSendAttemptEvent
 {
     public bool Cancelled;
 };
+
+[Serializable, NetSerializable]
+public sealed class SuitSensorChangeDoAfterEvent : DoAfterEvent
+{
+    [DataField(required: true)]
+    public SuitSensorMode Mode;
+
+    private SuitSensorChangeDoAfterEvent()
+    {
+    }
+
+    public SuitSensorChangeDoAfterEvent(SuitSensorMode mode)
+    {
+        Mode = mode;
+    }
+
+    public override DoAfterEvent Clone() => this;
+}

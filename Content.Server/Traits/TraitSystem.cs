@@ -40,26 +40,31 @@ public sealed class TraitSystem : EntitySystem
                 return;
             }
 
-            if (_whitelistSystem.IsWhitelistFail(traitPrototype.Whitelist, args.Mob) ||
-                _whitelistSystem.IsBlacklistPass(traitPrototype.Blacklist, args.Mob))
-                continue;
-
-            // Add all components required by the prototype
-            EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
-
-            // Add item required by the trait
-            if (traitPrototype.TraitGear == null)
-                continue;
-
-            if (!TryComp(args.Mob, out HandsComponent? handsComponent))
-                continue;
-
-            var coords = Transform(args.Mob).Coordinates;
-            var inhandEntity = Spawn(traitPrototype.TraitGear, coords);
-            _sharedHandsSystem.TryPickup(args.Mob,
-                inhandEntity,
-                checkActionBlocker: false,
-                handsComp: handsComponent);
+            AddTrait(args.Mob, traitPrototype);
         }
+    }
+
+    public void AddTrait(EntityUid uid, TraitPrototype traitPrototype)
+    {
+        if (_whitelistSystem.IsWhitelistFail(traitPrototype.Whitelist, uid) ||
+            _whitelistSystem.IsBlacklistPass(traitPrototype.Blacklist, uid))
+            return;
+
+        // Add all components required by the prototype
+        EntityManager.AddComponents(uid, traitPrototype.Components, false);
+
+        // Add item required by the trait
+        if (traitPrototype.TraitGear == null)
+            return;
+
+        if (!TryComp(uid, out HandsComponent? handsComponent))
+            return;
+
+        var coords = Transform(uid).Coordinates;
+        var inhandEntity = Spawn(traitPrototype.TraitGear, coords);
+        _sharedHandsSystem.TryPickup(uid,
+            inhandEntity,
+            checkActionBlocker: false,
+            handsComp: handsComponent);
     }
 }

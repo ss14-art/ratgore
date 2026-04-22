@@ -147,7 +147,7 @@ public abstract partial class InteractionTest
         {
             await Server.WaitPost(() =>
             {
-                Assert.That(HandSys.TryDrop(SEntMan.GetEntity(Player), null, false, true, Hands));
+                Assert.That(HandSys.TryDrop(SEntMan.GetEntity(Player), targetDropLocation: null, checkActionBlocker: false, doDropInteraction: true, handsComp: Hands));
                 SEntMan.DeleteEntity(held);
                 SLogger.Debug($"Deleting held entity");
             });

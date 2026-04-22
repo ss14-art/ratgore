@@ -27,8 +27,7 @@ namespace Content.Server.StationEvents
         protected override void Started(EntityUid uid, BasicStationEventSchedulerComponent component, GameRuleComponent gameRule,
             GameRuleStartedEvent args)
         {
-            // A little starting variance so schedulers dont all proc at once.
-            component.TimeUntilNextEvent = RobustRandom.NextFloat(component.MinimumTimeUntilFirstEvent, component.MinimumTimeUntilFirstEvent + 120);
+            component.TimeUntilNextEvent = TimeSpan.FromSeconds(RobustRandom.NextFloat((float) component.MinimumTimeUntilFirstEvent.TotalSeconds, (float) component.MinimumTimeUntilFirstEvent.TotalSeconds + 120));
         }
 
         protected override void Ended(EntityUid uid, BasicStationEventSchedulerComponent component, GameRuleComponent gameRule,
@@ -51,9 +50,9 @@ namespace Content.Server.StationEvents
                 if (!GameTicker.IsGameRuleActive(uid, gameRule))
                     continue;
 
-                if (eventScheduler.TimeUntilNextEvent > 0)
+                if (eventScheduler.TimeUntilNextEvent > TimeSpan.Zero)
                 {
-                    eventScheduler.TimeUntilNextEvent -= frameTime;
+                    eventScheduler.TimeUntilNextEvent -= TimeSpan.FromSeconds(frameTime);
                     continue;
                 }
 
@@ -67,7 +66,7 @@ namespace Content.Server.StationEvents
         /// </summary>
         private void ResetTimer(BasicStationEventSchedulerComponent component)
         {
-            component.TimeUntilNextEvent = component.MinMaxEventTiming.Next(_random);
+            component.TimeUntilNextEvent = TimeSpan.FromSeconds(component.MinMaxEventTiming.Next(_random));
         }
     }
 

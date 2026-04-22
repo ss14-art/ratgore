@@ -1,11 +1,17 @@
 using System.Numerics;
+using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Camera;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
+using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -14,6 +20,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Projectiles;
@@ -23,10 +30,16 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     public const string ProjectileFixture = "projectile";
 
     [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedCameraRecoilSystem _cameraRecoil = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly StaminaSystem _stamina = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -111,8 +124,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
 
         _audio.PlayPredicted(component.Sound, uid, null);
-        component.EmbeddedIntoUid = target;
-        var ev = new EmbedEvent(user, target);
+        component.Target = target;
+        var ev = new EmbedEvent(user, uid, null);
         RaiseLocalEvent(uid, ref ev);
         Dirty(uid, component);
     }
@@ -126,7 +139,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         TryComp<PhysicsComponent>(uid, out var physics);
         _physics.SetBodyType(uid, BodyType.Dynamic, body: physics, xform: xform);
         _transform.AttachToGridOrMap(uid, xform);
-        component.EmbeddedIntoUid = null;
+        component.Target = null;
         Dirty(uid, component);
 
         // Reset whether the projectile has damaged anything if it successfully was removed
@@ -134,7 +147,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         {
             projectile.Shooter = null;
             projectile.Weapon = null;
-            projectile.ProjectileSpent = false;
+            projectile.DamagedEntity = false;
 
             Dirty(uid, projectile);
         }
@@ -164,6 +177,54 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         component.Shooter = shooterId;
         Dirty(id, component);
+    }
+
+    public void ProjectileCollide(Entity<ProjectileComponent, PhysicsComponent> projectile, EntityUid target, bool prediction = false)
+    {
+        var (uid, component, physics) = projectile;
+        if (component.DamagedEntity ||
+            component.IgnoredEntities.Contains(target) ||
+            (component.OnlyCollideWhenShot && component.Weapon == null))
+        {
+            return;
+        }
+
+        var ev = new ProjectileHitEvent(component.Damage, target, component.Shooter);
+        RaiseLocalEvent(uid, ref ev);
+
+        var otherEv = new ProjectileHitEvent(component.Damage, target, component.Shooter);
+        RaiseLocalEvent(target, ref otherEv);
+
+        if (component.ImpactEffect != null && _netManager.IsServer)
+        {
+            var impactEv = new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(_transform.GetMoverCoordinates(uid)));
+            RaiseNetworkEvent(impactEv);
+        }
+
+        var damage = _damageable.TryChangeDamage(target, ev.Damage, component.IgnoreResistances, origin: component.Shooter);
+        if (damage is { Empty: false })
+        {
+            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target, entityManager: EntityManager));
+
+            if (component.stoppingPower > 0)
+                _stamina.TakeStaminaDamage(target, component.stoppingPower, source: component.Shooter, with: uid);
+        }
+
+        _cameraRecoil.KickCamera(target, physics.LinearVelocity.Normalized());
+
+        var sound = component.SoundHit;
+        _audio.PlayPredicted(sound, target, component.Shooter);
+
+        component.DamagedEntity = true;
+        Dirty(uid, component);
+
+        if (component.DeleteOnCollide && !component.Penetrate)
+            QueueDel(uid);
+
+        if (prediction && TryComp(uid, out PredictedProjectileHitComponent? predicted))
+        {
+            predicted.Origin = _transform.GetMoverCoordinates(uid);
+        }
     }
 
     [Serializable, NetSerializable]

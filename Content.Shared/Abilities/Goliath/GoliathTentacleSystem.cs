@@ -28,8 +28,10 @@ public sealed class GoliathTentacleSystem : EntitySystem
 
     private void OnSummonAction(GoliathSummonTentacleAction args)
     {
-        if (args.Handled || args.Coords is not { } coords)
+        if (args.Handled)
             return;
+
+        var coords = args.Target;
 
         // TODO: animation
 

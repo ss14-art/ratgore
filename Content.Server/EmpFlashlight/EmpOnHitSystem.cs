@@ -22,11 +22,11 @@ public sealed class EmpOnHitSystem : EntitySystem
     {
 
         if (!TryComp(uid, out LimitedChargesComponent? charges)
-            || _charges.IsEmpty(uid, charges)
+            || _charges.IsEmpty((uid, charges))
             || args.HitEntities.Count <= 0)
             return false;
 
-        _charges.UseCharge(uid, charges);
+        _charges.TryUseCharge((uid, charges));
         return true;
     }
 

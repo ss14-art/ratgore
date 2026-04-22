@@ -3,11 +3,12 @@ using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Paper;
+using Content.Server.Roles.RoleCodeword;
+using Content.Shared.Roles.RoleCodeword;
 using Content.Server.Traitor.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
-using Content.Server.Codewords;
 using Content.Shared.Paper;
 
 namespace Content.Server.Traitor.Systems;
@@ -16,7 +17,7 @@ public sealed class TraitorCodePaperSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly CodewordSystem _codewordSystem = default!;
+    [Dependency] private readonly RoleCodewordSystem _codewordSystem = default!;
 
     public override void Initialize()
     {

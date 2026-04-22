@@ -249,6 +249,12 @@ public abstract partial class SharedHandsSystem : EntitySystem
         throw new NotImplementedException();
     }
 
+    public bool TryPickup(EntityUid uid, EntityUid entity, HandsComponent? handsComp = null)
+        => TryPickupAnyHand(uid, entity, handsComp: handsComp);
+
     public bool TryPickup(EntityUid uid, EntityUid entity)
         => TryPickupAnyHand(uid, entity);
+
+    public bool TryPickup(EntityUid uid, EntityUid entity, bool animate, bool animateUser)
+        => TryPickupAnyHand(uid, entity, animate: animate, animateUser: animateUser);
 }

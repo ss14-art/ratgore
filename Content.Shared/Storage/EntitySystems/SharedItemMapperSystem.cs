@@ -98,7 +98,7 @@ public abstract class SharedItemMapperSystem : EntitySystem
         var list = new List<string>();
         foreach (var mapLayerData in itemMapper.MapLayers.Values)
         {
-            var count = containedLayers.Count(ent => _whitelistSystem.IsWhitelistPassOrNull(mapLayerData.Whitelist,
+            var count = containedLayers.Count(ent => _whitelistSystem.IsWhitelistPassOrNull(mapLayerData.ServerWhitelist,
                 ent));
             if (count >= mapLayerData.MinCount && count <= mapLayerData.MaxCount)
             {

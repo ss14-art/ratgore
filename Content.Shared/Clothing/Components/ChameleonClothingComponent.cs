@@ -32,6 +32,21 @@ public sealed partial class ChameleonClothingComponent : Component
     /// </summary>
     [ViewVariables]
     public EntityUid? User;
+
+    [DataField("affectedByEmp")]
+    public bool AffectedByEmp = true;
+
+    [DataField("empContinuous")]
+    public bool EmpContinuous = false;
+
+    [DataField("empChangeIntensity")]
+    public float EmpChangeIntensity = 1.0f;
+
+    [ViewVariables]
+    public TimeSpan NextEmpChange = TimeSpan.Zero;
+
+    [DataField("requireTag")]
+    public string? RequireTag;
 }
 
 [Serializable, NetSerializable]

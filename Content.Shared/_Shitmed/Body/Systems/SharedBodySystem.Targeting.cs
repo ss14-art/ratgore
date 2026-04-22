@@ -1,5 +1,6 @@
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
+using Content.Shared.Body.Systems;
 using Content.Shared._Shitmed.Body.Events;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -83,7 +84,7 @@ public partial class SharedBodySystem
             && damage <= entity.Comp.IntegrityThresholds[TargetIntegrity.HeavilyWounded]
             && _queryTargeting.HasComp(body)
             && !_mobState.IsDead(body))
-            _damageable.TryChangeDamage(entity, GetHealingSpecifier(entity), canSever: false, targetPart: GetTargetBodyPart(entity));
+            _damageable.TryChangeDamage(entity, GetHealingSpecifier(entity));
     }
 
     public override void Update(float frameTime)
@@ -119,9 +120,9 @@ public partial class SharedBodySystem
 
             if (args.TargetPart != null)
             {
-                targetPart = args.TargetPart;
+                targetPart = (Content.Shared._Shitmed.Targeting.TargetBodyPart) args.TargetPart;
             }
-            else if (args.Origin.HasValue && _queryTargeting.TryComp(args.Origin.Value, out var targeter))
+            else if (args.Origin.HasValue && _queryTargeting.TryComp(GetEntity(args.Origin.Value), out var targeter))
             {
                 targetPart = targeter.Target;
                 // If the target is Torso then have a 33% chance to hit another part
@@ -137,6 +138,7 @@ public partial class SharedBodySystem
                 // such as an animal, so we attack a random part.
                 if (args.Origin.HasValue)
                 {
+                    var origin = GetEntity(args.Origin.Value);
                     // Evasion would trigger constantly if we don't target torso
                     targetPart = args.CanEvade ? TargetBodyPart.Torso : GetRandomBodyPart(ent, targetEnt);
                 }
@@ -165,11 +167,13 @@ public partial class SharedBodySystem
 
     private void OnBodyDamageModify(Entity<BodyComponent> bodyEnt, ref DamageModifyEvent args)
     {
+        /*
         if (args.TargetPart != null)
         {
             var (targetType, _) = ConvertTargetBodyPart(args.TargetPart.Value);
             args.Damage *= GetPartDamageModifier(targetType);
         }
+        */
     }
 
     private void OnPartDamageModify(Entity<BodyPartComponent> partEnt, ref DamageModifyEvent args)
@@ -214,7 +218,7 @@ public partial class SharedBodySystem
                     continue;
                 }
 
-                var damageResult = _damageable.TryChangeDamage(part.FirstOrDefault().Id, damage * partMultiplier, ignoreResistances, canSever: canSever);
+                var damageResult = _damageable.TryChangeDamage(part.FirstOrDefault().Id, damage * partMultiplier, ignoreResistances);
                 if (damageResult != null && damageResult.GetTotal() != 0)
                     landed = true;
             }
@@ -232,6 +236,7 @@ public partial class SharedBodySystem
         var partIdSlot = GetParentPartAndSlotOrNull(partEnt)?.Slot;
         var delta = args.DamageDelta;
 
+        /*
         if (args.CanSever
             && partEnt.Comp.CanSever
             && partIdSlot is not null
@@ -241,6 +246,7 @@ public partial class SharedBodySystem
             && damageable.TotalDamage >= partEnt.Comp.SeverIntegrity
             && _severingDamageTypes.Any(damageType => delta.DamageDict.TryGetValue(damageType, out var value) && value > 0))
             severed = true;
+        */
 
         CheckBodyPart(partEnt, GetTargetBodyPart(partEnt), severed, damageable);
 

@@ -44,7 +44,7 @@ public sealed class AirlockVirusRule : StationEventSystem<AirlockVirusRuleCompon
                 continue;
 
             Timer.Spawn(TimeSpan.FromSeconds(_random.NextDouble(component.MinimumTimeToEmag, component.MaximumTimeToEmag)), () =>
-                _emag.DoEmagEffect(uid, airlockUid));
+                _emag.TryEmagEffect(uid, airlockUid, airlockUid));
         }
 
         _announcer.SendAnnouncement(

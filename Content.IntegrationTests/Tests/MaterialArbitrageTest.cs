@@ -61,7 +61,7 @@ public sealed class MaterialArbitrageTest : GameTest
         var refinableName = compFact.GetComponentName<ToolRefinableComponent>();
 
         // get the inverted lathe recipe dictionary
-        var latheRecipes = latheSys.InverseRecipes;
+        // var latheRecipes = latheSys.InverseRecipes; // Removed because it's now internal to latheSys
 
         // Find the lowest multiplier / optimal lathe that can be used to construct a recipie.
         var minMultiplier = new Dictionary<ProtoId<LatheRecipePrototype>, float>();
@@ -258,7 +258,7 @@ public sealed class MaterialArbitrageTest : GameTest
                     Assert.That(spawnedPrice, Is.LessThanOrEqualTo(price), $"{id} increases in price after being destroyed\nEntities spawned on destruction: {string.Join(',', spawnedEnts)}");
 
                 // Check lathe production
-                if (latheRecipes.TryGetValue(id, out var recipes))
+                if (latheSys.TryGetRecipesFromEntity(id, out var recipes))
                 {
                     foreach (var recipe in recipes)
                     {
@@ -346,7 +346,7 @@ public sealed class MaterialArbitrageTest : GameTest
                     Assert.That(deconstructedPrice, Is.LessThanOrEqualTo(price), $"{id} increases in price after being deconstructed");
 
                 // Check lathe production
-                if (latheRecipes.TryGetValue(id, out var recipes))
+                if (latheSys.TryGetRecipesFromEntity(id, out var recipes))
                 {
                     foreach (var recipe in recipes)
                     {
@@ -409,7 +409,7 @@ public sealed class MaterialArbitrageTest : GameTest
                     Assert.That(sumPrice, Is.LessThanOrEqualTo(price), $"{id} increases in price after decomposed into raw materials");
 
                 // Check lathe production
-                if (latheRecipes.TryGetValue(id, out var recipes))
+                if (latheSys.TryGetRecipesFromEntity(id, out var recipes))
                 {
                     foreach (var recipe in recipes)
                     {

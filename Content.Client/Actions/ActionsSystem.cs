@@ -26,6 +26,7 @@ namespace Content.Client.Actions
         public delegate void OnActionReplaced(EntityUid actionId);
 
         [Dependency] private readonly SharedChargesSystem _sharedCharges = default!;
+        [Dependency] private readonly ISerializationManager _serialization = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IResourceManager _resources = default!;
         [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -144,7 +145,6 @@ namespace Content.Client.Actions
             if (args.Current is not ActionsComponentState state)
                 return;
 
-            var (uid, comp) = ent;
             _added.Clear();
             _removed.Clear();
             var stateEnts = EnsureEntitySet<ActionsComponent>(state.Actions, uid);

@@ -4,6 +4,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.DeltaV.CCVars;
 using Content.Shared.Shipyard;
+using Content.Shared.Station.Components;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
@@ -72,12 +73,12 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
     /// <summary>
     /// Adds a ship to the shipyard and attempts to ftl-dock it to the given station.
     /// </summary>
-    public Entity<ShuttleComponent>? TrySendShuttle(Entity<StationDataComponent?> station, string path)
+    public Entity<ShuttleComponent>? TrySendShuttle(EntityUid station, string path, StationDataComponent? stationData = null)
     {
-        if (!Resolve(station, ref station.Comp))
+        if (!Resolve(station, ref stationData))
             return null;
 
-        if (_station.GetLargestGrid(station.Comp) is not {} grid)
+        if (_station.GetLargestGrid(stationData) is not {} grid)
         {
             Log.Error($"Station {ToPrettyString(station):station} had no largest grid to FTL to");
             return null;

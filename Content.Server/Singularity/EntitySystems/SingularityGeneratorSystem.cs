@@ -1,4 +1,6 @@
 using Content.Server.ParticleAccelerator.Components;
+using Content.Server.Popups;
+using Content.Server.Singularity.Components;
 using Content.Shared.Popups;
 using Content.Shared.Singularity.Components;
 using Content.Shared.Singularity.EntitySystems;
@@ -10,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Singularity.EntitySystems;
 
-public sealed class SingularityGeneratorSystem : SharedSingularityGeneratorSystem
+public sealed class SingularityGeneratorSystem : EntitySystem
 {
     #region Dependencies
     [Dependency] private readonly IViewVariablesManager _vvm = default!;
@@ -18,6 +20,7 @@ public sealed class SingularityGeneratorSystem : SharedSingularityGeneratorSyste
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     #endregion Dependencies
 
     public override void Initialize()
@@ -133,7 +136,7 @@ public sealed class SingularityGeneratorSystem : SharedSingularityGeneratorSyste
         if (!contained && !generatorComp.FailsafeDisabled)
         {
             generatorComp.NextFailsafe = _timing.CurTime + generatorComp.FailsafeCooldown;
-            PopupSystem.PopupEntity(Loc.GetString("comp-generator-failsafe", ("target", args.OtherEntity)), args.OtherEntity, PopupType.LargeCaution);
+            _popup.PopupEntity(Loc.GetString("comp-generator-failsafe", ("target", args.OtherEntity)), args.OtherEntity, PopupType.LargeCaution);
         }
         else
         {
@@ -177,9 +180,10 @@ public sealed class SingularityGeneratorSystem : SharedSingularityGeneratorSyste
         foreach (var result in rayCastResults)
         {
             if (genQuery.HasComponent(result.HitEntity))
+            {
                 closestResult = result;
-
-            break;
+                break;
+            }
         }
 
         if (closestResult == null)

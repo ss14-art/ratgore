@@ -159,7 +159,7 @@ public sealed class SuicideCommandTests : GameTest
                 Assert.That(mobStateSystem.IsDead(player, mobStateComp));
                 Assert.That(entManager.TryGetComponent<GhostComponent>(mindComponent.CurrentEntity, out var ghostComp) &&
                             !ghostComp.CanReturnToBody);
-                Assert.That(damageableSystem.GetTotalDamage(player), Is.EqualTo(lethalDamageThreshold));
+                Assert.That(entManager.GetComponent<DamageableComponent>(player).TotalDamage, Is.EqualTo(lethalDamageThreshold));
             });
         });
     }
@@ -262,7 +262,7 @@ public sealed class SuicideCommandTests : GameTest
         await server.WaitAssertion(() =>
         {
             // Heal all damage first (possible low pressure damage taken)
-            damageableSystem.ClearAllDamage((player, damageableComp));
+            damageableSystem.SetAllDamage(player, damageableComp, 0);
             consoleHost.GetSessionShell(playerMan.Sessions.First()).ExecuteCommand("suicide");
             var lethalDamageThreshold = mobThresholdsComp.Thresholds.Keys.Last();
 
@@ -271,7 +271,7 @@ public sealed class SuicideCommandTests : GameTest
                 Assert.That(mobStateSystem.IsDead(player, mobStateComp));
                 Assert.That(entManager.TryGetComponent<GhostComponent>(mindComponent.CurrentEntity, out var ghostComp) &&
                             !ghostComp.CanReturnToBody);
-                Assert.That(damageableSystem.GetAllDamage((player, damageableComp)).DamageDict["Slash"], Is.EqualTo(lethalDamageThreshold));
+                Assert.That(entManager.GetComponent<DamageableComponent>(player).Damage.DamageDict["Slash"], Is.EqualTo(lethalDamageThreshold));
             });
         });
     }
@@ -330,7 +330,7 @@ public sealed class SuicideCommandTests : GameTest
         await server.WaitAssertion(() =>
         {
             // Heal all damage first (possible low pressure damage taken)
-            damageableSystem.ClearAllDamage((player, damageableComp));
+            damageableSystem.SetAllDamage(player, damageableComp, 0);
             consoleHost.GetSessionShell(playerMan.Sessions.First()).ExecuteCommand("suicide");
             var lethalDamageThreshold = mobThresholdsComp.Thresholds.Keys.Last();
 
@@ -339,7 +339,7 @@ public sealed class SuicideCommandTests : GameTest
                 Assert.That(mobStateSystem.IsDead(player, mobStateComp));
                 Assert.That(entManager.TryGetComponent<GhostComponent>(mindComponent.CurrentEntity, out var ghostComp) &&
                             !ghostComp.CanReturnToBody);
-                Assert.That(damageableSystem.GetAllDamage((player, damageableComp)).DamageDict["Slash"], Is.EqualTo(lethalDamageThreshold / 2));
+                Assert.That(entManager.GetComponent<DamageableComponent>(player).Damage.DamageDict["Slash"], Is.EqualTo(lethalDamageThreshold / 2));
             });
         });
     }

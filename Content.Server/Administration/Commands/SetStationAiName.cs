@@ -51,7 +51,7 @@ public sealed class SetStationAiNameCommand : IConsoleCommand
         }
 
         var spawningSystem = _entManager.System<StationSpawningSystem>();
-        spawningSystem.EquipJobName(target.Value, job!);
+        spawningSystem.EquipStartingGear(target.Value, job.StartingGear);
         shell.WriteLine(Loc.GetString("shell-command-success"));
     }
 }

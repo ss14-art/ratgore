@@ -5,13 +5,15 @@ using Content.Server.Lightning;
 using Content.Shared._Crescent;
 using Content.Shared._Lavaland.Weapons;
 using Content.Shared.Projectiles;
-using Robust.Server.GameObjects;
-using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Threading;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Log;
+using Robust.Shared.Physics;
+using Robust.Server.GameObjects;
 
 
 /// <summary>
@@ -32,7 +34,7 @@ public class ProjectilePhasePreventerSystem : EntitySystem
     private EntityQuery<PhysicsComponent> physQuery;
     private EntityQuery<FixturesComponent> fixtureQuery;
     private List<RaycastBucket> processingBuckets = new();
-    public required ISawmill sawLogs;
+    public ISawmill sawLogs = default!;
     /// <summary>
     ///  how many rays will be put per thread
     ///
@@ -50,10 +52,10 @@ public class ProjectilePhasePreventerSystem : EntitySystem
     {
         SubscribeLocalEvent<ProjectilePhasePreventComponent, ComponentStartup>(OnInit);
         SubscribeLocalEvent<ProjectilePhasePreventComponent, ComponentShutdown>(OnRemove);
+        sawLogs = _logs.GetSawmill("Phase-Prevention");
         processingBuckets.Add(new RaycastBucket());
         fixtureQuery = GetEntityQuery<FixturesComponent>();
         physQuery = GetEntityQuery<PhysicsComponent>();
-        sawLogs = _logs.GetSawmill("Phase-Prevention");
     }
 
     private void OnInit(EntityUid uid, ProjectilePhasePreventComponent comp, ref ComponentStartup args)
@@ -125,8 +127,8 @@ public class ProjectilePhasePreventerSystem : EntitySystem
                 var checkUid = EntityUid.Invalid;
                 if (!TryComp<TransformComponent>(projectile.Weapon, out var projectileWeaponTransform))
                     continue;
-                if (projectile.Weapon is not null && projectileWeaponTransform.GridUid is not null)
-                    checkUid = projectileWeaponTransform.GridUid!.Value;
+                if (projectileWeaponTransform.GridUid is not null)
+                    checkUid = projectileWeaponTransform.GridUid.Value;
                 foreach (var hit in _phys.IntersectRay(_trans.GetMapId(owner), ray,rayLength, projectile.Weapon, false))
                 {
                     if (owner == hit.HitEntity)
@@ -172,7 +174,7 @@ public class ProjectilePhasePreventerSystem : EntitySystem
         {
             foreach(var eventData in bucket.output)
             {
-                if (TerminatingOrDeleted(eventData.selfEntity) || TerminatingOrDeleted(eventData.hitEntity))
+                if (TerminatingOrDeleted(eventData.selfEntity, null) || TerminatingOrDeleted(eventData.hitEntity, null))
                     continue;
                 var fEv = eventData;
                 try

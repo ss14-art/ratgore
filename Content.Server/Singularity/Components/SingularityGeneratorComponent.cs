@@ -30,4 +30,38 @@ public sealed partial class SingularityGeneratorComponent : Component
     [DataField("spawnId", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     [ViewVariables(VVAccess.ReadWrite)]
     public string? SpawnPrototype = "Singularity";
+
+    /// <summary>
+    ///     Whether or not the failsafe is disabled.
+    /// </summary>
+    [DataField("failsafeDisabled")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool FailsafeDisabled = false;
+
+    /// <summary>
+    ///     The time at which the failsafe will next be able to trigger.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan NextFailsafe = TimeSpan.Zero;
+
+    /// <summary>
+    ///     The cooldown between failsafe triggers.
+    /// </summary>
+    [DataField("failsafeCooldown")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan FailsafeCooldown = TimeSpan.FromSeconds(10);
+
+    /// <summary>
+    ///     The distance at which the failsafe will trigger.
+    /// </summary>
+    [DataField("failsafeDistance")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float FailsafeDistance = 10f;
+
+    /// <summary>
+    ///     The collision mask used to check for containment fields.
+    /// </summary>
+    [DataField("collisionMask")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public int CollisionMask = 0;
 }

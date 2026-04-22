@@ -73,13 +73,22 @@ public sealed class RCDSystem : EntitySystem
         if (component.AvailablePrototypes.Count > 0)
         {
             component.ProtoId = component.AvailablePrototypes.ElementAt(0);
-            Dirty(uid, component);
+            UpdateCachedPrototype(uid, component);
 
             return;
         }
 
         // The RCD has no valid recipes somehow? Get rid of it
         QueueDel(uid);
+    }
+
+    public void UpdateCachedPrototype(EntityUid uid, RCDComponent component)
+    {
+        if (component.CachedPrototype != null && component.CachedPrototype.ID == component.ProtoId)
+            return;
+
+        component.CachedPrototype = _protoManager.Index(component.ProtoId);
+        Dirty(uid, component);
     }
 
     private void OnRCDSystemMessage(EntityUid uid, RCDComponent component, RCDSystemMessage args)
@@ -93,7 +102,7 @@ public sealed class RCDSystem : EntitySystem
 
         // Set the current RCD prototype to the one supplied
         component.ProtoId = args.ProtoId;
-        Dirty(uid, component);
+        UpdateCachedPrototype(uid, component);
     }
 
     private void OnExamine(EntityUid uid, RCDComponent component, ExaminedEvent args)
@@ -584,6 +593,20 @@ public sealed class RCDSystem : EntitySystem
         var entXform = new Transform(new(), entXformComp.LocalRotation);
 
         return boundingPolygon.ComputeAABB(boundingTransform, 0).Intersects(fixture.Shape.ComputeAABB(entXform, 0));
+    }
+
+    public bool TryGetMapGridData(EntityCoordinates coordinates, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out (EntityUid GridUid, MapGridComponent MapGrid, TileRef Tile, Vector2i Position)? data)
+    {
+        data = null;
+        var gridUid = coordinates.GetGridUid(EntityManager);
+        if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
+            return false;
+
+        var position = _mapSystem.LocalToTile(gridUid.Value, mapGrid, coordinates);
+        var tile = _mapSystem.GetTileRef(gridUid.Value, mapGrid, position);
+
+        data = (gridUid.Value, mapGrid, tile, position);
+        return true;
     }
 
     #endregion

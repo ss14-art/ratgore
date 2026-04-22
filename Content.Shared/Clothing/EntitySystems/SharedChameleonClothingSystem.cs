@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
@@ -92,5 +93,11 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    public IEnumerable<EntityPrototype> GetValidTargets(SlotFlags slot)
+    {
+        return _proto.EnumeratePrototypes<EntityPrototype>()
+            .Where(p => IsValidTarget(p, slot));
     }
 }

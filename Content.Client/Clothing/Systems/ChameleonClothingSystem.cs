@@ -15,15 +15,6 @@ public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
     {
         base.Initialize();
         SubscribeLocalEvent<ChameleonClothingComponent, AfterAutoHandleStateEvent>(HandleState);
-
-        PrepareAllVariants();
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReloaded);
-    }
-
-    private void OnProtoReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (args.WasModified<EntityPrototype>())
-            PrepareAllVariants();
     }
 
     private void HandleState(EntityUid uid, ChameleonClothingComponent component, ref AfterAutoHandleStateEvent args)

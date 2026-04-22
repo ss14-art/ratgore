@@ -82,7 +82,28 @@ public abstract partial class SharedHandsSystem
     /// <summary>
     ///     Attempts to drop the item in the currently active hand.
     /// </summary>
-    public bool TryDrop(EntityUid uid, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true, HandsComponent? handsComp = null)
+    public bool TryDrop(EntityUid uid, HandsComponent? handsComp = null)
+    {
+        if (!Resolve(uid, ref handsComp))
+            return false;
+
+        if (handsComp.ActiveHand == null)
+            return false;
+
+        return TryDrop(uid, handsComp.ActiveHand, null, true, true, handsComp);
+    }
+
+    /// <summary>
+    ///     Attempts to drop the item in the currently active hand.
+    /// </summary>
+    public bool TryDrop(
+        EntityUid uid,
+        object handsActiveHandId,
+        EntityCoordinates? targetDropLocation = null,
+        bool checkActionBlocker = true,
+        bool doDropInteraction = true,
+        HandsComponent? handsComp = null
+    )
     {
         if (!Resolve(uid, ref handsComp))
             return false;
@@ -93,9 +114,6 @@ public abstract partial class SharedHandsSystem
         return TryDrop(uid, handsComp.ActiveHand, targetDropLocation, checkActionBlocker, doDropInteraction, handsComp);
     }
 
-    /// <summary>
-    ///     Drops an item at the target location.
-    /// </summary>
     public bool TryDrop(EntityUid uid, EntityUid entity, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true, HandsComponent? handsComp = null)
     {
         if (!Resolve(uid, ref handsComp))

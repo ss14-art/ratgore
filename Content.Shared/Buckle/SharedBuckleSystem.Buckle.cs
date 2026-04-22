@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Shared.Alert;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Buckle.Events;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -18,6 +19,7 @@ using Content.Shared.Storage.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
+using Content.Shared.Buckle.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -33,7 +35,6 @@ public abstract partial class SharedBuckleSystem
     public static ProtoId<AlertCategoryPrototype> BuckledAlertCategory = "Buckled";
 
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
     private void InitializeBuckle()
     {
@@ -382,7 +383,7 @@ public abstract partial class SharedBuckleSystem
                 _standing.Stand(buckle, force: true);
                 break;
             case StrapPosition.Down:
-                _standing.Down(buckle, false, false, force: true);
+                _standing.Down(buckle);
                 break;
         }
 
@@ -482,7 +483,7 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(buckle, BuckleVisuals.Buckled, false);
 
         if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
-            _standing.Down(buckle, playSound: false);
+            _standing.Down(buckle);
         else
             _standing.Stand(buckle);
 
@@ -551,7 +552,7 @@ public abstract partial class SharedBuckleSystem
         if (args.Cancelled || args.Handled || args.Target == null || args.Used == null)
             return;
 
-        args.Handled = TryBuckle(args.Target.Value, args.User, args.Used.Value, popup: false);
+        args.Handled = TryBuckle(GetEntity(args.Target.Value), args.User, GetEntity(args.Used.Value), popup: false);
     }
 
     /// <summary>
@@ -566,11 +567,13 @@ public abstract partial class SharedBuckleSystem
         if (args.Target == null || args.Used == null)
             return;
 
-        if (TryComp<CuffableComponent>(args.Target, out var targetCuffableComp) && targetCuffableComp.CuffedHandCount > 0
-            || _mobState.IsIncapacitated(args.Target.Value))
+        var target = GetEntity(args.Target.Value);
+
+        if (TryComp<CuffableComponent>(target, out var targetCuffableComp) && targetCuffableComp.CuffedHandCount > 0
+            || _mobState.IsIncapacitated(target))
         {
             ev.Cancel();
-            TryBuckle(args.Target.Value, args.User, args.Used.Value, popup: false);
+            TryBuckle(target, args.User, GetEntity(args.Used.Value), popup: false);
         }
     }
 }

@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 namespace Content.Shared.Roles;
 
 [Prototype("startingGear")]
-public sealed partial class StartingGearPrototype : IPrototype, IInheritingPrototype
+public sealed partial class StartingGearPrototype : IPrototype, IInheritingPrototype, IEquipmentLoadout
 {
     [DataField]
     [AlwaysPushInheritance]
@@ -14,14 +14,14 @@ public sealed partial class StartingGearPrototype : IPrototype, IInheritingProto
 
     [DataField]
     [AlwaysPushInheritance]
-    public List<EntProtoId> Inhand = new(0);
+    public List<EntProtoId> Inhand { get; private set; } = new(0);
 
     /// <summary>
     ///     Inserts entities into the specified slot's storage (if it does have storage).
     /// </summary>
     [DataField]
     [AlwaysPushInheritance]
-    public Dictionary<string, List<EntProtoId>> Storage = new();
+    public Dictionary<string, List<EntProtoId>> Storage { get; private set; } = new();
 
     /// <summary>
     ///     The list of starting gears that overwrite the entries on this starting gear

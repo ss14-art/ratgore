@@ -63,6 +63,9 @@ public sealed partial class ClothingComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan UnequipDelay = TimeSpan.Zero;
 
+    [DataField]
+    public string? MappedLayer;
+
     /// <summary>
     ///     These functions are called when an entity equips an item with this component.
     /// </summary>

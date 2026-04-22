@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Body.Part;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
@@ -124,12 +126,27 @@ namespace Content.Shared.Damage
         ///     null if the user had no applicable components that can take damage.
         /// </returns>
         public DamageSpecifier? TryChangeDamage(EntityUid? uid, DamageSpecifier damage, bool ignoreResistances = false,
-            bool interruptsDoAfters = true, DamageableComponent? damageable = null, EntityUid? origin = null)
+            bool interruptsDoAfters = true, DamageableComponent? damageable = null, EntityUid? origin = null,
+            float partMultiplier = 1.0f, TargetBodyPart? targetPart = null, bool canSever = false)
         {
             if (!uid.HasValue || !_damageableQuery.Resolve(uid.Value, ref damageable, false))
             {
-                // TODO BODY SYSTEM pass damage onto body system
+                if (uid.HasValue && targetPart != null)
+                {
+                    var ev = new TryChangePartDamageEvent(EntityManager.GetNetEntity(uid.Value), damage, EntityManager.GetNetEntity(origin), targetPart, ignoreResistances, canSever, partMultiplier: partMultiplier);
+                    RaiseLocalEvent(uid.Value, ev);
+                    if (ev.Handled)
+                        return ev.Damage;
+                }
                 return null;
+            }
+
+            if (targetPart != null)
+            {
+                var ev = new TryChangePartDamageEvent(EntityManager.GetNetEntity(uid.Value), damage, EntityManager.GetNetEntity(origin), targetPart, ignoreResistances, canSever, partMultiplier: partMultiplier);
+                RaiseLocalEvent(uid.Value, ev);
+                if (ev.Handled)
+                    return ev.Damage;
             }
 
             if (damage.Empty)
@@ -287,7 +304,22 @@ namespace Content.Shared.Damage
     ///     Raised before damage is done, so stuff can cancel it if necessary.
     /// </summary>
     [ByRefEvent]
-    public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid? Origin = null, bool Cancelled = false);
+    public struct BeforeDamageChangedEvent
+    {
+        public readonly DamageSpecifier Damage;
+        public readonly EntityUid? Origin;
+
+        public bool Cancelled = false;
+        public bool CanEvade = true;
+        public float stoppingPower = 0f;
+        public float HullrotArmorPen = 0f;
+
+        public BeforeDamageChangedEvent(DamageSpecifier damage, EntityUid? origin = null)
+        {
+            Damage = damage;
+            Origin = origin;
+        }
+    }
 
     /// <summary>
     ///     Raised on an entity when damage is about to be dealt,
@@ -304,6 +336,9 @@ namespace Content.Shared.Damage
         public readonly DamageSpecifier OriginalDamage;
         public DamageSpecifier Damage;
         public EntityUid? Origin;
+
+        public float stoppingPower = 0f;
+        public float HullrotArmorPen = 0f;
 
         public DamageModifyEvent(DamageSpecifier damage, EntityUid? origin = null)
         {

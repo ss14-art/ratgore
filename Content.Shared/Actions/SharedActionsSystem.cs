@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Events;
+using Content.Shared.Actions.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Hands;
@@ -15,10 +16,11 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.DoAfter;
 
 namespace Content.Shared.Actions;
 
-public abstract class SharedActionsSystem : EntitySystem
+public abstract partial class SharedActionsSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming GameTiming = default!;
     [Dependency] private   readonly ISharedAdminLogManager _adminLogger = default!;
@@ -27,12 +29,17 @@ public abstract class SharedActionsSystem : EntitySystem
     [Dependency] private   readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private   readonly RotateToFaceSystem _rotateToFaceSystem = default!;
     [Dependency] private   readonly SharedAudioSystem _audio = default!;
+    [Dependency] private   readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private   readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private   readonly SharedTransformSystem _transformSystem = default!;
+
+    private EntityQuery<ActionComponent> _actionQuery;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _actionQuery = GetEntityQuery<ActionComponent>();
 
         SubscribeLocalEvent<InstantActionComponent, MapInitEvent>(OnActionMapInit);
         SubscribeLocalEvent<EntityTargetActionComponent, MapInitEvent>(OnActionMapInit);
@@ -282,14 +289,26 @@ public abstract class SharedActionsSystem : EntitySystem
     #endregion
 
     #region Execution
+    public void SetCharges(EntityUid? actionId, int? charges)
+    {
+        // TODO: Implement charges in BaseActionComponent if needed, or use a separate component
+    }
+
+    public void SetMaxCharges(EntityUid? actionId, int? maxCharges)
+    {
+        // TODO: Implement charges in BaseActionComponent if needed, or use a separate component
+    }
+
     /// <summary>
     ///     When receiving a request to perform an action, this validates whether the action is allowed. If it is, it
     ///     will raise the relevant <see cref="InstantActionEvent"/>
     /// </summary>
-    private void OnActionRequest(RequestPerformActionEvent ev, EntitySessionEventArgs args)
+    public void OnActionRequest(RequestPerformActionEvent ev, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } user)
             return;
+
+        var curTime = GameTiming.CurTime;
 
         if (!TryComp(user, out ActionsComponent? component))
             return;
@@ -316,7 +335,6 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!action.Enabled)
             return;
 
-        var curTime = GameTiming.CurTime;
         if (IsCooldownActive(action, curTime))
             return;
 
@@ -407,7 +425,9 @@ public abstract class SharedActionsSystem : EntitySystem
                 if (entityWorldAction.Event != null)
                 {
                     entityWorldAction.Event.Entity = actionEntity;
-                    entityWorldAction.Event.Coords = actionCoords;
+                    if (actionCoords != null)
+                        entityWorldAction.Event.Target = actionCoords.Value;
+
                     Dirty(actionEnt, entityWorldAction);
                     performEvent = entityWorldAction.Event;
                 }
@@ -576,7 +596,11 @@ public abstract class SharedActionsSystem : EntitySystem
             actionEvent.Handled = false;
             var target = performer;
             actionEvent.Performer = performer;
-            actionEvent.Action = (actionId, action);
+
+            if (!_actionQuery.TryComp(actionId, out var actionComp))
+                return;
+
+            actionEvent.Action = (actionId, actionComp);
 
             if (!action.RaiseOnUser && action.Container != null && !HasComp<MindComponent>(action.Container))
                 target = action.Container.Value;

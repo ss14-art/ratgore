@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Alert;
 using Content.Shared.Rejuvenate;
-using Content.Shared.StatusEffectNew;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -94,6 +93,16 @@ namespace Content.Shared.StatusEffect
         private void OnRejuvenate(EntityUid uid, StatusEffectsComponent component, RejuvenateEvent args)
         {
             TryRemoveAllStatusEffects(uid, component);
+        }
+
+        /// <summary>
+        ///     Tries to set a status effect to an entity with a certain timer.
+        ///     If the effect already exists, it will replace the cooldown with the new one given.
+        /// </summary>
+        [Obsolete("Migration to Content.Shared.StatusEffectNew.SharedStatusEffectsSystem is required")]
+        public bool TrySetStatusEffect(EntityUid uid, string key, TimeSpan time, StatusEffectsComponent? component = null)
+        {
+            return TryAddStatusEffect(uid, key, time, true, component);
         }
 
         /// <summary>
@@ -480,6 +489,12 @@ namespace Content.Shared.StatusEffect
             return true;
         }
     }
+
+    /// <summary>
+    ///     Raised on an entity before a status effect is added to determine if adding it should be cancelled.
+    /// </summary>
+    [ByRefEvent]
+    public record struct BeforeStatusEffectAddedEvent(string Key, bool Cancelled = false);
 
     public readonly struct StatusEffectAddedEvent
     {

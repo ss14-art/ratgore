@@ -2,12 +2,18 @@ using Content.Shared.Customization.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 
+using Content.Shared.Roles;
+
 namespace Content.Shared.Clothing.Loadouts.Prototypes;
 
 
 [Prototype]
-public sealed partial class LoadoutPrototype : IPrototype
+public sealed partial class LoadoutPrototype : IPrototype, IEquipmentLoadout
 {
+    public string GetGear(string slot) => string.Empty;
+    public List<EntProtoId> Inhand => new();
+    public Dictionary<string, List<EntProtoId>> Storage => new();
+
     /// Formatted like "Loadout[Department/ShortHeadName][CommonClothingSlot][SimplifiedClothingId]", example: "LoadoutScienceOuterLabcoatSeniorResearcher"
     [IdDataField]
     public string ID { get; set; } = default!;

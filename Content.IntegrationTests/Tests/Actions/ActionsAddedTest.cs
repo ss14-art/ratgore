@@ -54,9 +54,9 @@ public sealed class ActionsAddedTest : GameTest
         var sQuery = sEntMan.GetEntityQuery<InstantActionComponent>();
         var cQuery = cEntMan.GetEntityQuery<InstantActionComponent>();
         var sActions = sActionSystem.GetActions(serverEnt).Where(
-            ent => sQuery.CompOrNull(ent)?.Event?.GetType() == evType).ToArray();
+            ent => sQuery.CompOrNull(ent.Id)?.Event?.GetType() == evType).Select(a => a.Id).ToArray();
         var cActions = cActionSystem.GetActions(clientEnt).Where(
-            ent => cQuery.CompOrNull(ent)?.Event?.GetType() == evType).ToArray();
+            ent => cQuery.CompOrNull(ent.Id)?.Event?.GetType() == evType).Select(a => a.Id).ToArray();
 
         Assert.That(sActions.Length, Is.EqualTo(1));
         Assert.That(cActions.Length, Is.EqualTo(1));
@@ -64,12 +64,12 @@ public sealed class ActionsAddedTest : GameTest
         var sAct = sActions[0];
         var cAct = cActions[0];
 
-        Assert.That(sAct.Comp, Is.Not.Null);
-        Assert.That(cAct.Comp, Is.Not.Null);
+        Assert.That(sEntMan.HasComponent<InstantActionComponent>(sAct));
+        Assert.That(cEntMan.HasComponent<InstantActionComponent>(cAct));
 
         // Finally, these two actions are not the same object
         // required, because integration tests do not respect the [NonSerialized] attribute and will simply events by reference.
-        Assert.That(ReferenceEquals(sAct.Comp, cAct.Comp), Is.False);
+        Assert.That(ReferenceEquals(sEntMan.GetComponent<InstantActionComponent>(sAct), cEntMan.GetComponent<InstantActionComponent>(cAct)), Is.False);
         Assert.That(ReferenceEquals(sQuery.GetComponent(sAct).Event, cQuery.GetComponent(cAct).Event), Is.False);
     }
 }

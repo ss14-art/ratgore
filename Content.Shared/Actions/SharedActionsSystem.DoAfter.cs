@@ -1,5 +1,9 @@
 using Content.Shared.Actions.Events;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
+using Robust.Shared.Player;
+using Content.Shared.Players;
+using Robust.Shared.GameObjects;
 
 namespace Content.Shared.Actions;
 
@@ -53,10 +57,10 @@ public abstract partial class SharedActionsSystem
         // If this doafter is on repeat and was cancelled, start use delay as expected
         if (args.Cancelled && ent.Comp.Repeat)
         {
-            SetUseDelay(action, args.OriginalUseDelay);
-            RemoveCooldown(action);
-            StartUseDelay(action);
-            UpdateAction(action);
+            SetUseDelay(ent, args.OriginalUseDelay);
+            ClearCooldown(ent);
+            StartUseDelay(ent);
+            UpdateAction(ent);
             return;
         }
 
@@ -65,7 +69,7 @@ public abstract partial class SharedActionsSystem
         // Set the use delay to 0 so this can repeat properly
         if (ent.Comp.Repeat)
         {
-            SetUseDelay(action, TimeSpan.Zero);
+            SetUseDelay(ent, TimeSpan.Zero);
         }
 
         if (args.Cancelled)
@@ -76,10 +80,13 @@ public abstract partial class SharedActionsSystem
             args.Args.Delay = ent.Comp.DelayReduction.Value;
 
         // Validate again for charges, blockers, etc
-        if (TryPerformAction(args.Input, performer, skipDoActionRequest: true))
+        if (TryComp(performer, out ActorComponent? actor))
+        {
+            OnActionRequest(args.Input, new EntitySessionEventArgs(actor.PlayerSession));
             return;
+        }
 
         // Cancel this doafter if we can't validate the action
-        _doAfter.Cancel(args.DoAfter.Id, force: true);
+        _doAfter.Cancel(args.DoAfter.Id);
     }
 }

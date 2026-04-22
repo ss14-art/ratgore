@@ -1,3 +1,4 @@
+using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
@@ -7,7 +8,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Clothing;
 
-public sealed class FlippableClothingVisualizerSystem : VisualizerSystem<FlippableClothingVisualsComponent>
+public sealed class FlippableClothingVisualizerSystem : VisualizerSystem<FoldableClothingComponent>
 {
     [Dependency] private readonly SharedItemSystem _itemSys = default!;
 
@@ -15,16 +16,16 @@ public sealed class FlippableClothingVisualizerSystem : VisualizerSystem<Flippab
     {
         base.Initialize();
 
-        SubscribeLocalEvent<FlippableClothingVisualsComponent, GetEquipmentVisualsEvent>(OnGetVisuals, after: [typeof(ClothingSystem)]);
-        SubscribeLocalEvent<FlippableClothingVisualsComponent, FoldedEvent>(OnFolded);
+        SubscribeLocalEvent<FoldableClothingComponent, GetEquipmentVisualsEvent>(OnGetVisuals, after: [typeof(ClothingSystem)]);
+        SubscribeLocalEvent<FoldableClothingComponent, FoldedEvent>(OnFolded);
     }
 
-    private void OnFolded(Entity<FlippableClothingVisualsComponent> ent, ref FoldedEvent args)
+    private void OnFolded(Entity<FoldableClothingComponent> ent, ref FoldedEvent args)
     {
         _itemSys.VisualsChanged(ent);
     }
 
-    private void OnGetVisuals(Entity<FlippableClothingVisualsComponent> ent, ref GetEquipmentVisualsEvent args)
+    private void OnGetVisuals(Entity<FoldableClothingComponent> ent, ref GetEquipmentVisualsEvent args)
     {
         if (!TryComp(ent, out SpriteComponent? sprite) ||
             !TryComp(ent, out ClothingComponent? clothing))

@@ -1,9 +1,13 @@
 using System.Linq;
+using Content.Shared.Roles;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
+using Content.Shared.Preferences;
 using Content.Shared.Item;
 using Content.Shared.Preferences.Loadouts;
+using Content.Shared.Clothing.Loadouts.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
@@ -86,7 +90,6 @@ public abstract class SharedStationSpawningSystem : EntitySystem
 
     public void EquipStartingGear(EntityUid entity, LoadoutPrototype loadout, bool raiseEvent = true)
     {
-        EquipStartingGear(entity, loadout.StartingGear, raiseEvent);
         EquipStartingGear(entity, (IEquipmentLoadout) loadout, raiseEvent);
     }
 
@@ -141,7 +144,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
             {
                 var inhandEntity = Spawn(prototype, coords);
 
-                if (_handsSystem.TryGetEmptyHand((entity, handsComponent), out var emptyHand))
+                if (_handsSystem.TryGetEmptyHand(entity, out var emptyHand, handsComponent))
                 {
                     _handsSystem.TryPickup(entity, inhandEntity, emptyHand, checkActionBlocker: false, handsComp: handsComponent);
                 }
@@ -208,5 +211,13 @@ public abstract class SharedStationSpawningSystem : EntitySystem
         }
 
         return null;
+    }
+
+    public HumanoidCharacterProfile? GetProfile(EntityUid uid, HumanoidAppearanceComponent? appearance = null)
+    {
+        if (!Resolve(uid, ref appearance, false))
+            return null;
+
+        return appearance.LastProfileLoaded;
     }
 }

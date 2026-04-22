@@ -12,6 +12,7 @@ namespace Content.Server.Actions;
 public sealed class ActionOnInteractSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
 
@@ -111,7 +112,7 @@ public sealed class ActionOnInteractSystem : EntitySystem
             if (entAct.Event != null)
             {
                 entAct.Event.Entity = args.Target;
-                entAct.Event.Coords = args.ClickLocation;
+                entAct.Event.Target = args.ClickLocation;
             }
 
             _actions.PerformAction(args.User, null, entActId, entAct, entAct.Event, _timing.CurTime, false);

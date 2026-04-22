@@ -1,12 +1,18 @@
 using System.Numerics;
+using Content.Server.Procedural;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Events;
 using Content.Shared.CCVar;
+using Content.Shared.Dataset;
+using Content.Shared.Procedural;
+using Content.Shared.Random.Helpers;
+using Content.Shared.Salvage;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Station.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -78,7 +84,7 @@ public sealed partial class ShuttleSystem
         _mapSystem.DeleteMap(mapId);
     }
 
-    private bool TryDungeonSpawn(Entity<MapGridComponent?> targetGrid, DungeonSpawnGroup group, out EntityUid spawned)
+    private bool TryDungeonSpawn(Entity<MapGridComponent?> targetGrid, GridSpawnGroup group, out EntityUid spawned)
     {
         spawned = EntityUid.Invalid;
 
@@ -108,9 +114,10 @@ public sealed partial class ShuttleSystem
         var spawnedGrid = _mapManager.CreateGridEntity(mapId);
 
         _transform.SetMapCoordinates(spawnedGrid, new MapCoordinates(Vector2.Zero, mapId));
-        _dungeon.GenerateDungeon(dungeonProto, spawnedGrid.Owner, spawnedGrid.Comp, Vector2i.Zero, _random.Next(), spawnCoords);
+        _dungeon.GenerateDungeon(dungeonProto, spawnedGrid.Owner, spawnedGrid.Comp, Vector2i.Zero, _random.Next());
 
         spawned = spawnedGrid.Owner;
+        _transform.SetCoordinates(spawned, spawnCoords);
         return true;
     }
 
@@ -176,25 +183,20 @@ public sealed partial class ShuttleSystem
             {
                 EntityUid spawned;
 
-                switch (group)
+                if (group.Protos.Count > 0)
                 {
-                    case DungeonSpawnGroup dungeon:
-                        if (!TryDungeonSpawn(targetGrid.Value, dungeon, out spawned))
-                            continue;
-
-                        break;
-                    case GridSpawnGroup grid:
-                        if (!TryGridSpawn(targetGrid.Value, uid, mapId, grid, out spawned))
-                            continue;
-
-                        break;
-                    default:
-                        throw new NotImplementedException();
+                    if (!TryDungeonSpawn(targetGrid.Value, group, out spawned))
+                        continue;
+                }
+                else
+                {
+                    if (!TryGridSpawn(targetGrid.Value, uid, mapId, group, out spawned))
+                        continue;
                 }
 
-                if (_protoManager.TryIndex(group.NameDataset, out var dataset))
+                if (group.NameDataset != null && _protoManager.TryIndex<DatasetPrototype>(group.NameDataset, out var dataset))
                 {
-                    _metadata.SetEntityName(spawned, _salvage.GetFTLName(dataset, _random.Next()));
+                    _metadata.SetEntityName(spawned, SharedSalvageSystem.GetFTLName(dataset, _random.Next()));
                 }
 
                 if (group.Hide)
@@ -293,3 +295,4 @@ public sealed partial class ShuttleSystem
         return null;
     }
 }
+
