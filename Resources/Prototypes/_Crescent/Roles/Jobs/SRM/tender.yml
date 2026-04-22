@@ -22,6 +22,9 @@
   supervisors: job-supervisors-srm-hunters
   canBeAntag: false
   requirements:
+    #- !type:CharacterWhitelistRequirement
+    - !type:CharacterOverallTimeRequirement
+      min: 57600
     - !type:FactionRequirement
       factionID: "SRM"
     - !type:CharacterSpeciesRequirement

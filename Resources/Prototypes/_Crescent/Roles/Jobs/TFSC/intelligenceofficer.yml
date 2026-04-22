@@ -26,6 +26,7 @@
       inverted: true
       species:
         - Voidborn
+    #- !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 10800
     - !type:FactionRequirement

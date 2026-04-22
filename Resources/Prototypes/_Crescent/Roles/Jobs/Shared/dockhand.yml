@@ -38,7 +38,7 @@
     head: ClothingHeadHelmetCMMMachinist
     id: DockhandPDA
     jumpsuit: ClothingUniformJumpsuitCMMMachinist
-    belt: ClothingBeltSalvageWebbingFilledNF
+    belt: ClothingBeltSalvageWebbingCrescentFilled
     back: ClothingBackpackSHI
     gloves: ClothingHandsGlovesColorYellow
     shoes: ClothingShoesBootsSalvage

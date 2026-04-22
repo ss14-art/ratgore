@@ -671,5 +671,29 @@ Entries:
     id: 84
     time: '2026-04-20T09:00:45.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/139
+  - author: freycyik
+    changes:
+      - type: Tweak
+        message: Увеличенно расстояние консоли Дронов вдвое
+    id: 85
+    time: '2026-04-22T12:06:24.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/137
+  - author: Gorox
+    changes:
+      - type: Tweak
+        message: Ракеты выпущенные из одного шаттла больше не сбивают друг друга.
+      - type: Tweak
+        message: Радиус магнитов кузни и верфи были увеличены на 0.3 тайла.
+      - type: Fix
+        message: Снаряды выпущенные из боевого меха теперь ведут себя корректно.
+      - type: Fix
+        message: Через трупы животных теперь пролетают пули.
+      - type: Fix
+        message: Переработчик биомассы теперь принимает трупы.
+      - type: Fix
+        message: Боевой режим больше не исчезает при выходе из меха или снятии джетпака.
+    id: 86
+    time: '2026-04-22T12:08:05.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/143
 Name: Rat
 Order: -1

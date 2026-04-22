@@ -35012,13 +35012,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 13.5,40.5
       parent: 1
-- proto: BiomeScrapyardSource
-  entities:
-  - uid: 360
-    components:
-    - type: Transform
-      pos: -0.35382742,1.3562131
-      parent: 1
 - proto: BlastDoor
   entities:
   - uid: 361
@@ -41379,7 +41372,7 @@ entities:
     - type: Transform
       pos: 6.5,22.5
       parent: 1
-- proto: ClosetFireFilled
+- proto: ClosetFireCrescentFilled
   entities:
   - uid: 1544
     components:
@@ -41391,7 +41384,7 @@ entities:
     - type: Transform
       pos: -5.5,22.5
       parent: 1
-- proto: ClosetMaintenanceFilledRandom
+- proto: ClosetMaintenance
   entities:
   - uid: 1546
     components:
@@ -45248,13 +45241,6 @@ entities:
     - type: Transform
       pos: -9.5,24.5
       parent: 1
-- proto: MarauderFlatpack
-  entities:
-  - uid: 2126
-    components:
-    - type: Transform
-      pos: 13.429619,20.572702
-      parent: 1
 - proto: MechaniteAutoinjector
   entities:
   - uid: 2127
@@ -46940,7 +46926,7 @@ entities:
     - type: Transform
       pos: -11.5,38.5
       parent: 1
-- proto: Screwdriver
+- proto: CrescentScrewdriver
   entities:
   - uid: 2407
     components:
@@ -48210,7 +48196,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -12.5,22.5
       parent: 1
-- proto: ToolboxElectricalFilled
+- proto: ToolboxElectricalCrescentFilled
   entities:
   - uid: 2571
     components:
@@ -48224,7 +48210,7 @@ entities:
     - type: Transform
       pos: 10.475063,38.91012
       parent: 1
-- proto: ToolboxMechanicalFilled
+- proto: ToolboxMechanicalCrescentFilled
   entities:
   - uid: 2573
     components:
@@ -48236,7 +48222,7 @@ entities:
     - type: Transform
       pos: 9.481008,18.509909
       parent: 1
-- proto: ToolboxSyndicateFilled
+- proto: ToolboxSyndicateCrescentFilled
   entities:
   - uid: 2575
     components:
@@ -48505,7 +48491,7 @@ entities:
     - type: Transform
       pos: -10.5,22.5
       parent: 1
-- proto: VendingMachineEngivend
+- proto: VendingMachineCrescentEngivend
   entities:
   - uid: 2588
     components:
@@ -48548,7 +48534,7 @@ entities:
     - type: Transform
       pos: 2.5,40.5
       parent: 1
-- proto: VendingMachineYouTool
+- proto: VendingMachineCrescentYouTool
   entities:
   - uid: 2595
     components:
@@ -50833,69 +50819,6 @@ entities:
     - type: Transform
       pos: 9.5,11.5
       parent: 1
-- proto: WeaponDonorPlasmaCutter
-  entities:
-  - uid: 1598
-    components:
-    - type: Transform
-      parent: 1597
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1600
-    components:
-    - type: Transform
-      parent: 1599
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1602
-    components:
-    - type: Transform
-      parent: 1601
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1604
-    components:
-    - type: Transform
-      parent: 1603
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 1606
-    components:
-    - type: Transform
-      parent: 1605
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 3023
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 14.710492,33.656216
-      parent: 1
-  - uid: 3024
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 14.700075,34.42705
-      parent: 1
-- proto: WeaponMechCombatAutoshotgun
-  entities:
-  - uid: 2992
-    components:
-    - type: Transform
-      pos: 12.532752,19.763376
-      parent: 1
-- proto: WeaponMechCombatGrenadeLauncher
-  entities:
-  - uid: 2993
-    components:
-    - type: Transform
-      pos: 12.665426,21.327589
-      parent: 1
 - proto: WeaponPistolViperWood
   entities:
   - uid: 2994
@@ -51110,9 +51033,7 @@ entities:
           showEnts: False
           occludes: True
           ent: 1336
-    - type: Anchorable
-      flags: None
-- proto: Welder
+- proto: CrescentWelder
   entities:
   - uid: 3011
     components:
@@ -51185,7 +51106,7 @@ entities:
     - type: Transform
       pos: 4.5,4.5
       parent: 1
-- proto: Wrench
+- proto: CrescentWrench
   entities:
   - uid: 3022
     components:

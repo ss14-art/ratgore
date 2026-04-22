@@ -29,6 +29,7 @@
   supervisors: job-supervisors-imperial
   canBeAntag: false
   requirements:
+    #- !type:CharacterWhitelistRequirement
     - !type:FactionRequirement
       factionID: "DSM"
     - !type:CharacterOverallTimeRequirement
@@ -58,6 +59,7 @@
   access:
   - Command
   - Empire
+  - EmpireNoble
   - Maintenance
   - ScribesGuild
   - Archmaester

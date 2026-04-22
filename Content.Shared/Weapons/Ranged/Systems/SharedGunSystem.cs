@@ -354,7 +354,12 @@ public abstract partial class SharedGunSystem : EntitySystem
             shots = Math.Min(shots, gun.ShotsPerBurstModified - gun.ShotCounter);
         }
 
-        var fromCoordinates = Transform(user).Coordinates;
+        // If the shooter is a mech pilot, fire from the mech's world transform, not the pilot's
+        // container-local transform. Otherwise projectiles can inherit mech-local offsets and
+        // appear to bend/shift when the mech rotates after the shot.
+        var fromCoordinates = TryComp<MechPilotComponent>(user, out var mechPilot)
+            ? Transform(mechPilot.Mech).Coordinates
+            : Transform(user).Coordinates;
         var attemptEv = new AttemptShootEvent(user, null, fromCoordinates, toCoordinates);
         RaiseLocalEvent(gunUid, ref attemptEv);
 

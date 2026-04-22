@@ -77,7 +77,7 @@ public sealed partial class CCVars
     ///     Needs <see cref="MonstermosEqualization"/> and <see cref="MonstermosDepressurization"/> to be enabled to work.
     /// </summary>
     public static readonly CVarDef<bool> AtmosGridImpulse =
-        CVarDef.Create("atmos.grid_impulse", true, CVar.SERVERONLY);
+        CVarDef.Create("atmos.grid_impulse", false, CVar.SERVERONLY);
 
     /// <summary>
     ///     Minimum amount of air allowed on a spaced tile before it is reset to 0 immediately in kPa

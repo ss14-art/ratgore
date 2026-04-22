@@ -451,17 +451,26 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (actionId == SelectingTargetFor)
             StopTargeting();
 
-        foreach (var page in _pages)
+        var currentPageChanged = false;
+        for (var pageIndex = 0; pageIndex < _pages.Count; pageIndex++)
         {
+            var page = _pages[pageIndex];
             for (var i = 0; i < page.Size; i++)
             {
                 if (page[i] == actionId)
                 {
                     page[i] = null;
-                    (_container.GetChild(i) as ActionButton)?.ClearData();
+
+                    if (pageIndex == _currentPageIndex)
+                        currentPageChanged = true;
                 }
             }
         }
+
+        // Only redraw if the visible page changed. This avoids clearing slot indices on the
+        // currently shown page for actions that were removed from a different page.
+        if (currentPageChanged && _actionsSystem != null)
+            _container.SetActionData(_actionsSystem, _pages[_currentPageIndex]);
     }
 
     private void OnActionsUpdated()

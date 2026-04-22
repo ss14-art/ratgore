@@ -46,6 +46,13 @@
         name: 30-зарядный магазин (5,56x45 мм)
       - id: MagazineShotgun
         name: 10-зарядный магазин (12 калибр)
+    - name: Вставки
+      choices: { CMInsert: 2 }
+      entries:
+      - id: ArmorPlateSteelInsertHardsuit
+        name: Compact Steel Insert
+      - id: ArmorPlateSteelInsert
+        name: Steel Insert
 
 - type: entity
   parent: ColMarTechBase
@@ -95,6 +102,13 @@
         name: 30-зарядный магазин (5,56x45 мм)
       - id: MagazineShotgun
         name: 10-зарядный магазин (12 калибр)
+    - name: Вставки
+      choices: { CMInsert: 2 }
+      entries:
+      - id: ArmorPlateSteelInsertHardsuit
+        name: Compact Steel Insert
+      - id: ArmorPlateSteelInsert
+        name: Steel Insert
 
 - type: entity
   parent: ColMarTechBase
@@ -162,6 +176,13 @@
         name: 18-зарядный пистолетный магазин (9x19 мм PSTF auto)
       - id: SpeedLoaderMagnum
         name: спидлоадер (.45 магнум)
+    - name: Вставки
+      choices: { CMInsert: 2 }
+      entries:
+      - id: ArmorPlateSteelInsertHardsuit
+        name: Compact Steel Insert
+      - id: ArmorPlateSteelInsert
+        name: Steel Insert
 
 - type: entity
   parent: ColMarTechBase
@@ -226,6 +247,13 @@
         name: 30-зарядный магазин (5,56х45 мм Imperial)
       - id: MagazinePistol
         name: 18-зарядный пистолетный магазин (9x19 мм PSTF auto)
+    - name: Вставки
+      choices: { CMInsert: 2 }
+      entries:
+      - id: ArmorPlateSteelInsertHardsuit
+        name: Compact Steel Insert
+      - id: ArmorPlateSteelInsert
+        name: Steel Insert
 
 - type: entity
   parent: ColMarTechBase
@@ -292,3 +320,10 @@
         name: 25-зарядный магазин (7,62х51 мм USM)
       - id: BoxLethalshot
         name: коробка ружейных патронов (.50 летальные)
+    - name: Вставки
+      choices: { CMInsert: 2 }
+      entries:
+      - id: ArmorPlateSteelInsertHardsuit
+        name: Compact Steel Insert
+      - id: ArmorPlateSteelInsert
+        name: Steel Insert

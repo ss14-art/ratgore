@@ -725,15 +725,6 @@
     ShipHull: 4000
 
 - type: latheRecipe
-  id: PraetorianLPC
-  result: ShipVoucherPraetorian
-  completetime: 1
-  materials:
-    StarshipEngineComponents: 3000
-    ShipComponents: 3000
-    ShipHull: 6000
-
-- type: latheRecipe
   id: CovetorLPC
   result: ShipVoucherCovetor
   completetime: 1
@@ -758,6 +749,15 @@
   materials:
     StarshipEngineComponents: 3000
     ShipComponents: 4500
+    ShipHull: 4000
+
+- type: latheRecipe
+  id: PraetorianLPC
+  result: ShipVoucherPraetorian
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 3000
+    ShipComponents: 4500  #placeholder
     ShipHull: 4000
 
 # MARK: Flatpacks

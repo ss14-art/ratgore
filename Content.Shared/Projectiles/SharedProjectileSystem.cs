@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._Crescent.SpaceArtillery;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
@@ -11,6 +12,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Throwing;
@@ -44,6 +46,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
@@ -271,7 +274,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     {
         if (!component.EmbedOnThrow
             || HasComp<ThrownItemImmuneComponent>(args.Target)
-            || _standing.IsDown(args.Target))
+            || _standing.IsDown(args.Target)
+            || _mobState.IsDead(args.Target))
             return;
 
         TryEmbed(uid, args.Target, null, component, args.TargetPart);
@@ -279,7 +283,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
     private void OnEmbedProjectileHit(EntityUid uid, EmbeddableProjectileComponent component, ref ProjectileHitEvent args)
     {
-        if (!(args.Target is { }) || _standing.IsDown(args.Target)
+        if (!(args.Target is { }) || _standing.IsDown(args.Target) || _mobState.IsDead(args.Target)
             || !TryComp(uid, out ProjectileComponent? projectile)
             || !TryEmbed(uid, args.Target, args.Shooter, component))
             return;
@@ -328,6 +332,29 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         if (component.IgnoreWeaponGrid && component.Weapon != null && !TerminatingOrDeleted(component.Weapon) && Transform(args.OtherEntity).GridUid == Transform((EntityUid) component.Weapon).GridUid)
             args.Cancelled = true;
+
+        // Ship weapon projectiles fired from the same shuttle should never collide with each other.
+        if (HasComp<ShipWeaponProjectileComponent>(uid)
+            && HasComp<ShipWeaponProjectileComponent>(args.OtherEntity)
+            && TryComp<ProjectileComponent>(args.OtherEntity, out var otherProjectile))
+        {
+            var ourGrid = GetProjectileSourceGrid(component);
+            var otherGrid = GetProjectileSourceGrid(otherProjectile);
+
+            if (ourGrid != null && ourGrid == otherGrid)
+                args.Cancelled = true;
+        }
+    }
+
+    private EntityUid? GetProjectileSourceGrid(ProjectileComponent projectile)
+    {
+        if (projectile.Weapon is { } weapon && !TerminatingOrDeleted(weapon))
+            return Transform(weapon).GridUid;
+
+        if (projectile.Shooter is { } shooter && !TerminatingOrDeleted(shooter))
+            return Transform(shooter).GridUid;
+
+        return null;
     }
 
     public void SetShooter(EntityUid id, ProjectileComponent component, EntityUid? shooterId)

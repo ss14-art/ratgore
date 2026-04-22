@@ -165,7 +165,9 @@ public partial class MobStateSystem
                 if (component.DownWhenDead)
                     _standing.Down(target);
 
-                if (_standing.IsDown(target) && TryComp<PhysicsComponent>(target, out var physics))
+                // Corpses should not block ballistics (same as humanoids that are downed); some mobs never
+                // successfully enter StandingState.Lying on death but must still not eat projectiles.
+                if (TryComp<PhysicsComponent>(target, out var physics))
                     _physics.SetCanCollide(target, false, body: physics);
 
                 _appearance.SetData(target, MobStateVisuals.State, MobState.Dead);

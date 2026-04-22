@@ -9251,8 +9251,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 3
     components:
     - type: Transform
@@ -9260,8 +9258,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
 - proto: AAAHardpointLargeMissile
   entities:
   - uid: 4
@@ -9271,8 +9267,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 5
     components:
     - type: Transform
@@ -9280,8 +9274,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
 - proto: AAAHardpointMediumEnergy
   entities:
   - uid: 6
@@ -9292,8 +9284,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 7
     components:
     - type: Transform
@@ -9301,8 +9291,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 8
     components:
     - type: Transform
@@ -9310,8 +9298,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 9
     components:
     - type: Transform
@@ -9320,8 +9306,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 10
     components:
     - type: Transform
@@ -9330,8 +9314,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 11
     components:
     - type: Transform
@@ -9340,8 +9322,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 12
     components:
     - type: Transform
@@ -9350,8 +9330,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 13
     components:
     - type: Transform
@@ -9360,8 +9338,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 14
     components:
     - type: Transform
@@ -9370,8 +9346,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
   - uid: 15
     components:
     - type: Transform
@@ -9379,8 +9353,6 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-    - type: Anchorable
-      flags: None
 - proto: AdvMopItem
   entities:
   - uid: 16
@@ -10826,8 +10798,6 @@ entities:
       - 284
       - 285
       - 286
-    - type: Anchorable
-      flags: None
   - uid: 287
     components:
     - type: Transform
@@ -10852,8 +10822,6 @@ entities:
       - 288
       - 289
       - 290
-    - type: Anchorable
-      flags: None
 - proto: Beaker
   entities:
   - uid: 291
@@ -20500,7 +20468,7 @@ entities:
       pos: -6.5,0.5
       parent: 1
     - type: WarpPoint
-      location: БИ Эпитафия
+      location: IPM Hayes Medical Waystation
 - proto: WeaponCapacitorRecharger
   entities:
   - uid: 1907
@@ -20551,77 +20519,57 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -2.5,16.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1914
     components:
     - type: Transform
       pos: -10.5,-5.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1915
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -10.5,6.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1916
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 3.5,-15.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1917
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 9.5,7.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1918
     components:
     - type: Transform
       pos: 9.5,-6.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1919
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -15.5,3.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1920
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -2.5,-15.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1921
     components:
     - type: Transform
       pos: -15.5,-2.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1922
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 3.5,16.5
       parent: 1
-    - type: Anchorable
-      flags: None
 - proto: WeaponTurretMauler
   entities:
   - uid: 1923
@@ -20630,21 +20578,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: -4.5,11.5
       parent: 1
-    - type: Anchorable
-      flags: None
   - uid: 1924
     components:
     - type: Transform
       pos: 5.5,-10.5
-      parent: 1
-    - type: Anchorable
-      flags: None
-- proto: WildBiomeSource
-  entities:
-  - uid: 1925
-    components:
-    - type: Transform
-      pos: -5.337845,0.52850986
       parent: 1
 - proto: WindoorSecure
   entities:

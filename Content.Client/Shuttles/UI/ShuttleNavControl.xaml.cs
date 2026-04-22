@@ -422,7 +422,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
 
         DrawBacking(handle);
         DrawCircles(handle);
-        DrawZoneCircles(handle); // Corvax-Frontier-Zones
+        DrawZoneCircles(handle); // Ratgore zones
 
         // No data
         if (_coordinates == null || _rotation == null)
@@ -924,7 +924,6 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         if (_coordinates == null || _rotation == null)
             return;
 
-        // Получаем текущую позицию на карте
         var xformQuery = EntManager.GetEntityQuery<TransformComponent>();
         if (!xformQuery.TryGetComponent(_coordinates.Value.EntityId, out var xform)
             || xform.MapID == MapId.Nullspace)
@@ -935,7 +934,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         var mapPos = _transform.ToMapCoordinates(_coordinates.Value);
         var (_, ourEntRot, ourEntMatrix) = _transform.GetWorldPositionRotationMatrix(_coordinates.Value.EntityId);
         var rot = ourEntRot + _rotation.Value;
-
+        
         if (keepWorldAligned)
         {
             ourEntRot = Angle.Zero;
@@ -948,17 +947,13 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         var ourWorldMatrix = Matrix3x2.Multiply(posMatrix, ourEntMatrix);
         Matrix3x2.Invert(ourWorldMatrix, out var ourWorldMatrixInvert);
 
-        // Центр карты (0,0) в мировых координатах
         var mapCenterWorld = Vector2.Zero;
 
-        // Преобразуем центр карты через ту же матрицу, что и другие объекты
         var mapCenterUI = Vector2.Transform(mapCenterWorld, ourWorldMatrixInvert);
-        mapCenterUI.Y = -mapCenterUI.Y; // Инвертируем Y для UI
+        mapCenterUI.Y = -mapCenterUI.Y; 
 
-        // Масштабируем для отображения
         var uiCenter = ScalePosition(mapCenterUI);
 
-        // Рисуем зоны с фиксированным центром в координатах карты (0,0)
         handle.DrawCircle(uiCenter, 650 * MinimapScale, new Color(255, 0, 0, 50), false);
         handle.DrawCircle(uiCenter, 3950 * MinimapScale, new Color(0, 255, 0, 50), false);
         handle.DrawCircle(uiCenter, 4350 * MinimapScale, new Color(0, 255, 0, 50), false);

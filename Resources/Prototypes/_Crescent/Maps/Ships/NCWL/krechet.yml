@@ -22,6 +22,10 @@
         - type: MapIcon
           iconType: Shuttle
       components:
+        - type: VesselIcon
+          iffIcon:
+            sprite: _Crescent/ShipIcons/ifficons.rsi
+            state: fighter
         - type: StationNameSetup
           mapNameTemplate: 'ЛРНП Кречет {1}'
           nameGenerator:

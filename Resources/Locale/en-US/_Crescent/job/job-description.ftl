@@ -114,7 +114,7 @@ job-description-arbeiter = The industrial life blood of the Authoritat. Follow t
 
 
 # misc
-
+job-description-vagrant = Be an independent nomad of Taypan. Survive and keep your head low.
 job-description-spacer = Be an independent citizen of Taypan.
 job-description-gliess-sheriff = Maintain law and order on Gliess Santo. Organize your militia, and protect the independent civilians of Taypan.
 job-description-gliess-deputy = Assist the Sheriff in keeping the law. Defend independent spacers and maintain peace with much bigger fish.
@@ -164,6 +164,11 @@ job-description-unionfall-dsm-officer = Lead small squads. Ensure cohesion. List
 job-description-unionfall-dsm-doctor = Keep your fellow men alive.
 job-description-unionfall-dsm-rifleman = Be the rank and file. Pilot fighters and ultralights. Listen to your superiors.
 job-description-unionfall-dsm-cadet = Listen to your superiors. Keep your head down and learn.
+
+# planetfall
+job-description-planetfall-team-subleader = Enact the team leader's orders. Ensure Cohesion.
+job-description-planetfall-team-member = Follow orders from your team leader. Do your part to ensure the success of the mission. Listen to your superiors.
+job-description-planetfall-team-leader = Lead your team. Ensure the success of your mission. Listen to your superiors.
 
 # event roles
 job-description-ncwl-conscript-event = Conscript from the NCWL ground forces militia. Armed with a semi automatic rifle and a dream.

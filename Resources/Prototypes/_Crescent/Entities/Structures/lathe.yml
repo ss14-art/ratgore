@@ -357,6 +357,15 @@
       - ClothingHeadHelmetEVALarge # Frontier
       - TradebandTranslator
       - ClothingBeltSalvageWebbing
+      - ArmorPlateSteelInsertHardsuitCraft
+      - ArmorPlateCeramicInsertBasicHardsuitCraft
+      - ArmorPlatePlasteelInsertHardsuitCraft
+      - ArmorPlateCeramicInsertAdvancedHardsuitCraft
+      - ArmorPlateSteelInsertCraft
+      - ArmorPlateKevlarInsertCraft
+      - ArmorPlateCeramicInsertBasicCraft
+      - ArmorPlatePlasteelInsertCraft
+      - ArmorPlateCeramicInsertAdvancedCraft
     dynamicRecipes:
       #Minutemen
       - MinutemanLPC
@@ -645,7 +654,7 @@
       - BaseWeaponTurretShortbowFlatpack
       - BaseWeaponTurretAzimuthFlatpack
       - BaseWeaponTurretArbalestFlatpack
-      - WeaponDonorPlasmaCutter
+      # - WeaponDonorPlasmaCutter
       - RCDRecharging
       - KineticMachete
       - BreachingHammer
@@ -1649,6 +1658,7 @@
       - ClothingOuterHardsuitCybersunDreadnoughtCyberdawn
   - type: MaterialStorageMagnetPickup
     magnetEnabled: True
+    range: 0.3
 
   - type: Machine
     board: MicroforgeCircuitboard
@@ -1720,6 +1730,9 @@
   - type: Anchorable
     flags:
     - Anchorable
+  - type: MaterialStorageMagnetPickup
+    magnetEnabled: False
+    range: 0.3
 
 #organs
 

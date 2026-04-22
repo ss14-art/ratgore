@@ -907,10 +907,16 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!Resolve(performer, ref comp, false))
             return;
 
+        // Defensive guard: removing "provided" actions from self should never happen in normal flows
+        // (mech/jetpack/gear providers are external entities). If this does happen due an invalid
+        // unequip provider, we'd otherwise strip innate actions from the performer.
+        if (container == performer)
+            return;
+
         foreach (var actionId in comp.Actions.ToArray())
         {
             if (!TryGetActionData(actionId, out var action))
-                return;
+                continue;
 
             if (action.Container == container)
                 RemoveAction(performer, actionId, comp);

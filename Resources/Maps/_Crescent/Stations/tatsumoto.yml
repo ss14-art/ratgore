@@ -42957,7 +42957,7 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-- proto: ClosetToolFilled
+- proto: ClosetToolCrescentFilled
   entities:
   - uid: 3983
     components:
@@ -58965,7 +58965,7 @@ entities:
       parent: 1
     - type: Lock
       locked: False
-- proto: LockerElectricalSuppliesFilled
+- proto: LockerElectricalSuppliesCrescentFilled
   entities:
   - uid: 6128
     components:
@@ -64245,7 +64245,7 @@ entities:
     - type: Transform
       pos: -10.5,16.5
       parent: 1
-- proto: Screwdriver
+- proto: CrescentScrewdriver
   entities:
   - uid: 6919
     components:
@@ -66736,7 +66736,7 @@ entities:
           showEnts: False
           occludes: True
           ents: []
-- proto: ToolboxElectricalFilled
+- proto: ToolboxElectricalCrescentFilled
   entities:
   - uid: 7226
     components:
@@ -66750,7 +66750,7 @@ entities:
     - type: Transform
       pos: 3.5340078,63.63167
       parent: 1
-- proto: ToolboxMechanicalFilled
+- proto: ToolboxMechanicalCrescentFilled
   entities:
   - uid: 6918
     components:
@@ -67445,7 +67445,7 @@ entities:
     - type: Transform
       pos: 21.5,16.5
       parent: 1
-- proto: VendingMachineEngivend
+- proto: VendingMachineCrescentEngivend
   entities:
   - uid: 7279
     components:
@@ -67619,7 +67619,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -8.5,-2.5
       parent: 1
-- proto: VendingMachineYouTool
+- proto: VendingMachineCrescentYouTool
   entities:
   - uid: 7303
     components:
@@ -74888,8 +74888,8 @@ entities:
     - type: Battery
       startingCharge: 0
     - type: PointCannon
-      linkedConsoleId: 4157
-- proto: WelderIndustrial
+      linkedConsoleId: 4188
+- proto: CrescentWelder
   entities:
   - uid: 8477
     components:
@@ -75169,7 +75169,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -12.5,52.5
       parent: 1
-- proto: Wrench
+- proto: CrescentWrench
   entities:
   - uid: 8524
     components:

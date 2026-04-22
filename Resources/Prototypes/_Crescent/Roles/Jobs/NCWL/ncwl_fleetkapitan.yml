@@ -37,6 +37,7 @@
   supervisors: job-supervisors-ncwl-leaders
   canBeAntag: false
   requirements:
+    #- !type:CharacterWhitelistRequirement
     - !type:CharacterOverallTimeRequirement
       min: 20000
     - !type:FactionRequirement

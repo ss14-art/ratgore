@@ -12,6 +12,7 @@
   supervisors: job-supervisors-prophet
   canBeAntag: false
   requirements:
+    #- !type:CharacterWhitelistRequirement
     - !type:FactionRequirement
       factionID: "TAP"
     - !type:CharacterOverallTimeRequirement
