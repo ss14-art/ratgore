@@ -2,11 +2,13 @@
 using Content.Shared.Actions;
 using Content.Shared.Chat;
 using Content.Shared.Storage;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Magic.Events;
 
 // TODO: This class needs combining with InstantSpawnSpellEvent
 
+[Serializable, NetSerializable]
 public sealed partial class WorldSpawnSpellEvent : WorldTargetActionEvent, ISpeakSpell
 {
     /// <summary>

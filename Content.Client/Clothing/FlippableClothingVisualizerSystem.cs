@@ -16,7 +16,7 @@ public sealed class FlippableClothingVisualizerSystem : VisualizerSystem<Foldabl
     {
         base.Initialize();
 
-        SubscribeLocalEvent<FoldableClothingComponent, GetEquipmentVisualsEvent>(OnGetVisuals, after: [typeof(ClothingSystem)]);
+        SubscribeLocalEvent<FoldableClothingComponent, GetEquipmentVisualsEvent>(OnGetVisuals, after: new[] { typeof(ClothingSystem) });
         SubscribeLocalEvent<FoldableClothingComponent, FoldedEvent>(OnFolded);
     }
 

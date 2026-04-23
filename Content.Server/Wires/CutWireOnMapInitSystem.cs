@@ -13,7 +13,7 @@ public sealed partial class CutWireOnMapInitSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CutWireOnMapInitComponent, MapInitEvent>(OnMapInit, after: [typeof(WiresSystem)]);
+        SubscribeLocalEvent<CutWireOnMapInitComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(WiresSystem) });
     }
 
     private void OnMapInit(Entity<CutWireOnMapInitComponent> entity, ref MapInitEvent args)

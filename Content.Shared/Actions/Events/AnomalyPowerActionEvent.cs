@@ -5,9 +5,11 @@ using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Content.Shared.Explosion;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Actions.Events;
 
+[Serializable, NetSerializable]
 public sealed partial class AnomalyPowerActionEvent : InstantActionEvent
 {
     /// <summary>
@@ -71,6 +73,7 @@ public sealed partial class AnomalyPowerActionEvent : InstantActionEvent
     public PyroclasticAnomalySettings? Pyroclastic;
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct AnomalyPowerSettings()
 {
@@ -136,6 +139,7 @@ public partial record struct AnomalyPowerSettings()
     public bool DoSupercritical = true;
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct BluespaceAnomalySettings()
 {
@@ -166,6 +170,7 @@ public partial record struct BluespaceAnomalySettings()
     public SoundSpecifier TeleportSound = new SoundPathSpecifier("/Audio/Effects/teleport_arrival.ogg");
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct ElectricalAnomalySettings()
 {
@@ -196,6 +201,7 @@ public partial record struct ElectricalAnomalySettings()
     public float EmpDisabledDuration = 60f;
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct ExplosionAnomalySettings()
 {
@@ -242,6 +248,7 @@ public partial record struct ExplosionAnomalySettings()
     public float SupercritMaxTileIntensity = 10f;
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct GasProducerAnomalySettings()
 {
@@ -296,6 +303,7 @@ public partial record struct GasProducerAnomalySettings()
     public float SupercritTempChange = 0;
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct GravityAnomalySettings()
 {
@@ -317,6 +325,7 @@ public partial record struct GravityAnomalySettings()
     public float SpaceRange = 3f;
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct InjectionAnomalySettings()
 {
@@ -352,6 +361,7 @@ public partial record struct InjectionAnomalySettings()
     public string Solution { get; set; } = "default";
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct PuddleAnomalySettings()
 {
@@ -367,6 +377,7 @@ public partial record struct PuddleAnomalySettings()
     public string Solution { get; set; } = "default";
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct PyroclasticAnomalySettings()
 {

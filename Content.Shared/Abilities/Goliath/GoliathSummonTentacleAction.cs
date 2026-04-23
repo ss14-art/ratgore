@@ -1,8 +1,11 @@
 using Content.Shared.Actions;
 using Robust.Shared.Prototypes;
 
+using Robust.Shared.Serialization;
+
 namespace Content.Shared.Abilities.Goliath;
 
+[Serializable, NetSerializable]
 public sealed partial class GoliathSummonTentacleAction : WorldTargetActionEvent
 {
     /// <summary>

@@ -275,3 +275,14 @@
     exclusiveAntag: true
     roleType: SoloAntagonist
   - type: ChangelingRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleBlob
+  name: Blob Role
+  components:
+  - type: MindRole
+    antagPrototype: Blob
+    exclusiveAntag: true
+    roleType: SoloAntagonist
+  - type: BlobRole

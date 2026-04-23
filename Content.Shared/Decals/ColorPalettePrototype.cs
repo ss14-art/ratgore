@@ -2,7 +2,7 @@
 
 namespace Content.Shared.Decals;
 
-[Prototype]
+[Prototype("palette")]
 public sealed partial class ColorPalettePrototype : IPrototype
 {
     [IdDataField] public string ID { get; private set; } = null!;

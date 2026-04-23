@@ -3,6 +3,7 @@ using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -114,6 +115,7 @@ public abstract partial class SharedGunSystem
     }
 
     // TODO: Actions need doing for guns anyway.
+    [Serializable, NetSerializable]
     private sealed partial class CycleModeEvent : InstantActionEvent
     {
         public SelectiveFire Mode = default;

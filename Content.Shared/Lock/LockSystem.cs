@@ -42,8 +42,8 @@ public sealed partial class LockSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<LockComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<LockComponent, ActivateInWorldEvent>(OnActivated, before: [typeof(ActivatableUISystem)]);
-        SubscribeLocalEvent<LockComponent, UseInHandEvent>(OnUseInHand, before: [typeof(ActivatableUISystem)]);
+        SubscribeLocalEvent<LockComponent, ActivateInWorldEvent>(OnActivated, before: new[] { typeof(ActivatableUISystem) });
+        SubscribeLocalEvent<LockComponent, UseInHandEvent>(OnUseInHand, before: new[] { typeof(ActivatableUISystem) });
         SubscribeLocalEvent<LockComponent, StorageOpenAttemptEvent>(OnStorageOpenAttempt);
         SubscribeLocalEvent<LockComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<LockComponent, GetVerbsEvent<AlternativeVerb>>(AddToggleLockVerb);

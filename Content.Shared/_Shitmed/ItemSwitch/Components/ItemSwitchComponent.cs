@@ -1,3 +1,4 @@
+using System;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -59,6 +60,7 @@ public sealed partial class ItemSwitchState : BoundUserInterfaceMessage
     public SoundSpecifier? SoundFailToActivate;
 
     [DataField]
+    [NonSerialized]
     public ComponentRegistry? Components;
 
     [DataField]

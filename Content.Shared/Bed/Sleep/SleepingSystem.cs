@@ -19,6 +19,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Bed.Sleep;
@@ -309,8 +310,10 @@ public sealed partial class SleepingSystem : EntitySystem
 }
 
 
+[Serializable, NetSerializable]
 public sealed partial class SleepActionEvent : InstantActionEvent;
 
+[Serializable, NetSerializable]
 public sealed partial class WakeActionEvent : InstantActionEvent;
 
 /// <summary>

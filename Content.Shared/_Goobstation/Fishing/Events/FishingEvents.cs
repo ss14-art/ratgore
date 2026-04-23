@@ -3,8 +3,10 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._Goobstation.Fishing.Events;
 
+[Serializable, NetSerializable]
 public sealed partial class ThrowFishingLureActionEvent : WorldTargetActionEvent;
 
+[Serializable, NetSerializable]
 public sealed partial class PullFishingLureActionEvent : InstantActionEvent;
 
 [Serializable, NetSerializable]

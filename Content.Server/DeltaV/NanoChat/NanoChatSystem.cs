@@ -33,7 +33,7 @@ public sealed class NanoChatSystem : SharedNanoChatSystem
         SubscribeLocalEvent<NanoChatCardComponent, EntGotRemovedFromContainerMessage>(OnRemoved);
 
         SubscribeLocalEvent<NanoChatCardComponent, MapInitEvent>(OnCardInit);
-        SubscribeLocalEvent<NanoChatCardComponent, BeingMicrowavedEvent>(OnMicrowaved, after: [typeof(IdCardSystem)]);
+        SubscribeLocalEvent<NanoChatCardComponent, BeingMicrowavedEvent>(OnMicrowaved, after: new[] { typeof(IdCardSystem) });
     }
 
     private void OnInserted(Entity<NanoChatCardComponent> ent, ref EntGotInsertedIntoContainerMessage args)

@@ -80,14 +80,14 @@ public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerCo
                     heatTolerance: plantHolder.Seed.HeatTolerance,
                     idealLight: plantHolder.Seed.IdealLight,
                     lightTolerance: plantHolder.Seed.LightTolerance,
-                    consumeGasses: [.. plantHolder.Seed.ConsumeGasses.Keys]
+                    consumeGasses: plantHolder.Seed.ConsumeGasses.Keys.ToList()
                 );
                 produceData = new PlantAnalyzerProduceData(
                     yield: plantHolder.Seed.ProductPrototypes.Count == 0 ? 0 : BotanySystem.CalculateTotalYield(plantHolder.Seed.Yield, plantHolder.YieldMod),
                     potency: plantHolder.Seed.Potency,
-                    chemicals: [.. plantHolder.Seed.Chemicals.Keys],
+                    chemicals: plantHolder.Seed.Chemicals.Keys.ToList(),
                     produce: plantHolder.Seed.ProductPrototypes,
-                    exudeGasses: [.. plantHolder.Seed.ExudeGasses.Keys],
+                    exudeGasses: plantHolder.Seed.ExudeGasses.Keys.ToList(),
                     seedless: plantHolder.Seed.Seedless
                 );
             }
@@ -138,7 +138,7 @@ public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerCo
         var missingData = Loc.GetString("plant-analyzer-printout-missing");
 
         var seedName = data.PlantData is not null ? Loc.GetString(data.PlantData.SeedDisplayName) : null;
-        (string, object)[] parameters = [
+        (string, object)[] parameters = {
             ("seedName", seedName ?? missingData),
             ("produce", data.ProduceData is not null ? PlantAnalyzerLocalizationHelper.ProduceToLocalizedStrings(data.ProduceData.Produce, _prototypeManager).Plural : missingData),
             ("water", data.TolerancesData?.WaterConsumption.ToString("0.00") ?? missingData),
@@ -164,9 +164,9 @@ public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerCo
             ("kudzu", data.PlantData is not null ? (data.PlantData.Kudzu ? "yes" : "no") : "other"),
             ("indent", "    "),
             ("nl", "\n")
-        ];
+        };
 
-        _paperSystem.SetContent(printed, Loc.GetString($"plant-analyzer-printout", [.. parameters]));
+        _paperSystem.SetContent(printed, Loc.GetString($"plant-analyzer-printout", parameters));
         _labelSystem.Label(printed, seedName);
         _audioSystem.PlayPvs(component.SoundPrint, uid,
             AudioParams.Default

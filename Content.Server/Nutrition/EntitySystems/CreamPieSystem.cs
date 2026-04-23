@@ -33,7 +33,7 @@ namespace Content.Server.Nutrition.EntitySystems
             base.Initialize();
 
             // activate BEFORE entity is deleted and trash is spawned
-            SubscribeLocalEvent<CreamPieComponent, ConsumeDoAfterEvent>(OnConsume, before: [typeof(FoodSystem)]);
+            SubscribeLocalEvent<CreamPieComponent, ConsumeDoAfterEvent>(OnConsume, before: new[] { typeof(FoodSystem) });
             SubscribeLocalEvent<CreamPieComponent, SliceFoodEvent>(OnSlice);
 
             SubscribeLocalEvent<CreamPiedComponent, RejuvenateEvent>(OnRejuvenate);

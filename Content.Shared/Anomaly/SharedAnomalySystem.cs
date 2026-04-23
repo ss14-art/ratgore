@@ -16,6 +16,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -428,6 +429,7 @@ public abstract class SharedAnomalySystem : EntitySystem
     }
 }
 
+[Serializable, NetSerializable]
 [DataRecord, DataDefinition]
 public partial record struct AnomalySpawnSettings()
 {
