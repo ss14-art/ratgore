@@ -175,6 +175,7 @@ public abstract partial class BaseActionEvent : HandledEntityEventArgs
     /// <summary>
     ///     The action the event belongs to.
     /// </summary>
+    [NonSerialized]
     public Entity<ActionComponent> Action;
 
     /// <summary>

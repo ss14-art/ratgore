@@ -1,11 +1,13 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Cargo.Prototypes
 {
     [Prototype]
+    [Serializable, NetSerializable]
     public sealed partial class CargoProductPrototype : IPrototype, IInheritingPrototype
     {
         /// <inheritdoc />
