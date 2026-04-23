@@ -256,7 +256,8 @@ namespace Content.Server.Database
                 }).ToHashSet(),
                 profile.BankBalance,
                 profile.Faction,
-                profile.CharacterFlags.ToList()
+                profile.CharacterFlags.ToList(),
+                null!
             );
         }
 

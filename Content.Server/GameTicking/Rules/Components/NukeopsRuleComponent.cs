@@ -95,6 +95,12 @@ public sealed partial class NukeopsRuleComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/nukeops_start.ogg");
+
+    /// <summary>
+    ///     Whether war declaration should disable evac shuttle call
+    /// </summary>
+    [DataField]
+    public bool WarEvacShuttleDisabled = true;
 }
 
 /// <summary>

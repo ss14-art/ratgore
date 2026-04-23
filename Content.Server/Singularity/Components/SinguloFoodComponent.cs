@@ -9,5 +9,9 @@ namespace Content.Server.Singularity.Components
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField("energy")]
         public float Energy { get; set; } = 1f;
+
+        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField("energyFactor")]
+        public float EnergyFactor { get; set; } = 1f;
     }
 }

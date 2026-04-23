@@ -13,6 +13,7 @@ using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
@@ -27,6 +28,7 @@ namespace Content.Server.Tabletop
         [Dependency] private readonly ViewSubscriberSystem _viewSubscriberSystem = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private readonly IMapManager _mapManager = default!;
 
         public override void Initialize()
         {
@@ -86,7 +88,7 @@ namespace Content.Server.Tabletop
             if (component.Session is not { } session)
                 return;
 
-            if (!_hands.TryGetActiveItem(uid, out var handEnt))
+            if (!_hands.TryGetActiveItem(args.User, out var handEnt))
                 return;
 
             if (!TryComp<ItemComponent>(handEnt, out var item))

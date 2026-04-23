@@ -1,3 +1,4 @@
+using Content.Shared.Radio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Cargo.Prototypes;
@@ -13,4 +14,10 @@ public sealed partial class CargoAccountPrototype : IPrototype
 
     [DataField]
     public int DefaultPoints = 0;
+
+    [DataField]
+    public ProtoId<RadioChannelPrototype> RadioChannel = "Supply";
+
+    [DataField]
+    public EntProtoId AcquisitionSlip = "CargoAcquisitionSlip";
 }

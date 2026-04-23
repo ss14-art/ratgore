@@ -238,7 +238,7 @@ public sealed class StationJobsTest
 
                         foreach (var (job, array) in ((StationJobsComponent) comp).SetupAvailableJobs)
                         {
-                            Assert.That(array.Length, Is.EqualTo(2));
+                            Assert.That(array.Count, Is.EqualTo(2));
                             Assert.That(array[0] is -1 or >= 0);
                             Assert.That(array[1] is -1 or >= 0);
                             Assert.That(invalidJobs, Does.Not.Contain(job), $"Station {stationId} contains job prototype {job} which cannot be present roundstart.");

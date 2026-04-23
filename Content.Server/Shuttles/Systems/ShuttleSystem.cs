@@ -10,9 +10,11 @@ using Content.Server.Procedural;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Damage;
 using Content.Server.Stunnable;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Damage;
+using Content.Shared.Movement.Events;
+using Content.Server.Shuttles.Events;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
@@ -86,6 +88,10 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     //used for logging, don't touch this
     private ISawmill _sawmill = default!;
 
+
+    private void OnTileFriction(EntityUid uid, ShuttleComponent component, ref TileFrictionEvent args) { }
+    private void OnFTLStarted(EntityUid uid, ShuttleComponent component, ref FTLStartedEvent args) { }
+    private void OnFTLCompleted(EntityUid uid, ShuttleComponent component, ref FTLCompletedEvent args) { }
 
     public override void Initialize()
     {

@@ -1,3 +1,4 @@
+using Content.Server.GameTicking;
 using Content.Server.Ghost;
 using Content.Server.Hands.Systems;
 using Content.Shared.Administration.Logs;
@@ -28,6 +29,7 @@ public sealed class SuicideSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly GhostSystem _ghostSystem = default!;
     [Dependency] private readonly SharedSuicideSystem _suicide = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     private static readonly ProtoId<TagPrototype> CannotSuicideTag = "CannotSuicide";
 
@@ -102,7 +104,7 @@ public sealed class SuicideSystem : EntitySystem
         if (_tagSystem.HasTag(victim, CannotSuicideTag))
             args.CanReturnToBody = true;
 
-        if (_ghostSystem.OnGhostAttempt(victim.Comp.Mind.Value, args.CanReturnToBody, mind: mindComponent))
+        if (_gameTicker.OnGhostAttempt(victim.Comp.Mind.Value, args.CanReturnToBody, mind: mindComponent))
             args.Handled = true;
     }
 

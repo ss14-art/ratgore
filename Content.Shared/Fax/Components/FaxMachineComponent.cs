@@ -130,6 +130,12 @@ public sealed partial class FaxMachineComponent : Component
     public float InsertionTime = 1.88f; // 0.02 off for correct animation
 
     /// <summary>
+    /// Prototype for the paper to be printed.
+    /// </summary>
+    [DataField("printPaperId", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    public string PrintPaperId { get; set; } = "Paper";
+
+    /// <summary>
     /// Remaining time of printing animation
     /// </summary>
     [DataField]

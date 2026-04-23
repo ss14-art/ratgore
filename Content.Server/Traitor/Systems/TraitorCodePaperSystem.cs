@@ -17,7 +17,6 @@ public sealed class TraitorCodePaperSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly RoleCodewordSystem _codewordSystem = default!;
 
     public override void Initialize()
     {
@@ -39,7 +38,7 @@ public sealed class TraitorCodePaperSystem : EntitySystem
         {
             if (TryGetTraitorCode(out var paperContent, component))
             {
-                _paper.SetContent((uid, paperComp), paperContent);
+                _paper.SetContent(uid, paperContent, paperComp);
             }
         }
     }
@@ -49,14 +48,17 @@ public sealed class TraitorCodePaperSystem : EntitySystem
         traitorCode = null;
 
         var codesMessage = new FormattedMessage();
-        var codeList = _codewordSystem.GetCodewords(component.CodewordFaction).ToList();
+        var codeList = new List<string>();
+
+        var query = EntityQueryEnumerator<TraitorRuleComponent>();
+        if (query.MoveNext(out _, out var traitorRule))
+        {
+            codeList = traitorRule.Codewords.ToList();
+        }
 
         if (codeList.Count == 0)
         {
-            if (component.FakeCodewords)
-                codeList = _codewordSystem.GenerateCodewords(component.CodewordGenerator).ToList();
-            else
-                codeList = [Loc.GetString("traitor-codes-none")];
+            codeList = [Loc.GetString("traitor-codes-none")];
         }
 
         _random.Shuffle(codeList);

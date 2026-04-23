@@ -139,14 +139,13 @@ namespace Content.Server.GameTicking
             UpdateGameRules();
         }
 
-        public bool OnGhostAttempt(EntityUid mindId, bool b, bool b1, MindComponent mind)
+        public bool OnGhostAttempt(EntityUid mindId, bool canReturn, bool viaCommand = false, MindComponent? mind = null)
         {
-            throw new NotImplementedException();
-        }
+            if (!Resolve(mindId, ref mind))
+                return false;
 
-        public void OnGhostAttempt(EntityUid mindId, bool componentCanReturn, MindComponent mind)
-        {
-            throw new NotImplementedException();
+            _ghost.SpawnGhost((mindId, mind), mindId, canReturn);
+            return true;
         }
     }
 }

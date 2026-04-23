@@ -44,6 +44,16 @@ public sealed partial class CargoOrderConsoleComponent : Component
 
     [DataField]
     public CargoOrderConsoleMode Mode = CargoOrderConsoleMode.DirectOrder;
+
+    [DataField]
+    public SoundSpecifier? ScanSound;
+
+    public TimeSpan NextDenySoundTime;
+
+    [DataField]
+    public TimeSpan DenySoundDelay = TimeSpan.FromSeconds(0.5);
+
+    public static ProtoId<RadioChannelPrototype> BaseAnnouncementChannel = "Supply";
 }
 
 [Serializable, NetSerializable]

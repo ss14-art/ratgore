@@ -54,11 +54,13 @@ public sealed class ChameleonBoundUserInterfaceState : BoundUserInterfaceState
 {
     public readonly SlotFlags Slot;
     public readonly string? SelectedId;
+    public readonly string? RequireTag;
 
-    public ChameleonBoundUserInterfaceState(SlotFlags slot, string? selectedId)
+    public ChameleonBoundUserInterfaceState(SlotFlags slot, string? selectedId, string? requireTag = null)
     {
         Slot = slot;
         SelectedId = selectedId;
+        RequireTag = requireTag;
     }
 }
 

@@ -144,7 +144,8 @@ public sealed partial class SalvageSystem
         while (query.MoveNext(out var uid, out var comp))
         {
             var remaining = comp.EndTime - _timing.CurTime;
-            var audioLength = _audio.GetAudioLength(comp.SelectedSong);
+            var resolvedSong = _audio.ResolveSound(comp.SelectedSong);
+            var audioLength = _audio.GetAudioLength(resolvedSong);
 
             if (comp.Stage < ExpeditionStage.FinalCountdown && remaining < TimeSpan.FromSeconds(45))
             {
@@ -154,9 +155,10 @@ public sealed partial class SalvageSystem
             }
             else if (comp.Stream == null && remaining < audioLength)
             {
-                var audio = _audio.PlayPvs(comp.Sound, uid);
+                var resolved = _audio.ResolveSound(comp.Sound);
+                var audio = _audio.PlayGlobal(resolved, uid);
                 comp.Stream = audio?.Entity;
-                _audio.SetMapAudio(audio);
+
                 comp.Stage = ExpeditionStage.MusicCountdown;
                 Dirty(uid, comp);
                 Announce(uid, Loc.GetString("salvage-expedition-announcement-countdown-minutes", ("duration", audioLength.Minutes)));

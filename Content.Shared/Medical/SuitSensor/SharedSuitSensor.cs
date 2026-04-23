@@ -1,3 +1,4 @@
+using Content.Shared.DoAfter;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
@@ -6,16 +7,19 @@ namespace Content.Shared.Medical.SuitSensor;
 [Serializable, NetSerializable]
 public sealed class SuitSensorStatus
 {
-    public SuitSensorStatus(NetEntity suitSensorUid, string name, string job, string jobIcon, List<string> jobDepartments)
+    public SuitSensorStatus(NetEntity ownerUid, NetEntity suitSensorUid, string name, string job, string jobIcon, List<string> jobDepartments, TimeSpan timestamp)
     {
+        OwnerUid = ownerUid;
         SuitSensorUid = suitSensorUid;
         Name = name;
         Job = job;
         JobIcon = jobIcon;
         JobDepartments = jobDepartments;
+        Timestamp = timestamp;
     }
 
     public TimeSpan Timestamp;
+    public NetEntity OwnerUid;
     public NetEntity SuitSensorUid;
     public string Name;
     public string Job;
@@ -26,6 +30,25 @@ public sealed class SuitSensorStatus
     public int? TotalDamageThreshold;
     public float? DamagePercentage => TotalDamageThreshold == null || TotalDamage == null ? null : TotalDamage / (float) TotalDamageThreshold;
     public NetCoordinates? Coordinates;
+}
+
+public static class SuitSensorConstants
+{
+    public const string NET_NAME = "name";
+    public const string NET_JOB = "job";
+    public const string NET_JOB_ICON = "jobIcon";
+    public const string NET_JOB_DEPARTMENTS = "jobDepartments";
+    public const string NET_IS_ALIVE = "alive";
+    public const string NET_TOTAL_DAMAGE = "vitals";
+    public const string NET_TOTAL_DAMAGE_THRESHOLD = "vitalsThreshold";
+    public const string NET_COORDINATES = "coords";
+    public const string NET_SUIT_SENSOR_UID = "uid";
+    public const string NET_OWNER_UID = "owner-uid";
+    public const string NET_TIMESTAMP = "timestamp";
+
+    ///Used by the CrewMonitoringServerSystem to send the status of all connected suit sensors to each crew monitor
+    public const string NET_STATUS_COLLECTION = "suit-status-collection";
+    public const string NET_SENSORS_TIME = "sensors-time";
 }
 
 [Serializable, NetSerializable]
@@ -52,18 +75,20 @@ public enum SuitSensorMode : byte
     SensorCords = 3
 }
 
-public static class SuitSensorConstants
+[Serializable, NetSerializable]
+public sealed partial class SuitSensorChangeDoAfterEvent : DoAfterEvent
 {
-    public const string NET_NAME = "name";
-    public const string NET_JOB = "job";
-    public const string NET_JOB_ICON = "jobIcon";
-    public const string NET_JOB_DEPARTMENTS = "jobDepartments";
-    public const string NET_IS_ALIVE = "alive";
-    public const string NET_TOTAL_DAMAGE = "vitals";
-    public const string NET_TOTAL_DAMAGE_THRESHOLD = "vitalsThreshold";
-    public const string NET_COORDINATES = "coords";
-    public const string NET_SUIT_SENSOR_UID = "uid";
+    [DataField(required: true)]
+    public SuitSensorMode Mode;
 
-    ///Used by the CrewMonitoringServerSystem to send the status of all connected suit sensors to each crew monitor
-    public const string NET_STATUS_COLLECTION = "suit-status-collection";
+    private SuitSensorChangeDoAfterEvent()
+    {
+    }
+
+    public SuitSensorChangeDoAfterEvent(SuitSensorMode mode)
+    {
+        Mode = mode;
+    }
+
+    public override DoAfterEvent Clone() => this;
 }

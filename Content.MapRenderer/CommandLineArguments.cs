@@ -12,6 +12,8 @@ public sealed class CommandLineArguments
     public bool ExportViewerJson { get; set; } = false;
     public string OutputPath { get; set; } = DirectoryExtensions.MapImages().FullName;
     public bool ArgumentsAreFileNames { get; set; } = false;
+    public bool OutputParallax { get; set; } = false;
+    public bool ShowMarkers { get; set; } = false;
 
     public static bool TryParse(IReadOnlyList<string> args, [NotNullWhen(true)] out CommandLineArguments? parsed)
     {
@@ -59,6 +61,14 @@ public sealed class CommandLineArguments
                     parsed.ArgumentsAreFileNames = true;
                     break;
 
+                case "--parallax":
+                    parsed.OutputParallax = true;
+                    break;
+
+                case "--markers":
+                    parsed.ShowMarkers = true;
+                    break;
+
                 case "-h":
                 case "--help":
                     PrintHelp();
@@ -96,6 +106,10 @@ Options:
     -f / --files
         This option tells the map renderer that you supplied a list of map file names instead of their ids.
         Example: Content.MapRenderer -f box.yml bagel.yml
+    --parallax
+        Causes the map renderer to output parallax images.
+    --markers
+        Causes the map renderer to show markers on the maps.
     -h / --help
         Displays this help text");
     }

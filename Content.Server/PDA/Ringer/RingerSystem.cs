@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Runtime.InteropServices;
+using Content.Server.GameTicking.Rules;
 using Content.Server.Store.Components;
 using Content.Server.Store.Systems;
 using Content.Shared.PDA;
@@ -44,6 +45,12 @@ namespace Content.Server.PDA.Ringer
             SubscribeLocalEvent<RingerComponent, RingerRequestUpdateInterfaceMessage>(UpdateRingerUserInterfaceDriver);
 
             SubscribeLocalEvent<RingerUplinkComponent, CurrencyInsertAttemptEvent>(OnCurrencyInsert);
+            SubscribeLocalEvent<RingerUplinkComponent, GenerateUplinkCodeEvent>(OnGenerateUplinkCode);
+        }
+
+        private void OnGenerateUplinkCode(EntityUid uid, RingerUplinkComponent component, GenerateUplinkCodeEvent args)
+        {
+            args.Code = component.Code;
         }
 
         //Event Functions

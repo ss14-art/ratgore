@@ -115,47 +115,34 @@ public sealed partial class ShipTargetingSystem : EntitySystem
 
             var hitTime = 0f;
             var leadBy = Vector2.Zero;
-            if (_gun.TryNextShootPrototype((uid, gun), out var entProto, out var hitscanProto))
+
+            // Einstein Engines / Mono Fix: gun.ProjectileSpeedModified is enough for projection.
+            // We assume it's a projectile if it has speed.
+            var projVel = gun.ProjectileSpeedModified;
+            if (projVel > 0f)
             {
                 var gunToDestVec = destMapPos.Position - _transform.GetWorldPosition(gXform);
+                var centerToGunVec = gXform.LocalPosition - shipBody.LocalCenter;
+                // rotate 90deg left
+                var gunAngVel = new Vector2(-centerToGunVec.Y, centerToGunVec.X) * shipAngVel;
+                gunAngVel = shipXform.LocalRotation.RotateVec(gunAngVel);
+                leadBy = otherVel - ourVel - gunAngVel;
 
-                if (hitscanProto is { } hitscan)
-                {
-                    // check if too far
-                    if (hitscan.MaxLength < gunToDestVec.Length()
-                    )
-                        continue;
-                }
-                else if (entProto is { } proto)
-                {
-                    var centerToGunVec = gXform.LocalPosition - shipBody.LocalCenter;
-                    // rotate 90deg left
-                    var gunAngVel = new Vector2(-centerToGunVec.Y, centerToGunVec.X) * shipAngVel;
-                    gunAngVel = shipXform.LocalRotation.RotateVec(gunAngVel);
-                    leadBy = otherVel - ourVel - gunAngVel;
+                var gunToDestDir = NormalizedOrZero(gunToDestVec);
 
-                    var gunToDestDir = NormalizedOrZero(gunToDestVec);
+                var normVel = gunToDestDir * Vector2.Dot(leadBy, gunToDestDir);
+                var tgVel = leadBy - normVel;
+                // going too fast to the side, we can't possibly hit it
+                if (tgVel.Length() > projVel)
+                    continue;
 
-                    var projVel = gun.ProjectileSpeedModified;
-                    var normVel = gunToDestDir * Vector2.Dot(leadBy, gunToDestDir);
-                    var tgVel = leadBy - normVel;
-                    // going too fast to the side, we can't possibly hit it
-                    if (tgVel.Length() > projVel)
-                        continue;
+                var normTarget = gunToDestDir * MathF.Sqrt(projVel * projVel - tgVel.LengthSquared());
+                // going too fast away, we can't hit it
+                if (Vector2.Dot(normTarget, normVel) > 0f && normVel.Length() > normTarget.Length())
+                    continue;
 
-                    var normTarget = gunToDestDir * MathF.Sqrt(projVel * projVel - tgVel.LengthSquared());
-                    // going too fast away, we can't hit it
-                    if (Vector2.Dot(normTarget, normVel) > 0f && normVel.Length() > normTarget.Length())
-                        continue;
-
-                    var approachVel = (normTarget - normVel).Length();
-                    hitTime = gunToDestVec.Length() / approachVel;
-
-                    // might take too long to hit
-                    var bulletProto = _gun.GetBulletPrototype(proto);
-                    if (bulletProto.TryGetComponent<TimedDespawnComponent>(out var despawn, Factory) && hitTime > despawn.Lifetime)
-                        continue;
-                }
+                var approachVel = (normTarget - normVel).Length();
+                hitTime = gunToDestVec.Length() / approachVel;
             }
 
             var targetMapPos = destMapPos.Offset(leadBy * hitTime);

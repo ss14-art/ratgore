@@ -1,6 +1,6 @@
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Components;
+using Content.Shared.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.DeltaV.CCVars;
 using Content.Shared.Tag;
@@ -164,7 +164,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         }
 
         var price = ComputeSellValue((EntityUid) shuttleGrid, null);
-        var targetGrid = _station.GetLargestGrid(stationData);
+        var targetGrid = _station.GetLargestGrid((stationUid, stationData));
 
         if (targetGrid == null) //how are we even here with no station grid
         {
@@ -216,7 +216,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         if (!TryComp<StationDataComponent>(stationUid, out var stationGrid) || !HasComp<ShuttleComponent>(shuttleUid) || !TryComp<TransformComponent>(shuttleUid, out var xform) || ShipyardMap == null)
             return false;
 
-        var targetGrid = _station.GetLargestGrid(stationGrid);
+        var targetGrid = _station.GetLargestGrid((stationUid, stationGrid));
 
         if (targetGrid == null)
             return false;

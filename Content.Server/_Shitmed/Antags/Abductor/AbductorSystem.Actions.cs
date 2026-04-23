@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._Shitmed.Antags.Abductor;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
@@ -96,7 +97,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
     private void AddActions(AbductorBeaconChosenBuiMsg args)
     {
         EnsureComp<AbductorsAbilitiesComponent>(args.Actor, out var comp);
-        comp.HiddenActions = _actions.HideActions(args.Actor);
+        comp.HiddenActions = _actions.HideActions(args.Actor).ToArray();
         _actions.AddAction(args.Actor, ref comp.ExitConsole, ExitAction);
         _actions.AddAction(args.Actor, ref comp.SendYourself, SendYourself);
     }
@@ -105,7 +106,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         EnsureComp<AbductorsAbilitiesComponent>(actor, out var comp);
         _actions.RemoveAction(actor, comp.ExitConsole);
         _actions.RemoveAction(actor, comp.SendYourself);
-        _actions.UnHideActions(actor, comp.HiddenActions);
+        _actions.UnHideActions(actor, comp.HiddenActions.ToList());
     }
 
     private void StopPulls(EntityUid ent)

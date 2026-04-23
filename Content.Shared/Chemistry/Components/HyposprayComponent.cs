@@ -38,4 +38,10 @@ public sealed partial class HyposprayComponent : Component
     /// </summary>
     [DataField]
     public bool InjectOnly = false;
+
+    /// <summary>
+    /// Whether or not the hypospray is able to draw from containers
+    /// </summary>
+    [DataField]
+    public bool CanContainerDraw = true;
 }

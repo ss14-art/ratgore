@@ -1,5 +1,8 @@
 using System.Numerics;
 using Content.Server.Access.Systems;
+using Content.Shared.Medical.SuitSensor;
+using Content.Server.DeviceNetwork;
+using Content.Server.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Emp;
 using Content.Server.Medical.CrewMonitoring;
@@ -317,7 +320,7 @@ public sealed class SuitSensorSystem : EntitySystem
         else
         {
             var doAfterEvent = new SuitSensorChangeDoAfterEvent(mode);
-            var doAfterArgs = new DoAfterArgs(EntityManager, userUid, comp.SensorsTime, doAfterEvent, sensors)
+            var doAfterArgs = new DoAfterArgs(EntityManager, userUid, TimeSpan.FromSeconds(2), doAfterEvent, sensors)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true
@@ -386,7 +389,7 @@ public sealed class SuitSensorSystem : EntitySystem
             userJobIcon = card.Comp.JobIcon;
 
             foreach (var department in card.Comp.JobDepartments)
-                userJobDepartments.Add(Loc.GetString(_proto.Index(department).Name));
+                userJobDepartments.Add(Loc.GetString($"department-{department}"));
         }
 
         // get health mob state
@@ -405,7 +408,7 @@ public sealed class SuitSensorSystem : EntitySystem
             totalDamageThreshold = critThreshold.Value.Int();
 
         // finally, form suit sensor status
-        var status = new SuitSensorStatus(GetNetEntity(sensor.User.Value), GetNetEntity(uid), userName, userJob, userJobIcon, userJobDepartments);
+        var status = new SuitSensorStatus(GetNetEntity(sensor.User.Value), GetNetEntity(uid), userName, userJob, userJobIcon, userJobDepartments, _gameTiming.CurTime);
         switch (sensor.Mode)
         {
             case SuitSensorMode.SensorBinary:
@@ -461,6 +464,7 @@ public sealed class SuitSensorSystem : EntitySystem
             [SuitSensorConstants.NET_IS_ALIVE] = status.IsAlive,
             [SuitSensorConstants.NET_SUIT_SENSOR_UID] = status.SuitSensorUid,
             [SuitSensorConstants.NET_OWNER_UID] = status.OwnerUid,
+            [SuitSensorConstants.NET_TIMESTAMP] = status.Timestamp,
         };
 
         if (status.TotalDamage != null)
@@ -492,13 +496,14 @@ public sealed class SuitSensorSystem : EntitySystem
         if (!payload.TryGetValue(SuitSensorConstants.NET_IS_ALIVE, out bool? isAlive)) return null;
         if (!payload.TryGetValue(SuitSensorConstants.NET_SUIT_SENSOR_UID, out NetEntity suitSensorUid)) return null;
         if (!payload.TryGetValue(SuitSensorConstants.NET_OWNER_UID, out NetEntity ownerUid)) return null;
+        if (!payload.TryGetValue(SuitSensorConstants.NET_TIMESTAMP, out TimeSpan timestamp)) return null;
 
         // try get total damage and cords (optionals)
         payload.TryGetValue(SuitSensorConstants.NET_TOTAL_DAMAGE, out int? totalDamage);
         payload.TryGetValue(SuitSensorConstants.NET_TOTAL_DAMAGE_THRESHOLD, out int? totalDamageThreshold);
         payload.TryGetValue(SuitSensorConstants.NET_COORDINATES, out NetCoordinates? coords);
 
-        var status = new SuitSensorStatus(ownerUid, suitSensorUid, name, job, jobIcon, jobDepartments)
+        var status = new SuitSensorStatus(ownerUid, suitSensorUid, name, job, jobIcon, jobDepartments, timestamp)
         {
             IsAlive = isAlive.Value,
             TotalDamage = totalDamage,

@@ -179,6 +179,11 @@ public abstract partial class BaseActionComponent : Component
     [DataField("temporary")] public bool Temporary;
 
     /// <summary>
+    ///     Whether this action is currently hidden.
+    /// </summary>
+    [DataField] public bool Hidden;
+
+    /// <summary>
     ///     Determines the appearance of the entity-icon for actions that are enabled via some entity.
     /// </summary>
     [DataField("itemIconStyle")] public ItemActionIconStyle ItemIconStyle;
@@ -213,6 +218,7 @@ public abstract class BaseActionComponentState : ComponentState
     public bool RaiseOnAction;
     public bool AutoPopulate;
     public bool Temporary;
+    public bool Hidden;
     public ItemActionIconStyle ItemIconStyle;
     public SoundSpecifier? Sound;
 
@@ -239,6 +245,7 @@ public abstract class BaseActionComponentState : ComponentState
         Priority = component.Priority;
         AutoPopulate = component.AutoPopulate;
         Temporary = component.Temporary;
+        Hidden = component.Hidden;
         ItemIconStyle = component.ItemIconStyle;
         Sound = component.Sound;
     }

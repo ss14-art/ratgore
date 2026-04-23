@@ -32,8 +32,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private readonly EmagSystem _emag = default!;
 
     private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
 
@@ -92,6 +94,16 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     private void OnPlayerSpawnComplete(EntityUid uid, SiliconLawBoundComponent component, PlayerSpawnCompleteEvent args)
     {
         component.LastLawProvider = args.Station;
+    }
+
+    private void OnLawProviderMindAdded(EntityUid uid, SiliconLawProviderComponent component, MindAddedMessage args)
+    {
+        NotifyLawsChanged(uid);
+    }
+
+    private void OnLawProviderMindRemoved(EntityUid uid, SiliconLawProviderComponent component, MindRemovedMessage args)
+    {
+        NotifyLawsChanged(uid);
     }
 
     private void OnDirectedGetLaws(EntityUid uid, SiliconLawProviderComponent component, ref GetSiliconLawsEvent args)
@@ -266,21 +278,24 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         return true;
     }
 
-    protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         // TODO: Prediction dump this
         if (!TryComp(args.Entity, out SiliconLawProviderComponent? provider))
             return;
 
         var lawset = GetLawset(provider.Laws).Laws;
-        var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
+        var query = EntityQueryEnumerator<SiliconLawBoundComponent>();
 
-        while (query.MoveNext(out var update))
+        while (query.MoveNext(out var uid, out var component))
         {
-            if (!SetLaws(lawset, update, provider.UnRemovable))
+            if (!_container.IsEntityInContainer(uid))
                 continue;
 
-            if (provider.LawUploadSound != null && _mind.TryGetMind(update, out var mindId, out _))
+            if (!SetLaws(lawset, uid, provider.UnRemovable))
+                continue;
+
+            if (provider.LawUploadSound != null && _mind.TryGetMind(uid, out var mindId, out _))
                 _roles.MindPlaySound(mindId, provider.LawUploadSound);
         }
     }

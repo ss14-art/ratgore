@@ -337,7 +337,7 @@ public sealed partial class RevenantSystem
                 _whitelistSystem.IsBlacklistPass(component.MalfunctionBlacklist, ent))
                 continue;
 
-            _emag.DoEmagEffect(uid, ent); //it does not emag itself. adorable.
+            _emag.TryEmagEffect(uid, ent); //it does not emag itself. adorable.
         }
     }
 }

@@ -56,7 +56,7 @@ public sealed class MachineBoardTest : GameTest
                         $"Machine board {p.ID}'s corresponding machine has an invalid prototype.");
                     Assert.That(mProto.TryGetComponent<MachineComponent>(out var mComp, compFact),
                         $"Machine board {p.ID}'s corresponding machine {mId} does not have MachineComponent");
-                    Assert.That(mComp.Board, Is.EqualTo(p.ID),
+                    Assert.That(mComp.BoardPrototype, Is.EqualTo(p.ID),
                         $"Machine {mId}'s BoardPrototype is not equal to it's corresponding machine board, {p.ID}");
                 });
             }

@@ -78,7 +78,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         if (!Resolve(station, ref stationData))
             return null;
 
-        if (_station.GetLargestGrid(stationData) is not {} grid)
+        if (_station.GetLargestGrid((station, stationData)) is not {} grid)
         {
             Log.Error($"Station {ToPrettyString(station):station} had no largest grid to FTL to");
             return null;

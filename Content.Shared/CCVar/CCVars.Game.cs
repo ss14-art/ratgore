@@ -107,6 +107,12 @@ public sealed partial class CCVars
     public static readonly CVarDef<bool>
         GameRoleWhitelist = CVarDef.Create("game.role_whitelist", true, CVar.SERVER | CVar.REPLICATED);
 
+    /// <summary>
+    ///    Whether or not players can place items on tabletops.
+    /// </summary>
+    public static readonly CVarDef<bool>
+        GameTabletopPlace = CVarDef.Create("game.tabletop_place", true, CVar.SERVERONLY | CVar.ARCHIVE);
+
 
     /// <summary>
     ///     Controls whether to use world persistence or not.

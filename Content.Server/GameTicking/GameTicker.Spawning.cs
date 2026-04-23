@@ -260,7 +260,7 @@ namespace Content.Server.GameTicking
                 if (character.StationAiName != null)
                     _metaData.SetEntityName(mob, character.StationAiName);
                 else
-                    _stationSpawning.EquipJobName(mob, jobPrototype);
+                    _stationSpawning.EquipStartingGear(mob, jobPrototype.StartingGear);
             }
 
             if (jobPrototype.ID == CyborgJobPrototypeName

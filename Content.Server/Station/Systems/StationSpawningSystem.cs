@@ -215,6 +215,11 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
             _pdaSystem.SetOwner(idUid.Value, pdaComponent, characterName);
     }
 
+    private StartingGearPrototype ApplySubGear(StartingGearPrototype startingGear, HumanoidCharacterProfile profile, JobPrototype job)
+    {
+        return startingGear;
+    }
+
 
     #endregion Player spawning helpers
 }

@@ -52,10 +52,15 @@ namespace Content.Shared.Cargo
         [DataField]
         public string Reason { get; private set; }
         public bool Approved;
+
         [DataField]
         public string? Approver;
 
+        [DataField]
         public ProtoId<CargoAccountPrototype> Account;
+
+        [DataField]
+        public string? RequesterJobIcon;
 
         public CargoOrderData(int orderId, string productId, string productName, int price, int amount, string requester, string reason, ProtoId<CargoAccountPrototype> account)
         {

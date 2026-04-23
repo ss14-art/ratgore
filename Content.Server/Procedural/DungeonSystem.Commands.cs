@@ -53,6 +53,9 @@ public sealed partial class DungeonSystem
             EntityManager.InitializeAndStartEntity(dungeonUid, mapId);
         }
 
+        if (dungeonGrid == null)
+            return;
+
         int seed;
 
         if (args.Length >= 5)

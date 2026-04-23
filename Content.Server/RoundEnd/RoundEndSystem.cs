@@ -10,14 +10,16 @@ using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
-using Content.Shared.Database;
-using Content.Shared.DeviceNetwork;
-using Content.Shared.GameTicking;
+using Content.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Server.DeviceNetwork.Components;
+using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Station.Components;
 using Timer = Robust.Shared.Timing.Timer;
@@ -193,7 +195,7 @@ namespace Content.Server.RoundEnd
             ExpectedCountdownEnd = _gameTiming.CurTime + countdownTime;
 
             // TODO full game saves
-            Timer.Spawn(countdownTime, _shuttle.DockEmergencyShuttle, _countdownTokenSource.Token);
+            Timer.Spawn(countdownTime, () => _shuttle.CallEmergencyShuttle(), _countdownTokenSource.Token);
 
             ActivateCooldown();
             RaiseLocalEvent(RoundEndSystemChangedEvent.Default);

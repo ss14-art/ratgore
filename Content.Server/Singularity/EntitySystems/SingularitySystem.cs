@@ -257,10 +257,8 @@ public sealed class SingularitySystem : SharedSingularitySystem
     {
         if (TryComp<SingularityComponent>(args.EventHorizonUid, out var singulo))
         {
-            // Calculate the percentage change (positive or negative)
-            var percentageChange = singulo.Energy * (comp.EnergyFactor - 1f);
             // Apply both the flat and percentage changes
-            AdjustEnergy(args.EventHorizonUid, comp.Energy + percentageChange, singularity: singulo);
+            AdjustEnergy(args.EventHorizonUid, comp.Energy, singularity: singulo);
         }
     }
 

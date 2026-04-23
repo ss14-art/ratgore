@@ -34,7 +34,7 @@ public sealed class ChameleonBoundUserInterface : BoundUserInterface
         if (state is not ChameleonBoundUserInterfaceState st)
             return;
 
-        var targets = _chameleon.GetValidTargets(st.Slot).Select(p => p.ID);
+        var targets = _chameleon.GetValidTargets(st.Slot, st.RequireTag).Select(p => p.ID);
         _menu?.UpdateState(targets, st.SelectedId);
     }
 

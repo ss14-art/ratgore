@@ -16,6 +16,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.Charges.Components;
 using Content.Shared.DoAfter;
 
 namespace Content.Shared.Actions;
@@ -281,6 +282,58 @@ public abstract partial class SharedActionsSystem : EntitySystem
         Dirty(actionId.Value, action);
     }
 
+    public void SetHidden(EntityUid? actionId, bool hidden)
+    {
+        if (!TryGetActionData(actionId, out var action) ||
+            action.Hidden == hidden)
+        {
+            return;
+        }
+
+        action.Hidden = hidden;
+        UpdateAction(actionId, action);
+        Dirty(actionId.Value, action);
+    }
+
+    public List<EntityUid> HideActions(EntityUid performer, ActionsComponent? component = null)
+    {
+        var hidden = new List<EntityUid>();
+        if (!Resolve(performer, ref component))
+            return hidden;
+
+        foreach (var actionId in component.Actions)
+        {
+            if (!TryGetActionData(actionId, out var action) || action.Hidden)
+                continue;
+
+            SetHidden(actionId, true);
+            hidden.Add(actionId);
+        }
+
+        return hidden;
+    }
+
+    public void UnHideActions(EntityUid performer, List<EntityUid> hiddenActions, ActionsComponent? component = null)
+    {
+        if (!Resolve(performer, ref component))
+            return;
+
+        foreach (var actionId in hiddenActions)
+        {
+            SetHidden(actionId, false);
+        }
+    }
+
+    public void RemoveCooldown(EntityUid? actionId)
+    {
+        ClearCooldown(actionId);
+    }
+
+    public void TryPerformAction(EntityUid performer, ActionsComponent? component, EntityUid actionId, BaseActionComponent action, BaseActionEvent? actionEvent, TimeSpan curTime, bool predicted = true)
+    {
+        PerformAction(performer, component, actionId, action, actionEvent, curTime, predicted);
+    }
+
     private void OnActionsGetState(EntityUid uid, ActionsComponent component, ref ComponentGetState args)
     {
         args.State = new ActionsComponentState(GetNetEntitySet(component.Actions));
@@ -291,12 +344,31 @@ public abstract partial class SharedActionsSystem : EntitySystem
     #region Execution
     public void SetCharges(EntityUid? actionId, int? charges)
     {
-        // TODO: Implement charges in BaseActionComponent if needed, or use a separate component
+        if (!TryGetActionData(actionId, out var action))
+            return;
+
+        if (TryComp<LimitedChargesComponent>(actionId, out var limited))
+        {
+            limited.LastCharges = charges ?? 0;
+            limited.LastUpdate = GameTiming.CurTime;
+            Dirty(actionId.Value, limited);
+        }
+
+        UpdateAction(actionId, action);
     }
 
     public void SetMaxCharges(EntityUid? actionId, int? maxCharges)
     {
-        // TODO: Implement charges in BaseActionComponent if needed, or use a separate component
+        if (!TryGetActionData(actionId, out var action))
+            return;
+
+        if (TryComp<LimitedChargesComponent>(actionId, out var limited))
+        {
+            limited.MaxCharges = maxCharges ?? 1;
+            Dirty(actionId.Value, limited);
+        }
+
+        UpdateAction(actionId, action);
     }
 
     /// <summary>

@@ -62,6 +62,12 @@ namespace Content.Shared.Damage
         [ViewVariables]
         public FixedPoint2 TotalDamage;
 
+        [ViewVariables]
+        public List<string> DamageModifierSets = new();
+
+        [ViewVariables, DataField]
+        public bool Damageable = true;
+
         [DataField("radiationDamageTypes")]
         public List<ProtoId<DamageTypePrototype>> RadiationDamageTypeIDs = new() { "Radiation" };
 

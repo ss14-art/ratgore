@@ -144,9 +144,7 @@ namespace Content.Server.Chemistry.EntitySystems
                             // Preform the reagent's TileReaction
                             var reaction =
                                 reagent.ReactionTile(tile,
-                                    clampedAmount,
-                                    EntityManager,
-                                    reagentQuantity.Reagent.Data);
+                                    clampedAmount);
 
                             if (reaction > reagentQuantity.Quantity)
                                 reaction = reagentQuantity.Quantity;

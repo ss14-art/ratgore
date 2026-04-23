@@ -484,7 +484,7 @@ public sealed class AccessReaderSystem : EntitySystem
     /// </summary>
     /// <param name="ent">The access reader entity which is having its list of access permissions replaced.</param>
     /// <param name="accesses">The list of access permissions replacing the original one.</param>
-    private void SetAccesses(Entity<AccessReaderComponent> ent, List<HashSet<ProtoId<AccessLevelPrototype>>> accesses)
+    public void SetAccesses(Entity<AccessReaderComponent> ent, List<HashSet<ProtoId<AccessLevelPrototype>>> accesses)
     {
         ent.Comp.AccessLists.Clear();
         AddAccesses(ent, accesses);
@@ -500,7 +500,7 @@ public sealed class AccessReaderSystem : EntitySystem
     }
 
     /// <inheritdoc cref = "SetAccesses"/>
-    private void SetAccesses(Entity<AccessReaderComponent> ent, List<ProtoId<AccessLevelPrototype>> accesses)
+    public void SetAccesses(Entity<AccessReaderComponent> ent, List<ProtoId<AccessLevelPrototype>> accesses)
     {
         ent.Comp.AccessLists.Clear();
         AddAccesses(ent, accesses);
@@ -524,7 +524,7 @@ public sealed class AccessReaderSystem : EntitySystem
     /// </summary>
     /// <param name="ent">The access reader entity to which the new access permissions are being added.</param>
     /// <param name="accesses">The list of access permissions being added.</param>
-    private void AddAccesses(Entity<AccessReaderComponent> ent, List<HashSet<ProtoId<AccessLevelPrototype>>> accesses)
+    public void AddAccesses(Entity<AccessReaderComponent> ent, List<HashSet<ProtoId<AccessLevelPrototype>>> accesses)
     {
         foreach (var access in accesses)
         {
@@ -545,7 +545,7 @@ public sealed class AccessReaderSystem : EntitySystem
     }
 
     /// <inheritdoc cref = "AddAccesses"/>
-    private void AddAccesses(Entity<AccessReaderComponent> ent, List<ProtoId<AccessLevelPrototype>> accesses)
+    public void AddAccesses(Entity<AccessReaderComponent> ent, List<ProtoId<AccessLevelPrototype>> accesses)
     {
         foreach (var access in accesses)
         {
@@ -576,7 +576,7 @@ public sealed class AccessReaderSystem : EntitySystem
     /// <param name="ent">The access reader entity to which the access permission is being added.</param>
     /// <param name="access">The access permission being added.</param>
     /// <param name="dirty">If true, the component will be  marked as changed afterward.</param>
-    private void AddAccess(Entity<AccessReaderComponent> ent, HashSet<ProtoId<AccessLevelPrototype>> access, bool dirty = true)
+    public void AddAccess(Entity<AccessReaderComponent> ent, HashSet<ProtoId<AccessLevelPrototype>> access, bool dirty = true)
     {
         ent.Comp.AccessLists.Add(access);
 
@@ -597,7 +597,7 @@ public sealed class AccessReaderSystem : EntitySystem
     }
 
     /// <inheritdoc cref = "AddAccess"/>
-    private void AddAccess(Entity<AccessReaderComponent> ent, ProtoId<AccessLevelPrototype> access, bool dirty = true)
+    public void AddAccess(Entity<AccessReaderComponent> ent, ProtoId<AccessLevelPrototype> access, bool dirty = true)
     {
         AddAccess(ent, new HashSet<ProtoId<AccessLevelPrototype>>() { access }, dirty);
     }

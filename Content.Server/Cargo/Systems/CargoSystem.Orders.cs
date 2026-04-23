@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Cargo.Components;
+using Content.Server.Labels.Components;
+using Content.Server.Paper;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.BUI;
 using Content.Shared.Cargo.Components;
@@ -12,6 +14,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Paper;
+using Content.Shared.Radio;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
@@ -50,7 +53,7 @@ namespace Content.Server.Cargo.Systems
                 return;
 
             _audio.PlayPvs(ApproveSound, uid);
-            UpdateBankAccount((stationUid.Value, bank), (int) price, component.Account);
+            UpdateBankAccount(stationUid.Value, bank, (int) price);
             QueueDel(args.Used);
             args.Handled = true;
         }
@@ -75,9 +78,10 @@ namespace Content.Server.Cargo.Systems
                 return;
 
             var orderId = GenerateOrderId(orderDatabase);
-            var data = new CargoOrderData(orderId, product.Product, product.Name, product.Cost, slip.OrderQuantity, slip.Requester, slip.Reason, slip.Account);
+            var account = slip.Account ?? ent.Comp.Account;
+            var data = new CargoOrderData(orderId, product.Product, product.Name, product.Cost, slip.OrderQuantity, slip.Requester, slip.Reason, account);
 
-            if (!TryAddOrder(stationUid.Value, ent.Comp.Account, data, orderDatabase))
+            if (!TryAddOrder(stationUid.Value, account, data, orderDatabase))
             {
                 PlayDenySound(ent, ent.Comp);
                 return;
@@ -126,12 +130,12 @@ namespace Content.Server.Cargo.Systems
             var stationQuery = EntityQueryEnumerator<StationBankAccountComponent>();
             while (stationQuery.MoveNext(out var uid, out var bank))
             {
-                if (Timing.CurTime < bank.NextIncomeTime)
+                if (_timing.CurTime < bank.NextIncomeTime)
                     continue;
                 bank.NextIncomeTime += bank.IncomeDelay;
 
                 var balanceToAdd = (int) Math.Round(bank.IncreasePerSecond * bank.IncomeDelay.TotalSeconds);
-                UpdateBankAccount((uid, bank), balanceToAdd, bank.RevenueDistribution);
+                UpdateBankAccount(uid, bank, balanceToAdd, bank.RevenueDistribution);
             }
         }
 
@@ -254,7 +258,7 @@ namespace Content.Server.Cargo.Systems
                 $"{ToPrettyString(player):user} approved order [orderId:{order.OrderId}, quantity:{order.OrderQuantity}, product:{order.ProductId}, requester:{order.Requester}, reason:{order.Reason}] on account {order.Account} with balance at {accountBalance}");
 
             orderDatabase.Orders[component.Account].Remove(order);
-            UpdateBankAccount((station.Value, bank), -cost, order.Account);
+            UpdateBankAccount(station.Value, bank, -cost);
             UpdateOrders(station.Value);
         }
 
@@ -342,7 +346,7 @@ namespace Content.Server.Cargo.Systems
                 ("cost", product.Cost * args.Amount),
                 ("orderer", args.Requester),
                 ("reason", args.Reason)));
-            _paperSystem.SetContent((label, paper), msg.ToMarkup());
+            _paperSystem.SetContent(label, msg.ToMarkup(), paper);
 
             var slip = EnsureComp<CargoSlipComponent>(label);
             slip.Product = product.ID;
@@ -413,7 +417,8 @@ namespace Content.Server.Cargo.Systems
             if (!TryComp<CargoOrderConsoleComponent>(consoleUid, out var console))
                 return;
 
-            if (!TryComp<StationCargoOrderDatabaseComponent>(station, out var orderDatabase))
+            if (!TryComp<StationCargoOrderDatabaseComponent>(station, out var orderDatabase) ||
+                !TryComp<StationBankAccountComponent>(station, out var bank))
                 return;
 
             if (_uiSystem.HasUi(consoleUid, CargoConsoleUiKey.Orders))
@@ -424,9 +429,9 @@ namespace Content.Server.Cargo.Systems
                     MetaData(station.Value).EntityName,
                     GetOutstandingOrderCount((station!.Value, orderDatabase), console.Account),
                     orderDatabase.Capacity,
-                    GetNetEntity(station.Value),
+                    bank.Balance,
                     RelevantOrders((station!.Value, orderDatabase), (consoleUid, console)),
-                    GetAvailableProducts((consoleUid, console))
+                    GetAvailableProducts((consoleUid, console)).Select(p => _protoMan.Index(p)).ToList()
                 ));
             }
         }
@@ -635,6 +640,9 @@ namespace Content.Server.Cargo.Systems
             // Ensure the item doesn't start anchored
             _transformSystem.Unanchor(item, Transform(item));
 
+            if (paperProto == null)
+                return true;
+
             // Create a sheet of paper to write the order details on
             var printed = Spawn(paperProto, spawn);
             if (TryComp<PaperComponent>(printed, out var paper))
@@ -644,7 +652,7 @@ namespace Content.Server.Cargo.Systems
                 _metaSystem.SetEntityName(printed, val);
 
                 var accountProto = _protoMan.Index(account);
-                _paperSystem.SetContent((printed, paper),
+                _paperSystem.SetContent(printed,
                     Loc.GetString(
                         "cargo-console-paper-print-text",
                         ("orderNumber", order.OrderId),
@@ -653,8 +661,8 @@ namespace Content.Server.Cargo.Systems
                         ("requester", order.Requester),
                         ("reason", string.IsNullOrWhiteSpace(order.Reason) ? Loc.GetString("cargo-console-paper-reason-default") : order.Reason),
                         ("account", Loc.GetString(accountProto.Name)),
-                        ("accountcode", Loc.GetString(accountProto.Code)),
-                        ("approver", string.IsNullOrWhiteSpace(order.Approver) ? Loc.GetString("cargo-console-paper-approver-default") : order.Approver)));
+                        ("approver", string.IsNullOrWhiteSpace(order.Approver) ? Loc.GetString("cargo-console-paper-approver-default") : order.Approver)),
+                    paperComp: paper);
 
                 // attempt to attach the label to the item
                 if (TryComp<PaperLabelComponent>(item, out var label))
@@ -678,7 +686,7 @@ namespace Content.Server.Cargo.Systems
             var products = new List<ProtoId<CargoProductPrototype>>();
 
             // Note that a market must be both on the station and on the console to be available.
-            var markets = ent.Comp.AllowedGroups.Intersect(db.Markets).ToList();
+            var markets = ent.Comp.AllowedGroups.Where(g => db.Markets.Any(m => m == g)).ToList();
             foreach (var product in _protoMan.EnumeratePrototypes<CargoProductPrototype>())
             {
                 if (!markets.Contains(product.Group))

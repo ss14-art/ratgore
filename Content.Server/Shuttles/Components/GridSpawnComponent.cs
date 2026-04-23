@@ -58,6 +58,9 @@ public partial record struct GridSpawnGroup
     [DataField]
     public float MaximumDistance = 0f;
 
+    [DataField]
+    public bool StationShuttle = false;
+
     public GridSpawnGroup()
     {
     }

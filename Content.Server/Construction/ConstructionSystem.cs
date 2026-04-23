@@ -22,6 +22,7 @@ namespace Content.Server.Construction
         [Dependency] private readonly ContainerSystem _container = default!;
         [Dependency] private readonly StackSystem _stackSystem = default!;
         [Dependency] private readonly SharedToolSystem _toolSystem = default!;
+        [Dependency] private readonly IComponentFactory _factory = default!;
 
         public override void Initialize()
         {

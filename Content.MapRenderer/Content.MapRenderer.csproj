@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <WarningsAsErrors>nullable</WarningsAsErrors>
     <ServerGarbageCollection>true</ServerGarbageCollection>
+    <StartupObject>Content.MapRenderer.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

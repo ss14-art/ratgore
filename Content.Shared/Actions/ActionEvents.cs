@@ -151,6 +151,8 @@ public abstract partial class WorldTargetActionEvent : BaseActionEvent
     /// </summary>
     public EntityCoordinates Target;
 
+    public EntityCoordinates Coords => Target;
+
     /// <summary>
     /// When combined with <see cref="EntityTargetAction"/> (and <c>Event</c> is null), the entity the client was hovering when clicked.
     /// This can be null as the primary purpose of this event is for getting coordinates.

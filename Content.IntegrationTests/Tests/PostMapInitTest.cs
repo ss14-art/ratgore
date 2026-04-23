@@ -413,13 +413,13 @@ namespace Content.IntegrationTests.Tests
 
                     IEnumerable<object> spawnPoints = entManager.EntityQuery<SpawnPointComponent>()
                         .Where(x => x.SpawnType == SpawnPointType.Job && x.Job != null)
-                        .Select<SpawnPointComponent, object>(x => x.Job.Value);
+                        .Select<SpawnPointComponent, object>(x => x.Job!);
 
                     jobs.ExceptWith(spawnPoints);
 
                     spawnPoints = entManager.EntityQuery<ContainerSpawnPointComponent>()
                         .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset && x.Job != null)
-                        .Select<ContainerSpawnPointComponent, object>(x => x.Job.Value);
+                        .Select<ContainerSpawnPointComponent, object>(x => x.Job!);
 
                     jobs.ExceptWith(spawnPoints);
 

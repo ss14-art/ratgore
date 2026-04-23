@@ -7,6 +7,7 @@ using Content.Shared.Emp;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Prototypes;
+using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -19,6 +20,8 @@ public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
     [Dependency] private readonly IdentitySystem _identity = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
+    [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -60,7 +63,7 @@ public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
             return;
 
         var state = new ChameleonBoundUserInterfaceState(component.Slot, component.Default, component.RequireTag);
-        UI.SetUiState(uid, ChameleonUiKey.Key, state);
+        _ui.SetUiState(uid, ChameleonUiKey.Key, state);
     }
 
     /// <summary>
@@ -95,7 +98,7 @@ public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
     /// </summary>
     public string GetRandomValidPrototype(SlotFlags slot, string? tag = null)
     {
-        return _random.Pick(GetValidTargets(slot, tag).ToList());
+        return _random.Pick(GetValidTargets(slot, tag).ToList()).ID;
     }
 
     public override void Update(float frameTime)
