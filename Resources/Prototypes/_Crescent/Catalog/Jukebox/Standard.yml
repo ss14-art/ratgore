@@ -387,3 +387,68 @@
   name: Dark Fantasy
   path:
     path: /Audio/_Crescent/Jukebox/darkfantasy.ogg
+
+- type: jukebox
+  id: knockknock
+  name: Scattle - Knock Knock
+  path:
+    path: /Audio/_CommunityMusic/Scattle-KnockKnock.ogg
+
+- type: jukebox
+  id: inneranimal
+  name: Scattle - Inner Animal
+  path:
+    path: /Audio/_CommunityMusic/Scattle-InnerAnimal.ogg
+
+- type: jukebox
+  id: bloodline
+  name: Scattle - Bloodline
+  path:
+    path: /Audio/_CommunityMusic/Scattle-Bloodline.ogg
+
+- type: jukebox
+  id: stalkerclearsky
+  name: Clear sky bar
+  path:
+    path: /Audio/_CommunityMusic/S.T.A.L.K.E.R.bar-of-Clear-sky.ogg
+
+- type: jukebox
+  id: sexualizer
+  name: Perturbator Sexualizer
+    path: /Audio/_CommunityMusic/Perturbator-Sexualizer.ogg
+
+- type: jukebox
+  id: miamidisco
+  name: Perturbator Miami Disco
+  path:
+    path: /Audio/_CommunityMusic/Perturbator-Miami-Disco.ogg
+
+- type: jukebox
+  id: around
+  name: Modulogeek Around
+  path:
+    path: /Audio/_CommunityMusic/Modulogeek-Around.ogg
+
+- type: jukebox
+  id: voyager
+  name: Jasper Byrne - Voyager
+  path:
+    path: /Audio/_CommunityMusic/Jasper-Byrne-Voyager.ogg
+
+- type: jukebox
+  id: everlong
+  name: Foo Fighters - Everlong
+  path:
+    path: /Audio/_CommunityMusic/Foo-Fighters-Everlong.ogg
+
+- type: jukebox
+  id: rust
+  name: El huervo - Rust
+  path:
+    path: /Audio/_CommunityMusic/El-huervo-Rust.ogg
+
+- type: jukebox
+  id: remorse
+  name: Carpenter Brut - Remorse
+  path:
+    path: /Audio/_CommunityMusic/Carpenter-Brut-Remorse.ogg
