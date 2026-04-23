@@ -1,10 +1,12 @@
 ﻿using Content.Shared.Actions;
 using Content.Shared.Chat;
+using Robust.Shared.Serialization;
 
 
 namespace Content.Shared.Magic.Events;
 
 // TODO: Can probably just be an entity or something
+[Serializable, NetSerializable]
 public sealed partial class TeleportSpellEvent : WorldTargetActionEvent, ISpeakSpell
 {
     [DataField]

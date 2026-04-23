@@ -1,12 +1,15 @@
-﻿using Content.Shared.Actions;
+﻿using System;
+using Content.Shared.Actions;
 using Content.Shared.Chat;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Magic.Events;
 
 /// <summary>
 ///     Spell that uses the magic of ECS to add & remove components. Components are first removed, then added.
 /// </summary>
+[Serializable, NetSerializable]
 public sealed partial class ChangeComponentsSpellEvent : EntityTargetActionEvent, ISpeakSpell
 {
     // TODO allow it to set component data-fields?
@@ -14,6 +17,7 @@ public sealed partial class ChangeComponentsSpellEvent : EntityTargetActionEvent
 
     [DataField("toAdd")]
     [AlwaysPushInheritance]
+    [NonSerialized]
     public ComponentRegistry ToAdd = new();
 
     [DataField("toRemove")]

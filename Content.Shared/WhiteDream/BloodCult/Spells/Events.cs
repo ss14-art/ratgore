@@ -9,6 +9,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.WhiteDream.BloodCult.Spells;
 
+[Serializable, NetSerializable]
 public sealed partial class BloodCultTeleportEvent : EntityTargetActionEvent, ISpeakSpell
 {
     [DataField]
@@ -23,6 +24,7 @@ public sealed partial class BloodCultTeleportEvent : EntityTargetActionEvent, IS
     public InGameICChatType ChatType => InGameICChatType.Whisper;
 }
 
+[Serializable, NetSerializable]
 public sealed partial class BloodCultEmpEvent : InstantActionEvent, ISpeakSpell
 {
     [DataField]
@@ -40,6 +42,7 @@ public sealed partial class BloodCultEmpEvent : InstantActionEvent, ISpeakSpell
     public InGameICChatType ChatType => InGameICChatType.Whisper;
 }
 
+[Serializable, NetSerializable]
 public sealed partial class BloodCultTwistedConstructionEvent : EntityTargetActionEvent, ISpeakSpell
 {
     [DataField]
@@ -48,6 +51,7 @@ public sealed partial class BloodCultTwistedConstructionEvent : EntityTargetActi
     public InGameICChatType ChatType => InGameICChatType.Whisper;
 }
 
+[Serializable, NetSerializable]
 public sealed partial class SummonEquipmentEvent : InstantActionEvent, ISpeakSpell
 {
     /// <summary>
@@ -68,8 +72,10 @@ public sealed partial class SummonEquipmentEvent : InstantActionEvent, ISpeakSpe
     public InGameICChatType ChatType => InGameICChatType.Whisper;
 }
 
+[Serializable, NetSerializable]
 public sealed partial class BloodSpearRecalledEvent : InstantActionEvent;
 
+[Serializable, NetSerializable]
 public sealed partial class PlaceTileEntityEvent : WorldTargetActionEvent
 {
     [DataField]
@@ -83,6 +89,7 @@ public sealed partial class PlaceTileEntityEvent : WorldTargetActionEvent
 
 }
 
+[Serializable, NetSerializable]
 public sealed partial class PhaseShiftEvent : InstantActionEvent
 {
     [DataField]

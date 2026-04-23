@@ -197,7 +197,6 @@ namespace Content.Server.GameTicking
         {
             var ev = RaisePreLoad(proto, options, offset, rot);
 
-            Logger.Info(ev.GameMap.MapPath.ToString());
 
             if (ev.GameMap.IsGrid)
             {
@@ -218,7 +217,7 @@ namespace Content.Server.GameTicking
                 return g;
             }
 
-            if (!_loader.TryLoadMap(ev.GameMap.MapPath, //this causes an engine related crash yippee!
+            if (!_loader.TryLoadMap(ev.GameMap.MapPath,
                     out var map,
                     out var grids,
                     ev.Options,

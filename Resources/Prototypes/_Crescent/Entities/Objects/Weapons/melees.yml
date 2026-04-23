@@ -1,4 +1,9 @@
 - type: entity
+  id: ArmBladeChangeling
+  parent: BaseItem
+  abstract: true
+
+- type: entity
   name: hunter's vibrokhopesh
   parent: [BaseItem, StreeCredRedeemableHigh]
   id: SRMKhopesh

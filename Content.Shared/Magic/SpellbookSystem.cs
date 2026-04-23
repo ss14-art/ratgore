@@ -19,7 +19,7 @@ public sealed class SpellbookSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<SpellbookComponent, MapInitEvent>(OnInit, before: [typeof(SharedMagicSystem)]);
+        SubscribeLocalEvent<SpellbookComponent, MapInitEvent>(OnInit, before: new[] { typeof(SharedMagicSystem) });
         SubscribeLocalEvent<SpellbookComponent, UseInHandEvent>(OnUse);
         SubscribeLocalEvent<SpellbookComponent, SpellbookDoAfterEvent>(OnDoAfter);
     }

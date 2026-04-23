@@ -1,0 +1,1481 @@
+﻿
+C:\Users\User\Desktop\Nezumi\Content.Server\Atmos\Serialization\TileAtmosCollec
+tionSerializer.cs(51,25): warning CS0618: "Logger.Error(string)" является устар
+евшим: 'Use ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Conten
+t.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Atmos\Serialization\TileAtmosCollec
+tionSerializer.cs(94,37): warning CS0618: "Logger.Error(string)" является устар
+евшим: 'Use ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Conten
+t.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Administration\Commands\SetStationA
+iName.cs(54,56): error CS8602: Разыменование вероятной пустой ссылки. [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Shitmed\Antags\Abductor\AbductorSy
+stem.Actions.cs(99,30): error CS0029: Не удается неявно преобразовать тип "Syst
+em.Collections.Generic.List<Robust.Shared.GameObjects.EntityUid>" в "Robust.Sha
+red.GameObjects.EntityUid[]". [C:\Users\User\Desktop\Nezumi\Content.Server\Cont
+ent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Shitmed\Antags\Abductor\AbductorSy
+stem.Actions.cs(108,39): error CS1503: Аргумент 2: не удается преобразовать из 
+"Robust.Shared.GameObjects.EntityUid[]" в "System.Collections.Generic.List<Robu
+st.Shared.GameObjects.EntityUid>". [C:\Users\User\Desktop\Nezumi\Content.Server
+\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Shitmed\Antags\Abductor\AbductorSy
+stem.cs(151,47): error CS1503: Аргумент 1: не удается преобразовать из "Content
+.Shared.Station.Components.StationDataComponent" в "Robust.Shared.GameObjects.E
+ntity<Content.Shared.Station.Components.StationDataComponent?>". [C:\Users\User
+\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(53,13): error CS7036: Отсутствует аргумент, соответствующий требуемому парамет
+ру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAccou
+ntComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content
+.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(78,146): error CS1503: Аргумент 8: не удается преобразовать из "Robust.Shared.
+Prototypes.ProtoId<Content.Shared.Cargo.Prototypes.CargoAccountPrototype>?" в "
+Robust.Shared.Prototypes.ProtoId<Content.Shared.Cargo.Prototypes.CargoAccountPr
+ototype>". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(87,37): error CS1061: "CargoOrderConsoleComponent" не содержит определения "Sc
+anSound", и не удалось найти доступный метод расширения "ScanSound", принимающи
+й тип "CargoOrderConsoleComponent" в качестве первого аргумента (возможно, проп
+ущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Cont
+ent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(129,21): error CS0103: Имя "Timing" не существует в текущем контексте. [C:\Use
+rs\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(244,63): error CS1061: "CargoAccountPrototype" не содержит определения "RadioC
+hannel", и не удалось найти доступный метод расширения "RadioChannel", принимаю
+щий тип "CargoAccountPrototype" в качестве первого аргумента (возможно, пропуще
+на директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content
+.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(245,48): error CS0117: "CargoOrderConsoleComponent" не содержит определение дл
+я "BaseAnnouncementChannel". [C:\Users\User\Desktop\Nezumi\Content.Server\Conte
+nt.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(245,83): error CS1061: "CargoAccountPrototype" не содержит определения "RadioC
+hannel", и не удалось найти доступный метод расширения "RadioChannel", принимаю
+щий тип "CargoAccountPrototype" в качестве первого аргумента (возможно, пропуще
+на директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content
+.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(246,86): error CS0117: "CargoOrderConsoleComponent" не содержит определение дл
+я "BaseAnnouncementChannel". [C:\Users\User\Desktop\Nezumi\Content.Server\Conte
+nt.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(257,13): error CS7036: Отсутствует аргумент, соответствующий требуемому параме
+тру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAcco
+untComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Conten
+t.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(330,39): error CS1061: "CargoAccountPrototype" не содержит определения "Acquis
+itionSlip", и не удалось найти доступный метод расширения "AcquisitionSlip", пр
+инимающий тип "CargoAccountPrototype" в качестве первого аргумента (возможно, п
+ропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\C
+ontent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(334,36): error CS0246: Не удалось найти тип или имя пространства имен "PaperCo
+mponent" (возможно, отсутствует директива using или ссылка на сборку). [C:\User
+s\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(345,37): error CS1503: Аргумент 1: не удается преобразовать из "(Robust.Shared
+.GameObjects.EntityUid, PaperComponent)" в "Robust.Shared.GameObjects.EntityUid
+". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(386,94): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(423,25): error CS1729: "CargoConsoleInterfaceState" не содержит конструктор, к
+оторый принимает аргументы 6. [C:\Users\User\Desktop\Nezumi\Content.Server\Cont
+ent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(444,46): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(447,56): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(459,46): error CS1061: "CargoOrderConsoleComponent" не содержит определения "N
+extDenySoundTime", и не удалось найти доступный метод расширения "NextDenySound
+Time", принимающий тип "CargoOrderConsoleComponent" в качестве первого аргумент
+а (возможно, пропущена директива using или ссылка на сборку). [C:\Users\User\De
+sktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(461,27): error CS1061: "CargoOrderConsoleComponent" не содержит определения "N
+extDenySoundTime", и не удалось найти доступный метод расширения "NextDenySound
+Time", принимающий тип "CargoOrderConsoleComponent" в качестве первого аргумент
+а (возможно, пропущена директива using или ссылка на сборку). [C:\Users\User\De
+sktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(461,75): error CS1061: "CargoOrderConsoleComponent" не содержит определения "D
+enySoundDelay", и не удалось найти доступный метод расширения "DenySoundDelay",
+ принимающий тип "CargoOrderConsoleComponent" в качестве первого аргумента (воз
+можно, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\
+Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(485,33): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(488,60): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(640,25): error CS0246: Не удалось найти тип или имя пространства имен "PaperCo
+mponent" (возможно, отсутствует директива using или ссылка на сборку). [C:\User
+s\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(656,68): error CS1061: "CargoAccountPrototype" не содержит определения "Code",
+ и не удалось найти доступный метод расширения "Code", принимающий тип "CargoAc
+countPrototype" в качестве первого аргумента (возможно, пропущена директива usi
+ng или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.
+Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(660,29): error CS0246: Не удалось найти тип или имя пространства имен "PaperLa
+belComponent" (возможно, отсутствует директива using или ссылка на сборку). [C:
+\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(681,27): error CS1929: "List<string>" не содержит определение для "Intersect",
+ и наиболее подходящий перегруженный метод расширения "Enumerable.Intersect<Pro
+toId<CargoMarketPrototype>>(IEnumerable<ProtoId<CargoMarketPrototype>>, IEnumer
+able<ProtoId<CargoMarketPrototype>>)" требует наличия получателя типа "System.C
+ollections.Generic.IEnumerable<Robust.Shared.Prototypes.ProtoId<Content.Shared.
+Cargo.Prototypes.CargoMarketPrototype>>". [C:\Users\User\Desktop\Nezumi\Content
+.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(158,42): error CS1503: Аргумент 1: не удается преобразовать из "int" в "Robus
+t.Shared.Prototypes.ProtoId<Content.Shared.Cargo.Prototypes.CargoAccountPrototy
+pe>". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(159,23): error CS1061: "List<CargoOrderData>" не содержит определения "Approv
+ed", и не удалось найти доступный метод расширения "Approved", принимающий тип 
+"List<CargoOrderData>" в качестве первого аргумента (возможно, пропущена директ
+ива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\C
+ontent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(161,39): error CS1061: "List<CargoOrderData>" не содержит определения "OrderQ
+uantity", и не удалось найти доступный метод расширения "OrderQuantity", приним
+ающий тип "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущ
+ена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Conten
+t.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(161,61): error CS1061: "List<CargoOrderData>" не содержит определения "NumDis
+patched", и не удалось найти доступный метод расширения "NumDispatched", приним
+ающий тип "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущ
+ена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Conten
+t.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(166,65): error CS1061: "List<CargoOrderData>" не содержит определения "OrderI
+d", и не удалось найти доступный метод расширения "OrderId", принимающий тип "L
+ist<CargoOrderData>" в качестве первого аргумента (возможно, пропущена директив
+а using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Con
+tent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,35): error CS1061: "List<CargoOrderData>" не содержит определения "Produc
+tId", и не удалось найти доступный метод расширения "ProductId", принимающий ти
+п "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущена дире
+ктива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server
+\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,52): error CS1061: "List<CargoOrderData>" не содержит определения "Produc
+tName", и не удалось найти доступный метод расширения "ProductName", принимающи
+й тип "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущена 
+директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Se
+rver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,71): error CS1061: "List<CargoOrderData>" не содержит определения "Price"
+, и не удалось найти доступный метод расширения "Price", принимающий тип "List<
+CargoOrderData>" в качестве первого аргумента (возможно, пропущена директива us
+ing или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content
+.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,100): error CS1061: "List<CargoOrderData>" не содержит определения "Reque
+ster", и не удалось найти доступный метод расширения "Requester", принимающий т
+ип "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущена дир
+ектива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Serve
+r\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,117): error CS1061: "List<CargoOrderData>" не содержит определения "Reaso
+n", и не удалось найти доступный метод расширения "Reason", принимающий тип "Li
+st<CargoOrderData>" в качестве первого аргумента (возможно, пропущена директива
+ using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Cont
+ent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(166,44): error CS7036: Отсутствует аргумент, соответствующий требуемому парам
+етру "account" из "CargoOrderData.CargoOrderData(int, string, string, int, int,
+ string, string, ProtoId<CargoAccountPrototype>)". [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(172,32): error CS1503: Аргумент 1: не удается преобразовать из "System.Collec
+tions.Generic.List<Content.Shared.Cargo.CargoOrderData>" в "Content.Shared.Carg
+o.CargoOrderData". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_NF\Shuttles\Bank\StationATMSystem.
+cs(82,16): error CS7036: Отсутствует аргумент, соответствующий требуемому парам
+етру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAcc
+ountComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Conte
+nt.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Chemistry\EntitySystems\VaporSystem
+.cs(146,41): error CS1501: Ни одна из перегрузок метода "ReactionTile" не прини
+мает 4 аргументов. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(350,9): error CS0103: Имя "Reset" не существует в текущем контексте. [C:\User
+s\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_NF\Shuttles\Bank\StationATMSystem.
+cs(188,16): error CS7036: Отсутствует аргумент, соответствующий требуемому пара
+метру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAc
+countComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Cont
+ent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Telepad.c
+s(97,17): error CS7036: Отсутствует аргумент, соответствующий требуемому параме
+тру "paperProto" из "CargoSystem.FulfillOrder(CargoOrderData, ProtoId<CargoAcco
+untPrototype>, EntityCoordinates, string?)". [C:\Users\User\Desktop\Nezumi\Cont
+ent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Telepad.c
+s(148,13): error CS7036: Отсутствует аргумент, соответствующий требуемому парам
+етру "orderDatabase" из "CargoSystem.TryFulfillOrder(Entity<StationDataComponen
+t>, ProtoId<CargoAccountPrototype>, CargoOrderData, StationCargoOrderDatabaseCo
+mponent)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Clothing\Systems\ChameleonClothingS
+ystem.cs(62,25): error CS1729: "ChameleonBoundUserInterfaceState" не содержит к
+онструктор, который принимает аргументы 3. [C:\Users\User\Desktop\Nezumi\Conten
+t.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Clothing\Systems\ChameleonClothingS
+ystem.cs(63,9): error CS0103: Имя "UI" не существует в текущем контексте. [C:\U
+sers\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Chat\SuicideSystem.cs(105,26): erro
+r CS1061: "GhostSystem" не содержит определения "OnGhostAttempt", и не удалось 
+найти доступный метод расширения "OnGhostAttempt", принимающий тип "GhostSystem
+" в качестве первого аргумента (возможно, пропущена директива using или ссылка 
+на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Clothing\Systems\ChameleonClothingS
+ystem.cs(83,14): error CS1501: Ни одна из перегрузок метода "IsValidTarget" не 
+принимает 3 аргументов. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Se
+rver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Clothing\Systems\ChameleonClothingS
+ystem.cs(98,29): error CS1501: Ни одна из перегрузок метода "GetValidTargets" н
+е принимает 2 аргументов. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.
+Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Chemistry\EntitySystems\HypospraySy
+stem.cs(296,63): error CS1061: "HyposprayComponent" не содержит определения "Ca
+nContainerDraw", и не удалось найти доступный метод расширения "CanContainerDra
+w", принимающий тип "HyposprayComponent" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Commands\ActionCommands.cs(46,38): 
+error CS0246: Не удалось найти тип или имя пространства имен "ActionUpgradeComp
+onent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Communications\CommunicationsConsol
+eSystem.cs(276,25): error CS0246: Не удалось найти тип или имя пространства име
+н "StationDataComponent" (возможно, отсутствует директива using или ссылка на с
+борку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Mono\NPC\HTN\ShipTargetingSystem.c
+s(118,22): error CS1061: "SharedGunSystem" не содержит определения "TryNextShoo
+tPrototype", и не удалось найти доступный метод расширения "TryNextShootPrototy
+pe", принимающий тип "SharedGunSystem" в качестве первого аргумента (возможно, 
+пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\
+Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Mono\NPC\HTN\ShipTargetingSystem.c
+s(155,44): error CS1061: "SharedGunSystem" не содержит определения "GetBulletPr
+ototype", и не удалось найти доступный метод расширения "GetBulletPrototype", п
+ринимающий тип "SharedGunSystem" в качестве первого аргумента (возможно, пропущ
+ена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Conten
+t.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Silicons\Laws\SiliconLawSystem.cs(5
+3,76): error CS0103: Имя "OnLawProviderMindAdded" не существует в текущем конте
+ксте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Silicons\Laws\SiliconLawSystem.cs(5
+4,78): error CS0103: Имя "OnLawProviderMindRemoved" не существует в текущем кон
+тексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Silicons\Laws\SiliconLawSystem.cs(1
+13,14): error CS0103: Имя "_emag" не существует в текущем контексте. [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Silicons\Laws\SiliconLawSystem.cs(1
+21,23): error CS1061: "SiliconLawProviderComponent" не содержит определения "Su
+bverted", и не удалось найти доступный метод расширения "Subverted", принимающи
+й тип "SiliconLawProviderComponent" в качестве первого аргумента (возможно, про
+пущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Con
+tent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Destructible\DestructibleSystem.cs(
+111,29): error CS1061: "SharedProjectileSystem" не содержит определения "Remove
+Embed", и не удалось найти доступный метод расширения "RemoveEmbed", принимающи
+й тип "SharedProjectileSystem" в качестве первого аргумента (возможно, пропущен
+а директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Station\Systems\StationSpawningSyst
+em.cs(145,32): error CS0103: Имя "ApplySubGear" не существует в текущем контекс
+те. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Construction\ConstructionSystem.Int
+eractions.cs(274,71): error CS0103: Имя "_factory" не существует в текущем конт
+ексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Database\ServerDbBase.cs(221,24): e
+rror CS7036: Отсутствует аргумент, соответствующий требуемому параметру "loadou
+ts" из "HumanoidCharacterProfile.HumanoidCharacterProfile(string, string, strin
+g, string, string, string, string, float, float, int, Sex, string, Gender, stri
+ng?, string?, string?, HumanoidCharacterAppearance, SpawnPriorityPreference, Di
+ctionary<string, JobPriority>, PreferenceUnavailableMode, HashSet<string>, Hash
+Set<string>, HashSet<LoadoutPreference>, long, string, List<string>, HumanoidCh
+aracterProfile)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Factory\FactorySystem.cs(
+125,21): warning CS0618: "Logger.Error(string)" является устаревшим: 'Use ISawm
+ill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Factory\FactorySystem.cs(
+156,22): warning CS0618: "IPrototypeManager.TryIndex(EntProtoId, out EntityProt
+otype?, bool)" является устаревшим: 'Use Resolve() if you want to get a prototy
+pe without throwing but while still logging an error.' [C:\Users\User\Desktop\N
+ezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Goobstation\Ghostbar\GhostBarSyste
+m.cs(116,16): error CS1061: "TraitSystem" не содержит определения "ApplyTraits"
+, и не удалось найти доступный метод расширения "ApplyTraits", принимающий тип 
+"TraitSystem" в качестве первого аргумента (возможно, пропущена директива using
+ или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Se
+rver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\WhiteDream\BloodCult\Spells\BloodCu
+ltSpellsSystem.cs(201,30): error CS1061: "SharedMagicSystem" не содержит опреде
+ления "Speak", и не удалось найти доступный метод расширения "Speak", принимающ
+ий тип "SharedMagicSystem" в качестве первого аргумента (возможно, пропущена ди
+ректива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Serv
+er\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Traitor\Systems\TraitorCodePaperSys
+tem.cs(42,35): error CS1503: Аргумент 1: не удается преобразовать из "(Robust.S
+hared.GameObjects.EntityUid, Content.Server.Paper.PaperComponent)" в "Robust.Sh
+ared.GameObjects.EntityUid". [C:\Users\User\Desktop\Nezumi\Content.Server\Conte
+nt.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Traitor\Systems\TraitorCodePaperSys
+tem.cs(52,40): error CS1061: "RoleCodewordSystem" не содержит определения "GetC
+odewords", и не удалось найти доступный метод расширения "GetCodewords", приним
+ающий тип "RoleCodewordSystem" в качестве первого аргумента (возможно, пропущен
+а директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Traitor\Systems\TraitorCodePaperSys
+tem.cs(57,44): error CS1061: "RoleCodewordSystem" не содержит определения "Gene
+rateCodewords", и не удалось найти доступный метод расширения "GenerateCodeword
+s", принимающий тип "RoleCodewordSystem" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Traits\TraitSystem.Functions.cs(145
+,44): error CS1503: Аргумент 2: не удается преобразовать из "Robust.Shared.Prot
+otypes.EntProtoId" в "Robust.Shared.GameObjects.EntityUid?". [C:\Users\User\Des
+ktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Strip\StrippableSystem.cs(485,26): 
+error CS1501: Ни одна из перегрузок метода "TryDrop" не принимает 3 аргументов.
+ [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Strip\StrippableSystem.cs(486,26): 
+error CS7036: Отсутствует аргумент, соответствующий требуемому параметру "hands
+ComponentActiveHandId" из "SharedHandsSystem.TryPickup(EntityUid, EntityUid, ob
+ject, string?, bool, bool, bool, HandsComponent?, ItemComponent?)". [C:\Users\U
+ser\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Misc\DirectionalTilingSys
+tem.cs(261,25): warning CS0618: "Logger.Error(string)" является устаревшим: 'Us
+e ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Misc\DirectionalTilingSys
+tem.cs(275,25): warning CS0618: "Logger.Error(string)" является устаревшим: 'Us
+e ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Misc\DirectionalTilingSys
+tem.cs(293,17): warning CS0618: "Logger.Error(string)" является устаревшим: 'Us
+e ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shipyard\ShipyardSystem.cs(81,37): 
+error CS1503: Аргумент 1: не удается преобразовать из "Content.Shared.Station.C
+omponents.StationDataComponent" в "Robust.Shared.GameObjects.Entity<Content.Sha
+red.Station.Components.StationDataComponent?>". [C:\Users\User\Desktop\Nezumi\C
+ontent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Magic\CrescentMagicSystem
+.cs(67,16): error CS1061: "MagicSystem" не содержит определения "Speak", и не у
+далось найти доступный метод расширения "Speak", принимающий тип "MagicSystem" 
+в качестве первого аргумента (возможно, пропущена директива using или ссылка на
+ сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Shipyard\ShipyardPatch.cs
+(160,22): error CS0246: Не удалось найти тип или имя пространства имен "Station
+DataComponent" (возможно, отсутствует директива using или ссылка на сборку). [C
+:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Magic\CrescentMagicSystem
+.cs(91,16): error CS1061: "MagicSystem" не содержит определения "Speak", и не у
+далось найти доступный метод расширения "Speak", принимающий тип "MagicSystem" 
+в качестве первого аргумента (возможно, пропущена директива using или ссылка на
+ сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Magic\CrescentMagicSystem
+.cs(114,16): error CS1061: "MagicSystem" не содержит определения "Speak", и не 
+удалось найти доступный метод расширения "Speak", принимающий тип "MagicSystem"
+ в качестве первого аргумента (возможно, пропущена директива using или ссылка н
+а сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Shipyard\ShipyardPatch.cs
+(216,22): error CS0246: Не удалось найти тип или имя пространства имен "Station
+DataComponent" (возможно, отсутствует директива using или ссылка на сборку). [C
+:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Singularity\EntitySystems\Singulari
+tySystem.cs(261,59): error CS1061: "SinguloFoodComponent" не содержит определен
+ия "EnergyFactor", и не удалось найти доступный метод расширения "EnergyFactor"
+, принимающий тип "SinguloFoodComponent" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Magic\CrescentMagicSystem
+.cs(148,16): error CS1061: "MagicSystem" не содержит определения "Speak", и не 
+удалось найти доступный метод расширения "Speak", принимающий тип "MagicSystem"
+ в качестве первого аргумента (возможно, пропущена директива using или ссылка н
+а сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\WhiteDream\BloodCult\Items\ShuttleC
+urse\ShuttleCurseSystem.cs(59,19): error CS1061: "RoundEndSystem" не содержит о
+пределения "DelayShuttle", и не удалось найти доступный метод расширения "Delay
+Shuttle", принимающий тип "RoundEndSystem" в качестве первого аргумента (возмож
+но, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nez
+umi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\SelfExtinguisher\SelfExtinguisherSy
+stem.cs(57,22): error CS1501: Ни одна из перегрузок метода "IsEmpty" не принима
+ет 2 аргументов. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\SelfExtinguisher\SelfExtinguisherSy
+stem.cs(115,22): error CS1061: "SharedChargesSystem" не содержит определения "U
+seCharge", и не удалось найти доступный метод расширения "UseCharge", принимающ
+ий тип "SharedChargesSystem" в качестве первого аргумента (возможно, пропущена 
+директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Se
+rver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\SelfExtinguisher\SelfExtinguisherSy
+stem.cs(116,22): error CS1061: "SharedActionsSystem" не содержит определения "R
+emoveCharges", и не удалось найти доступный метод расширения "RemoveCharges", п
+ринимающий тип "SharedActionsSystem" в качестве первого аргумента (возможно, пр
+опущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Co
+ntent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\SelfExtinguisher\SelfExtinguisherSy
+stem.cs(118,26): error CS1061: "SharedActionsSystem" не содержит определения "G
+etCharges", и не удалось найти доступный метод расширения "GetCharges", принима
+ющий тип "SharedActionsSystem" в качестве первого аргумента (возможно, пропущен
+а директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\WhiteDream\BloodCult\Items\BloodSpe
+ar\BloodSpearSystem.cs(78,25): error CS1061: "ProjectileSystem" не содержит опр
+еделения "RemoveEmbed", и не удалось найти доступный метод расширения "RemoveEm
+bed", принимающий тип "ProjectileSystem" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\DynamicAcces\DynamicAcces
+CodeSystem.cs(57,13): warning CS0618: "Logger.Error(string)" является устаревши
+м: 'Use ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Se
+rver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\DynamicAcces\DynamicAcces
+CodeSystem.cs(159,21): warning CS0618: "Logger.Error(string)" является устаревш
+им: 'Use ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.S
+erver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\RoundEnd\RoundEndSystem.cs(196,49):
+ error CS1061: "EmergencyShuttleSystem" не содержит определения "DockEmergencyS
+huttle", и не удалось найти доступный метод расширения "DockEmergencyShuttle", 
+принимающий тип "EmergencyShuttleSystem" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\RoundEnd\RoundEndSystem.cs(202,44):
+ error CS0246: Не удалось найти тип или имя пространства имен "DeviceNetworkCom
+ponent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shipyard\ShipyardConsoleSystem.cs(6
+1,16): error CS7036: Отсутствует аргумент, соответствующий требуемому параметру
+ "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAccount
+Component, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.S
+erver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\RoundEnd\RoundEndSystem.cs(248,44):
+ error CS0246: Не удалось найти тип или имя пространства имен "DeviceNetworkCom
+ponent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+06,47): error CS0246: Не удалось найти тип или имя пространства имен "TileFrict
+ionEvent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Use
+rs\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+06,66): error CS0103: Имя "OnTileFriction" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+07,47): error CS0246: Не удалось найти тип или имя пространства имен "FTLStarte
+dEvent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+07,64): error CS0103: Имя "OnFTLStarted" не существует в текущем контексте. [C:
+\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+08,47): error CS0246: Не удалось найти тип или имя пространства имен "FTLComple
+tedEvent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Use
+rs\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+08,66): error CS0103: Имя "OnFTLCompleted" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Revenant\EntitySystems\RevenantSyst
+em.Abilities.cs(340,19): error CS1061: "EmagSystem" не содержит определения "Do
+EmagEffect", и не удалось найти доступный метод расширения "DoEmagEffect", прин
+имающий тип "EmagSystem" в качестве первого аргумента (возможно, пропущена дире
+ктива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server
+\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Singularity\EntitySystems\EventHori
+zonSystem.cs(48,29): error CS0246: Не удалось найти тип или имя пространства им
+ен "GhostComponent" (возможно, отсутствует директива using или ссылка на сборку
+). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Singularity\EntitySystems\EventHori
+zonSystem.cs(48,84): error CS1503: Аргумент 1: не удается преобразовать из "гру
+ппа методов" в "Robust.Shared.GameObjects.EntityEventRefHandler<GhostComponent,
+ Content.Server.Singularity.Events.EventHorizonAttemptConsumeEntityEvent>". [C:
+\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.Commands.c
+s(47,26): error CS0103: Имя "_mapManager" не существует в текущем контексте. [C
+:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.Commands.c
+s(119,22): error CS0103: Имя "_mapManager" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.Commands.c
+s(175,22): error CS0103: Имя "_mapManager" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Salvage\SalvageSystem.Runner.cs(147
+,53): error CS1503: Аргумент 1: не удается преобразовать из "Robust.Shared.Audi
+o.SoundPathSpecifier" в "Robust.Shared.Audio.ResolvedSoundSpecifier". [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.cs(203,13)
+: error CS0103: Имя "_mapManager" не существует в текущем контексте. [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.cs(236,13)
+: error CS0103: Имя "_mapManager" не существует в текущем контексте. [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.Rooms.cs(1
+10,30): error CS0103: Имя "_mapManager" не существует в текущем контексте. [C:\
+Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(49,26): warning CS0618: "IMapManager.CreateMap(MapId?)" является устар
+евшим: 'Use MapSystem' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Ser
+ver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(60,22): warning CS0618: "IMapManager.GetMapEntityId(MapId)" является у
+старевшим: 'Use MapSystem' [C:\Users\User\Desktop\Nezumi\Content.Server\Content
+.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(113,13): warning CS0618: "SharedTransformSystem.DetachParentToNull(Ent
+ityUid, TransformComponent)" является устаревшим: 'Use DetachEntity' [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(128,20): error CS7036: Отсутствует аргумент, соответствующий требуемом
+у параметру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, Station
+BankAccountComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Serve
+r\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Mail\Systems\MailSystem.cs(241,30):
+ error CS7036: Отсутствует аргумент, соответствующий требуемому параметру "dist
+ribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAccountCompon
+ent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(70,66): error CS0246: Не удалось найти тип или имя пространства имен "Devi
+ceNetworkComponent" (возможно, отсутствует директива using или ссылка на сборку
+). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\NPC\Systems\NPCUseActionOnTargetSys
+tem.cs(46,13): error CS0103: Имя "_timing" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Mail\Systems\MailSystem.cs(298,30):
+ error CS7036: Отсутствует аргумент, соответствующий требуемому параметру "dist
+ribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAccountCompon
+ent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Mind\MindSystem.cs(197,29): error C
+S1501: Ни одна из перегрузок метода "OnGhostAttempt" не принимает 2 аргументов.
+ [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\StationEvents\Events\PirateRadioSpa
+wnRule.cs(49,25): error CS0246: Не удалось найти тип или имя пространства имен 
+"StationDataComponent" (возможно, отсутствует директива using или ссылка на сбо
+рку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(320,76): error CS1061: "SuitSensorComponent" не содержит определения "Sens
+orsTime", и не удалось найти доступный метод расширения "SensorsTime", принимаю
+щий тип "SuitSensorComponent" в качестве первого аргумента (возможно, пропущена
+ директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.S
+erver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(389,67): error CS1503: Аргумент 1: не удается преобразовать из "Robust.Sha
+red.Localization.LocId" в "Robust.Shared.Prototypes.EntProtoId". [C:\Users\User
+\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(408,147): error CS0103: Имя "_timing" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(456,14): error CS0103: Имя "DeviceNetworkConstants" не существует в текуще
+м контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj
+]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(456,48): error CS0103: Имя "DeviceNetworkConstants" не существует в текуще
+м контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj
+]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(482,34): error CS0103: Имя "DeviceNetworkConstants" не существует в текуще
+м контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj
+]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(484,24): error CS0103: Имя "DeviceNetworkConstants" не существует в текуще
+м контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj
+]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(501,26): error CS7036: Отсутствует аргумент, соответствующий требуемому па
+раметру "timestamp" из "SuitSensorStatus.SuitSensorStatus(NetEntity, NetEntity,
+ string, string, string, List<string>, TimeSpan)". [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Gateway\Systems\GatewayGeneratorSys
+tem.cs(101,21): error CS0103: Имя "_mapManager" не существует в текущем контекс
+те. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Gateway\Systems\GatewayGeneratorSys
+tem.cs(102,22): error CS0103: Имя "_mapManager" не существует в текущем контекс
+те. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Fax\FaxSystem.cs(479,82): error CS1
+061: "FaxMachineComponent" не содержит определения "PrintPaperId", и не удалось
+ найти доступный метод расширения "PrintPaperId", принимающий тип "FaxMachineCo
+mponent" в качестве первого аргумента (возможно, пропущена директива using или 
+ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\StationEvents\Events\CargoGiftsRule
+.cs(64,39): error CS7036: Отсутствует аргумент, соответствующий требуемому пара
+метру "account" из "CargoSystem.GetOutstandingOrderCount(Entity<StationCargoOrd
+erDatabaseComponent>, ProtoId<CargoAccountPrototype>)". [C:\Users\User\Desktop\
+Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\StationEvents\Events\CargoGiftsRule
+.cs(73,31): error CS7036: Отсутствует аргумент, соответствующий требуемому пара
+метру "stationData" из "CargoSystem.AddAndApproveOrder(EntityUid, string, strin
+g, int, int, string, string, string, StationCargoOrderDatabaseComponent, ProtoI
+d<CargoAccountPrototype>, Entity<StationDataComponent>)". [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\StationEvents\Events\AirlockVirusRu
+le.cs(34,25): error CS0246: Не удалось найти тип или имя пространства имен "Sta
+tionDataComponent" (возможно, отсутствует директива using или ссылка на сборку)
+. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(61,71): error CS1061: "TraitorRuleComponent" не содержит определения "Codew
+ordFactionPrototypeId", и не удалось найти доступный метод расширения "Codeword
+FactionPrototypeId", принимающий тип "TraitorRuleComponent" в качестве первого 
+аргумента (возможно, пропущена директива using или ссылка на сборку). [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(61,48): error CS1061: "RoleCodewordSystem" не содержит определения "GetCode
+words", и не удалось найти доступный метод расширения "GetCodewords", принимающ
+ий тип "RoleCodewordSystem" в качестве первого аргумента (возможно, пропущена д
+иректива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Ser
+ver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(44,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в те
+кущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(47,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в те
+кущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(163,26): error CS0246: Не удалось найти тип или имя пространства имен "Gene
+rateUplinkCodeEvent" (возможно, отсутствует директива using или ссылка на сборк
+у). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(190,144): error CS1061: "TraitorRuleComponent" не содержит определения "Cod
+ewordFactionPrototypeId", и не удалось найти доступный метод расширения "Codewo
+rdFactionPrototypeId", принимающий тип "TraitorRuleComponent" в качестве первог
+о аргумента (возможно, пропущена директива using или ссылка на сборку). [C:\Use
+rs\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(190,126): error CS1061: "RoleCodewordSystem" не содержит определения "GetCo
+dewords", и не удалось найти доступный метод расширения "GetCodewords", принима
+ющий тип "RoleCodewordSystem" в качестве первого аргумента (возможно, пропущена
+ директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.S
+erver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(87,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в те
+кущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(90,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в те
+кущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(127,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в т
+екущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(130,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в т
+екущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\NukeopsRuleSystem
+.cs(337,39): error CS1061: "NukeopsRuleComponent" не содержит определения "WarE
+vacShuttleDisabled", и не удалось найти доступный метод расширения "WarEvacShut
+tleDisabled", принимающий тип "NukeopsRuleComponent" в качестве первого аргумен
+та (возможно, пропущена директива using или ссылка на сборку). [C:\Users\User\D
+esktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\NPC\HTN\PrimitiveTasks\Operators\Sp
+ecific\WeldbotWeldOperator.cs(105,35): error CS1061: "DamageableSystem" не соде
+ржит определения "ChangeAllDamage", и не удалось найти доступный метод расширен
+ия "ChangeAllDamage", принимающий тип "DamageableSystem" в качестве первого арг
+умента (возможно, пропущена директива using или ссылка на сборку). [C:\Users\Us
+er\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\GameTicker.Spawning.cs(
+263,38): error CS1061: "StationSpawningSystem" не содержит определения "EquipJo
+bName", и не удалось найти доступный метод расширения "EquipJobName", принимающ
+ий тип "StationSpawningSystem" в качестве первого аргумента (возможно, пропущен
+а директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorCompo
+nent.cs(100,15): error RA0017: Type SuitSensorChangeDoAfterEvent is a DataDefin
+ition but is not partial [C:\Users\User\Desktop\Nezumi\Content.Server\Content.S
+erver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(89,13): warning RA0045: Use the proxy method TryComp instead of callin
+g EntityManager.TryGetComponent directly [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Mail\Systems\MailSystem.cs(534,17):
+ error RA0002: Tried to perform an 'Execute' other-type access to member 'Acces
+sLists' in type 'AccessReaderComponent', despite only having 'Read' access. Typ
+e Permissions: rwxrwxr--. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.
+Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Atmos\Serialization\TileAtmosCollec
+tionSerializer.cs(51,25): warning CS0618: "Logger.Error(string)" является устар
+евшим: 'Use ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Conten
+t.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Atmos\Serialization\TileAtmosCollec
+tionSerializer.cs(94,37): warning CS0618: "Logger.Error(string)" является устар
+евшим: 'Use ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Conten
+t.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Factory\FactorySystem.cs(
+125,21): warning CS0618: "Logger.Error(string)" является устаревшим: 'Use ISawm
+ill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Factory\FactorySystem.cs(
+156,22): warning CS0618: "IPrototypeManager.TryIndex(EntProtoId, out EntityProt
+otype?, bool)" является устаревшим: 'Use Resolve() if you want to get a prototy
+pe without throwing but while still logging an error.' [C:\Users\User\Desktop\N
+ezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Misc\DirectionalTilingSys
+tem.cs(261,25): warning CS0618: "Logger.Error(string)" является устаревшим: 'Us
+e ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Misc\DirectionalTilingSys
+tem.cs(275,25): warning CS0618: "Logger.Error(string)" является устаревшим: 'Us
+e ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Misc\DirectionalTilingSys
+tem.cs(293,17): warning CS0618: "Logger.Error(string)" является устаревшим: 'Us
+e ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\DynamicAcces\DynamicAcces
+CodeSystem.cs(57,13): warning CS0618: "Logger.Error(string)" является устаревши
+м: 'Use ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Se
+rver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\DynamicAcces\DynamicAcces
+CodeSystem.cs(159,21): warning CS0618: "Logger.Error(string)" является устаревш
+им: 'Use ISawmill.Error' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.S
+erver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(49,26): warning CS0618: "IMapManager.CreateMap(MapId?)" является устар
+евшим: 'Use MapSystem' [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Ser
+ver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(60,22): warning CS0618: "IMapManager.GetMapEntityId(MapId)" является у
+старевшим: 'Use MapSystem' [C:\Users\User\Desktop\Nezumi\Content.Server\Content
+.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(113,13): warning CS0618: "SharedTransformSystem.DetachParentToNull(Ent
+ityUid, TransformComponent)" является устаревшим: 'Use DetachEntity' [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(89,13): warning RA0045: Use the proxy method TryComp instead of callin
+g EntityManager.TryGetComponent directly [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Administration\Commands\SetStationA
+iName.cs(54,56): error CS8602: Разыменование вероятной пустой ссылки. [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Shitmed\Antags\Abductor\AbductorSy
+stem.Actions.cs(99,30): error CS0029: Не удается неявно преобразовать тип "Syst
+em.Collections.Generic.List<Robust.Shared.GameObjects.EntityUid>" в "Robust.Sha
+red.GameObjects.EntityUid[]". [C:\Users\User\Desktop\Nezumi\Content.Server\Cont
+ent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Shitmed\Antags\Abductor\AbductorSy
+stem.Actions.cs(108,39): error CS1503: Аргумент 2: не удается преобразовать из 
+"Robust.Shared.GameObjects.EntityUid[]" в "System.Collections.Generic.List<Robu
+st.Shared.GameObjects.EntityUid>". [C:\Users\User\Desktop\Nezumi\Content.Server
+\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Shitmed\Antags\Abductor\AbductorSy
+stem.cs(151,47): error CS1503: Аргумент 1: не удается преобразовать из "Content
+.Shared.Station.Components.StationDataComponent" в "Robust.Shared.GameObjects.E
+ntity<Content.Shared.Station.Components.StationDataComponent?>". [C:\Users\User
+\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(53,13): error CS7036: Отсутствует аргумент, соответствующий требуемому парамет
+ру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAccou
+ntComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content
+.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(78,146): error CS1503: Аргумент 8: не удается преобразовать из "Robust.Shared.
+Prototypes.ProtoId<Content.Shared.Cargo.Prototypes.CargoAccountPrototype>?" в "
+Robust.Shared.Prototypes.ProtoId<Content.Shared.Cargo.Prototypes.CargoAccountPr
+ototype>". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(87,37): error CS1061: "CargoOrderConsoleComponent" не содержит определения "Sc
+anSound", и не удалось найти доступный метод расширения "ScanSound", принимающи
+й тип "CargoOrderConsoleComponent" в качестве первого аргумента (возможно, проп
+ущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Cont
+ent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(129,21): error CS0103: Имя "Timing" не существует в текущем контексте. [C:\Use
+rs\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(244,63): error CS1061: "CargoAccountPrototype" не содержит определения "RadioC
+hannel", и не удалось найти доступный метод расширения "RadioChannel", принимаю
+щий тип "CargoAccountPrototype" в качестве первого аргумента (возможно, пропуще
+на директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content
+.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(245,48): error CS0117: "CargoOrderConsoleComponent" не содержит определение дл
+я "BaseAnnouncementChannel". [C:\Users\User\Desktop\Nezumi\Content.Server\Conte
+nt.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(245,83): error CS1061: "CargoAccountPrototype" не содержит определения "RadioC
+hannel", и не удалось найти доступный метод расширения "RadioChannel", принимаю
+щий тип "CargoAccountPrototype" в качестве первого аргумента (возможно, пропуще
+на директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content
+.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(246,86): error CS0117: "CargoOrderConsoleComponent" не содержит определение дл
+я "BaseAnnouncementChannel". [C:\Users\User\Desktop\Nezumi\Content.Server\Conte
+nt.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(257,13): error CS7036: Отсутствует аргумент, соответствующий требуемому параме
+тру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAcco
+untComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Conten
+t.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(330,39): error CS1061: "CargoAccountPrototype" не содержит определения "Acquis
+itionSlip", и не удалось найти доступный метод расширения "AcquisitionSlip", пр
+инимающий тип "CargoAccountPrototype" в качестве первого аргумента (возможно, п
+ропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\C
+ontent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(334,36): error CS0246: Не удалось найти тип или имя пространства имен "PaperCo
+mponent" (возможно, отсутствует директива using или ссылка на сборку). [C:\User
+s\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(345,37): error CS1503: Аргумент 1: не удается преобразовать из "(Robust.Shared
+.GameObjects.EntityUid, PaperComponent)" в "Robust.Shared.GameObjects.EntityUid
+". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(386,94): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(423,25): error CS1729: "CargoConsoleInterfaceState" не содержит конструктор, к
+оторый принимает аргументы 6. [C:\Users\User\Desktop\Nezumi\Content.Server\Cont
+ent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(444,46): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(447,56): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(459,46): error CS1061: "CargoOrderConsoleComponent" не содержит определения "N
+extDenySoundTime", и не удалось найти доступный метод расширения "NextDenySound
+Time", принимающий тип "CargoOrderConsoleComponent" в качестве первого аргумент
+а (возможно, пропущена директива using или ссылка на сборку). [C:\Users\User\De
+sktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(461,27): error CS1061: "CargoOrderConsoleComponent" не содержит определения "N
+extDenySoundTime", и не удалось найти доступный метод расширения "NextDenySound
+Time", принимающий тип "CargoOrderConsoleComponent" в качестве первого аргумент
+а (возможно, пропущена директива using или ссылка на сборку). [C:\Users\User\De
+sktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(461,75): error CS1061: "CargoOrderConsoleComponent" не содержит определения "D
+enySoundDelay", и не удалось найти доступный метод расширения "DenySoundDelay",
+ принимающий тип "CargoOrderConsoleComponent" в качестве первого аргумента (воз
+можно, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\
+Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(485,33): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(488,60): error CS1061: "StationBankAccountComponent" не содержит определения "
+PrimaryAccount", и не удалось найти доступный метод расширения "PrimaryAccount"
+, принимающий тип "StationBankAccountComponent" в качестве первого аргумента (в
+озможно, пропущена директива using или ссылка на сборку). [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(640,25): error CS0246: Не удалось найти тип или имя пространства имен "PaperCo
+mponent" (возможно, отсутствует директива using или ссылка на сборку). [C:\User
+s\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(656,68): error CS1061: "CargoAccountPrototype" не содержит определения "Code",
+ и не удалось найти доступный метод расширения "Code", принимающий тип "CargoAc
+countPrototype" в качестве первого аргумента (возможно, пропущена директива usi
+ng или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.
+Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(660,29): error CS0246: Не удалось найти тип или имя пространства имен "PaperLa
+belComponent" (возможно, отсутствует директива using или ссылка на сборку). [C:
+\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Orders.cs
+(681,27): error CS1929: "List<string>" не содержит определение для "Intersect",
+ и наиболее подходящий перегруженный метод расширения "Enumerable.Intersect<Pro
+toId<CargoMarketPrototype>>(IEnumerable<ProtoId<CargoMarketPrototype>>, IEnumer
+able<ProtoId<CargoMarketPrototype>>)" требует наличия получателя типа "System.C
+ollections.Generic.IEnumerable<Robust.Shared.Prototypes.ProtoId<Content.Shared.
+Cargo.Prototypes.CargoMarketPrototype>>". [C:\Users\User\Desktop\Nezumi\Content
+.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(158,42): error CS1503: Аргумент 1: не удается преобразовать из "int" в "Robus
+t.Shared.Prototypes.ProtoId<Content.Shared.Cargo.Prototypes.CargoAccountPrototy
+pe>". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(159,23): error CS1061: "List<CargoOrderData>" не содержит определения "Approv
+ed", и не удалось найти доступный метод расширения "Approved", принимающий тип 
+"List<CargoOrderData>" в качестве первого аргумента (возможно, пропущена директ
+ива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\C
+ontent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(161,39): error CS1061: "List<CargoOrderData>" не содержит определения "OrderQ
+uantity", и не удалось найти доступный метод расширения "OrderQuantity", приним
+ающий тип "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущ
+ена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Conten
+t.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(161,61): error CS1061: "List<CargoOrderData>" не содержит определения "NumDis
+patched", и не удалось найти доступный метод расширения "NumDispatched", приним
+ающий тип "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущ
+ена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Conten
+t.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(166,65): error CS1061: "List<CargoOrderData>" не содержит определения "OrderI
+d", и не удалось найти доступный метод расширения "OrderId", принимающий тип "L
+ist<CargoOrderData>" в качестве первого аргумента (возможно, пропущена директив
+а using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Con
+tent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,35): error CS1061: "List<CargoOrderData>" не содержит определения "Produc
+tId", и не удалось найти доступный метод расширения "ProductId", принимающий ти
+п "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущена дире
+ктива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server
+\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,52): error CS1061: "List<CargoOrderData>" не содержит определения "Produc
+tName", и не удалось найти доступный метод расширения "ProductName", принимающи
+й тип "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущена 
+директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Se
+rver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,71): error CS1061: "List<CargoOrderData>" не содержит определения "Price"
+, и не удалось найти доступный метод расширения "Price", принимающий тип "List<
+CargoOrderData>" в качестве первого аргумента (возможно, пропущена директива us
+ing или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content
+.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,100): error CS1061: "List<CargoOrderData>" не содержит определения "Reque
+ster", и не удалось найти доступный метод расширения "Requester", принимающий т
+ип "List<CargoOrderData>" в качестве первого аргумента (возможно, пропущена дир
+ектива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Serve
+r\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(167,117): error CS1061: "List<CargoOrderData>" не содержит определения "Reaso
+n", и не удалось найти доступный метод расширения "Reason", принимающий тип "Li
+st<CargoOrderData>" в качестве первого аргумента (возможно, пропущена директива
+ using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Cont
+ent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(166,44): error CS7036: Отсутствует аргумент, соответствующий требуемому парам
+етру "account" из "CargoOrderData.CargoOrderData(int, string, string, int, int,
+ string, string, ProtoId<CargoAccountPrototype>)". [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(172,32): error CS1503: Аргумент 1: не удается преобразовать из "System.Collec
+tions.Generic.List<Content.Shared.Cargo.CargoOrderData>" в "Content.Shared.Carg
+o.CargoOrderData". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_NF\Shuttles\Bank\StationATMSystem.
+cs(82,16): error CS7036: Отсутствует аргумент, соответствующий требуемому парам
+етру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAcc
+ountComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Conte
+nt.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Chemistry\EntitySystems\VaporSystem
+.cs(146,41): error CS1501: Ни одна из перегрузок метода "ReactionTile" не прини
+мает 4 аргументов. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Shuttle.c
+s(350,9): error CS0103: Имя "Reset" не существует в текущем контексте. [C:\User
+s\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_NF\Shuttles\Bank\StationATMSystem.
+cs(188,16): error CS7036: Отсутствует аргумент, соответствующий требуемому пара
+метру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAc
+countComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Cont
+ent.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Telepad.c
+s(97,17): error CS7036: Отсутствует аргумент, соответствующий требуемому параме
+тру "paperProto" из "CargoSystem.FulfillOrder(CargoOrderData, ProtoId<CargoAcco
+untPrototype>, EntityCoordinates, string?)". [C:\Users\User\Desktop\Nezumi\Cont
+ent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Cargo\Systems\CargoSystem.Telepad.c
+s(148,13): error CS7036: Отсутствует аргумент, соответствующий требуемому парам
+етру "orderDatabase" из "CargoSystem.TryFulfillOrder(Entity<StationDataComponen
+t>, ProtoId<CargoAccountPrototype>, CargoOrderData, StationCargoOrderDatabaseCo
+mponent)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Clothing\Systems\ChameleonClothingS
+ystem.cs(62,25): error CS1729: "ChameleonBoundUserInterfaceState" не содержит к
+онструктор, который принимает аргументы 3. [C:\Users\User\Desktop\Nezumi\Conten
+t.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Clothing\Systems\ChameleonClothingS
+ystem.cs(63,9): error CS0103: Имя "UI" не существует в текущем контексте. [C:\U
+sers\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Chat\SuicideSystem.cs(105,26): erro
+r CS1061: "GhostSystem" не содержит определения "OnGhostAttempt", и не удалось 
+найти доступный метод расширения "OnGhostAttempt", принимающий тип "GhostSystem
+" в качестве первого аргумента (возможно, пропущена директива using или ссылка 
+на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Clothing\Systems\ChameleonClothingS
+ystem.cs(83,14): error CS1501: Ни одна из перегрузок метода "IsValidTarget" не 
+принимает 3 аргументов. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Se
+rver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Clothing\Systems\ChameleonClothingS
+ystem.cs(98,29): error CS1501: Ни одна из перегрузок метода "GetValidTargets" н
+е принимает 2 аргументов. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.
+Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Chemistry\EntitySystems\HypospraySy
+stem.cs(296,63): error CS1061: "HyposprayComponent" не содержит определения "Ca
+nContainerDraw", и не удалось найти доступный метод расширения "CanContainerDra
+w", принимающий тип "HyposprayComponent" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Commands\ActionCommands.cs(46,38): 
+error CS0246: Не удалось найти тип или имя пространства имен "ActionUpgradeComp
+onent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Communications\CommunicationsConsol
+eSystem.cs(276,25): error CS0246: Не удалось найти тип или имя пространства име
+н "StationDataComponent" (возможно, отсутствует директива using или ссылка на с
+борку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Mono\NPC\HTN\ShipTargetingSystem.c
+s(118,22): error CS1061: "SharedGunSystem" не содержит определения "TryNextShoo
+tPrototype", и не удалось найти доступный метод расширения "TryNextShootPrototy
+pe", принимающий тип "SharedGunSystem" в качестве первого аргумента (возможно, 
+пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\
+Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Mono\NPC\HTN\ShipTargetingSystem.c
+s(155,44): error CS1061: "SharedGunSystem" не содержит определения "GetBulletPr
+ototype", и не удалось найти доступный метод расширения "GetBulletPrototype", п
+ринимающий тип "SharedGunSystem" в качестве первого аргумента (возможно, пропущ
+ена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Conten
+t.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Silicons\Laws\SiliconLawSystem.cs(5
+3,76): error CS0103: Имя "OnLawProviderMindAdded" не существует в текущем конте
+ксте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Silicons\Laws\SiliconLawSystem.cs(5
+4,78): error CS0103: Имя "OnLawProviderMindRemoved" не существует в текущем кон
+тексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Silicons\Laws\SiliconLawSystem.cs(1
+13,14): error CS0103: Имя "_emag" не существует в текущем контексте. [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Silicons\Laws\SiliconLawSystem.cs(1
+21,23): error CS1061: "SiliconLawProviderComponent" не содержит определения "Su
+bverted", и не удалось найти доступный метод расширения "Subverted", принимающи
+й тип "SiliconLawProviderComponent" в качестве первого аргумента (возможно, про
+пущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Con
+tent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Destructible\DestructibleSystem.cs(
+111,29): error CS1061: "SharedProjectileSystem" не содержит определения "Remove
+Embed", и не удалось найти доступный метод расширения "RemoveEmbed", принимающи
+й тип "SharedProjectileSystem" в качестве первого аргумента (возможно, пропущен
+а директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Station\Systems\StationSpawningSyst
+em.cs(145,32): error CS0103: Имя "ApplySubGear" не существует в текущем контекс
+те. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Construction\ConstructionSystem.Int
+eractions.cs(274,71): error CS0103: Имя "_factory" не существует в текущем конт
+ексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Database\ServerDbBase.cs(221,24): e
+rror CS7036: Отсутствует аргумент, соответствующий требуемому параметру "loadou
+ts" из "HumanoidCharacterProfile.HumanoidCharacterProfile(string, string, strin
+g, string, string, string, string, float, float, int, Sex, string, Gender, stri
+ng?, string?, string?, HumanoidCharacterAppearance, SpawnPriorityPreference, Di
+ctionary<string, JobPriority>, PreferenceUnavailableMode, HashSet<string>, Hash
+Set<string>, HashSet<LoadoutPreference>, long, string, List<string>, HumanoidCh
+aracterProfile)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Goobstation\Ghostbar\GhostBarSyste
+m.cs(116,16): error CS1061: "TraitSystem" не содержит определения "ApplyTraits"
+, и не удалось найти доступный метод расширения "ApplyTraits", принимающий тип 
+"TraitSystem" в качестве первого аргумента (возможно, пропущена директива using
+ или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Se
+rver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\WhiteDream\BloodCult\Spells\BloodCu
+ltSpellsSystem.cs(201,30): error CS1061: "SharedMagicSystem" не содержит опреде
+ления "Speak", и не удалось найти доступный метод расширения "Speak", принимающ
+ий тип "SharedMagicSystem" в качестве первого аргумента (возможно, пропущена ди
+ректива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Serv
+er\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Traitor\Systems\TraitorCodePaperSys
+tem.cs(42,35): error CS1503: Аргумент 1: не удается преобразовать из "(Robust.S
+hared.GameObjects.EntityUid, Content.Server.Paper.PaperComponent)" в "Robust.Sh
+ared.GameObjects.EntityUid". [C:\Users\User\Desktop\Nezumi\Content.Server\Conte
+nt.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Traitor\Systems\TraitorCodePaperSys
+tem.cs(52,40): error CS1061: "RoleCodewordSystem" не содержит определения "GetC
+odewords", и не удалось найти доступный метод расширения "GetCodewords", приним
+ающий тип "RoleCodewordSystem" в качестве первого аргумента (возможно, пропущен
+а директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Traitor\Systems\TraitorCodePaperSys
+tem.cs(57,44): error CS1061: "RoleCodewordSystem" не содержит определения "Gene
+rateCodewords", и не удалось найти доступный метод расширения "GenerateCodeword
+s", принимающий тип "RoleCodewordSystem" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Traits\TraitSystem.Functions.cs(145
+,44): error CS1503: Аргумент 2: не удается преобразовать из "Robust.Shared.Prot
+otypes.EntProtoId" в "Robust.Shared.GameObjects.EntityUid?". [C:\Users\User\Des
+ktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Strip\StrippableSystem.cs(485,26): 
+error CS1501: Ни одна из перегрузок метода "TryDrop" не принимает 3 аргументов.
+ [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Strip\StrippableSystem.cs(486,26): 
+error CS7036: Отсутствует аргумент, соответствующий требуемому параметру "hands
+ComponentActiveHandId" из "SharedHandsSystem.TryPickup(EntityUid, EntityUid, ob
+ject, string?, bool, bool, bool, HandsComponent?, ItemComponent?)". [C:\Users\U
+ser\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shipyard\ShipyardSystem.cs(81,37): 
+error CS1503: Аргумент 1: не удается преобразовать из "Content.Shared.Station.C
+omponents.StationDataComponent" в "Robust.Shared.GameObjects.Entity<Content.Sha
+red.Station.Components.StationDataComponent?>". [C:\Users\User\Desktop\Nezumi\C
+ontent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Magic\CrescentMagicSystem
+.cs(67,16): error CS1061: "MagicSystem" не содержит определения "Speak", и не у
+далось найти доступный метод расширения "Speak", принимающий тип "MagicSystem" 
+в качестве первого аргумента (возможно, пропущена директива using или ссылка на
+ сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Shipyard\ShipyardPatch.cs
+(160,22): error CS0246: Не удалось найти тип или имя пространства имен "Station
+DataComponent" (возможно, отсутствует директива using или ссылка на сборку). [C
+:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Magic\CrescentMagicSystem
+.cs(91,16): error CS1061: "MagicSystem" не содержит определения "Speak", и не у
+далось найти доступный метод расширения "Speak", принимающий тип "MagicSystem" 
+в качестве первого аргумента (возможно, пропущена директива using или ссылка на
+ сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Magic\CrescentMagicSystem
+.cs(114,16): error CS1061: "MagicSystem" не содержит определения "Speak", и не 
+удалось найти доступный метод расширения "Speak", принимающий тип "MagicSystem"
+ в качестве первого аргумента (возможно, пропущена директива using или ссылка н
+а сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Shipyard\ShipyardPatch.cs
+(216,22): error CS0246: Не удалось найти тип или имя пространства имен "Station
+DataComponent" (возможно, отсутствует директива using или ссылка на сборку). [C
+:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Singularity\EntitySystems\Singulari
+tySystem.cs(261,59): error CS1061: "SinguloFoodComponent" не содержит определен
+ия "EnergyFactor", и не удалось найти доступный метод расширения "EnergyFactor"
+, принимающий тип "SinguloFoodComponent" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\Magic\CrescentMagicSystem
+.cs(148,16): error CS1061: "MagicSystem" не содержит определения "Speak", и не 
+удалось найти доступный метод расширения "Speak", принимающий тип "MagicSystem"
+ в качестве первого аргумента (возможно, пропущена директива using или ссылка н
+а сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\WhiteDream\BloodCult\Items\ShuttleC
+urse\ShuttleCurseSystem.cs(59,19): error CS1061: "RoundEndSystem" не содержит о
+пределения "DelayShuttle", и не удалось найти доступный метод расширения "Delay
+Shuttle", принимающий тип "RoundEndSystem" в качестве первого аргумента (возмож
+но, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nez
+umi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\SelfExtinguisher\SelfExtinguisherSy
+stem.cs(57,22): error CS1501: Ни одна из перегрузок метода "IsEmpty" не принима
+ет 2 аргументов. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\SelfExtinguisher\SelfExtinguisherSy
+stem.cs(115,22): error CS1061: "SharedChargesSystem" не содержит определения "U
+seCharge", и не удалось найти доступный метод расширения "UseCharge", принимающ
+ий тип "SharedChargesSystem" в качестве первого аргумента (возможно, пропущена 
+директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Se
+rver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\SelfExtinguisher\SelfExtinguisherSy
+stem.cs(116,22): error CS1061: "SharedActionsSystem" не содержит определения "R
+emoveCharges", и не удалось найти доступный метод расширения "RemoveCharges", п
+ринимающий тип "SharedActionsSystem" в качестве первого аргумента (возможно, пр
+опущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Co
+ntent.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\SelfExtinguisher\SelfExtinguisherSy
+stem.cs(118,26): error CS1061: "SharedActionsSystem" не содержит определения "G
+etCharges", и не удалось найти доступный метод расширения "GetCharges", принима
+ющий тип "SharedActionsSystem" в качестве первого аргумента (возможно, пропущен
+а директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\WhiteDream\BloodCult\Items\BloodSpe
+ar\BloodSpearSystem.cs(78,25): error CS1061: "ProjectileSystem" не содержит опр
+еделения "RemoveEmbed", и не удалось найти доступный метод расширения "RemoveEm
+bed", принимающий тип "ProjectileSystem" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\RoundEnd\RoundEndSystem.cs(196,49):
+ error CS1061: "EmergencyShuttleSystem" не содержит определения "DockEmergencyS
+huttle", и не удалось найти доступный метод расширения "DockEmergencyShuttle", 
+принимающий тип "EmergencyShuttleSystem" в качестве первого аргумента (возможно
+, пропущена директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\RoundEnd\RoundEndSystem.cs(202,44):
+ error CS0246: Не удалось найти тип или имя пространства имен "DeviceNetworkCom
+ponent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shipyard\ShipyardConsoleSystem.cs(6
+1,16): error CS7036: Отсутствует аргумент, соответствующий требуемому параметру
+ "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAccount
+Component, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.S
+erver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\RoundEnd\RoundEndSystem.cs(248,44):
+ error CS0246: Не удалось найти тип или имя пространства имен "DeviceNetworkCom
+ponent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+06,47): error CS0246: Не удалось найти тип или имя пространства имен "TileFrict
+ionEvent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Use
+rs\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+06,66): error CS0103: Имя "OnTileFriction" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+07,47): error CS0246: Не удалось найти тип или имя пространства имен "FTLStarte
+dEvent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+07,64): error CS0103: Имя "OnFTLStarted" не существует в текущем контексте. [C:
+\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+08,47): error CS0246: Не удалось найти тип или имя пространства имен "FTLComple
+tedEvent" (возможно, отсутствует директива using или ссылка на сборку). [C:\Use
+rs\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Shuttles\Systems\ShuttleSystem.cs(1
+08,66): error CS0103: Имя "OnFTLCompleted" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Revenant\EntitySystems\RevenantSyst
+em.Abilities.cs(340,19): error CS1061: "EmagSystem" не содержит определения "Do
+EmagEffect", и не удалось найти доступный метод расширения "DoEmagEffect", прин
+имающий тип "EmagSystem" в качестве первого аргумента (возможно, пропущена дире
+ктива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server
+\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Singularity\EntitySystems\EventHori
+zonSystem.cs(48,29): error CS0246: Не удалось найти тип или имя пространства им
+ен "GhostComponent" (возможно, отсутствует директива using или ссылка на сборку
+). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Singularity\EntitySystems\EventHori
+zonSystem.cs(48,84): error CS1503: Аргумент 1: не удается преобразовать из "гру
+ппа методов" в "Robust.Shared.GameObjects.EntityEventRefHandler<GhostComponent,
+ Content.Server.Singularity.Events.EventHorizonAttemptConsumeEntityEvent>". [C:
+\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.Commands.c
+s(47,26): error CS0103: Имя "_mapManager" не существует в текущем контексте. [C
+:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.Commands.c
+s(119,22): error CS0103: Имя "_mapManager" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.Commands.c
+s(175,22): error CS0103: Имя "_mapManager" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Salvage\SalvageSystem.Runner.cs(147
+,53): error CS1503: Аргумент 1: не удается преобразовать из "Robust.Shared.Audi
+o.SoundPathSpecifier" в "Robust.Shared.Audio.ResolvedSoundSpecifier". [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.cs(203,13)
+: error CS0103: Имя "_mapManager" не существует в текущем контексте. [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.cs(236,13)
+: error CS0103: Имя "_mapManager" не существует в текущем контексте. [C:\Users\
+User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Procedural\DungeonSystem.Rooms.cs(1
+10,30): error CS0103: Имя "_mapManager" не существует в текущем контексте. [C:\
+Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\_Crescent\SpaceEvents\BluespaceErro
+rRule.cs(128,20): error CS7036: Отсутствует аргумент, соответствующий требуемом
+у параметру "distribution" из "CargoSystem.UpdateBankAccount(EntityUid, Station
+BankAccountComponent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Serve
+r\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Mail\Systems\MailSystem.cs(241,30):
+ error CS7036: Отсутствует аргумент, соответствующий требуемому параметру "dist
+ribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAccountCompon
+ent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(70,66): error CS0246: Не удалось найти тип или имя пространства имен "Devi
+ceNetworkComponent" (возможно, отсутствует директива using или ссылка на сборку
+). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\NPC\Systems\NPCUseActionOnTargetSys
+tem.cs(46,13): error CS0103: Имя "_timing" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Mail\Systems\MailSystem.cs(298,30):
+ error CS7036: Отсутствует аргумент, соответствующий требуемому параметру "dist
+ribution" из "CargoSystem.UpdateBankAccount(EntityUid, StationBankAccountCompon
+ent, int, float)". [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Mind\MindSystem.cs(197,29): error C
+S1501: Ни одна из перегрузок метода "OnGhostAttempt" не принимает 2 аргументов.
+ [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\StationEvents\Events\PirateRadioSpa
+wnRule.cs(49,25): error CS0246: Не удалось найти тип или имя пространства имен 
+"StationDataComponent" (возможно, отсутствует директива using или ссылка на сбо
+рку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(320,76): error CS1061: "SuitSensorComponent" не содержит определения "Sens
+orsTime", и не удалось найти доступный метод расширения "SensorsTime", принимаю
+щий тип "SuitSensorComponent" в качестве первого аргумента (возможно, пропущена
+ директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.S
+erver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(389,67): error CS1503: Аргумент 1: не удается преобразовать из "Robust.Sha
+red.Localization.LocId" в "Robust.Shared.Prototypes.EntProtoId". [C:\Users\User
+\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(408,147): error CS0103: Имя "_timing" не существует в текущем контексте. [
+C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(456,14): error CS0103: Имя "DeviceNetworkConstants" не существует в текуще
+м контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj
+]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(456,48): error CS0103: Имя "DeviceNetworkConstants" не существует в текуще
+м контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj
+]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(482,34): error CS0103: Имя "DeviceNetworkConstants" не существует в текуще
+м контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj
+]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(484,24): error CS0103: Имя "DeviceNetworkConstants" не существует в текуще
+м контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj
+]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorSyste
+m.cs(501,26): error CS7036: Отсутствует аргумент, соответствующий требуемому па
+раметру "timestamp" из "SuitSensorStatus.SuitSensorStatus(NetEntity, NetEntity,
+ string, string, string, List<string>, TimeSpan)". [C:\Users\User\Desktop\Nezum
+i\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Gateway\Systems\GatewayGeneratorSys
+tem.cs(101,21): error CS0103: Имя "_mapManager" не существует в текущем контекс
+те. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Gateway\Systems\GatewayGeneratorSys
+tem.cs(102,22): error CS0103: Имя "_mapManager" не существует в текущем контекс
+те. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Fax\FaxSystem.cs(479,82): error CS1
+061: "FaxMachineComponent" не содержит определения "PrintPaperId", и не удалось
+ найти доступный метод расширения "PrintPaperId", принимающий тип "FaxMachineCo
+mponent" в качестве первого аргумента (возможно, пропущена директива using или 
+ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.
+csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\StationEvents\Events\CargoGiftsRule
+.cs(64,39): error CS7036: Отсутствует аргумент, соответствующий требуемому пара
+метру "account" из "CargoSystem.GetOutstandingOrderCount(Entity<StationCargoOrd
+erDatabaseComponent>, ProtoId<CargoAccountPrototype>)". [C:\Users\User\Desktop\
+Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\StationEvents\Events\CargoGiftsRule
+.cs(73,31): error CS7036: Отсутствует аргумент, соответствующий требуемому пара
+метру "stationData" из "CargoSystem.AddAndApproveOrder(EntityUid, string, strin
+g, int, int, string, string, string, StationCargoOrderDatabaseComponent, ProtoI
+d<CargoAccountPrototype>, Entity<StationDataComponent>)". [C:\Users\User\Deskto
+p\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\StationEvents\Events\AirlockVirusRu
+le.cs(34,25): error CS0246: Не удалось найти тип или имя пространства имен "Sta
+tionDataComponent" (возможно, отсутствует директива using или ссылка на сборку)
+. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(61,71): error CS1061: "TraitorRuleComponent" не содержит определения "Codew
+ordFactionPrototypeId", и не удалось найти доступный метод расширения "Codeword
+FactionPrototypeId", принимающий тип "TraitorRuleComponent" в качестве первого 
+аргумента (возможно, пропущена директива using или ссылка на сборку). [C:\Users
+\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(61,48): error CS1061: "RoleCodewordSystem" не содержит определения "GetCode
+words", и не удалось найти доступный метод расширения "GetCodewords", принимающ
+ий тип "RoleCodewordSystem" в качестве первого аргумента (возможно, пропущена д
+иректива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.Ser
+ver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(44,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в те
+кущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(47,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в те
+кущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(163,26): error CS0246: Не удалось найти тип или имя пространства имен "Gene
+rateUplinkCodeEvent" (возможно, отсутствует директива using или ссылка на сборк
+у). [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(190,144): error CS1061: "TraitorRuleComponent" не содержит определения "Cod
+ewordFactionPrototypeId", и не удалось найти доступный метод расширения "Codewo
+rdFactionPrototypeId", принимающий тип "TraitorRuleComponent" в качестве первог
+о аргумента (возможно, пропущена директива using или ссылка на сборку). [C:\Use
+rs\User\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\TraitorRuleSystem
+.cs(190,126): error CS1061: "RoleCodewordSystem" не содержит определения "GetCo
+dewords", и не удалось найти доступный метод расширения "GetCodewords", принима
+ющий тип "RoleCodewordSystem" в качестве первого аргумента (возможно, пропущена
+ директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.S
+erver\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(87,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в те
+кущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(90,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в те
+кущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.cs
+proj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(127,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в т
+екущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Power\EntitySystems\UpgradePowerSys
+tem.cs(130,18): error CS0103: Имя "MachineUpgradeScalingType" не существует в т
+екущем контексте. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.Server.c
+sproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\Rules\NukeopsRuleSystem
+.cs(337,39): error CS1061: "NukeopsRuleComponent" не содержит определения "WarE
+vacShuttleDisabled", и не удалось найти доступный метод расширения "WarEvacShut
+tleDisabled", принимающий тип "NukeopsRuleComponent" в качестве первого аргумен
+та (возможно, пропущена директива using или ссылка на сборку). [C:\Users\User\D
+esktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\NPC\HTN\PrimitiveTasks\Operators\Sp
+ecific\WeldbotWeldOperator.cs(105,35): error CS1061: "DamageableSystem" не соде
+ржит определения "ChangeAllDamage", и не удалось найти доступный метод расширен
+ия "ChangeAllDamage", принимающий тип "DamageableSystem" в качестве первого арг
+умента (возможно, пропущена директива using или ссылка на сборку). [C:\Users\Us
+er\Desktop\Nezumi\Content.Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\GameTicking\GameTicker.Spawning.cs(
+263,38): error CS1061: "StationSpawningSystem" не содержит определения "EquipJo
+bName", и не удалось найти доступный метод расширения "EquipJobName", принимающ
+ий тип "StationSpawningSystem" в качестве первого аргумента (возможно, пропущен
+а директива using или ссылка на сборку). [C:\Users\User\Desktop\Nezumi\Content.
+Server\Content.Server.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Medical\SuitSensors\SuitSensorCompo
+nent.cs(100,15): error RA0017: Type SuitSensorChangeDoAfterEvent is a DataDefin
+ition but is not partial [C:\Users\User\Desktop\Nezumi\Content.Server\Content.S
+erver.csproj]
+C:\Users\User\Desktop\Nezumi\Content.Server\Mail\Systems\MailSystem.cs(534,17):
+ error RA0002: Tried to perform an 'Execute' other-type access to member 'Acces
+sLists' in type 'AccessReaderComponent', despite only having 'Read' access. Typ
+e Permissions: rwxrwxr--. [C:\Users\User\Desktop\Nezumi\Content.Server\Content.
+Server.csproj]
+
+

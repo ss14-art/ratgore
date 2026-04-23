@@ -1,8 +1,10 @@
 ﻿using Content.Shared.Actions;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Decals;
 
+[Serializable, NetSerializable]
 public sealed partial class PlaceDecalActionEvent : WorldTargetActionEvent
 {
     [DataField("decalId", customTypeSerializer:typeof(PrototypeIdSerializer<DecalPrototype>), required:true)]

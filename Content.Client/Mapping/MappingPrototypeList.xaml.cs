@@ -293,7 +293,11 @@ public sealed partial class MappingPrototypeList : Control
             FavoritesPrototype.Children.Remove(prototype);
             if (_favoriteList.CollapseButton.Pressed)
             {
-                var lists = new List<Container>([_favoriteList.ChildrenPrototypes, _favoriteList.ChildrenPrototypesGallery]);
+                var lists = new List<Container>
+                {
+                    _favoriteList.ChildrenPrototypes,
+                    _favoriteList.ChildrenPrototypesGallery
+                };
                 foreach (var list in lists)
                 {
                     foreach (var child in list.Children)

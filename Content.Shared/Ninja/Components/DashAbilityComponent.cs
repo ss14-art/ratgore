@@ -3,6 +3,7 @@ using Content.Shared.Ninja.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Ninja.Components;
 
@@ -27,4 +28,5 @@ public sealed partial class DashAbilityComponent : Component
     public bool AllowDashToUnseen = false;
 }
 
+[Serializable, NetSerializable]
 public sealed partial class DashEvent : WorldTargetActionEvent;

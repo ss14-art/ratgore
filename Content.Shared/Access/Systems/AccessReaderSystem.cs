@@ -55,7 +55,7 @@ public sealed class AccessReaderSystem : EntitySystem
 
     private void OnMapInit(Entity<AccessReaderComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.AccessListsOriginal ??= [.. ent.Comp.AccessLists];
+        ent.Comp.AccessListsOriginal ??= new(ent.Comp.AccessLists);
         Dirty(ent);
     }
 

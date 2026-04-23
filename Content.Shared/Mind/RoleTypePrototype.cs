@@ -1,4 +1,5 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Mind;
 
@@ -6,6 +7,7 @@ namespace Content.Shared.Mind;
 ///     The core properties of Role Types
 /// </summary>
 [Prototype]
+[Serializable, NetSerializable]
 public sealed partial class RoleTypePrototype : IPrototype
 {
     [IdDataField]

@@ -7,9 +7,16 @@ using Robust.Shared.Utility;
 namespace Content.Shared.Construction.Prototypes;
 
 [Prototype]
-public sealed partial class ConstructionPrototype(IReadOnlyList<SpriteSpecifier> layers, SpriteSpecifier icon)
-    : IPrototype
+public sealed partial class ConstructionPrototype : IPrototype
 {
+    [DataField("layers")]
+    private IReadOnlyList<SpriteSpecifier>? _layers;
+
+    [DataField("icon")]
+    public SpriteSpecifier Icon { get; set; } = SpriteSpecifier.Invalid;
+
+    public IReadOnlyList<SpriteSpecifier> Layers => _layers ?? new List<SpriteSpecifier> { Icon };
+
     [DataField("conditions")] private List<IConstructionCondition> _conditions = new();
 
     /// <summary>
@@ -95,8 +102,6 @@ public sealed partial class ConstructionPrototype(IReadOnlyList<SpriteSpecifier>
     public ProtoId<ConstructionPrototype>[] AlternativePrototypes = [];
 
     public IReadOnlyList<IConstructionCondition> Conditions => _conditions;
-    public IReadOnlyList<SpriteSpecifier> Layers => layers ?? new List<SpriteSpecifier> { Icon };
-    public SpriteSpecifier Icon { get; set; } = icon;
 }
 
 public enum ConstructionType

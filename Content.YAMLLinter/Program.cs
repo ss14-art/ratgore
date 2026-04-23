@@ -10,6 +10,7 @@ using Robust.Shared.Serialization.Markdown.Validation;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Robust.UnitTesting;
+using Robust.UnitTesting.Pool;
 
 namespace Content.YAMLLinter
 {
@@ -51,9 +52,9 @@ namespace Content.YAMLLinter
         }
 
         private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
-            ValidateClient()
+            ValidateClient(ITestContextLike testContext)
         {
-            await using var pair = await PoolManager.GetServerClient();
+            await using var pair = await PoolManager.GetServerClient(testContext: testContext);
             var client = pair.Client;
             var result = await ValidateInstance(client);
             await pair.CleanReturnAsync();
@@ -61,9 +62,9 @@ namespace Content.YAMLLinter
         }
 
         private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
-            ValidateServer()
+            ValidateServer(ITestContextLike testContext)
         {
-            await using var pair = await PoolManager.GetServerClient();
+            await using var pair = await PoolManager.GetServerClient(testContext: testContext);
             var server = pair.Server;
             var result = await ValidateInstance(server);
             await pair.CleanReturnAsync();
@@ -108,14 +109,15 @@ namespace Content.YAMLLinter
         public static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
             RunValidation()
         {
-            var (clientAssemblies, serverAssemblies) = await GetClientServerAssemblies();
+            var testContext = new ExternalTestContext("YAMLLinter", Console.Out);
+            var (clientAssemblies, serverAssemblies) = await GetClientServerAssemblies(testContext);
             var serverTypes = serverAssemblies.SelectMany(n => n.GetTypes()).Select(t => t.Name).ToHashSet();
             var clientTypes = clientAssemblies.SelectMany(n => n.GetTypes()).Select(t => t.Name).ToHashSet();
 
             var yamlErrors = new Dictionary<string, HashSet<ErrorNode>>();
 
-            var serverErrors = await ValidateServer();
-            var clientErrors = await ValidateClient();
+            var serverErrors = await ValidateServer(testContext);
+            var clientErrors = await ValidateClient(testContext);
 
             foreach (var (key, val) in serverErrors.YamlErrors)
             {
@@ -171,9 +173,9 @@ namespace Content.YAMLLinter
         }
 
         private static async Task<(Assembly[] clientAssemblies, Assembly[] serverAssemblies)>
-            GetClientServerAssemblies()
+            GetClientServerAssemblies(ITestContextLike testContext)
         {
-            await using var pair = await PoolManager.GetServerClient();
+            await using var pair = await PoolManager.GetServerClient(testContext: testContext);
 
             var result = (GetAssemblies(pair.Client), GetAssemblies(pair.Server));
 

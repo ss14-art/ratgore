@@ -25,7 +25,7 @@ public sealed class ActionButton : Control, IEntityControl
     private IEntityManager _entities;
     private SpriteSystem? _spriteSys;
     private ActionUIController? _controller;
-    private SharedChargesSystem _sharedChargesSys;
+    private SharedChargesSystem? _sharedChargesSys;
     private bool _beingHovered;
     private bool _depressed;
     private bool _toggled;
@@ -71,7 +71,6 @@ public sealed class ActionButton : Control, IEntityControl
 
         _entities = entities;
         _spriteSys = spriteSys;
-        _sharedChargesSys = _entities.System<SharedChargesSystem>();
         _controller = controller;
 
         MouseFilter = MouseFilterMode.Pass;
@@ -206,6 +205,7 @@ public sealed class ActionButton : Control, IEntityControl
         // TODO: Don't touch this use an event make callers able to add their own shit for actions or I kill you.
         if (_entities.TryGetComponent(ActionId, out LimitedChargesComponent? actionCharges))
         {
+            _sharedChargesSys ??= _entities.System<SharedChargesSystem>();
             var charges = _sharedChargesSys.GetCurrentCharges((ActionId.Value, actionCharges, null));
             chargesText = FormattedMessage.FromMarkupPermissive(Loc.GetString($"Charges: {charges.ToString()}/{actionCharges.MaxCharges}"));
 
