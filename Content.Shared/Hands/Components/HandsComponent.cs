@@ -7,12 +7,14 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Hands.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
-[Access(typeof(SharedHandsSystem))]
 public sealed partial class HandsComponent : Component
 {
     /// <summary>
     ///     The currently active hand.
     /// </summary>
+    [DataField("activeHand")]
+    public string? ActiveHandName;
+
     [ViewVariables]
     public Hand? ActiveHand;
 
@@ -22,7 +24,7 @@ public sealed partial class HandsComponent : Component
     [ViewVariables]
     public EntityUid? ActiveHandEntity => ActiveHand?.HeldEntity;
 
-    [ViewVariables]
+    [DataField]
     public Dictionary<string, Hand> Hands = new();
 
     public int Count => Hands.Count;
@@ -30,7 +32,7 @@ public sealed partial class HandsComponent : Component
     /// <summary>
     ///     List of hand-names. These are keys for <see cref="Hands"/>. The order of this list determines the order in which hands are iterated over.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public List<string> SortedHands = new();
 
     /// <summary>
@@ -53,7 +55,7 @@ public sealed partial class HandsComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public float ThrowRange { get; set; } = 8f;
 
-    public object ActiveHandId { get; set; }
+    public string? ActiveHandId => ActiveHand?.Name;
 
     /// <summary>
     ///     Whether or not to add in-hand sprites for held items. Some entities (e.g., drones) don't want these.
@@ -86,23 +88,32 @@ public sealed partial class HandsComponent : Component
 }
 
 [Serializable, NetSerializable]
-public sealed class Hand //TODO: This should definitely be a struct - Jezi
+[DataDefinition]
+public sealed partial class Hand
 {
-    [ViewVariables]
-    public string Name { get; }
+    [DataField]
+    public string Name { get; internal set; } = string.Empty;
 
-    [ViewVariables]
-    public HandLocation Location { get; }
+    [DataField]
+    public HandLocation Location { get; private set; }
 
     /// <summary>
     ///     The container used to hold the contents of this hand. Nullable because the client must get the containers via <see cref="ContainerManagerComponent"/>,
     ///     which may not be synced with the server when the client hands are created.
     /// </summary>
-    [ViewVariables, NonSerialized]
-    public ContainerSlot? Container;
+    [ViewVariables]
+    [NonSerialized]
+    private ContainerSlot? _container;
 
     [ViewVariables]
-    public EntityUid? HeldEntity => Container?.ContainedEntity;
+    public ContainerSlot? Container
+    {
+        get => _container;
+        set => _container = value;
+    }
+
+    [ViewVariables]
+    public EntityUid? HeldEntity => _container?.ContainedEntity;
 
     public bool IsEmpty => HeldEntity == null;
 
@@ -110,21 +121,40 @@ public sealed class Hand //TODO: This should definitely be a struct - Jezi
     {
         Name = name;
         Location = location;
-        Container = container;
+        _container = container;
+    }
+
+    public Hand() {}
+}
+
+[Serializable, NetSerializable]
+public struct HandData
+{
+    public string Name;
+    public HandLocation Location;
+
+    public HandData(Hand hand)
+    {
+        Name = hand.Name;
+        Location = hand.Location;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed class HandsComponentState : ComponentState
 {
-    public readonly List<Hand> Hands;
+    public readonly List<HandData> Hands;
     public readonly List<string> HandNames;
     public readonly string? ActiveHand;
 
     public HandsComponentState(HandsComponent handComp)
     {
         // cloning lists because of test networking.
-        Hands = new(handComp.Hands.Values);
+        Hands = new();
+        foreach (var hand in handComp.Hands.Values)
+        {
+            Hands.Add(new HandData(hand));
+        }
         HandNames = new(handComp.SortedHands);
         ActiveHand = handComp.ActiveHand?.Name;
     }

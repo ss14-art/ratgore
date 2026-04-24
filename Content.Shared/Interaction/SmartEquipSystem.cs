@@ -119,7 +119,7 @@ public sealed class SmartEquipSystem : EntitySystem
                 return;
             }
 
-            _hands.TryDrop(uid, hands.ActiveHand);
+            _hands.TryDropHand(uid, hands.ActiveHand);
             _inventory.TryEquip(uid, handItem.Value, equipmentSlot, predicted: true, checkDoafter:true);
             return;
         }
@@ -152,7 +152,7 @@ public sealed class SmartEquipSystem : EntitySystem
                 return;
             }
 
-            _hands.TryDrop(uid, hands.ActiveHand);
+            _hands.TryDropHand(uid, hands.ActiveHand);
             _storage.Insert(slotItem, handItem.Value, out var stacked, out _);
 
             if (stacked != null)

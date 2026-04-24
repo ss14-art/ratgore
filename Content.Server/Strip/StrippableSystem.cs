@@ -483,7 +483,7 @@ namespace Content.Server.Strip
                 return;
 
             _handsSystem.TryDrop(user, handsComp: user.Comp);
-            _handsSystem.TryPickup(target, held, handName, handsComp: target.Comp);
+            _handsSystem.TryPickupByName(target, held, handName, handsComp: target.Comp);
             _adminLogger.Add(LogType.Stripping, LogImpact.Medium, $"{ToPrettyString(user):actor} has placed the item {ToPrettyString(held):item} in {ToPrettyString(target):target}'s hands");
 
             // Hand update will trigger strippable update.
@@ -584,7 +584,7 @@ namespace Content.Server.Strip
             if (!CanStripRemoveHand(user, target, item, handName))
                 return;
 
-            _handsSystem.TryDrop(target, item, checkActionBlocker: false, handsComp: target.Comp);
+            _handsSystem.TryDropEntity(target, item, checkActionBlocker: false, handsComp: target.Comp);
             _handsSystem.PickupOrDrop(user, item, animateUser: hidden, animate: hidden, handsComp: user.Comp);
             _adminLogger.Add(LogType.Stripping, LogImpact.Medium, $"{ToPrettyString(user):actor} has stripped the item {ToPrettyString(item):item} from {ToPrettyString(target):target}'s hands");
 

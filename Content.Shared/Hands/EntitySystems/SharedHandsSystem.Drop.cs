@@ -80,25 +80,11 @@ public abstract partial class SharedHandsSystem
     }
 
     /// <summary>
-    ///     Attempts to drop the item in the currently active hand.
+    ///     Attempts to drop the item in a specific hand.
     /// </summary>
-    public bool TryDrop(EntityUid uid, HandsComponent? handsComp = null)
-    {
-        if (!Resolve(uid, ref handsComp))
-            return false;
-
-        if (handsComp.ActiveHand == null)
-            return false;
-
-        return TryDrop(uid, handsComp.ActiveHand, null, true, true, handsComp);
-    }
-
-    /// <summary>
-    ///     Attempts to drop the item in the currently active hand.
-    /// </summary>
-    public bool TryDrop(
+    public bool TryDropByName(
         EntityUid uid,
-        object handsActiveHandId,
+        string handName,
         EntityCoordinates? targetDropLocation = null,
         bool checkActionBlocker = true,
         bool doDropInteraction = true,
@@ -108,13 +94,30 @@ public abstract partial class SharedHandsSystem
         if (!Resolve(uid, ref handsComp))
             return false;
 
+        if (!handsComp.Hands.TryGetValue(handName, out var hand))
+            return false;
+
+        return TryDropHand(uid, hand, targetDropLocation, checkActionBlocker, doDropInteraction, handsComp);
+    }
+
+    public bool TryDrop(
+        EntityUid uid,
+        bool checkActionBlocker = true,
+        bool doDropInteraction = true,
+        EntityCoordinates? targetDropLocation = null,
+        HandsComponent? handsComp = null
+    )
+    {
+        if (!Resolve(uid, ref handsComp))
+            return false;
+
         if (handsComp.ActiveHand == null)
             return false;
 
-        return TryDrop(uid, handsComp.ActiveHand, targetDropLocation, checkActionBlocker, doDropInteraction, handsComp);
+        return TryDropHand(uid, handsComp.ActiveHand, targetDropLocation, checkActionBlocker, doDropInteraction, handsComp);
     }
 
-    public bool TryDrop(EntityUid uid, EntityUid entity, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true, HandsComponent? handsComp = null)
+    public bool TryDropEntity(EntityUid uid, EntityUid entity, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true, HandsComponent? handsComp = null)
     {
         if (!Resolve(uid, ref handsComp))
             return false;
@@ -122,13 +125,10 @@ public abstract partial class SharedHandsSystem
         if (!IsHolding(uid, entity, out var hand, handsComp))
             return false;
 
-        return TryDrop(uid, hand, targetDropLocation, checkActionBlocker, doDropInteraction, handsComp);
+        return TryDropHand(uid, hand, targetDropLocation, checkActionBlocker, doDropInteraction, handsComp);
     }
 
-    /// <summary>
-    ///     Drops a hands contents at the target location.
-    /// </summary>
-    public bool TryDrop(EntityUid uid, Hand hand, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true, HandsComponent? handsComp = null)
+    public bool TryDropHand(EntityUid uid, Hand hand, EntityCoordinates? targetDropLocation = null, bool checkActionBlocker = true, bool doDropInteraction = true, HandsComponent? handsComp = null)
     {
         if (!Resolve(uid, ref handsComp))
             return false;
@@ -151,13 +151,15 @@ public abstract partial class SharedHandsSystem
 
         if (targetDropLocation == null || isInContainer)
         {
-            // If user is in a container, drop item into that container. Otherwise, attach to grid or map.\
+            // If user is in a container, drop item into that container. Otherwise, attach to grid or map.
             // TODO recursively check upwards for containers
 
-            if (!isInContainer
-                || !ContainerSystem.TryGetContainingContainer(userXform.ParentUid, uid, out var container)
-                || !ContainerSystem.Insert((entity, itemXform), container))
-                TransformSystem.AttachToGridOrMap(entity, itemXform);
+            if (isInContainer
+                && ContainerSystem.TryGetContainingContainer(userXform.ParentUid, uid, out var container)
+                && ContainerSystem.Insert(entity, container))
+                return true;
+
+            TransformSystem.AttachToGridOrMap(entity, itemXform);
             return true;
         }
 

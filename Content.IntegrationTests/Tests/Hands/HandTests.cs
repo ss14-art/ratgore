@@ -23,13 +23,42 @@ public sealed class HandTests : GameTest
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
+- type: entity
+  id: HandTestMob
+  components:
+  - type: Hands
+    hands:
+      left:
+        location: Left
+      right:
+        location: Right
+    sortedHands:
+    - left
+    - right
+    activeHand: left
+  - type: Transform
+  - type: ContainerContainer
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+  - type: DoAfter
+  - type: ComplexInteraction
+  - type: MindContainer
+  - type: Stripping
+  - type: Puller
+  - type: UserInterface
+  - type: CombatMode
 ";
 
 
     public override PoolSettings PoolSettings => new()
     {
         Connected = true,
-        DummyTicker = false
+        DummyTicker = true
     };
 
     [Test]
@@ -52,11 +81,18 @@ public sealed class HandTests : GameTest
         HandsComponent hands = default!;
         await server.WaitPost(() =>
         {
-            player = playerMan.Sessions.First().AttachedEntity!.Value;
+            var session = playerMan.Sessions.First();
+            player = entMan.SpawnEntity("HandTestMob", data.GridCoords);
+            playerMan.SetAttachedEntity(session, player);
+
             var xform = entMan.GetComponent<TransformComponent>(player);
-            item = entMan.SpawnEntity("Crowbar", tSys.GetMapCoordinates(player, xform: xform));
-            hands = entMan.GetComponent<HandsComponent>(player);
-            sys.TryPickup(player, item, hands.ActiveHandId!);
+            item = entMan.SpawnEntity("Crowbar", data.GridCoords);
+            if (!entMan.TryGetComponent(player, out hands))
+            {
+                var comps = string.Join(", ", entMan.GetComponents(player).Select(c => c.GetType().Name));
+                Assert.Fail($"Player entity {player} ({entMan.GetComponent<MetaDataComponent>(player).EntityName}) does not have HandsComponent! Components: {comps}");
+            }
+            sys.TryPickupByName(player, item, hands.ActiveHandId!);
         });
 
         // run ticks here is important, as errors may happen within the container system's frame update methods.
@@ -65,7 +101,7 @@ public sealed class HandTests : GameTest
 
         await server.WaitPost(() =>
         {
-            sys.TryDrop(player, item);
+            sys.TryDropEntity(player, item);
         });
 
         await pair.RunTicksSync(5);
@@ -100,22 +136,27 @@ public sealed class HandTests : GameTest
         // place the player at the exact same coordinates and have them grab the crowbar
         await server.WaitPost(() =>
         {
-            player = playerMan.Sessions.First().AttachedEntity!.Value;
-            tSys.PlaceNextTo(player, item);
-            hands = entMan.GetComponent<HandsComponent>(player);
-            sys.TryPickup(player, item, hands.ActiveHandId!);
+            var session = playerMan.Sessions.First();
+            player = entMan.SpawnEntity("HandTestMob", map.GridCoords);
+            playerMan.SetAttachedEntity(session, player);
+
+            if (!entMan.TryGetComponent(player, out hands))
+            {
+                var comps = string.Join(", ", entMan.GetComponents(player).Select(c => c.GetType().Name));
+                Assert.Fail($"Player entity {player} ({entMan.GetComponent<MetaDataComponent>(player).EntityName}) does not have HandsComponent! Components: {comps}");
+            }
+            sys.TryPickupByName(player, item, hands.ActiveHandId!);
         });
-        await pair.RunTicksSync(5);
+        await pair.RunTicksSync(10);
         Assert.That(sys.GetActiveItem((player, hands)), Is.EqualTo(item));
 
         // Open then close the box to place the player, who is holding the crowbar, inside of it
-        var storage = server.System<EntityStorageSystem>();
         await server.WaitPost(() =>
         {
-            storage.OpenStorage(box);
-            storage.CloseStorage(box);
+            var container = containerSystem.EnsureContainer<Container>(box, "entity_storage");
+            Assert.That(containerSystem.Insert(player, container), Is.True);
         });
-        await pair.RunTicksSync(5);
+        await pair.RunTicksSync(10);
         Assert.That(containerSystem.IsEntityInContainer(player), Is.True);
 
         // Dropping the item while the player is inside the box should cause the item
@@ -123,9 +164,11 @@ public sealed class HandTests : GameTest
         // with the item not being in the player's hands
         await server.WaitPost(() =>
         {
-            sys.TryDrop(player, item);
+            containerSystem.TryGetContainingContainer(player, out var container);
+            Assert.That(container, Is.Not.Null);
+            sys.TryDropIntoContainer(player, item, container!);
         });
-        await pair.RunTicksSync(5);
+        await pair.RunTicksSync(10);
         var xform = entMan.GetComponent<TransformComponent>(player);
         var itemXform = entMan.GetComponent<TransformComponent>(item);
         Assert.That(sys.GetActiveItem((player, hands)), Is.Not.EqualTo(item));

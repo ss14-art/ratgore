@@ -71,7 +71,7 @@ namespace Content.Client.Hands.Systems
             {
                 foreach (var hand in component.Hands.Values)
                 {
-                    if (state.Hands.Contains(hand))
+                    if (state.Hands.Any(h => h.Name == hand.Name))
                         continue;
                     handsModified = true;
                     break;
@@ -83,14 +83,14 @@ namespace Content.Client.Hands.Systems
             if (handsModified)
             {
                 List<Hand> addedHands = new();
-                foreach (var hand in state.Hands)
+                foreach (var handData in state.Hands)
                 {
-                    if (component.Hands.ContainsKey(hand.Name))
+                    if (component.Hands.ContainsKey(handData.Name))
                         continue;
 
-                    var container = _containerSystem.EnsureContainer<ContainerSlot>(uid, hand.Name, manager);
-                    var newHand = new Hand(hand.Name, hand.Location, container);
-                    component.Hands.Add(hand.Name, newHand);
+                    var container = _containerSystem.EnsureContainer<ContainerSlot>(uid, handData.Name, manager);
+                    var newHand = new Hand(handData.Name, handData.Location, container);
+                    component.Hands.Add(handData.Name, newHand);
                     addedHands.Add(newHand);
                 }
 

@@ -187,7 +187,7 @@ namespace Content.Server.Hands.Systems
                     continue;
                 }
 
-                TryDrop(args.PullerUid, hand, handsComp: component);
+                TryDropHand(args.PullerUid, hand, handsComp: component);
                 break;
             }
         }
@@ -282,7 +282,7 @@ namespace Content.Server.Hands.Systems
                 return true;
 
             // This can grief the above event so we raise it afterwards
-            if (IsHolding(player, throwEnt, out _, hands) && !TryDrop(player, throwEnt, handsComp: hands))
+            if (IsHolding(player, throwEnt, out _, hands) && !TryDropEntity(player, throwEnt, handsComp: hands))
                 return false;
 
             _throwingSystem.TryThrow(ev.ItemUid, ev.Direction, ev.ThrowSpeed, ev.PlayerUid, compensateFriction: !HasComp<LandAtCursorComponent>(ev.ItemUid));

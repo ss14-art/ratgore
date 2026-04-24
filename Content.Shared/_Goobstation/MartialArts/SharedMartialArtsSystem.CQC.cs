@@ -162,7 +162,7 @@ public partial class SharedMartialArtsSystem
 
         if (_hands.TryGetActiveItem(target, out var activeItem) // I know this looks horrible, but the disarm should happen BEFORE the stam dmg, and the popup should always show.
             && _hands.TryGetEmptyHand(target, out var emptyHand)
-            && _hands.TryDrop(target, activeItem.Value)
+            && _hands.TryDropEntity(target, activeItem.Value)
             && _hands.TryPickupAnyHand(ent, activeItem.Value)
             && _hands.TryGetEmptyHand(ent, out var userEmptyHand))
             _hands.SetActiveHand(ent, userEmptyHand);

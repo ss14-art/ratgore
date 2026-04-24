@@ -64,7 +64,7 @@ public sealed class PlaceableSurfaceSystem : EntitySystem
             if (HasComp<DumpableComponent>(args.Used))
                 return;
 
-            if (!_handsSystem.TryDrop(args.User, args.Used))
+            if (!_handsSystem.TryDropEntity(args.User, args.Used))
                 return;
 
         _transformSystem.SetCoordinates(args.Used,

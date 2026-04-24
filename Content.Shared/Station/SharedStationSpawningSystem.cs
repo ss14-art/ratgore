@@ -146,7 +146,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
 
                 if (_handsSystem.TryGetEmptyHand(entity, out var emptyHand, handsComponent))
                 {
-                    _handsSystem.TryPickup(entity, inhandEntity, emptyHand, checkActionBlocker: false, handsComp: handsComponent);
+                    _handsSystem.TryPickupHand(entity, inhandEntity, emptyHand, checkActionBlocker: false, handsComp: handsComponent);
                 }
             }
         }

@@ -31,7 +31,7 @@ public sealed class StandingStateSystem : EntitySystem
             if (hand.HeldEntity is not EntityUid held)
                 continue;
 
-            if (!_handsSystem.TryDrop(uid, hand, null, checkActionBlocker: false, handsComp: handsComp))
+            if (!_handsSystem.TryDropHand(uid, hand, null, checkActionBlocker: false, handsComp: handsComp))
                 continue;
 
             _throwingSystem.TryThrow(held,

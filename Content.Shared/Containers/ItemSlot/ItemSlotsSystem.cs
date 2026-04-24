@@ -255,7 +255,7 @@ namespace Content.Shared.Containers.ItemSlots
             }
 
             // Drop the held item onto the floor. Return if the user cannot drop.
-            if (!_handsSystem.TryDrop(args.User, args.Used))
+            if (!_handsSystem.TryDropEntity(args.User, args.Used))
                 return;
 
             slots.Sort(SortEmpty);
@@ -402,7 +402,7 @@ namespace Content.Shared.Containers.ItemSlots
                 return false;
 
             // hands.Drop(item) checks CanDrop action blocker
-            if (!_handsSystem.TryDrop(user, hands.ActiveHandId!))
+            if (!_handsSystem.TryDropByName(user, hands.ActiveHandId!))
                 return false;
 
             Insert(uid, slot, held.Value, user, excludeUserAudio: excludeUserAudio);
@@ -435,7 +435,7 @@ namespace Content.Shared.Containers.ItemSlots
                     emptyOnly: true))
                 return false;
 
-            if (user != null && !_handsSystem.TryDrop(user.Value, item))
+            if (user != null && !_handsSystem.TryDropEntity(user.Value, item))
                 return false;
 
             Insert(ent, itemSlot, item, user, excludeUserAudio: excludeUserAudio);

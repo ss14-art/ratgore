@@ -156,6 +156,7 @@ public abstract partial class InteractionTest
         location: Right
     sortedHands:
     - hand_right
+    activeHand: hand_right
   - type: ComplexInteraction
   - type: MindContainer
   - type: Stripping

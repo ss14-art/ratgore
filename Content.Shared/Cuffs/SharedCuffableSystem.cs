@@ -484,7 +484,7 @@ namespace Content.Shared.Cuffs
             handcuffsComp.Used = true;
             Dirty(handcuff, handcuffsComp);
             // Success!
-            _hands.TryDrop(user, handcuff);
+            _hands.TryDropEntity(user, handcuff);
             var result = _container.Insert(handcuff, component.Container);
             // Shitmed Change End
 

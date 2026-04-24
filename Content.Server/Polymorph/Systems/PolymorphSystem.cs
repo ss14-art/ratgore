@@ -243,7 +243,7 @@ public sealed partial class PolymorphSystem : EntitySystem
             _inventory.TransferEntityInventories(uid, child);
             foreach (var hand in _hands.EnumerateHeld(uid))
             {
-                _hands.TryDrop(uid, hand, checkActionBlocker: false);
+                _hands.TryDropEntity(uid, hand, checkActionBlocker: false);
                 _hands.TryPickupAnyHand(child, hand);
             }
         }
@@ -259,7 +259,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
             foreach (var held in _hands.EnumerateHeld(uid))
             {
-                _hands.TryDrop(uid, held);
+                _hands.TryDropEntity(uid, held);
             }
         }
 
@@ -319,7 +319,7 @@ public sealed partial class PolymorphSystem : EntitySystem
             _inventory.TransferEntityInventories(uid, parent);
             foreach (var held in _hands.EnumerateHeld(uid))
             {
-                _hands.TryDrop(uid, held);
+                _hands.TryDropEntity(uid, held);
                 _hands.TryPickupAnyHand(parent, held, checkActionBlocker: false);
             }
         }
@@ -335,7 +335,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
             foreach (var held in _hands.EnumerateHeld(uid))
             {
-                _hands.TryDrop(uid, held);
+                _hands.TryDropEntity(uid, held);
             }
         }
 

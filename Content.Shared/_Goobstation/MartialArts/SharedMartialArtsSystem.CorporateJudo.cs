@@ -102,7 +102,7 @@ public partial class SharedMartialArtsSystem
         {
             var item = _hands.GetActiveItem(target);
             if (item != null)
-                _hands.TryDrop(target, item.Value);
+                _hands.TryDropEntity(target, item.Value);
         }
         _stamina.TakeStaminaDamage(target, proto.StaminaDamage);
         _stun.TryKnockdown(target, TimeSpan.FromSeconds(proto.ParalyzeTime), false);

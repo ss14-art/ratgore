@@ -411,7 +411,7 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
 
         foreach (var item in _hands.EnumerateHeld(cultist))
             if (TryComp(item, out CultItemComponent? cultItem) && !cultItem.AllowUseToEveryone &&
-                !_hands.TryDrop(cultist, item, null, false, false))
+                !_hands.TryDropEntity(cultist, item, null, false, false))
                 QueueDel(item);
     }
 

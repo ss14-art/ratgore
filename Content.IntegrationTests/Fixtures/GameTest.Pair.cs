@@ -17,9 +17,9 @@ public abstract partial class GameTest
     ///     Runs the pairs just long enough for PVS to send entities, ensuring the client's current tick is what the
     ///     server's was at call time.
     /// </summary>
-    public async Task RunUntilSynced()
+    public Task RunUntilSynced()
     {
-        await RunUntilSynced();
+        return Pair.RunUntilSynced();
     }
 
     /// <summary>
