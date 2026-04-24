@@ -80,6 +80,29 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     public void OnStateEntered(LobbyState state)
     {
         PreviewPanel?.SetLoaded(_preferencesManager.ServerDataLoaded);
+
+        if (PreviewPanel != null)
+        {
+            PreviewPanel.CharacterSetupButton.OnPressed += _ =>
+            {
+                if (_stateManager.CurrentState is LobbyState lobby)
+                {
+                    lobby.SwitchState(LobbyGui.LobbyGuiState.CharacterSetup);
+                }
+            };
+        }
+
+        if (_characterSetup != null)
+        {
+            _characterSetup.CloseButton.OnPressed += _ =>
+            {
+                if (_stateManager.CurrentState is LobbyState lobby)
+                {
+                    lobby.SwitchState(LobbyGui.LobbyGuiState.Default);
+                }
+            };
+        }
+
         ReloadCharacterSetup();
     }
 

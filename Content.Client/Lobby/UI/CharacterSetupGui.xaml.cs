@@ -116,7 +116,7 @@ namespace Content.Client.Lobby.UI
                 characterPickerButton.OnPressed += args =>
                 {
                     CharEditor.RemoveAllChildren();
-                    if (profileOfCharacter.Faction is null || profileOfCharacter?.Faction == "")
+                    if (string.IsNullOrEmpty(profileOfCharacter.Faction))
                         CharEditor.AddChild(FactionSelector);
                     else
                         CharEditor.AddChild(_humanoidProfileEditor);
@@ -135,7 +135,7 @@ namespace Content.Client.Lobby.UI
                 HumanoidCharacterProfile profileOfCharacterr = (HumanoidCharacterProfile) (selectedChar);
 
                 CharEditor.RemoveAllChildren();
-                if (profileOfCharacterr?.Faction is null || profileOfCharacterr?.Faction == "")
+                if (string.IsNullOrEmpty(profileOfCharacterr.Faction))
                     CharEditor.AddChild(FactionSelector);
                 else
                     CharEditor.AddChild(_humanoidProfileEditor);
