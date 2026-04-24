@@ -1,9 +1,9 @@
+﻿using Content.Server._Goobstation.Blob.Systems;
 using Content.Shared.Mind;
 using Robust.Shared.Audio;
 
 namespace Content.Server.GameTicking.Rules.Components;
-
-[RegisterComponent]
+[RegisterComponent, Access(typeof(BlobRuleSystem), typeof(BlobCoreSystem), typeof(BlobObserverSystem))]
 public sealed partial class BlobRuleComponent : Component
 {
     [DataField]
@@ -13,7 +13,7 @@ public sealed partial class BlobRuleComponent : Component
     public SoundSpecifier? CriticalAudio = new SoundPathSpecifier("/Audio/StationEvents/blobin_time.ogg");
 
     [ViewVariables]
-    public List<(EntityUid mindId, MindComponent mind)> Blobs = new();
+    public List<(EntityUid mindId, MindComponent mind)> Blobs = new(); //BlobRoleComponent
 
     [ViewVariables]
     public BlobStage Stage = BlobStage.Default;
@@ -21,6 +21,7 @@ public sealed partial class BlobRuleComponent : Component
     [ViewVariables]
     public float Accumulator = 0f;
 }
+
 
 public enum BlobStage : byte
 {
