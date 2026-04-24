@@ -29,3 +29,14 @@ public sealed partial class ProjectilePhasePreventComponent : Component
     public int relevantBitmasks = 0;
 
 }
+
+[ByRefEvent]
+public struct HullrotBulletHitEvent
+{
+    public EntityUid selfEntity;
+    public EntityUid hitEntity;
+    public string selfFixtureKey;
+    public Fixture targetFixture;
+    public string targetFixtureKey;
+    public PhysicsComponent selfPhys;
+}

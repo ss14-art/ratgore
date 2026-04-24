@@ -1,3 +1,4 @@
+using Content.Shared.Actions.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -51,6 +52,16 @@ public abstract partial class BaseActionComponent : Component
     [DataField("iconColor")] public Color IconColor = Color.White;
 
     /// <summary>
+    ///     The original <see cref="IconColor"/> this action was.
+    /// </summary>
+    [DataField] public Color OriginalIconColor;
+
+    /// <summary>
+    ///     The color the action should turn to when disabled
+    /// </summary>
+    [DataField] public Color DisabledIconColor = Color.DimGray;
+
+    /// <summary>
     ///     Keywords that can be used to search for this action in the action menu.
     /// </summary>
     [DataField("keywords")] public HashSet<string> Keywords = new();
@@ -85,24 +96,6 @@ public abstract partial class BaseActionComponent : Component
     ///     Time interval between action uses.
     /// </summary>
     [DataField("useDelay")] public TimeSpan? UseDelay;
-
-    /// <summary>
-    ///     Convenience tool for actions with limited number of charges. Automatically decremented on use, and the
-    ///     action is disabled when it reaches zero. Does NOT automatically remove the action from the action bar.
-    ///     However, charges will regenerate if <see cref="RenewCharges"/> is enabled and the action will not disable
-    ///     when charges reach zero.
-    /// </summary>
-    [DataField("charges")] public int? Charges;
-
-    /// <summary>
-    ///     The max charges this action has. If null, this is set automatically from <see cref="Charges"/> on mapinit.
-    /// </summary>
-    [DataField] public int? MaxCharges;
-
-    /// <summary>
-    ///     If enabled, charges will regenerate after a <see cref="Cooldown"/> is complete
-    /// </summary>
-    [DataField("renewCharges")]public bool RenewCharges;
 
     /// <summary>
     /// The entity that contains this action. If the action is innate, this may be the user themselves.
@@ -168,6 +161,14 @@ public abstract partial class BaseActionComponent : Component
     public bool RaiseOnUser;
 
     /// <summary>
+    ///     If true, this will cause the the action event to always be raised directed at the action itself instead of the action's container/provider.
+    ///     Takes priority over RaiseOnUser.
+    /// </summary>
+    [DataField]
+    [Obsolete("This datafield will be reworked in an upcoming action refactor")]
+    public bool RaiseOnAction;
+
+    /// <summary>
     ///     Whether or not to automatically add this action to the action bar when it becomes available.
     /// </summary>
     [DataField("autoPopulate")] public bool AutoPopulate = true;
@@ -176,6 +177,11 @@ public abstract partial class BaseActionComponent : Component
     ///     Temporary actions are deleted when they get removed a <see cref="ActionsComponent"/>.
     /// </summary>
     [DataField("temporary")] public bool Temporary;
+
+    /// <summary>
+    ///     Whether this action is currently hidden.
+    /// </summary>
+    [DataField] public bool Hidden;
 
     /// <summary>
     ///     Determines the appearance of the entity-icon for actions that are enabled via some entity.
@@ -194,14 +200,13 @@ public abstract class BaseActionComponentState : ComponentState
     public SpriteSpecifier? Icon;
     public SpriteSpecifier? IconOn;
     public Color IconColor;
+    public Color OriginalIconColor;
+    public Color DisabledIconColor;
     public HashSet<string> Keywords;
     public bool Enabled;
     public bool Toggled;
     public (TimeSpan Start, TimeSpan End)? Cooldown;
     public TimeSpan? UseDelay;
-    public int? Charges;
-    public int? MaxCharges;
-    public bool RenewCharges;
     public NetEntity? Container;
     public NetEntity? EntityIcon;
     public bool CheckCanInteract;
@@ -210,8 +215,10 @@ public abstract class BaseActionComponentState : ComponentState
     public int Priority;
     public NetEntity? AttachedEntity;
     public bool RaiseOnUser;
+    public bool RaiseOnAction;
     public bool AutoPopulate;
     public bool Temporary;
+    public bool Hidden;
     public ItemActionIconStyle ItemIconStyle;
     public SoundSpecifier? Sound;
 
@@ -221,23 +228,24 @@ public abstract class BaseActionComponentState : ComponentState
         EntityIcon = entManager.GetNetEntity(component.EntIcon);
         AttachedEntity = entManager.GetNetEntity(component.AttachedEntity);
         RaiseOnUser = component.RaiseOnUser;
+        RaiseOnAction = component.RaiseOnAction;
         Icon = component.Icon;
         IconOn = component.IconOn;
         IconColor = component.IconColor;
+        OriginalIconColor = component.OriginalIconColor;
+        DisabledIconColor = component.DisabledIconColor;
         Keywords = component.Keywords;
         Enabled = component.Enabled;
         Toggled = component.Toggled;
         Cooldown = component.Cooldown;
         UseDelay = component.UseDelay;
-        Charges = component.Charges;
-        MaxCharges = component.MaxCharges;
-        RenewCharges = component.RenewCharges;
         CheckCanInteract = component.CheckCanInteract;
         CheckConsciousness = component.CheckConsciousness;
         ClientExclusive = component.ClientExclusive;
         Priority = component.Priority;
         AutoPopulate = component.AutoPopulate;
         Temporary = component.Temporary;
+        Hidden = component.Hidden;
         ItemIconStyle = component.ItemIconStyle;
         Sound = component.Sound;
     }

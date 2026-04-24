@@ -21,7 +21,8 @@ using Content.Shared.Chemistry.Reagent;
 using Robust.Server.Audio;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.DoAfter;
-using Content.Shared._Goobstation.Chemistry.Hypospray; // Goobstation
+using Content.Shared._Goobstation.Chemistry.Hypospray;
+using Content.Shared.Verbs; // Goobstation
 
 namespace Content.Server.Chemistry.EntitySystems;
 
@@ -189,7 +190,7 @@ public sealed class HypospraySystem : SharedHypospraySystem
             // meleeSys.SendLunge(angle, user);
         }
 
-        _audio.PlayPvs(component.InjectSound, user);
+        _audio.PlayPredicted(component.InjectSound, target, user);
 
         // Medipens and such use this system and don't have a delay, requiring extra checks
         // BeginDelay function returns if item is already on delay
@@ -237,7 +238,7 @@ public sealed class HypospraySystem : SharedHypospraySystem
 
         if (realTransferAmount <= 0)
         {
-            _popup.PopupEntity(
+            _popup.PopupClient(
                 Loc.GetString("injector-component-target-is-empty-message",
                     ("target", Identity.Entity(target, EntityManager))),
                 entity.Owner, user);
@@ -251,19 +252,48 @@ public sealed class HypospraySystem : SharedHypospraySystem
             return;
         }
 
-        _popup.PopupEntity(Loc.GetString("injector-component-draw-success-message",
+        _popup.PopupClient(Loc.GetString("injector-component-draw-success-message",
             ("amount", removedSolution.Volume),
             ("target", Identity.Entity(target, EntityManager))), entity.Owner, user);
     }
 
-    private bool EligibleEntity(EntityUid entity, IEntityManager entMan, HyposprayComponent component)
+    private bool EligibleEntity(EntityUid entity, EntityManager entityManager, HyposprayComponent component)
     {
         // TODO: Does checking for BodyComponent make sense as a "can be hypospray'd" tag?
         // In SS13 the hypospray ONLY works on mobs, NOT beakers or anything else.
         // But this is 14, we dont do what SS13 does just because SS13 does it.
         return component.OnlyAffectsMobs
-            ? entMan.HasComponent<SolutionContainerManagerComponent>(entity) &&
-              entMan.HasComponent<MobStateComponent>(entity)
-            : entMan.HasComponent<SolutionContainerManagerComponent>(entity);
+            ? HasComp<SolutionContainerManagerComponent>(entity) &&
+              HasComp<MobStateComponent>(entity)
+            : HasComp<SolutionContainerManagerComponent>(entity);
+    }
+
+    // <summary>
+    // Uses the OnlyMobs field as a check to implement the ability
+    // to draw from jugs and containers with the hypospray
+    // Toggleable to allow people to inject containers if they prefer it over drawing
+    // </summary>
+    private void AddToggleModeVerb(Entity<HyposprayComponent> entity, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || args.Hands == null || entity.Comp.InjectOnly)
+            return;
+
+        var user = args.User;
+        var verb = new AlternativeVerb
+        {
+            Text = Loc.GetString("hypospray-verb-mode-label"),
+            Act = () =>
+            {
+                ToggleMode(entity, user);
+            }
+        };
+        args.Verbs.Add(verb);
+    }
+
+    private void ToggleMode(Entity<HyposprayComponent> entity, EntityUid user)
+    {
+        SetMode(entity, !entity.Comp.OnlyAffectsMobs);
+        var msg = (entity.Comp.OnlyAffectsMobs && entity.Comp.CanContainerDraw) ? "hypospray-verb-mode-inject-mobs-only" : "hypospray-verb-mode-inject-all";
+        _popup.PopupClient(Loc.GetString(msg), entity, user);
     }
 }

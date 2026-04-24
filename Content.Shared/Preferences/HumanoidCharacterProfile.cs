@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared._Art.TTS; // Art-TTS
@@ -174,7 +175,8 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         HashSet<LoadoutPreference> loadoutPreferences,
         long bankWealth,
         string proFaction,
-        List<string> characterFlags
+        List<string> characterFlags,
+        HumanoidCharacterProfile loadouts
     )
     {
         Name = name;
@@ -205,10 +207,11 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         BankBalance = bankWealth;
         Faction = proFaction;
         CharacterFlags = characterFlags;
+        Loadouts = loadouts;
     }
 
     /// <summary>Copy constructor</summary>
-    public HumanoidCharacterProfile(HumanoidCharacterProfile other)
+    public HumanoidCharacterProfile(HumanoidCharacterProfile other, HumanoidCharacterProfile loadouts)
         : this(
             other.Name,
             other.FlavorText,
@@ -237,14 +240,17 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
             new HashSet<LoadoutPreference>(other.LoadoutPreferences),
             other.BankBalance,
             other.Faction,
-            other.CharacterFlags) { }
+            other.CharacterFlags,
+            loadouts) { }
 
     /// <summary>
     ///     Get the default humanoid character profile, using internal constant values.
     ///     Defaults to <see cref="SharedHumanoidAppearanceSystem.DefaultSpecies"/> for the species.
     /// </summary>
     /// <returns></returns>
-    public HumanoidCharacterProfile() { }
+    public HumanoidCharacterProfile(HumanoidCharacterProfile loadouts) {
+        Loadouts = loadouts;
+    }
 
     /// <summary>
     ///     Return a default character profile, based on species.i
@@ -385,8 +391,8 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     public HumanoidCharacterProfile WithSpawnPriorityPreference(SpawnPriorityPreference spawnPriority) =>
         new(this) { SpawnPriority = spawnPriority };
 
-    public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<string, JobPriority>> jobPriorities) =>
-        new(this) { _jobPriorities = new Dictionary<string, JobPriority>(jobPriorities) };
+    public HumanoidCharacterProfile WithJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities) =>
+        new(this) { _jobPriorities = new Dictionary<string, JobPriority>((IEnumerable<KeyValuePair<string, JobPriority>>)jobPriorities) };
 
     public HumanoidCharacterProfile WithJobPriority(string jobId, JobPriority priority)
     {
@@ -459,7 +465,9 @@ public string Summary =>
             ("age", Age)
         );
 
-    public bool MemberwiseEquals(ICharacterProfile maybeOther)
+public HumanoidCharacterProfile Loadouts { get; set; }
+
+public bool MemberwiseEquals(ICharacterProfile maybeOther)
     {
         return maybeOther is HumanoidCharacterProfile other
             && Name == other.Name

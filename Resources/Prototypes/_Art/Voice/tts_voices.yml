@@ -108,7 +108,7 @@
   speaker: alyx
 
 - type: ttsVoice
-  id: Gman
+  id: Gman #demented fix?
   name: tts-voice-name-gman
   sex: Male
   speaker: gman

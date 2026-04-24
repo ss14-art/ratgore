@@ -213,7 +213,7 @@ public abstract class SharedStunSystem : EntitySystem
         var ev = new StunnedEvent();
         RaiseLocalEvent(uid, ref ev);
 
-        _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} stunned for {time.Seconds} seconds");
+        _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} stunned for {time.TotalSeconds} seconds");
         return true;
     }
 
@@ -230,7 +230,7 @@ public abstract class SharedStunSystem : EntitySystem
 
         var component = _componentFactory.GetComponent<KnockedDownComponent>();
         component.DropHeldItemsBehavior = behavior;
-        if (!_statusEffect.TryAddStatusEffect(uid, "KnockedDown", time, refresh, component))
+        if (!_statusEffect.TryAddStatusEffect(uid, "KnockedDown", time, refresh, "KnockedDown", status))
             return false;
 
         var ev = new KnockedDownEvent();
@@ -265,6 +265,26 @@ public abstract class SharedStunSystem : EntitySystem
             return false;
 
         return TryKnockdown(uid, time, refresh, status) && TryStun(uid, time, refresh, status);
+    }
+
+    /// <summary>
+    /// Updates or removes the paralysis duration on an entity.
+    /// If duration is null, the effect is removed.
+    /// </summary>
+    public bool TryUpdateParalyzeDuration(EntityUid uid, TimeSpan? duration,
+        StatusEffectsComponent? status = null)
+    {
+        if (!Resolve(uid, ref status, false))
+            return false;
+
+        if (duration == null)
+            return _statusEffect.TryRemoveStatusEffect(uid, "KnockedDown", status);
+
+        if (_statusEffect.HasStatusEffect(uid, "KnockedDown", status))
+            return _statusEffect.TrySetStatusEffect(uid, "KnockedDown", duration.Value, status);
+
+        return _statusEffect.TryAddStatusEffect(uid, "KnockedDown",
+            duration.Value, true, "KnockedDown", status);
     }
 
     /// <summary>

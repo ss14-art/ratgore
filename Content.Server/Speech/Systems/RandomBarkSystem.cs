@@ -11,7 +11,7 @@ public sealed class RandomBarkSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
 
-    private static readonly string[] AddedPunctuation = [".", "...", "!", "..!", "!!"];
+    private static readonly string[] AddedPunctuation = { ".", "...", "!", "..!", "!!" };
 
 
     public override void Initialize()

@@ -6,17 +6,17 @@
     <Nullable>enable</Nullable>
     <WarningsAsErrors>nullable</WarningsAsErrors>
     <ServerGarbageCollection>true</ServerGarbageCollection>
+    <StartupObject>Content.MapRenderer.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Content.IntegrationTests\Content.IntegrationTests.csproj" />
-    <ProjectReference Include="..\RobustToolbox\Robust.UnitTesting\Robust.UnitTesting.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NUnit" />
     <PackageReference Include="SixLabors.ImageSharp" />
   </ItemGroup>
-
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
+  <Import Project="..\RobustToolbox\Imports\Shared.props" Condition="Exists('..\RobustToolbox\Imports\Shared.props')" />
 </Project>

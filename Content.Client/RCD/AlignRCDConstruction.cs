@@ -109,7 +109,7 @@ public sealed class AlignRCDConstruction : PlacementMode
         var target = screen.GetClickedEntity(_unalignedMouseCoords.ToMap(_entityManager, _transformSystem));
 
         // Determine if the RCD operation is valid or not
-        if (!_rcdSystem.IsRCDOperationStillValid(heldEntity.Value, rcd, mapGridData.Value, target, player.Value, false))
+        if (!_rcdSystem.IsRCDOperationStillValid(heldEntity.Value, rcd, mapGridData.Value.GridUid, mapGridData.Value.MapGrid, mapGridData.Value.Tile, mapGridData.Value.Position, target, player.Value, false))
             return false;
 
         return true;

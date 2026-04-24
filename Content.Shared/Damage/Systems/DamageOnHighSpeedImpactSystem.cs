@@ -30,7 +30,7 @@ public sealed class DamageOnHighSpeedImpactSystem : EntitySystem
         if (!args.OurFixture.Hard || !args.OtherFixture.Hard)
             return;
 
-        if (!EntityManager.HasComponent<DamageableComponent>(uid))
+        if (!HasComp<DamageableComponent>(uid))
             return;
 
         var speed = args.OurBody.LinearVelocity.Length();

@@ -32,7 +32,7 @@ public abstract class ClothingSystem : EntitySystem
         SubscribeLocalEvent<ClothingComponent, GotUnequippedEvent>(OnGotUnequipped);
         SubscribeLocalEvent<ClothingComponent, ItemMaskToggledEvent>(OnMaskToggled);
         SubscribeLocalEvent<ClothingComponent, GettingPickedUpAttemptEvent>(OnPickedUp);
-        SubscribeLocalEvent<HumanoidAppearanceComponent, BodyPartAddedEvent>(OnPartAttachedToBody, after: [typeof(SharedBodySystem)]);
+        SubscribeLocalEvent<HumanoidAppearanceComponent, BodyPartAddedEvent>(OnPartAttachedToBody, after: new[] { typeof(SharedBodySystem) });
 
         SubscribeLocalEvent<ClothingComponent, ClothingEquipDoAfterEvent>(OnEquipDoAfter);
         SubscribeLocalEvent<ClothingComponent, ClothingUnequipDoAfterEvent>(OnUnequipDoAfter);
@@ -264,8 +264,7 @@ public abstract class ClothingSystem : EntitySystem
 
         clothing.ClothingVisuals = otherClothing.ClothingVisuals;
         clothing.EquippedPrefix = otherClothing.EquippedPrefix;
-        clothing.Sprite = otherClothing.Sprite;
-        clothing.FemaleMask = otherClothing.FemaleMask;
+        clothing.RsiPath = otherClothing.RsiPath;
 
         _itemSys.VisualsChanged(uid);
         Dirty(uid, clothing);

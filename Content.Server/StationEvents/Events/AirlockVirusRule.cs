@@ -7,7 +7,7 @@ using Content.Server.Announcements.Systems;
 using Content.Server.GameTicking;
 using Content.Shared.Emag.Systems;
 using Robust.Shared.Timing;
-using Content.Server.Station.Components;
+using Content.Shared.Station.Components;
 using Content.Server.Station.Systems;
 
 namespace Content.Server.StationEvents.Events;
@@ -31,7 +31,7 @@ public sealed class AirlockVirusRule : StationEventSystem<AirlockVirusRuleCompon
         var stationGrids = new HashSet<EntityUid>();
         foreach (var stations in station)
         {
-            if (TryComp<StationDataComponent>(stations, out var data) && _station.GetLargestGrid(data) is { } grid)
+            if (TryComp<StationDataComponent>(stations, out var data) && _station.GetLargestGrid((stations, data)) is { } grid)
                 stationGrids.Add(grid);
         }
 
@@ -44,7 +44,7 @@ public sealed class AirlockVirusRule : StationEventSystem<AirlockVirusRuleCompon
                 continue;
 
             Timer.Spawn(TimeSpan.FromSeconds(_random.NextDouble(component.MinimumTimeToEmag, component.MaximumTimeToEmag)), () =>
-                _emag.DoEmagEffect(uid, airlockUid));
+                _emag.TryEmagEffect(uid, airlockUid, airlockUid));
         }
 
         _announcer.SendAnnouncement(

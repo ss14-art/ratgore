@@ -641,9 +641,7 @@
       - WeaponTurretSmallMachinegunFlatpack
       - WeaponTurretMediumMachinegunFlatpack
       - WeaponTurretSmallArtilleryFlatpack
-      - WeaponTurretMediumArtilleryFlatpack
       - WeaponTurretLargeMachinegunFlatpack
-      - WeaponTurretLargeArtilleryFlatpack
       - BaseWeaponTurretShortbowFlatpack
       - BaseWeaponTurretAzimuthFlatpack
       - BaseWeaponTurretArbalestFlatpack

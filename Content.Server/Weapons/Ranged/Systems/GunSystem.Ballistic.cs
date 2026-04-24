@@ -20,7 +20,7 @@ public sealed partial class GunSystem
 
             Containers.Remove(existing, component.Container);
             EnsureShootable(existing);
-            EjectCartridge(existing, gunComp: gunComponent);
+            EjectCartridge(existing);
         }
         else if (component.UnspawnedCount > 0)
         {
@@ -30,7 +30,7 @@ public sealed partial class GunSystem
         }
 
         if (ent != null)
-            EjectCartridge(ent.Value, gunComp: gunComponent);
+            EjectCartridge(ent.Value);
 
         var cycledEvent = new GunCycledEvent();
         RaiseLocalEvent(uid, ref cycledEvent);

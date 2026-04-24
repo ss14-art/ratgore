@@ -446,7 +446,7 @@ namespace Content.Server.Administration.Systems
                 {
                     foreach (var hand in _hands.EnumerateHands(entity.Value, hands))
                     {
-                        _hands.TryDrop(entity.Value, hand, checkActionBlocker: false, doDropInteraction: false, handsComp: hands);
+                        _hands.TryDropHand(entity.Value, hand, checkActionBlocker: false, doDropInteraction: false, handsComp: hands);
                     }
                 }
             }

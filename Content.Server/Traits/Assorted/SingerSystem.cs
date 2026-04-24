@@ -42,7 +42,7 @@ public sealed class SingerSystem : SharedSingerSystem
         SubscribeLocalEvent<InstrumentComponent, StatusEffectAddedEvent>(OnStatusEffect);
         SubscribeLocalEvent<InstrumentComponent, DamageChangedEvent>(OnDamageChanged);
         // This is intended to intercept and cancel the UI event before it reaches ActivatableUISystem.
-        SubscribeLocalEvent<SingerComponent, OpenUiActionEvent>(OnInstrumentOpen, before: [typeof(ActivatableUISystem)]);
+        SubscribeLocalEvent<SingerComponent, OpenUiActionEvent>(OnInstrumentOpen, before: new[] { typeof(ActivatableUISystem) });
     }
 
     protected override SharedInstrumentComponent EnsureInstrumentComp(EntityUid uid, SingerInstrumentPrototype singer)

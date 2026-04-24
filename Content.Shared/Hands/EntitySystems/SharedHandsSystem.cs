@@ -27,10 +27,37 @@ public abstract partial class SharedHandsSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<HandsComponent, ComponentInit>(OnInit);
         InitializeInteractions();
         InitializeDrop();
         InitializePickup();
         InitializeRelay();
+    }
+
+    private void OnInit(EntityUid uid, HandsComponent component, ComponentInit args)
+    {
+        foreach (var (name, hand) in component.Hands)
+        {
+            if (string.IsNullOrEmpty(hand.Name))
+                hand.Name = name;
+
+            var container = ContainerSystem.EnsureContainer<ContainerSlot>(uid, name);
+            container.OccludesLight = false;
+            hand.Container = container;
+
+            if (!component.SortedHands.Contains(name))
+                AddToSortedHands(component, name, hand.Location);
+        }
+
+        if (component.ActiveHandName != null && component.Hands.TryGetValue(component.ActiveHandName, out var activeHand))
+        {
+            component.ActiveHand = activeHand;
+        }
+
+        if (component.ActiveHand == null && component.SortedHands.Count > 0)
+        {
+            component.ActiveHand = component.Hands[component.SortedHands[0]];
+        }
     }
 
     public override void Shutdown()
@@ -70,7 +97,7 @@ public abstract partial class SharedHandsSystem
             return;
 
         handsComp.SortedHands.Remove(hand.Name);
-        TryDrop(uid, hand, null, false, true, handsComp);
+        TryDropHand(uid, hand, null, false, true, handsComp);
         if (hand.Container != null)
             ContainerSystem.ShutdownContainer(hand.Container);
 
@@ -91,19 +118,10 @@ public abstract partial class SharedHandsSystem
         if (!Resolve(uid, ref handsComp))
             return;
 
-        RemoveHands(uid, EnumerateHands(uid), handsComp);
-    }
-
-    private void RemoveHands(EntityUid uid, IEnumerable<Hand> hands, HandsComponent handsComp)
-    {
-        if (!hands.Any())
-            return;
-
-        var hand = hands.First();
-        RemoveHand(uid, hand.Name, handsComp);
-
-        // Repeats it for any additional hands.
-        RemoveHands(uid, hands, handsComp);
+        foreach (var hand in handsComp.Hands.Values.ToList())
+        {
+            RemoveHand(uid, hand.Name, handsComp);
+        }
     }
 
     private void HandleSetHand(RequestSetHandEvent msg, EntitySessionEventArgs eventArgs)

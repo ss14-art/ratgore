@@ -6,6 +6,7 @@ using Content.Server.RoundEnd;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
+using Content.Shared.Maps;
 using Content.Shared.Voting;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
@@ -57,7 +58,7 @@ namespace Content.Server.Voting.Managers
 
             var ghostVotePercentageRequirement = _cfg.GetCVar(CCVars.VoteRestartGhostPercentage);
             var ghostCount = 0;
-            
+
             foreach (var player in _playerManager.Sessions)
             {
                 _playerManager.UpdateState(player);

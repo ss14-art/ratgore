@@ -111,7 +111,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         if (prototype?.JobEntity != null)
         {
             DebugTools.Assert(entity is null);
-            var jobEntity = EntityManager.SpawnEntity(prototype.JobEntity, coordinates);
+            var jobEntity = Spawn(prototype.JobEntity, coordinates);
             MakeSentientCommand.MakeSentient(jobEntity, EntityManager);
             DoJobSpecials(job, jobEntity);
             _identity.QueueIdentityUpdate(jobEntity);
@@ -213,6 +213,11 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
         if (pdaComponent != null)
             _pdaSystem.SetOwner(idUid.Value, pdaComponent, characterName);
+    }
+
+    private StartingGearPrototype ApplySubGear(StartingGearPrototype startingGear, HumanoidCharacterProfile profile, JobPrototype job)
+    {
+        return startingGear;
     }
 
 

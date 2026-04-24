@@ -1,8 +1,10 @@
 using Robust.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.Popups;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Actions.Events;
+[Serializable, NetSerializable]
 public sealed partial class PsionicHealOtherPowerActionEvent : EntityTargetActionEvent
 {
     /// <summary>

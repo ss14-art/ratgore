@@ -11,6 +11,6 @@ namespace Content.Server.LocalizedRadio.Prototypes
         ///  ID of the channel being forcefully localized
         /// </summary>
         [IdDataField, ViewVariables]
-        public string ID { get; } = default!;
+        public string ID { get; set; } = default!;
     }
 }

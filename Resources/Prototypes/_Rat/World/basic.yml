@@ -243,7 +243,7 @@
   id: RatAsteroidsStandardTaypan
   parent: RatBiomeBase
   priority: 9000
-  distanceRange: 4000, 4300
+  distanceRange: 4100, 4400
   chunkComponents:
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: RatDensityMin
@@ -262,7 +262,7 @@
   id: RatCraster
   parent: RatBiomeBase
   priority: 9001
-  distanceRange: 0, 550
+  distanceRange: 0, 500
   chunkComponents:
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: RatDensityMin

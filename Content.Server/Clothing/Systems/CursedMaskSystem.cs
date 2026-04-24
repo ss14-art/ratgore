@@ -11,7 +11,6 @@ using Content.Shared.Database;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Players;
-using Content.Shared.Popups;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -36,18 +35,9 @@ public sealed class CursedMaskSystem : SharedCursedMaskSystem
         if (ent.Comp.CurrentState != CursedMaskExpression.Anger)
             return;
 
-        if (TryComp<ActorComponent>(wearer, out var actor) && actor.PlayerSession.GetMind() is { } mind)
+        if (TryComp<ActorComponent>(wearer, out var actor) && actor.PlayerSession.GetMind() is not null)
         {
-            var session = actor.PlayerSession;
-            if (!_ticker.OnGhostAttempt(mind, false))
-                return;
-
-            ent.Comp.StolenMind = mind;
-
-            _popup.PopupEntity(Loc.GetString("cursed-mask-takeover-popup"), wearer, session, PopupType.LargeCaution);
-            _adminLog.Add(LogType.Action,
-                LogImpact.Extreme,
-                $"{ToPrettyString(wearer):player} had their body taken over and turned into an enemy through the cursed mask {ToPrettyString(ent):entity}");
+            return;
         }
 
         var npcFaction = EnsureComp<NpcFactionMemberComponent>(wearer);
@@ -80,7 +70,8 @@ public sealed class CursedMaskSystem : SharedCursedMaskSystem
             if (Exists(ent.Comp.StolenMind))
             {
                 _mind.TransferTo(ent.Comp.StolenMind.Value, args.Wearer);
-                _adminLog.Add(LogType.Action,
+                _adminLog.Add(
+                    LogType.Action,
                     LogImpact.Extreme,
                     $"{ToPrettyString(args.Wearer):player} was restored to their body after the removal of {ToPrettyString(ent):entity}.");
                 ent.Comp.StolenMind = null;

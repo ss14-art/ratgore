@@ -56,7 +56,7 @@ public sealed class ShuttleCurseSystem : EntitySystem
             return;
         }
 
-        _roundEnd.DelayShuttle(orb.Comp.DelayTime);
+        _roundEnd.ExpectedCountdownEnd += orb.Comp.DelayTime;
 
         var cursedMessage = string.Concat(Loc.GetString(_random.Pick(orb.Comp.CurseMessages)),
             " ",

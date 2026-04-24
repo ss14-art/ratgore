@@ -19,7 +19,7 @@ public sealed class SlavedBorgSystem : SharedSlavedBorgSystem
         base.Initialize();
 
         // need to run after so it doesnt get overriden by the actual lawset
-        SubscribeLocalEvent<SlavedBorgComponent, GetSiliconLawsEvent>(OnGetSiliconLaws, after: [ typeof(SiliconLawSystem) ]);
+        SubscribeLocalEvent<SlavedBorgComponent, GetSiliconLawsEvent>(OnGetSiliconLaws, after: new[] { typeof(SiliconLawSystem) });
     }
 
     private void OnGetSiliconLaws(Entity<SlavedBorgComponent> ent, ref GetSiliconLawsEvent args)

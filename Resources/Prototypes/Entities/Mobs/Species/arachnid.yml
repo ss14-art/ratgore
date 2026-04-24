@@ -139,6 +139,7 @@
     leftBarePrint: "footprint-left-bare-spider"
     rightBarePrint: "footprint-right-bare-spider"
 
+
 - type: entity
   parent: BaseSpeciesDummy
   id: MobArachnidDummy
@@ -147,4 +148,5 @@
   - type: HumanoidAppearance
     species: Arachnid
 
-#88w88
+
+#>88w88<

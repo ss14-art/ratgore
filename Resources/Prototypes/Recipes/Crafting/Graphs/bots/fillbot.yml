@@ -9,9 +9,9 @@
       - material: Plastic
         amount: 10
       - material: AdvancedMechatronics
-        amount: 10
+        amount: 2
       - material: AdvancedElectronics
-        amount: 10
+        amount: 2
       - tag: ProximitySensor
         icon:
           sprite: Objects/Misc/proximity_sensor.rsi

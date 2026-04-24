@@ -24,6 +24,7 @@ using Robust.Shared.Configuration;
 using Content.Server.Announcements.Systems;
 using Robust.Shared.Player;
 using Content.Server.Station.Components;
+using Content.Shared.Station.Components;
 
 namespace Content.Server.Communications
 {

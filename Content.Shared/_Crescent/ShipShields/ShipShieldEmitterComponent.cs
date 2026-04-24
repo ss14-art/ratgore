@@ -1,17 +1,19 @@
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._Crescent.ShipShields;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ShipShieldEmitterComponent : Component
 {
+    [AutoNetworkedField]  
     public EntityUid? Shield;
     public EntityUid? Shielded;
 
     [DataField]
     public float Accumulator;
 
-    [DataField]
+    [AutoNetworkedField, DataField]
     public float Damage = 0f;
 
     [DataField]
@@ -29,15 +31,16 @@ public sealed partial class ShipShieldEmitterComponent : Component
     [DataField]
     public float PowerDraw = 50000f;
 
-    [DataField]
+    [AutoNetworkedField, DataField]
     public bool Recharging = false;
 
-    [DataField]
+    [AutoNetworkedField, DataField]
     public float DamageLimit = 3500;
 
     [DataField]
     public float DamageOverloadTimePunishment = 30;
 
+    [AutoNetworkedField]
     public float OverloadAccumulator = 0f;
     /// <summary>
     /// On power up, players for all on vessel, pitched down.

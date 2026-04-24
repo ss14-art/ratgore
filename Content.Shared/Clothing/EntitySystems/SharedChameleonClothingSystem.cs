@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
@@ -75,7 +76,7 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
     /// <summary>
     ///     Check if this entity prototype is valid target for chameleon item.
     /// </summary>
-    public bool IsValidTarget(EntityPrototype proto, SlotFlags chameleonSlot = SlotFlags.NONE)
+    public bool IsValidTarget(EntityPrototype proto, SlotFlags chameleonSlot = SlotFlags.NONE, string? requireTag = null)
     {
         // check if entity is valid
         if (proto.Abstract || proto.HideSpawnMenu)
@@ -85,6 +86,9 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
         if (!proto.TryGetComponent(out TagComponent? tag, _factory) || !_tag.HasTag(tag, "WhitelistChameleon"))
             return false;
 
+        if (requireTag != null && !_tag.HasTag(tag, requireTag))
+            return false;
+
         // check if it's valid clothing
         if (!proto.TryGetComponent("Clothing", out ClothingComponent? clothing))
             return false;
@@ -92,5 +96,11 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    public IEnumerable<EntityPrototype> GetValidTargets(SlotFlags slot, string? requireTag = null)
+    {
+        return _proto.EnumeratePrototypes<EntityPrototype>()
+            .Where(p => IsValidTarget(p, slot, requireTag));
     }
 }

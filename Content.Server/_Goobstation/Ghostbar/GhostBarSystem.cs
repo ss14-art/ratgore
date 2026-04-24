@@ -102,7 +102,7 @@ public sealed class GhostBarSystem : EntitySystem
         var profile = _ticker.GetPlayerProfile(args.SenderSession);
         var mobUid = _spawningSystem.SpawnPlayerMob(randomSpawnPoint, randomJob, profile, null);
 
-        // Einstein Engines start - apply loadouts and traits
+        /* Einstein Engines start - apply loadouts and traits
         var playTimes = _playTimeTracking.GetTrackerTimes(player);
         var whitelisted = player.ContentData()?.Whitelisted ?? false;
 
@@ -121,7 +121,7 @@ public sealed class GhostBarSystem : EntitySystem
             whitelisted,
             punishCheater: false
         );
-        // Einstein Engines end - apply loadouts and traits
+        Einstein Engines end - apply loadouts and traits */
 
         _entityManager.EnsureComponent<GhostBarPlayerComponent>(mobUid);
         _entityManager.EnsureComponent<MindShieldComponent>(mobUid);

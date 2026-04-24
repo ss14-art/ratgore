@@ -203,7 +203,7 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
             var pullerComponent = EnsureComp<PullerComponent>(user);
             if (!_proto.TryIndex<MartialArtPrototype>(comp.MartialArtsForm.ToString(), out var martialArtsPrototype))
                 return false;
-                
+
             martialArtsKnowledgeComponent.MartialArtsForm = martialArtsPrototype.MartialArtsForm;
             LoadCombos(martialArtsPrototype.RoundstartCombos, canPerformComboComponent);
             martialArtsKnowledgeComponent.Blocked = false;
@@ -319,6 +319,8 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         damage.DamageDict.Add(damageType, damageAmount);
         _damageable.TryChangeDamage(target, damage, origin: ent, targetPart: targetBodyPart ?? targetingComponent.Target);
     }
+
+    private static bool TryComp<T>(object actionEnt, out T comp) => throw new NotImplementedException();
 
     #endregion
 }

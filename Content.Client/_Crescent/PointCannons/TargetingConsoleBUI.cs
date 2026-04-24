@@ -6,7 +6,7 @@ using System.Numerics;
 using Content.Client._Crescent.PointCannons;
 using Robust.Client.GameObjects;
 using Content.Shared.Weapons.Ranged.Events;
-using OpenToolkit.GraphicsLibraryFramework;
+using OpenTK.Mathematics;
 using Content.Client.Weapons.Ranged.Systems;
 
 namespace Content.Client._Crescent.PointCannons;
@@ -19,7 +19,7 @@ public sealed class TargetingConsoleBoundUserInterface : BoundUserInterface
 
     private TargetingConsoleWindow? _window;
     private bool _isFiring;
-    private Vector2 _coords;
+    private System.Numerics.Vector2 _coords;
     private CancellationTokenSource _updTimerTok = new();
     private List<NetEntity>? _controlled;
 

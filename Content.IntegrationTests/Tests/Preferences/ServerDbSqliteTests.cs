@@ -1,17 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.Server.Database;
-using Content.Shared.GameTicking;
-using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Preferences;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Configuration;
-using Robust.Shared.Enums;
 using Robust.Shared.Log;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
+using Robust.Shared.Serialization.Manager;
 using Robust.UnitTesting;
 
 namespace Content.IntegrationTests.Tests.Preferences
@@ -45,7 +43,7 @@ namespace Content.IntegrationTests.Tests.Preferences
                 Species = "Human",
                 Customspeciename = "",
                 Age = 21,
-                Voice = "gman",
+                Voice = "Gman",
                 Appearance = new(
                     "Afro",
                     Color.Aqua,
@@ -65,8 +63,10 @@ namespace Content.IntegrationTests.Tests.Preferences
             var conn = new SqliteConnection("Data Source=:memory:");
             conn.Open();
             builder.UseSqlite(conn);
-            return new ServerDbSqlite(() => builder.Options, true, cfg, true, opsLog);
+            return new ServerDbSqlite(() => builder.Options, true, cfg, true, opsLog, serialization);
         }
+
+        public static ISerializationManager serialization { get; }
 
         [Test]
         public async Task TestUserDoesNotExist()

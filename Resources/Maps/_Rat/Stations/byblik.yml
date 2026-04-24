@@ -16157,7 +16157,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 17.5,-12.5
       parent: 1
-    - type: Timer
   - uid: 1674
     components:
     - type: Transform

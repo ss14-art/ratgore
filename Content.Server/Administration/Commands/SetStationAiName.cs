@@ -42,6 +42,9 @@ public sealed class SetStationAiNameCommand : IConsoleCommand
             return;
         }
 
+        if (target == null)
+            return;
+
         var hasStationAi = _prototypeManager.TryIndex(_stationAiJob, out var job);
 
         if (!hasStationAi)
@@ -51,7 +54,7 @@ public sealed class SetStationAiNameCommand : IConsoleCommand
         }
 
         var spawningSystem = _entManager.System<StationSpawningSystem>();
-        spawningSystem.EquipJobName(target.Value, job!);
+        spawningSystem.EquipStartingGear(target.Value, job!.StartingGear);
         shell.WriteLine(Loc.GetString("shell-command-success"));
     }
 }

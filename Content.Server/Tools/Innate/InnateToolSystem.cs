@@ -89,7 +89,7 @@ public sealed class InnateToolSystem : EntitySystem
             {
                 foreach (var hand in hands.Hands)
                 {
-                    _sharedHandsSystem.TryDrop(uid, hand.Value, checkActionBlocker: false, handsComp: hands);
+                    _sharedHandsSystem.TryDropHand(uid, hand.Value, null, checkActionBlocker: false, handsComp: hands);
                 }
             }
         }

@@ -75,7 +75,7 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
 
     private void MovementSpeedCheck(EntityUid uid, SpeedModifiedByContactComponent component, RefreshMovementSpeedModifiersEvent args)
     {
-        if (!EntityManager.TryGetComponent<PhysicsComponent>(uid, out var physicsComponent))
+        if (!TryComp<PhysicsComponent>(uid, out var physicsComponent))
             return;
 
         var walkSpeed = 0.0f;

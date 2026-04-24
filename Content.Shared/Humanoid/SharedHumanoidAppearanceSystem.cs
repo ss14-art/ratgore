@@ -11,7 +11,6 @@ using Content.Shared._Shitmed.Humanoid.Events; // Shitmed Change
 using Content.Shared.IdentityManagement;
 using Content.Shared.Preferences;
 using Content.Shared.HeightAdjust;
-using Microsoft.Extensions.Configuration;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -59,13 +58,13 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     public const string DefaultLifepath = "Spacer";
 
     // Art-TTS Start
-    public const string DefaultVoice = "zeus_dota_2";
+    public const string DefaultVoice = "Sniper";
 
     public static readonly Dictionary<Sex, string> DefaultSexVoice = new()
     {
-        { Sex.Male, "zeus_dota_2" },
-        { Sex.Female, "lina_dota_2" },
-        { Sex.Unsexed, "gman" },
+        { Sex.Male, "Sniper" },
+        { Sex.Female, "LinaDota2" },
+        { Sex.Unsexed, "Vance" },
     };
     // Art-TTS End
 

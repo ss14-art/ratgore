@@ -191,7 +191,7 @@ namespace Content.Shared.Localizations
         private static ILocValue FormatSignLanguage(LocArgs args)
         {
             string originalMessage = ((LocValueString) args.Args[0]).Value;
-            string newMessage = originalMessage.Split([' ', ',', '.', '-', '_'])[0]; //SHOULD grab the first word
+            string newMessage = originalMessage.Split(new[] { ' ', ',', '.', '-', '_' })[0]; //SHOULD grab the first word
 
             if (newMessage.Length > 10)
                 newMessage = newMessage.Substring(0, 10);

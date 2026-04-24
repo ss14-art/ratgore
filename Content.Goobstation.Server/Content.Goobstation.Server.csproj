@@ -9,8 +9,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   <PropertyGroup>
     <!-- Work around https://github.com/dotnet/project-system/issues/4314 -->
-    <TargetFramework>$(TargetFramework)</TargetFramework>
-    <LangVersion>12</LangVersion>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14</LangVersion>
     <IsPackable>false</IsPackable>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>..\bin\Content.Server\</OutputPath>
@@ -29,8 +29,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <ProjectReference Include="..\Content.Goobstation.Maths\Content.Goobstation.Maths.csproj" />
       <ProjectReference Include="..\Content.Goobstation.Shared\Content.Goobstation.Shared.csproj" />
       <ProjectReference Include="..\Content.Server\Content.Server.csproj" />
-      <ProjectReference Include="..\RobustToolbox\Robust.Shared\Robust.Shared.csproj" />
     </ItemGroup>
-
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
+  <Import Project="..\RobustToolbox\Imports\Server.props" Condition="Exists('..\RobustToolbox\Imports\Server.props')" />
 </Project>

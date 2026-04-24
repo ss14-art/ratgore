@@ -112,7 +112,7 @@ public sealed class ActionOnInteractSystem : EntitySystem
             if (entAct.Event != null)
             {
                 entAct.Event.Entity = args.Target;
-                entAct.Event.Coords = args.ClickLocation;
+                entAct.Event.Target = args.ClickLocation;
             }
 
             _actions.PerformAction(args.User, null, entActId, entAct, entAct.Event, _timing.CurTime, false);

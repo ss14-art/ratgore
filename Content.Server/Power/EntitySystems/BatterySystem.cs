@@ -123,6 +123,8 @@ namespace Content.Server.Power.EntitySystems
             TrySetChargeCooldown(uid);
         }
 
+        public float GetCharge(Entity<BatteryComponent> ent) => ent.Comp.CurrentCharge;
+
         public float UseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
         {
             if (value <= 0 ||  !Resolve(uid, ref battery) || battery.CurrentCharge == 0)
@@ -264,5 +266,14 @@ namespace Content.Server.Power.EntitySystems
             return false;
         }
         // WD EDIT END
+        public void SetMaxCharge((EntityUid generatorEnt, BatteryComponent battery) uid, float startingCharge)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCharge((EntityUid generatorEnt, BatteryComponent battery) uid, float startingCharge)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

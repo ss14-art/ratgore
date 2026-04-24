@@ -118,7 +118,7 @@ public sealed class RadialSelectorMenuBUI : BoundUserInterface
             return prototype.Name;
 
         if (_protoManager.TryIndex(proto, out ConstructionPrototype? constructionPrototype))
-            return constructionPrototype.Name;
+            return constructionPrototype.Name ?? "";
 
         return proto;
     }

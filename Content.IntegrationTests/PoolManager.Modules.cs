@@ -25,9 +25,9 @@ public static partial class PoolManager
     private static readonly string[] Suffixes = [".Shared", ".Client", ".Server", ".Common", ".UIKit", ".Maths"];
     private static readonly Assembly CurrentAssembly = typeof(PoolManager).Assembly;
 
-    private static readonly HashSet<Assembly> Client = [];
-    private static readonly HashSet<Assembly> Shared = []; // Holds both .Shared and .Common modules
-    private static readonly HashSet<Assembly> Server = [];
+    internal static readonly HashSet<Assembly> Client = [];
+    internal static readonly HashSet<Assembly> Shared = []; // Holds both .Shared and .Common modules
+    internal static readonly HashSet<Assembly> Server = [];
 
     private static readonly IReadOnlyList<ModuleMap> ModuleTypes = new[]
     {
@@ -56,7 +56,7 @@ public static partial class PoolManager
     },
     LazyThreadSafetyMode.ExecutionAndPublication);
 
-    private static void DiscoverModules()
+    internal static void DiscoverModules()
     {
         _ = Discovered.Value;
     }
@@ -109,6 +109,10 @@ public static partial class PoolManager
 
     private static void AssignModule(Assembly asm)
     {
+        if (asm == CurrentAssembly)
+            return;
+
+        var name = asm.GetName().Name;
         var types = asm.GetExportedTypes();
 
         foreach (var type in types)
@@ -117,6 +121,9 @@ public static partial class PoolManager
             {
                 if (!mapping.Type.IsAssignableFrom(type))
                     continue;
+
+                if (mapping.Col.Any(a => a.GetName().Name == name))
+                    return;
 
                 mapping.Col.Add(asm);
                 return;

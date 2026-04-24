@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Client.DisplacementMap;
 using Content.Client.Examine;
 using Content.Client.Strip;
 using Content.Client.Verbs.UI;
@@ -30,6 +31,7 @@ namespace Content.Client.Hands.Systems
         [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
         [Dependency] private readonly StrippableSystem _stripSys = default!;
         [Dependency] private readonly ExamineSystem _examine = default!;
+        [Dependency] private readonly DisplacementMapSystem _displacement = default!;
 
         public event Action<string, HandLocation>? OnPlayerAddHand;
         public event Action<string>? OnPlayerRemoveHand;
@@ -40,6 +42,7 @@ namespace Content.Client.Hands.Systems
         public event Action<string, EntityUid>? OnPlayerItemRemoved;
         public event Action<string>? OnPlayerHandBlocked;
         public event Action<string>? OnPlayerHandUnblocked;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -68,7 +71,7 @@ namespace Content.Client.Hands.Systems
             {
                 foreach (var hand in component.Hands.Values)
                 {
-                    if (state.Hands.Contains(hand))
+                    if (state.Hands.Any(h => h.Name == hand.Name))
                         continue;
                     handsModified = true;
                     break;
@@ -80,14 +83,14 @@ namespace Content.Client.Hands.Systems
             if (handsModified)
             {
                 List<Hand> addedHands = new();
-                foreach (var hand in state.Hands)
+                foreach (var handData in state.Hands)
                 {
-                    if (component.Hands.ContainsKey(hand.Name))
+                    if (component.Hands.ContainsKey(handData.Name))
                         continue;
 
-                    var container = _containerSystem.EnsureContainer<ContainerSlot>(uid, hand.Name, manager);
-                    var newHand = new Hand(hand.Name, hand.Location, container);
-                    component.Hands.Add(hand.Name, newHand);
+                    var container = _containerSystem.EnsureContainer<ContainerSlot>(uid, handData.Name, manager);
+                    var newHand = new Hand(handData.Name, handData.Location, container);
+                    component.Hands.Add(handData.Name, newHand);
                     addedHands.Add(newHand);
                 }
 
@@ -297,7 +300,6 @@ namespace Content.Client.Hands.Systems
 
             if (!hands.Hands.TryGetValue(args.Container.ID, out var hand))
                 return;
-
             UpdateHandVisuals(uid, args.Entity, hand);
             _stripSys.UpdateUi(uid);
 
@@ -307,7 +309,7 @@ namespace Content.Client.Hands.Systems
             OnPlayerItemRemoved?.Invoke(hand.Name, args.Entity);
 
             if (HasComp<VirtualItemComponent>(args.Entity))
-                OnPlayerHandUnblocked?.Invoke(hand.Name);
+                OnPlayerHandUnblocked?.Invoke(args.Container.ID);
         }
 
         /// <summary>
@@ -381,6 +383,10 @@ namespace Content.Client.Hands.Systems
                 }
 
                 sprite.LayerSetData(index, layerData);
+
+                //Add displacement maps
+                if (handComp.HandDisplacement is not null)
+                    _displacement.TryAddDisplacement(handComp.HandDisplacement, sprite, index, key, revealedLayers);
             }
 
             RaiseLocalEvent(held, new HeldVisualsUpdatedEvent(uid, revealedLayers), true);

@@ -31,6 +31,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Spawners;
 
 namespace Content.Server.Fluids.EntitySystems;
 
@@ -39,6 +40,8 @@ namespace Content.Server.Fluids.EntitySystems;
 /// </summary>
 public sealed partial class PuddleSystem : SharedPuddleSystem
 {
+    private const float PuddleAutoDespawnSeconds = 5f * 60f; // Forge-Change
+
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
@@ -68,7 +71,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
     [ValidatePrototypeId<ReagentPrototype>]
     private const string BlackBlood = "BlackBlood";
 
-    private static string[] _standoutReagents = [Blood, Slime, CopperBlood, BlackBlood];
+    private static string[] _standoutReagents = { Blood, Slime, CopperBlood, BlackBlood };
 
     public static readonly float PuddleVolume = 1000;
 
@@ -496,6 +499,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         }
 
         _solutionContainerSystem.AddSolution(puddleComponent.Solution.Value, addedSolution);
+        EnsureComp<TimedDespawnComponent>(puddleUid).Lifetime = PuddleAutoDespawnSeconds; // Forge-Change
 
         if (checkForOverflow && IsOverflowing(puddleUid, puddleComponent))
         {
@@ -697,7 +701,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         }
 
         var coords = _map.GridTileToLocal(gridId, mapGrid, tileRef.GridIndices);
-        puddleUid = EntityManager.SpawnEntity("Puddle", coords);
+        puddleUid = Spawn("Puddle", coords);
         EnsureComp<PuddleComponent>(puddleUid);
         if (TryAddSolution(puddleUid, solution, sound))
         {

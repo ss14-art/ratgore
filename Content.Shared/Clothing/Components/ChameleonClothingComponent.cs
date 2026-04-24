@@ -32,6 +32,21 @@ public sealed partial class ChameleonClothingComponent : Component
     /// </summary>
     [ViewVariables]
     public EntityUid? User;
+
+    [DataField("affectedByEmp")]
+    public bool AffectedByEmp = true;
+
+    [DataField("empContinuous")]
+    public bool EmpContinuous = false;
+
+    [DataField("empChangeIntensity")]
+    public float EmpChangeIntensity = 1.0f;
+
+    [ViewVariables]
+    public TimeSpan NextEmpChange = TimeSpan.Zero;
+
+    [DataField("requireTag")]
+    public string? RequireTag;
 }
 
 [Serializable, NetSerializable]
@@ -39,11 +54,13 @@ public sealed class ChameleonBoundUserInterfaceState : BoundUserInterfaceState
 {
     public readonly SlotFlags Slot;
     public readonly string? SelectedId;
+    public readonly string? RequireTag;
 
-    public ChameleonBoundUserInterfaceState(SlotFlags slot, string? selectedId)
+    public ChameleonBoundUserInterfaceState(SlotFlags slot, string? selectedId, string? requireTag = null)
     {
         Slot = slot;
         SelectedId = selectedId;
+        RequireTag = requireTag;
     }
 }
 

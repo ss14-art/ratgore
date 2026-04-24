@@ -14,5 +14,5 @@ public sealed partial class OrganActionsComponent : Component
     /// The ID of every action to add.
     /// </summary>
     [DataField(required: true)]
-    public List<EntProtoId<ActionsComponent>> Actions = new();
+    public List<EntProtoId<InstantActionComponent>> Actions = new();
 }

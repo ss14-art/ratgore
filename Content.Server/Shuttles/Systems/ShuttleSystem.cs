@@ -6,12 +6,15 @@ using Content.Server.Body.Systems;
 using Content.Server.Buckle.Systems;
 using Content.Server.Doors.Systems;
 using Content.Server.Parallax;
+using Content.Server.Procedural;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Damage;
 using Content.Server.Stunnable;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Damage;
+using Content.Shared.Movement.Events;
+using Content.Server.Shuttles.Events;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
@@ -52,6 +55,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private readonly BuckleSystem _buckle = default!;
     [Dependency] private readonly DamageableSystem _damageSys = default!;
     [Dependency] private readonly DockingSystem _dockSystem = default!;
+    [Dependency] private readonly DungeonSystem _dungeon = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
@@ -85,6 +89,10 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     private ISawmill _sawmill = default!;
 
 
+    private void OnTileFriction(EntityUid uid, ShuttleComponent component, ref TileFrictionEvent args) { }
+    private void OnFTLStarted(EntityUid uid, ShuttleComponent component, ref FTLStartedEvent args) { }
+    private void OnFTLCompleted(EntityUid uid, ShuttleComponent component, ref FTLCompletedEvent args) { }
+
     public override void Initialize()
     {
         base.Initialize();
@@ -101,6 +109,9 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
         SubscribeLocalEvent<ShuttleComponent, ComponentStartup>(OnShuttleStartup);
         SubscribeLocalEvent<ShuttleComponent, ComponentShutdown>(OnShuttleShutdown);
+        SubscribeLocalEvent<ShuttleComponent, TileFrictionEvent>(OnTileFriction);
+        SubscribeLocalEvent<ShuttleComponent, FTLStartedEvent>(OnFTLStarted);
+        SubscribeLocalEvent<ShuttleComponent, FTLCompletedEvent>(OnFTLCompleted);
 
         SubscribeLocalEvent<GridInitializeEvent>(OnGridInit);
         SubscribeLocalEvent<FixturesComponent, GridFixtureChangeEvent>(OnGridFixtureChange);
@@ -328,12 +339,12 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     private void OnShuttleStartup(EntityUid uid, ShuttleComponent component, ComponentStartup args)
     {
-        if (!EntityManager.HasComponent<MapGridComponent>(uid))
+        if (!HasComp<MapGridComponent>(uid))
         {
             return;
         }
 
-        if (!EntityManager.TryGetComponent(uid, out PhysicsComponent? physicsComponent))
+        if (!TryComp(uid, out PhysicsComponent? physicsComponent))
         {
             return;
         }
@@ -346,7 +357,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     public void Toggle(EntityUid uid, ShuttleComponent component)
     {
-        if (!EntityManager.TryGetComponent(uid, out PhysicsComponent? physicsComponent))
+        if (!TryComp(uid, out PhysicsComponent? physicsComponent))
             return;
 
         component.Enabled = !component.Enabled;
@@ -386,7 +397,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     private void OnShuttleShutdown(EntityUid uid, ShuttleComponent component, ComponentShutdown args)
     {
         // None of the below is necessary for any cleanup if we're just deleting.
-        if (EntityManager.GetComponent<MetaDataComponent>(uid).EntityLifeStage >= EntityLifeStage.Terminating)
+        if (Comp<MetaDataComponent>(uid).EntityLifeStage >= EntityLifeStage.Terminating)
             return;
 
         Disable(uid);

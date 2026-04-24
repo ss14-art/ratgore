@@ -14,6 +14,8 @@ using Robust.Shared.Timing;
 using Content.Server._Lavaland.Procedural.Components;
 using Content.Server.Station.Events;
 using System.Security.Principal;
+using Content.Shared.Station.Components;
+
 
 namespace Content.Server._Lavaland.Shuttles.Systems;
 

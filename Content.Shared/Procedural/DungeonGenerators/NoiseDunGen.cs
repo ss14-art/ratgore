@@ -41,8 +41,8 @@ public sealed partial class NoiseDunGen : IDunGen
     public List<NoiseDunGenLayer> Layers = new();
 }
 
-[DataRecord]
-public record struct NoiseDunGenLayer
+[DataRecord, DataDefinition]
+public partial record struct NoiseDunGenLayer
 {
     /// <summary>
     /// If the noise value is above this then it gets output.

@@ -246,7 +246,7 @@ namespace Content.Shared.Cuffs
 
         private void HandleMoveAttempt(EntityUid uid, CuffableComponent component, UpdateCanMoveEvent args)
         {
-            if (component.CanStillInteract || !EntityManager.TryGetComponent(uid, out PullableComponent? pullable) || !pullable.BeingPulled)
+            if (component.CanStillInteract || !TryComp(uid, out PullableComponent? pullable) || !pullable.BeingPulled)
                 return;
 
             args.Cancel();
@@ -484,7 +484,7 @@ namespace Content.Shared.Cuffs
             handcuffsComp.Used = true;
             Dirty(handcuff, handcuffsComp);
             // Success!
-            _hands.TryDrop(user, handcuff);
+            _hands.TryDropEntity(user, handcuff);
             var result = _container.Insert(handcuff, component.Container);
             // Shitmed Change End
 

@@ -1,51 +1,50 @@
 using Content.Server.Stunnable.Components;
+using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using JetBrains.Annotations;
+using Robust.Shared.Physics.Dynamics;
 using Content.Shared.Throwing;
-using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
 
-namespace Content.Server.Stunnable.Systems;
-
-[UsedImplicitly]
-internal sealed class StunOnCollideSystem : EntitySystem
+namespace Content.Server.Stunnable
 {
-    [Dependency] private readonly StunSystem _stunSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-
-    public override void Initialize()
+    [UsedImplicitly]
+    internal sealed class StunOnCollideSystem : EntitySystem
     {
-        base.Initialize();
-        SubscribeLocalEvent<StunOnCollideComponent, StartCollideEvent>(HandleCollide);
-        SubscribeLocalEvent<StunOnCollideComponent, ThrowDoHitEvent>(HandleThrow);
+        [Dependency] private readonly StunSystem _stunSystem = default!;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            SubscribeLocalEvent<StunOnCollideComponent, StartCollideEvent>(HandleCollide);
+            SubscribeLocalEvent<StunOnCollideComponent, ThrowDoHitEvent>(HandleThrow);
+        }
+
+        private void TryDoCollideStun(EntityUid uid, StunOnCollideComponent component, EntityUid target)
+        {
+
+            if (TryComp<StatusEffectsComponent>(target, out var status))
+            {
+                _stunSystem.TryStun(target, component.StunAmount, true, status);
+
+                _stunSystem.TryKnockdown(target, component.KnockdownAmount, true,
+                    status);
+
+                _stunSystem.TrySlowdown(target, component.SlowdownAmount, true,
+                    component.WalkSpeedMultiplier, component.RunSpeedMultiplier, status);
+            }
+        }
+        private void HandleCollide(EntityUid uid, StunOnCollideComponent component, ref StartCollideEvent args)
+        {
+            if (args.OurFixtureId != component.FixtureId)
+                return;
+
+            TryDoCollideStun(uid, component, args.OtherEntity);
+        }
+
+        private void HandleThrow(EntityUid uid, StunOnCollideComponent component, ThrowDoHitEvent args)
+        {
+            TryDoCollideStun(uid, component, args.Target);
+        }
     }
-
-    private void TryDoCollideStun(Entity<StunOnCollideComponent> ent, EntityUid target)
-    {
-        if (!EntityManager.TryGetComponent<StatusEffectsComponent>(target, out var status) ||
-            ent.Comp.Blacklist is { } blacklist && _entityWhitelist.IsValid(blacklist, target))
-            return;
-
-        _stunSystem.TryStun(target, ent.Comp.StunAmount, true, status);
-        _stunSystem.TryKnockdown(target, ent.Comp.KnockdownAmount, true, status);
-
-        _stunSystem.TrySlowdown(
-            target,
-            ent.Comp.SlowdownAmount,
-            true,
-            ent.Comp.WalkSpeedMultiplier,
-            ent.Comp.RunSpeedMultiplier,
-            status);
-    }
-
-    private void HandleCollide(Entity<StunOnCollideComponent> ent, ref StartCollideEvent args)
-    {
-        if (args.OurFixtureId != ent.Comp.FixtureId)
-            return;
-
-        TryDoCollideStun(ent, args.OtherEntity);
-    }
-
-    private void HandleThrow(Entity<StunOnCollideComponent> ent, ref ThrowDoHitEvent args) =>
-        TryDoCollideStun(ent, args.Target);
 }

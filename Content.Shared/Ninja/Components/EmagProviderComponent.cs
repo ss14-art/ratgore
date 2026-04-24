@@ -1,6 +1,8 @@
 using Content.Shared.Ninja.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
+using Content.Shared.Emag.Systems;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -17,11 +19,19 @@ public sealed partial class EmagProviderComponent : Component
     /// The tag that marks an entity as immune to emagging.
     /// </summary>
     [DataField]
-    public ProtoId<TagPrototype> EmagImmuneTag = "EmagImmune";
+    public ProtoId<TagPrototype> AccessBreakerImmuneTag = "AccessBreakerImmune";
 
     /// <summary>
     /// Whitelist that entities must be on to work.
     /// </summary>
     [DataField]
     public EntityWhitelist? Whitelist;
+
+    /// <summary>What type of emag this will provide.</summary>
+    [DataField]
+    public EmagType EmagType = EmagType.Access;
+
+    /// <summary>Sound played when used.</summary>
+    [DataField]
+    public SoundSpecifier EmagSound = new SoundCollectionSpecifier("sparks");
 }

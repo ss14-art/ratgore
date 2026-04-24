@@ -1,4 +1,7 @@
 using Content.Shared.Cargo;
+using Content.Shared.Cargo.Prototypes;
+using Robust.Shared.Prototypes;
+
 
 namespace Content.Server.Cargo.Components;
 
@@ -16,4 +19,16 @@ public sealed partial class StationBankAccountComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("increasePerSecond")]
     public int IncreasePerSecond = 1;
+
+    [ViewVariables(VVAccess.ReadWrite), DataField("incomeDelay")]
+    public TimeSpan IncomeDelay = TimeSpan.FromMinutes(1);
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan NextIncomeTime;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float RevenueDistribution = 0.5f;
+
+    [DataField]
+    public ProtoId<CargoAccountPrototype> PrimaryAccount = "market";
 }

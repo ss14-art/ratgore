@@ -63,6 +63,20 @@
     damage:
       types:
         Piercing: 5
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      30: Critical
+      60: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 120
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
   - type: Tag
     tags:
     - VimPilot
@@ -115,6 +129,8 @@
     states:
       Alive:
         Base: 0
+      Critical:
+        Base: dead
       Dead:
         Base: dead
   - type: Item
@@ -320,7 +336,6 @@
   parent: FoodEgg
   suffix: Fertilized, Chicken
   components:
-  - type: Timer
   - type: TimedSpawner
     prototypes:
     - MobChicken
@@ -648,7 +663,6 @@
   name: Mothroach egg
   description: Ew.
   components:
-  - type: Timer
   - type: TimedSpawner
     prototypes:
     - MobMothroach
@@ -951,7 +965,6 @@
   parent: FoodEgg
   suffix: Fertilized, Duck
   components:
-    - type: Timer
     - type: TimedSpawner
       prototypes:
       - MobDuckMallard
@@ -1624,6 +1637,19 @@
     tags:
     - VimPilot
     - DoorBumpOpener
+    - AnomalyHost
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water, SpaceCleaner ]
+      methods: [ Touch ]
+      effects:
+      - !type:WashCreamPieReaction
+  - type: StatusIcon
+    bounds: -0.5,-0.5,0.5,0.5
+  - type: JobStatus # marks them as crew
 
 - type: entity
   name: monkey

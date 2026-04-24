@@ -142,7 +142,16 @@ public sealed partial class TraitRemoveActions : TraitFunction
     {
         var actionSystem = entityManager.System<SharedActionsSystem>();
         foreach (var proto in Actions)
-            actionSystem.RemoveAction(uid, proto);
+        {
+            var query = actionSystem.GetActions(uid);
+            foreach (var (id, comp) in query)
+            {
+                if (entityManager.GetComponent<MetaDataComponent>(id).EntityPrototype?.ID == (string) proto)
+                {
+                    actionSystem.RemoveAction(uid, id);
+                }
+            }
+        }
     }
 }
 

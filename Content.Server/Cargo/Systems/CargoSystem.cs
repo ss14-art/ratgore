@@ -11,8 +11,10 @@ using Content.Server.Radio.EntitySystems;
 using Content.Shared.Bank.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
+using Content.Shared.Cargo.Prototypes;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
@@ -82,15 +84,19 @@ public sealed partial class CargoSystem : SharedCargoSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        UpdateConsole(frameTime);
+        UpdateConsole();
         UpdateTelepad(frameTime);
         UpdateBounty();
     }
 
-    [PublicAPI]
-    public void UpdateBankAccount(EntityUid uid, StationBankAccountComponent component, int balanceAdded)
+    public int GetBalanceFromAccount(Entity<StationBankAccountComponent> bank, ProtoId<CargoAccountPrototype> accountId)
     {
+        return bank.Comp.Balance; // TODO: Implement multi-account balance if needed
+    }
 
+    [PublicAPI]
+    public void UpdateBankAccount(EntityUid uid, StationBankAccountComponent component, int balanceAdded, float distribution = 1.0f)
+    {
         component.Balance += balanceAdded;
         var query = EntityQueryEnumerator<BankClientComponent, TransformComponent>();
 

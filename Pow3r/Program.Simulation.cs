@@ -5,7 +5,6 @@ using Robust.Shared.Threading;
 using Robust.UnitTesting;
 using static Content.Server.Power.Pow3r.PowerState;
 
-
 namespace Pow3r
 {
     internal sealed partial class Program

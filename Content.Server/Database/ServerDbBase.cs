@@ -15,6 +15,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Preferences;
 using Microsoft.EntityFrameworkCore;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
@@ -30,7 +31,7 @@ namespace Content.Server.Database
         public event Action<DatabaseNotification>? OnNotificationReceived;
 
         /// <param name="opsLog">Sawmill to trace log database operations to.</param>
-        public ServerDbBase(ISawmill opsLog)
+        public ServerDbBase(ISawmill opsLog, ISerializationManager serialization)
         {
             _opsLog = opsLog;
         }
@@ -255,7 +256,8 @@ namespace Content.Server.Database
                 }).ToHashSet(),
                 profile.BankBalance,
                 profile.Faction,
-                profile.CharacterFlags.ToList()
+                profile.CharacterFlags.ToList(),
+                null!
             );
         }
 

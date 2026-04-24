@@ -358,7 +358,7 @@ public sealed class CardStackSystem : EntitySystem
                 _container.Remove(card, firstComp.ItemContainer);
                 if (_hands.IsHolding(user, first))
                 {
-                    _hands.TryDrop(user, first);
+                    _hands.TryDropEntity(user, first);
                     _hands.TryPickupAnyHand(user, card);
                 }
                 firstComp.Cards.Clear();

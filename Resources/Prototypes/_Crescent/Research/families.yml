@@ -6,7 +6,7 @@
     state: large
   discipline: Families
   tier: 1
-  cost: 15000
+  cost: 10000
   recipeUnlocks:
   - SmallBallisticHardpointFlatpack
   - MediumBallisticHardpointFlatpack
@@ -24,7 +24,7 @@
     state: icon
   discipline: Families
   tier: 1
-  cost: 15000
+  cost: 10000
   recipeUnlocks:
   - HanaqLPC
   - BaghlLPC
@@ -40,7 +40,7 @@
     state: tubeloaderrobotics
   discipline: Families
   tier: 2
-  cost: 15000
+  cost: 10000
   recipeUnlocks:
   - BallisticCycler1Craft
   - TubeLoader1Craft
@@ -70,7 +70,7 @@
     state: machinegun
   discipline: Families
   tier: 1
-  cost: 20000
+  cost: 15000
   recipeUnlocks:
     - WeaponTurretSmallMachinegunFlatpack
     - WeaponTurretMediumMachinegunFlatpack
@@ -85,7 +85,7 @@
     state: arbalest
   discipline: Families
   tier: 2
-  cost: 20000
+  cost: 15000
   recipeUnlocks:
     - WeaponTurretSmallArtilleryFlatpack
     - WeaponTurretLargeMachinegunFlatpack
@@ -101,7 +101,7 @@
     state: curse
   discipline: Families
   tier: 3
-  cost: 20000
+  cost: 15000
   recipeUnlocks:
     - BaseWeaponTurretRetributionFlatpack
     - BaseWeaponTurretGlareFlatpack
@@ -116,7 +116,7 @@
     state: equipped-OUTERCLOTHING
   discipline: Families
   tier: 1
-  cost: 10000
+  cost: 7500
   recipeUnlocks:
     - ClothingUniformJumpsuitBeltrunner
     - ClothingUniformJumpsuitAntiquarianFamilies
@@ -140,7 +140,7 @@
     state: icon
   discipline: Families
   tier: 2
-  cost: 15000
+  cost: 10000
   recipeUnlocks:
     - WeaponShotgunHarba
     - EnergySwordFamilies
@@ -156,7 +156,7 @@
     state: icon
   discipline: Families
   tier: 3
-  cost: 20000
+  cost: 10000
   recipeUnlocks:
     - CompositionC4
 
@@ -169,7 +169,7 @@
     state: icon
   discipline: Families
   tier: 1
-  cost: 15000
+  cost: 10000
   recipeUnlocks:
     - FlatpackComputerDroneControl
     - FlatpackDroneController
@@ -183,6 +183,6 @@
     state: base
   discipline: Families
   tier: 2
-  cost: 20000
+  cost: 7500
   recipeUnlocks:
     - ThrusterHighImpulseTAP

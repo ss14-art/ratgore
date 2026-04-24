@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Server.GameTicking;
 using Content.Server.StationEvents.Components;
-using Content.Server.Station.Components;
+using Content.Shared.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking.Components;
@@ -46,7 +46,7 @@ public sealed class PirateRadioSpawnRule : StationEventSystem<PirateRadioSpawnRu
 
         foreach (var stations in station)
         {
-            if (TryComp<StationDataComponent>(stations, out var data) && _station.GetLargestGrid(data) is { } grid)
+            if (TryComp<StationDataComponent>(stations, out var data) && _station.GetLargestGrid((stations, data)) is { } grid)
                 stationGrids.Add(grid);
         }
 

@@ -2,8 +2,11 @@
 using Content.Shared.Chat;
 using Robust.Shared.Prototypes;
 
+using Robust.Shared.Serialization;
+
 namespace Content.Shared.Magic.Events;
 
+[Serializable, NetSerializable]
 public sealed partial class ProjectileSpellEvent : WorldTargetActionEvent, ISpeakSpell
 {
     /// <summary>

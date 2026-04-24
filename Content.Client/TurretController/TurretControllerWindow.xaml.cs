@@ -47,7 +47,7 @@ public sealed partial class TurretControllerWindow : BaseWindow
     public event Action<int>? OnArmamentSettingChangedEvent;
 
     // Colors
-    private Color[] _themeColors = [Color.FromHex("#33e633"), Color.FromHex("#dfb827"), Color.FromHex("#da2a2a")];
+    private Color[] _themeColors = { Color.FromHex("#33e633"), Color.FromHex("#dfb827"), Color.FromHex("#da2a2a") };
 
     public TurretControllerWindow()
     {

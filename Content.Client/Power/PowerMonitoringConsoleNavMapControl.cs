@@ -27,10 +27,10 @@ public sealed partial class PowerMonitoringConsoleNavMapControl : NavMapControl
     public List<PowerMonitoringConsoleLine> PowerCableNetwork = new();
     public List<PowerMonitoringConsoleLine> FocusCableNetwork = new();
 
-    private Dictionary<Vector2i, Vector2i>[] _horizLines = [new(), new(), new()];
-    private Dictionary<Vector2i, Vector2i>[] _horizLinesReversed = [new(), new(), new()];
-    private Dictionary<Vector2i, Vector2i>[] _vertLines = [new(), new(), new()];
-    private Dictionary<Vector2i, Vector2i>[] _vertLinesReversed = [new(), new(), new()];
+    private Dictionary<Vector2i, Vector2i>[] _horizLines = { new(), new(), new() };
+    private Dictionary<Vector2i, Vector2i>[] _horizLinesReversed = { new(), new(), new() };
+    private Dictionary<Vector2i, Vector2i>[] _vertLines = { new(), new(), new() };
+    private Dictionary<Vector2i, Vector2i>[] _vertLinesReversed = { new(), new(), new() };
 
     private MapGridComponent? _grid;
 

@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
@@ -14,17 +15,19 @@ namespace Content.IntegrationTests.Tests.GameRules;
 // Once upon a time, players in the lobby weren't ever considered eligible for antag roles.
 // Lets not let that happen again.
 [TestFixture]
-public sealed class AntagPreferenceTest
+public sealed class AntagPreferenceTest : GameTest
 {
+    public override PoolSettings PoolSettings => new PoolSettings
+    {
+        DummyTicker = false,
+        Connected = true,
+        InLobby = true
+    };
+
     [Test]
     public async Task TestLobbyPlayersValid()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            DummyTicker = false,
-            Connected = true,
-            InLobby = true
-        });
+        var pair = Pair;
 
         var server = pair.Server;
         var client = pair.Client;
@@ -52,7 +55,7 @@ public sealed class AntagPreferenceTest
         Assert.That(pool.Count, Is.EqualTo(0));
 
         // Opt into the traitor role.
-        await pair.SetAntagPref("Traitor", true);
+        await pair.SetAntagPreference("Traitor", true);
 
         Assert.That(sys.IsSessionValid(rule, pair.Player, def), Is.True);
         Assert.That(sys.IsEntityValid(client.AttachedEntity, def), Is.True);
@@ -63,7 +66,7 @@ public sealed class AntagPreferenceTest
         Assert.That(sessions.Count, Is.EqualTo(1));
 
         // opt back out
-        await pair.SetAntagPref("Traitor", false);
+        await pair.SetAntagPreference("Traitor", false);
 
         Assert.That(sys.IsSessionValid(rule, pair.Player, def), Is.True);
         Assert.That(sys.IsEntityValid(client.AttachedEntity, def), Is.True);
@@ -71,6 +74,5 @@ public sealed class AntagPreferenceTest
         Assert.That(pool.Count, Is.EqualTo(0));
 
         await server.WaitPost(() => server.EntMan.DeleteEntity(uid));
-        await pair.CleanReturnAsync();
     }
 }

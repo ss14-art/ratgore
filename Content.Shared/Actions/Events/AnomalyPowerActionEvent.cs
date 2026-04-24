@@ -5,9 +5,11 @@ using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Content.Shared.Explosion;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Actions.Events;
 
+[Serializable, NetSerializable]
 public sealed partial class AnomalyPowerActionEvent : InstantActionEvent
 {
     /// <summary>
@@ -71,7 +73,8 @@ public sealed partial class AnomalyPowerActionEvent : InstantActionEvent
     public PyroclasticAnomalySettings? Pyroclastic;
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct AnomalyPowerSettings()
 {
     public string PowerName = string.Empty;
@@ -136,7 +139,8 @@ public partial record struct AnomalyPowerSettings()
     public bool DoSupercritical = true;
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct BluespaceAnomalySettings()
 {
     /// <summary>
@@ -166,7 +170,8 @@ public partial record struct BluespaceAnomalySettings()
     public SoundSpecifier TeleportSound = new SoundPathSpecifier("/Audio/Effects/teleport_arrival.ogg");
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct ElectricalAnomalySettings()
 {
     /// <summary>
@@ -196,7 +201,8 @@ public partial record struct ElectricalAnomalySettings()
     public float EmpDisabledDuration = 60f;
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct ExplosionAnomalySettings()
 {
     /// <summary>
@@ -242,7 +248,8 @@ public partial record struct ExplosionAnomalySettings()
     public float SupercritMaxTileIntensity = 10f;
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct GasProducerAnomalySettings()
 {
     /// <summary>
@@ -296,7 +303,8 @@ public partial record struct GasProducerAnomalySettings()
     public float SupercritTempChange = 0;
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct GravityAnomalySettings()
 {
     /// <summary>
@@ -317,7 +325,8 @@ public partial record struct GravityAnomalySettings()
     public float SpaceRange = 3f;
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct InjectionAnomalySettings()
 {
     /// <summary>
@@ -352,7 +361,8 @@ public partial record struct InjectionAnomalySettings()
     public string Solution { get; set; } = "default";
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct PuddleAnomalySettings()
 {
     /// <summary>
@@ -367,7 +377,8 @@ public partial record struct PuddleAnomalySettings()
     public string Solution { get; set; } = "default";
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct PyroclasticAnomalySettings()
 {
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿# Spells
 spellbook-fireball-name = Fireball
-spellbook-fireball-desc = Get most crew exploding with rage when they see this fireball heading toward them!
+spellbook-fireball-desc = Get most crew exploding with rage when they see this fireball heading toward them! Upgradeable.
 
 spellbook-blink-name = Blink
 spellbook-blink-desc = Don't blink or you'll miss yourself teleporting away.

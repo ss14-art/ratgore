@@ -1,41 +1,18 @@
-using System.Linq;
-using Content.Server.Administration.Systems;
-using Content.Server.Chat.Managers;
 using Content.Shared.GameTicking;
-using Content.Server.Players.PlayTimeTracking;
-using Content.Shared.CCVar;
-using Content.Shared.Chat;
-using Content.Shared.Customization.Systems;
-using Content.Shared.Players;
-using Content.Shared.Preferences;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
-using Robust.Server.Player;
-using Robust.Shared.Configuration;
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
-using Robust.Shared.Serialization.Manager;
-using Robust.Shared.Utility;
-using Timer = Robust.Shared.Timing.Timer;
-using Content.Shared.Humanoid.Prototypes;
-using Content.Shared.Administration.Logs;
-using Content.Shared.Database;
 
 namespace Content.Server.Traits;
 
 public sealed class TraitSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly CharacterRequirementsSystem _characterRequirements = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly AdminSystem _adminSystem = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -45,123 +22,49 @@ public sealed class TraitSystem : EntitySystem
     }
 
     // When the player is spawned in, add all trait components selected during character creation
-    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args) =>
-        ApplyTraits(args.Mob, args.JobId, args.Profile,
-            _playTimeTracking.GetTrackerTimes(args.Player), args.Player.ContentData()?.Whitelisted ?? false);
-
-    /// <summary>
-    ///     Adds the traits selected by a player to an entity.
-    /// </summary>
-    public void ApplyTraits(EntityUid uid, ProtoId<JobPrototype>? jobId, HumanoidCharacterProfile profile,
-        Dictionary<string, TimeSpan> playTimes, bool whitelisted, bool punishCheater = true)
+    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args)
     {
-        var pointsTotal = _configuration.GetCVar(CCVars.GameTraitsDefaultPoints);
-        var traitSelections = _configuration.GetCVar(CCVars.GameTraitsMax);
-        if (jobId is not null && !_prototype.TryIndex(jobId, out var jobPrototype)
-            && jobPrototype is not null && !jobPrototype.ApplyTraits)
-            return;
-
-        if (_prototype.TryIndex<SpeciesPrototype>(profile.Species, out var speciesProto))
-            pointsTotal += speciesProto.BonusTraitPoints;
-
-        var jobPrototypeToUse = _prototype.Index(jobId ?? _prototype.EnumeratePrototypes<JobPrototype>().First().ID);
-        var sortedTraits = new List<TraitPrototype>();
-
-        foreach (var traitId in profile.TraitPreferences)
+        // Check if player's job allows to apply traits
+        if (args.JobId == null ||
+            !_prototypeManager.TryIndex<JobPrototype>(args.JobId ?? string.Empty, out var protoJob) ||
+            !protoJob.ApplyTraits)
         {
-            if (_prototype.TryIndex<TraitPrototype>(traitId, out var traitPrototype))
+            return;
+        }
+
+        foreach (var traitId in args.Profile.TraitPreferences)
+        {
+            if (!_prototypeManager.TryIndex<TraitPrototype>(traitId, out var traitPrototype))
             {
-                sortedTraits.Add(traitPrototype);
-            }
-            else
-            {
-                DebugTools.Assert($"No trait found with ID {traitId}!");
+                Log.Warning($"No trait found with ID {traitId}!");
                 return;
             }
+
+            AddTrait(args.Mob, traitPrototype);
         }
-
-        sortedTraits.Sort();
-        var traitsToAdd = new List<TraitPrototype>();
-        foreach (var traitPrototype in sortedTraits)
-        {
-            if (!_characterRequirements.CheckRequirementsValid(
-                traitPrototype.Requirements,
-                jobPrototypeToUse,
-                profile, playTimes, whitelisted, traitPrototype,
-                EntityManager, _prototype, _configuration,
-                out _))
-                continue;
-
-            // To check for cheaters. :FaridaBirb.png:
-            pointsTotal += traitPrototype.Points;
-            --traitSelections;
-            traitsToAdd.Add(traitPrototype);
-        }
-
-        if (pointsTotal < 0 || traitSelections < 0)
-        {
-            _adminLogManager.Add(LogType.AdminMessage, LogImpact.Extreme, $"{ToPrettyString(uid):player} attempted to spawn with illegal trait selection total {profile.TraitPreferences.Count}, and {pointsTotal} net trait points");
-            if (punishCheater)
-                PunishCheater(uid);
-
-            if (_playerManager.TryGetSessionByEntity(uid, out var targetPlayer))
-            {
-                var feedbackMessage = "You have attempted to spawn with an illegal trait list. None of your traits will be applied. If you think this is in error, please return to the lobby and correct your trait selections.";
-                _chatManager.ChatMessageToOne(
-                    ChatChannel.Emotes,
-                    feedbackMessage,
-                    feedbackMessage,
-                    EntityUid.Invalid,
-                    false,
-                    targetPlayer.Channel);
-            }
-            return;
-        }
-
-        foreach (var trait in traitsToAdd)
-            AddTrait(uid, trait);
     }
 
-    /// <summary>
-    ///     Adds a single Trait Prototype to an Entity.
-    /// </summary>
     public void AddTrait(EntityUid uid, TraitPrototype traitPrototype)
     {
-        foreach (var function in traitPrototype.Functions)
-            function.OnPlayerSpawn(uid, _componentFactory, EntityManager, _serialization);
-    }
-
-    /// <summary>
-    ///     On a non-cheating client, it's not possible to save a character with a negative number of traits. This can however
-    ///     trigger incorrectly if a character was saved, and then at a later point in time an admin changes the traits Cvars to reduce the points.
-    ///     Or if the points costs of traits is increased.
-    /// </summary>
-    private void PunishCheater(EntityUid uid)
-    {
-        if (!_configuration.GetCVar(CCVars.TraitsPunishCheaters)
-            || !_playerManager.TryGetSessionByEntity(uid, out var targetPlayer))
+        if (_whitelistSystem.IsWhitelistFail(traitPrototype.Whitelist, uid) ||
+            _whitelistSystem.IsBlacklistPass(traitPrototype.Blacklist, uid))
             return;
 
-        // For maximum comedic effect, this is plenty of time for the cheater to get on station and start interacting with people.
-        var timeToDestroy = _random.NextFloat(120, 360);
+        // Add all components required by the prototype
+        EntityManager.AddComponents(uid, traitPrototype.Components, false);
 
-        Timer.Spawn(TimeSpan.FromSeconds(timeToDestroy), () => VaporizeCheater(targetPlayer));
-    }
+        // Add item required by the trait
+        if (traitPrototype.TraitGear == null)
+            return;
 
-    /// <summary>
-    ///     https://www.youtube.com/watch?v=X2QMN0a_TrA
-    /// </summary>
-    private void VaporizeCheater (Robust.Shared.Player.ICommonSession targetPlayer)
-    {
-        _adminSystem.Erase(targetPlayer);
+        if (!TryComp(uid, out HandsComponent? handsComponent))
+            return;
 
-        var feedbackMessage = $"[font size=24][color=#ff0000]{"You have spawned in with an illegal trait point total. If this was a result of cheats, then your nonexistence is a skill issue. Otherwise, feel free to click 'Return To Lobby', and fix your trait selections."}[/color][/font]";
-        _chatManager.ChatMessageToOne(
-            ChatChannel.Emotes,
-            feedbackMessage,
-            feedbackMessage,
-            EntityUid.Invalid,
-            false,
-            targetPlayer.Channel);
+        var coords = Transform(uid).Coordinates;
+        var inhandEntity = Spawn(traitPrototype.TraitGear, coords);
+        _sharedHandsSystem.TryPickup(uid,
+            inhandEntity,
+            checkActionBlocker: false,
+            handsComp: handsComponent);
     }
 }

@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Components;
-using Content.Server.Atmos;
 using Content.Server.Atmos.Components;
 using Content.Server.Cargo.Components;
 using Content.Server.Doors.Systems;
@@ -11,7 +10,6 @@ using Content.Server.Mind;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Stack;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._EE.Contractors.Systems;
@@ -20,6 +18,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Construction.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -31,6 +30,7 @@ using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Stacks;
+using Content.Shared.Station.Components;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.Physics;
@@ -63,7 +63,7 @@ public sealed partial class AdminVerbSystem
 
     private void AddTricksVerbs(GetVerbsEvent<Verb> args)
     {
-        if (!EntityManager.TryGetComponent(args.User, out ActorComponent? actor))
+        if (!TryComp(args.User, out ActorComponent? actor))
             return;
 
         var player = actor.PlayerSession;

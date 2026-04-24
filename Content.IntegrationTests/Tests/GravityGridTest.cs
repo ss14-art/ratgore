@@ -1,3 +1,4 @@
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Gravity;
 using Content.Server.Power.Components;
 using Content.Shared.Gravity;
@@ -12,7 +13,7 @@ namespace Content.IntegrationTests.Tests
     /// making sure that gravity is applied to the correct grids.
     [TestFixture]
     [TestOf(typeof(GravityGeneratorComponent))]
-    public sealed class GravityGridTest
+    public sealed class GravityGridTest : GameTest
     {
         [TestPrototypes]
         private const string Prototypes = @"
@@ -32,7 +33,7 @@ namespace Content.IntegrationTests.Tests
         [Test]
         public async Task Test()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             var testMap = await pair.CreateTestMap();
@@ -76,8 +77,8 @@ namespace Content.IntegrationTests.Tests
                 Assert.Multiple(() =>
                 {
                     Assert.That(generatorComponent.GravityActive, Is.True);
-                    Assert.That(!entityMan.GetComponent<GravityComponent>(grid1).EnabledVV);
-                    Assert.That(entityMan.GetComponent<GravityComponent>(grid2).EnabledVV);
+                    Assert.That(!entityMan.GetComponent<GravityComponent>(grid1).Enabled);
+                    Assert.That(entityMan.GetComponent<GravityComponent>(grid2).Enabled);
                 });
 
                 // Re-enable needs power so it turns off again.
@@ -94,11 +95,9 @@ namespace Content.IntegrationTests.Tests
                 Assert.Multiple(() =>
                 {
                     Assert.That(generatorComponent.GravityActive, Is.False);
-                    Assert.That(entityMan.GetComponent<GravityComponent>(grid2).EnabledVV, Is.False);
+                    Assert.That(entityMan.GetComponent<GravityComponent>(grid2).Enabled, Is.False);
                 });
             });
-
-            await pair.CleanReturnAsync();
         }
     }
 }

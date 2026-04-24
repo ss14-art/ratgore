@@ -214,7 +214,7 @@ public abstract class SharedAutodocSystem : EntitySystem
 
     public bool GrabItem(Entity<AutodocComponent, HandsComponent> ent, EntityUid item)
     {
-        return _hands.TryPickup(ent, item, ent.Comp1.ItemSlot, animate: false, handsComp: ent.Comp2);
+        return _hands.TryPickupByName(ent, item, ent.Comp1.ItemSlot, animate: false, handsComp: ent.Comp2);
     }
 
     public void GrabItemOrThrow(Entity<AutodocComponent, HandsComponent> ent, EntityUid item)

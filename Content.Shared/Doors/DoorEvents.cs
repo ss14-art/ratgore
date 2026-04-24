@@ -39,7 +39,7 @@ namespace Content.Shared.Doors
         public bool PerformCollisionCheck;
         public EntityUid? User = null;
 
-        public BeforeDoorClosedEvent(bool performCollisionCheck)
+        public BeforeDoorClosedEvent(bool doorPerformCollisionCheck, bool performCollisionCheck)
         {
             PerformCollisionCheck = performCollisionCheck;
         }

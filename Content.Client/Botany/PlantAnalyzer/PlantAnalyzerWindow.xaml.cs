@@ -150,8 +150,8 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         // Section 4: Tolerances part 2.
         if (msg.TolerancesData is not null)
         {
-            (string, string)[] parameters = [
-                ("seedName", SeedLabel.Text),
+            (string, object)[] parameters = {
+                ("seedName", (object) SeedLabel.Text),
                 ("gases", PlantAnalyzerLocalizationHelper.GasesToLocalizedStrings(msg.TolerancesData.ConsumeGasses, _prototypeManager)),
                 ("kpa", msg.TolerancesData.IdealPressure.ToString("0.00")),
                 ("kpaTolerance", msg.TolerancesData.PressureTolerance.ToString("0.00")),
@@ -159,12 +159,12 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 ("tempTolerance", msg.TolerancesData.HeatTolerance.ToString("0.00")),
                 ("lightLevel", msg.TolerancesData.IdealLight.ToString("0.00")),
                 ("lightTolerance", msg.TolerancesData.LightTolerance.ToString("0.00"))
-            ];
+            };
             EnvironmentLabel.Text = msg.TolerancesData.ConsumeGasses.Count == 0
                 ? msg.TolerancesData.IdealHeat - msg.TolerancesData.HeatTolerance <= 0f && msg.TolerancesData.IdealPressure - msg.TolerancesData.PressureTolerance <= 0f
-                    ? Loc.GetString("plant-analyzer-component-environment-void", [.. parameters])
-                    : Loc.GetString("plant-analyzer-component-environment", [.. parameters])
-                : Loc.GetString("plant-analyzer-component-environment-gas", [.. parameters]);
+                    ? Loc.GetString("plant-analyzer-component-environment-void", parameters)
+                    : Loc.GetString("plant-analyzer-component-environment", parameters)
+                : Loc.GetString("plant-analyzer-component-environment-gas", parameters);
 
             EnvironmentBox.Visible = true;
         }
@@ -181,7 +181,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
             var (produce, producePlural) = PlantAnalyzerLocalizationHelper.ProduceToLocalizedStrings(msg.ProduceData.Produce, _prototypeManager);
             var chemicals = PlantAnalyzerLocalizationHelper.ChemicalsToLocalizedStrings(msg.ProduceData.Chemicals, _prototypeManager);
 
-            (string, object)[] parameters = [
+            (string, object)[] parameters = {
                 ("yield", msg.ProduceData.Yield),
                 ("gasCount", msg.ProduceData.ExudeGasses.Count),
                 ("gases", gases),
@@ -193,9 +193,9 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 ("chemCount", msg.ProduceData.Chemicals.Count),
                 ("chemicals", chemicals),
                 ("nothing", "")
-            ];
+            };
 
-            ProduceLabel.Text = Loc.GetString("plant-analyzer-output", [.. parameters]);
+            ProduceLabel.Text = Loc.GetString("plant-analyzer-output", parameters);
             ProduceBox.Visible = true;
         }
         else

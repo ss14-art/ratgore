@@ -34,14 +34,14 @@ public abstract partial class SharedWeaponAttachmentSystem : EntitySystem
         var itemSlots = EnsureComp<ItemSlotsComponent>(uid);
         var bayonetSlot = new ItemSlot
         {
-            Whitelist = new EntityWhitelist { Components = ["AttachmentBayonet"] },
+            Whitelist = new EntityWhitelist { Components = new[] { "AttachmentBayonet" } },
             Swap = false,
             EjectOnBreak = true,
             Name = Loc.GetString("attachment-bayonet-slot-name")
         };
         var lightSlot = new ItemSlot
         {
-            Whitelist = new EntityWhitelist { Components = ["AttachmentFlashlight"] },
+            Whitelist = new EntityWhitelist { Components = new[] { "AttachmentFlashlight" } },
             Swap = false,
             EjectOnBreak = true,
             Name = Loc.GetString("attachment-light-slot-name"),

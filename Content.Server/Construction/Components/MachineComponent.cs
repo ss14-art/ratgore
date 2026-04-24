@@ -1,6 +1,8 @@
-﻿using Robust.Shared.Containers;
+﻿using Content.Shared.Construction.Components;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+
 
 namespace Content.Server.Construction.Components
 {
@@ -12,16 +14,8 @@ namespace Content.Server.Construction.Components
 
         [ViewVariables]
         public Container BoardContainer = default!;
+
         [ViewVariables]
         public Container PartContainer = default!;
-    }
-
-    /// <summary>
-    /// The different types of scaling that are available for machine upgrades
-    /// </summary>
-    public enum MachineUpgradeScalingType : byte
-    {
-        Linear,
-        Exponential
     }
 }

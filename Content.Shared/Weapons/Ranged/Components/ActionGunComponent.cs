@@ -2,6 +2,7 @@ using Content.Shared.Actions;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
@@ -34,4 +35,5 @@ public sealed partial class ActionGunComponent : Component
 /// <summary>
 /// Action event for <see cref="ActionGunComponent"/> to shoot at a position.
 /// </summary>
+[Serializable, NetSerializable]
 public sealed partial class ActionGunShootEvent : WorldTargetActionEvent;

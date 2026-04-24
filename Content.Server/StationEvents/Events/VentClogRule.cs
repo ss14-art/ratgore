@@ -1,14 +1,13 @@
 using Content.Server.Atmos.Piping.Unary.Components;
-using Content.Server.Station.Components;
+using Content.Server.Fluids.EntitySystems;
+using Content.Server.StationEvents.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.Station.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Random;
 using System.Linq;
-using Content.Server.Fluids.EntitySystems;
-using Content.Server.GameTicking.Rules.Components;
-using Content.Server.StationEvents.Components;
-using Content.Shared.GameTicking.Components;
 
 namespace Content.Server.StationEvents.Events;
 
@@ -29,7 +28,7 @@ public sealed class VentClogRule : StationEventSystem<VentClogRuleComponent>
             .Where(x => !x.Abstract)
             .Select(x => x.ID).ToList();
 
-        foreach (var (_, transform) in EntityManager.EntityQuery<GasVentPumpComponent, TransformComponent>())
+        foreach (var (_, transform) in EntityQuery<GasVentPumpComponent, TransformComponent>())
         {
             if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station != chosenStation)
             {

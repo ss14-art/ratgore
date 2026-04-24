@@ -1,3 +1,4 @@
+using Content.Shared.DoAfter;
 using Content.Shared.Medical.SuitSensor;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 

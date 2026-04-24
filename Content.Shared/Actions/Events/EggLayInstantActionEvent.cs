@@ -1,3 +1,6 @@
-﻿namespace Content.Shared.Actions.Events;
+﻿using Robust.Shared.Serialization;
 
+namespace Content.Shared.Actions.Events;
+
+[Serializable, NetSerializable]
 public sealed partial class EggLayInstantActionEvent : InstantActionEvent {}

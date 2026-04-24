@@ -6,7 +6,6 @@ using Robust.Shared.Toolshed;
 namespace Content.IntegrationTests.Tests.Toolshed;
 
 [TestFixture]
-[Ignore("Broken in 160.x for unknown reasons")]
 public sealed class AdminTest : ToolshedTest
 {
     [Test]
@@ -15,7 +14,7 @@ public sealed class AdminTest : ToolshedTest
         var toolMan = Server.ResolveDependency<ToolshedManager>();
         var admin = Server.ResolveDependency<IAdminManager>();
         var ignored = new HashSet<Assembly>()
-            {typeof(LocTest).Assembly, typeof(Robust.UnitTesting.Shared.Toolshed.LocTest).Assembly};
+            {typeof(LocTest).Assembly};
 
         await Server.WaitAssertion(() =>
         {
@@ -24,6 +23,11 @@ public sealed class AdminTest : ToolshedTest
                 foreach (var cmd in toolMan.DefaultEnvironment.AllCommands())
                 {
                     if (ignored.Contains(cmd.Cmd.GetType().Assembly))
+                        continue;
+
+                    // Only care about content commands.
+                    var assemblyName = cmd.Cmd.GetType().Assembly.FullName;
+                    if (assemblyName == null || !assemblyName.StartsWith("Content."))
                         continue;
 
                     Assert.That(admin.TryGetCommandFlags(cmd, out _), $"Command does not have admin permissions set up: {cmd.FullName()}");

@@ -153,25 +153,30 @@ public sealed partial class CargoSystem
             return orders;
 
         var spaceRemaining = GetCargoSpace(shuttleUid);
-        for (var i = 0; i < component.Orders.Count && spaceRemaining > 0; i++)
+        foreach (var (account, orderList) in component.Orders)
         {
-            var order = component.Orders[i];
-            if (order.Approved)
+            foreach (var order in orderList)
             {
-                var numToShip = order.OrderQuantity - order.NumDispatched;
-                if (numToShip > spaceRemaining)
+                if (spaceRemaining <= 0)
+                    break;
+
+                if (order.Approved)
                 {
-                    // We won't be able to fit the whole order on, so make one
-                    // which represents the space we do have left:
-                    var reducedOrder = new CargoOrderData(order.OrderId,
-                            order.ProductId, order.ProductName, order.Price, spaceRemaining, order.Requester, order.Reason);
-                    orders.Add(reducedOrder);
+                    var numToShip = order.OrderQuantity - order.NumDispatched;
+                    if (numToShip > spaceRemaining)
+                    {
+                        // We won't be able to fit the whole order on, so make one
+                        // which represents the space we do have left:
+                        var reducedOrder = new CargoOrderData(order.OrderId,
+                                order.ProductId, order.ProductName, order.Price, spaceRemaining, order.Requester, order.Reason, order.Account);
+                        orders.Add(reducedOrder);
+                    }
+                    else
+                    {
+                        orders.Add(order);
+                    }
+                    spaceRemaining -= numToShip;
                 }
-                else
-                {
-                    orders.Add(order);
-                }
-                spaceRemaining -= numToShip;
             }
         }
 
@@ -347,8 +352,9 @@ public sealed partial class CargoSystem
 
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        Reset();
-        CleanupTradeStation();
+        _setEnts.Clear();
+        _listEnts.Clear();
+        _pads.Clear();
     }
 
     private void OnStationInitialize(StationInitializedEvent args)

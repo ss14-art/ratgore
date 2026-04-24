@@ -1,13 +1,12 @@
 using Content.Server.Power.EntitySystems;
+using Robust.Server.GameObjects;
 using Content.Shared._Crescent.Misc;
 using Content.Shared.EntityList;
-using Content.Shared.Interaction.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-
+using Robust.Shared.Timing;
 
 namespace Content.Server._Crescent.Misc;
-
 
 /// <summary>
 /// This handles...
@@ -17,6 +16,36 @@ public sealed class PassiveSpawningMachineSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly PowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<PassiveSpawningMachineComponent, BoundUIOpenedEvent>(OnUIOpened);
+        SubscribeLocalEvent<PassiveSpawningMachineComponent, AutominerStartMessage>(OnStartMessage);
+    }
+
+    private void OnUIOpened(EntityUid uid, PassiveSpawningMachineComponent comp, BoundUIOpenedEvent args)
+    {
+        UpdateUi(uid, comp);
+    }
+
+    private void OnStartMessage(EntityUid uid, PassiveSpawningMachineComponent comp, AutominerStartMessage args)
+    {
+        if (comp.isActive) return;
+        comp.isActive = true;
+        comp.cooldownEndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(comp.cycleDuration);
+        comp.passedTime = 0;
+        UpdateUi(uid, comp);
+    }
+
+    private void UpdateUi(EntityUid uid, PassiveSpawningMachineComponent comp)
+    {
+        _ui.SetUiState(uid, AutominerUiKey.Key,
+            new AutominerBoundUserInterfaceState(comp.cooldownEndTime, comp.isActive));
+    }
+
     public override void Update(float delta)
     {
         var query = EntityQueryEnumerator<PassiveSpawningMachineComponent>();
@@ -24,10 +53,23 @@ public sealed class PassiveSpawningMachineSystem : EntitySystem
         {
             if (comp.requirePower && !_powerReceiver.IsPowered(uid))
                 continue;
+
+            if (comp.manualActivation)
+            {
+                if (!comp.isActive) continue;
+
+                if (_gameTiming.CurTime >= comp.cooldownEndTime)
+                {
+                    comp.isActive = false;
+                    UpdateUi(uid, comp);
+                    continue;
+                }
+            }
+
             comp.passedTime += delta;
-            if (comp.passedTime < comp.spawnDelay)
-                continue;
+            if (comp.passedTime < comp.spawnDelay) continue;
             comp.passedTime = 0;
+
             if (!_proto.TryIndex<EntityListPrototype>(comp.entityListProto, out var entityListProto))
             {
                 Log.Error(
