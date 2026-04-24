@@ -1,4 +1,5 @@
 #nullable enable
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Content.IntegrationTests.Pair;
@@ -95,14 +96,16 @@ public sealed class ContentPoolManager : PoolManager<TestPair>
     public override void Startup(params Assembly[] extraAssemblies)
     {
         DefaultCvars.AddRange(PoolManager.TestCvars);
+        PoolManager.DiscoverModules();
 
-        var shared = extraAssemblies
-                .Append(typeof(Shared.Entry.EntryPoint).Assembly)
-                .Append(typeof(PoolManager).Assembly)
-                .ToArray();
+        // SSD: SS14 Content assemblies (not Goobstation)
+        var client = PoolManager.Client.Where(a => !a.GetName().Name!.Contains("Goobstation")).ToArray();
+        var server = PoolManager.Server.Where(a => !a.GetName().Name!.Contains("Goobstation")).ToArray();
+        var shared = PoolManager.Shared.Where(a => !a.GetName().Name!.Contains("Goobstation"))
+            .Concat(extraAssemblies)
+            .Append(typeof(PoolManager).Assembly)
+            .ToArray();
 
-        Startup([typeof(Client.Entry.EntryPoint).Assembly],
-            [typeof(Server.Entry.EntryPoint).Assembly],
-            shared);
+        Startup(client, server, shared);
     }
 }

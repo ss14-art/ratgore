@@ -1,5 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Content.Client.IoC;
 using Content.Client.Parallax.Managers;
 using Content.IntegrationTests.Tests.Destructible;
@@ -12,6 +14,8 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Log;
 using Robust.Shared.Network;
+using Robust.Shared.Reflection;
+using Robust.Shared.Testing;
 using Robust.Shared.Utility;
 using Robust.UnitTesting;
 
@@ -101,6 +105,47 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair
                     ClientBeforeIoC = () => IoCManager.Register<IParallaxManager, DummyParallaxManager>(true)
                 });
         };
+
+        opts.BeforeRegisterComponents += () =>
+        {
+            var refl = IoCManager.Resolve<IReflectionManager>();
+            var modLoader = IoCManager.Resolve<IModLoader>();
+
+            var loaded = refl.Assemblies.Select(a => a.GetName().Name).ToHashSet();
+            var goobAsms = PoolManager.Client.Concat(PoolManager.Shared)
+                .Where(a => a.GetName().Name!.Contains("Goobstation"))
+                .ToArray();
+
+            var toLoadReflection = goobAsms
+                .Where(a => !loaded.Contains(a.GetName().Name))
+                .ToArray();
+
+            refl.LoadAssemblies(toLoadReflection);
+
+            foreach (var asm in goobAsms)
+            {
+                var iocClasses = asm.GetTypes().Where(t => t.Name.Contains("Goob") && t.Name.Contains("IoC")).ToArray();
+                foreach (var iocClass in iocClasses)
+                {
+                    var registerMethod = iocClass.GetMethod("Register", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (registerMethod != null)
+                    {
+                        registerMethod.Invoke(null, null);
+                    }
+                }
+            }
+
+            var addMethod = modLoader.GetType().GetMethod("AddModWithoutInit", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (addMethod != null)
+            {
+                foreach (var asm in goobAsms)
+                {
+                    if (!modLoader.LoadedModules.Contains(asm))
+                        addMethod.Invoke(modLoader, new object[] { asm });
+                }
+            }
+        };
+
         return opts;
     }
 
@@ -123,6 +168,47 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair
             entSysMan.LoadExtraSystemType<DeviceNetworkTestSystem>();
             entSysMan.LoadExtraSystemType<TestDestructibleListenerSystem>();
         };
+
+        opts.BeforeRegisterComponents += () =>
+        {
+            var refl = IoCManager.Resolve<IReflectionManager>();
+            var modLoader = IoCManager.Resolve<IModLoader>();
+
+            var loaded = refl.Assemblies.Select(a => a.GetName().Name).ToHashSet();
+            var goobAsms = PoolManager.Server.Concat(PoolManager.Shared)
+                .Where(a => a.GetName().Name!.Contains("Goobstation"))
+                .ToArray();
+
+            var toLoadReflection = goobAsms
+                .Where(a => !loaded.Contains(a.GetName().Name))
+                .ToArray();
+
+            refl.LoadAssemblies(toLoadReflection);
+
+            foreach (var asm in goobAsms)
+            {
+                var iocClasses = asm.GetTypes().Where(t => t.Name.Contains("Goob") && t.Name.Contains("IoC")).ToArray();
+                foreach (var iocClass in iocClasses)
+                {
+                    var registerMethod = iocClass.GetMethod("Register", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (registerMethod != null)
+                    {
+                        registerMethod.Invoke(null, null);
+                    }
+                }
+            }
+
+            var addMethod = modLoader.GetType().GetMethod("AddModWithoutInit", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (addMethod != null)
+            {
+                foreach (var asm in goobAsms)
+                {
+                    if (!modLoader.LoadedModules.Contains(asm))
+                        addMethod.Invoke(modLoader, new object[] { asm });
+                }
+            }
+        };
+
         return opts;
     }
 
