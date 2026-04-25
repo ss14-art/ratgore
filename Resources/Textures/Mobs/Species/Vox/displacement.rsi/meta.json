@@ -15,19 +15,7 @@
             "directions": 4
         },
         {
-            "name": "back",
-            "directions": 4
-        },
-        {
-            "name": "hand",
-            "directions": 4
-        },
-        {
             "name": "ears",
-            "directions": 4
-        },
-        {
-            "name": "eyes",
             "directions": 4
         },
         {
