@@ -16,7 +16,7 @@ public sealed class RetroMonitorOverlay : Overlay
     public RetroMonitorOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _retroShader = _prototypeManager.Index<ShaderPrototype>("CRT_VHS").InstanceUnique();
+        _retroShader = _prototypeManager.Index<ShaderPrototype>("crt_vhs").InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
