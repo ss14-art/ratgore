@@ -218,23 +218,23 @@ namespace Content.Server.Database
             }
 
             return new HumanoidCharacterProfile(
-                profile.CharacterName,
-                profile.FlavorText,
-                profile.Species,
-                profile.CustomSpecieName,
-                profile.Nationality,
-                profile.Employer,
-                profile.Lifepath,
-                profile.Height,
-                profile.Width,
-                profile.Age,
-                sex,
-                voice, // Art-TTS
-                gender,
-                profile.DisplayPronouns,
-                profile.StationAiName,
-                profile.CyborgName,
-                new HumanoidCharacterAppearance(
+                name: profile.CharacterName,
+                flavortext: profile.FlavorText,
+                species: profile.Species,
+                customspeciename: profile.CustomSpecieName,
+                nationality: profile.Nationality,
+                employer: profile.Employer,
+                lifepath: profile.Lifepath,
+                height: profile.Height,
+                width: profile.Width,
+                age: profile.Age,
+                sex: sex,
+                voice: voice, // Art-TTS
+                gender: gender,
+                displayPronouns: profile.DisplayPronouns,
+                stationAiName: profile.StationAiName,
+                cyborgName: profile.CyborgName,
+                appearance: new HumanoidCharacterAppearance(
                     profile.HairName,
                     Color.FromHex(profile.HairColor),
                     profile.FacialHairName,
@@ -243,19 +243,20 @@ namespace Content.Server.Database
                     Color.FromHex(profile.SkinColor),
                     markings
                 ),
-                spawnPriority,
-                jobs,
-                (PreferenceUnavailableMode) profile.PreferenceUnavailable,
-                antags.ToHashSet(),
-                traits.ToHashSet(),
-                loadouts.Select(l => new LoadoutPreference(l.LoadoutName)
+                spawnPriority: spawnPriority,
+                jobPriorities: jobs,
+                preferenceUnavailable: (PreferenceUnavailableMode) profile.PreferenceUnavailable,
+                antagPreferences: antags.ToHashSet(),
+                traitPreferences: traits.ToHashSet(),
+                loadoutPreferences: loadouts.Select(l => new LoadoutPreference(l.LoadoutName)
                 {
                     CustomName = l.CustomName, CustomDescription = l.CustomDescription,
                     CustomColorTint = l.CustomColorTint, CustomHeirloom = l.CustomHeirloom, Selected = true,
                 }).ToHashSet(),
-                profile.BankBalance,
-                profile.Faction,
-                profile.CharacterFlags.ToList()
+                bankWealth: profile.BankBalance,
+                proFaction: profile.Faction,
+                characterFlags: profile.CharacterFlags.ToList(),
+                loadouts: null!
             );
         }
 
