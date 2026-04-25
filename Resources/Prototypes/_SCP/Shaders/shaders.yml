@@ -12,3 +12,8 @@
   id: Vignette
   kind: source
   path: "/Textures/_Scp/Shaders/vignette.swsl"
+
+- type: shader
+  id: LightingOverlay
+  kind: source
+  path: "/Textures/_Scp/Shaders/light.swsl"
