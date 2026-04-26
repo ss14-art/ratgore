@@ -1,5 +1,5 @@
 - type: shader
-  id: CRT_VHS
+  id: crt_vhs
   kind: source
   path: "/Textures/_Scp/Shaders/crt_vhs.swsl"
 
