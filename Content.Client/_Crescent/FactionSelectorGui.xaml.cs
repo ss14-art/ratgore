@@ -60,6 +60,9 @@ namespace Content.Client._Crescent
         {
             Profile = profile?.Clone();
             index = slot;
+
+            if (_prefsMan.ServerDataLoaded)
+                UpdateUI();
         }
 
         public FactionSelectorGui(IClientPreferencesManager preferencesManager, IPrototypeManager prototypeManager, CharacterSetupGui setupUI)

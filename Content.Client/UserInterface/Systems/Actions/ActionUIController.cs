@@ -70,6 +70,11 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
     public ActionUIController()
     {
+        for (var i = 0; i < 10; i++)
+        {
+            _actions.Add(null);
+        }
+
         _menuDragHelper = new DragDropHelper<ActionButton>(OnMenuBeginDrag, OnMenuContinueDrag, OnMenuEndDrag);
         _dragShadow = new TextureRect
         {
@@ -121,14 +126,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         {
             var boundId = i; // This is needed, because the lambda captures it.
             var boundKey = hotbarKeys[i];
-            builder = builder.Bind(boundKey, new PointerInputCmdHandler((in PointerInputCmdArgs args) =>
-            {
-                if (args.State != BoundKeyState.Down)
-                    return false;
-
-                TriggerAction(boundId);
-                return true;
-            }, false, true));
+            builder = builder.Bind(boundKey, InputCmdHandler.FromDelegate(_ => TriggerAction(boundId)));
         }
 
         builder
@@ -354,16 +352,17 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     private void TriggerAction(int index)
     {
         if (_actionsSystem == null ||
-            !_actions.TryGetValue(index, out var actionId) ||
+            index < 0 || index >= _actions.Count ||
+            _actions[index] is not { } actionId ||
             !_actionsSystem.TryGetActionData(actionId, out var baseAction))
         {
             return;
         }
 
         if (baseAction is BaseTargetActionComponent action)
-            ToggleTargeting(actionId.Value, action);
+            ToggleTargeting(actionId, action);
         else
-            _actionsSystem?.TriggerAction(actionId.Value, baseAction);
+            _actionsSystem.TriggerAction(actionId, baseAction);
     }
 
     private void OnActionAdded(EntityUid actionId)
@@ -381,7 +380,21 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (_actions.Contains(actionId))
             return;
 
+        for (var i = 0; i < 10; i++)
+        {
+            if (i >= _actions.Count)
+                _actions.Add(null);
+
+            if (_actions[i] != null)
+                continue;
+
+            _actions[i] = actionId;
+            OnActionsUpdated();
+            return;
+        }
+
         _actions.Add(actionId);
+        OnActionsUpdated();
     }
 
     private void OnActionRemoved(EntityUid actionId)
@@ -392,7 +405,21 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (actionId == SelectingTargetFor)
             StopTargeting();
 
-        _actions.RemoveAll(x => x == actionId);
+        for (var i = 0; i < _actions.Count; i++)
+        {
+            if (_actions[i] != actionId)
+                continue;
+
+            if (i < 10)
+                _actions[i] = null;
+            else
+            {
+                _actions.RemoveAt(i);
+                i--;
+            }
+        }
+
+        OnActionsUpdated();
     }
 
     private void OnActionsUpdated()
@@ -560,21 +587,23 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             if (_container?.TryGetButtonIndex(button, out position) ?? false)
             {
                 if (_actions.Count > position && position >= 0)
-                    _actions.RemoveAt(position);
+                {
+                    if (position < 10)
+                        _actions[position] = null;
+                    else
+                        _actions.RemoveAt(position);
+                }
             }
         }
         else if (button.TryReplaceWith(actionId.Value, _actionsSystem) &&
             _container != null &&
             _container.TryGetButtonIndex(button, out position))
         {
-            if (position >= _actions.Count)
+            while (position >= _actions.Count)
             {
-                _actions.Add(actionId);
+                _actions.Add(null);
             }
-            else
-            {
-                _actions[position] = actionId;
-            }
+            _actions[position] = actionId;
         }
 
         if (updateSlots)
@@ -826,12 +855,46 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             return;
 
         _actions.Clear();
-        foreach (var assign in assignments)
+
+        var maxSlot = assignments.Select(a => (int) a.Slot).DefaultIfEmpty(-1).Max();
+        for (var i = 0; i <= Math.Max(maxSlot, 9); i++)
         {
-            _actions.Add(assign.ActionId);
+            _actions.Add(null);
         }
 
-        _container?.SetActionData(_actionsSystem, _actions.ToArray());
+        foreach (var assign in assignments)
+        {
+            if (assign.Hotbar != 0)
+                continue;
+
+            _actions[assign.Slot] = assign.ActionId;
+        }
+
+        // Auto-populate any empty slots with available actions
+        var allActions = _actionsSystem.GetClientActions().ToList();
+        allActions.Sort(ActionComparer);
+
+        foreach (var (id, _) in allActions)
+        {
+            if (_actions.Contains(id))
+                continue;
+
+            var found = false;
+            for (var i = 0; i < 10; i++)
+            {
+                if (_actions[i] != null)
+                    continue;
+
+                _actions[i] = id;
+                found = true;
+                break;
+            }
+
+            if (!found)
+                _actions.Add(id);
+        }
+
+        OnActionsUpdated();
     }
 
     public void RemoveActionContainer()
@@ -845,6 +908,11 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         system.UnlinkActions += OnComponentUnlinked;
         system.ClearAssignments += ClearActions;
         system.AssignSlot += AssignSlots;
+
+        // The gameplay screen can load before the actions system is available.
+        // In that case we still need an initial sync for already-attached actions.
+        system.LinkAllActions();
+        QueueWindowUpdate();
     }
 
     public void OnSystemUnloaded(ActionsSystem system)
@@ -884,14 +952,21 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (_actionsSystem == null)
             return;
 
-        var actions = _actionsSystem.GetClientActions().Where(action => action.Comp.AutoPopulate).ToList();
+        var actions = _actionsSystem.GetClientActions().ToList();
         actions.Sort(ActionComparer);
 
         _actions.Clear();
-        foreach (var (action, _) in actions)
+        for (var i = 0; i < 10; i++)
         {
-            if (!_actions.Contains(action))
-                _actions.Add(action);
+            _actions.Add(null);
+        }
+
+        for (var i = 0; i < actions.Count; i++)
+        {
+            if (i < 10)
+                _actions[i] = actions[i].Id;
+            else
+                _actions.Add(actions[i].Id);
         }
     }
 

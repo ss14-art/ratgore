@@ -2,11 +2,13 @@ using Content.Client.Hands.Systems;
 using Content.Client.NPC.HTN;
 using Content.Shared.CCVar;
 using Content.Shared.CombatMode;
+using Content.Shared.Input;
 using Content.Client.CombatMode;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Input.Binding;
 
 namespace Content.Client.CombatMode;
 
@@ -19,7 +21,7 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
     [Dependency] private readonly IEyeManager _eye = default!;
 
     /// <summary>
-    /// Raised whenever combat mode changes. 
+    /// Raised whenever combat mode changes.
     /// C# .NET 9 event, not SS14 event.
     /// use SharedCombatModeSystem.ToggleCombatActionEvent instead for anything else.
     /// </summary>
@@ -32,7 +34,21 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
         SubscribeLocalEvent<CombatModeComponent, AfterAutoHandleStateEvent>(OnHandleState);
 
         Subs.CVar(_cfg, CCVars.CombatModeIndicatorsPointShow, OnShowCombatIndicatorsChanged, true);
+
+        CommandBinds.Builder
+            .Bind(ContentKeyFunctions.CombatModeToggle,
+                InputCmdHandler.FromDelegate(_ => ToggleCombat()))
+            .Register<CombatModeSystem>();
     }
+
+    private void ToggleCombat()
+    {
+        if (_playerManager.LocalEntity is not { } entity)
+            return;
+
+        RaisePredictiveEvent(new ToggleCombatActionEvent());
+    }
+
 
     private void OnHandleState(EntityUid uid, CombatModeComponent component, ref AfterAutoHandleStateEvent args)
     {

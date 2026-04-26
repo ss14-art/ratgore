@@ -47,6 +47,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ProjectileComponent, PreventCollideEvent>(PreventCollision);
+        SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<EmbeddableProjectileComponent, ProjectileHitEvent>(OnEmbedProjectileHit);
         SubscribeLocalEvent<EmbeddableProjectileComponent, ThrowDoHitEvent>(OnEmbedThrowDoHit);
         SubscribeLocalEvent<EmbeddableProjectileComponent, ActivateInWorldEvent>(OnEmbedActivate);
@@ -177,6 +178,17 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         component.Shooter = shooterId;
         Dirty(id, component);
+    }
+
+    private void OnCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
+    {
+        if (args.OurFixtureId != ProjectileFixture)
+            return;
+
+        if (!TryComp<PhysicsComponent>(uid, out var physics))
+            return;
+
+        ProjectileCollide((uid, component, physics), args.OtherEntity);
     }
 
     public void ProjectileCollide(Entity<ProjectileComponent, PhysicsComponent> projectile, EntityUid target, bool prediction = false)

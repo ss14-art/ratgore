@@ -48,7 +48,7 @@ public sealed class NationalitySystem : EntitySystem
 
         var jobPrototypeToUse = _prototype.Index(jobId.Value);
 
-        ProtoId<NationalityPrototype> nationality = profile.Nationality != string.Empty? profile.Nationality : SharedHumanoidAppearanceSystem.DefaultNationality;
+        ProtoId<NationalityPrototype> nationality = !string.IsNullOrEmpty(profile.Nationality) ? profile.Nationality : SharedHumanoidAppearanceSystem.DefaultNationality;
 
         if(!_prototype.TryIndex<NationalityPrototype>(nationality, out var nationalityPrototype))
         {

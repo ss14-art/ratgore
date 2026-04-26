@@ -48,7 +48,7 @@ public sealed class LifepathSystem : EntitySystem
 
         var jobPrototypeToUse = _prototype.Index(jobId.Value);
 
-        ProtoId<LifepathPrototype> lifepath = profile.Lifepath != string.Empty? profile.Lifepath : SharedHumanoidAppearanceSystem.DefaultLifepath;
+        ProtoId<LifepathPrototype> lifepath = !string.IsNullOrEmpty(profile.Lifepath) ? profile.Lifepath : SharedHumanoidAppearanceSystem.DefaultLifepath;
 
         if(!_prototype.TryIndex<LifepathPrototype>(lifepath, out var lifepathPrototype))
         {

@@ -11,18 +11,21 @@ marking-used = { $marking-name }
 marking-used-forced = { $marking-name } (Принудительно)
 marking-slot-add = Добавить
 marking-slot-remove = Удалить
+marking-slot-index = Слот { $index }
+marking-slot-customize = Настройка
+marking-slot-color = Цвет { $state }:
 
 # Categories
 
 markings-category-Hair = Причёска
-markings-category-RightArm = Right Arm
-markings-category-RightHand = Right Hand
-markings-category-LeftArm = Left Arm
-markings-category-LeftHand = Left Hand
-markings-category-RightLeg = Right Leg
-markings-category-RightFoot = Right Foot
-markings-category-LeftLeg = Left Leg
-markings-category-LeftFoot = Left Foot
+markings-category-RightArm = Правая рука
+markings-category-RightHand = Правая кисть
+markings-category-LeftArm = Левая рука
+markings-category-LeftHand = Левая кисть
+markings-category-RightLeg = Правая нога
+markings-category-RightFoot = Правая стопа
+markings-category-LeftLeg = Левая нога
+markings-category-LeftFoot = Левая стопа
 markings-category-FacialHair = Лицевая растительность
 markings-category-Head = Голова
 markings-category-Undershirt = Рубашка

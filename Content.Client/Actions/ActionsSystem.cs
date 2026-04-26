@@ -264,12 +264,12 @@ namespace Content.Client.Actions
                 return;
             }
 
-            if (action is not InstantActionComponent instantAction)
-                return;
-
             if (action.ClientExclusive)
             {
-                PerformAction(user, actions, actionId, instantAction, instantAction.Event, GameTiming.CurTime);
+                if (action is InstantActionComponent instantAction)
+                {
+                    PerformAction(user, actions, actionId, instantAction, instantAction.Event, GameTiming.CurTime);
+                }
             }
             else
             {

@@ -186,7 +186,7 @@ binds:
   mod1: Alt
 - function: OpenCharacterMenu
   type: State
-  key: C
+  key: J
 - function: OpenEmotesMenu
   type: State
   key: Y
@@ -520,6 +520,9 @@ binds:
 - function: OpenAbilitiesMenu
   type: State
   key: K
+- function: CombatModeToggle
+  type: State
+  key: C
 - function: Hotbar0
   type: State
   key: Num0

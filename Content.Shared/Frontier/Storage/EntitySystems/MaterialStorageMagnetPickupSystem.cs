@@ -89,6 +89,13 @@ public sealed class MaterialStorageMagnetPickupSystem : EntitySystem
             if (!comp.MagnetEnabled)
                 continue;
 
+            if (!float.IsFinite(comp.Range) || comp.Range <= 0f)
+            {
+                Log.Warning($"Disabled material storage magnet on {ToPrettyString(uid)} due to invalid range {comp.Range}.");
+                comp.MagnetEnabled = false;
+                continue;
+            }
+
             var parentUid = xform.ParentUid;
 
             foreach (var near in _lookup.GetEntitiesInRange(uid, comp.Range, LookupFlags.Dynamic | LookupFlags.Sundries))

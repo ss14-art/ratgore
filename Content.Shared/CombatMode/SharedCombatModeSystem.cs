@@ -19,6 +19,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<CombatModeComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<CombatModeComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<CombatModeComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<CombatModeComponent, ToggleCombatActionEvent>(OnActionPerform);
     }
@@ -27,6 +28,11 @@ public abstract class SharedCombatModeSystem : EntitySystem
     {
         _actionsSystem.AddAction(uid, ref component.CombatToggleActionEntity, component.CombatToggleAction);
         Dirty(uid, component);
+    }
+
+    private void OnStartup(EntityUid uid, CombatModeComponent component, ComponentStartup args)
+    {
+        _actionsSystem.AddAction(uid, ref component.CombatToggleActionEntity, component.CombatToggleAction);
     }
 
     private void OnShutdown(EntityUid uid, CombatModeComponent component, ComponentShutdown args)

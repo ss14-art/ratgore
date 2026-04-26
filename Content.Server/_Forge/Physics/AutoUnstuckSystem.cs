@@ -62,6 +62,10 @@ public sealed class AutoUnstuckSystem : EntitySystem
         foreach (var awake in _awakeSnapshot)
         {
             var uid = awake.Owner;
+
+            if (TerminatingOrDeleted(uid))
+                continue;
+
             var body = awake.Comp1;
 
             if (body.BodyType == BodyType.Static || !body.CanCollide)
@@ -73,7 +77,10 @@ public sealed class AutoUnstuckSystem : EntitySystem
             if (IsPaused(uid))
                 continue;
 
-            var contacts = _physics.GetContacts(uid);
+            if (!TryComp<FixturesComponent>(uid, out var fixtures))
+                continue;
+
+            var contacts = _physics.GetContacts((uid, fixtures));
             var hasStaticHard = false;
             var awaySum = Vector2.Zero;
 

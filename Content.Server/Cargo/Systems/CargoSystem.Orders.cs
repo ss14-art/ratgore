@@ -169,7 +169,10 @@ namespace Content.Server.Cargo.Systems
             }
 
             // Find our order again. It might have been dispatched or approved already
-            var order = orderDatabase.Orders[component.Account].Find(order => args.OrderId == order.OrderId && !order.Approved);
+            if (!orderDatabase.Orders.TryGetValue(component.Account, out var orders))
+                return;
+
+            var order = orders.Find(order => args.OrderId == order.OrderId && !order.Approved);
             if (order == null || !_protoMan.TryIndex(order.Account, out var account))
             {
                 return;
@@ -257,7 +260,7 @@ namespace Content.Server.Cargo.Systems
                 LogImpact.Low,
                 $"{ToPrettyString(player):user} approved order [orderId:{order.OrderId}, quantity:{order.OrderQuantity}, product:{order.ProductId}, requester:{order.Requester}, reason:{order.Reason}] on account {order.Account} with balance at {accountBalance}");
 
-            orderDatabase.Orders[component.Account].Remove(order);
+            orders.Remove(order);
             UpdateBankAccount(station.Value, bank, -cost);
             UpdateOrders(station.Value);
         }
@@ -444,12 +447,17 @@ namespace Content.Server.Cargo.Systems
             if (!TryComp<StationBankAccountComponent>(station, out var bank))
                 return [];
 
-            var ourOrders = station.Comp.Orders[console.Comp.Account];
+            if (!station.Comp.Orders.TryGetValue(console.Comp.Account, out var ourOrders))
+                ourOrders = new List<CargoOrderData>();
 
             if (console.Comp.Account == bank.PrimaryAccount)
                 return ourOrders;
 
-            var otherOrders = station.Comp.Orders[bank.PrimaryAccount].Where(order => order.Account == console.Comp.Account);
+            var otherOrders = Enumerable.Empty<CargoOrderData>();
+            if (station.Comp.Orders.TryGetValue(bank.PrimaryAccount, out var primaryOrders))
+            {
+                otherOrders = primaryOrders.Where(order => order.Account == console.Comp.Account);
+            }
 
             return ourOrders.Concat(otherOrders).ToList();
         }
@@ -480,23 +488,29 @@ namespace Content.Server.Cargo.Systems
             if (!TryComp<StationBankAccountComponent>(station, out var bank))
                 return amount;
 
-            foreach (var order in station.Comp.Orders[account])
+            if (station.Comp.Orders.TryGetValue(account, out var accountOrders))
             {
-                if (!order.Approved)
-                    continue;
-                amount += order.OrderQuantity - order.NumDispatched;
+                foreach (var order in accountOrders)
+                {
+                    if (!order.Approved)
+                        continue;
+                    amount += order.OrderQuantity - order.NumDispatched;
+                }
             }
 
             if (account == bank.PrimaryAccount)
                 return amount;
 
-            foreach (var order in station.Comp.Orders[bank.PrimaryAccount])
+            if (station.Comp.Orders.TryGetValue(bank.PrimaryAccount, out var primaryOrders))
             {
-                if (order.Account != account)
-                    continue;
-                if (!order.Approved)
-                    continue;
-                amount += order.OrderQuantity - order.NumDispatched;
+                foreach (var order in primaryOrders)
+                {
+                    if (order.Account != account)
+                        continue;
+                    if (!order.Approved)
+                        continue;
+                    amount += order.OrderQuantity - order.NumDispatched;
+                }
             }
 
             return amount;

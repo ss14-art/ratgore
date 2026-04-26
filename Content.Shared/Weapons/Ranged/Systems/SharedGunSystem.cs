@@ -468,6 +468,62 @@ public abstract partial class SharedGunSystem : EntitySystem
         bool throwItems = false)
     {
         userImpulse = false;
+
+        var fromMap = fromCoordinates.ToMap(EntityManager, TransformSystem);
+        var toMap = toCoordinates.ToMap(EntityManager, TransformSystem);
+
+        if (fromMap.MapId != toMap.MapId)
+            return;
+
+        var direction = toMap.Position - fromMap.Position;
+        if (direction == Vector2.Zero)
+            direction = Vector2.UnitX;
+
+        var gunVelocity = Vector2.Zero;
+        if (user != null && TryComp<PhysicsComponent>(user, out var userPhysics))
+        {
+            gunVelocity = userPhysics.LinearVelocity;
+        }
+
+        foreach (var (ent, shootable) in ammo)
+        {
+            if (throwItems)
+            {
+                if (ent != null)
+                    ThrowingSystem.TryThrow(ent.Value, direction, 10f, user);
+                continue;
+            }
+
+            userImpulse = true;
+
+            switch (shootable)
+            {
+                case CartridgeAmmoComponent cartridge:
+                    if (!cartridge.Spent)
+                    {
+                        SetCartridgeSpent(ent!.Value, cartridge, true);
+                        if (cartridge.Prototype != null)
+                        {
+                            var projectile = Spawn(cartridge.Prototype, fromCoordinates);
+                            ShootProjectile(projectile, direction, gunVelocity, gunUid, user, speed: gun.ProjectileSpeedModified);
+                        }
+                    }
+                    break;
+                case AmmoComponent ammoComp:
+                    if (ent != null)
+                    {
+                        ShootProjectile(ent.Value, direction, gunVelocity, gunUid, user, speed: gun.ProjectileSpeedModified);
+                    }
+                    break;
+                case HitscanPrototype hitscan:
+                    FireHitscan(gunUid, gun, hitscan, fromCoordinates, toCoordinates, user);
+                    break;
+            }
+        }
+    }
+
+    protected virtual void FireHitscan(EntityUid gunUid, GunComponent gun, HitscanPrototype hitscan, EntityCoordinates fromCoordinates, EntityCoordinates toCoordinates, EntityUid? user = null)
+    {
     }
 
     public void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid? gunUid, EntityUid? user = null, float speed = 20f)
@@ -491,7 +547,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (shooter != null)
             Projectiles.SetShooter(uid, projectile, shooter.Value);
 
-        TransformSystem.SetWorldRotation(uid, direction.ToWorldAngle() + projectile.Angle);
+        TransformSystem.SetWorldRotation(uid, direction.ToAngle() + projectile.Angle);
     }
 
     protected abstract void Popup(string message, EntityUid? uid, EntityUid? user);

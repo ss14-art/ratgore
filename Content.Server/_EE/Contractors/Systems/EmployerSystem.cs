@@ -48,7 +48,7 @@ public sealed class EmployerSystem : EntitySystem
 
         var jobPrototypeToUse = _prototype.Index(jobId.Value);
 
-        ProtoId<EmployerPrototype> employer = profile.Employer != string.Empty ? profile.Employer : SharedHumanoidAppearanceSystem.DefaultEmployer;
+        ProtoId<EmployerPrototype> employer = !string.IsNullOrEmpty(profile.Employer) ? profile.Employer : SharedHumanoidAppearanceSystem.DefaultEmployer;
 
         if(!_prototype.TryIndex<EmployerPrototype>(employer, out var employerPrototype))
         {

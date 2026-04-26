@@ -147,6 +147,10 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     public List<string> CharacterFlags { get; private set; } = new();
 
 
+    public HumanoidCharacterProfile()
+    {
+    }
+
     public HumanoidCharacterProfile(
         string name,
         string flavortext,
@@ -176,7 +180,7 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         long bankWealth,
         string proFaction,
         List<string> characterFlags,
-        HumanoidCharacterProfile loadouts
+        HumanoidCharacterProfile? loadouts
     )
     {
         Name = name;
@@ -207,11 +211,11 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         BankBalance = bankWealth;
         Faction = proFaction;
         CharacterFlags = characterFlags;
-        Loadouts = loadouts;
+        Loadouts = loadouts!;
     }
 
     /// <summary>Copy constructor</summary>
-    public HumanoidCharacterProfile(HumanoidCharacterProfile other, HumanoidCharacterProfile loadouts)
+    public HumanoidCharacterProfile(HumanoidCharacterProfile other)
         : this(
             other.Name,
             other.FlavorText,
@@ -240,17 +244,41 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
             new HashSet<LoadoutPreference>(other.LoadoutPreferences),
             other.BankBalance,
             other.Faction,
-            other.CharacterFlags,
-            loadouts) { }
+            new List<string>(other.CharacterFlags),
+            ReferenceEquals(other.Loadouts, other) ? null : other.Loadouts) { }
 
-    /// <summary>
-    ///     Get the default humanoid character profile, using internal constant values.
-    ///     Defaults to <see cref="SharedHumanoidAppearanceSystem.DefaultSpecies"/> for the species.
-    /// </summary>
-    /// <returns></returns>
-    public HumanoidCharacterProfile(HumanoidCharacterProfile loadouts) {
-        Loadouts = loadouts;
-    }
+    /// <summary>Copy constructor</summary>
+    public HumanoidCharacterProfile(HumanoidCharacterProfile other, HumanoidCharacterProfile? loadouts)
+        : this(
+            other.Name,
+            other.FlavorText,
+            other.Species,
+            other.Customspeciename,
+            // EE -- Contractors Change Start
+            other.Nationality,
+            other.Employer,
+            other.Lifepath,
+            // EE -- Contractors Change End
+            other.Height,
+            other.Width,
+            other.Age,
+            other.Sex,
+            other.Voice, // Art-TTS
+            other.Gender,
+            other.DisplayPronouns,
+            other.StationAiName,
+            other.CyborgName,
+            other.Appearance.Clone(),
+            other.SpawnPriority,
+            new Dictionary<string, JobPriority>(other.JobPriorities),
+            other.PreferenceUnavailable,
+            new HashSet<string>(other.AntagPreferences),
+            new HashSet<string>(other.TraitPreferences),
+            new HashSet<LoadoutPreference>(other.LoadoutPreferences),
+            other.BankBalance,
+            other.Faction,
+            new List<string>(other.CharacterFlags),
+            loadouts) { }
 
     /// <summary>
     ///     Return a default character profile, based on species.i
@@ -465,7 +493,14 @@ public string Summary =>
             ("age", Age)
         );
 
-public HumanoidCharacterProfile Loadouts { get; set; }
+    [DataField]
+    private HumanoidCharacterProfile? _loadouts;
+
+    public HumanoidCharacterProfile Loadouts
+    {
+        get => _loadouts ?? this;
+        set => _loadouts = ReferenceEquals(value, this) ? null : value;
+    }
 
 public bool MemberwiseEquals(ICharacterProfile maybeOther)
     {
@@ -491,6 +526,9 @@ public bool MemberwiseEquals(ICharacterProfile maybeOther)
             && FlavorText == other.FlavorText
             && Faction == other.Faction
             && BankBalance == other.BankBalance
+            && Height == other.Height
+            && Width == other.Width
+            && Customspeciename == other.Customspeciename
             && CharacterFlags.SequenceEqual(other.CharacterFlags);
     }
 
@@ -720,6 +758,8 @@ public bool MemberwiseEquals(ICharacterProfile maybeOther)
         hashCode.Add(Customspeciename);
         hashCode.Add(Faction);
         hashCode.Add(BankBalance);
+        hashCode.Add(Height);
+        hashCode.Add(Width);
         hashCode.Add(CharacterFlags);
         return hashCode.ToHashCode();
     }

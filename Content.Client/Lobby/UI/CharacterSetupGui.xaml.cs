@@ -66,6 +66,10 @@ namespace Content.Client.Lobby.UI
                 args.Event.Handle();
             };
             FactionSelector = new FactionSelectorGui(preferencesManager, protoManager, this);
+            FactionSelector.Save += (profile, slot) =>
+            {
+                preferencesManager.UpdateCharacter(profile, slot);
+            };
             _humanoidProfileEditor = profileEditor;
             RulesButton.OnPressed += _ => new RulesAndInfoWindow().Open();
 
