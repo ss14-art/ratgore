@@ -216,9 +216,11 @@ public sealed partial class ShuttleSystem
         // process tile and entity damage
         ProcessImpactZone(ent, grid, tile, energy, deltaV.Normalized(), radius);
 
-        // throw every entity on grid if the impulse is not negligible
-        if (deltaV.Length() > _minImpulseVelocity)
-            ThrowEntitiesOnGrid(ent, xform, -deltaV);
+        // Rat-start
+		//// throw every entity on grid if the impulse is not negligible
+        //if (deltaV.Length() > _minImpulseVelocity)
+        //    ThrowEntitiesOnGrid(ent, xform, -deltaV);
+		// Rat-end
     }
 
     /// <summary>
@@ -389,8 +391,10 @@ public sealed partial class ShuttleSystem
                 }
                 else
                 {
-                    var direction = throwDirection * tileData.DistanceFactor;
-                    _throwing.TryThrow(localEnt, direction, physics, localEnt.Comp, _projQuery, direction.Length(), playSound: false);
+					// Rat-start
+                    // var direction = throwDirection * tileData.DistanceFactor;
+                    // _throwing.TryThrow(localEnt, direction, physics, localEnt.Comp, _projQuery, direction.Length(), playSound: false);
+					// Rat-end
                 }
             }
 

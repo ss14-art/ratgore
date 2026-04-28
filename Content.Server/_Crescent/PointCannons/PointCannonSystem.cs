@@ -1,3 +1,14 @@
+// =============================================================================
+// ОПТИМИЗИРОВАННЫЙ PointCannonSystem
+// Путь: Content.Server/_Crescent/PointCannons/PointCannonSystem.cs
+//
+// Изменения на основе Monolith FireControl:
+// 1. Кэшированные EntityQuery вместо TryComp<> (11 вызовов → 0 в горячих путях)
+// 2. GridCannonCacheComponent — кэш пушек на гриде (не сканируем EntityLookup каждый раз)
+// 3. CannonFireCooldownComponent — серверный кулдаун стрельбы (ранний выход до GunSystem)
+// 4. Batch-стрельба с ранним выходом для неготовых пушек
+// =============================================================================
+
 using System.Linq;
 using System.Numerics;
 using System.Collections.Generic;
@@ -28,6 +39,7 @@ using Content.Shared._Crescent.Hardpoints;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Crescent.Radar;
+using Robust.Shared.Timing;
 
 namespace Content.Server.PointCannons;
 
@@ -45,6 +57,7 @@ public sealed class PointCannonSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly HardpointSystem _hardpoint = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IGameTiming _timing = default!; // +NEW
 
     private float _accumulatedFrameTime;
     private float _uiTps;
@@ -52,9 +65,23 @@ public sealed class PointCannonSystem : EntitySystem
     private readonly HashSet<EntityUid> _activeConsoles = new();
 
     private readonly Dictionary<EntityUid, float> _gridUpdateCooldown = new();
-    private const float GridUpdateCooldownTime = 0.5f; // seconds
+    private const float GridUpdateCooldownTime = 0.5f;
     private int CannonCheckRange = 25;
     private HashSet<EntityUid> QueuedGrids = new();
+
+    // ===== ОПТИМИЗАЦИЯ 1: Кэшированные EntityQuery =====
+    // Вместо TryComp<T>() каждый раз — один раз GetEntityQuery<T>() в Initialize
+    // EntityQuery.TryGetComponent() ~ в 2-3 раза быстрее чем TryComp<T>()
+    private EntityQuery<PointCannonComponent> _cannonQuery;
+    private EntityQuery<TargetingConsoleComponent> _consoleQuery;
+    private EntityQuery<GunComponent> _gunQuery;
+    private EntityQuery<TransformComponent> _xformQuery;
+    private EntityQuery<HardpointAnchorableOnlyComponent> _anchorQuery;
+    private EntityQuery<ApcPowerReceiverComponent> _powerQuery;
+    private EntityQuery<HardpointFixedMountComponent> _fixedMountQuery;
+    private EntityQuery<PhysicsComponent> _physicsQuery;
+    private EntityQuery<CannonFireCooldownComponent> _cooldownQuery;
+    private EntityQuery<GridCannonCacheComponent> _gridCacheQuery;
 
     public override void Initialize()
     {
@@ -77,6 +104,71 @@ public sealed class PointCannonSystem : EntitySystem
         SubscribeLocalEvent<PointCannonComponent, ReAnchorEvent>(OnCannonDetach);
 
         SubscribeLocalEvent<PointCannonLinkToolComponent, UseInHandEvent>(OnLinkToolHandUse);
+
+        // ===== ОПТИМИЗАЦИЯ 2: Инвалидация грид-кэша при изменении пушек =====
+        SubscribeLocalEvent<PointCannonComponent, AnchorStateChangedEvent>(OnCannonAnchorChanged);
+        SubscribeLocalEvent<PointCannonComponent, ComponentInit>(OnCannonInit);
+        SubscribeLocalEvent<PointCannonComponent, ComponentRemove>(OnCannonRemoved);
+
+        // Кэшируем EntityQuery один раз
+        _cannonQuery = GetEntityQuery<PointCannonComponent>();
+        _consoleQuery = GetEntityQuery<TargetingConsoleComponent>();
+        _gunQuery = GetEntityQuery<GunComponent>();
+        _xformQuery = GetEntityQuery<TransformComponent>();
+        _anchorQuery = GetEntityQuery<HardpointAnchorableOnlyComponent>();
+        _powerQuery = GetEntityQuery<ApcPowerReceiverComponent>();
+        _fixedMountQuery = GetEntityQuery<HardpointFixedMountComponent>();
+        _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        _cooldownQuery = GetEntityQuery<CannonFireCooldownComponent>();
+        _gridCacheQuery = GetEntityQuery<GridCannonCacheComponent>();
+    }
+
+    // ===== ОПТИМИЗАЦИЯ 2: Инвалидация грид-кэша =====
+    private void OnCannonAnchorChanged(EntityUid uid, PointCannonComponent comp, ref AnchorStateChangedEvent args)
+    {
+        InvalidateGridCache(uid);
+    }
+
+    private void OnCannonInit(EntityUid uid, PointCannonComponent comp, ComponentInit args)
+    {
+        InvalidateGridCache(uid);
+    }
+
+    private void OnCannonRemoved(EntityUid uid, PointCannonComponent comp, ComponentRemove args)
+    {
+        InvalidateGridCache(uid);
+    }
+
+    private void InvalidateGridCache(EntityUid cannonUid)
+    {
+        if (!_xformQuery.TryGetComponent(cannonUid, out var xform))
+            return;
+        if (xform.GridUid is not { } gridUid)
+            return;
+        if (_gridCacheQuery.TryGetComponent(gridUid, out var cache))
+            cache.Dirty = true;
+    }
+
+    // ===== ОПТИМИЗАЦИЯ 3: Получение пушек с грид-кэша =====
+    private HashSet<EntityUid> GetGridCannons(EntityUid gridUid)
+    {
+        var cache = EnsureComp<GridCannonCacheComponent>(gridUid);
+
+        if (!cache.Dirty)
+            return cache.CachedCannons;
+
+        // Пересканировать только когда Dirty=true
+        cache.CachedCannons.Clear();
+        var cannonList = new HashSet<Entity<PointCannonComponent>>();
+        _lookup.GetGridEntities(gridUid, cannonList);
+
+        foreach (var cannon in cannonList)
+        {
+            cache.CachedCannons.Add(cannon.Owner);
+        }
+
+        cache.Dirty = false;
+        return cache.CachedCannons;
     }
 
     public override void Update(float frameTime)
@@ -93,7 +185,8 @@ public sealed class PointCannonSystem : EntitySystem
 
         foreach (var uid in _activeConsoles)
         {
-            if (!TryComp<TargetingConsoleComponent>(uid, out var console))
+            // Используем кэшированный запрос вместо TryComp
+            if (!_consoleQuery.TryGetComponent(uid, out var console))
             {
                 _activeConsoles.Remove(uid);
                 continue;
@@ -106,7 +199,7 @@ public sealed class PointCannonSystem : EntitySystem
         {
             if (timer <= 0)
             {
-                if (!TryComp<TargetingConsoleComponent>(uid, out var consoleComp))
+                if (!_consoleQuery.TryGetComponent(uid, out var consoleComp))
                     continue;
                 ProcessGridShapeChange(uid, consoleComp);
                 toRemove.Add(uid);
@@ -124,23 +217,27 @@ public sealed class PointCannonSystem : EntitySystem
 
     private void ProcessGridShapeChange(EntityUid console, TargetingConsoleComponent component)
     {
-            UnlinkAllCannonsFromConsole(console, component);
-            LinkAllCannonsToConsole(console, component);
+        UnlinkAllCannonsFromConsole(console, component);
+        LinkAllCannonsToConsole(console, component);
     }
 
     private void OnRefreshServer(EntityUid console, TargetingConsoleComponent component, FireControlConsoleRefreshServerMessage args)
     {
-            if (_gridUpdateCooldown.ContainsKey(console))
-                _gridUpdateCooldown[console] = GridUpdateCooldownTime; // reset timer
-            else
-                _gridUpdateCooldown[console] = GridUpdateCooldownTime;     
+        // Инвалидируем грид-кэш при ручном рефреше
+        var gridUid = Transform(console).GridUid;
+        if (gridUid is not null && _gridCacheQuery.TryGetComponent(gridUid.Value, out var cache))
+            cache.Dirty = true;
+
+        if (_gridUpdateCooldown.ContainsKey(console))
+            _gridUpdateCooldown[console] = GridUpdateCooldownTime;
+        else
+            _gridUpdateCooldown[console] = GridUpdateCooldownTime;
     }
 
     private void UnlinkAllCannonsFromConsole(EntityUid console, TargetingConsoleComponent comp)
     {
-        // Create a complete snapshot of all cannons before unlinking anything
         var allLinks = new List<(string group, EntityUid cannon)>();
-        
+
         foreach (var (group, cannons) in comp.CannonGroups)
         {
             foreach (var cannon in cannons)
@@ -148,8 +245,7 @@ public sealed class PointCannonSystem : EntitySystem
                 allLinks.Add((group, cannon));
             }
         }
-        
-        // Now unlink using the snapshot
+
         foreach (var (group, cannon) in allLinks)
         {
             UnlinkConsole(cannon, console, comp);
@@ -171,20 +267,23 @@ public sealed class PointCannonSystem : EntitySystem
         }
     }
 
+    // ===== ОПТИМИЗАЦИЯ 3: LinkAllCannonsToConsole использует грид-кэш =====
     public void LinkAllCannonsToConsole(EntityUid console, TargetingConsoleComponent comp)
     {
         var gridUid = Transform(console).GridUid;
         if (gridUid is null)
             return;
-        var cannonList = new HashSet<Entity<PointCannonComponent>>();
-        _lookup.GetGridEntities(gridUid.Value, cannonList);
-        foreach (var cannon in cannonList)
+
+        // Используем кэш вместо _lookup.GetGridEntities каждый раз
+        var cachedCannons = GetGridCannons(gridUid.Value);
+
+        foreach (var cannonUid in cachedCannons)
         {
-            if (!Transform(cannon.Owner).Anchored)
+            if (!_xformQuery.TryGetComponent(cannonUid, out var xform) || !xform.Anchored)
                 continue;
-            if (!TryComp<HardpointAnchorableOnlyComponent>(cannon.Owner, out var anchorComp) || anchorComp.anchoredTo is null)
+            if (!_anchorQuery.TryGetComponent(cannonUid, out var anchorComp) || anchorComp.anchoredTo is null)
                 continue;
-            LinkCannon(cannon.Owner, console, comp, MetaData(cannon.Owner).EntityName);
+            LinkCannon(cannonUid, console, comp, MetaData(cannonUid).EntityName);
         }
     }
 
@@ -251,14 +350,14 @@ public sealed class PointCannonSystem : EntitySystem
 
     public void LinkCannon(EntityUid cannonUid, EntityUid consoleUid, TargetingConsoleComponent console, string group)
     {
-        if (!TryComp<PointCannonComponent>(cannonUid, out var cannonComponent))
+        // Используем кэшированный запрос
+        if (!_cannonQuery.TryGetComponent(cannonUid, out var cannonComponent))
             return;
         if (!console.CannonGroups.ContainsKey(group))
             console.CannonGroups[group] = new List<EntityUid>();
 
         if (console.CannonGroups[group].Contains(cannonUid))
         {
-            // SPCR 2024 - For fixing the old ships before we added this functionality
             if (cannonComponent.LinkedConsoleId is null)
                 cannonComponent.LinkedConsoleId = consoleUid;
             return;
@@ -273,67 +372,63 @@ public sealed class PointCannonSystem : EntitySystem
         cannonComponent.LinkedConsoleIds.Add(consoleUid);
 
         RefreshFiringRanges(cannonUid, null, null, cannonComponent, CannonCheckRange);
-
-        //if (console.ActiveGroups.Contains(group))
-            //TogglePvsOverride(new[] { cannonUid }, GetUiSessions(consoleUid), true);
     }
 
     public void UnlinkCannon(EntityUid cannonUid)
     {
-        if (!TryComp<PointCannonComponent>(cannonUid, out var cannonComp))
+        if (!_cannonQuery.TryGetComponent(cannonUid, out var cannonComp))
             return;
 
         var consoleIds = cannonComp.LinkedConsoleIds.ToList();
-        
+
         foreach (var consoleUid in consoleIds)
         {
-            if (!TryComp<TargetingConsoleComponent>(consoleUid, out var console))
+            if (!_consoleQuery.TryGetComponent(consoleUid, out var console))
                 continue;
 
             var groups = console.CannonGroups.Keys.ToList();
-            
+
             foreach (string group in groups)
             {
                 if (console.CannonGroups.TryGetValue(group, out var cannons))
                 {
                     cannons.Remove(cannonUid);
-                    
+
                     if (cannons.Count == 0 && group != "all")
                         console.CannonGroups.Remove(group);
                 }
             }
-            
+
             console.RegenerateCannons = true;
             TogglePvsOverride(new[] { cannonUid }, GetUiSessions(consoleUid), false);
         }
-        
+
         cannonComp.LinkedConsoleIds.Clear();
     }
 
     public void UnlinkConsole(EntityUid cannonUid, EntityUid consoleUid, TargetingConsoleComponent comp)
     {
-        if (!TryComp<PointCannonComponent>(cannonUid, out var cannonComp))
+        if (!_cannonQuery.TryGetComponent(cannonUid, out var cannonComp))
             return;
-            
+
         cannonComp.LinkedConsoleIds.Remove(consoleUid);
-        
-        if (!TryComp<TargetingConsoleComponent>(consoleUid, out var console))
+
+        if (!_consoleQuery.TryGetComponent(consoleUid, out var console))
             return;
-        
-        // Get a snapshot of groups to iterate safely
+
         var groups = console.CannonGroups.Keys.ToList();
-        
+
         foreach (string group in groups)
         {
             if (console.CannonGroups.TryGetValue(group, out var cannons))
             {
                 cannons.Remove(cannonUid);
-                
+
                 if (cannons.Count == 0 && group != "all")
                     console.CannonGroups.Remove(group);
             }
         }
-        
+
         console.RegenerateCannons = true;
         TogglePvsOverride(new[] { cannonUid }, GetUiSessions(consoleUid), false);
     }
@@ -356,8 +451,11 @@ public sealed class PointCannonSystem : EntitySystem
         _uiSys.SetUiState(uid, TargetingConsoleUiKey.Key, consoleState);
     }
 
+    // ===== ОПТИМИЗАЦИЯ 4: OnConsoleFire с серверным кулдауном =====
     private void OnConsoleFire(EntityUid uid, TargetingConsoleComponent console, TargetingConsoleFireMessage ev)
     {
+        var now = _timing.CurTime;
+
         for (int i = 0; i < console.CurrentGroup.Count;)
         {
             EntityUid cannonUid = console.CurrentGroup[i];
@@ -368,7 +466,23 @@ public sealed class PointCannonSystem : EntitySystem
                 continue;
             }
 
-            TryFireCannon(cannonUid, ev.Coordinates);
+            // ===== Проверка серверного кулдауна — ранний выход до TryFireCannon =====
+            if (_cooldownQuery.TryGetComponent(cannonUid, out var cooldown))
+            {
+                if (now < cooldown.NextFire)
+                {
+                    i++;
+                    continue; // Пушка на кулдауне — пропускаем без вызова GunSystem
+                }
+            }
+
+            if (TryFireCannon(cannonUid, ev.Coordinates))
+            {
+                // Обновляем кулдаун после успешного выстрела
+                if (cooldown != null)
+                    cooldown.NextFire = now + TimeSpan.FromSeconds(cooldown.FireCooldown);
+            }
+
             i++;
         }
     }
@@ -383,7 +497,7 @@ public sealed class PointCannonSystem : EntitySystem
                 uid.Comp.ActiveGroups = new();
             else
                 uid.Comp.ActiveGroups.Remove(args.GroupName);
-            TogglePvsOverride(uid.Comp.CannonGroups[args.GroupName], sessions, false); 
+            TogglePvsOverride(uid.Comp.CannonGroups[args.GroupName], sessions, false);
         }
         else
         {
@@ -392,7 +506,7 @@ public sealed class PointCannonSystem : EntitySystem
             else
                 uid.Comp.ActiveGroups.Add(args.GroupName);
             TogglePvsOverride(uid.Comp.CannonGroups[args.GroupName], sessions, true);
-        } 
+        }
 
         var totalLength = 0;
 
@@ -407,6 +521,7 @@ public sealed class PointCannonSystem : EntitySystem
         uid.Comp.CurrentGroup = selected;
     }
 
+    // ===== ОПТИМИЗАЦИЯ 1: TryFireCannon с кэшированными EntityQuery =====
     public bool TryFireCannon(
         EntityUid uid,
         Vector2 pos,
@@ -414,18 +529,25 @@ public sealed class PointCannonSystem : EntitySystem
         GunComponent? gun = null,
         PointCannonComponent? cannon = null)
     {
-        if (!Resolve(uid, ref form) || !Resolve(uid, ref gun) || !Resolve(uid, ref cannon))
+        // Используем кэшированные запросы вместо Resolve → TryComp
+        if (form == null && !_xformQuery.TryGetComponent(uid, out form))
+            return false;
+        if (gun == null && !_gunQuery.TryGetComponent(uid, out gun))
+            return false;
+        if (cannon == null && !_cannonQuery.TryGetComponent(uid, out cannon))
             return false;
 
         if (form.MapUid == null || !_gunSys.CanShoot(gun))
             return false;
-        if (!TryComp<HardpointAnchorableOnlyComponent>(uid, out var anchorComp) || anchorComp.anchoredTo is null)
+
+        // Кэшированные запросы для hardpoint-проверок
+        if (!_anchorQuery.TryGetComponent(uid, out var anchorComp) || anchorComp.anchoredTo is null)
             return false;
-        if (!TryComp<ApcPowerReceiverComponent>(anchorComp.anchoredTo, out var powerComp) || !powerComp.Powered)
+        if (!_powerQuery.TryGetComponent(anchorComp.anchoredTo.Value, out var powerComp) || !powerComp.Powered)
             return false;
 
         var entPos = new EntityCoordinates(uid, new Vector2(0, -1));
-        if (!HasComp<HardpointFixedMountComponent>(anchorComp.anchoredTo))
+        if (!_fixedMountQuery.HasComponent(anchorComp.anchoredTo.Value))
         {
             Vector2 cannonPos = _formSys.GetWorldPosition(form);
             _formSys.SetWorldRotation(uid, Angle.FromWorldVec(pos - cannonPos));
@@ -451,7 +573,11 @@ public sealed class PointCannonSystem : EntitySystem
 
     public void RefreshFiringRanges(EntityUid uid, TransformComponent? form = null, GunComponent? gun = null, PointCannonComponent? cannon = null, int? range = null)
     {
-        if (!Resolve(uid, ref form) || !Resolve(uid, ref gun) || !Resolve(uid, ref cannon))
+        if (form == null && !_xformQuery.TryGetComponent(uid, out form))
+            return;
+        if (gun == null && !_gunQuery.TryGetComponent(uid, out gun))
+            return;
+        if (cannon == null && !_cannonQuery.TryGetComponent(uid, out cannon))
             return;
         range ??= 10;
 
@@ -472,7 +598,9 @@ public sealed class PointCannonSystem : EntitySystem
 
         foreach (var childUid in entities)
         {
-            var otherForm = Transform(childUid);
+            // Кэшированный запрос вместо Transform()
+            if (!_xformQuery.TryGetComponent(childUid, out var otherForm))
+                continue;
             if (otherForm.GridUid != gridUid)
                 continue;
 
@@ -480,7 +608,8 @@ public sealed class PointCannonSystem : EntitySystem
             if (!otherForm.Anchored)
                 continue;
 
-            if (!TryComp<PhysicsComponent>(childUid, out var body) || !body.Hard)
+            // Кэшированный запрос вместо TryComp<PhysicsComponent>
+            if (!_physicsQuery.TryGetComponent(childUid, out var body) || !body.Hard)
                 continue;
 
             if ((body.CollisionLayer & (int)CollisionGroup.BulletImpassable) == 0)
@@ -490,7 +619,6 @@ public sealed class PointCannonSystem : EntitySystem
             sectors.Add((start, width));
         }
 
-        // Merge overlapping sectors efficiently: O(n log n)
         if (sectors.Count == 0)
             return new();
 
