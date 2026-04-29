@@ -4,8 +4,8 @@ meta:
   engineVersion: 268.1.0
   forkId: ""
   forkVersion: ""
-  time: 04/17/2026 19:24:10
-  entityCount: 748
+  time: 04/28/2026 21:57:24
+  entityCount: 750
 maps: []
 grids:
 - 1
@@ -29,7 +29,6 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      pos: 49.5,49.523438
       parent: invalid
     - type: MapGrid
       chunks:
@@ -442,6 +441,12 @@ entities:
             1101: -4,-7
             1104: -3,-10
             1107: -2,-11
+            1136: 9,4
+            1147: -9,4
+            1167: -10,-2
+            1171: -4,-7
+            1174: -3,-10
+            1177: -2,-11
         - node:
             zIndex: 1
             id: LatticeCornerNW
@@ -517,6 +522,12 @@ entities:
             1113: 3,-10
             1116: 4,-7
             1123: 10,-2
+            1139: 9,4
+            1150: -9,4
+            1180: 2,-11
+            1183: 3,-10
+            1186: 4,-7
+            1193: 10,-2
         - node:
             zIndex: 1
             id: LatticeCornerSE
@@ -581,6 +592,12 @@ entities:
             1087: -4,8
             1090: -2,11
             1095: -10,-2
+            1134: 9,4
+            1145: -9,4
+            1153: -9,5
+            1157: -4,8
+            1160: -2,11
+            1165: -10,-2
         - node:
             zIndex: 1
             id: LatticeCornerSW
@@ -645,6 +662,12 @@ entities:
             1072: 9,5
             1079: -9,4
             1122: 10,-2
+            1127: 2,11
+            1130: 4,8
+            1138: 9,4
+            1142: 9,5
+            1149: -9,4
+            1192: 10,-2
         - node:
             id: LatticeEdgeE
           decals:
@@ -753,6 +776,15 @@ entities:
             1099: -4,-7
             1102: -3,-10
             1105: -2,-11
+            1133: 9,4
+            1144: -9,4
+            1152: -9,5
+            1156: -4,8
+            1159: -2,11
+            1164: -10,-2
+            1169: -4,-7
+            1172: -3,-10
+            1175: -2,-11
         - node:
             id: LatticeEdgeN
           decals:
@@ -928,6 +960,20 @@ entities:
             1117: 7,-7
             1118: 10,-4
             1120: 10,-2
+            1135: 9,4
+            1146: -9,4
+            1162: -10,-4
+            1166: -10,-2
+            1168: -7,-7
+            1170: -4,-7
+            1173: -3,-10
+            1176: -2,-11
+            1178: 2,-11
+            1181: 3,-10
+            1184: 4,-7
+            1187: 7,-7
+            1188: 10,-4
+            1190: 10,-2
         - node:
             id: LatticeEdgeS
           decals:
@@ -1083,6 +1129,20 @@ entities:
             1091: -1,13
             1093: -10,-2
             1119: 10,-2
+            1124: 1,13
+            1125: 2,11
+            1128: 4,8
+            1131: 7,7
+            1132: 9,4
+            1140: 9,5
+            1143: -9,4
+            1151: -9,5
+            1154: -7,7
+            1155: -4,8
+            1158: -2,11
+            1161: -1,13
+            1163: -10,-2
+            1189: 10,-2
         - node:
             id: LatticeEdgeW
           decals:
@@ -1191,6 +1251,15 @@ entities:
             1112: 3,-10
             1115: 4,-7
             1121: 10,-2
+            1126: 2,11
+            1129: 4,8
+            1137: 9,4
+            1141: 9,5
+            1148: -9,4
+            1179: 2,-11
+            1182: 3,-10
+            1185: 4,-7
+            1191: 10,-2
         - node:
             angle: 3.141592653589793 rad
             color: '#EFB34196'
@@ -1566,7 +1635,7 @@ entities:
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 744
+      - 109
     - type: Physics
       canCollide: False
   - uid: 3
@@ -1577,7 +1646,7 @@ entities:
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 744
+      - 109
     - type: Physics
       canCollide: False
   - uid: 4
@@ -1588,7 +1657,7 @@ entities:
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 744
+      - 109
     - type: Physics
       canCollide: False
 - proto: AAAHardpointSmallBallistic
@@ -1796,6 +1865,16 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,8.5
+      parent: 1
+  - uid: 749
+    components:
+    - type: Transform
+      pos: -8.5,3.5
+      parent: 1
+  - uid: 750
+    components:
+    - type: Transform
+      pos: 9.5,3.5
       parent: 1
 - proto: AtmosFixBlockerMarker
   entities:
@@ -2089,7 +2168,7 @@ entities:
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 744
+      - 109
   - uid: 93
     components:
     - type: Transform
@@ -2098,7 +2177,7 @@ entities:
     - type: DeviceLinkSink
       links:
       - 543
-      - 744
+      - 109
   - uid: 94
     components:
     - type: Transform
@@ -2131,7 +2210,7 @@ entities:
     - type: DeviceLinkSink
       links:
       - 544
-      - 744
+      - 109
 - proto: BlastDoorOpen
   entities:
   - uid: 98
@@ -2216,7 +2295,7 @@ entities:
       parent: 1
 - proto: C_ComputerTabletopShuttle
   entities:
-  - uid: 744
+  - uid: 109
     components:
     - type: Transform
       pos: -0.5,3.5
@@ -5795,7 +5874,7 @@ entities:
       parent: 1
 - proto: WeaponTurretMediumArtillery
   entities:
-  - uid: 109
+  - uid: 743
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5805,7 +5884,7 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
-  - uid: 743
+  - uid: 744
     components:
     - type: Transform
       rot: 3.141592653589793 rad
