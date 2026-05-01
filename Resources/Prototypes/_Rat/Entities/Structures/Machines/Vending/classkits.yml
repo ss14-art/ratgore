@@ -27,9 +27,21 @@
         recommended: true    
       - id: ClothingOuterArmorNCWLHeavyCarapace
         name: бронежилет ЛРНП
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponRifleFAL
+        name: НКВЛ МК-2 Фалин 5.56x45 мм
+        recommended: true    
+      - id: WeaponShotgunProletar
+        name: НКВЛ Тоз-97 Пролетарий 12 кал
+      - id: WeaponSubMachineGunNCWLWatchdog
+        name: НКВЛ ДС1 Страж 9x19mm
     - name: Утилиты
       choices: { CMUtilities: 2 }
       entries:
+      - id: ExGrenade
+        name: разрывная граната 
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
@@ -76,9 +88,21 @@
         recommended: true    
       - id: ClothingOuterArmorImperialTrooperArmor
         name: бронежилет БМС
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponShotgunReno
+        name: БМС ДА-13 Рено 12 кал.
+      - id: WeaponRifleMiller
+        name: БМС ДА-8 Миллер 5.56x45 мм
+        recommended: true
+      - id: WeaponSubMachineGunBeetle
+        name: ХП Мак-11 Жук 9x19 мм
     - name: Утилиты
       choices: { CMUtilities: 2 }
       entries:
+      - id: ExGrenade
+        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
@@ -131,6 +155,16 @@
         recommended: true    
       - id: ClothingOuterArmorCMM
         name: кираса патрульного
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponShotgunSHIDoubleBarreled4g
+        name: SHI M135 Двустволка 12g
+      - id: WeaponRifleCMMNimrod
+        name: КММ M32 Нимрод 7.62x51mm
+        recommended: true
+      - id: WeaponSubMachineGunMP5
+        name: НТ MP5 9x19mm
     - name: Дополнительное оружие
       choices: { CMPistol: 1 }
       entries:
@@ -142,6 +176,8 @@
     - name: Утилиты
       choices: { CMUtilities: 2 }
       entries:
+      - id: ExGrenade
+        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
@@ -199,6 +235,16 @@
       - id: ClothingOuterHardsuitHighsecUA
         name: боевой скафандр "Шиногара" SVBT-2-UA
         recommended: true  
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponRifleLecter
+        name: ТПШ Лектер
+        recommended: true
+      - id: WeaponRifleHoundMarksman
+        name: ТПШ М215 "Хаунд" 5.56х45
+      - id: WeaponSubMachineGunMP49
+        name: ТПШ MP49 "Надзиратель" 9x19mm
     - name: Дополнительное оружие
       choices: { CMPistol: 1 }
       entries:
@@ -210,6 +256,8 @@
     - name: Утилиты
       choices: { CMUtilities: 3 }
       entries:
+      - id: ExGrenade
+        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
@@ -218,7 +266,7 @@
         name: портативный сканер масс
         recommended: true 
     - name: Боеприпасы
-      choices: { CMAmmo: 3 }
+      choices: { CMAmmo: 4 }
       entries:
       - id: MagazinePistolSubMachineGun
         name: 35-зарядный магазин для пистолета-пулемета (9x19 мм PSTF auto)

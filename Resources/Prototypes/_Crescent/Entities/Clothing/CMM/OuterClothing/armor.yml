@@ -9,16 +9,16 @@
   - type: Clothing
     sprite: _Crescent/Clothing/CMM/OuterClothing/marshal.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
+    armorMaxHealth: 1000
     armorType: Metallic
     armorRepair: PlasteelPlate
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 15
-        Piercing: 45
-        Heat: 5
-        Caustic: 15
+        Blunt: 25
+        Slash: 25
+        Piercing: 60
+        Heat: 25
+        Caustic: 25
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
@@ -37,16 +37,16 @@
   - type: Clothing
     sprite: _Crescent/Clothing/CMM/OuterClothing/deputymarshal.rsi
   - type: DegradeableArmor
-    armorMaxHealth: 750
+    armorMaxHealth: 1000
     armorType: Metallic
     armorRepair: PlasteelPlate
     initialModifiers:
       flatReductions:
-        Blunt: 15
-        Slash: 15
-        Piercing: 45
-        Heat: 5
-        Caustic: 15
+        Blunt: 25
+        Slash: 25
+        Piercing: 55
+        Heat: 25
+        Caustic: 25
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0

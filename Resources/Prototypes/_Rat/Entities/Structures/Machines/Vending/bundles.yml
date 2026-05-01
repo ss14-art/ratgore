@@ -51,7 +51,6 @@
     - DoubleEmergencyOxygenTankFilled
     - JetpackBlackFilled
     - ClothingShoesBootsMagCombat
-    - Stunbaton
 
 - type: entity
   id: CMVendorBundleCorpSecApparel
@@ -70,7 +69,6 @@
     - DoubleEmergencyOxygenTankFilled
     - JetpackBlackFilled
     - ClothingShoesBootsMagCombat
-    - Stunbaton
 
 - type: entity
   id: CMVendorBundleGSCApparel

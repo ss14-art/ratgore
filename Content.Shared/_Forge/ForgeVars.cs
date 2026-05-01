@@ -29,7 +29,7 @@ public sealed class ForgeVars
     ///     Nudge entities that stay in hard contact with static geometry for a long time (anti-stuck).
     /// </summary>
     public static readonly CVarDef<bool> AutoUnstuckEnabled =
-        CVarDef.Create("forge.physics.auto_unstuck", true, CVar.SERVERONLY);
+        CVarDef.Create("forge.physics.auto_unstuck", false, CVar.SERVERONLY);
 
     /// <summary>
     ///     Seconds of continuous static hard contact before a nudge is applied.

@@ -54,4 +54,9 @@ public sealed partial class HTNComponent : NPCComponent
     /// </summary>
     [DataField]
     public bool Enabled = true;
+
+    // Rat-start
+    [DataField]  
+    public float? SleepPlayerCheckRangeOverride = null;  
+    // Rat-end  
 }

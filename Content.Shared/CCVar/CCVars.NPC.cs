@@ -13,4 +13,16 @@ public sealed partial class CCVars
     ///     Should NPCs pathfind when steering. For debug purposes.
     /// </summary>
     public static readonly CVarDef<bool> NPCPathfinding = CVarDef.Create("npc.pathfinding", false);
+
+    /// <summary>
+    ///     Mono: Should NPCs pause (sleep) when no players are within range?
+    /// </summary>
+    public static readonly CVarDef<bool> NPCPauseWhenNoPlayersInRange =
+        CVarDef.Create("npc.pause_when_no_players_in_range", true);
+
+    /// <summary>
+    ///     Mono: Distance threshold for pausing NPCs when no players are in range.
+    /// </summary>
+    public static readonly CVarDef<float> NPCPlayerPauseDistance =
+        CVarDef.Create("npc.player_pause_distance", 32f);
 }

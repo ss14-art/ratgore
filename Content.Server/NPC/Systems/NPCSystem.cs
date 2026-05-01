@@ -10,6 +10,14 @@ using Content.Shared.NPC;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+// Rat-start
+using Content.Shared.Ghost;
+using Content.Shared.Mobs.Components;
+using Content.Shared.NPC.Systems;
+using Prometheus;
+using Robust.Server.Player;
+using Robust.Shared.Map;
+// Rat-end
 
 namespace Content.Server.NPC.Systems
 {
@@ -31,6 +39,21 @@ namespace Content.Server.NPC.Systems
 
         private int _count;
 
+        // Rat-start
+        private static readonly Gauge ActiveGauge = Metrics.CreateGauge(
+            "npc_active_count",
+            "Amount of NPCs that are actively processing");
+        
+        [Dependency] private readonly IPlayerManager _playerManager = default!;
+        
+        private bool _pauseWhenNoPlayersInRange;
+        private float _playerPauseDistance;
+        private float _playerDistanceCheckTimer;
+        private const float PlayerDistanceCheckInterval = 2.0f;
+        
+        private readonly List<(EntityUid Entity, EntityCoordinates Coords)> _playerPauseCandidates = new();
+        // Rat-end
+
         /// <inheritdoc />
         public override void Initialize()
         {
@@ -38,6 +61,10 @@ namespace Content.Server.NPC.Systems
 
             Subs.CVar(_configurationManager, CCVars.NPCEnabled, value => Enabled = value, true);
             Subs.CVar(_configurationManager, CCVars.NPCMaxUpdates, obj => _maxUpdates = obj, true);
+            // Rat-start
+            Subs.CVar(_configurationManager, CCVars.NPCPauseWhenNoPlayersInRange, value => _pauseWhenNoPlayersInRange = value, true);
+            Subs.CVar(_configurationManager, CCVars.NPCPlayerPauseDistance, value => _playerPauseDistance = value, true);
+            // Rat-end
         }
 
         public void OnPlayerNPCAttach(EntityUid uid, HTNComponent component, PlayerAttachedEvent args)
@@ -127,6 +154,7 @@ namespace Content.Server.NPC.Systems
             RemComp<ActiveNPCComponent>(uid);
         }
 
+        // Rat-start
         /// <inheritdoc />
         public override void Update(float frameTime)
         {
@@ -135,10 +163,88 @@ namespace Content.Server.NPC.Systems
             if (!Enabled)
                 return;
 
+            if (_pauseWhenNoPlayersInRange)
+            {
+                _playerDistanceCheckTimer += frameTime;
+                if (_playerDistanceCheckTimer >= PlayerDistanceCheckInterval)
+                {
+                    _playerDistanceCheckTimer = 0f;
+                    CheckPlayerDistancesAndPauseNPCs();
+                }
+            }
+
             _count = 0;
-            // Add your system here.
             _htn.UpdateNPC(ref _count, _maxUpdates, frameTime);
+
+            ActiveGauge.Set(Count<ActiveNPCComponent>());
         }
+        // Rat-end
+
+        // Rat-start
+        private void CheckPlayerDistancesAndPauseNPCs()
+        {
+            _playerPauseCandidates.Clear();
+            foreach (var playerData in _playerManager.GetAllPlayerData())
+            {
+                if (!_playerManager.TryGetSessionById(playerData.UserId, out var session) || session == null)
+                    continue;
+
+                if (session.AttachedEntity is not { Valid: true } playerEnt)
+                    continue;
+
+                if (HasComp<GhostComponent>(playerEnt))
+                    continue;
+
+                if (TryComp<MobStateComponent>(playerEnt, out var state) && state.CurrentState != MobState.Alive)
+                    continue;
+
+                _playerPauseCandidates.Add((playerEnt, Transform(playerEnt).Coordinates));
+            }
+
+            var anyPlayers = _playerPauseCandidates.Count > 0;
+
+            var npcQuery = EntityQueryEnumerator<HTNComponent, TransformComponent>();
+
+            while (npcQuery.MoveNext(out var npcUid, out var htn, out var npcTransform))
+            {
+                if (HasComp<ActorComponent>(npcUid) ||
+                    (TryComp<MindContainerComponent>(npcUid, out var mindContainer) && mindContainer.HasMind))
+                    continue;
+                if (_mobState.IsIncapacitated(npcUid))
+                    continue;
+
+                var minDistance = htn.SleepPlayerCheckRangeOverride ?? _playerPauseDistance;
+                var npcCoords = npcTransform.Coordinates;
+                var hasNearbyPlayer = false;
+
+                if (anyPlayers)
+                {
+                    foreach (var (_, playerCoords) in _playerPauseCandidates)
+                    {
+                        if (npcCoords.TryDistance(EntityManager, playerCoords, out var distance) &&
+                            distance <= minDistance)
+                        {
+                            hasNearbyPlayer = true;
+                            break;
+                        }
+                    }
+                }
+
+                var isAwake = IsAwake(npcUid, htn);
+
+                if (!hasNearbyPlayer)
+                {
+                    if (isAwake)
+                        SleepNPC(npcUid, htn);
+                }
+                else
+                {
+                    if (!isAwake)
+                        WakeNPC(npcUid, htn);
+                }
+            }
+        }
+        // Rat-end
 
         public void OnMobStateChange(EntityUid uid, HTNComponent component, MobStateChangedEvent args)
         {

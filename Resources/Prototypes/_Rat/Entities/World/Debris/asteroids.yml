@@ -5,6 +5,7 @@
   abstract: true
   components:
     - type: MapGrid
+    - type: IgnoreHeatSeekingTarget
     - type: BlobFloorPlanBuilder
       floorTileset:
       - FloorAsteroidSand

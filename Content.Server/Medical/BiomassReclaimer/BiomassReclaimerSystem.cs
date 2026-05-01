@@ -13,6 +13,7 @@ using Content.Shared.Climbing.Events;
 using Content.Shared.Construction.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -100,6 +101,8 @@ namespace Content.Server.Medical.BiomassReclaimer
             SubscribeLocalEvent<ActiveBiomassReclaimerComponent, ComponentShutdown>(OnShutdown);
             SubscribeLocalEvent<ActiveBiomassReclaimerComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
             SubscribeLocalEvent<BiomassReclaimerComponent, AfterInteractUsingEvent>(OnAfterInteractUsing);
+            SubscribeLocalEvent<BiomassReclaimerComponent, CanDropTargetEvent>(OnCanDragDropOn);
+            SubscribeLocalEvent<BiomassReclaimerComponent, DragDropTargetEvent>(OnDragDropOn);
             SubscribeLocalEvent<BiomassReclaimerComponent, ClimbedOnEvent>(OnClimbedOn);
             SubscribeLocalEvent<BiomassReclaimerComponent, RefreshPartsEvent>(OnRefreshParts);
             SubscribeLocalEvent<BiomassReclaimerComponent, UpgradeExamineEvent>(OnUpgradeExamine);
@@ -163,6 +166,30 @@ namespace Content.Server.Medical.BiomassReclaimer
             });
         }
 
+        private void OnCanDragDropOn(Entity<BiomassReclaimerComponent> reclaimer, ref CanDropTargetEvent args)
+        {
+            args.Handled = true;
+            args.CanDrop = CanGib(reclaimer, args.Dragged);
+        }
+
+        private void OnDragDropOn(Entity<BiomassReclaimerComponent> reclaimer, ref DragDropTargetEvent args)
+        {
+            if (args.Handled || !CanGib(reclaimer, args.Dragged))
+                return;
+
+            args.Handled = true;
+
+            var delay = reclaimer.Comp.BaseInsertionDelay * (TryComp<PhysicsComponent>(args.Dragged, out var physics)
+                ? physics.FixturesMass
+                : 1);
+
+            _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, delay, new ReclaimerDoAfterEvent(), reclaimer, target: reclaimer, used: args.Dragged)
+            {
+                NeedHand = false,
+                BreakOnMove = true
+            });
+        }
+
         private void OnClimbedOn(Entity<BiomassReclaimerComponent> reclaimer, ref ClimbedOnEvent args)
         {
             if (!CanGib(reclaimer, args.Climber))
@@ -205,7 +232,7 @@ namespace Content.Server.Medical.BiomassReclaimer
                 || !HasComp<BiomassReclaimerComponent>(args.Args.Target.Value))
                 return;
 
-            _adminLogger.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(args.Args.User):player} used a biomass reclaimer to gib {ToPrettyString(args.Args.Target.Value):target} in {ToPrettyString(reclaimer):reclaimer}");
+            _adminLogger.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(args.Args.User):player} used a biomass reclaimer to gib {ToPrettyString(args.Args.Used.Value):target} in {ToPrettyString(reclaimer):reclaimer}");
             StartProcessing(args.Args.Used.Value, reclaimer);
 
             args.Handled = true;

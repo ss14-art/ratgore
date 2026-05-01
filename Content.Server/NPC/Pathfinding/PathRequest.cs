@@ -21,9 +21,11 @@ public abstract class PathRequest
 
     public bool Started = false;
 
+    public readonly DateTime EnqueuedAtUtc = DateTime.UtcNow; // Rat
+
     #region Pathfinding state
 
-    public readonly Stopwatch Stopwatch = new();
+    public Stopwatch Stopwatch = new(); // Rat
     public PriorityQueue<ValueTuple<float, PathPoly>> Frontier = default!;
     public readonly Dictionary<PathPoly, float> CostSoFar = new();
     public readonly Dictionary<PathPoly, PathPoly> CameFrom = new();
@@ -46,6 +48,18 @@ public abstract class PathRequest
         CollisionMask = mask;
         Tcs = new TaskCompletionSource<PathResult>(cancelToken);
     }
+
+    // Rat-start
+    public void ClearState()
+    {
+        Polys.Clear();
+        CostSoFar.Clear();
+        CameFrom.Clear();
+        Frontier = default!;
+        Started = false;
+        Stopwatch = new Stopwatch();
+    }
+    // Rat-end
 }
 
 public sealed class AStarPathRequest : PathRequest

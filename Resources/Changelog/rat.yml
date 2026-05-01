@@ -657,5 +657,64 @@ Entries:
     id: 82
     time: '2026-04-13T14:06:04.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/131
+  - author: Ko-mp-otik
+    changes:
+      - type: Tweak
+        message: Обновлён ТК Анвил
+    id: 83
+    time: '2026-04-19T11:39:33.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/141
+  - author: xtensig
+    changes:
+      - type: Add
+        message: Добавлены респрайты имперских скафандров, униформ
+    id: 84
+    time: '2026-04-20T09:00:45.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/139
+  - author: freycyik
+    changes:
+      - type: Tweak
+        message: Увеличенно расстояние консоли Дронов вдвое
+    id: 85
+    time: '2026-04-22T12:06:24.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/137
+  - author: Gorox
+    changes:
+      - type: Tweak
+        message: Ракеты выпущенные из одного шаттла больше не сбивают друг друга.
+      - type: Tweak
+        message: Радиус магнитов кузни и верфи были увеличены на 0.3 тайла.
+      - type: Fix
+        message: Снаряды выпущенные из боевого меха теперь ведут себя корректно.
+      - type: Fix
+        message: Через трупы животных теперь пролетают пули.
+      - type: Fix
+        message: Переработчик биомассы теперь принимает трупы.
+      - type: Fix
+        message: Боевой режим больше не исчезает при выходе из меха или снятии джетпака.
+    id: 86
+    time: '2026-04-22T12:08:05.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/143
+  - author: Aleksandr_Belov
+    changes:
+      - type: Fix
+        message: Добавлен гравген на шаттл "Judge" Глисс-Санто
+    id: 87
+    time: '2026-04-24T02:59:14.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/149
+  - author: ReWAFFlution
+    changes:
+      - type: Remove
+        message: Фильтр чата вырезан.
+    id: 88
+    time: '2026-04-24T09:27:03.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/152
+  - author: Gorox
+    changes:
+      - type: Tweak
+        message: Ракеты больше не наводятся на обломки и астероиды.
+    id: 89
+    time: '2026-04-24T12:31:05.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/150
 Name: Rat
 Order: -1
