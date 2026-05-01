@@ -32,7 +32,7 @@
   - type: Gun
     fireOnDropChance: 0
     projectileSpeed: 65
-    fireRate: 3
+    fireRate: 1
     selectedMode: SemiAuto
     angleDecay: 45
     minAngle: 5
@@ -126,7 +126,7 @@
       size: Medium
 
 - type: entity
-  parent: BaseTurretShipgun
+  parent: WeaponTurretCurse
   id: WeaponTurretCurseNavy
   suffix: Medium Energy, Navy
   name: Navy 300w 'Mandate' EMP Projector
@@ -263,7 +263,7 @@
       size: Small
 
 - type: entity
-  parent: BaseTurretShipgun
+  parent: WeaponTurretRetribution
   id: WeaponTurretRetributionNavy
   suffix: Small Laser, Navy
   name: Navy 200cc 'Solaris' Pulse Laser
@@ -373,7 +373,7 @@
       size: Medium
 
 - type: entity
-  parent: BaseTurretShipgun
+  parent:  WeaponTurretAbsolution
   id: WeaponTurretAbsolutionNavy
   suffix: Medium Laser, Navy
   name: Navy 350cc 'Absolution' Burst Laser
@@ -446,7 +446,7 @@
       size: Large
 
 - type: entity
-  parent: BaseTurretShipgun
+  parent: WeaponTurretDamnation
   id: WeaponTurretDamnationNavy
   suffix: Large Energy, Navy
   name: Navy 600cc 'Dominus' Carronade

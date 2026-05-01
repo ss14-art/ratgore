@@ -34,7 +34,7 @@
       - Cartridge
       - Cartridge20mm
   - type: CartridgeAmmo
-    deleteOnSpawn: false
+    deleteOnSpawn: true
     proto: Bullet20mmBase
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Cartridge/screamer.rsi

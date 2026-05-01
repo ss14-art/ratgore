@@ -716,5 +716,12 @@ Entries:
     id: 89
     time: '2026-04-24T12:31:05.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/150
+  - author: Ko-mp-otik
+    changes:
+      - type: Fix
+        message: Станции больше не могут летать
+    id: 90
+    time: '2026-04-26T02:38:32.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/158
 Name: Rat
 Order: -1

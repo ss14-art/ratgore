@@ -30,3 +30,5 @@
       collection: HeavyBulletBounce
   - type: StaticPrice
     price: 1
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
