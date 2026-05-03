@@ -813,6 +813,8 @@
       - KhanLPC
       - PerigaleLPC
       - RaiderLPC
+      - ValorDroneLPC
+      - RocinanteDroneLPC
       # DSM end
       # NCWL start
       - ClothingHeadHelmetNCWLEVA
@@ -859,6 +861,8 @@
       - SternLPC
       - BogatyrLPC
       - SunderLPC
+      - HornetDroneLPC
+      - WaspDroneLPC
       - WeaponSubMachineGunBloodhound
       - WeaponSubMachineGunMilitant
       - WeaponRifleNCWLBatanya

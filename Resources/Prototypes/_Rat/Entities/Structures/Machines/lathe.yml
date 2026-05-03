@@ -2,7 +2,7 @@
   id: AmmoTechFabTAP #tap rework
   parent: AmmoTechFab
   name: ammo techfab
-  description: Prints the bare minimum of bullets that any budget military or armory could need. Nothing fancy.
+  description: The Thukkers made this ammunition techfab capable of crafting more equipment than standard ones.
   components:
     - type: Machine
       board: AmmoTechFabTAPCircuitboard
@@ -51,9 +51,9 @@
         - Arbalest95mmRegularRecipe
         # - Arbalest95mmNCWLRecipe
         # - Arbalest95mmGorlexRecipe
-        #- Gargoyle240mmRegularRecipe #shellfab
+        - Gargoyle240mmRegularRecipe #shellfab
         #- Gargoyle240mmNCWLRecipe #shellfab
-        #- Catapult330mmRegularRecipe #shellfab
+        - Catapult330mmRegularRecipe #shellfab
         #NEW SHIPGUN AMMO RECIPIES END
         - Cartridge40mmFrag
         - Cartridge40mmCan
@@ -84,6 +84,7 @@
         - MagazineBoxLightRifle
         - MagazineBoxCaselessRifle
         - MagazineBoxCaselessRifleBig
+        - MagazinePistolCaselessRifle #tap, finally craft cobra mags
         - BoxShotgunFlash4g
         - BoxShotgunSlug4g
         - BoxLethalshot4g

@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 260.2.0
+  engineVersion: 268.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/26/2026 10:40:17
+  time: 04/14/2026 19:29:40
   entityCount: 748
 maps: []
 grids:
@@ -69,7 +69,7 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
-      baseMaxLinearVelocity: 30
+      baseMaxLinearVelocity: 25
     - type: GridPathfinding
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
@@ -562,22 +562,6 @@ entities:
     - type: BecomesStation
       id: Musinyane
     - type: SelfDeleteGrid
-- proto: AAAardpointMediumMissile
-  entities:
-  - uid: 2
-    components:
-    - type: Transform
-      pos: -2.5,18.5
-      parent: 1
-    - type: Physics
-      canCollide: False
-  - uid: 3
-    components:
-    - type: Transform
-      pos: 3.5,18.5
-      parent: 1
-    - type: Physics
-      canCollide: False
 - proto: AAAHardpointMediumEnergy
   entities:
   - uid: 4
@@ -596,12 +580,9 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-- proto: AAAHardpointSmallEnergy
-  entities:
   - uid: 6
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -5.5,-4.5
       parent: 1
     - type: Physics
@@ -609,8 +590,25 @@ entities:
   - uid: 7
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 6.5,-4.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+- proto: AAAHardpointSmallMissile
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,18.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+  - uid: 42
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,18.5
       parent: 1
     - type: Physics
       canCollide: False
@@ -819,28 +817,32 @@ entities:
     - type: Transform
       pos: 3.5,17.5
       parent: 1
-- proto: BaseWeaponTurretArbalest
+- proto: BaseWeaponTurretShortbow
   entities:
-  - uid: 41
+  - uid: 2
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -2.5,18.5
       parent: 1
-    - type: PointCannon
-      linkedConsoleIds:
-      - 364
-      linkedConsoleId: 364
-  - uid: 42
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
+  - uid: 41
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,18.5
       parent: 1
-    - type: PointCannon
-      linkedConsoleIds:
-      - 364
-      linkedConsoleId: 364
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
 - proto: Bed
   entities:
   - uid: 43
@@ -2570,14 +2572,6 @@ entities:
     - type: Transform
       pos: -4.5,0.5
       parent: 1
-    - type: TargetingConsole
-      cannonGroups:
-        all:
-        - 41
-        - 42
-        95mm 'Arbalest' heavy assault MRM platform:
-        - 41
-        - 42
 - proto: DefibrillatorCabinetFilled
   entities:
   - uid: 365
@@ -5097,30 +5091,52 @@ entities:
     - type: Transform
       pos: 0.5,0.5
       parent: 1
-- proto: WeaponTurretBolter
+- proto: WeaponTurretAbsolution
   entities:
   - uid: 745
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -5.5,9.5
+      pos: 6.5,9.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
   - uid: 746
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 6.5,9.5
+      pos: -5.5,9.5
       parent: 1
-- proto: WeaponTurretStarburst
-  entities:
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
   - uid: 747
-    components:
-    - type: Transform
-      pos: 6.5,-4.5
-      parent: 1
-  - uid: 748
     components:
     - type: Transform
       pos: -5.5,-4.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
+  - uid: 748
+    components:
+    - type: Transform
+      pos: 6.5,-4.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
 ...

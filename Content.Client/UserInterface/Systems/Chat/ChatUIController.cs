@@ -833,9 +833,13 @@ public sealed class ChatUIController : UIController
         // color the name unless it's something like "the old man"
         if ((msg.Channel == ChatChannel.Local || msg.Channel == ChatChannel.Whisper) && _chatNameColorsEnabled)
         {
-            var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
-            if (grammar != null && grammar.ProperNoun == true)
-                msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
+            var nameText = SharedChatSystem.GetStringInsideTag(msg, "Name");
+            if (!nameText.Contains("[color=", StringComparison.OrdinalIgnoreCase))
+            {
+                var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
+                if (grammar != null && grammar.ProperNoun == true)
+                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(nameText));
+            }
         }
 
         // Color any codewords for minds that have roles that use them

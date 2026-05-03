@@ -24,7 +24,7 @@
       entries:
       - id: ClothingOuterHardsuitNCWLInfantry
         name: скафандр ЛРНП
-        recommended: true    
+        recommended: true
       - id: ClothingOuterArmorNCWLHeavyCarapace
         name: бронежилет ЛРНП
     - name: Основное оружие
@@ -32,7 +32,7 @@
       entries:
       - id: WeaponRifleFAL
         name: НКВЛ МК-2 Фалин 5.56x45 мм
-        recommended: true    
+        recommended: true
       - id: WeaponShotgunProletar
         name: НКВЛ Тоз-97 Пролетарий 12 кал
       - id: WeaponSubMachineGunNCWLWatchdog
@@ -41,14 +41,14 @@
       choices: { CMUtilities: 2 }
       entries:
       - id: ExGrenade
-        name: разрывная граната 
+        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true   
+        recommended: true
     - name: Боеприпасы
       choices: { CMAmmo: 2 }
       entries:
@@ -85,7 +85,7 @@
       entries:
       - id: ClothingOuterHardsuitImperialSoldier
         name: скафандр БМС
-        recommended: true    
+        recommended: true
       - id: ClothingOuterArmorImperialTrooperArmor
         name: бронежилет БМС
     - name: Основное оружие
@@ -109,7 +109,7 @@
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true 
+        recommended: true
     - name: Боеприпасы
       choices: { CMAmmo: 2 }
       entries:
@@ -152,7 +152,7 @@
       entries:
       - id: ClothingOuterHardsuitMidshipman
         name: скафандр минитменов "Мичман"
-        recommended: true    
+        recommended: true
       - id: ClothingOuterArmorCMM
         name: кираса патрульного
     - name: Основное оружие
@@ -184,7 +184,7 @@
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true 
+        recommended: true
     - name: Боеприпасы
       choices: { CMAmmo: 4 }
       entries:
@@ -234,7 +234,7 @@
         name: боевой скафандр "Шиногара" SVBT-2
       - id: ClothingOuterHardsuitHighsecUA
         name: боевой скафандр "Шиногара" SVBT-2-UA
-        recommended: true  
+        recommended: true
     - name: Основное оружие
       choices: { CMWeapon: 1 }
       entries:
@@ -264,7 +264,7 @@
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true 
+        recommended: true
     - name: Боеприпасы
       choices: { CMAmmo: 4 }
       entries:
@@ -304,7 +304,7 @@
       entries:
       - id: ClothingOuterHardsuitSyndicateBG
         name: скафандр штурмовика BULWARK mk.II
-        recommended: true  
+        recommended: true
       - id: ClothingOuterHardsuitSyndicateSellsword
         name: модифицированный скафандр SELLSWORD mk.IIB
       - id: ClothingOuterHardsuitSyndicateFreiritter
@@ -330,7 +330,7 @@
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true 
+        recommended: true
     - name: Боеприпасы
       choices: { CMAmmo: 4 }
       entries:

@@ -137,26 +137,11 @@
       drawdepth: Mobs
       layers:
         - state: curse-dsm
-
-#scourer
-
-- type: entity
-  parent: BaseTurretShipgun
-  id: WeaponTurretSmallLaserPD
-  suffix: Small Point Defense Laser
-  name: 250cc 'Scourer' Diffusion Laser
-  description: A light energy weapons platform that converts energy into masses of hardlight and flings them at high speeds. This model uses a 'scattergun' profile to mete out effective point defense at the cost of comparitively weak projectiles.
-  components:
-    - type: Sprite
-      sprite: _Crescent/Objects/Turrets/Laser/scourer.rsi
-      drawdepth: Mobs
-      layers:
-        - state: scourer
     - type: Destructible
       thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 1200
+            damage: 2000
           # TODO: Construction graph
           behaviors:
             - !type:ChangeConstructionNodeBehavior
@@ -170,34 +155,34 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 180
-      fireRate: 20
+      projectileSpeed: 120
+      fireRate: .5
       selectedMode: FullAuto
       availableModes:
         - FullAuto
       angleDecay: 0
-      minAngle: 0.1
-      maxAngle: 0.1
+      minAngle: 5
+      maxAngle: 5
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/laserturret.ogg
         params:
           variation: 0.12
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 0.5
+      rechargeCooldown: 3
       rechargeSound:
         path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
         params:
           pitch: 1.2
           variation: 0.08
     - type: BasicEntityAmmoProvider
-      proto: BulletScourer
-      capacity: 200
-      count: 200
+      proto: BulletCurse
+      capacity: 10
+      count: 10
     - type: ApcPowerReceiver
       powerLoad: 2500
     - type: HardpointAnchorableOnly
       class: Energy
-      size: Small
+      size: Medium
 
 #retribution
 
@@ -231,13 +216,11 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 180
-      burstFireRate: 20
-      burstCooldown: .2
-      shotsPerBurst: 3
-      selectedMode: Burst
+      projectileSpeed: 200
+      fireRate: 6
+      selectedMode: FullAuto
       availableModes:
-        - Burst
+        - FullAuto
       angleDecay: 0
       minAngle: 0.1
       maxAngle: 0.1
@@ -246,7 +229,7 @@
         params:
           variation: 0.12
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 0.5
+      rechargeCooldown: 0.2
       rechargeSound:
         path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
         params:
@@ -254,8 +237,8 @@
           variation: 0.08
     - type: BasicEntityAmmoProvider
       proto: BulletRetribution
-      capacity: 200
-      count: 200
+      capacity: 60
+      count: 60
     - type: ApcPowerReceiver
       powerLoad: 2500
     - type: HardpointAnchorableOnly
@@ -274,40 +257,52 @@
       drawdepth: Mobs
       layers:
         - state: retribution-dsm
-    # - type: ContainerContainer
-    #   containers:
-    #     ballistic-ammo: !type:Container
-    #       ents: []
-    # - type: Gun
-    #   fireOnDropChance: 0
-    #   projectileSpeed: 200
-    #   fireRate: 6
-    #   selectedMode: FullAuto
-    #   availableModes:
-    #     - FullAuto
-    #   angleDecay: 0
-    #   minAngle: 0.1
-    #   maxAngle: 0.1
-    #   soundGunshot:
-    #     path: /Audio/Weapons/Guns/Gunshots/laserturret.ogg
-    #     params:
-    #       variation: 0.12
-    # - type: RechargeBasicEntityAmmo
-    #   rechargeCooldown: 0.25
-    #   rechargeSound:
-    #     path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
-    #     params:
-    #       pitch: 1.2
-    #       variation: 0.08
-    # - type: BasicEntityAmmoProvider
-    #   proto: BulletRetribution
-    #   capacity: 30
-    #   count: 30
-    # - type: ApcPowerReceiver
-    #   powerLoad: 5000
-    # - type: HardpointAnchorableOnly
-    #   class: Energy
-    #   size: Small
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1200
+          # TODO: Construction graph
+          behaviors:
+            - !type:ChangeConstructionNodeBehavior
+              node: machineFrame
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalGlassBreak
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          ents: []
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 200
+      fireRate: 6
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      angleDecay: 0
+      minAngle: 0.1
+      maxAngle: 0.1
+      soundGunshot:
+        path: /Audio/Weapons/Guns/Gunshots/laserturret.ogg
+        params:
+          variation: 0.12
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 0.25
+      rechargeSound:
+        path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
+        params:
+          pitch: 1.2
+          variation: 0.08
+    - type: BasicEntityAmmoProvider
+      proto: BulletRetribution
+      capacity: 30
+      count: 30
+    - type: ApcPowerReceiver
+      powerLoad: 5000
+    - type: HardpointAnchorableOnly
+      class: Energy
+      size: Small
 
 #absolution
 
@@ -356,7 +351,7 @@
         params:
           variation: 0.12
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 0.6
+      rechargeCooldown: 0.25
       rechargeSound:
         path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
         params:
@@ -364,8 +359,8 @@
           variation: 0.08
     - type: BasicEntityAmmoProvider
       proto: BulletAbsolution
-      capacity: 50
-      count: 50
+      capacity: 60
+      count: 60
     - type: ApcPowerReceiver
       powerLoad: 4000
     - type: HardpointAnchorableOnly
@@ -384,6 +379,54 @@
       drawdepth: Mobs
       layers:
         - state: absolution-dsm
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1800
+          # TODO: Construction graph
+          behaviors:
+            - !type:ChangeConstructionNodeBehavior
+              node: machineFrame
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalGlassBreak
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          ents: []
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 200
+      burstFireRate: 40 #8 effective RPS
+      burstCooldown: 1
+      shotsPerBurst: 10
+      selectedMode: Burst
+      availableModes:
+        - Burst
+      angleDecay: 0
+      minAngle: 0.1
+      maxAngle: 0.1
+      soundGunshot:
+        path: /Audio/Weapons/Guns/Gunshots/lasergatling.ogg
+        params:
+          variation: 0.12
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 0.25
+      rechargeSound:
+        path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
+        params:
+          pitch: 1.5
+          variation: 0.08
+    - type: BasicEntityAmmoProvider
+      proto: BulletAbsolution
+      capacity: 80
+      count: 80
+    - type: ApcPowerReceiver
+      powerLoad: 6000
+    - type: HardpointAnchorableOnly
+      class: Energy
+      size: Medium
 
 #damnation
 
@@ -469,3 +512,36 @@
             - !type:PlaySoundBehavior
               sound:
                 collection: MetalGlassBreak
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          ents: []
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 200
+      minAngle: 0.1
+      maxAngle: 0.1
+      fireRate: 3
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      soundGunshot:
+        path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
+        params:
+          variation: 0.12
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 0.7
+      rechargeSound:
+        path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
+        params:
+          pitch: 1.2
+          variation: 0.08
+    - type: BasicEntityAmmoProvider
+      proto: BulletDamnation
+      capacity: 30
+      count: 30
+    - type: ApcPowerReceiver
+      powerLoad: 10000
+    - type: HardpointAnchorableOnly
+      class: Energy
+      size: Large

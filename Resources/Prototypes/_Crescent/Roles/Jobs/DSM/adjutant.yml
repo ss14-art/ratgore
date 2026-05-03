@@ -26,6 +26,12 @@
   alwaysUseSpawner: true
   requireAdminNotify: true
   icon: "JobIconImperialAdjutant"
+  chatNameColor: "#ff00f2"
+  chatAmplification:
+    bubbleScale: 1.09
+    shoutBubbleScale: 1.32
+    radioScale: 1.23
+    radioBold: true
   supervisors: job-supervisors-imperial
   canBeAntag: false
   requirements:

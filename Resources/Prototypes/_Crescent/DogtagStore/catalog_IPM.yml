@@ -21,19 +21,19 @@
   priority: 8
 
 # LPCs
-- type: listing
-  id: StoreListingIPMHulk
-  name: IPM Hulk LPC
-  description: Effectively an entire hospital station equipped with every possible service a war-torn sector could require, and modified with enough thrusters to be legally classified as a ship. Said be to commissioned by an enterprising Felinid.
-  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
-  productEntity: ShipVoucherHulk
-  cost:
-    SampleIPM: 20
-  categories:
-  - StoreCategoryIPMShips
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
+#- type: listing
+#  id: StoreListingIPMHulk
+#  name: IPM Hulk LPC
+#  description: Effectively an entire hospital station equipped with every possible service a war-torn sector could require, and modified with enough thrusters to be legally classified as a ship. Said be to commissioned by an enterprising Felinid.
+#  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
+#  productEntity: ShipVoucherHulk
+#  cost:
+#    SampleIPM: 20
+#  categories:
+#  - StoreCategoryIPMShips
+#  conditions:
+#  - !type:ListingLimitedStockCondition
+#    stock: 1
 
 - type: listing
   id: StoreListingIPMMatabele
@@ -49,24 +49,24 @@
   - !type:ListingLimitedStockCondition
     stock: 2
 
-- type: listing
-  id: StoreListingIPMHarpy
-  name: IPM Harpy LPC
-  description: A corvette-sized clinic, equipped with missile launchers. Only in Taypan does such a sentence seem normal.
-  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
-  productEntity: ShipVoucherHarpy
-  cost:
-    SampleIPM: 5
-  categories:
-  - StoreCategoryIPMShips
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 2
+#- type: listing
+#  id: StoreListingIPMHarpy
+#  name: IPM Harpy LPC
+#  description: A corvette-sized clinic, equipped with missile launchers. Only in Taypan does such a sentence seem normal.
+#  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
+#  productEntity: ShipVoucherHarpy
+#  cost:
+#    SampleIPM: 5
+#  categories:
+#  - StoreCategoryIPMShips
+#  conditions:
+#  - !type:ListingLimitedStockCondition
+#    stock: 2
 
 - type: listing
   id: StoreListingIPMMeatwagon
   name: IPM Meatwagon LPC
-  description: One of the few corvette Interdyne can field, decently armed and well protected.
+  description: One of the few corvettes Interdyne can field, decently armed and well protected.
   icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
   productEntity: ShipVoucherMeatwagon
   cost:
@@ -78,9 +78,23 @@
     stock: 2
 
 - type: listing
+  id: StoreListingIPMHarrier
+  name: IPM Harrier LPC
+  description: The pinnacle of what IPM can field, a superb medium fighter. Few remain in Taypan.
+  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
+  productEntity: ShipVoucherHarrier
+  cost:
+    SampleIPM: 10
+  categories:
+  - StoreCategoryIPMShips
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
+
+- type: listing
   id: StoreListingIPMFridge
   name: IPM Fridge LPC
-  description: An unarmed corpse recovery vessel for picking up those with less important insurances.
+  description: An almost-unarmed corpse recovery vessel for picking up those with less important insurances.
   icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
   productEntity: ShipVoucherFridge
   cost:
