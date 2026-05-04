@@ -4,8 +4,8 @@ meta:
   engineVersion: 268.1.0
   forkId: ""
   forkVersion: ""
-  time: 04/30/2026 13:38:57
-  entityCount: 509
+  time: 05/04/2026 11:14:44
+  entityCount: 510
 maps: []
 grids:
 - 1
@@ -1406,7 +1406,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -6523.2046
+      secondsUntilStateChange: -6767.4023
       state: Opening
   - uid: 79
     components:
@@ -1473,7 +1473,7 @@ entities:
       pos: -5.5,2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -11291.514
+      secondsUntilStateChange: -11535.712
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1497,7 +1497,7 @@ entities:
       pos: -1.5,2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -11064.181
+      secondsUntilStateChange: -11308.379
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -3291,7 +3291,7 @@ entities:
       pos: 5.5,-1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -352.06647
+      secondsUntilStateChange: -596.2646
       state: Closing
 - proto: JetpackMiniFilled
   entities:
@@ -3550,7 +3550,7 @@ entities:
     - type: MetaData
       name: баночка для таблеток (chloral-hydrate 20u)
     - type: Transform
-      pos: 5.9100566,0.4479167
+      pos: 5.9004817,0.39583334
       parent: 1
     - type: Storage
       storedItems:
@@ -4951,6 +4951,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -1.5,-5.5
+      parent: 1
+- proto: WarpPointShip
+  entities:
+  - uid: 510
+    components:
+    - type: Transform
+      pos: 0.5,-0.5
       parent: 1
 - proto: WeaponRevolverArgentiSecurity
   entities:
