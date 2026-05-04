@@ -280,6 +280,8 @@
   description: A weighty polearm made with a crystalline plasma-bladed edge. A vibro-module at the spine accelerates the toxic-edged material to burning levels of friction, melting through targets.
   components:
   - type: Sharp
+  - type: Reflect
+  - type: DisarmMalus
   - type: Sprite
     sprite: _Crescent/Objects/Weapons/Melee/halberd.rsi
     state: icon

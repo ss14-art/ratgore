@@ -1,0 +1,26 @@
+- type: vessel
+  id: RocinanteDrone
+  name: DSM Rocinante
+  description: A fighter drone.
+  price: 35000
+  category: Small
+  group: None
+  path: /Maps/_Crescent/Shuttles/DSM/rocinantedrone.yml
+
+- type: gameMap
+  id: RocinanteDrone
+  mapName: 'DSM Rocinante'
+  mapPath: /Maps/_Crescent/Shuttles/DSM/rocinantedrone.yml
+  minPlayers: 0
+  stations:
+    RocinanteDrone:
+      stationProto: StandardCrescentVessel
+      gridComponents:
+        - type: MapIcon
+          iconType: Shuttle
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'DSM Rocinante {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'

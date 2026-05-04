@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 260.2.0
+  engineVersion: 268.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/29/2026 22:25:56
-  entityCount: 462
+  time: 04/14/2026 19:00:49
+  entityCount: 460
 maps: []
 grids:
 - 1
@@ -237,6 +237,10 @@ entities:
             585: -6,-5
             588: -5,-7
             591: -3,-8
+            604: 3,-8
+            623: -6,-5
+            626: -5,-7
+            629: -3,-8
         - node:
             zIndex: 1
             id: LatticeCornerNW
@@ -293,6 +297,10 @@ entities:
             572: 7,-7
             575: 8,-5
             594: -1,-8
+            607: 5,-8
+            610: 7,-7
+            613: 8,-5
+            632: -1,-8
         - node:
             zIndex: 1
             id: LatticeCornerSE
@@ -320,6 +328,8 @@ entities:
             543: -3,8
             578: -4,5
             581: -3,8
+            616: -4,5
+            619: -3,8
         - node:
             zIndex: 1
             id: LatticeCornerSW
@@ -347,6 +357,8 @@ entities:
             525: 6,5
             560: 5,8
             563: 6,5
+            598: 5,8
+            601: 6,5
         - node:
             id: LatticeEdgeE
           decals:
@@ -425,6 +437,12 @@ entities:
             583: -6,-5
             586: -5,-7
             589: -3,-8
+            602: 3,-8
+            615: -4,5
+            618: -3,8
+            621: -6,-5
+            624: -5,-7
+            627: -3,-8
         - node:
             id: LatticeEdgeN
           decals:
@@ -532,6 +550,14 @@ entities:
             587: -5,-7
             590: -3,-8
             592: -1,-8
+            603: 3,-8
+            605: 5,-8
+            608: 7,-7
+            611: 8,-5
+            622: -6,-5
+            625: -5,-7
+            628: -3,-8
+            630: -1,-8
         - node:
             id: LatticeEdgeS
           decals:
@@ -599,6 +625,12 @@ entities:
             576: -4,5
             579: -3,8
             582: -1,9
+            595: 3,9
+            596: 5,8
+            599: 6,5
+            614: -4,5
+            617: -3,8
+            620: -1,9
         - node:
             id: LatticeEdgeW
           decals:
@@ -677,6 +709,12 @@ entities:
             571: 7,-7
             574: 8,-5
             593: -1,-8
+            597: 5,8
+            600: 6,5
+            606: 5,-8
+            609: 7,-7
+            612: 8,-5
+            631: -1,-8
         - node:
             color: '#FFFFFFFF'
             id: TechE
@@ -958,7 +996,7 @@ entities:
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 224
+      - 221
     - type: Physics
       canCollide: False
   - uid: 3
@@ -969,17 +1007,7 @@ entities:
       parent: 1
     - type: DeviceLinkSink
       links:
-      - 224
-    - type: Physics
-      canCollide: False
-- proto: AAAHardpointSmallEnergy
-  entities:
-  - uid: 4
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -4.5,1.5
-      parent: 1
+      - 221
     - type: Physics
       canCollide: False
   - uid: 5
@@ -988,14 +1016,9 @@ entities:
       rot: 3.141592653589793 rad
       pos: 8.5,-1.5
       parent: 1
-    - type: Physics
-      canCollide: False
-  - uid: 6
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -5.5,-1.5
-      parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 221
     - type: Physics
       canCollide: False
   - uid: 7
@@ -1004,6 +1027,31 @@ entities:
       rot: 3.141592653589793 rad
       pos: 7.5,1.5
       parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 221
+    - type: Physics
+      canCollide: False
+  - uid: 296
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,1.5
+      parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 221
+    - type: Physics
+      canCollide: False
+  - uid: 297
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -5.5,-1.5
+      parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 221
     - type: Physics
       canCollide: False
 - proto: AirAlarm
@@ -1120,7 +1168,7 @@ entities:
       pos: 4.5,-2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -924.9899
+      secondsUntilStateChange: -1693.1559
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1132,7 +1180,7 @@ entities:
       pos: 4.5,2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -18449.656
+      secondsUntilStateChange: -19217.822
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1150,9 +1198,6 @@ entities:
     - type: Transform
       pos: -3.5,-3.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 224
   - uid: 23
     components:
     - type: Transform
@@ -1190,9 +1235,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -5.5,-3.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 224
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 29
@@ -1472,7 +1514,7 @@ entities:
     - type: DeviceLinkSink
       links:
       - 340
-      - 224
+      - 221
   - uid: 80
     components:
     - type: Transform
@@ -1481,7 +1523,7 @@ entities:
     - type: DeviceLinkSink
       links:
       - 340
-      - 224
+      - 221
   - uid: 81
     components:
     - type: Transform
@@ -1533,33 +1575,21 @@ entities:
     - type: Transform
       pos: 2.5,-1.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 224
   - uid: 87
     components:
     - type: Transform
       pos: 0.5,-1.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 224
   - uid: 88
     components:
     - type: Transform
       pos: -2.5,-2.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 224
   - uid: 89
     components:
     - type: Transform
       pos: 5.5,-2.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 224
 - proto: BoriaticGeneratorEinsteinShuttle
   entities:
   - uid: 90
@@ -1627,6 +1657,53 @@ entities:
       rot: 3.141592653589793 rad
       pos: 1.5,-1.5
       parent: 1
+- proto: C_ComputerTabletopShuttle
+  entities:
+  - uid: 221
+    components:
+    - type: Transform
+      pos: 1.5,-2.5
+      parent: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        79:
+        - - Group1
+          - Toggle
+        80:
+        - - Group1
+          - Toggle
+        2:
+        - - Group2
+          - Toggle
+        3:
+        - - Group2
+          - Toggle
+        7:
+        - - Group2
+          - Toggle
+        296:
+        - - Group2
+          - Toggle
+        297:
+        - - Group3
+          - Toggle
+        5:
+        - - Group3
+          - Toggle
+    - type: ContainerContainer
+      containers:
+        board: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        disk_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        id_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
 - proto: CableApcExtension
   entities:
   - uid: 101
@@ -2204,6 +2281,14 @@ entities:
     - type: Transform
       pos: 5.5,1.5
       parent: 1
+- proto: ChairPilotSeat
+  entities:
+  - uid: 222
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,-3.5
+      parent: 1
 - proto: CigarRoyalCase
   entities:
   - uid: 215
@@ -2249,18 +2334,10 @@ entities:
       canCollide: False
 - proto: ComputerTabletopAdvancedRadar
   entities:
-  - uid: 221
+  - uid: 224
     components:
     - type: Transform
-      pos: 1.5,-2.5
-      parent: 1
-- proto: ComputerTabletopIFF
-  entities:
-  - uid: 222
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-4.5
+      pos: 0.5,-2.5
       parent: 1
 - proto: ComputerTabletopPowerMonitoring
   entities:
@@ -2269,73 +2346,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.5,-4.5
-      parent: 1
-- proto: ComputerTabletopShuttle
-  entities:
-  - uid: 224
-    components:
-    - type: Transform
-      pos: 0.5,-2.5
-      parent: 1
-    - type: NamedModules
-      buttonNames:
-      - Toggle Blastdoors
-      - Fire Curse
-      - Fire Second Curse
-      - Lockdown
-      - N/A
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        disk_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        id_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-    - type: DeviceLinkSource
-      linkedPorts:
-        2:
-        - - Group2
-          - SpaceArtilleryFire
-        3:
-        - - Group3
-          - Toggle
-        86:
-        - - Group4
-          - Toggle
-        79:
-        - - Group1
-          - Toggle
-        87:
-        - - Group4
-          - Toggle
-        80:
-        - - Group1
-          - Toggle
-        89:
-        - - Group4
-          - Toggle
-        88:
-        - - Group4
-          - Toggle
-        28:
-        - - Group4
-          - DoorBolt
-        22:
-        - - Group4
-          - DoorBolt
-- proto: ComputerTabletopTargeting
-  entities:
-  - uid: 225
-    components:
-    - type: Transform
-      pos: 2.5,-2.5
       parent: 1
 - proto: CrescentSuitStorageDSMVoidsuit
   entities:
@@ -2383,6 +2393,13 @@ entities:
       parent: 214
     - type: Physics
       canCollide: False
+- proto: FaxMachineShip
+  entities:
+  - uid: 225
+    components:
+    - type: Transform
+      pos: 2.5,-2.5
+      parent: 1
 - proto: FirelockGlass
   entities:
   - uid: 229
@@ -2957,17 +2974,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: -1.5,-5.5
       parent: 1
-- proto: JugBoriaticFuel
+- proto: LockerSyndicate
   entities:
-  - uid: 296
+  - uid: 350
     components:
     - type: Transform
-      pos: 5.297247,-5.5
-      parent: 1
-  - uid: 297
-    components:
-    - type: Transform
-      pos: 5.443283,-5.5
+      pos: 0.5,-4.5
       parent: 1
 - proto: N14BedWood
   entities:
@@ -3135,11 +3147,6 @@ entities:
       parent: 1
 - proto: Rack
   entities:
-  - uid: 317
-    components:
-    - type: Transform
-      pos: 5.5,-5.5
-      parent: 1
   - uid: 318
     components:
     - type: Transform
@@ -3260,6 +3267,13 @@ entities:
       parent: 214
     - type: Physics
       canCollide: False
+- proto: ShieldEmitterSmall
+  entities:
+  - uid: 317
+    components:
+    - type: Transform
+      pos: 5.5,-5.5
+      parent: 1
 - proto: SignalButtonDirectional
   entities:
   - uid: 337
@@ -3384,15 +3398,10 @@ entities:
     - type: Transform
       pos: 0.5,-2.5
       parent: 1
-  - uid: 350
-    components:
-    - type: Transform
-      pos: 2.5,-4.5
-      parent: 1
   - uid: 351
     components:
     - type: Transform
-      pos: 0.5,-4.5
+      pos: 2.5,-4.5
       parent: 1
   - uid: 352
     components:
@@ -4008,44 +4017,80 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 1.5,-3.5
       parent: 1
-- proto: WeaponTurretCurse
+- proto: WeaponTurretAbsolution
   entities:
-  - uid: 457
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,0.5
-      parent: 1
-  - uid: 458
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.5,0.5
-      parent: 1
-- proto: WeaponTurretRetribution
-  entities:
-  - uid: 459
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 7.5,1.5
-      parent: 1
-  - uid: 460
+  - uid: 4
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -4.5,1.5
       parent: 1
-  - uid: 461
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
+  - uid: 6
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -5.5,-1.5
+      pos: 0.5,0.5
       parent: 1
-  - uid: 462
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
+  - uid: 457
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,0.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
+  - uid: 460
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 7.5,1.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
+- proto: WeaponTurretRetribution
+  entities:
+  - uid: 458
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 8.5,-1.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
+  - uid: 459
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -5.5,-1.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
 ...

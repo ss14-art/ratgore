@@ -70,7 +70,7 @@
 - type: listing
   id: StoreListingGSCSinn
   name: GSC Sinn LPC.
-  description: The Sinn-class cruiser is an abominable, missile-toting, heavily armored brick of a vessel. Great firepower, obscene ammo requirements.
+  description: The Sinn-class cruiser is a superheavy fighter built as a contender to the NCWL's Bogatyr.
   icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
   productEntity: ShipVoucherSinn
   cost:
@@ -118,7 +118,7 @@
   icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
   productEntity: ShipVoucherCleaver
   cost:
-    PlunderGSC: 15
+    PlunderGSC: 10
   categories:
   - StoreCategoryGSCLPC
 
