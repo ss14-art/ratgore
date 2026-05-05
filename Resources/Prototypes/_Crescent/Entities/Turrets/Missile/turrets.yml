@@ -31,17 +31,18 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 80
-      fireRate: 2
-      selectedMode: FullAuto
+      projectileSpeed: 100
+      burstCooldown: 2.5
+      shotsPerBurst: 2
+      burstFireRate: 8
+      selectedMode: Burst
       availableModes:
-        - FullAuto
+        - Burst
       soundGunshot: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
     - type: BallisticAmmoProvider
       cycleable: false
       capacity: 12
-      fillWithDoAfter: true
-      fillDelay: 0.5
+      fillWithDoAfter: false
       proto: Cartridge48mmRocket
       whitelist:
         tags:
@@ -64,6 +65,36 @@
       drawdepth: Mobs
       layers:
         - state: shortbow-tfsc
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1200
+          # TODO: Construction graph
+          behaviors:
+            - !type:ChangeConstructionNodeBehavior
+              node: machineFrame
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalGlassBreak
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 140
+      burstCooldown: 2.5
+      shotsPerBurst: 3
+      burstFireRate: 8
+      selectedMode: Burst
+      availableModes:
+        - Burst
+    - type: BallisticAmmoProvider
+      cycleable: false
+      capacity: 18
+      fillWithDoAfter: false
+      proto: Cartridge48mmRocket
+      whitelist:
+        tags:
+        - CartridgeShortbow
+
 #azimuth
 
 - type: entity
@@ -71,7 +102,7 @@
   id: BaseWeaponTurretAzimuth
   suffix: ShipGun
   name: 60mm 'Azimuth' Rocket Pod
-  description: A rapid-fire rocket pod capable of bypassing shields.
+  description: A rapid-fire rocket pod.
   components:
     - type: Sprite
       sprite: _Crescent/Objects/Turrets/Missile/azimuth.rsi
@@ -98,7 +129,7 @@
     - type: Gun
       fireOnDropChance: 0
       projectileSpeed: 180
-      fireRate: 2
+      fireRate: 4
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -106,8 +137,58 @@
     - type: BallisticAmmoProvider
       cycleable: false
       capacity: 6
-      fillWithDoAfter: true
-      fillDelay: 1
+      fillWithDoAfter: false
+      proto: Cartridge60mmRocket
+      whitelist:
+        tags:
+        - CartridgeAzimuth
+    - type: ApcPowerReceiver
+      powerLoad: 1500
+    - type: HardpointAnchorableOnly
+      class: Missile
+      size: Small
+
+- type: entity
+  parent: BaseTurretShipgunNoIFF
+  id: BaseWeaponTurretAzimuthCDT
+  suffix: ShipGun
+  name: Cyberdawn 60mm 'Haruspex' Rocket Pod
+  description: An Azimuth Rocket Pod modified by Cyberdawn to have no IFF signature.
+  components:
+    - type: Sprite
+      sprite: _Crescent/Objects/Turrets/Missile/azimuth.rsi
+      drawdepth: Mobs
+      layers:
+        - state: azimuth
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1200
+          # TODO: Construction graph
+          behaviors:
+            - !type:ChangeConstructionNodeBehavior
+              node: machineFrame
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalGlassBreak
+    - type: ProjectileIFF
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          ents: []
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 180
+      fireRate: 4
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+    - type: BallisticAmmoProvider
+      cycleable: false
+      capacity: 6
+      fillWithDoAfter: false
       proto: Cartridge60mmRocket
       whitelist:
         tags:
@@ -122,8 +203,8 @@
   parent: BaseWeaponTurretAzimuth
   id: BaseWeaponTurretAzimuthNCWL
   suffix: ShipGun
-  name: Homeguard 60mm 'Dumbfire' Rocket Pod
-  description: A rapid-fire rocket pod capable of bypassing shields. This one has been reinforced heavily.
+  name: Homeguard 60mm 'Compass' Rocket Pod
+  description: A rapid-fire rocket pod. This one has been reinforced heavily.
   components:
     - type: Sprite
       sprite: _Crescent/Objects/Turrets/Missile/azimuth.rsi
@@ -142,19 +223,67 @@
             - !type:PlaySoundBehavior
               sound:
                 collection: MetalGlassBreak
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 170
+      fireRate: 3
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+    - type: BallisticAmmoProvider
+      cycleable: false
+      capacity: 6
+      fillWithDoAfter: false
+      proto: Cartridge60mmRocket
+      whitelist:
+        tags:
+        - CartridgeAzimuth
+    - type: ApcPowerReceiver
+      powerLoad: 1500
 
 - type: entity
   parent: BaseWeaponTurretAzimuth
   id: BaseWeaponTurretAzimuthGSC
   suffix: ShipGun
   name: Gorlex 60mm 'Crossfire' Rocket Pod
-  description: A rapid-fire rocket pod capable of bypassing shields. This one has been upgraded by Gorlex.
+  description: A rapid-fire rocket pod. This one has been upgraded by Gorlex.
   components:
     - type: Sprite
       sprite: _Crescent/Objects/Turrets/Missile/azimuth.rsi
       drawdepth: Mobs
       layers:
         - state: tfsc-azimuth
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 1800
+          # TODO: Construction graph
+          behaviors:
+            - !type:ChangeConstructionNodeBehavior
+              node: machineFrame
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalGlassBreak
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 190
+      fireRate: 5
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+    - type: BallisticAmmoProvider
+      cycleable: false
+      capacity: 6
+      fillWithDoAfter: false
+      proto: Cartridge60mmRocket
+      whitelist:
+        tags:
+        - CartridgeAzimuth
+    - type: ApcPowerReceiver
+      powerLoad: 1500
 
 #arbalest
 
@@ -189,8 +318,8 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 60
-      fireRate: 0.2
+      projectileSpeed: 160
+      fireRate: 1.2
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -221,6 +350,44 @@
       drawdepth: Mobs
       layers:
         - state: arbalest-tfsc
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 2800
+          # TODO: Construction graph
+          behaviors:
+            - !type:ChangeConstructionNodeBehavior
+              node: machineFrame
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalGlassBreak
+    - type: ProjectileIFF
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          ents: []
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 180
+      fireRate: 1.5
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+    - type: BallisticAmmoProvider
+      cycleable: false
+      capacity: 8
+      fillWithDoAfter: false
+      proto: Cartridge95mmRocket
+      whitelist:
+        tags:
+        - CartridgeArbalest
+    - type: ApcPowerReceiver
+      powerLoad: 4000
+    - type: HardpointAnchorableOnly
+      class: Missile
+      size: Medium
 
 - type: entity
   parent: BaseTurretShipgun
@@ -246,6 +413,32 @@
             - !type:PlaySoundBehavior
               sound:
                 collection: MetalGlassBreak
+    - type: ProjectileIFF
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          ents: []
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 150
+      fireRate: 1
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+    - type: BallisticAmmoProvider
+      cycleable: false
+      capacity: 4
+      fillWithDoAfter: false
+      proto: Cartridge95mmRocket
+      whitelist:
+        tags:
+        - CartridgeArbalest
+    - type: ApcPowerReceiver
+      powerLoad: 3000
+    - type: HardpointAnchorableOnly
+      class: Missile
+      size: Medium
 
 #gargoyle
 
@@ -286,8 +479,8 @@
       zeroVisible: true
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 60
-      fireRate: 0.1
+      projectileSpeed: 120
+      fireRate: 0.25
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -332,6 +525,36 @@
             - !type:PlaySoundBehavior
               sound:
                 collection: MetalGlassBreak
+    - type: ProjectileIFF
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          ents: []
+    - type: MagazineVisuals
+      magState: mag
+      steps: 4
+      zeroVisible: true
+    - type: Gun
+      fireOnDropChance: 0
+      projectileSpeed: 110
+      fireRate: 0.2
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
+    - type: BallisticAmmoProvider
+      fillWithDoAfter: false
+      cycleable: false
+      capacity: 4
+      proto: Cartridge240mmRocketNCWL
+      whitelist:
+        tags:
+        - CartridgeGargoyle
+    - type: ApcPowerReceiver
+      powerLoad: 3500
+    - type: HardpointAnchorableOnly
+      class: Missile
+      size: Medium
 
 #catapult
 
@@ -370,8 +593,8 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 60
-      fireRate: 0.1
+      projectileSpeed: 200
+      fireRate: 0.35
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -379,8 +602,9 @@
     - type: BallisticAmmoProvider
       cycleable: false
       capacity: 3
-      fillWithDoAfter: false
-      proto: Cartridge330mmRocket
+      fillWithDoAfter: true
+      fillDelay: 2
+      proto: Cartridge95mmRocketNCWL
       whitelist:
         tags:
         - CartridgeCatapult

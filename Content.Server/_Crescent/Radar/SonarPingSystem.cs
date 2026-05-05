@@ -1,9 +1,6 @@
-using System.Collections.Frozen;
-using System.Linq;
 using System.Numerics;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
-using Content.Server.Radio.EntitySystems;
 using Content.Shared.Chat;
 using Content.Shared.Crescent.Radar;
 using Content.Shared.Shuttles.BUIStates;
@@ -14,108 +11,105 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Crescent.Radar;
 
-/// <summary>
-/// This handles...
-/// </summary>
 public sealed class SonarPingSystem : EntitySystem
 {
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IGameTiming _timer = default!;
-    private Dictionary<EntityUid, HashSet<EntityUid>> receptionList = new();
 
-    private float curTime = 0f;
-    private const float pingCheckInterval = 5f;
-    private TimeSpan alertCooldown = TimeSpan.FromSeconds(10);
+    private float _curTime;
+    private const float PingCheckInterval = 3f;
+    private static readonly TimeSpan AlertCooldown = TimeSpan.FromSeconds(6);
 
-    /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<RadarDetectorComponent, GetVerbsEvent<ActivationVerb>>(RequestVerbs);
     }
 
-    public void RequestVerbs(EntityUid owner, RadarDetectorComponent comp, ref GetVerbsEvent<ActivationVerb> args)
+    private void RequestVerbs(EntityUid owner, RadarDetectorComponent comp, ref GetVerbsEvent<ActivationVerb> args)
     {
-
-        ActivationVerb verb = new()
+        args.Verbs.Add(new ActivationVerb
         {
             Text = Loc.GetString("sonar-ping-verb-toggle"),
-            Act = () =>
-            {
-                comp.alertOnPing = !comp.alertOnPing;
-            }
-        };
-        args.Verbs.Add(verb);
-
+            Act = () => comp.alertOnPing = !comp.alertOnPing,
+        });
     }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        if (_timer.IsFirstTimePredicted)
-            curTime += frameTime;
-        var query = EntityQueryEnumerator<RadarConsoleComponent, RadarDetectorComponent, TransformComponent>();
-        var checking = EntityManager.GetAllComponents(typeof(RadarPingerComponent), false).ToDictionary();
-        while (query.MoveNext(out var uid, out var radar, out var pinger, out var transform))
+
+        if (!_timer.IsFirstTimePredicted)
+            return;
+
+        _curTime += frameTime;
+
+        if (_curTime < PingCheckInterval)
+            return;
+
+        _curTime = 0f;
+
+        var worldTime = _timer.CurTime;
+
+        var detectorQuery = EntityQueryEnumerator<RadarConsoleComponent, RadarDetectorComponent, TransformComponent, ApcPowerReceiverComponent>();
+
+        while (detectorQuery.MoveNext(out var uid, out var radar, out var detector, out var detectorXform, out var power))
         {
-            var ourRange = radar.MaxRange * 0.8;
-            var ourPos = _transform.GetWorldPosition(transform);
-            if (!receptionList.ContainsKey(uid))
+            if (!power.Powered)
+                continue;
+            if (worldTime - detector.lastAlert < TimeSpan.Zero)
+                continue;
+
+            var ourPos = _transform.GetWorldPosition(detectorXform);
+            var ourRangeSq = (float)(radar.MaxRange * radar.MaxRange * 0.64);
+
+            var closestSq = float.MaxValue;
+            var closestPos = Vector2.Zero;
+            var count = 0;
+
+            var pingerQuery = EntityQueryEnumerator<RadarPingerComponent, TransformComponent>();
+            while (pingerQuery.MoveNext(out var pingerUid, out _, out var pingerXform))
             {
-                receptionList.Add(uid, new HashSet<EntityUid>());
-            }
+                if (!_uiSystem.IsUiOpen(pingerUid, RadarConsoleUiKey.Key))
+                    continue;
 
-            var ourHash = receptionList[uid];
+                if (pingerXform.GridUid != null)
+                    continue;
 
-            foreach (var (key, _) in checking)
-            {
-                var targetTrans = Transform(key);
-                // dont care about inactives
-                if (!_uiSystem.IsUiOpen(key, RadarConsoleUiKey.Key))
-                    continue;
-                if ((_transform.GetWorldPosition(targetTrans) - ourPos).Length() > ourRange)
-                    continue;
-                ourHash.Add(key);
-            }
+                var pingerPos = _transform.GetWorldPosition(pingerXform);
+                var deltaSq = (pingerPos - ourPos).LengthSquared();
 
-        }
-        if (curTime > pingCheckInterval)
-        {
-            curTime = 0f;
+                if (deltaSq > ourRangeSq)
+                    continue;
 
-            var worldTime = _timer.CurTime;
-            foreach(var (key, set) in receptionList)
-            {
-                if (!TryComp<RadarDetectorComponent>(key, out var comp))
-                    continue;
-                if (!TryComp<ApcPowerReceiverComponent>(key ,out var powerComp))
-                    continue;
-                if (!powerComp.Powered)
-                    continue;
-                if (worldTime - comp.lastAlert < TimeSpan.Zero)
-                    continue;
-                if (!set.Any())
-                    continue;
-                var closest = 9999f;
-                var ourPos = _transform.GetWorldPosition(key);
-                foreach (var entity in set)
+                count++;
+                if (deltaSq < closestSq)
                 {
-                    var distance = (_transform.GetWorldPosition(entity) - ourPos).Length();
-                    if (distance > closest)
-                        continue;
-                    closest = distance;
+                    closestSq = deltaSq;
+                    closestPos = pingerPos;
                 }
-
-                var message = Loc.GetString("sonar-ping-alert-message",
-                    ("count", set.Count()),
-                    ("distance", Math.Round(closest)));
-                _chatSystem.TrySendInGameICMessage(key, message, InGameICChatType.Speak, ChatTransmitRange.Normal);
-                comp.lastAlert = worldTime + alertCooldown;
             }
-            receptionList.Clear();
 
+            if (count == 0)
+                continue;
+
+            var azimuth = GetAzimuthDegrees(closestPos - ourPos);
+            var distance = Math.Round(MathF.Sqrt(closestSq));
+
+            var message = Loc.GetString("sonar-ping-alert-message",
+                ("count", count),
+                ("distance", distance),
+                ("azimuth", azimuth));
+
+            _chatSystem.TrySendInGameICMessage(uid, message, InGameICChatType.Speak, ChatTransmitRange.Normal);
+            detector.lastAlert = worldTime + AlertCooldown;
         }
+    }
 
-
+    private static int GetAzimuthDegrees(Vector2 delta)
+    {
+        var degrees = (Math.Atan2(delta.X, delta.Y) * (180.0 / Math.PI) + 360.0) % 360.0;
+        return (int) Math.Round(degrees) % 360;
     }
 }

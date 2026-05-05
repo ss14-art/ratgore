@@ -18,6 +18,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconAdvocatusTemplar"
+  chatNameColor: "#167800"
   supervisors: job-supervisors-imperial
   canBeAntag: false
   requirements:

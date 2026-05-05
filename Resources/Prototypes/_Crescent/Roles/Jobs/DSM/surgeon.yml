@@ -18,6 +18,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconImperialSurgeon"
+  chatNameColor: "#00e6d6"
   supervisors: job-supervisors-imperial
   canBeAntag: false
   requirements:

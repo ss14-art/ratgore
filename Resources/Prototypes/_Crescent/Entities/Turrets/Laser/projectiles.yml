@@ -10,7 +10,6 @@
     - state: chronobolt
       shader: unshaded
   - type: Projectile
-    ignoreWeaponGrid: true
     damage:
       types:
         Blunt: 30
@@ -61,37 +60,6 @@
       - state: bluespace
 
 - type: entity
-  id: BulletScourer
-  name: diffused hardlight bolt
-  parent: BaseBulletTrigger
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ProjectilePhasePrevent
-  - type: ShipWeaponProjectile
-  - type: Projectile
-    ignoreWeaponGrid: true
-    damage:
-      types:
-        Heat: 4
-  - type: ProjectileIFF
-    visualType: Circle
-    color: Red
-  - type: PointLight
-    radius: 3.5
-    color: blue
-    energy: 0.5
-  - type: TimedDespawn
-    lifetime: 3 #540
-  - type: Sprite
-    sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/lasers.rsi
-    layers:
-      - state: laserlight
-#  - type: ProjectileSpread
-#    proto: BulletScourer
-#    count: 4
-#    spread: 3
-
-- type: entity
   id: BulletRetribution
   name: volatile hardlight bolt
   parent: BaseBulletTrigger
@@ -103,7 +71,7 @@
     ignoreWeaponGrid: true
     damage:
       types:
-        Heat: 71
+        Heat: 120
   - type: ProjectileIFF
     visualType: Circle
     color: Red
@@ -112,7 +80,7 @@
     color: blue
     energy: 0.5
   - type: TimedDespawn
-    lifetime: 5.9 #1062
+    lifetime: 7 #ratgore, 1400m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/lasers.rsi
     layers:
@@ -130,7 +98,7 @@
     ignoreWeaponGrid: true
     damage:
       types:
-        Heat: 125
+        Heat: 250
   - type: ProjectileIFF
     visualType: Circle
     color: Red
@@ -139,7 +107,7 @@
     color: blue
     energy: 0.5
   - type: TimedDespawn
-    lifetime: 10 #2000m
+    lifetime: 16 #3200m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/lasers.rsi
     layers:

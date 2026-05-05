@@ -410,7 +410,7 @@
 - type: listing
   id: StoreListingSAWScabrak
   name: SAW Scabrak LPC
-  description: A product of one particularly drunk foreman seeing a Bogatyr-class ship, and then asking if it could mine. Shockingly good platform for weaponization.
+  description: A Shipfitters original design of a cruiser-sized mining barge.
   icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
   productEntity: ShipVoucherScabrak
   cost:
@@ -418,16 +418,16 @@
   categories:
   - StoreCategorySAWships
 
-- type: listing
-  id: StoreListingSAWThanapod
-  name: SAW Thanapod LPC
-  description: A Shipfitters original design of a cruiser-sized mining barge.
-  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
-  productEntity: ShipVoucherThanapod
-  cost:
-    ScrapSAW: 150
-  categories:
-  - StoreCategorySAWships
+#- type: listing
+#  id: StoreListingSAWThanapod
+#  name: SAW Thanapod LPC
+#  description: A product of one particularly drunk foreman seeing a Bogatyr-class ship, and then asking if it could mine. Shockingly good platform for weaponization.
+#  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
+#  productEntity: ShipVoucherThanapod
+#  cost:
+#    ScrapSAW: 150
+#  categories:
+#  - StoreCategorySAWships
 
 - type: listing
   id: StoreListingSAWHyena

@@ -25,8 +25,7 @@
     iffColor: Orange
     shuttles:
     - HornetDrone
-    - Rapier
-    - Nova
+    - WaspDrone
 
 - type: entity
   id: DSMLightCarrierComputer
@@ -37,8 +36,7 @@
     iffColor: "#C677A5"
     shuttles:
     - ValorDrone
-    - Khan
-    - Perigale
+    - RocinanteDrone
 
 - type: entity
   id: JackalMothershipComputer
@@ -50,11 +48,11 @@
     shuttles:
     - Reaver
     - Itch
-    - Sinn
+    #- Sinn - the sinn is really strong now
     - Cerberus
     - Corvax
     - Ouroboros
-    - Cleaver
+    #- Cleaver - why the fuck is this designated upgrade available roundstart
 
 - type: entity
   id: CountsmanMothershipComputer
@@ -138,7 +136,7 @@
     - buffalo
     - gazpachov
     - Musinyane
-    - Chanchu
+    #- Chanchu
     - Nazaar
 
 - type: entity
@@ -149,8 +147,8 @@
   - type: ShipyardListing
     iffColor: IndianRed
     shuttles:
-    - Velator
-    - Taipan
+    #- Velator
+    #- Taipan
     - Wreck
     - Spriggan
     - Lungspot

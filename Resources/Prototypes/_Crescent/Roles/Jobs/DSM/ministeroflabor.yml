@@ -25,6 +25,12 @@
   startingGear: LaborGear
   alwaysUseSpawner: true
   icon: "JobIconImperialLabor"
+  chatNameColor: "#fc9300"
+  chatAmplification:
+    bubbleScale: 1.09
+    shoutBubbleScale: 1.32
+    radioScale: 1.23
+    radioBold: true
   requireAdminNotify: false
   supervisors: job-supervisors-imperial
   canBeAntag: false

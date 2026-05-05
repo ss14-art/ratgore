@@ -187,14 +187,10 @@
     iffColor: Orange
     shuttles:
     - Vanguard
-    - Lodka
-    #- Ivarod
-    #- Stern
-    #- Gargut
-    - Hind
-    - Vasinya
     - Krechet
     - Psoglav
+    - Lodka
+    - Vasinya
 
 - type: entity
   id: RatNCWLLightCarrierComputer
@@ -205,8 +201,7 @@
     iffColor: Orange
     shuttles:
     - HornetDrone
-    - Rapier
-    - Nova
+    - WaspDrone
 
 - type: entity
   id: RatDSMLightCarrierComputer
@@ -217,8 +212,7 @@
     iffColor: "#C677A5"
     shuttles:
     - ValorDrone
-    - Khan
-    - Perigale
+    - RocinanteDrone
 
 - type: entity
   id: RatJackalMothershipComputer
@@ -230,11 +224,11 @@
     shuttles:
     - Reaver
     - Itch
-    - Sinn
+    #- Sinn - the sinn is really strong now
     - Cerberus
     - Corvax
     - Ouroboros
-    - Cleaver
+    #- Cleaver - why the fuck is this designated upgrade available roundstart
 
 - type: entity
   id: RatCountsmanMothershipComputer
@@ -251,7 +245,6 @@
     - Gnosis
     - Praxis
     - Praetorian
-    - Laelaps
     #- Torturer
 
 - type: entity
@@ -263,8 +256,7 @@
     iffColor: "#C677A5"
     shuttles:
     - Redemptor
-    - Imparator
-    - Perigale
+    - RocinanteDrone
 
 - type: entity
   id: RatUnionfallNemesisMothershipComputer
@@ -286,9 +278,9 @@
   - type: ShipyardListing
     iffColor: IndianRed
     shuttles:
-    - Hulk
+    #- Hulk
     - Meatwagon
-    - Harpy
+    #- Harpy
     - Matabele
     - Fridge
 
@@ -305,7 +297,7 @@
     - Hyena
     - Scabrak
     - Geode
-    - Thanapod
+    #- Thanapod
     - Mercurymk2
 
 - type: entity
@@ -318,7 +310,7 @@
     - buffalo
     - gazpachov
     - Musinyane
-    - Chanchu
+    #- Chanchu
     - Nazaar
 
 - type: entity
@@ -329,8 +321,8 @@
   - type: ShipyardListing
     iffColor: IndianRed
     shuttles:
-    - Velator
-    - Taipan
+    #- Velator not rounstart.
+    #- Taipan
     - Wreck
     - Spriggan
     - Lungspot
@@ -344,7 +336,7 @@
     iffColor: Orange
     shuttles:
     - HornetDrone
-    #- Khopesh
+    - WaspDrone
     #- Broadsword
 
 - type: entity
