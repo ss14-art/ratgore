@@ -7,6 +7,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -76,6 +79,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -146,6 +152,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -214,6 +223,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
@@ -248,6 +260,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
@@ -282,6 +297,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
@@ -318,6 +336,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -386,6 +407,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -454,6 +478,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -524,6 +551,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -593,6 +623,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -664,6 +697,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -736,6 +772,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     damage:

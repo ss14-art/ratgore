@@ -16,8 +16,6 @@ namespace Content.Client.Chat.UI
 {
     public abstract class SpeechBubble : Control
     {
-        protected const int FancyBubbleContentTopMargin = 10;
-
         [Dependency] private readonly IEyeManager _eyeManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] protected readonly IConfigurationManager ConfigManager = default!;
@@ -315,9 +313,11 @@ namespace Content.Client.Chat.UI
                 VerticalAlignment = VAlignment.Top,
             };
 
+            // Symmetric padding: header and body are stacked in a vertical BoxContainer, so extra top inset
+            // is not needed (it only made the speech frame look like it reached up under the name panel).
             var contentMargin = shout
-                ? new Thickness(4, FancyBubbleContentTopMargin + 1, 4, 4)
-                : new Thickness(2, FancyBubbleContentTopMargin, 2, 2);
+                ? new Thickness(4, 4, 4, 4)
+                : new Thickness(2, 2, 2, 2);
 
             var bubbleContent = new RichTextLabel
             {
@@ -332,9 +332,10 @@ namespace Content.Client.Chat.UI
             bubbleContent.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
 
             //As for below: Some day this could probably be converted to xaml. But that is not today. -Myr
+            // Top margin 0: gap between name chip and message bubble comes from BoxContainer separation only.
             var mainPanelMargin = shout
-                ? new Thickness(6, 5, 6, 4)
-                : new Thickness(4, 4, 4, 2);
+                ? new Thickness(6, 0, 6, 4)
+                : new Thickness(4, 0, 4, 2);
 
             var mainPanel = new PanelContainer
             {
@@ -357,7 +358,7 @@ namespace Content.Client.Chat.UI
             var panel = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
-                SeparationOverride = -2,
+                SeparationOverride = 3,
                 HorizontalAlignment = HAlignment.Center,
                 Children = { headerPanel, mainPanel },
             };

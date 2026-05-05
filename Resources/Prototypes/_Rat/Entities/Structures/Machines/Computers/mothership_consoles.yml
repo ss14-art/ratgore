@@ -295,10 +295,11 @@
     - Shanty
     - Rockchipper
     - Hyena
-    - Scabrak
+    #- Scabrak
     - Geode
-    #- Thanapod
+    - Thanapod
     - Mercurymk2
+    - Scarab
 
 - type: entity
   id: RatTatsumotoMothershipComputer
