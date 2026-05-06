@@ -372,11 +372,7 @@ namespace Content.Client.Chat.UI
             var panel = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
-<<<<<<< HEAD
                 SeparationOverride = 3,
-=======
-                SeparationOverride = -2,
->>>>>>> origin/master
                 HorizontalAlignment = HAlignment.Center,
                 Children = { headerPanel, mainPanel },
             };

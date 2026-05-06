@@ -4,13 +4,8 @@ meta:
   engineVersion: 268.1.0
   forkId: ""
   forkVersion: ""
-<<<<<<< HEAD
   time: 05/04/2026 20:58:31
   entityCount: 10905
-=======
-  time: 05/01/2026 10:07:50
-  entityCount: 10860
->>>>>>> origin/master
 maps: []
 grids:
 - 1

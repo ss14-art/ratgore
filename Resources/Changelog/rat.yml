@@ -730,7 +730,6 @@ Entries:
     id: 91
     time: '2026-05-03T02:22:03.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/170
-<<<<<<< HEAD
   - author: Gorox
     changes:
       - type: Fix
@@ -747,7 +746,5 @@ Entries:
     id: 93
     time: '2026-05-05T03:30:44.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/176
-=======
->>>>>>> origin/master
 Name: Rat
 Order: -1
