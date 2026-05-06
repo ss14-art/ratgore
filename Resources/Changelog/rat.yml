@@ -730,5 +730,24 @@ Entries:
     id: 91
     time: '2026-05-03T02:22:03.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/170
+<<<<<<< HEAD
+  - author: Gorox
+    changes:
+      - type: Fix
+        message: Фикс выхода сообщений за окно чата
+      - type: Fix
+        message: Рамку над головой персонажа больше не увеличивает вверх при включенной настройке видимости имен над сообщениями.
+    id: 92
+    time: '2026-05-05T03:30:10.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/174
+  - author: ChangelingRUES
+    changes:
+      - type: Fix
+        message: Шаттл Преторианец, Шаттл Сузериан, Станция Аврора, Станция Марсова.
+    id: 93
+    time: '2026-05-05T03:30:44.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/176
+=======
+>>>>>>> origin/master
 Name: Rat
 Order: -1

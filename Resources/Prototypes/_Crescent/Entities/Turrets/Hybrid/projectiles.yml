@@ -6,6 +6,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent # still do not remove
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ProjectileIFF
     visualType: Circle
     color: "#ea86f7" #you have no idea how hard it was to see the previous IFF color
@@ -34,6 +37,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ProjectileIFF
     visualType: Circle
     color: "#ea86f7"
@@ -69,6 +75,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ProjectileIFF
     visualType: Circle
     color: "#ea86f7"
