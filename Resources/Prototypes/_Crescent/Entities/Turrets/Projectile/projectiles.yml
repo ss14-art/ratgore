@@ -38,9 +38,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+<<<<<<< HEAD
     mask:
     - Impassable
     - BulletImpassable
+=======
+>>>>>>> origin/master
   - type: ProjectileIFF
     visualType: Circle
     color: White
@@ -143,9 +146,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+<<<<<<< HEAD
     mask:
     - Impassable
     - BulletImpassable
+=======
+>>>>>>> origin/master
   - type: ProjectileIFF
     visualType: Circle
     color: White
@@ -249,9 +255,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+<<<<<<< HEAD
     mask:
     - Impassable
     - BulletImpassable
+=======
+>>>>>>> origin/master
   - type: ProjectileIFF
     visualType: Square
     color: White
@@ -287,9 +296,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+<<<<<<< HEAD
     mask:
     - Impassable
     - BulletImpassable
+=======
+>>>>>>> origin/master
   - type: ProjectileIFF
     visualType: Square
     color: White
@@ -369,9 +381,12 @@
     color: White
   - type: ShipWeaponProjectile
   - type: ProjectilePhasePrevent
+<<<<<<< HEAD
     mask:
     - Impassable
     - BulletImpassable
+=======
+>>>>>>> origin/master
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
@@ -474,9 +489,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+<<<<<<< HEAD
     mask:
     - Impassable
     - BulletImpassable
+=======
+>>>>>>> origin/master
   - type: ProjectileIFF
     visualType: Diamond
     color: White
@@ -510,9 +528,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+<<<<<<< HEAD
     mask:
     - Impassable
     - BulletImpassable
+=======
+>>>>>>> origin/master
   - type: ProjectileIFF
     visualType: Diamond
     color: White
