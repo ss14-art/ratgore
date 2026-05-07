@@ -191,7 +191,7 @@ namespace Content.Shared.VendingMachines
         /// HULLROT: every price in the vending machine is multiplied by this. useful for making shit more/less expensive. set to 0 to make everything free.
         /// </summary>
         [DataField("globalPriceMod")]
-        public float GlobalPriceMod = 1;
+        public float GlobalPriceMod = 0;
         #endregion
     }
 
