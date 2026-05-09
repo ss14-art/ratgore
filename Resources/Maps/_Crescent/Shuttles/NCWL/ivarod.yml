@@ -4,7 +4,7 @@ meta:
   engineVersion: 268.1.0
   forkId: ""
   forkVersion: ""
-  time: 02/28/2026 09:20:45
+  time: 04/14/2026 17:41:09
   entityCount: 1067
 maps: []
 grids:
@@ -391,6 +391,10 @@ entities:
             1240: -9,-2
             1246: -2,-12
             1252: 5,-12
+            1298: -9,-11
+            1304: -9,-2
+            1310: -2,-12
+            1316: 5,-12
         - node:
             zIndex: 1
             id: LatticeCornerNW
@@ -451,6 +455,10 @@ entities:
             1249: 2,-12
             1255: 9,-11
             1261: 9,-2
+            1307: -5,-12
+            1313: 2,-12
+            1319: 9,-11
+            1325: 9,-2
         - node:
             zIndex: 1
             id: LatticeCornerSE
@@ -549,6 +557,13 @@ entities:
             1223: -4,13
             1228: -3,14
             1237: -9,-5
+            1264: 2,14
+            1270: 4,13
+            1281: -7,10
+            1284: -5,13
+            1287: -4,13
+            1292: -3,14
+            1301: -9,-5
         - node:
             zIndex: 1
             id: LatticeCornerSW
@@ -647,6 +662,13 @@ entities:
             1225: -4,13
             1231: -2,14
             1258: 9,-5
+            1267: 3,14
+            1272: 4,13
+            1275: 5,13
+            1278: 7,10
+            1289: -4,13
+            1295: -2,14
+            1322: 9,-5
         - node:
             id: LatticeEdgeE
           decals:
@@ -800,6 +822,17 @@ entities:
             1238: -9,-2
             1244: -2,-12
             1250: 5,-12
+            1263: 2,14
+            1269: 4,13
+            1280: -7,10
+            1283: -5,13
+            1286: -4,13
+            1291: -3,14
+            1296: -9,-11
+            1300: -9,-5
+            1302: -9,-2
+            1308: -2,-12
+            1314: 5,-12
         - node:
             id: LatticeEdgeN
           decals:
@@ -915,6 +948,14 @@ entities:
             1251: 5,-12
             1253: 9,-11
             1259: 9,-2
+            1297: -9,-11
+            1303: -9,-2
+            1305: -5,-12
+            1309: -2,-12
+            1311: 2,-12
+            1315: 5,-12
+            1317: 9,-11
+            1323: 9,-2
         - node:
             id: LatticeEdgeS
           decals:
@@ -1070,6 +1111,18 @@ entities:
             1229: -2,14
             1235: -9,-5
             1256: 9,-5
+            1262: 2,14
+            1265: 3,14
+            1268: 4,13
+            1273: 5,13
+            1276: 7,10
+            1279: -7,10
+            1282: -5,13
+            1285: -4,13
+            1290: -3,14
+            1293: -2,14
+            1299: -9,-5
+            1320: 9,-5
         - node:
             id: LatticeEdgeW
           decals:
@@ -1223,6 +1276,17 @@ entities:
             1254: 9,-11
             1257: 9,-5
             1260: 9,-2
+            1266: 3,14
+            1271: 4,13
+            1274: 5,13
+            1277: 7,10
+            1288: -4,13
+            1294: -2,14
+            1306: -5,-12
+            1312: 2,-12
+            1318: 9,-11
+            1321: 9,-5
+            1324: 9,-2
         - node:
             color: '#FFFFFFFF'
             id: TechE
@@ -1705,7 +1769,7 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-  - uid: 10
+  - uid: 9
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -1713,7 +1777,7 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-  - uid: 11
+  - uid: 10
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -1721,7 +1785,7 @@ entities:
       parent: 1
     - type: Physics
       canCollide: False
-  - uid: 107
+  - uid: 11
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -1759,7 +1823,7 @@ entities:
       pos: 0.5,-7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20813.236
+      secondsUntilStateChange: -20901.916
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1770,7 +1834,7 @@ entities:
       pos: 1.5,3.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20802.037
+      secondsUntilStateChange: -20890.717
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1781,7 +1845,7 @@ entities:
       pos: -3.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20795.838
+      secondsUntilStateChange: -20884.518
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1792,7 +1856,7 @@ entities:
       pos: 4.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20793.07
+      secondsUntilStateChange: -20881.75
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1803,7 +1867,7 @@ entities:
       pos: -3.5,3.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20801.504
+      secondsUntilStateChange: -20890.184
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1814,7 +1878,7 @@ entities:
       pos: 4.5,3.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20802.504
+      secondsUntilStateChange: -20891.184
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1825,7 +1889,7 @@ entities:
       pos: 5.5,-1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20803.203
+      secondsUntilStateChange: -20891.883
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1836,7 +1900,7 @@ entities:
       pos: -4.5,-1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20801.037
+      secondsUntilStateChange: -20889.717
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1859,7 +1923,7 @@ entities:
       pos: -6.5,8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20781.904
+      secondsUntilStateChange: -20870.584
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1870,7 +1934,7 @@ entities:
       pos: 7.5,8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20783.604
+      secondsUntilStateChange: -20872.283
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1881,7 +1945,7 @@ entities:
       pos: -3.5,-5.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20809.137
+      secondsUntilStateChange: -20897.816
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1892,7 +1956,7 @@ entities:
       pos: 4.5,-5.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20809.67
+      secondsUntilStateChange: -20898.35
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1903,7 +1967,7 @@ entities:
       pos: 3.5,4.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20784.438
+      secondsUntilStateChange: -20873.117
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1914,7 +1978,7 @@ entities:
       pos: -2.5,4.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20782.97
+      secondsUntilStateChange: -20871.65
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1925,7 +1989,7 @@ entities:
       pos: 3.5,8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20784.004
+      secondsUntilStateChange: -20872.684
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1936,7 +2000,7 @@ entities:
       pos: -2.5,8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20782.57
+      secondsUntilStateChange: -20871.25
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1962,7 +2026,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -20817.438
+      secondsUntilStateChange: -20906.117
       state: Opening
   - uid: 37
     components:
@@ -1973,7 +2037,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -20818.07
+      secondsUntilStateChange: -20906.75
       state: Opening
 - proto: AmeController
   entities:
@@ -2198,172 +2262,172 @@ entities:
       parent: 1
 - proto: AtmosFixBlockerMarker
   entities:
-  - uid: 9
+  - uid: 74
     components:
     - type: Transform
       pos: -4.5,13.5
       parent: 1
-  - uid: 74
+  - uid: 75
     components:
     - type: Transform
       pos: -5.5,11.5
       parent: 1
-  - uid: 75
+  - uid: 76
     components:
     - type: Transform
       pos: 6.5,11.5
       parent: 1
-  - uid: 76
+  - uid: 77
     components:
     - type: Transform
       pos: -1.5,-11.5
       parent: 1
-  - uid: 77
+  - uid: 78
     components:
     - type: Transform
       pos: -4.5,-11.5
       parent: 1
-  - uid: 78
+  - uid: 79
     components:
     - type: Transform
       pos: -3.5,-10.5
       parent: 1
-  - uid: 79
+  - uid: 80
     components:
     - type: Transform
       pos: -2.5,-10.5
       parent: 1
-  - uid: 80
+  - uid: 81
     components:
     - type: Transform
       pos: 2.5,-11.5
       parent: 1
-  - uid: 81
+  - uid: 82
     components:
     - type: Transform
       pos: 3.5,-10.5
       parent: 1
-  - uid: 82
+  - uid: 83
     components:
     - type: Transform
       pos: 4.5,-10.5
       parent: 1
-  - uid: 83
+  - uid: 84
     components:
     - type: Transform
       pos: 5.5,-11.5
       parent: 1
-  - uid: 84
+  - uid: 85
     components:
     - type: Transform
       pos: 9.5,-10.5
       parent: 1
-  - uid: 85
+  - uid: 86
     components:
     - type: Transform
       pos: 9.5,-4.5
       parent: 1
-  - uid: 86
+  - uid: 87
     components:
     - type: Transform
       pos: 8.5,-2.5
       parent: 1
-  - uid: 87
+  - uid: 88
     components:
     - type: Transform
       pos: 8.5,-3.5
       parent: 1
-  - uid: 88
+  - uid: 89
     components:
     - type: Transform
       pos: -8.5,-10.5
       parent: 1
-  - uid: 89
+  - uid: 90
     components:
     - type: Transform
       pos: -8.5,-4.5
       parent: 1
-  - uid: 90
+  - uid: 91
     components:
     - type: Transform
       pos: -7.5,-3.5
       parent: 1
-  - uid: 91
+  - uid: 92
     components:
     - type: Transform
       pos: -7.5,-2.5
       parent: 1
-  - uid: 92
+  - uid: 93
     components:
     - type: Transform
       pos: -8.5,-1.5
       parent: 1
-  - uid: 93
+  - uid: 94
     components:
     - type: Transform
       pos: 9.5,-1.5
       parent: 1
-  - uid: 94
+  - uid: 95
     components:
     - type: Transform
       pos: 9.5,4.5
       parent: 1
-  - uid: 95
+  - uid: 96
     components:
     - type: Transform
       pos: -8.5,4.5
       parent: 1
-  - uid: 96
+  - uid: 97
     components:
     - type: Transform
       pos: -7.5,6.5
       parent: 1
-  - uid: 97
+  - uid: 98
     components:
     - type: Transform
       pos: -7.5,7.5
       parent: 1
-  - uid: 98
+  - uid: 99
     components:
     - type: Transform
       pos: -7.5,8.5
       parent: 1
-  - uid: 99
+  - uid: 100
     components:
     - type: Transform
       pos: 8.5,6.5
       parent: 1
-  - uid: 100
+  - uid: 101
     components:
     - type: Transform
       pos: 8.5,7.5
       parent: 1
-  - uid: 101
+  - uid: 102
     components:
     - type: Transform
       pos: 8.5,8.5
       parent: 1
-  - uid: 102
+  - uid: 103
     components:
     - type: Transform
       pos: 7.5,10.5
       parent: 1
-  - uid: 103
+  - uid: 104
     components:
     - type: Transform
       pos: 5.5,13.5
       parent: 1
-  - uid: 104
+  - uid: 105
     components:
     - type: Transform
       pos: 4.5,13.5
       parent: 1
-  - uid: 105
+  - uid: 106
     components:
     - type: Transform
       pos: -1.5,14.5
       parent: 1
-  - uid: 106
+  - uid: 107
     components:
     - type: Transform
       pos: -3.5,13.5
@@ -2380,35 +2444,19 @@ entities:
       parent: 1
 - proto: BaseWeaponTurretArbalestNCWL
   entities:
-  - uid: 110
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 1.5,12.5
-      parent: 1
-    - type: PointCannon
-      linkedConsoleIds:
-      - 537
-      linkedConsoleId: 537
-  - uid: 111
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,12.5
-      parent: 1
-    - type: PointCannon
-      linkedConsoleIds:
-      - 537
-      linkedConsoleId: 537
   - uid: 112
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -1.5,12.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
     - type: PointCannon
-      linkedConsoleIds:
-      - 537
       linkedConsoleId: 537
   - uid: 113
     components:
@@ -2416,9 +2464,13 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,12.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
     - type: PointCannon
-      linkedConsoleIds:
-      - 537
       linkedConsoleId: 537
 - proto: BedsheetBlack
   entities:
@@ -2566,6 +2618,60 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -1.5,-9.5
       parent: 1
+- proto: C_ComputerTabletopShuttle
+  entities:
+  - uid: 535
+    components:
+    - type: Transform
+      pos: -0.5,6.5
+      parent: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        119:
+        - - Group1
+          - Toggle
+        120:
+        - - Group1
+          - Toggle
+        118:
+        - - Group1
+          - Toggle
+        122:
+        - - Group1
+          - Toggle
+        3:
+        - - Group2
+          - Toggle
+        2:
+        - - Group2
+          - Toggle
+        5:
+        - - Group3
+          - Toggle
+        4:
+        - - Group3
+          - Toggle
+    - type: NamedModules
+      buttonNames:
+      - Toggle frontal weapon door
+      - Toggle 95mm launchers
+      - Toggle 50mm cannons
+      - Module D
+      - Module E
+    - type: ContainerContainer
+      containers:
+        board: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        disk_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        id_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
 - proto: CableApcExtension
   entities:
   - uid: 135
@@ -4608,68 +4714,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,-5.5
       parent: 1
-- proto: ComputerTabletopShuttle
-  entities:
-  - uid: 535
-    components:
-    - type: Transform
-      pos: -0.5,6.5
-      parent: 1
-    - type: DeviceLinkSource
-      linkedPorts:
-        3:
-        - - Group1
-          - Toggle
-        - - Group2
-          - SpaceArtilleryFire
-        5:
-        - - Group1
-          - Toggle
-        - - Group2
-          - SpaceArtilleryFire
-        4:
-        - - Group1
-          - Toggle
-        - - Group2
-          - SpaceArtilleryFire
-        2:
-        - - Group1
-          - Toggle
-        - - Group2
-          - SpaceArtilleryFire
-        119:
-        - - Group3
-          - Toggle
-        120:
-        - - Group3
-          - Toggle
-        118:
-        - - Group3
-          - Toggle
-        122:
-        - - Group3
-          - Toggle
-    - type: NamedModules
-      buttonNames:
-      - Toggle 95mm 'Arbalest' platforms
-      - Fire 95mm 'Arbalest' platforms
-      - Toggle Missile Blastdoors
-      - Empty Module
-      - Empty Module
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        disk_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        id_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
 - proto: ComputerTabletopSurveillanceWirelessCameraMonitor
   entities:
   - uid: 536
@@ -4685,18 +4729,6 @@ entities:
     - type: Transform
       pos: 1.5,6.5
       parent: 1
-    - type: TargetingConsole
-      cannonGroups:
-        all:
-        - 112
-        - 111
-        - 110
-        - 113
-        Homeguard 95mm 'Warden' Medium Missile System:
-        - 112
-        - 111
-        - 110
-        - 113
 - proto: ConveyorBelt
   entities:
   - uid: 538
@@ -4864,7 +4896,7 @@ entities:
       pos: 4.5,10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -20739.504
+      secondsUntilStateChange: -20828.184
       state: Closing
   - uid: 555
     components:
@@ -8283,6 +8315,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: -7.5,8.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
     - type: ContainerContainer
       containers:
         ballistic-ammo: !type:Container
@@ -8303,6 +8341,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: -5.5,11.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
     - type: ContainerContainer
       containers:
         ballistic-ammo: !type:Container
@@ -8323,6 +8367,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 5.5,13.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
     - type: ContainerContainer
       containers:
         ballistic-ammo: !type:Container
@@ -8343,6 +8393,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 8.5,8.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
     - type: ContainerContainer
       containers:
         ballistic-ammo: !type:Container
@@ -8363,6 +8419,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: -4.5,13.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
     - type: ContainerContainer
       containers:
         ballistic-ammo: !type:Container
@@ -8383,6 +8445,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 6.5,11.5
       parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
     - type: ContainerContainer
       containers:
         ballistic-ammo: !type:Container
@@ -8397,6 +8465,60 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+- proto: WeaponTurretSmallArtillery
+  entities:
+  - uid: 110
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,12.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        gun_magazine: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        gun_chamber: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
+  - uid: 111
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,12.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        gun_magazine: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        gun_chamber: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+    - type: ApcPowerReceiver
+      powerLoad: 1000
+    - type: Battery
+      startingCharge: 997.5
+    - type: ApcPowerReceiverBattery
+      enabled: True
 - proto: WindoorSecure
   entities:
   - uid: 1066

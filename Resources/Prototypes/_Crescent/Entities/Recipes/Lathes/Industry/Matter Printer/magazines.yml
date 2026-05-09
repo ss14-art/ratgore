@@ -1,0 +1,106 @@
+
+- type: latheRecipe
+  id: LightRifleMag
+  result: MagazineLightRifleEmpty
+  completetime: 1
+  materials:
+    Plastic: 30
+
+- type: latheRecipe
+  id: RifleMag
+  result: MagazineRifleEmpty
+  completetime: 1
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: RifleDrum
+  result: MagazineRifleDrumEmpty
+  completetime: 1
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: MagazinePistolSubMachineGunEmpty
+  result: MagazinePistolSubMachineGunEmpty
+  completetime: 1
+  materials:
+    Plastic: 20
+
+- type: latheRecipe
+  id: MagazineShotgunEmpty
+  result: MagazineShotgunEmpty
+  completetime: 5
+  materials:
+    Plastic: 50
+
+# .35 Pistol Magazines
+- type: latheRecipe
+  id: MagazinePistolEmpty
+  result: MagazinePistolEmpty
+  completetime: 1
+  materials:
+    Plastic: 25
+
+- type: latheRecipe
+  id: MagazinePistolSubMachineGunTopMountedEmpty
+  result: MagazinePistolSubMachineGunTopMountedEmpty
+  completetime: 5
+  materials:
+    Plastic: 30
+
+- type: latheRecipe
+  id: MagazineMagnumEmpty
+  result: MagazineMagnumEmpty
+  completetime: 5
+  materials:
+    Plastic: 30
+
+- type: latheRecipe
+  id: MagazinePistol6mmSmgEmpty
+  result: MagazinePistol6mmSmgEmpty
+  completetime: 5
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: BaseMagazine6x24mm
+  result: BaseMagazine6x24mm
+  completetime: 5
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: MagazineRiflePanEmpty
+  result: MagazineRiflePanEmpty
+  completetime: 5
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: SpeedLoaderMagnumEmpty
+  result: SpeedLoaderMagnumEmpty
+  completetime: 5
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
+  id: MagazineRocketEmpty
+  result: MagazineRocketEmpty
+  completetime: 1
+  materials:
+    Plastic: 20
+
+# - type: latheRecipe
+#   id: Magazine90mmEmpty
+#   result: Magazine90mmEmpty
+#   completetime: 1
+#   materials:
+#     Plastic: 20
+
+- type: latheRecipe
+  id: DrumMagazineShotgunEmpty
+  result: DrumMagazineShotgunEmpty
+  completetime: 1
+  materials:
+    Plastic: 20

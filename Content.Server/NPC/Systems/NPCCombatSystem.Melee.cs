@@ -81,7 +81,10 @@ public sealed partial class NPCCombatSystem
             return;
         }
 
-        if (distance > TargetMeleeLostRange)
+        var lostRange = TargetMeleeLostRange;
+        if (TryComp<HTNComponent>(uid, out var htn))
+        { lostRange = htn.Blackboard.GetValueOrDefault<float>(htn.Blackboard.GetVisionRadiusKey(EntityManager), EntityManager); }
+        if (distance > lostRange)
         {
             component.Status = CombatStatus.TargetUnreachable;
             return;

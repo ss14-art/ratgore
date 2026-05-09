@@ -31,7 +31,7 @@
     - type: Gun
       fireOnDropChance: 0
       fireRate: 6
-      projectileSpeed: 140
+      projectileSpeed: 80
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -96,7 +96,7 @@
     - type: Gun
       fireOnDropChance: 0
       fireRate: 6
-      projectileSpeed: 140
+      projectileSpeed: 80
       angleDecay: 1
       minAngle: 1.5
       maxAngle: 3
@@ -160,7 +160,7 @@
     - type: Gun
       fireOnDropChance: 0
       fireRate: 18
-      projectileSpeed: 140
+      projectileSpeed: 80
       angleDecay: 0.75
       minAngle: 1.5
       maxAngle: 2.5
@@ -224,7 +224,7 @@
     - type: MagazineAmmoProvider
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 120
+      projectileSpeed: 65
       fireRate: 3
       selectedMode: FullAuto
       availableModes:
@@ -290,7 +290,7 @@
     - type: MagazineAmmoProvider
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 120
+      projectileSpeed: 65
       fireRate: 3
       selectedMode: FullAuto
       availableModes:
@@ -358,7 +358,7 @@
                 collection: MetalGlassBreak
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 140
+      projectileSpeed: 70
       fireRate: 4
       selectedMode: FullAuto
       availableModes:
@@ -425,7 +425,7 @@
                 collection: MetalGlassBreak
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 140
+      projectileSpeed: 70
       fireRate: 4
       selectedMode: FullAuto
       availableModes:
@@ -495,7 +495,7 @@
         ballistic-ammo: !type:Container
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 200
+      projectileSpeed: 130
       fireRate: 0.3
       selectedMode: FullAuto
       availableModes:
@@ -550,7 +550,7 @@
                 collection: MetalGlassBreak
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 150
+      projectileSpeed: 70
       burstFireRate: 8
       burstCooldown: 2
       selectedMode: Burst
@@ -612,7 +612,7 @@
       powerLoad: 800
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 150
+      projectileSpeed: 70
       fireRate: 1.5
       angleDecay: 0.3
       minAngle: 0.75
@@ -660,7 +660,7 @@
         ballistic-ammo: !type:Container
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 250
+      projectileSpeed: 150
       fireRate: 0.2
       selectedMode: SemiAuto
       availableModes:
@@ -701,7 +701,7 @@
         - state: ncwl-howitzer
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 250
+      projectileSpeed: 150
       fireRate: 0.25
       angleDecay: 0.05
       minAngle: 0.4
@@ -763,7 +763,7 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 120
+      projectileSpeed: 70
       fireRate: 1.5
       selectedMode: FullAuto
       availableModes:

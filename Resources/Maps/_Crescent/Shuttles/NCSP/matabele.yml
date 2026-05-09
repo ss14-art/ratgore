@@ -60,6 +60,7 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
+      baseMaxLinearVelocity: 30
     - type: GridPathfinding
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
@@ -998,6 +999,11 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 2.5,4.5
       parent: 1
+    - type: IFFConsole
+      heatDissipation: 5 #fast recloaking
+      heatGeneration: 5
+      heatCapacity: 350 #70s
+      allowedFlags: HideLabel, Hide
 - proto: ComputerTabletopCrewMonitoring
   entities:
   - uid: 87

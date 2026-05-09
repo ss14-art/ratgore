@@ -187,14 +187,11 @@
     iffColor: Orange
     shuttles:
     - Vanguard
-    - Lodka
-    #- Ivarod
-    #- Stern
-    #- Gargut
-    - Hind
-    - Vasinya
     - Krechet
     - Psoglav
+    - Lodka
+    - Hind
+    - Vasinya
 
 - type: entity
   id: RatNCWLLightCarrierComputer
@@ -205,8 +202,7 @@
     iffColor: Orange
     shuttles:
     - HornetDrone
-    - Rapier
-    - Nova
+    - WaspDrone
 
 - type: entity
   id: RatDSMLightCarrierComputer
@@ -217,8 +213,7 @@
     iffColor: "#C677A5"
     shuttles:
     - ValorDrone
-    - Khan
-    - Perigale
+    - RocinanteDrone
 
 - type: entity
   id: RatJackalMothershipComputer
@@ -230,11 +225,11 @@
     shuttles:
     - Reaver
     - Itch
-    - Sinn
+    #- Sinn - the sinn is really strong now
     - Cerberus
     - Corvax
     - Ouroboros
-    - Cleaver
+    #- Cleaver - why the fuck is this designated upgrade available roundstart
 
 - type: entity
   id: RatCountsmanMothershipComputer
@@ -252,7 +247,6 @@
     - Praxis
     - Praetorian
     - Laelaps
-    #- Torturer
 
 - type: entity
   id: RatNemesisMothershipComputer
@@ -263,8 +257,7 @@
     iffColor: "#C677A5"
     shuttles:
     - Redemptor
-    - Imparator
-    - Perigale
+    - RocinanteDrone
 
 - type: entity
   id: RatUnionfallNemesisMothershipComputer
@@ -286,9 +279,9 @@
   - type: ShipyardListing
     iffColor: IndianRed
     shuttles:
-    - Hulk
+    #- Hulk
     - Meatwagon
-    - Harpy
+    #- Harpy
     - Matabele
     - Fridge
 
@@ -303,10 +296,11 @@
     - Shanty
     - Rockchipper
     - Hyena
-    - Scabrak
+    #- Scabrak
     - Geode
     - Thanapod
     - Mercurymk2
+    - Scarab
 
 - type: entity
   id: RatTatsumotoMothershipComputer
@@ -318,7 +312,7 @@
     - buffalo
     - gazpachov
     - Musinyane
-    - Chanchu
+    #- Chanchu
     - Nazaar
 
 - type: entity
@@ -329,8 +323,8 @@
   - type: ShipyardListing
     iffColor: IndianRed
     shuttles:
-    - Velator
-    - Taipan
+    #- Velator not rounstart.
+    #- Taipan
     - Wreck
     - Spriggan
     - Lungspot
@@ -344,7 +338,7 @@
     iffColor: Orange
     shuttles:
     - HornetDrone
-    #- Khopesh
+    - WaspDrone
     #- Broadsword
 
 - type: entity
@@ -438,6 +432,8 @@
   components:
   - type: ShipyardListing
     shuttles:
+    - Alkhuld
+    - Beelzebub
     - Lucifer
     - Fadeem
 

@@ -5,6 +5,7 @@
   abstract: true
   components:
     - type: MapGrid
+    - type: IgnoreHeatSeekingTarget
     - type: BlobFloorPlanBuilder
       floorTileset:
       - FloorAsteroidSand
@@ -43,6 +44,7 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: MapGrid
+    - type: IgnoreHeatSeekingTarget
     - type: BlobFloorPlanBuilder
       radius: 12
       floorPlacements: 35
@@ -54,6 +56,7 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: MapGrid
+    - type: IgnoreHeatSeekingTarget
     - type: BlobFloorPlanBuilder
       radius: 12
       floorPlacements: 58

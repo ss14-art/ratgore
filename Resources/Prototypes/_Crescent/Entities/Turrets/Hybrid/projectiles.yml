@@ -6,6 +6,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent # still do not remove
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ProjectileIFF
     visualType: Circle
     color: "#ea86f7" #you have no idea how hard it was to see the previous IFF color
@@ -34,6 +37,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ProjectileIFF
     visualType: Circle
     color: "#ea86f7"
@@ -47,9 +53,9 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    maxIntensity: 220 #about 3 rounds to break plastit and has a 3x3ish explosion
+    maxIntensity: 150
     intensitySlope: 45
-    totalIntensity: 900
+    totalIntensity: 550
     maxTileBreak: 6
   - type: PointLight
     radius: 3.5
@@ -69,6 +75,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ProjectileIFF
     visualType: Circle
     color: "#ea86f7"

@@ -405,6 +405,46 @@
     recipes:
       - MagnateLPC
 
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherRocinanteDrone
+  name: DSM 'Rocinante' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with an imperial Rocinante-class heavy drone pattern. Has to be redeemed at a shipyard console.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: RocinanteDrone
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - RocinanteDroneLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherValorDrone
+  name: DSM 'Valor' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with an imperial Valor-class light drone pattern. Has to be redeemed at a shipyard console.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: ValorDrone
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - ValorDroneLPC
+
 #ncwl
 
 #T0
@@ -656,6 +696,46 @@
   - type: ReverseEngineering # SectorCrescent
     recipes:
       - SunderLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherHornetDrone
+  name: NCWL 'Hornet' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a communard Hornet-class heavy drone pattern. Has to be redeemed at a shipyard console.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: HornetDrone
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - HornetDroneLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherWaspDrone
+  name: NCWL 'Wasp' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a communard Wasp-class light drone pattern. Has to be redeemed at a shipyard console.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: WaspDrone
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - WaspDroneLPC
 
 #T3 END
 
@@ -1199,6 +1279,23 @@
   - type: ReverseEngineering # SectorCrescent
     recipes:
       - MatabeleLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherHarrier
+  name: IPC 'Harrier' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a Interdyne Pharmaceuticals Harrier-class advanced fighter pattern. Has to be redeemed at a shipyard console.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: Harrier
 
 - type: entity
   parent: BaseItem
@@ -2306,7 +2403,7 @@
   parent: BaseItem
   id: ShipVoucherMojave
   name: Nap 'Mojave' pattern LPC fabprint disk
-  description: An LPC fabprint disk loaded with an Imperial Xenovalk-class medical shuttle. Has to be redeemed at a shipyard console.
+  description: An LPC fabprint disk loaded with an American Mojave-class medical shuttle. Has to be redeemed at a shipyard console.
   components:
   - type: Item
     size: Small

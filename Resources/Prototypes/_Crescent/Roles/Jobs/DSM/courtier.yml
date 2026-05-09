@@ -30,6 +30,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconImperialCourtier"
+  chatNameColor: "#b5af00"
   supervisors: job-supervisors-imperial
   canBeAntag: false
   requirements:

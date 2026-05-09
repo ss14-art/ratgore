@@ -21,7 +21,7 @@ public sealed class ServerPerfBroadcastSystem : EntitySystem
         _lastSent = now;
         var ev = new ServerPerfUpdateEvent
         {
-            ServerFpsAvg = (float) _time.FramesPerSecondAvg,
+            ServerFpsAvg = (float)_time.FramesPerSecondAvg,
             ServerTickRate = _time.TickRate
         };
         RaiseNetworkEvent(ev, Filter.Empty().AddAllPlayers(_players));

@@ -44,7 +44,8 @@ internal struct CustomWordWrap
     public void NextRune(Rune rune, out int? breakLine, out int? breakNewLine, out bool skip)
     {
         BreakIndexCounter = NextBreakIndexCounter;
-        NextBreakIndexCounter += rune.Utf16SequenceLength;
+        // Match RichText Draw globalBreakCounter (one increment per Unicode scalar / EnumerateRunes step).
+        NextBreakIndexCounter += 1;
 
         breakLine = null;
         breakNewLine = null;

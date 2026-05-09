@@ -695,5 +695,85 @@ Entries:
     id: 86
     time: '2026-04-22T12:08:05.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/143
+  - author: Aleksandr_Belov
+    changes:
+      - type: Fix
+        message: Добавлен гравген на шаттл "Judge" Глисс-Санто
+    id: 87
+    time: '2026-04-24T02:59:14.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/149
+  - author: ReWAFFlution
+    changes:
+      - type: Remove
+        message: Фильтр чата вырезан.
+    id: 88
+    time: '2026-04-24T09:27:03.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/152
+  - author: Gorox
+    changes:
+      - type: Tweak
+        message: Ракеты больше не наводятся на обломки и астероиды.
+    id: 89
+    time: '2026-04-24T12:31:05.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/150
+  - author: Ko-mp-otik
+    changes:
+      - type: Fix
+        message: Станции больше не могут летать
+    id: 90
+    time: '2026-04-26T02:38:32.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/158
+  - author: Gr-avity
+    changes:
+      - type: Fix
+        message: Маленькое исправление Гаргута
+    id: 91
+    time: '2026-05-03T02:22:03.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/170
+  - author: Gorox
+    changes:
+      - type: Fix
+        message: Фикс выхода сообщений за окно чата
+      - type: Fix
+        message: Рамку над головой персонажа больше не увеличивает вверх при включенной настройке видимости имен над сообщениями.
+    id: 92
+    time: '2026-05-05T03:30:10.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/174
+  - author: ChangelingRUES
+    changes:
+      - type: Fix
+        message: Шаттл Преторианец, Шаттл Сузериан, Станция Аврора, Станция Марсова.
+    id: 93
+    time: '2026-05-05T03:30:44.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/176
+  - author: NEirotoXiN00
+    changes:
+      - type: Add
+        message: Coordinates in the PDA
+    id: 94
+    time: '2026-05-07T11:34:41.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/180
+  - author: shad4338
+    changes:
+      - type: Add
+        message: ТАПу вернулись в продажу Alkhuld и Вельзе.
+      - type: Add
+        message: ТАПу добавлена новая музыка
+      - type: Tweak
+        message: Скафандры ТАПа получили существенный бафф.
+      - type: Tweak
+        message: Масло лотофагов теперь делать легче, как и порошок оуизаны. Но порошок оузианы теперь делать дороже, чем раньше.
+      - type: Tweak
+        message: У всего оружия ближнего боя ТАПа теперь есть шанс отразить пулю в 25 процентов.
+    id: 95
+    time: '2026-05-08T12:04:27.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/182
+  - author: nabegator220
+    changes:
+      - type: Tweak
+        message: Balance update follow up.
+    id: 96
+    time: '2026-05-08T12:43:29.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/175
 Name: Rat
 Order: -1

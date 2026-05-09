@@ -32,6 +32,7 @@ namespace Content.Client.PDA
         private string _stationName = Loc.GetString("comp-pda-ui-unknown");
         private string _alertLevel = Loc.GetString("comp-pda-ui-unknown");
         private string _instructions = Loc.GetString("comp-pda-ui-unknown");
+        private string _coordinates = Loc.GetString("comp-pda-ui-unknown");
         
 
         private int _currentView;
@@ -125,7 +126,10 @@ namespace Content.Client.PDA
                 _clipboard.SetText(_instructions);
             };
 
-            
+            CoordinatesButton.OnPressed += _ =>
+            {
+                _clipboard.SetText(_coordinates); // TODO: Dynamic updates
+            };
 
 
             HideAllViews();
@@ -161,7 +165,6 @@ namespace Content.Client.PDA
             StationNameLabel.SetMarkup(Loc.GetString("comp-pda-ui-station",
                 ("station", _stationName)));
             
-
             var stationTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
 
             StationTimeLabel.SetMarkup(Loc.GetString("comp-pda-ui-station-time",
@@ -182,6 +185,13 @@ namespace Content.Client.PDA
                 "comp-pda-ui-station-alert-level-instructions",
                 ("instructions", _instructions))
             );
+
+            var coordinates = state.Coordinates ?? Loc.GetString("comp-pda-ui-unknown");
+
+            CoordinatesLabel.SetMarkup(Loc.GetString("comp-pda-ui-coordinates",
+                    ("coordinates", coordinates)));
+
+            _coordinates = state.Coordinates?.ToString() ?? Loc.GetString("comp-pda-ui-unknown");
 
             AddressLabel.Text = state.Address?.ToUpper() ?? " - ";
 

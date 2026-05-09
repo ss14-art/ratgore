@@ -1,7 +1,7 @@
 - type: gameMap
   id: PortBalreska
   mapName: 'ЛРНП Марсова'
-  mapPath: /Maps/_Crescent/Stations/novabalreska.yml
+  mapPath: /Maps/_Rat/Stations/marsova.yml
   minPlayers: 0
   stations:
     PortBalreska:

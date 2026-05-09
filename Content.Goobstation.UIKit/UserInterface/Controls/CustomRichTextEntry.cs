@@ -124,8 +124,11 @@ internal struct CustomRichTextEntry
         // Bear with me here.
         // I am so deeply sorry for the person adding stuff to this in the future.
 
-        Height = defaultFont.GetHeight(uiScale);
+        Height = 0;
         LineBreaks.Clear();
+
+        // Per-visual-line max height (fixes embedded [font]/bold + deferred FinalizeText word wrap).
+        var pendingLineHeight = GetLineHeight(defaultFont, uiScale, lineHeightScale);
 
         if (IsInBox && maxSizeX > 0)
             maxSizeX -= Margin * uiScale;
@@ -181,6 +184,16 @@ internal struct CustomRichTextEntry
         Width = wordWrap.FinalizeText(out breakLine);
         CheckLineBreak(ref this, breakLine);
 
+        // FinalizeText may defer moving the last word to the next row; that uses one LineBreak but two visual rows.
+        if (breakLine == null)
+            Height += pendingLineHeight;
+        else
+        {
+            if (!context.Font.TryPeek(out var font))
+                font = defaultFont;
+            Height += GetLineHeight(font, uiScale, lineHeightScale);
+        }
+
         return this;
 
         bool ProcessRune(ref CustomRichTextEntry src, Rune rune, out int? outBreakLine)
@@ -194,22 +207,33 @@ internal struct CustomRichTextEntry
 
         bool ProcessMetric(ref CustomRichTextEntry src, CharMetrics metrics, out int? outBreakLine)
         {
+            if (!context.Font.TryPeek(out var font))
+                font = defaultFont;
+
+            pendingLineHeight = Math.Max(pendingLineHeight, GetLineHeight(font, uiScale, lineHeightScale));
+
             wordWrap.NextMetrics(metrics, out breakLine, out var abort);
             CheckLineBreak(ref src, breakLine);
             outBreakLine = breakLine;
+
+            if (abort)
+                src.Height += pendingLineHeight;
+
             return abort;
         }
 
         void CheckLineBreak(ref CustomRichTextEntry src, int? line)
         {
-            if (line is { } l)
-            {
-                src.LineBreaks.Add(l);
-                if (!context.Font.TryPeek(out var font))
-                    font = defaultFont;
+            if (line is not { } l)
+                return;
 
-                src.Height += GetLineHeight(font, uiScale, lineHeightScale);
-            }
+            src.LineBreaks.Add(l);
+            src.Height += pendingLineHeight;
+
+            if (!context.Font.TryPeek(out var font))
+                font = defaultFont;
+
+            pendingLineHeight = GetLineHeight(font, uiScale, lineHeightScale);
         }
     }
 

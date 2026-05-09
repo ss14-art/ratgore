@@ -4,7 +4,6 @@ using System.Numerics;
 using Content.Client.Administration.Managers;
 using Content.Client.Chat;
 using Content.Client.Chat.Managers;
-using Content.Client._Rat.Chat.StreamerMode;
 using Content.Client.Chat.TypingIndicator;
 using Content.Client.Chat.UI;
 using Content.Client.Examine;
@@ -59,7 +58,6 @@ public sealed class ChatUIController : UIController
     [Dependency] private readonly IStateManager _state = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IReplayRecordingManager _replayRecording = default!;
-    [Dependency] private readonly StreamerModeSystem _streamerMode = default!;
 
     [UISystemDependency] private readonly ExamineSystem? _examine = default;
     [UISystemDependency] private readonly GhostSystem? _ghost = default;
@@ -193,8 +191,6 @@ public sealed class ChatUIController : UIController
         SubscribeNetworkEvent<DamageForceSayEvent>(OnDamageForceSay);
         _config.OnValueChanged(CCVars.ChatEnableColorName, (value) => { _chatNameColorsEnabled = value; });
         _chatNameColorsEnabled = _config.GetCVar(CCVars.ChatEnableColorName);
-
-        _config.OnValueChanged(CCVars.StreamerModeEnabled, _streamerMode.OnStreamerModeChanged, true);
 
         _speechBubbleRoot = new LayoutContainer();
 
@@ -834,19 +830,16 @@ public sealed class ChatUIController : UIController
 
     public void ProcessChatMessage(ChatMessage msg, bool speechBubble = true)
     {
-        // Apply streamer mode filtering: replace names and filter profanity
-        if (_streamerMode.Enabled)
-        {
-            msg.WrappedMessage = _streamerMode.FilterWrappedMessage(msg.WrappedMessage);
-            msg.Message = _streamerMode.FilterMessage(msg.Message);
-        }
-
         // color the name unless it's something like "the old man"
         if ((msg.Channel == ChatChannel.Local || msg.Channel == ChatChannel.Whisper) && _chatNameColorsEnabled)
         {
-            var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
-            if (grammar != null && grammar.ProperNoun == true)
-                msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
+            var nameText = SharedChatSystem.GetStringInsideTag(msg, "Name");
+            if (!nameText.Contains("[color=", StringComparison.OrdinalIgnoreCase))
+            {
+                var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
+                if (grammar != null && grammar.ProperNoun == true)
+                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(nameText));
+            }
         }
 
         // Color any codewords for minds that have roles that use them

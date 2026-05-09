@@ -163,9 +163,11 @@
 
 - type: soundCollection
   id: combatmodeTAP
-  files:
-    - /Audio/_Crescent/Ambience/CombatMode/TAP_1.ogg
-    - /Audio/_Crescent/Ambience/CombatMode/TAP_2.ogg
+  files: # Rat-Change
+    - /Audio/_Crescent/Ambience/CombatMode/TAP_3.ogg
+    - /Audio/_Crescent/Ambience/CombatMode/TAP_4.ogg
+    - /Audio/_Crescent/Ambience/CombatMode/TAP_5.ogg
+    - /Audio/_Crescent/Ambience/CombatMode/TAP_6.ogg
 
 #Spacers/Independent | STATE: .2 approved
 - type: ambientMusic

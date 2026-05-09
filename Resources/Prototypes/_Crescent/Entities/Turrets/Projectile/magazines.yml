@@ -14,7 +14,7 @@
       tags:
         - Cartridge35mm
     proto: Cartridge35mm
-    capacity: 80
+    capacity: 200
     soundRack:
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
       params:
@@ -57,7 +57,7 @@
       tags:
         - Cartridge35mmHE
     proto: Bullet35mmHE
-    capacity: 80
+    capacity: 200
     soundRack:
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
       params:
@@ -103,7 +103,7 @@
       tags:
         - Cartridge50mm
     proto: Cartridge50mm
-    capacity: 120
+    capacity: 200
     soundRack:
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
       params:
@@ -146,7 +146,7 @@
       tags:
         - Cartridge50mmHE
     proto: Bullet50mmHE
-    capacity: 120
+    capacity: 200
     soundRack:
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
       params:
@@ -189,7 +189,7 @@
       tags:
         - Cartridge50mmSAPHE
     proto: Bullet50mmSAPHE
-    capacity: 120
+    capacity: 200
     soundRack:
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
       params:
@@ -235,7 +235,7 @@
       tags:
         - Cartridge20mm
     proto: Cartridge20mm
-    capacity: 200
+    capacity: 300
     soundRack:
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
       params:
@@ -278,7 +278,7 @@
       tags:
         - Cartridge20mmFrag
     proto: Bullet20mmFrag
-    capacity: 200
+    capacity: 300
     soundRack:
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
       params:

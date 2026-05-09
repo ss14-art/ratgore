@@ -1,0 +1,54 @@
+#20mm
+- type: latheRecipe
+  id: Magazine20mm
+  result: Magazine20mm
+  completetime: 2
+  materials:
+    Steel: 20
+
+# - type: latheRecipe
+#   id: Magazine20mmFrag
+#   result: Magazine20mmFrag
+#   completetime: 2
+#   materials:
+#     Steel: 10
+
+#35mm
+- type: latheRecipe
+  id: Magazine35mm
+  result: Magazine35mm
+  completetime: 4
+  materials:
+    Steel: 40
+
+# - type: latheRecipe
+#   id: Magazine35mmHE
+#   result: Magazine35mmHE
+#   completetime: 4
+#   materials:
+#     Steel: 10
+
+    #to do add ap ammo for all autocannons
+
+#50mm
+- type: latheRecipe
+  id: Magazine50mm
+  result: Magazine50mm
+  completetime: 5
+  materials:
+    Steel: 60
+
+# - type: latheRecipe
+#   id: Magazine50mmHE
+#   result: Magazine50mmHE
+#   completetime: 5
+#   materials:
+#     Steel: 20
+
+# - type: latheRecipe
+#   id: Magazine50mmSAPHE
+#   result: Magazine50mmSAPHE
+#   completetime: 7
+#   materials:
+#     Steel: 50
+

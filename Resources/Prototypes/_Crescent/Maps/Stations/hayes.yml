@@ -9,6 +9,7 @@
       gridComponents:
         - type: MapIcon
           iconType: Station
+        - type: PreventPilot
       components:
         - type: StationNameSetup
           mapNameTemplate: 'БИ Эпитафия'
