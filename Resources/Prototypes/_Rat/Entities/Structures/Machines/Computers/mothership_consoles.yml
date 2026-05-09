@@ -434,8 +434,10 @@
     shuttles:
     - Alkhuld
     - Beelzebub
-    - Lucifer
+    #- Lucifer #Im fucking tired of TAP dying on Fakel roundstart with the gear from it.
     - Fadeem
+    - Qasr
+    - Yanbue # those 2 are modular shuttles which means the shipguns are placed there manually
 
 - type: entity
   id: RatOuroborosMothershipComputer

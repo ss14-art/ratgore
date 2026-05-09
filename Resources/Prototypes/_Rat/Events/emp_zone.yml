@@ -1,0 +1,20 @@
+- type: entity
+  id: RatEmpZoneEvent
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    earliestStart: 30
+    minimumPlayers: 1
+    weight: 5
+    duration: 900
+    maxOccurrences: 3
+  - type: EmpZoneRule
+    zoneRadius: 1000
+    empRange: 20
+    empEnergyConsumption: 10000
+    empDisableDuration: 5
+    minX: -4000
+    minY: -4000
+    maxX: 4000
+    maxY: 4000

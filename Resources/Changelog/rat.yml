@@ -775,5 +775,16 @@ Entries:
     id: 96
     time: '2026-05-08T12:43:29.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/175
+  - author: shad4338
+    changes:
+      - type: Add
+        message: ТАПу были добавлены модульные шаттлы Qasr и Yanbue
+      - type: Remove
+        message: У ТАПа был удалён шаттл Люцифер
+      - type: Tweak
+        message: Баффнуто ИПМ-92 Интердайна
+    id: 97
+    time: '2026-05-09T12:06:33.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/188
 Name: Rat
 Order: -1

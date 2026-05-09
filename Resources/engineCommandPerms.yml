@@ -26,11 +26,6 @@
   - showtime
   - showspritebb
   - cldbglyr
-  - togglefov
-  - togglehardfov
-  - togglelight
-  - togglelightbuf
-  - toggleshadows
   - testbed
   - lightbb
   - vv
@@ -105,6 +100,11 @@
   - unpausemap
   - restart
   - shutdown
+  - togglefov
+  - togglehardfov
+  - togglelight
+  - togglelightbuf
+  - toggleshadows
 
 - Flags: SPAWN
   Commands:

@@ -34,18 +34,18 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 40
+        damage: 80 # Rat
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
-        damage: 20
+        damage: 40 # Rat
       behaviors:
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:DumpRestockInventory
+      # - !type:DumpRestockInventory # Rat-delete
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 

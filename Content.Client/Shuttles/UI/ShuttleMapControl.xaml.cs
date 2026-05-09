@@ -17,6 +17,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Client._Rat.SpaceEvents; // Rat
 
 namespace Content.Client.Shuttles.UI;
 
@@ -28,6 +29,8 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
     [Dependency] private readonly IMapManager _mapManager = default!;
     private readonly ShuttleSystem _shuttles;
     private readonly SharedTransformSystem _xformSystem;
+
+    private EmpZoneClientSystem _empZone = default!;
 
     protected override bool Draggable => true;
 
@@ -77,6 +80,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         RobustXamlLoader.Load(this);
         _shuttles = EntManager.System<ShuttleSystem>();
         _xformSystem = EntManager.System<SharedTransformSystem>();
+		_empZone = EntManager.System<EmpZoneClientSystem>();
         var cache = IoCManager.Resolve<IResourceCache>();
 
         _physicsQuery = EntManager.GetEntityQuery<PhysicsComponent>();
@@ -181,63 +185,69 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
     // Rat-end
 
     // Rat-start
+    private static void DrawFilledRing(DrawingHandleScreen handle, Vector2 center,
+        float innerRadius, float outerRadius, Color fillColor, Color outlineColor, int segments = 64)
+    {
+        var verts = new Vector2[segments * 6];
+        for (int i = 0; i < segments; i++)
+        {
+            float a0 = MathF.Tau * i / segments;
+            float a1 = MathF.Tau * (i + 1) / segments;
+            var d0 = new Vector2(MathF.Cos(a0), MathF.Sin(a0));
+            var d1 = new Vector2(MathF.Cos(a1), MathF.Sin(a1));
+            verts[i * 6 + 0] = center + d0 * innerRadius;
+            verts[i * 6 + 1] = center + d0 * outerRadius;
+            verts[i * 6 + 2] = center + d1 * outerRadius;
+            verts[i * 6 + 3] = center + d0 * innerRadius;
+            verts[i * 6 + 4] = center + d1 * outerRadius;
+            verts[i * 6 + 5] = center + d1 * innerRadius;
+        }
+        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, verts, fillColor);
+
+        var outerVerts = new Vector2[segments];
+        var innerVerts = new Vector2[segments];
+        for (int i = 0; i < segments; i++)
+        {
+            float a = MathF.Tau * i / segments;
+            var dir = new Vector2(MathF.Cos(a), MathF.Sin(a));
+            outerVerts[i] = center + dir * outerRadius;
+            innerVerts[i] = center + dir * innerRadius;
+        }
+        handle.DrawPrimitives(DrawPrimitiveTopology.LineLoop, outerVerts, outlineColor);
+        handle.DrawPrimitives(DrawPrimitiveTopology.LineLoop, innerVerts, outlineColor);
+    }
+
     private void DrawRatZones(DrawingHandleScreen handle)
     {
         var matty = Matrix3Helpers.CreateInverseTransform(Offset, Angle.Zero);
         var worldOrigin = Vector2.Transform(Vector2.Zero, matty);
         worldOrigin = worldOrigin with { Y = -worldOrigin.Y };
         var screenOrigin = ScalePosition(worldOrigin);
-    
-        // Радиусы зон с учетом масштаба
-        float zone1OuterRadius = 500f * MinimapScale;
-        float zone2InnerRadius = 4000f * MinimapScale;
-        float zone2OuterRadius = 4500f * MinimapScale;
-    
-        // Зона 1: красный заполненный круг (0–500)
-        var zone1Color = new Color(1f, 0f, 0f, 0.07f);  
-        handle.DrawCircle(screenOrigin, zone1OuterRadius, zone1Color);
-        handle.DrawCircle(screenOrigin, zone1OuterRadius, zone1Color.WithAlpha(0.25f), filled: false);
-    
-        // Зона 2: зелёное кольцо (4000–4500)
-        var zone2Color = new Color(0f, 1f, 0f, 0.07f);  
-        var segments = 64;
-        var verts = new Vector2[segments * 6];
-    
-        for (int i = 0; i < segments; i++)
+
+        // Центр
+        handle.DrawCircle(screenOrigin, 500f * MinimapScale, new Color(1f, 0f, 0f, 0.03f));
+        handle.DrawCircle(screenOrigin, 500f * MinimapScale, new Color(1f, 0f, 0f, 0.2f), filled: false);
+
+        // Внешнее кольцо
+        DrawFilledRing(handle, screenOrigin,
+            4000f * MinimapScale, 4500f * MinimapScale,
+            new Color(0f, 1f, 0f, 0.03f), new Color(0f, 1f, 0f, 0.2f));
+
+        // Хадал
+        DrawFilledRing(handle, screenOrigin,
+            10000f * MinimapScale, 20000f * MinimapScale,
+            new Color(1f, 0f, 0f, 0.01f), new Color(1f, 0f, 0f, 0.1f));
+
+	    if (_empZone.ZoneActive)
         {
-            float a0 = MathF.Tau * i / segments;
-            float a1 = MathF.Tau * (i + 1) / segments;
-    
-            var inner0 = screenOrigin + new Vector2(MathF.Cos(a0), MathF.Sin(a0)) * zone2InnerRadius;
-            var outer0 = screenOrigin + new Vector2(MathF.Cos(a0), MathF.Sin(a0)) * zone2OuterRadius;
-            var inner1 = screenOrigin + new Vector2(MathF.Cos(a1), MathF.Sin(a1)) * zone2InnerRadius;
-            var outer1 = screenOrigin + new Vector2(MathF.Cos(a1), MathF.Sin(a1)) * zone2OuterRadius;
-    
-            verts[i * 6 + 0] = inner0;
-            verts[i * 6 + 1] = outer0;
-            verts[i * 6 + 2] = outer1;
-            verts[i * 6 + 3] = inner0;
-            verts[i * 6 + 4] = outer1;
-            verts[i * 6 + 5] = inner1;
+            var empRelPos = Vector2.Transform(_empZone.ZoneCenter, matty);
+            empRelPos = empRelPos with { Y = -empRelPos.Y };
+            var empScreenPos = ScalePosition(empRelPos);
+            var empScreenRadius = _empZone.ZoneRadius * MinimapScale;
+
+            handle.DrawCircle(empScreenPos, empScreenRadius, new Color(0f, 0.8f, 1f, 0.03f));
+            handle.DrawCircle(empScreenPos, empScreenRadius, new Color(0f, 0.8f, 1f, 0.2f), filled: false);
         }
-    
-        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, verts, zone2Color);
-    
-        // Контуры кольца (LineLoop — автоматически замыкает контур)
-        var outlineColor = new Color(0f, 1f, 0f, 0.25f);
-        var outerVerts = new Vector2[segments];
-        var innerVerts = new Vector2[segments];
-    
-        for (int i = 0; i < segments; i++)
-        {
-            float a = MathF.Tau * i / segments;
-            var dir = new Vector2(MathF.Cos(a), MathF.Sin(a));
-            outerVerts[i] = screenOrigin + dir * zone2OuterRadius;
-            innerVerts[i] = screenOrigin + dir * zone2InnerRadius;
-        }
-    
-        handle.DrawPrimitives(DrawPrimitiveTopology.LineLoop, outerVerts, outlineColor);
-        handle.DrawPrimitives(DrawPrimitiveTopology.LineLoop, innerVerts, outlineColor);
     }
     // Rat-end
 
