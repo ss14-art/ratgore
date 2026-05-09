@@ -1,7 +1,6 @@
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
-using Content.Client._Rat.Chat.StreamerMode;
 using Content.Client.Clickable;
 using Content.Client.DeltaV.NanoChat;
 using Content.Client.DebugMon;
@@ -67,7 +66,6 @@ namespace Content.Client.IoC
             collection.Register<SponsorManager>(); // Forge-Change
             collection.Register<ISharedSponsorManager, SponsorManager>(); // Forge-Change
             collection.Register<JoinQueueManager>();
-            collection.Register<StreamerModeSystem>();
         }
     }
 }

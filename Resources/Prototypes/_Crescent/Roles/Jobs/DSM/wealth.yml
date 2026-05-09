@@ -22,6 +22,12 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconImperialWealth"
+  chatNameColor: "#ba6d00"
+  chatAmplification:
+    bubbleScale: 1.08
+    shoutBubbleScale: 1.3
+    radioScale: 1.2
+    radioBold: true
   supervisors: job-supervisors-imperial
   canBeAntag: false
   requirements:

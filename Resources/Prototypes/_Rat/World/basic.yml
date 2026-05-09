@@ -6,7 +6,7 @@
 - type: spaceBiome
   id: RatGraveyardMin1
   priority: 1000
-  distanceRange: 2500, 4000
+  distanceRange: 2500, 5000
   noiseRanges: {}
   chunkComponents:
   - type: DebrisFeaturePlacerController
@@ -228,7 +228,7 @@
       prob: 1
   - type: NoiseRangeCarver
     ranges:
-    - 0.3, 0.9
+    - 0.3, 0.95
     noiseChannel: RatCarver
 
 - type: spaceBiome
@@ -249,14 +249,11 @@
     densityNoiseChannel: RatDensityMin
   - type: NoiseRangeCarver
     ranges:
-    - 0.4, 0.8
+    - 0.4, 0.75
     noiseChannel: RatCarver
   - type: SimpleDebrisSelector
     debrisTable:
     - id: RatAsteroidPoorLarge
-      prob: 0.5
-    - id: RatAsteroidPoorHuge
-      prob: 0.5
 
 - type: spaceBiome
   id: RatCraster
@@ -269,9 +266,6 @@
   - type: SimpleDebrisSelector
     debrisTable:
     - id: RatAsteroidRichLarge
-      prob: 0.5
-    - id: RatAsteroidRichHuge
-      prob: 0.5
   - type: NoiseRangeCarver
     ranges:
     - 0.3, 0.51

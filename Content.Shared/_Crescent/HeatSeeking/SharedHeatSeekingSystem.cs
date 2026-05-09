@@ -57,6 +57,9 @@ public sealed class HeatSeekingSystem : EntitySystem
         var shipQuery = EntityQueryEnumerator<CanBeHeatTrackedComponent, TransformComponent>(); // get all entities that can be tracked
         while (shipQuery.MoveNext(out var tUid, out var tComp, out var tXform))
         {
+            if (tXform.GridUid.HasValue && HasComp<IgnoreHeatSeekingTargetComponent>(tXform.GridUid.Value))
+                continue;
+
             var angle = (
                 _transform.ToMapCoordinates(tXform.Coordinates).Position -
                 _transform.ToMapCoordinates(xform.Coordinates).Position

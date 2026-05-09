@@ -165,7 +165,6 @@
     soundGunshot:
       path: /Audio/_Crescent/Weapons/Guns/AK_74/rifle_gunshot_1.ogg
     fireOnDropChance: 0.5
-    damageModifier: 1.15 # ratgore-change
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
@@ -196,12 +195,6 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
-  - type: ExtendDescription
-    descriptionList:
-      - description: На его ствол был установлен дульный ускоритель, потому он его урон на 15% больше.
-        fontSize: 12
-        color: "#ff0000"
-        requireDetailRange: false
   - type: ReverseEngineering
     recipes:
       - WeaponRifleAkCyberdawn

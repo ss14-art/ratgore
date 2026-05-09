@@ -8,13 +8,14 @@
       stationProto: StandardCrescentStation
       gridComponents:
         - type: BlockShipWeaponProjectileGrid
-        - type: MapIcon
-          iconType: Station
-      components:
+        - type: PreventPilot
         - type: VesselIcon
           iffIcon:
             sprite: _Crescent/ShipIcons/ifficons.rsi
-            state: capital
+            state: outpost
+        - type: MapIcon
+          iconType: Station
+      components:
         - type: StationNameSetup
           mapNameTemplate: 'БМС Аврора'
         - type: VesselDesignation

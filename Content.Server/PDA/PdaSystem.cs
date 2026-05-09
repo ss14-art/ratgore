@@ -156,6 +156,10 @@ namespace Content.Server.PDA
             var hasInstrument = HasComp<InstrumentComponent>(uid);
             var showUplink = HasComp<UplinkComponent>(uid) && IsUnlocked(uid);
 
+            var xform = Transform(uid);
+            var worldPos = xform.WorldPosition;
+            var coordinates = $"{worldPos.X:F0} ; {worldPos.Y:F0}";
+
             UpdateStationName(uid, pda);
             UpdateAlertLevel(uid, pda);
             // TODO: Update the level and name of the station with each call to UpdatePdaUi is only needed for latejoin players.
@@ -182,6 +186,7 @@ namespace Content.Server.PDA
                     StationAlertColor = pda.StationAlertColor
                 },
                 pda.StationName,
+                coordinates,
                 showUplink,
                 hasInstrument,
                 address);

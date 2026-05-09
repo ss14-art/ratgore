@@ -1,7 +1,6 @@
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Content.Server._Lua.ChatFilter; // Lua
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -22,9 +21,12 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Language.Systems;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -55,11 +57,12 @@ namespace Content.Server.Chat.Systems;
 /// </summary>
 public sealed partial class ChatSystem : SharedChatSystem
 {
+    private const int MaxAmplifiedChatFontSize = 18;
+
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly IChatSanitizationManager _sanitizer = default!;
-    [Dependency] private readonly ChatFilterManager _chatFilter = default!; // Lua
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -74,6 +77,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly TelepathicChatSystem _telepath = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
+    [Dependency] private readonly SharedJobSystem _jobSystem = default!;
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -209,8 +214,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (!CanSendInGame(message, shell, player))
             return;
 
-        if (_chatFilter.IsProhibitedContent(source, message)) return; // Lua
-
         ignoreActionBlocker = CheckIgnoreSpeechBlocker(source, ignoreActionBlocker);
 
         // this method is a disaster
@@ -307,8 +310,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         // in-game IC messages.
         if (player?.AttachedEntity is not { Valid: true } entity || source != entity)
             return;
-
-        if (_chatFilter.IsProhibitedContent(source, message)) return; // Lua
 
         message = SanitizeInGameOOCMessage(message);
 
@@ -856,7 +857,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         var msg = message;
 
         msg = _wordreplacement.ApplyReplacements(msg, ChatSanitize_Accent);
-        msg = _chatFilter.FilterMessage(msg); // Lua
 
         return msg;
     }
@@ -888,6 +888,8 @@ public sealed partial class ChatSystem : SharedChatSystem
             wrapId = wrapOverride;
 
         var speech = GetSpeechVerb(source, message);
+        var baseFontSize = language.SpeechOverride.FontSize ?? speech.FontSize;
+        message = AmplifySpeechMessage(source, chatType, message, baseFontSize);
         var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
             ? _random.Pick(verbsOverride).ToString()
             : _random.Pick(speech.SpeechVerbStrings);
@@ -897,15 +899,81 @@ public sealed partial class ChatSystem : SharedChatSystem
         var languageDisplay = language.IsVisibleLanguage
             ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
             : "";
+        var nameColor = GetJobChatNameColor(source);
+        if (nameColor != null)
+            entityName = $"[color={nameColor.Value.ToHex()}]{entityName}[/color]";
 
         return Loc.GetString(wrapId,
             ("color", color),
             ("entityName", entityName),
             ("verb", Loc.GetString(verbId)),
             ("fontType", language.SpeechOverride.FontId ?? speech.FontId),
-            ("fontSize", language.SpeechOverride.FontSize ?? speech.FontSize),
+            ("fontSize", baseFontSize),
             ("message", message),
             ("language", languageDisplay));
+    }
+
+    public JobChatAmplification? GetJobChatAmplification(EntityUid source)
+    {
+        if (!_mindSystem.TryGetMind(source, out var mindId, out _))
+            return null;
+
+        if (!_jobSystem.MindTryGetJob(mindId, out var job))
+            return null;
+
+        return job.ChatAmplification;
+    }
+
+    public Color? GetJobChatNameColor(EntityUid source)
+    {
+        if (!_mindSystem.TryGetMind(source, out var mindId, out _))
+            return null;
+
+        if (!_jobSystem.MindTryGetJob(mindId, out var job))
+            return null;
+
+        return job.ChatNameColor;
+    }
+
+    private string AmplifySpeechMessage(EntityUid source, InGameICChatType chatType, string message, int baseFontSize)
+    {
+        if (chatType is not (InGameICChatType.Speak or InGameICChatType.Whisper))
+            return message;
+
+        var amplification = GetJobChatAmplification(source);
+        if (amplification == null)
+            return message;
+
+        var isShout = message.TrimEnd().EndsWith("!!", StringComparison.Ordinal);
+        var multiplier = isShout ? amplification.ShoutBubbleScale : amplification.BubbleScale;
+        return ApplySizeMultiplier(message, baseFontSize, multiplier);
+    }
+
+    public static string ApplySizeMultiplier(string text, int baseFontSize, float multiplier, bool bold = false)
+    {
+        var adjustedMultiplier = MathF.Max(multiplier, 0.1f);
+        var targetSize = Math.Clamp((int) MathF.Round(baseFontSize * adjustedMultiplier), 1, MaxAmplifiedChatFontSize);
+        var output = text;
+
+        if (bold)
+            output = $"[bold]{output}[/bold]";
+
+        if (targetSize != baseFontSize)
+            output = $"[font size={targetSize}]{output}[/font]";
+
+        return output;
+    }
+
+    public static string ApplyRadioChatFormatting(string text, string fontId, int baseFontSize, float multiplier, bool bold)
+    {
+        var adjustedMultiplier = MathF.Max(multiplier, 0.1f);
+        var targetSize = Math.Clamp((int) MathF.Round(baseFontSize * adjustedMultiplier), 1, MaxAmplifiedChatFontSize);
+        var output = text;
+
+        if (bold)
+            output = $"[bold]{output}[/bold]";
+
+        return $"[font=\"{fontId}\" size={targetSize}]{output}[/font]";
     }
 
     /// <summary>

@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Server.Worldgen.Components;
 using Content.Server.Worldgen.Components.Debris;
 using Content.Server.Worldgen.Tools;
+using Content.Shared._Crescent.HeatSeeking;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
@@ -262,6 +263,8 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
                     _sawmill.Debug($"[DebrisPlacer] Grid '{mapPath}' loaded successfully at {coords}. Grid: {gridUid}");
                     
                     var grid = gridUid.Value;
+                    // GameMap station `components` are not applied by TryLoadGrid; match round-start setup for important markers.
+                    EnsureComp<IgnoreHeatSeekingTargetComponent>(grid);
                     component.OwnedDebris.Add(point, grid);
 
                     // Track ownership for cleanup and chunk management

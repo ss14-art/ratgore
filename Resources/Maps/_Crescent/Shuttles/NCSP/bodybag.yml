@@ -721,8 +721,8 @@ entities:
       parent: 1
     - type: IFFConsole
       heatDissipation: 2.5
-      heatGeneration: 12.5
-      heatCapacity: 400
+      heatGeneration: 5
+      heatCapacity: 450
       allowedFlags: HideLabel, Hide
 - proto: ComputerTabletopShuttle
   entities:

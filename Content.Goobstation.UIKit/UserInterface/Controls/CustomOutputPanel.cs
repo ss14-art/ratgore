@@ -84,6 +84,7 @@ public sealed class CustomOutputPanel : Control
     public void RemoveEntry(Index index)
     {
         var entry = _entries[index];
+        entry.RemoveControls();
         _entries.RemoveAt(index.GetOffset(_entries.Count));
 
         var font = _getFont();
@@ -210,13 +211,19 @@ public sealed class CustomOutputPanel : Control
         _totalContentHeight = 0;
         var font = _getFont();
         var sizeX = _getContentBox().Width;
+        var first = true;
         foreach (ref var entry in _entries)
         {
             entry.Update(_tagManager, font, sizeX, UIScale);
-            _totalContentHeight += entry.Height + font.GetLineSeparation(UIScale);
+            _totalContentHeight += entry.Height;
+            if (first)
+                first = false;
+            else
+                _totalContentHeight += font.GetLineSeparation(UIScale);
         }
 
         _scrollBar.MaxValue = Math.Max(_scrollBar.Page, _totalContentHeight);
+        _firstLine = _entries.Count == 0;
         if (_isAtBottom && ScrollFollowing)
         {
             _scrollBar.MoveToEnd();

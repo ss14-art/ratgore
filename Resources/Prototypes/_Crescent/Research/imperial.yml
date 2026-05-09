@@ -260,9 +260,8 @@
   cost: 10000
   recipeUnlocks:
   - NemesisLPC
-  - JanissaryLPC
-  - KhanLPC
-  - PerigaleLPC
+  - ValorDroneLPC
+  - RocinanteDroneLPC
 
 - type: technology
   id: ImperialPaladinMech

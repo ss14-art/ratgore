@@ -18,6 +18,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconImperialForeman"
+  chatNameColor: "#ba6d00"
   supervisors: job-supervisors-imperial
   canBeAntag: false
   requirements:

@@ -31,8 +31,8 @@
       machine_parts: !type:Container
   - type: Gun
     fireOnDropChance: 0
-    projectileSpeed: 65
-    fireRate: 3
+    projectileSpeed: 40
+    fireRate: 1
     selectedMode: SemiAuto
     angleDecay: 45
     minAngle: 5
@@ -96,7 +96,7 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 120
+      projectileSpeed: 80
       fireRate: .5
       selectedMode: FullAuto
       availableModes:
@@ -126,7 +126,7 @@
       size: Medium
 
 - type: entity
-  parent: BaseTurretShipgun
+  parent: WeaponTurretCurse
   id: WeaponTurretCurseNavy
   suffix: Medium Energy, Navy
   name: Navy 300w 'Mandate' EMP Projector
@@ -155,7 +155,7 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 120
+      projectileSpeed: 85
       fireRate: .5
       selectedMode: FullAuto
       availableModes:
@@ -216,8 +216,8 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 200
-      fireRate: 6
+      projectileSpeed: 90
+      fireRate: 8
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -229,7 +229,7 @@
         params:
           variation: 0.12
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 0.33
+      rechargeCooldown: 0.12
       rechargeSound:
         path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
         params:
@@ -246,7 +246,7 @@
       size: Small
 
 - type: entity
-  parent: BaseTurretShipgun
+  parent: WeaponTurretRetribution
   id: WeaponTurretRetributionNavy
   suffix: Small Laser, Navy
   name: Navy 200cc 'Solaris' Pulse Laser
@@ -275,8 +275,8 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 200
-      fireRate: 6
+      projectileSpeed: 90
+      fireRate: 10
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -336,7 +336,7 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 200
+      projectileSpeed: 85
       burstFireRate: 20 #6.67 effective RPS
       burstCooldown: 1
       shotsPerBurst: 10
@@ -368,7 +368,7 @@
       size: Medium
 
 - type: entity
-  parent: BaseTurretShipgun
+  parent:  WeaponTurretAbsolution
   id: WeaponTurretAbsolutionNavy
   suffix: Medium Laser, Navy
   name: Navy 350cc 'Absolution' Burst Laser
@@ -397,7 +397,7 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 200
+      projectileSpeed: 90
       burstFireRate: 40 #8 effective RPS
       burstCooldown: 1
       shotsPerBurst: 10
@@ -460,7 +460,7 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 200
+      projectileSpeed: 70
       fireRate: 2.5
       minAngle: 0.1
       maxAngle: 0.1
@@ -489,7 +489,7 @@
       size: Large
 
 - type: entity
-  parent: BaseTurretShipgun
+  parent: WeaponTurretDamnation
   id: WeaponTurretDamnationNavy
   suffix: Large Energy, Navy
   name: Navy 600cc 'Dominus' Carronade
@@ -518,7 +518,7 @@
           ents: []
     - type: Gun
       fireOnDropChance: 0
-      projectileSpeed: 200
+      projectileSpeed: 75
       minAngle: 0.1
       maxAngle: 0.1
       fireRate: 3

@@ -1,8 +1,8 @@
 - type: vessel
   id: ValorDrone
   name: DSM Valor
-  description: An imperial ultralight fighter drone.
-  price: 15000
+  description: A fighter drone.
+  price: 10000
   category: Small
   group: None
   path: /Maps/_Crescent/Shuttles/DSM/valordrone.yml

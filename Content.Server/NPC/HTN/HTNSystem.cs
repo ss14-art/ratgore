@@ -13,6 +13,7 @@ using Content.Shared.NPC;
 using JetBrains.Annotations;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Map; // Mono
 using Robust.Shared.Utility;
 
@@ -24,6 +25,7 @@ public sealed class HTNSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
     [Dependency] private readonly NPCUtilitySystem _utility = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     private readonly JobQueue _planQueue = new(0.004);
 
@@ -226,7 +228,7 @@ public sealed class HTNSystem : EntitySystem
 
                 if (comp.Plan == null || newPlanBetter)
                 {
-                    comp.CheckServices = false;
+                    comp.ServiceCooldowns.Clear();
 
                     if (comp.Plan != null)
                     {
@@ -267,7 +269,6 @@ public sealed class HTNSystem : EntitySystem
                 // Keeping old plan
                 else
                 {
-                    comp.CheckServices = true;
                 }
 
                 comp.PlanningJob = null;
@@ -341,6 +342,7 @@ public sealed class HTNSystem : EntitySystem
 
         // Run the existing plan still
         var status = HTNOperatorStatus.Finished;
+		var servicesTicked = false;
 
         // Continuously run operators until we can't anymore.
         while (status != HTNOperatorStatus.Continuing && component.Plan != null)
@@ -351,19 +353,44 @@ public sealed class HTNSystem : EntitySystem
             var blackboard = component.Blackboard;
 
             // Service still on cooldown.
-            if (component.CheckServices)
+            if (!servicesTicked && component.CheckServices && currentTask.Services.Count > 0)
             {
                 foreach (var service in currentTask.Services)
                 {
+                    if (string.IsNullOrEmpty(service.ID))
+                        continue;
+
+                    component.ServiceCooldowns.TryGetValue(service.ID, out var remaining);
+                    remaining -= frameTime;
+
+                    if (remaining > 0f)
+                    {
+                        component.ServiceCooldowns[service.ID] = remaining;
+                        continue;
+                    }
+
                     var serviceResult = _utility.GetEntities(blackboard, service.Prototype);
                     var res = serviceResult.GetHighest();
-                    blackboard.SetValue(service.Key, res);
-                    // Mono
-                    if (service.CoordinatesKey != null)
-                        blackboard.SetValue(service.CoordinatesKey, new EntityCoordinates(res, Vector2.Zero));
-                }
 
-                component.CheckServices = false;
+                    if (res.IsValid())
+                    {
+                        blackboard.SetValue(service.Key, res);
+                        if (service.CoordinatesKey != null)
+                            blackboard.SetValue(service.CoordinatesKey, new EntityCoordinates(res, Vector2.Zero));
+                    }
+                    else
+                    {
+                        blackboard.Remove<EntityUid>(service.Key);
+                        if (service.CoordinatesKey != null)
+                            blackboard.Remove<EntityCoordinates>(service.CoordinatesKey);
+                    }
+
+                    var next = service.MinCooldown >= service.MaxCooldown
+                        ? service.MinCooldown
+                        : _random.NextFloat(service.MinCooldown, service.MaxCooldown);
+                    component.ServiceCooldowns[service.ID] = MathF.Max(0f, next);
+                }
+                servicesTicked = true;
             }
 
             status = currentOperator.Update(blackboard, frameTime);

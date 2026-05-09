@@ -24,19 +24,31 @@
       entries:
       - id: ClothingOuterHardsuitNCWLInfantry
         name: скафандр ЛРНП
-        recommended: true    
+        recommended: true
       - id: ClothingOuterArmorNCWLHeavyCarapace
         name: бронежилет ЛРНП
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponRifleFAL
+        name: НКВЛ МК-2 Фалин 5.56x45 мм
+        recommended: true
+      - id: WeaponShotgunProletar
+        name: НКВЛ Тоз-97 Пролетарий 12 кал
+      - id: WeaponSubMachineGunNCWLWatchdog
+        name: НКВЛ ДС1 Страж 9x19mm
     - name: Утилиты
       choices: { CMUtilities: 2 }
       entries:
+      - id: ExGrenade
+        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true   
+        recommended: true
     - name: Боеприпасы
       choices: { CMAmmo: 2 }
       entries:
@@ -46,13 +58,6 @@
         name: 30-зарядный магазин (5,56x45 мм)
       - id: MagazineShotgun
         name: 10-зарядный магазин (12 калибр)
-    - name: Вставки
-      choices: { CMInsert: 2 }
-      entries:
-      - id: ArmorPlateSteelInsertHardsuit
-        name: Compact Steel Insert
-      - id: ArmorPlateSteelInsert
-        name: Steel Insert
 
 - type: entity
   parent: ColMarTechBase
@@ -80,19 +85,31 @@
       entries:
       - id: ClothingOuterHardsuitImperialSoldier
         name: скафандр БМС
-        recommended: true    
+        recommended: true
       - id: ClothingOuterArmorImperialTrooperArmor
         name: бронежилет БМС
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponShotgunReno
+        name: БМС ДА-13 Рено 12 кал.
+      - id: WeaponRifleMiller
+        name: БМС ДА-8 Миллер 5.56x45 мм
+        recommended: true
+      - id: WeaponSubMachineGunBeetle
+        name: ХП Мак-11 Жук 9x19 мм
     - name: Утилиты
       choices: { CMUtilities: 2 }
       entries:
+      - id: ExGrenade
+        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true 
+        recommended: true
     - name: Боеприпасы
       choices: { CMAmmo: 2 }
       entries:
@@ -102,13 +119,6 @@
         name: 30-зарядный магазин (5,56x45 мм)
       - id: MagazineShotgun
         name: 10-зарядный магазин (12 калибр)
-    - name: Вставки
-      choices: { CMInsert: 2 }
-      entries:
-      - id: ArmorPlateSteelInsertHardsuit
-        name: Compact Steel Insert
-      - id: ArmorPlateSteelInsert
-        name: Steel Insert
 
 - type: entity
   parent: ColMarTechBase
@@ -142,9 +152,19 @@
       entries:
       - id: ClothingOuterHardsuitMidshipman
         name: скафандр минитменов "Мичман"
-        recommended: true    
+        recommended: true
       - id: ClothingOuterArmorCMM
         name: кираса патрульного
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponShotgunSHIDoubleBarreled4g
+        name: SHI M135 Двустволка 12g
+      - id: WeaponRifleCMMNimrod
+        name: КММ M32 Нимрод 7.62x51mm
+        recommended: true
+      - id: WeaponSubMachineGunMP5
+        name: НТ MP5 9x19mm
     - name: Дополнительное оружие
       choices: { CMPistol: 1 }
       entries:
@@ -156,13 +176,15 @@
     - name: Утилиты
       choices: { CMUtilities: 2 }
       entries:
+      - id: ExGrenade
+        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true 
+        recommended: true
     - name: Боеприпасы
       choices: { CMAmmo: 4 }
       entries:
@@ -176,13 +198,6 @@
         name: 18-зарядный пистолетный магазин (9x19 мм PSTF auto)
       - id: SpeedLoaderMagnum
         name: спидлоадер (.45 магнум)
-    - name: Вставки
-      choices: { CMInsert: 2 }
-      entries:
-      - id: ArmorPlateSteelInsertHardsuit
-        name: Compact Steel Insert
-      - id: ArmorPlateSteelInsert
-        name: Steel Insert
 
 - type: entity
   parent: ColMarTechBase
@@ -219,7 +234,17 @@
         name: боевой скафандр "Шиногара" SVBT-2
       - id: ClothingOuterHardsuitHighsecUA
         name: боевой скафандр "Шиногара" SVBT-2-UA
-        recommended: true  
+        recommended: true
+    - name: Основное оружие
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: WeaponRifleLecter
+        name: ТПШ Лектер
+        recommended: true
+      - id: WeaponRifleHoundMarksman
+        name: ТПШ М215 "Хаунд" 5.56х45
+      - id: WeaponSubMachineGunMP49
+        name: ТПШ MP49 "Надзиратель" 9x19mm
     - name: Дополнительное оружие
       choices: { CMPistol: 1 }
       entries:
@@ -231,15 +256,17 @@
     - name: Утилиты
       choices: { CMUtilities: 3 }
       entries:
+      - id: ExGrenade
+        name: разрывная граната
       - id: EmpGrenade
         name: ЭМИ Граната
       - id: BreachingCharge
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true 
+        recommended: true
     - name: Боеприпасы
-      choices: { CMAmmo: 3 }
+      choices: { CMAmmo: 4 }
       entries:
       - id: MagazinePistolSubMachineGun
         name: 35-зарядный магазин для пистолета-пулемета (9x19 мм PSTF auto)
@@ -247,13 +274,6 @@
         name: 30-зарядный магазин (5,56х45 мм Imperial)
       - id: MagazinePistol
         name: 18-зарядный пистолетный магазин (9x19 мм PSTF auto)
-    - name: Вставки
-      choices: { CMInsert: 2 }
-      entries:
-      - id: ArmorPlateSteelInsertHardsuit
-        name: Compact Steel Insert
-      - id: ArmorPlateSteelInsert
-        name: Steel Insert
 
 - type: entity
   parent: ColMarTechBase
@@ -284,7 +304,7 @@
       entries:
       - id: ClothingOuterHardsuitSyndicateBG
         name: скафандр штурмовика BULWARK mk.II
-        recommended: true  
+        recommended: true
       - id: ClothingOuterHardsuitSyndicateSellsword
         name: модифицированный скафандр SELLSWORD mk.IIB
       - id: ClothingOuterHardsuitSyndicateFreiritter
@@ -310,7 +330,7 @@
         name: Прорывной заряд
       - id: HandHeldMassScannerEE
         name: портативный сканер масс
-        recommended: true 
+        recommended: true
     - name: Боеприпасы
       choices: { CMAmmo: 4 }
       entries:
@@ -320,10 +340,3 @@
         name: 25-зарядный магазин (7,62х51 мм USM)
       - id: BoxLethalshot
         name: коробка ружейных патронов (.50 летальные)
-    - name: Вставки
-      choices: { CMInsert: 2 }
-      entries:
-      - id: ArmorPlateSteelInsertHardsuit
-        name: Compact Steel Insert
-      - id: ArmorPlateSteelInsert
-        name: Steel Insert

@@ -10,6 +10,7 @@
         - type: BlockShipWeaponProjectileGrid
         - type: MapIcon
           iconType: Station
+        - type: PreventPilot
       components:
         - type: StationNameSetup
           mapNameTemplate: 'ТК Анвил'

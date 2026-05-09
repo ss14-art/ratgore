@@ -921,7 +921,6 @@
   - type: Gun
     soundGunshot:
       path: /Audio/_Crescent/Weapons/Guns/rifle_1/rifle_gunshot_2.ogg
-    damageModifier: 1.15 # ratgore-change
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -953,12 +952,6 @@
     price: 1500
   - type: Contraband
     value: 3
-  - type: ExtendDescription
-    descriptionList:
-      - description: На его ствол установлен дульный ускоритель, потому он его урон на 15% больше.
-        fontSize: 12
-        color: "#ff0000"
-        requireDetailRange: false
 
   - type: ReverseEngineering
     difficulty: 2

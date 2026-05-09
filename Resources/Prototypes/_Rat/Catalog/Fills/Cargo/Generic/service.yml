@@ -1,0 +1,19 @@
+- type: cargoProduct
+  id: ServiceBoomboxGeneric
+  icon:
+    sprite: _Crescent/Objects/Misc/boombox.rsi
+    state: base
+  product: Boombox
+  cost: 1200
+  category: cargoproduct-category-name-service
+  group: generic
+
+- type: cargoProduct
+  id: ServiceToyBoxGeneric
+  icon:
+    sprite: Structures/Storage/Crates/toybox.rsi
+    state: crate_icon
+  product: CrateFunToyBox
+  cost: 5000
+  category: cargoproduct-category-name-service
+  group: generic

@@ -58,16 +58,6 @@ public sealed partial class CCVars
         CVarDef.Create("chat.chatstack_last_lines", 1, CVar.CLIENTONLY | CVar.ARCHIVE, "How far into the chat history to look when looking for similiar messages to coalesce them.");
 
     /// <summary>
-    ///     Streamer mode: replaces profanity with innocuous alternatives
-    ///     to protect privacy during streaming.
-    /// </summary>
-    public static readonly CVarDef<bool> StreamerModeEnabled =
-        CVarDef.Create("chat.streamer_mode_enabled",
-            false,
-            CVar.CLIENTONLY | CVar.ARCHIVE,
-            "Replaces profanity in chat with innocuous words for streaming privacy.");
-
-    /// <summary>
     ///     A message broadcast to each player that joins the lobby.
     ///     May be changed by admins ingame through use of the "set-motd" command.
     ///     In this case the new value, if not empty, is broadcast to all connected players and saved between rounds.

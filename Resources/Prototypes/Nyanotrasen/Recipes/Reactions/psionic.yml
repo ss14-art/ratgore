@@ -1,9 +1,8 @@
 - type: reaction
   id: LotophagoiOil
+  minTemp: 370
   reactants:
     SpaceDrugs:
-      amount: 1
-    THC:
       amount: 1
     Beer:
       amount: 1
@@ -11,27 +10,23 @@
       amount: 5
       catalyst: true
   products:
-    LotophagoiOil: 3
+    LotophagoiOil: 1
 
 - type: reaction
-  id: CreateNormalityCrystal
+  id: CreateOusianaDust
   impact: Low
   quantized: true
   minTemp: 400
   reactants:
     Ash:
-      amount: 5 # DeltaV - Change from 10 to 5 to fit the guidebook recipe
+      amount: 10 # Ratgore - Changed every amount to 10 so it will be a bit harder to get.
     Water:
-      amount: 5 # DeltaV - Change from 10 to 5 to fit the guidebook recipe
+      amount: 10 
     Blood:
-      amount: 5 # DeltaV - Change from 10 to 5 to fit the guidebook recipe
+      amount: 10 
     Omnizine:
-      amount: 5 # Ratgore - Changed due to inability to acquire Ectoplasm in hullrot at all
+      amount: 10 # Ratgore - Changed due to inability to acquire Ectoplasm in hullrot at all
     Plasma:
-      amount: 5 # DeltaV - Change from 10 to 5 to fit the guidebook recipe
-      catalyst: true
-  effects:
-    - !type:CreateEntityReactionEffect
-      entity: MaterialNormality1
-    - !type:ChangeGlimmerReactionEffect
-      count: -10
+      amount: 10 
+  products:
+    OusianaDust: 5
