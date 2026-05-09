@@ -70,12 +70,15 @@
         Heat: 55
         Caustic: 25
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 1
+    sprintModifier: 1
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitArabet
   - type: StaticPrice
     price: 1000
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSilent
 
 - type: entity
   parent: ClothingOuterHardsuitBase
@@ -100,12 +103,12 @@
       flatReductions:
         Blunt: 35
         Slash: 25
-        Piercing: 35
+        Piercing: 45
         Heat: 10
         Caustic: 25
   - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.90
+    walkModifier: 1.2
+    sprintModifier: 1.2
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitIzdari
   - type: StaticPrice
@@ -116,6 +119,9 @@
       - ClothingOuterHardsuitIzdari
       - ClothingOuterHardsuitThukker
       - ClothingOuterHardsuitDraugr
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSilent
 
 - type: entity
   parent: ClothingOuterHardsuitBase
@@ -140,12 +146,13 @@
       flatReductions:
         Blunt: 10
         Slash: 10
-        Piercing: 20
+        Piercing: 40
         Heat: 10
         Caustic: 25
+        Radiation: 35
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 1.2
+    sprintModifier: 1.2
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitThukker
   - type: StaticPrice
@@ -156,6 +163,9 @@
       - ClothingOuterHardsuitThukker
       - ClothingOuterHardsuitIzdari
       - ClothingOuterHardsuitDraugr
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSilent
 
 
 - type: entity

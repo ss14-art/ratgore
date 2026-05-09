@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Content.Server._Lua.ChatFilter; // Lua
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
@@ -48,7 +47,6 @@ namespace Content.Server.Chat.Managers
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
         [Dependency] private readonly SponsorManager _sponsors = default!; // Forge-Change
-        [Dependency] private readonly ChatFilterManager _chatFilter = default!; // Lua
 
         private ISawmill _sawmill = default!;
 
@@ -222,8 +220,6 @@ namespace Content.Server.Chat.Managers
                 DispatchServerMessage(player, Loc.GetString("chat-manager-max-message-length-exceeded-message", ("limit", MaxMessageLength)));
                 return;
             }
-
-            if (_chatFilter.IsProhibitedContent(player, message)) return; // Lua
 
             switch (type)
             {

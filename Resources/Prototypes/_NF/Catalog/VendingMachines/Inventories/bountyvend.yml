@@ -1,22 +1,23 @@
 - type: vendingMachineInventory
   id: BountyVendInventory
   startingInventory:
-    PinpointerUniversal: 6
-    WeaponGrapplingGun: 6
-    HandheldGPSBasic: 6
-    JetpackMiniFilled:  6
+    PinpointerUniversal: 8
+    BountyContractsCartridge: 8
+    WeaponGrapplingGun: 8
+    HandheldGPSBasic: 8
+    JetpackMiniFilled:  8
     WeaponDisabler: 10
     Zipties: 20
-    Flash: 10
-    ClothingEyesGlassesSunglasses: 6
-    ForensicScanner: 6
-    BoxForensicPad: 6
-    LogProbeCartridge: 6
+    Flash: 12
+    ClothingEyesGlassesSunglasses: 8
+    ForensicScanner: 8
+    BoxForensicPad: 8
+    LogProbeCartridge: 8
 #Bounty hunter
-    ClothingUniformJumpsuitBH: 6
-    ClothingUniformJumpskirtBH: 6
-    ClothingUniformJumpsuitBHGrey: 2
-    ClothingUniformJumpskirtBHGrey: 2
-    ClothingNeckTieBH: 2
-    ClothingOuterCoatBHTrench: 6
-    ClothingHeadHatBH: 6
+    ClothingUniformJumpsuitBH: 8
+    ClothingUniformJumpskirtBH: 8
+    ClothingUniformJumpsuitBHGrey: 4
+    ClothingUniformJumpskirtBHGrey: 4
+    ClothingNeckTieBH: 4
+    ClothingOuterCoatBHTrench: 8
+    ClothingHeadHatBH: 8

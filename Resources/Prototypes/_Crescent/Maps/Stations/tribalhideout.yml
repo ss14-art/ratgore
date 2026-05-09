@@ -8,6 +8,7 @@
       stationProto: StandardCrescentStation
       gridComponents:
         - type: BlockShipWeaponProjectileGrid
+        - type: PreventPilot
         - type: MapIcon
           iconType: Station
       components:

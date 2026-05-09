@@ -24,7 +24,7 @@
     lightRangeModifier: 1.15
     maxTargets: 4
   - type: Reflect
-    reflectProb: .75
+    reflectProb: .6 #nerf
     spread: 75
   - type: Item
     size: Normal

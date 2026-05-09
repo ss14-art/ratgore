@@ -5,6 +5,7 @@ using Content.Shared.Dataset;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
@@ -169,6 +170,46 @@ namespace Content.Shared.Roles
         [DataField]
         public readonly Dictionary<ProtoId<RankPrototype>, HashSet<CharacterRequirement>?>? Ranks;
 
+        /// <summary>
+        /// Optional chat styling amplification for command jobs.
+        /// </summary>
+        [DataField("chatAmplification")]
+        public JobChatAmplification? ChatAmplification { get; private set; }
+
+        /// <summary>
+        /// Optional override for speaker name color in chat output.
+        /// </summary>
+        [DataField("chatNameColor")]
+        public Color? ChatNameColor { get; private set; }
+
+    }
+
+    [DataDefinition]
+    public sealed partial class JobChatAmplification
+    {
+        /// <summary>
+        /// Multiplier for regular local speech in chat and speech bubbles.
+        /// </summary>
+        [DataField("bubbleScale")]
+        public float BubbleScale = 1f;
+
+        /// <summary>
+        /// Multiplier for local speech ending with !! in chat and speech bubbles.
+        /// </summary>
+        [DataField("shoutBubbleScale")]
+        public float ShoutBubbleScale = 1f;
+
+        /// <summary>
+        /// Multiplier for radio message size.
+        /// </summary>
+        [DataField("radioScale")]
+        public float RadioScale = 1f;
+
+        /// <summary>
+        /// Forces radio messages to render bold.
+        /// </summary>
+        [DataField("radioBold")]
+        public bool RadioBold = true;
     }
 
     /// <summary>

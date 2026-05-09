@@ -97,29 +97,29 @@
     sprite: _Crescent/Objects/Turrets/Projectile/machinegun.rsi
     state: machinegun
   product: CrateShuttlegun20mmScreamer
-  cost: 7500
+  cost: 5000
   category: cargoproduct-category-name-shuttle
   group: generic
 
-#- type: cargoProduct
-#  id: ShuttleGunGeneric35mmScout
-#  icon:
-#    sprite: _Crescent/Objects/Turrets/Projectile/minigun.rsi
-#    state: minigun
-#  product: CrateShuttlegun35mmScout
-#  cost: 10000
-#  category: cargoproduct-category-name-shuttle
-#  group: generic
+- type: cargoProduct
+  id: ShuttleGunGeneric35mmScout
+  icon:
+    sprite: _Crescent/Objects/Turrets/Projectile/minigun.rsi
+    state: minigun
+  product: CrateShuttlegun35mmScout
+  cost: 10000
+  category: cargoproduct-category-name-shuttle
+  group: generic
 
-#- type: cargoProduct
-#  id: ShuttleGunGeneric50mmStriker
-#  icon:
-#    sprite: _Crescent/Objects/Turrets/Projectile/autocannon.rsi
-#    state: autocannon
-# product: CrateShuttlegun50mmStriker
-#  cost: 15000
-#  category: cargoproduct-category-name-shuttle
-#  group: generic
+- type: cargoProduct
+  id: ShuttleGunGeneric50mmStriker
+  icon:
+    sprite: _Crescent/Objects/Turrets/Projectile/autocannon.rsi
+    state: autocannon
+  product: CrateShuttlegun50mmStriker
+  cost: 15000
+  category: cargoproduct-category-name-shuttle
+  group: generic
 
 #missiles
 - type: cargoProduct
@@ -128,19 +128,19 @@
     sprite: _Crescent/Objects/Turrets/Missile/shortbow.rsi
     state: shortbow
   product: CrateShuttlegun48mmShortbow
-  cost: 17500
+  cost: 10000
   category: cargoproduct-category-name-shuttle
   group: generic
 
-#- type: cargoProduct
-#  id: ShuttleGunGeneric60mmAzimuth
-#  icon:
-#    sprite: _Crescent/Objects/Turrets/Missile/azimuth.rsi
-#    state: azimuth
-#  product: CrateShuttlegun60mmAzimuth
-#  cost: 15000
-#  category: cargoproduct-category-name-shuttle
-#  group: generic
+- type: cargoProduct
+  id: ShuttleGunGeneric60mmAzimuth
+  icon:
+    sprite: _Crescent/Objects/Turrets/Missile/azimuth.rsi
+    state: azimuth
+  product: CrateShuttlegun60mmAzimuth
+  cost: 15000
+  category: cargoproduct-category-name-shuttle
+  group: generic
 
 #energy
 - type: cargoProduct
@@ -149,6 +149,6 @@
     sprite: _Crescent/Objects/Turrets/Laser/absolution.rsi
     state: absolution
   product: CrateShuttlegun200ccAbsolution
-  cost: 15000
+  cost: 10000
   category: cargoproduct-category-name-shuttle
   group: generic

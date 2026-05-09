@@ -1,0 +1,91 @@
+# 9x19mm
+- type: latheRecipe
+  id: MagazineBoxPistol
+  result: MagazineBoxPistol
+  completetime: .5
+  category: Ammo
+  materials:
+    Steel: 10
+
+# 11mm
+- type: latheRecipe
+  id: MagazineBoxHeavyPistol
+  result: MagazineBoxHeavyPistol
+  completetime: .5
+  category: Ammo
+  materials:
+    Steel: 20
+
+# .327
+- type: latheRecipe
+  id: MagazineBoxMagnum
+  result: MagazineBoxMagnum
+  completetime: .5
+  category: Ammo
+  materials:
+    Steel: 20
+
+# 5.56
+- type: latheRecipe
+  id: MagazineBoxLightRifle
+  result: MagazineBoxLightRifle
+  completetime: 2
+  category: Ammo
+  materials:
+    Steel: 35
+
+# 7.62
+- type: latheRecipe
+  id: MagazineBoxRifleBig
+  result: MagazineBoxRifleBig
+  completetime: 3
+  category: Ammo
+  materials:
+    Steel: 50
+
+# 12.7x99mm
+- type: latheRecipe
+  id: MagazineBoxHeavyRifle
+  result: MagazineBoxHeavyRifle
+  completetime: 5
+  category: Ammo
+  materials:
+    Steel: 100
+
+# 15.2x169mm
+- type: latheRecipe
+  id: MagazineBoxAntiMaterielBig
+  result: MagazineBoxAntiMaterielBig
+  completetime: 10
+  category: Ammo
+  materials:
+    Steel: 140
+
+# 12g
+- type: latheRecipe
+  id: BoxLethalshot
+  result: BoxLethalshot
+  completetime: 2
+  category: Ammo
+  materials:
+    Steel: 40
+
+# 4g
+- type: latheRecipe
+  id: BoxLethalshot4g
+  result: BoxLethalshot4g
+  completetime: 3
+  category: Ammo
+  materials:
+    Steel: 120
+
+- type: latheRecipe
+  id: BoxShotgunSlug4g
+  result: BoxShotgunSlug4g
+  completetime: 5
+  category: Ammo
+  materials:
+    Tungsten: 40
+
+
+#to do add ap and frag ammo

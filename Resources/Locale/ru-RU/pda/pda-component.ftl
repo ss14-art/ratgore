@@ -30,3 +30,4 @@ comp-pda-ui-unknown = Неизвестно
 comp-pda-ui-unassigned = Не назначено
 pda-notification-message = [font size=12][bold]PDA[/bold] { $header }: [/font]
     "{ $message }"
+comp-pda-ui-coordinates = Координаты: [color=white]{$coordinates}[/color]

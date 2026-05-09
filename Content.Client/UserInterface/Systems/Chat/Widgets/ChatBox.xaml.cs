@@ -114,9 +114,7 @@ public partial class ChatBox : UIWidget
     /// Removing and then adding insantly nudges the chat window up before slowly dragging it back down, which makes the whole chat log shake.
     /// With rapid enough updates, the whole chat becomes unreadable.
     /// Adding first and then removing does not produce any visual effects.
-    /// The other option is to dublicate OutputPanel functionality and everything internal to the engine it relies on.
-    /// But OutputPanel relies on directly setting Control.Position for control embedding. (which is not exposed to Content.)
-    /// Thanks robustengine, very cool.
+    /// Chat uses Content.Goobstation.UIKit CustomOutputPanel (same API as OutputPanel) so rich-text entry height accounts for embedded fonts and deferred word-wrap lines.
     /// </summary>
     /// <remarks>
     /// zero index is the very last line in chat, 1 is the line before the last one, 2 is the line before that, etc.

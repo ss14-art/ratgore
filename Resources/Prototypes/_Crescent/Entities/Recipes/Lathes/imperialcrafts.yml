@@ -760,6 +760,24 @@
     ShipComponents: 4500
     ShipHull: 4000
 
+- type: latheRecipe
+  id: RocinanteDroneLPC
+  result: ShipVoucherRocinanteDrone
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 1500
+    ShipComponents: 1500
+    ShipHull: 4000
+
+- type: latheRecipe
+  id: ValorDroneLPC
+  result: ShipVoucherValorDrone
+  completetime: 1
+  materials:
+    StarshipEngineComponents: 1000
+    ShipComponents: 1000
+    ShipHull: 1500
+
 # MARK: Flatpacks
 
 - type: latheRecipe

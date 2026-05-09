@@ -208,6 +208,15 @@ public sealed class RadioSystem : EntitySystem
     {
         // TODO: code duplication with ChatSystem.WrapMessage
         var speech = _chat.GetSpeechVerb(source, message);
+        var amplification = _chat.GetJobChatAmplification(source);
+        var nameColor = _chat.GetJobChatNameColor(source);
+        var baseFontSize = language.SpeechOverride.FontSize ?? speech.FontSize;
+        var radioBold = speech.Bold || (amplification?.RadioBold ?? false);
+        var radioScale = amplification?.RadioScale ?? 1f;
+        if (nameColor != null)
+            name = $"[color={nameColor.Value.ToHex()}]{name}[/color]";
+        var fontType = language.SpeechOverride.FontId ?? speech.FontId;
+        message = ChatSystem.ApplyRadioChatFormatting(message, fontType, baseFontSize, radioScale, radioBold);
         var languageColor = channel.Color;
         if (language.SpeechOverride.Color is { } colorOverride)
             languageColor = Color.InterpolateBetween(languageColor, colorOverride, colorOverride.A);
@@ -222,12 +231,10 @@ public sealed class RadioSystem : EntitySystem
         else
             channelText = $"\\[{channel.LocalizedName}\\]";
 
-        return Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
+        return Loc.GetString("chat-radio-message-wrap",
             ("color", channel.Color),
             ("languageColor", languageColor),
             ("messageColor", messageColor),
-            ("fontType", language.SpeechOverride.FontId ?? speech.FontId),
-            ("fontSize", language.SpeechOverride.FontSize ?? speech.FontSize),
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("channel", channelText),
             ("name", name),

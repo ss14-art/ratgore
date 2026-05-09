@@ -5,6 +5,7 @@
   abstract: true
   components:
     - type: MapGrid
+    - type: IgnoreHeatSeekingTarget
     - type: BlobFloorPlanBuilder
       floorTileset:
       - FloorAsteroidSand
@@ -25,7 +26,7 @@
       entries:
         FloorAsteroidSand:
           - id: WallRock
-            prob: 0.85
+            prob: 0.2
             orGroup: rock
           - id: WallRockCoal
             prob: 0.05
@@ -43,9 +44,6 @@
             prob: 0.02
             orGroup: rock
           - id: WallRockSilver
-            prob: 0.02
-            orGroup: rock
-          - id: WallRockSalt
             prob: 0.02
             orGroup: rock
           - id: WallRockArtifactFragment
@@ -74,7 +72,7 @@
       entries:
         FloorAsteroidSand:
           - id: WallRock
-            prob: 0.4
+            prob: 0.1
             orGroup: rock
           - id: WallRockCoal
             prob: 0.075
@@ -94,11 +92,8 @@
           - id: WallRockSilver
             prob: 0.05
             orGroup: rock
-          - id: WallRockSalt
-            prob: 0.05
-            orGroup: rock
           - id: WallRockArtifactFragment
-            prob: 0.005
+            prob: 0.01
             orGroup: rock
           - id: WallRockPlasma
             prob: 0.03
@@ -281,8 +276,8 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 150
-      radius: 40
+      radius: 6
+      floorPlacements: 300
 
 - type: entity
   id: RatAsteroidRichLarge
@@ -292,8 +287,8 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 150
-      radius: 40
+      radius: 8
+      floorPlacements: 300
 
 - type: entity
   id: RatAsteroidPoorHuge
@@ -314,8 +309,8 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
+      radius: 8
       floorPlacements: 300
-      radius: 70
 
 - type: entity
   id: RatIceAsteroidPoorLarge

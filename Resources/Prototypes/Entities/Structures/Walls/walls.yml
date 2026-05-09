@@ -707,7 +707,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 800
+        damage: 500
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -716,7 +716,7 @@
             collection: MetalSlam
     - trigger:
         !type:DamageTrigger
-        damage: 400
+        damage: 300
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -725,7 +725,7 @@
         acts: ["Destruction"]
     - trigger: #this trigger is a Nyano addition
         !type:DamageTrigger
-        damage: 400
+        damage: 300
       behaviors:
       - !type:ChangeConstructionNodeBehavior
         node: girder
@@ -755,7 +755,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 600
+          damage: 500
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -764,7 +764,7 @@
               collection: MetalSlam
       - trigger:
           !type:DamageTrigger
-          damage: 400
+          damage: 300
         behaviors:
         - !type:PlaySoundBehavior
           sound:

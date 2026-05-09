@@ -17,11 +17,11 @@
   color: "#9FED58"
   weight: 5
   roles:
-  - OrdnancemanCMM
-  - MachinistCMM
-  - PhysicianCMM
+  #- OrdnancemanCMM
+  #- MachinistCMM
+  #- PhysicianCMM
   - MinutemanCMM
-  - WatchmasterCMM
+  #- WatchmasterCMM
   - DeputyMarshalCMM
   - MarshalCMM
   - Spacer
@@ -172,11 +172,11 @@
   roles:
   - ExecutiveSHI
   - BoardSHI
-  - HighsecSHI
+  #- HighsecSHI
   - CorpsecSHI
   - EmployeeSHI
   - MedtechSHI
-  - BoardHRSHI
+  #- BoardHRSHI
   - HosSHI
   editorHidden: false
 
@@ -202,10 +202,10 @@
   weight: 55
   roles:
   - ProphetTAP
-  - AcolyteTAP
+  #- AcolyteTAP
   - TinkererTAP
   - TechminerTAP
-  - HangarTechTAP
+  #- HangarTechTAP
   - Antiquarian
   - BeltrunnerTAP
   - DraugrTAP

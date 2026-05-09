@@ -98,7 +98,7 @@
       - Cartridge120mm
   - type: CartridgeAmmo
     deleteOnSpawn: true
-    proto: Bullet120mmFlak
+    proto: 120mmFlakSpread
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Cartridge/anvil.rsi
     layers:
@@ -108,6 +108,16 @@
   - type: SpentAmmoVisuals
   - type: StaticPrice
     price: 125
+
+- type: entity
+  id: 120mmFlakSpread
+  categories: [ HideSpawnMenu ]
+  parent: Bullet120mmFlak
+  components:
+  - type: ProjectileSpread
+    proto: Bullet120mmFlak
+    count: 4
+    spread: 20
 
 - type: entity
   id: Cartridge120mmFlux

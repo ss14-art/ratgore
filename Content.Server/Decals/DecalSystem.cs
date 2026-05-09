@@ -22,6 +22,7 @@ using Robust.Shared.Threading;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Decals.DecalGridComponent;
+using ChunkIndicesEnumerator = Robust.Shared.Map.Enumerators.ChunkIndicesEnumerator;
 
 namespace Content.Server.Decals
 {
@@ -36,17 +37,16 @@ namespace Content.Server.Decals
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+        [Dependency] private readonly SharedTransformSystem _transform = default!;
 
         private readonly Dictionary<NetEntity, HashSet<Vector2i>> _dirtyChunks = new();
         private readonly Dictionary<ICommonSession, Dictionary<NetEntity, HashSet<Vector2i>>> _previousSentChunks = new();
-        private readonly List<NetEntity> previouslySentRemoveBuffer = new();
         private static readonly Vector2 _boundsMinExpansion = new(0.01f, 0.01f);
         private static readonly Vector2 _boundsMaxExpansion = new(1.01f, 1.01f);
 
         private UpdatePlayerJob _updateJob;
         private List<ICommonSession> _sessions = new();
 
-        // If this ever gets parallelised then you'll want to increase the pooled count.
         private static readonly ThreadLocal<ObjectPool<HashSet<Vector2i>>> ChunkIndexPool = // Forge-Change
             new(() => new DefaultObjectPool<HashSet<Vector2i>>( // Forge-Change
                 new DefaultPooledObjectPolicy<HashSet<Vector2i>>(), 64)); // Forge-Change
@@ -90,7 +90,7 @@ namespace Content.Server.Decals
                 playerData.Clear();
             }
 
-            var query = EntityQueryEnumerator<DecalGridComponent, MetaDataComponent>();
+            var query = AllEntityQuery<DecalGridComponent, MetaDataComponent>();
             while (query.MoveNext(out var uid, out var grid, out var meta))
             {
                 grid.ForceTick = _timing.CurTick;
@@ -160,18 +160,22 @@ namespace Content.Server.Decals
 
         private void OnTileChanged(ref TileChangedEvent args)
         {
+            if (!TryComp(args.Entity, out DecalGridComponent? grid))
+                return;
+
+            var toDelete = new HashSet<uint>();
+
             foreach (var change in args.Changes)
             {
                 if (!change.NewTile.IsSpace(_tileDefMan))
-                    return;
-
-                if (!TryComp(args.Entity, out DecalGridComponent? grid))
-                    return;
+                    continue;
 
                 var indices = GetChunkIndices(change.GridIndices);
-                var toDelete = new HashSet<uint>();
+
                 if (!grid.ChunkCollection.ChunkCollection.TryGetValue(indices, out var chunk))
-                    return;
+                    continue;
+
+                toDelete.Clear();
 
                 foreach (var (uid, decal) in chunk.Decals)
                 {
@@ -183,7 +187,7 @@ namespace Content.Server.Decals
                 }
 
                 if (toDelete.Count == 0)
-                    return;
+                    continue;
 
                 foreach (var decalId in toDelete)
                 {
@@ -253,7 +257,7 @@ namespace Content.Server.Decals
             if (!coordinates.IsValid(EntityManager))
                 return;
 
-            var gridId = coordinates.GetGridUid(EntityManager);
+            var gridId = _transform.GetGrid(coordinates);
 
             if (gridId == null)
                 return;
@@ -300,10 +304,10 @@ namespace Content.Server.Decals
             if (!PrototypeManager.HasIndex<DecalPrototype>(decal.Id))
                 return false;
 
-            var gridId = coordinates.GetGridUid(EntityManager);
+            var gridId = _transform.GetGrid(coordinates);
             if (!TryComp(gridId, out MapGridComponent? grid))
                 return false;
-            // hullrot edit , let directionals bypass the space verificaton! SPCR 2025
+
             if (_mapSystem.GetTileRef(gridId.Value, grid, coordinates).IsSpace(_tileDefMan) && !decal.Directional)
                 return false;
 
@@ -339,6 +343,33 @@ namespace Content.Server.Decals
                 if (validDelegate == null || validDelegate(decal))
                 {
                     decalIds.Add((uid, decal));
+                }
+            }
+
+            return decalIds;
+        }
+
+        public HashSet<(uint Index, Decal Decal)> GetDecalsIntersecting(EntityUid gridUid, Box2 bounds, DecalGridComponent? component = null)
+        {
+            var decalIds = new HashSet<(uint, Decal)>();
+            var chunkCollection = ChunkCollection(gridUid, component);
+
+            if (chunkCollection == null)
+                return decalIds;
+
+            var chunks = new ChunkIndicesEnumerator(bounds, ChunkSize);
+
+            while (chunks.MoveNext(out var chunkOrigin))
+            {
+                if (!chunkCollection.TryGetValue(chunkOrigin.Value, out var chunk))
+                    continue;
+
+                foreach (var (id, decal) in chunk.Decals)
+                {
+                    if (!bounds.Contains(decal.Coordinates))
+                        continue;
+
+                    decalIds.Add((id, decal));
                 }
             }
 
@@ -451,6 +482,7 @@ namespace Content.Server.Decals
                 if (!chunksInRange.TryGetValue(netGrid, out var chunks))
                 {
                     previouslySentRemoveBuffer.Add(netGrid); // Forge-Change
+
                     continue;
                 }
 
@@ -472,25 +504,6 @@ namespace Content.Server.Decals
                 }
 
                 staleChunks.Add(netGrid, elmo);
-            }
-
-            foreach (var netGrid in previouslySentRemoveBuffer)
-            {
-                if (!previouslySent.Remove(netGrid, out var oldIndices))
-                    continue;
-
-                // Was the grid deleted?
-                if (TryGetEntity(netGrid, out var gridId) && HasComp<MapGridComponent>(gridId.Value))
-                {
-                    // no -> add it to the list of stale chunks
-                    staleChunks[netGrid] = oldIndices;
-                }
-                else
-                {
-                    // If the grid was deleted then don't worry about telling the client to delete the chunk.
-                    oldIndices.Clear();
-                    indexPool.Return(oldIndices);
-                }
             }
 
             foreach (var netGrid in previouslySentRemoveBuffer) // Forge-Change

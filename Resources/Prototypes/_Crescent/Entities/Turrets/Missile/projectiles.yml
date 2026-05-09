@@ -7,15 +7,18 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 200
+        Structural: 350
         Blunt: 50
   - type: TimedDespawn
-    lifetime: 15 #1500m
+    lifetime: 8.24 #1000m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/shortbow.rsi
     layers:
@@ -25,7 +28,7 @@
     explosionType: Default
     maxIntensity: 50
     intensitySlope: 25
-    totalIntensity: 500
+    totalIntensity: 700
     maxTileBreak: 2
   - type: PointLight
     radius: 3.5
@@ -35,12 +38,12 @@
     visualType: SquareReticle
     color: Red
   - type: HeatSeeking
-    rotationSpeed: 10 # slow rotation so it isnt aimbot, still fairly accurate though
+    rotationSpeed: 18 # fighter killer for security ships
     acceleration: 120
-    topSpeed: 100
-    fieldOfView: 15
+    topSpeed: 110
+    fieldOfView: 30
     defaultSeekingRange: 800
-    guidanceAlgorithm: PurePursuit
+    guidanceAlgorithm: PredictiveGuidance
   - type: Fixtures
     fixtures:
       projectile:
@@ -61,7 +64,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 150
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -76,15 +79,18 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 150
+        Structural: 400
         Blunt: 50
   - type: TimedDespawn
-    lifetime: 9 #1260m
+    lifetime: 7.92 #1000m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/shortbow.rsi
     layers:
@@ -94,7 +100,7 @@
     explosionType: Default
     maxIntensity: 150
     intensitySlope: 100
-    totalIntensity: 600
+    totalIntensity: 1000
     maxTileBreak: 2
   - type: PointLight
     radius: 3.5
@@ -106,7 +112,7 @@
   - type: HeatSeeking
     rotationSpeed: 10 # slow rotation so it isnt aimbot, still fairly accurate though
     acceleration: 90
-    topSpeed: 140
+    topSpeed: 110
     fieldOfView: 15
     defaultSeekingRange: 400
     guidanceAlgorithm: PurePursuit
@@ -130,7 +136,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 150
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -146,15 +152,18 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 250
+        Structural: 600
         Blunt: 100
   - type: TimedDespawn
-    lifetime: 25 #2500
+    lifetime: 11.49 #1500m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/azimuth.rsi
     layers:
@@ -162,9 +171,9 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    maxIntensity: 200
+    maxIntensity: 400
     intensitySlope: 100
-    totalIntensity: 1500
+    totalIntensity: 2500
     maxTileBreak: 4
   - type: PointLight
     radius: 3.5
@@ -193,11 +202,18 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 150
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:ExplodeBehavior
+  - type: HeatSeeking
+    rotationSpeed: 7
+    acceleration: 90
+    topSpeed: 90
+    fieldOfView: 30
+    defaultSeekingRange: 1200
+    guidanceAlgorithm: PurePursuit
 
 - type: entity
   id: AzimuthRocketProjectileGorlex
@@ -207,24 +223,34 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 250
+        Structural: 650
         Blunt: 40
   - type: TimedDespawn
-    lifetime: 6 #1520
+    lifetime: 11.49 #1500m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/azimuth.rsi
     layers:
       - state: gscazimuthfired
   - type: Explosive
     explosionType: Default
-    maxIntensity: 200
+    maxIntensity: 500
     intensitySlope: 200
-    totalIntensity: 1600
+    totalIntensity: 3000
     maxTileBreak: 5
+  - type: HeatSeeking
+    rotationSpeed: 3
+    acceleration: 90
+    topSpeed: 90
+    fieldOfView: 30
+    defaultSeekingRange: 1200
+    guidanceAlgorithm: PurePursuit
 
 - type: entity
   id: AzimuthRocketProjectileNCWL
@@ -234,33 +260,46 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 200
+        Structural: 650
         Blunt: 40
   - type: TimedDespawn
-    lifetime: 12 #2500
+    lifetime: 11.49 #1500m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/azimuth.rsi
     layers:
       - state: ncwlazimuthfired
   - type: Explosive
     explosionType: Default
-    maxIntensity: 200
+    maxIntensity: 450
     intensitySlope: 20
-    totalIntensity: 2000
+    totalIntensity: 3200
     maxTileBreak: 6
+  - type: HeatSeeking
+    rotationSpeed: 5
+    acceleration: 90
+    topSpeed: 90
+    fieldOfView: 30
+    defaultSeekingRange: 1200
+    guidanceAlgorithm: PurePursuit
 
 - type: entity
-  id: AzimuthRocketProjectileAdvanced
+  id: AzimuthRocketProjectileAdvanced # ratgore - removed from the game
   name: 60mm high-explosive fragmentation rocket mk.II #only guided one kinda like the laser guided apache hydra pods
   description: Shit.
   parent: AzimuthRocketProjectile
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
@@ -268,7 +307,7 @@
         Structural: 200
         Blunt: 40
   - type: TimedDespawn
-    lifetime: 14 #2520
+    lifetime: 8 #ratgore, something over 1000m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/azimuth.rsi
     layers:
@@ -282,7 +321,7 @@
   - type: HeatSeeking
     rotationSpeed: 30
     acceleration: 60
-    topSpeed: 180
+    topSpeed: 90
     fieldOfView: 10
     defaultSeekingRange: 850
     guidanceAlgorithm: PurePursuit
@@ -297,15 +336,18 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 400
+        Structural: 900
         Blunt: 200
   - type: TimedDespawn
-    lifetime: 20 #3200
+    lifetime: 14.28 # 2000m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/arbalest.rsi
     layers:
@@ -313,9 +355,9 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    maxIntensity: 250
+    maxIntensity: 400
     intensitySlope: 100
-    totalIntensity: 3000
+    totalIntensity: 6000
     maxTileBreak: 8
   - type: PointLight
     radius: 3.5
@@ -327,9 +369,80 @@
   - type: HeatSeeking
     rotationSpeed: 10
     acceleration: 45
-    topSpeed: 160
-    fieldOfView: 20
-    defaultSeekingRange: 1500
+    topSpeed: 110
+    fieldOfView: 30
+    defaultSeekingRange: 2000
+    guidanceAlgorithm: PredictiveGuidance
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.25,0.25"
+        layer:
+        - BulletImpassable
+        mask:
+        - Impassable
+        - BulletImpassable
+        hard: true
+        density: 100
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+
+- type: entity
+  id: ArbalestRocketProjectileNCWL
+  name: homeguard-issue 95mm high-explosive assault missile
+  description: Shit.
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
+  - type: ShipWeaponProjectile
+  - type: Projectile
+    ignoreWeaponGrid: true
+    damage:
+      types:
+        Structural: 900
+        Blunt: 200
+  - type: TimedDespawn
+    lifetime: 15 #2000
+  - type: Sprite
+    sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/arbalest.rsi
+    layers:
+      - state: arbalest
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 400
+    intensitySlope: 100
+    totalIntensity: 8000
+    maxTileBreak: 8
+  - type: PointLight
+    radius: 3.5
+    color: orange
+    energy: 0.5
+  - type: ProjectileIFF
+    visualType: SquareReticle
+    color: Red
+  - type: HeatSeeking
+    rotationSpeed: 4
+    acceleration: 45
+    topSpeed: 100
+    fieldOfView: 30
+    defaultSeekingRange: 2000
     guidanceAlgorithm: PredictiveGuidance
   - type: Fixtures
     fixtures:
@@ -356,76 +469,6 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:ExplodeBehavior
-  - type: IgnoresHullrotShields
-
-- type: entity
-  id: ArbalestRocketProjectileNCWL
-  name: homeguard-issue 95mm high-explosive assault missile
-  description: Shit.
-  parent: BaseBulletTrigger
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ProjectilePhasePrevent
-  - type: ShipWeaponProjectile
-  - type: Projectile
-    ignoreWeaponGrid: true
-    damage:
-      types:
-        Structural: 500
-        Blunt: 200
-  - type: TimedDespawn
-    lifetime: 23 #3450m
-  - type: Sprite
-    sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/arbalest.rsi
-    layers:
-      - state: arbalest
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: Default
-    maxIntensity: 150
-    intensitySlope: 50
-    totalIntensity: 3000
-    maxTileBreak: 8
-  - type: PointLight
-    radius: 3.5
-    color: orange
-    energy: 0.5
-  - type: ProjectileIFF
-    visualType: SquareReticle
-    color: Red
-  - type: HeatSeeking
-    rotationSpeed: 10
-    acceleration: 45
-    topSpeed: 150
-    fieldOfView: 15
-    defaultSeekingRange: 2000
-    guidanceAlgorithm: PredictiveGuidance
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.25,-0.45,0.25,0.25"
-        layer:
-        - BulletImpassable
-        mask:
-        - Impassable
-        - BulletImpassable
-        hard: true
-        density: 100
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 400
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:ExplodeBehavior
-  - type: IgnoresHullrotShields
 
 - type: entity
   id: ArbalestRocketProjectileGSC
@@ -435,15 +478,18 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
     damage:
       types:
-        Structural: 750
+        Structural: 900
         Blunt: 200
   - type: TimedDespawn
-    lifetime: 14 #2520
+    lifetime: 12.3 #2000m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/arbalest.rsi
     layers:
@@ -451,9 +497,9 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    maxIntensity: 500
-    intensitySlope: 200
-    totalIntensity: 1500
+    maxIntensity: 400
+    intensitySlope: 100
+    totalIntensity: 10000
     maxTileBreak: 5
   - type: PointLight
     radius: 3.5
@@ -463,9 +509,9 @@
     visualType: SquareReticle
     color: Red
   - type: HeatSeeking
-    rotationSpeed: 25
+    rotationSpeed: 2
     acceleration: 75
-    topSpeed: 180
+    topSpeed: 130
     fieldOfView: 30
     defaultSeekingRange: 1000
     guidanceAlgorithm: PredictiveGuidance
@@ -494,7 +540,6 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:ExplodeBehavior
-  - type: IgnoresHullrotShields
 
 #gargoyle
 
@@ -506,6 +551,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -514,7 +562,7 @@
         Structural: 1000
         Blunt: 200
   - type: TimedDespawn
-    lifetime: 17 #2040m
+    lifetime: 27.4 #3000m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/gargoyle.rsi
     layers:
@@ -524,7 +572,7 @@
     explosionType: Default
     maxIntensity: 1000
     intensitySlope: 200
-    totalIntensity: 7000
+    totalIntensity: 12000
     maxTileBreak: 10
   - type: PointLight
     radius: 3.5
@@ -560,7 +608,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 750
+        damage: 350
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -575,6 +623,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -583,7 +634,7 @@
         Structural: 1000
         Blunt: 200
   - type: TimedDespawn
-    lifetime: 21 #2310m
+    lifetime: 28.84 #3000m
   - type: Sprite
     sprite: _Crescent/Objects/Turrets/Ammunition/Projectiles/gargoyle.rsi
     layers:
@@ -593,7 +644,7 @@
     explosionType: Default
     maxIntensity: 750
     intensitySlope: 50
-    totalIntensity: 8000
+    totalIntensity: 19000
     maxTileBreak: 16
   - type: PointLight
     radius: 3.5
@@ -629,7 +680,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 900 #its a very slow and not agile missile
+        damage: 400 #its a very slow and not agile missile
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -646,6 +697,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     ignoreWeaponGrid: true
@@ -660,11 +714,12 @@
     layers:
       - state: catapult
   - type: ExplodeOnTrigger
+  - type: IgnoresHullrotShields
   - type: Explosive
     explosionType: Default
     maxIntensity: 23000
     intensitySlope: 500
-    totalIntensity: 23000
+    totalIntensity: 35000
     maxTileBreak: 32
   - type: PointLight
     radius: 3.5
@@ -676,7 +731,7 @@
   - type: HeatSeeking
     rotationSpeed: 8
     acceleration: 10
-    topSpeed: 200
+    topSpeed: 130
     fieldOfView: 10
     defaultSeekingRange: 5000
     guidanceAlgorithm: PredictiveGuidance
@@ -700,12 +755,11 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 750 #harder to shoot down than a gargoyle still
+        damage: 500 #harder to shoot down than a gargoyle still
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:ExplodeBehavior
-  - type: IgnoresHullrotShields
 
 #pila
 
@@ -718,6 +772,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectilePhasePrevent
+    mask:
+    - Impassable
+    - BulletImpassable
   - type: ShipWeaponProjectile
   - type: Projectile
     damage:

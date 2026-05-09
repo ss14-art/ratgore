@@ -5,7 +5,7 @@
     Хорошо оснащенная имперская промышленный шаттл размером с эсминец, предназначенный для добычи полезных ископаемых, разборки завалов и производства боеприпасов. Легковооружена и неповоротлива.
     LOADOUT: 1x 300w 'Curse' energized ion bolt cannon, 4x 200cc 'Retribution' small laser gatling, 1x SHI 250c "Exhumer" kinetic Pulser
     MINIMUM CREW: 1x Captain, 1x Gunner, 2x Miner Crew
-  price: 85000
+  price: 50000
   category: Small
   group: None
   path: /Maps/_Crescent/Shuttles/DSM/covetor.yml

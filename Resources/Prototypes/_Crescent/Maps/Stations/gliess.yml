@@ -66,12 +66,8 @@
           availableJobs:
             MarshalCMM: [ 1, 1 ]
             DeputyMarshalCMM: [ 1, 1 ]
-            WatchmasterCMM: [ 2, 2 ]
-            OrdnancemanCMM: [ 2, 2 ]
-            PhysicianCMM: [ 3, 3 ]
-            MachinistCMM: [ 2, 2 ]
             MinutemanCMM: [ 6, 6 ]
             GliessianDockhand: [ 3, 3 ]
-            Spacer: [ -1, -1 ]
+            Spacer: [ 15, 15 ]
 
 
