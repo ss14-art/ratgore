@@ -1,9 +1,10 @@
-using System.Collections.Immutable;
 using System.Linq;
-using System.Runtime.InteropServices.JavaScript;
+using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Body.Part;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Radiation.Events;
@@ -13,10 +14,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-// Shitmed Change
-using Content.Shared.Body.Systems;
-using Content.Shared._Shitmed.Targeting;
-
 namespace Content.Shared.Damage
 {
     public sealed class DamageableSystem : EntitySystem
@@ -24,15 +21,11 @@ namespace Content.Shared.Damage
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly INetManager _netMan = default!;
-        [Dependency] private readonly SharedBodySystem _body = default!; // Shitmed Change
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
 
         private EntityQuery<AppearanceComponent> _appearanceQuery;
         private EntityQuery<DamageableComponent> _damageableQuery;
-
-        // hullrot change
-        // for converting damages by their convertInto variable in damageType SPCR 2025
-        private Dictionary<string, string> damageConversion = new();
+        private EntityQuery<MindContainerComponent> _mindContainerQuery;
 
         public override void Initialize()
         {
@@ -42,20 +35,9 @@ namespace Content.Shared.Damage
             SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated);
             SubscribeLocalEvent<DamageableComponent, RejuvenateEvent>(OnRejuvenate);
 
-            foreach (var proto in _prototypeManager.EnumeratePrototypes<DamageTypePrototype>())
-            {
-                if (proto.convertInto == "")
-                    continue;
-                if (!_prototypeManager.TryIndex<DamageTypePrototype>(proto.convertInto, out _))
-                {
-                    throw new Exception("Unknown damage type prototype: " + proto.convertInto);
-                }
-                damageConversion.Add(proto.ID, proto.convertInto);
-
-            }
-
             _appearanceQuery = GetEntityQuery<AppearanceComponent>();
             _damageableQuery = GetEntityQuery<DamageableComponent>();
+            _mindContainerQuery = GetEntityQuery<MindContainerComponent>();
         }
 
         /// <summary>
@@ -117,7 +99,7 @@ namespace Content.Shared.Damage
         ///     The damage changed event is used by other systems, such as damage thresholds.
         /// </remarks>
         public void DamageChanged(EntityUid uid, DamageableComponent component, DamageSpecifier? damageDelta = null,
-            bool interruptsDoAfters = true, EntityUid? origin = null, bool? canSever = null) // Shitmed Change
+            bool interruptsDoAfters = true, EntityUid? origin = null)
         {
             component.Damage.GetDamagePerGroup(_prototypeManager, component.DamagePerGroup);
             component.TotalDamage = component.Damage.GetTotal();
@@ -128,7 +110,7 @@ namespace Content.Shared.Damage
                 var data = new DamageVisualizerGroupData(component.DamagePerGroup.Keys.ToList());
                 _appearance.SetData(uid, DamageVisualizerKeys.DamageUpdateGroups, data, appearance);
             }
-            RaiseLocalEvent(uid, new DamageChangedEvent(component, damageDelta, interruptsDoAfters, origin, canSever ?? true)); // Shitmed Change
+            RaiseLocalEvent(uid, new DamageChangedEvent(component, damageDelta, interruptsDoAfters, origin));
         }
 
         /// <summary>
@@ -144,15 +126,27 @@ namespace Content.Shared.Damage
         ///     null if the user had no applicable components that can take damage.
         /// </returns>
         public DamageSpecifier? TryChangeDamage(EntityUid? uid, DamageSpecifier damage, bool ignoreResistances = false,
-            bool interruptsDoAfters = true, DamageableComponent? damageable = null, EntityUid? origin = null, EntityUid? tool = null,
-            // Shitmed Change
-            bool? canSever = true, bool? canEvade = false, float? partMultiplier = 1.00f, TargetBodyPart? targetPart = null, bool doPartDamage = true,
-            float armorPen = 0, float stopPower = 0)
+            bool interruptsDoAfters = true, DamageableComponent? damageable = null, EntityUid? origin = null,
+            float partMultiplier = 1.0f, TargetBodyPart? targetPart = null, bool canSever = false)
         {
             if (!uid.HasValue || !_damageableQuery.Resolve(uid.Value, ref damageable, false))
             {
-                // TODO BODY SYSTEM pass damage onto body system
+                if (uid.HasValue && targetPart != null)
+                {
+                    var ev = new TryChangePartDamageEvent(EntityManager.GetNetEntity(uid.Value), damage, EntityManager.GetNetEntity(origin), targetPart, ignoreResistances, canSever, partMultiplier: partMultiplier);
+                    RaiseLocalEvent(uid.Value, ev);
+                    if (ev.Handled)
+                        return ev.Damage;
+                }
                 return null;
+            }
+
+            if (targetPart != null)
+            {
+                var ev = new TryChangePartDamageEvent(EntityManager.GetNetEntity(uid.Value), damage, EntityManager.GetNetEntity(origin), targetPart, ignoreResistances, canSever, partMultiplier: partMultiplier);
+                RaiseLocalEvent(uid.Value, ev);
+                if (ev.Handled)
+                    return ev.Damage;
             }
 
             if (damage.Empty)
@@ -160,23 +154,11 @@ namespace Content.Shared.Damage
                 return damage;
             }
 
-            var before = new BeforeDamageChangedEvent(damage, origin, targetPart, canEvade ?? false); // Shitmed Change
+            var before = new BeforeDamageChangedEvent(damage, origin);
             RaiseLocalEvent(uid.Value, ref before);
 
             if (before.Cancelled)
                 return null;
-
-            // Shitmed Change Start
-            if (doPartDamage)
-            {
-                var partDamage = new TryChangePartDamageEvent(damage, origin, targetPart, ignoreResistances, canSever ?? true, canEvade ?? false, partMultiplier ?? 1.00f);
-                RaiseLocalEvent(uid.Value, ref partDamage);
-
-                if (partDamage.Evaded || partDamage.Cancelled)
-                    return null;
-            }
-
-            // Shitmed Change End
 
             // Apply resistances
             if (!ignoreResistances)
@@ -186,21 +168,10 @@ namespace Content.Shared.Damage
                 {
                     // TODO DAMAGE PERFORMANCE
                     // use a local private field instead of creating a new dictionary here..
-                    // TODO: We need to add a check to see if the given armor covers the targeted part (if any) to modify or not.
                     damage = DamageSpecifier.ApplyModifierSet(damage, modifierSet);
                 }
 
-                // From Solidus: If you are reading this, I owe you a more comprehensive refactor of this entire system.
-                if (damageable.DamageModifierSets.Count > 0)
-                    foreach (var enumerableModifierSet in damageable.DamageModifierSets)
-                        if (_prototypeManager.TryIndex<DamageModifierSetPrototype>(enumerableModifierSet, out var enumerableModifier))
-                            damage = DamageSpecifier.ApplyModifierSet(damage, enumerableModifier);
-
-                var ev = new DamageModifyEvent(damage, origin, targetPart, tool)
-                {
-                    HullrotArmorPen = armorPen,
-                    stoppingPower = stopPower,
-                }; // Shitmed Change
+                var ev = new DamageModifyEvent(damage, origin);
                 RaiseLocalEvent(uid.Value, ev);
                 damage = ev.Damage;
 
@@ -215,16 +186,6 @@ namespace Content.Shared.Damage
             // Would need to check that nothing ever tries to cache the delta.
             var delta = new DamageSpecifier();
             delta.DamageDict.EnsureCapacity(damage.DamageDict.Count);
-            foreach (var (type, value) in damage.DamageDict.ToImmutableDictionary())
-            {
-                if (!damageConversion.ContainsKey(type))
-                    continue;
-                if (!damage.DamageDict.ContainsKey(damageConversion[type]))
-                    damage.DamageDict.Add(damageConversion[type], 0);
-                damage.DamageDict[damageConversion[type]] += value;
-                damage.DamageDict[type] = 0;
-            }
-
 
             var dict = damageable.Damage.DamageDict;
             foreach (var (type, value) in damage.DamageDict)
@@ -242,7 +203,7 @@ namespace Content.Shared.Damage
             }
 
             if (delta.DamageDict.Count > 0)
-                DamageChanged(uid.Value, damageable, delta, interruptsDoAfters, origin, canSever); // Shitmed Change
+                DamageChanged(uid.Value, damageable, delta, interruptsDoAfters, origin);
 
             return delta;
         }
@@ -269,55 +230,9 @@ namespace Content.Shared.Damage
             // Setting damage does not count as 'dealing' damage, even if it is set to a larger value, so we pass an
             // empty damage delta.
             DamageChanged(uid, component, new DamageSpecifier());
-
-            // Shitmed Change Start
-            if (HasComp<TargetingComponent>(uid))
-            {
-                foreach (var (part, _) in _body.GetBodyChildren(uid))
-                {
-                    if (!TryComp(part, out DamageableComponent? damageComp))
-                        continue;
-
-                    SetAllDamage(part, damageComp, newValue);
-                }
-            }
-            // Shitmed Change End
         }
 
-        /// <summary>
-        ///     Changes all damage types supported by a <see cref="DamageableComponent"/> by the specified value.
-        /// </summary>
-        /// <remakrs>
-        ///     Will not lower damage to a negative value.
-        /// </remakrs>
-        public void ChangeAllDamage(EntityUid uid, DamageableComponent component, FixedPoint2 addedValue)
-        {
-            foreach (var type in component.Damage.DamageDict.Keys)
-            {
-                component.Damage.DamageDict[type] += addedValue;
-                if (component.Damage.DamageDict[type] < 0)
-                    component.Damage.DamageDict[type] = 0;
-            }
-
-            // Changing damage does not count as 'dealing' damage, even if it is set to a larger value, so we pass an
-            // empty damage delta.
-            DamageChanged(uid, component, new DamageSpecifier());
-
-            // Shitmed Change Start
-            if (!HasComp<TargetingComponent>(uid))
-                return;
-
-            foreach (var (part, _) in _body.GetBodyChildren(uid))
-            {
-                if (!TryComp(part, out DamageableComponent? damageComp))
-                    continue;
-
-                ChangeAllDamage(part, damageComp, addedValue);
-            }
-            // Shitmed Change End
-        }
-
-        public void SetDamageModifierSetId(EntityUid uid, string? damageModifierSetId, DamageableComponent? comp = null)
+        public void SetDamageModifierSetId(EntityUid uid, string damageModifierSetId, DamageableComponent? comp = null)
         {
             if (!_damageableQuery.Resolve(uid, ref comp))
                 return;
@@ -330,12 +245,12 @@ namespace Content.Shared.Damage
         {
             if (_netMan.IsServer)
             {
-                args.State = new DamageableComponentState(component.Damage.DamageDict, component.DamageModifierSetId);
+                args.State = new DamageableComponentState(component.Damage.DamageDict, component.DamageContainerID, component.DamageModifierSetId, component.HealthBarThreshold);
             }
             else
             {
                 // avoid mispredicting damage on newly spawned entities.
-                args.State = new DamageableComponentState(component.Damage.DamageDict.ShallowClone(), component.DamageModifierSetId);
+                args.State = new DamageableComponentState(component.Damage.DamageDict.ShallowClone(), component.DamageContainerID, component.DamageModifierSetId, component.HealthBarThreshold);
             }
         }
 
@@ -368,7 +283,9 @@ namespace Content.Shared.Damage
                 return;
             }
 
+            component.DamageContainerID = state.DamageContainerId;
             component.DamageModifierSetId = state.ModifierSetId;
+            component.HealthBarThreshold = state.HealthBarThreshold;
 
             // Has the damage actually changed?
             DamageSpecifier newDamage = new() { DamageDict = new(state.DamageDict) };
@@ -387,27 +304,22 @@ namespace Content.Shared.Damage
     ///     Raised before damage is done, so stuff can cancel it if necessary.
     /// </summary>
     [ByRefEvent]
-    public record struct BeforeDamageChangedEvent(
-        DamageSpecifier Damage,
-        EntityUid? Origin = null,
-        TargetBodyPart? TargetPart = null, // Shitmed Change
-        bool CanEvade = false, // Lavaland Change
-        bool Cancelled = false);
+    public struct BeforeDamageChangedEvent
+    {
+        public readonly DamageSpecifier Damage;
+        public readonly EntityUid? Origin;
 
-    /// <summary>
-    ///     Shitmed Change: Raised on parts before damage is done so we can cancel the damage if they evade.
-    /// </summary>
-    [ByRefEvent]
-    public record struct TryChangePartDamageEvent(
-        DamageSpecifier Damage,
-        EntityUid? Origin = null,
-        TargetBodyPart? TargetPart = null,
-        bool IgnoreResistances = false,
-        bool CanSever = true,
-        bool CanEvade = false,
-        float PartMultiplier = 1.00f,
-        bool Evaded = false,
-        bool Cancelled = false);
+        public bool Cancelled = false;
+        public bool CanEvade = true;
+        public float stoppingPower = 0f;
+        public float HullrotArmorPen = 0f;
+
+        public BeforeDamageChangedEvent(DamageSpecifier damage, EntityUid? origin = null)
+        {
+            Damage = damage;
+            Origin = origin;
+        }
+    }
 
     /// <summary>
     ///     Raised on an entity when damage is about to be dealt,
@@ -420,24 +332,19 @@ namespace Content.Shared.Damage
     {
         // Whenever locational damage is a thing, this should just check only that bit of armour.
         public SlotFlags TargetSlots { get; } = ~SlotFlags.POCKET;
+
         public readonly DamageSpecifier OriginalDamage;
         public DamageSpecifier Damage;
         public EntityUid? Origin;
-        public EntityUid? Tool;
-        public readonly TargetBodyPart? TargetPart; // Shitmed Change
-        // HULLROT CHANGE - SPCR 2025
-        public float HullrotArmorPen = 0;
-        public float stoppingPower = 0;
-        // hullrot change end
 
+        public float stoppingPower = 0f;
+        public float HullrotArmorPen = 0f;
 
-        public DamageModifyEvent(DamageSpecifier damage, EntityUid? origin = null, TargetBodyPart? targetPart = null, EntityUid? tool = null) // Shitmed Change
+        public DamageModifyEvent(DamageSpecifier damage, EntityUid? origin = null)
         {
             OriginalDamage = damage;
             Damage = damage;
             Origin = origin;
-            TargetPart = targetPart; // Shitmed Change
-            Tool = tool;
         }
     }
 
@@ -476,17 +383,12 @@ namespace Content.Shared.Damage
         /// </summary>
         public readonly EntityUid? Origin;
 
-        /// <summary>
-        ///     Shitmed Change: Can this damage event sever parts?
-        /// </summary>
-        public readonly bool CanSever;
-
-        public DamageChangedEvent(DamageableComponent damageable, DamageSpecifier? damageDelta, bool interruptsDoAfters, EntityUid? origin, bool canSever = true, EntityUid? tool = null) // Shitmed Change
+        public DamageChangedEvent(DamageableComponent damageable, DamageSpecifier? damageDelta, bool interruptsDoAfters, EntityUid? origin)
         {
             Damageable = damageable;
             DamageDelta = damageDelta;
             Origin = origin;
-            CanSever = canSever; // Shitmed Change
+
             if (DamageDelta == null)
                 return;
 

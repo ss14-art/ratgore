@@ -1,15 +1,19 @@
 using Content.Server.Light.Components;
+using Content.Server.Stack;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
+using Content.Shared.NameModifier.EntitySystems;
+using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Temperature;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Light.EntitySystems
@@ -22,7 +26,10 @@ namespace Content.Server.Light.EntitySystems
         [Dependency] private readonly TagSystem _tagSystem = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly MetaDataSystem _metaData = default!;
+        [Dependency] private readonly StackSystem _stackSystem = default!;
+        [Dependency] private readonly NameModifierSystem _nameModifier = default!;
+
+        private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 
         public override void Initialize()
         {
@@ -51,6 +58,9 @@ namespace Content.Server.Light.EntitySystems
         private void UpdateLight(Entity<ExpendableLightComponent> ent, float frameTime)
         {
             var component = ent.Comp;
+            if (!component.Activated)
+                return;
+
             component.StateExpiryTime -= frameTime;
 
             if (component.StateExpiryTime <= 0f)
@@ -68,9 +78,7 @@ namespace Content.Server.Light.EntitySystems
                     default:
                     case ExpendableLightState.Fading:
                         component.CurrentState = ExpendableLightState.Dead;
-                        var meta = MetaData(ent);
-                        _metaData.SetEntityName(ent, Loc.GetString(component.SpentName), meta);
-                        _metaData.SetEntityDescription(ent, Loc.GetString(component.SpentDesc), meta);
+                        _nameModifier.RefreshNameModifiers(ent.Owner);
 
                         _tagSystem.AddTag(ent, "Trash");
 
@@ -167,12 +175,10 @@ namespace Content.Server.Light.EntitySystems
         private void OnExpLightInit(EntityUid uid, ExpendableLightComponent component, ComponentInit args)
         {
             if (TryComp<ItemComponent>(uid, out var item))
-            {
                 _item.SetHeldPrefix(uid, "unlit", component: item);
-            }
 
             component.CurrentState = ExpendableLightState.BrandNew;
-            EntityManager.EnsureComponent<PointLightComponent>(uid);
+            EnsureComp<PointLightComponent>(uid);
         }
 
         private void OnExpLightUse(Entity<ExpendableLightComponent> ent, ref UseInHandEvent args)

@@ -65,7 +65,7 @@ namespace Content.Server.Mind.Commands
                 // If the entity already speaks some language (like monkey or robot), we do nothing else
                 // Otherwise, we give them the fallback language
                 if (speaker.SpokenLanguages.Count == 0)
-                    language.AddLanguage(uid, SharedLanguageSystem.FallbackLanguagePrototype);
+                    language.AddLanguage(uid, "Universal");
             }
 
             entityManager.EnsureComponent<ExaminerComponent>(uid);

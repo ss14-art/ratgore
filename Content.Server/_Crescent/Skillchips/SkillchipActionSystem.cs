@@ -24,7 +24,7 @@ public sealed partial class SkillchipActionSystem : EntitySystem
     {
         if (TryComp<AirlockComponent>(args.Target, out var _))
         {
-            _emagSystem.DoEmagEffect(skillchip.Owner, args.Target);
+            _emagSystem.TryEmagEffect(skillchip.Owner, args.Target);
         }
     }
 }

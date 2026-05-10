@@ -37,7 +37,7 @@ public sealed class SharpSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SharpComponent, AfterInteractEvent>(OnAfterInteract, before: [typeof(UtensilSystem)]);
+        SubscribeLocalEvent<SharpComponent, AfterInteractEvent>(OnAfterInteract, before: new[] { typeof(UtensilSystem) });
         SubscribeLocalEvent<SharpComponent, SharpDoAfterEvent>(OnDoAfter);
 
         SubscribeLocalEvent<ButcherableComponent, GetVerbsEvent<InteractionVerb>>(OnGetInteractionVerbs);
@@ -129,9 +129,9 @@ public sealed class SharpSystem : EntitySystem
         args.Handled = true;
 
         _adminLogger.Add(LogType.Gib,
-            $"{EntityManager.ToPrettyString(args.User):user} " +
-            $"has butchered {EntityManager.ToPrettyString(args.Target):target} " +
-            $"with {EntityManager.ToPrettyString(args.Used):knife}");
+            $"{ToPrettyString(args.User):user} " +
+            $"has butchered {ToPrettyString(args.Target):target} " +
+            $"with {ToPrettyString(args.Used):knife}");
     }
 
     private void OnGetInteractionVerbs(EntityUid uid, ButcherableComponent component, GetVerbsEvent<InteractionVerb> args)

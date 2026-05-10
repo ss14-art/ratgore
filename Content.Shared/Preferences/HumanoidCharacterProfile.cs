@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared._Art.TTS; // Art-TTS
@@ -146,6 +147,10 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     public List<string> CharacterFlags { get; private set; } = new();
 
 
+    public HumanoidCharacterProfile()
+    {
+    }
+
     public HumanoidCharacterProfile(
         string name,
         string flavortext,
@@ -174,7 +179,8 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         HashSet<LoadoutPreference> loadoutPreferences,
         long bankWealth,
         string proFaction,
-        List<string> characterFlags
+        List<string> characterFlags,
+        HumanoidCharacterProfile? loadouts
     )
     {
         Name = name;
@@ -205,6 +211,7 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
         BankBalance = bankWealth;
         Faction = proFaction;
         CharacterFlags = characterFlags;
+        Loadouts = loadouts!;
     }
 
     /// <summary>Copy constructor</summary>
@@ -237,14 +244,41 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
             new HashSet<LoadoutPreference>(other.LoadoutPreferences),
             other.BankBalance,
             other.Faction,
-            other.CharacterFlags) { }
+            new List<string>(other.CharacterFlags),
+            ReferenceEquals(other.Loadouts, other) ? null : other.Loadouts) { }
 
-    /// <summary>
-    ///     Get the default humanoid character profile, using internal constant values.
-    ///     Defaults to <see cref="SharedHumanoidAppearanceSystem.DefaultSpecies"/> for the species.
-    /// </summary>
-    /// <returns></returns>
-    public HumanoidCharacterProfile() { }
+    /// <summary>Copy constructor</summary>
+    public HumanoidCharacterProfile(HumanoidCharacterProfile other, HumanoidCharacterProfile? loadouts)
+        : this(
+            other.Name,
+            other.FlavorText,
+            other.Species,
+            other.Customspeciename,
+            // EE -- Contractors Change Start
+            other.Nationality,
+            other.Employer,
+            other.Lifepath,
+            // EE -- Contractors Change End
+            other.Height,
+            other.Width,
+            other.Age,
+            other.Sex,
+            other.Voice, // Art-TTS
+            other.Gender,
+            other.DisplayPronouns,
+            other.StationAiName,
+            other.CyborgName,
+            other.Appearance.Clone(),
+            other.SpawnPriority,
+            new Dictionary<string, JobPriority>(other.JobPriorities),
+            other.PreferenceUnavailable,
+            new HashSet<string>(other.AntagPreferences),
+            new HashSet<string>(other.TraitPreferences),
+            new HashSet<LoadoutPreference>(other.LoadoutPreferences),
+            other.BankBalance,
+            other.Faction,
+            new List<string>(other.CharacterFlags),
+            loadouts) { }
 
     /// <summary>
     ///     Return a default character profile, based on species.i
@@ -385,8 +419,8 @@ public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     public HumanoidCharacterProfile WithSpawnPriorityPreference(SpawnPriorityPreference spawnPriority) =>
         new(this) { SpawnPriority = spawnPriority };
 
-    public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<string, JobPriority>> jobPriorities) =>
-        new(this) { _jobPriorities = new Dictionary<string, JobPriority>(jobPriorities) };
+    public HumanoidCharacterProfile WithJobPriorities(Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities) =>
+        new(this) { _jobPriorities = new Dictionary<string, JobPriority>((IEnumerable<KeyValuePair<string, JobPriority>>)jobPriorities) };
 
     public HumanoidCharacterProfile WithJobPriority(string jobId, JobPriority priority)
     {
@@ -459,7 +493,16 @@ public string Summary =>
             ("age", Age)
         );
 
-    public bool MemberwiseEquals(ICharacterProfile maybeOther)
+    [DataField]
+    private HumanoidCharacterProfile? _loadouts;
+
+    public HumanoidCharacterProfile Loadouts
+    {
+        get => _loadouts ?? this;
+        set => _loadouts = ReferenceEquals(value, this) ? null : value;
+    }
+
+public bool MemberwiseEquals(ICharacterProfile maybeOther)
     {
         return maybeOther is HumanoidCharacterProfile other
             && Name == other.Name
@@ -483,6 +526,9 @@ public string Summary =>
             && FlavorText == other.FlavorText
             && Faction == other.Faction
             && BankBalance == other.BankBalance
+            && Height == other.Height
+            && Width == other.Width
+            && Customspeciename == other.Customspeciename
             && CharacterFlags.SequenceEqual(other.CharacterFlags);
     }
 
@@ -712,6 +758,8 @@ public string Summary =>
         hashCode.Add(Customspeciename);
         hashCode.Add(Faction);
         hashCode.Add(BankBalance);
+        hashCode.Add(Height);
+        hashCode.Add(Width);
         hashCode.Add(CharacterFlags);
         return hashCode.ToHashCode();
     }

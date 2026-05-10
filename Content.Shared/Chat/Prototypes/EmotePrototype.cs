@@ -10,6 +10,7 @@ namespace Content.Shared.Chat.Prototypes;
 ///     Entities can activate emotes by chat input, radial or code.
 /// </summary>
 [Prototype("emote")]
+[Serializable, NetSerializable]
 public sealed partial class EmotePrototype : IPrototype
 {
     [IdDataField]

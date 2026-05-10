@@ -47,7 +47,7 @@ public abstract partial class SharedSelfExtinguisherSystem : EntitySystem
         _actions.SetUseDelay(component.ActionEntity, component.Cooldown);
         if (TryComp<LimitedChargesComponent>(uid, out var charges))
         {
-            _actions.SetCharges(component.ActionEntity, charges.Charges);
+            _actions.SetCharges(component.ActionEntity, _charges.GetCurrentCharges((uid, charges, null)));
             _actions.SetMaxCharges(component.ActionEntity, charges.MaxCharges);
         }
     }
@@ -58,11 +58,17 @@ public abstract partial class SharedSelfExtinguisherSystem : EntitySystem
             !TryComp<LimitedChargesComponent>(uid, out var chargeComp))
             return;
 
-        _charges.SetCharges((uid, chargeComp), charges, maxCharges);
-        _actions.SetCharges(component.ActionEntity, chargeComp.Charges);
-        _actions.SetMaxCharges(component.ActionEntity, chargeComp.MaxCharges);
+        _charges.SetCharges((uid, chargeComp), charges ?? chargeComp.LastCharges);
+        if (maxCharges != null)
+        {
+            chargeComp.MaxCharges = maxCharges.Value;
+            _actions.SetMaxCharges(component.ActionEntity, chargeComp.MaxCharges);
+        }
 
-        _actions.SetEnabled(component.ActionEntity, chargeComp.Charges != 0);
+        var curCharges = _charges.GetCurrentCharges((uid, chargeComp, null));
+        _actions.SetCharges(component.ActionEntity, curCharges);
+
+        _actions.SetEnabled(component.ActionEntity, curCharges != 0);
     }
 
     private void GetRelayedVerbs(EntityUid uid, SelfExtinguisherComponent component, InventoryRelayedEvent<GetVerbsEvent<EquipmentVerb>> args)
@@ -100,7 +106,7 @@ public abstract partial class SharedSelfExtinguisherSystem : EntitySystem
             !TryComp<LimitedChargesComponent>(uid, out var charges))
             return;
 
-        if (charges.Charges >= charges.MaxCharges)
+        if (_charges.GetCurrentCharges((uid, charges, null)) >= charges.MaxCharges)
         {
             if (!SetPopupCooldown((uid, component)))
                 return;
@@ -110,11 +116,12 @@ public abstract partial class SharedSelfExtinguisherSystem : EntitySystem
         }
 
         // Add charges
-        _charges.AddCharges(uid, refill.RefillAmount, charges);
-        _actions.SetCharges(component.ActionEntity, charges.Charges);
+        _charges.AddCharges((uid, charges), refill.RefillAmount);
+        var curCharges = _charges.GetCurrentCharges((uid, charges, null));
+        _actions.SetCharges(component.ActionEntity, curCharges);
 
         // Reenable action
-        _actions.SetEnabled(component.ActionEntity, charges.Charges != 0);
+        _actions.SetEnabled(component.ActionEntity, curCharges != 0);
 
         // Reset cooldown
         _actions.ClearCooldown(component.ActionEntity);
@@ -130,7 +137,7 @@ public abstract partial class SharedSelfExtinguisherSystem : EntitySystem
 
     private void OnExamined(EntityUid uid, SelfExtinguisherComponent component, ExaminedEvent args)
     {
-        if (TryComp<LimitedChargesComponent>(uid, out var charges) && charges.Charges == 0)
+        if (TryComp<LimitedChargesComponent>(uid, out var charges) && _charges.GetCurrentCharges((uid, charges, null)) == 0)
             return;
 
         var curTime = _timing.CurTime;

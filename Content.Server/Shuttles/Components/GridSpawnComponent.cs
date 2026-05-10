@@ -1,4 +1,6 @@
 using Content.Server.Shuttles.Systems;
+using Content.Shared.Dataset;
+using Content.Shared.Procedural;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -17,8 +19,8 @@ public sealed partial class GridSpawnComponent : Component
     [DataField(required: true)] public Dictionary<string, GridSpawnGroup> Groups = new();
 }
 
-[DataRecord]
-public record struct GridSpawnGroup
+[DataRecord, DataDefinition]
+public partial record struct GridSpawnGroup
 {
     public List<ResPath> Paths = new();
     public int MinCount = 1;
@@ -43,6 +45,21 @@ public record struct GridSpawnGroup
     /// Should we add this to the station's grids (if possible / relevant).
     /// </summary>
     public bool StationGrid = true;
+
+    [DataField]
+    public ProtoId<DatasetPrototype>? NameDataset;
+
+    [DataField]
+    public List<ProtoId<DungeonConfigPrototype>> Protos = new();
+
+    [DataField]
+    public float MinimumDistance = 0f;
+
+    [DataField]
+    public float MaximumDistance = 0f;
+
+    [DataField]
+    public bool StationShuttle = false;
 
     public GridSpawnGroup()
     {

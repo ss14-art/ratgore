@@ -20,7 +20,7 @@ public sealed class VascularSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<VascularComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedBodySystem)]);
+        SubscribeLocalEvent<VascularComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(SharedBodySystem) });
         SubscribeLocalEvent<VascularComponent, VascularStrainEvent>(OnStrainChange);
         SubscribeLocalEvent<VascularComponent, DefibrillatorZapSuccessEvent>(OnZapSuccess);
     }

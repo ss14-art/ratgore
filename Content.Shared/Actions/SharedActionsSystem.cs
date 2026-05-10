@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Events;
+using Content.Shared.Actions.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Hands;
@@ -13,36 +14,33 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.Charges.Components;
+using Content.Shared.DoAfter;
+
 namespace Content.Shared.Actions;
 
-// Shitmed Change
-using Content.Shared._Shitmed.Antags.Abductor;
-using Content.Shared.Silicons.StationAi;
-using Content.Shared.Popups;
-using Robust.Shared.Prototypes;
-
-public abstract class SharedActionsSystem : EntitySystem
+public abstract partial class SharedActionsSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming GameTiming = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private   readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private   readonly ActionBlockerSystem _actionBlockerSystem = default!;
+    [Dependency] private   readonly ActionContainerSystem _actionContainer = default!;
+    [Dependency] private   readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private   readonly RotateToFaceSystem _rotateToFaceSystem = default!;
+    [Dependency] private   readonly SharedAudioSystem _audio = default!;
+    [Dependency] private   readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private   readonly SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private   readonly SharedTransformSystem _transformSystem = default!;
 
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotateToFaceSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!; // Shitmed Change
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    private EntityQuery<ActionComponent> _actionQuery;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _actionQuery = GetEntityQuery<ActionComponent>();
 
         SubscribeLocalEvent<InstantActionComponent, MapInitEvent>(OnActionMapInit);
         SubscribeLocalEvent<EntityTargetActionComponent, MapInitEvent>(OnActionMapInit);
@@ -81,11 +79,7 @@ public abstract class SharedActionsSystem : EntitySystem
 
     private void OnActionMapInit(EntityUid uid, BaseActionComponent component, MapInitEvent args)
     {
-        if (component.Charges == null)
-            return;
-
-        component.MaxCharges ??= component.Charges.Value;
-        Dirty(uid, component);
+        component.OriginalIconColor = component.IconColor;
     }
 
     private void OnActionShutdown(EntityUid uid, BaseActionComponent component, ComponentShutdown args)
@@ -133,7 +127,7 @@ public abstract class SharedActionsSystem : EntitySystem
         bool logError = true)
     {
         result = null;
-        if (!Exists(uid))
+        if (uid == null || TerminatingOrDeleted(uid.Value))
             return false;
 
         var ev = new GetActionDataEvent();
@@ -257,7 +251,7 @@ public abstract class SharedActionsSystem : EntitySystem
     }
 
     #region ComponentStateManagement
-    protected virtual void UpdateAction(EntityUid? actionId, BaseActionComponent? action = null)
+    public virtual void UpdateAction(EntityUid? actionId, BaseActionComponent? action = null)
     {
         // See client-side code.
     }
@@ -288,73 +282,56 @@ public abstract class SharedActionsSystem : EntitySystem
         Dirty(actionId.Value, action);
     }
 
-    public void SetCharges(EntityUid? actionId, int? charges)
+    public void SetHidden(EntityUid? actionId, bool hidden)
     {
         if (!TryGetActionData(actionId, out var action) ||
-            action.Charges == charges)
+            action.Hidden == hidden)
         {
             return;
         }
 
-        action.Charges = charges;
+        action.Hidden = hidden;
         UpdateAction(actionId, action);
         Dirty(actionId.Value, action);
     }
 
-    public int? GetCharges(EntityUid? actionId)
+    public List<EntityUid> HideActions(EntityUid performer, ActionsComponent? component = null)
     {
-        if (!TryGetActionData(actionId, out var action))
-            return null;
+        var hidden = new List<EntityUid>();
+        if (!Resolve(performer, ref component))
+            return hidden;
 
-        return action.Charges;
+        foreach (var actionId in component.Actions)
+        {
+            if (!TryGetActionData(actionId, out var action) || action.Hidden)
+                continue;
+
+            SetHidden(actionId, true);
+            hidden.Add(actionId);
+        }
+
+        return hidden;
     }
 
-    public void AddCharges(EntityUid? actionId, int addCharges)
+    public void UnHideActions(EntityUid performer, List<EntityUid> hiddenActions, ActionsComponent? component = null)
     {
-        if (!TryGetActionData(actionId, out var action) || action.Charges == null || addCharges < 1)
+        if (!Resolve(performer, ref component))
             return;
 
-        action.Charges += addCharges;
-        UpdateAction(actionId, action);
-        Dirty(actionId.Value, action);
+        foreach (var actionId in hiddenActions)
+        {
+            SetHidden(actionId, false);
+        }
     }
 
-    public void RemoveCharges(EntityUid? actionId, int? removeCharges)
+    public void RemoveCooldown(EntityUid? actionId)
     {
-        if (!TryGetActionData(actionId, out var action) || action.Charges == null)
-            return;
-
-        if (removeCharges == null)
-            action.Charges = removeCharges;
-        else
-            action.Charges -= removeCharges;
-
-        if (action.Charges is < 0)
-            action.Charges = null;
-
-        UpdateAction(actionId, action);
-        Dirty(actionId.Value, action);
+        ClearCooldown(actionId);
     }
 
-    public void ResetCharges(EntityUid? actionId)
+    public void TryPerformAction(EntityUid performer, ActionsComponent? component, EntityUid actionId, BaseActionComponent action, BaseActionEvent? actionEvent, TimeSpan curTime, bool predicted = true)
     {
-        if (!TryGetActionData(actionId, out var action))
-            return;
-
-        action.Charges = action.MaxCharges;
-        UpdateAction(actionId, action);
-        Dirty(actionId.Value, action);
-    }
-
-    public void SetMaxCharges(EntityUid? actionId, int? maxCharges)
-    {
-        if (!TryGetActionData(actionId, out var action) ||
-            action.MaxCharges == maxCharges)
-            return;
-
-        action.MaxCharges = maxCharges;
-        UpdateAction(actionId, action);
-        Dirty(actionId.Value, action);
+        PerformAction(performer, component, actionId, action, actionEvent, curTime, predicted);
     }
 
     private void OnActionsGetState(EntityUid uid, ActionsComponent component, ref ComponentGetState args)
@@ -365,14 +342,45 @@ public abstract class SharedActionsSystem : EntitySystem
     #endregion
 
     #region Execution
+    public void SetCharges(EntityUid? actionId, int? charges)
+    {
+        if (!TryGetActionData(actionId, out var action))
+            return;
+
+        if (TryComp<LimitedChargesComponent>(actionId, out var limited))
+        {
+            limited.LastCharges = charges ?? 0;
+            limited.LastUpdate = GameTiming.CurTime;
+            Dirty(actionId.Value, limited);
+        }
+
+        UpdateAction(actionId, action);
+    }
+
+    public void SetMaxCharges(EntityUid? actionId, int? maxCharges)
+    {
+        if (!TryGetActionData(actionId, out var action))
+            return;
+
+        if (TryComp<LimitedChargesComponent>(actionId, out var limited))
+        {
+            limited.MaxCharges = maxCharges ?? 1;
+            Dirty(actionId.Value, limited);
+        }
+
+        UpdateAction(actionId, action);
+    }
+
     /// <summary>
     ///     When receiving a request to perform an action, this validates whether the action is allowed. If it is, it
     ///     will raise the relevant <see cref="InstantActionEvent"/>
     /// </summary>
-    private void OnActionRequest(RequestPerformActionEvent ev, EntitySessionEventArgs args)
+    public void OnActionRequest(RequestPerformActionEvent ev, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } user)
             return;
+
+        var curTime = GameTiming.CurTime;
 
         if (!TryComp(user, out ActionsComponent? component))
             return;
@@ -399,21 +407,15 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!action.Enabled)
             return;
 
+        if (IsCooldownActive(action, curTime))
+            return;
+
         // check for action use prevention
         // TODO: make code below use this event with a dedicated component
         var attemptEv = new ActionAttemptEvent(user);
         RaiseLocalEvent(actionEnt, ref attemptEv);
         if (attemptEv.Cancelled)
             return;
-
-        var curTime = GameTiming.CurTime;
-        // TODO: Check for charge recovery timer
-        if (action.Cooldown.HasValue && action.Cooldown.Value.End > curTime)
-            return;
-
-        // TODO: Replace with individual charge recovery when we have the visuals to aid it
-        if (action is { Charges: < 1, RenewCharges: true })
-            ResetCharges(actionEnt);
 
         BaseActionEvent? performEvent = null;
 
@@ -457,7 +459,7 @@ public abstract class SharedActionsSystem : EntitySystem
                 }
 
                 var entityCoordinatesTarget = GetCoordinates(netCoordinatesTarget);
-                _rotateToFaceSystem.TryFaceCoordinates(user, entityCoordinatesTarget.ToMapPos(EntityManager, _transformSystem));
+                _rotateToFaceSystem.TryFaceCoordinates(user, _transformSystem.ToMapCoordinates(entityCoordinatesTarget).Position);
 
                 if (!ValidateWorldTarget(user, entityCoordinatesTarget, (actionEnt, worldAction)))
                     return;
@@ -495,15 +497,16 @@ public abstract class SharedActionsSystem : EntitySystem
                 if (entityWorldAction.Event != null)
                 {
                     entityWorldAction.Event.Entity = actionEntity;
-                    entityWorldAction.Event.Coords = actionCoords;
+                    if (actionCoords != null)
+                        entityWorldAction.Event.Target = actionCoords.Value;
+
                     Dirty(actionEnt, entityWorldAction);
                     performEvent = entityWorldAction.Event;
                 }
                 break;
             }
             case InstantActionComponent instantAction:
-                var hasNoSpecificComponents = !HasComp<StationAiOverlayComponent>(user) && !HasComp<AbductorScientistComponent>(user); // Shitmed Change
-                if (action.CheckCanInteract && !_actionBlockerSystem.CanInteract(user, null) && hasNoSpecificComponents) // Shitmed Change
+                if (action.CheckCanInteract && !_actionBlockerSystem.CanInteract(user, null))
                     return;
 
                 _adminLogger.Add(LogType.Action,
@@ -523,6 +526,7 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!ValidateEntityTargetBase(user,
                 target,
                 comp.Whitelist,
+                comp.Blacklist,
                 comp.CheckCanInteract,
                 comp.CanTargetSelf,
                 comp.CheckCanAccess,
@@ -537,6 +541,7 @@ public abstract class SharedActionsSystem : EntitySystem
     private bool ValidateEntityTargetBase(EntityUid user,
         EntityUid? targetEntity,
         EntityWhitelist? whitelist,
+        EntityWhitelist? blacklist,
         bool checkCanInteract,
         bool canTargetSelf,
         bool checkCanAccess,
@@ -546,6 +551,9 @@ public abstract class SharedActionsSystem : EntitySystem
             return false;
 
         if (_whitelistSystem.IsWhitelistFail(whitelist, target))
+            return false;
+
+        if (_whitelistSystem.IsBlacklistPass(blacklist, target))
             return false;
 
         if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, target))
@@ -593,8 +601,7 @@ public abstract class SharedActionsSystem : EntitySystem
         if (entityCoordinates is not { } coords)
             return false;
 
-        var hasNoSpecificComponents = !HasComp<StationAiOverlayComponent>(user) && !HasComp<AbductorScientistComponent>(user); // Shitmed Change
-        if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, null) && hasNoSpecificComponents) // Shitmed Change
+        if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, null))
             return false;
 
         if (!checkCanAccess)
@@ -603,10 +610,7 @@ public abstract class SharedActionsSystem : EntitySystem
             var xform = Transform(user);
 
             if (xform.MapID != coords.GetMapId(EntityManager))
-            {
-                _popup.PopupCursor(Loc.GetString("world-target-out-of-range"), user); // Goobstation Change
                 return false;
-            }
 
             if (range <= 0)
                 return true;
@@ -626,6 +630,7 @@ public abstract class SharedActionsSystem : EntitySystem
         var entityValidated = ValidateEntityTargetBase(user,
             entity,
             comp.Whitelist,
+            null,
             comp.CheckCanInteract,
             comp.CanTargetSelf,
             comp.CheckCanAccess,
@@ -663,10 +668,17 @@ public abstract class SharedActionsSystem : EntitySystem
             actionEvent.Handled = false;
             var target = performer;
             actionEvent.Performer = performer;
-            actionEvent.Action = (actionId, action);
+
+            if (!_actionQuery.TryComp(actionId, out var actionComp))
+                return;
+
+            actionEvent.Action = (actionId, actionComp);
 
             if (!action.RaiseOnUser && action.Container != null && !HasComp<MindComponent>(action.Container))
                 target = action.Container.Value;
+
+            if (action.RaiseOnAction)
+                target = actionId;
 
             RaiseLocalEvent(target, (object) actionEvent, broadcast: true);
             handled = actionEvent.Handled;
@@ -685,20 +697,8 @@ public abstract class SharedActionsSystem : EntitySystem
 
         var dirty = toggledBefore != action.Toggled;
 
-        if (action.Charges != null)
-        {
-            dirty = true;
-            action.Charges--;
-            if (action is { Charges: 0, RenewCharges: false })
-            {
-                var disabledEv = new ActionGettingDisabledEvent(performer);
-                RaiseLocalEvent(actionId, ref disabledEv);
-                action.Enabled = false;
-            }
-        }
-
         action.Cooldown = null;
-        if (action is { UseDelay: not null, Charges: null or < 1 })
+        if (action is { UseDelay: not null})
         {
             dirty = true;
             action.Cooldown = (curTime, curTime + action.UseDelay.Value);
@@ -799,15 +799,12 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!ResolveActionData(actionId, ref action))
             return false;
 
-        DebugTools.Assert(_net.IsClient || action.Container == null ||
+        DebugTools.Assert(action.Container == null ||
                           (TryComp(action.Container, out ActionsContainerComponent? containerComp)
                            && containerComp.Container.Contains(actionId)));
 
         if (action.AttachedEntity != null)
             RemoveAction(action.AttachedEntity.Value, actionId, action: action);
-
-        if (action.StartDelay && action.UseDelay != null)
-            SetCooldown(actionId, action.UseDelay.Value);
 
         DebugTools.AssertOwner(performer, comp);
         comp ??= EnsureComp<ActionsComponent>(performer);
@@ -949,38 +946,6 @@ public abstract class SharedActionsSystem : EntitySystem
         RemoveAction(action.AttachedEntity.Value, actionId, comp, action);
     }
 
-    public void RemoveAction(EntityUid uid, string actionProto)
-    {
-        if (!_protoMan.TryIndex(actionProto, out EntityPrototype? prototype))
-            return;
-
-        RemoveAction(uid, prototype);
-    }
-
-    /// <summary>
-    ///     Removes an action from its entity by prototype.
-    /// </summary>
-    public void RemoveAction(EntityUid uid, EntProtoId actionProto)
-    {
-        if (!TryComp(uid, out ActionsContainerComponent? actionsContainer)
-            || !TryComp(uid, out ActionsComponent? actionsComponent))
-            return;
-
-        var actionsToRemove = new List<Entity<BaseActionComponent>>();
-        foreach (var actionEnt in actionsContainer.Container.ContainedEntities)
-        {
-            var metaData = MetaData(actionEnt);
-            if (metaData.EntityPrototype is null || metaData.EntityPrototype.ID != actionProto
-                || !TryGetActionData(actionEnt, out var actionComponent))
-                continue;
-
-            actionsToRemove.Add((actionEnt, actionComponent));
-        }
-
-        foreach (var match in actionsToRemove)
-            RemoveAction(uid, match.Owner, actionsComponent, match.Comp);
-    }
-
     public void RemoveAction(EntityUid performer, EntityUid? actionId, ActionsComponent? comp = null, BaseActionComponent? action = null)
     {
         if (actionId == null)
@@ -1019,8 +984,8 @@ public abstract class SharedActionsSystem : EntitySystem
         Dirty(actionId.Value, action);
         Dirty(performer, comp);
         ActionRemoved(performer, actionId.Value, comp, action);
-        if (action.Temporary && GameTiming.IsFirstTimePredicted)
-            Del(actionId.Value);
+        if (action.Temporary)
+            QueueDel(actionId.Value);
     }
 
     /// <summary>
@@ -1036,8 +1001,6 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!action.Enabled)
             return false;
 
-        if (action.Charges.HasValue && action.Charges <= 0)
-            return false;
 
         var curTime = GameTiming.CurTime;
         if (action.Cooldown.HasValue && action.Cooldown.Value.End > curTime)
@@ -1147,38 +1110,9 @@ public abstract class SharedActionsSystem : EntitySystem
     /// <summary>
     ///     Checks if the action has a cooldown and if it's still active
     /// </summary>
-    protected bool IsCooldownActive(BaseActionComponent action, TimeSpan? curTime = null)
+    public bool IsCooldownActive(BaseActionComponent action, TimeSpan? curTime = null)
     {
-        curTime ??= GameTiming.CurTime;
         // TODO: Check for charge recovery timer
         return action.Cooldown.HasValue && action.Cooldown.Value.End > curTime;
     }
-
-    protected bool ShouldResetCharges(BaseActionComponent action)
-    {
-        return action is { Charges: < 1, RenewCharges: true };
-    }
-
-    // Shitmed Change Start - Starlight Abductors
-    public EntityUid[] HideActions(EntityUid performer, ActionsComponent? comp = null)
-    {
-        if (!Resolve(performer, ref comp, false))
-            return [];
-
-        var actions = comp.Actions.ToArray();
-        comp.Actions.Clear();
-        Dirty(performer, comp);
-        return actions;
-    }
-
-    public void UnHideActions(EntityUid performer, EntityUid[] actions, ActionsComponent? comp = null)
-    {
-        if (!Resolve(performer, ref comp, false))
-            return;
-
-        foreach (var action in actions)
-            comp.Actions.Add(action);
-        Dirty(performer, comp);
-    }
-    // Shitmed Change End
 }

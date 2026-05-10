@@ -30,4 +30,10 @@ public sealed partial class FoldableClothingComponent : Component
     /// </summary>
     [DataField]
     public string? FoldedHeldPrefix;
+
+    [DataField]
+    public string FoldingLayer = "folded";
+
+    [DataField]
+    public string UnfoldingLayer = "unfolded";
 }

@@ -27,7 +27,9 @@ internal sealed class AdminNameOverlay : Overlay
 
     //TODO make this adjustable via GUI
     private readonly ProtoId<RoleTypePrototype>[] _filter =
-        ["SoloAntagonist", "TeamAntagonist", "SiliconAntagonist", "FreeAgent"];
+    {
+        "SoloAntagonist", "TeamAntagonist", "SiliconAntagonist", "FreeAgent"
+    };
     private readonly string _antagLabelClassic = "";
     private readonly Color _antagColorClassic = Color.OrangeRed;
 

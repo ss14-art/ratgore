@@ -13,4 +13,10 @@ public sealed partial class CargoShuttleComponent : Component
     /*
      * Still needed for drone console for now.
      */
+
+    [ViewVariables(VVAccess.ReadWrite), DataField("nextCall")]
+    public TimeSpan NextCall;
+
+    [ViewVariables(VVAccess.ReadWrite), DataField("cooldown")]
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(30);
 }

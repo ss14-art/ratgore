@@ -74,7 +74,7 @@ public sealed class ParallaxManager : IParallaxManager
 
             ParallaxLayerPrepared[][] layers;
 
-            if (parallaxPrototype.LayersLQUseHQ)
+            if (parallaxPrototype.LayersLqUseHq)
             {
                 layers = new ParallaxLayerPrepared[2][];
                 layers[0] = layers[1] = await LoadParallaxLayers(parallaxPrototype.Layers, cancel);
@@ -83,7 +83,7 @@ public sealed class ParallaxManager : IParallaxManager
             {
                 layers = await Task.WhenAll(
                     LoadParallaxLayers(parallaxPrototype.Layers, cancel),
-                    LoadParallaxLayers(parallaxPrototype.LayersLQ, cancel)
+                    LoadParallaxLayers(parallaxPrototype.LayersLq, cancel)
                 );
             }
 

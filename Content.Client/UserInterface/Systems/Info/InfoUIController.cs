@@ -16,7 +16,7 @@ public sealed class InfoUIController : UIController, IOnStateExited<GameplayStat
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly IClientNetManager _netManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private RulesPopup? _rulesPopup;
@@ -29,6 +29,7 @@ public sealed class InfoUIController : UIController, IOnStateExited<GameplayStat
 
         _netManager.RegisterNetMessage<RulesAcceptedMessage>();
         _netManager.RegisterNetMessage<ShowRulesPopupMessage>(OnShowRulesPopupMessage);
+        _netManager.Disconnect += OnDisconnect;
 
         _consoleHost.RegisterCommand("fuckrules",
             "",
@@ -46,11 +47,18 @@ public sealed class InfoUIController : UIController, IOnStateExited<GameplayStat
 
     public void OnStateExited(GameplayState state)
     {
+        CloseRulesPopup();
+
         if (_infoWindow == null)
             return;
 
         _infoWindow.Dispose();
         _infoWindow = null;
+    }
+
+    private void OnDisconnect(object? sender, NetDisconnectedArgs args)
+    {
+        CloseRulesPopup();
     }
 
     private void ShowRules(float time)
@@ -74,12 +82,18 @@ public sealed class InfoUIController : UIController, IOnStateExited<GameplayStat
         _consoleHost.ExecuteCommand("quit");
     }
 
-    private void OnAcceptPressed()
+    private void CloseRulesPopup()
     {
-        _netManager.ClientSendMessage(new RulesAcceptedMessage());
-
         _rulesPopup?.Orphan();
         _rulesPopup = null;
+    }
+
+    private void OnAcceptPressed()
+    {
+        if (_netManager.IsConnected)
+            _netManager.ClientSendMessage(new RulesAcceptedMessage());
+
+        CloseRulesPopup();
     }
 
     public GuideEntryPrototype GetCoreRuleEntry()

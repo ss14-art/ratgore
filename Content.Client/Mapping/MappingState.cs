@@ -315,19 +315,19 @@ public sealed class MappingState : GameplayStateBase
         Sort(mappings, entitiesTemplate);
         mappings.Clear();
         Screen.Entities.UpdateVisible(
-            new (entitiesTemplate.Children?.Count > 0 ? [entitiesTemplate, entities] : [entities]),
+            entitiesTemplate.Children?.Count > 0 ? new List<MappingPrototype> { entitiesTemplate, entities } : new List<MappingPrototype> { entities },
             _allPrototypes.GetOrNew(typeof(EntityPrototype)));
 
         Sort(mappings, tilesTemplate);
         mappings.Clear();
         Screen.Tiles.UpdateVisible(
-            new (tilesTemplate.Children?.Count > 0 ? [tilesTemplate, tiles] : [tiles]),
+            tilesTemplate.Children?.Count > 0 ? new List<MappingPrototype> { tilesTemplate, tiles } : new List<MappingPrototype> { tiles },
             _allPrototypes.GetOrNew(typeof(ContentTileDefinition)));
 
         Sort(mappings, decalsTemplate);
         mappings.Clear();
         Screen.Decals.UpdateVisible(
-            new (decalsTemplate.Children?.Count > 0 ? [decalsTemplate, decals] : [decals]),
+            decalsTemplate.Children?.Count > 0 ? new List<MappingPrototype> { decalsTemplate, decals } : new List<MappingPrototype> { decals },
             _allPrototypes.GetOrNew(typeof(DecalPrototype)));
     }
 

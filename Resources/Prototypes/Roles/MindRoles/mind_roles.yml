@@ -264,6 +264,7 @@
     roleType: TeamAntagonist
   - type: ZombieRole
 
+
 # goob edit - antags
 - type: entity
   parent: BaseMindRoleAntag

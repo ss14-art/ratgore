@@ -43,7 +43,7 @@ namespace Content.MapRenderer.Painters
             _decals = GetDecals();
         }
 
-        public void Run(Image gridCanvas, EntityUid gridUid, MapGridComponent grid)
+        public void Run(Image gridCanvas, EntityUid gridUid, MapGridComponent grid, Vector2 customOffset)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();

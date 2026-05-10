@@ -83,6 +83,7 @@ public sealed partial class ZombieComponent : Component
     [DataField("emoteId", customTypeSerializer: typeof(PrototypeIdSerializer<EmoteSoundsPrototype>))]
     public string? EmoteSoundsId = "Zombie";
 
+    [ViewVariables]
     public EmoteSoundsPrototype? EmoteSounds;
 
     [DataField("nextTick", customTypeSerializer:typeof(TimeOffsetSerializer))]

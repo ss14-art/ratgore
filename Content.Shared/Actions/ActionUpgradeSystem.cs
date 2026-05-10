@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -53,7 +54,7 @@ public sealed class ActionUpgradeSystem : EntitySystem
 
         // TODO: Preserve ordering of actions
 
-        _entityManager.DeleteEntity(uid);
+        Del(uid);
     }
 
     public bool TryUpgradeAction(EntityUid? actionId, out EntityUid? upgradeActionId, ActionUpgradeComponent? actionUpgradeComponent = null, int newLevel = 0)
@@ -184,7 +185,7 @@ public sealed class ActionUpgradeSystem : EntitySystem
 
         // TODO: Preserve ordering of actions
 
-        _entityManager.DeleteEntity(actionId);
+        Del(actionId);
 
         return upgradedActionId.Value;
     }

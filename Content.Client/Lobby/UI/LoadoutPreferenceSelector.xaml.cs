@@ -105,7 +105,7 @@ public sealed partial class LoadoutPreferenceSelector : Control
 
 
         SpriteView previewLoadout;
-        if (!entities.TryGetValue(loadout.ID + 0, out var dummyLoadoutItem))
+        if (loadout.Items.Count > 0 && !entities.TryGetValue(loadout.ID + 0, out var dummyLoadoutItem))
         {
             // Get the first item in the loadout to be the preview
             dummyLoadoutItem = entityManager.SpawnEntity(loadout.Items.First(), MapCoordinates.Nullspace);
@@ -121,7 +121,7 @@ public sealed partial class LoadoutPreferenceSelector : Control
             };
             previewLoadout.SetEntity(dummyLoadoutItem);
         }
-        else
+        else if (entities.TryGetValue(loadout.ID + 0, out dummyLoadoutItem))
         {
             // Create a sprite preview of the loadout item
             previewLoadout = new SpriteView
@@ -133,18 +133,31 @@ public sealed partial class LoadoutPreferenceSelector : Control
             };
             previewLoadout.SetEntity(dummyLoadoutItem);
         }
+        else
+        {
+            previewLoadout = new SpriteView
+            {
+                Scale = new Vector2(1, 1),
+                OverrideDirection = Direction.South,
+                VerticalAlignment = VAlignment.Center,
+                SizeFlagsStretchRatio = 1,
+            };
+        }
         DummyEntityUid = dummyLoadoutItem;
 
-        entityManager.EnsureComponent<AppearanceComponent>(dummyLoadoutItem);
-        entityManager.EnsureComponent<PaintedComponent>(dummyLoadoutItem, out var paint);
+        if (dummyLoadoutItem.IsValid())
+        {
+            entityManager.EnsureComponent<AppearanceComponent>(dummyLoadoutItem);
+            entityManager.EnsureComponent<PaintedComponent>(dummyLoadoutItem, out var paint);
+        }
 
         var loadoutName =
             Loc.GetString($"loadout-name-{loadout.ID}") == $"loadout-name-{loadout.ID}"
-                ? entityManager.GetComponent<MetaDataComponent>(dummyLoadoutItem).EntityName
+                ? (dummyLoadoutItem.IsValid() ? entityManager.GetComponent<MetaDataComponent>(dummyLoadoutItem).EntityName : loadout.ID)
                 : Loc.GetString($"loadout-name-{loadout.ID}");
 
         // Display the item's label if it's present
-        if (entityManager.TryGetComponent(dummyLoadoutItem, out LabelComponent? labelComponent))
+        if (dummyLoadoutItem.IsValid() && entityManager.TryGetComponent(dummyLoadoutItem, out LabelComponent? labelComponent))
         {
             var itemLabel = labelComponent.CurrentLabel;
             if (!string.IsNullOrEmpty(itemLabel))
@@ -153,7 +166,7 @@ public sealed partial class LoadoutPreferenceSelector : Control
 
         var loadoutDesc =
             !Loc.TryGetString($"loadout-description-{loadout.ID}", out var description)
-                ? entityManager.GetComponent<MetaDataComponent>(dummyLoadoutItem).EntityDescription
+                ? (dummyLoadoutItem.IsValid() ? entityManager.GetComponent<MetaDataComponent>(dummyLoadoutItem).EntityDescription : "")
                 : description;
 
 
@@ -238,7 +251,8 @@ public sealed partial class LoadoutPreferenceSelector : Control
         ColorEdit.OnColorChanged += _ =>
         {
             _preference.CustomColorTint = SpecialColorTintToggle.Pressed ? ColorEdit.Color.ToHex() : null;
-            UpdatePaint(new(dummyLoadoutItem, paint), entityManager);
+            if (entityManager.TryGetComponent<PaintedComponent>(dummyLoadoutItem, out var paintComp))
+                UpdatePaint(new(dummyLoadoutItem, paintComp), entityManager);
         };
 
         var desc = Loc.GetString(loadoutDesc);

@@ -49,7 +49,6 @@ public sealed class BodySystem : SharedBodySystem
         if (_mobState.IsDead(ent) && _mindSystem.TryGetMind(ent, out var mindId, out var mind))
         {
             mind.TimeOfDeath ??= _gameTiming.CurTime; // WD EDIT
-            _ticker.OnGhostAttempt(mindId, canReturnGlobal: true, mind: mind);
         }
     }
 

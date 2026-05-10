@@ -32,8 +32,12 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private readonly EmagSystem _emag = default!;
+
+    private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -48,9 +52,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         SubscribeLocalEvent<SiliconLawProviderComponent, GetSiliconLawsEvent>(OnDirectedGetLaws);
         SubscribeLocalEvent<SiliconLawProviderComponent, IonStormLawsEvent>(OnIonStormLaws);
-        SubscribeLocalEvent<SiliconLawProviderComponent, GotEmaggedEvent>(OnEmagLawsAdded);
-        SubscribeLocalEvent<EmagSiliconLawComponent, MindAddedMessage>(OnEmagMindAdded);
-        SubscribeLocalEvent<EmagSiliconLawComponent, MindRemovedMessage>(OnEmagMindRemoved);
+        SubscribeLocalEvent<SiliconLawProviderComponent, MindAddedMessage>(OnLawProviderMindAdded);
+        SubscribeLocalEvent<SiliconLawProviderComponent, MindRemovedMessage>(OnLawProviderMindRemoved);
+        SubscribeLocalEvent<SiliconLawProviderComponent, SiliconEmaggedEvent>(OnEmagLawsAdded);
     }
 
     private void OnMapInit(EntityUid uid, SiliconLawBoundComponent component, MapInitEvent args)
@@ -92,6 +96,16 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         component.LastLawProvider = args.Station;
     }
 
+    private void OnLawProviderMindAdded(EntityUid uid, SiliconLawProviderComponent component, MindAddedMessage args)
+    {
+        NotifyLawsChanged(uid);
+    }
+
+    private void OnLawProviderMindRemoved(EntityUid uid, SiliconLawProviderComponent component, MindRemovedMessage args)
+    {
+        NotifyLawsChanged(uid);
+    }
+
     private void OnDirectedGetLaws(EntityUid uid, SiliconLawProviderComponent component, ref GetSiliconLawsEvent args)
     {
         if (args.Handled)
@@ -108,32 +122,34 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     private void OnIonStormLaws(EntityUid uid, SiliconLawProviderComponent component, ref IonStormLawsEvent args)
     {
         // Emagged borgs are immune to ion storm
-        if (!HasComp<EmaggedComponent>(uid))
+        if (!_emag.CheckFlag(uid, EmagType.Interaction))
         {
             component.Lawset = args.Lawset;
 
             // gotta tell player to check their laws
-            NotifyLawsChanged(uid);
+            NotifyLawsChanged(uid, component.LawUploadSound);
+
+            // Show the silicon has been subverted.
+            component.Subverted = true;
 
             // new laws may allow antagonist behaviour so make it clear for admins
-            if (TryComp<EmagSiliconLawComponent>(uid, out var emag))
-                EnsureEmaggedRole(uid, emag);
+            if(_mind.TryGetMind(uid, out var mindId, out _))
+                EnsureSubvertedSiliconRole(mindId);
 
         }
     }
 
-    private void OnEmagLawsAdded(EntityUid uid, SiliconLawProviderComponent component, ref GotEmaggedEvent args)
+    private void OnEmagLawsAdded(EntityUid uid, SiliconLawProviderComponent component, ref SiliconEmaggedEvent args)
     {
 
         if (component.Lawset == null)
             component.Lawset = GetLawset(component.Laws);
 
         // Add the first emag law before the others
-        var name = CompOrNull<EmagSiliconLawComponent>(uid)?.OwnerName ?? Name(args.UserUid); // DeltaV: Reuse emagger name if possible
         component.Lawset?.Laws.Insert(0, new SiliconLaw
         {
-            LawString = Loc.GetString("law-emag-custom", ("name", name), ("title", Loc.GetString(component.Lawset.ObeysTo))), // DeltaV: pass name from variable
-            Order = -1 // Goobstation - AI/borg law changes - borgs obeying AI
+            LawString = Loc.GetString("law-emag-custom", ("name", Name(args.user)), ("title", Loc.GetString(component.Lawset.ObeysTo))),
+            Order = 0
         });
 
         //Add the secrecy law after the others
@@ -144,40 +160,20 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         });
     }
 
-    protected override void OnGotEmagged(EntityUid uid, EmagSiliconLawComponent component, ref GotEmaggedEvent args)
+    protected override void EnsureSubvertedSiliconRole(EntityUid mindId)
     {
-        if (component.RequireOpenPanel && TryComp<WiresPanelComponent>(uid, out var panel) && !panel.Open)
-            return;
-
-        base.OnGotEmagged(uid, component, ref args);
-        NotifyLawsChanged(uid);
-        EnsureEmaggedRole(uid, component);
-
-        _stunSystem.TryParalyze(uid, component.StunTime, true);
-
-    }
-
-    private void OnEmagMindAdded(EntityUid uid, EmagSiliconLawComponent component, MindAddedMessage args)
-    {
-        if (HasComp<EmaggedComponent>(uid))
-            EnsureEmaggedRole(uid, component);
-    }
-
-    private void OnEmagMindRemoved(EntityUid uid, EmagSiliconLawComponent component, MindRemovedMessage args)
-    {
-        if (component.AntagonistRole == null)
-            return;
-
-        _roles.MindTryRemoveRole<SubvertedSiliconRoleComponent>(args.Mind);
-    }
-
-    private void EnsureEmaggedRole(EntityUid uid, EmagSiliconLawComponent component)
-    {
-        if (component.AntagonistRole == null || !_mind.TryGetMind(uid, out var mindId, out _))
-            return;
+        base.EnsureSubvertedSiliconRole(mindId);
 
         if (!_roles.MindHasRole<SubvertedSiliconRoleComponent>(mindId))
             _roles.MindAddRole(mindId, "MindRoleSubvertedSilicon", silent: true);
+    }
+
+    protected override void RemoveSubvertedSiliconRole(EntityUid mindId)
+    {
+        base.RemoveSubvertedSiliconRole(mindId);
+
+        if (_roles.MindHasRole<SubvertedSiliconRoleComponent>(mindId))
+            _roles.MindRemoveRole<SubvertedSiliconRoleComponent>(mindId);
     }
 
     public SiliconLawset GetLaws(EntityUid uid, SiliconLawBoundComponent? component = null)
@@ -282,21 +278,24 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         return true;
     }
 
-    protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         // TODO: Prediction dump this
         if (!TryComp(args.Entity, out SiliconLawProviderComponent? provider))
             return;
 
         var lawset = GetLawset(provider.Laws).Laws;
-        var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
+        var query = EntityQueryEnumerator<SiliconLawBoundComponent>();
 
-        while (query.MoveNext(out var update))
+        while (query.MoveNext(out var uid, out var component))
         {
-            if (!SetLaws(lawset, update, provider.UnRemovable))
+            if (!_container.IsEntityInContainer(uid))
                 continue;
 
-            if (provider.LawUploadSound != null && _mind.TryGetMind(update, out var mindId, out _))
+            if (!SetLaws(lawset, uid, provider.UnRemovable))
+                continue;
+
+            if (provider.LawUploadSound != null && _mind.TryGetMind(uid, out var mindId, out _))
                 _roles.MindPlaySound(mindId, provider.LawUploadSound);
         }
     }

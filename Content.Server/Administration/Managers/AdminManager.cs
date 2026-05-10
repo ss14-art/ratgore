@@ -468,14 +468,8 @@ namespace Content.Server.Administration.Managers
 
         private static bool IsLocal(ICommonSession player)
         {
-            var ep = player.Channel.RemoteEndPoint;
-            var addr = ep.Address;
-            if (addr.IsIPv4MappedToIPv6)
-            {
-                addr = addr.MapToIPv4();
-            }
-
-            return Equals(addr, System.Net.IPAddress.Loopback) || Equals(addr, System.Net.IPAddress.IPv6Loopback);
+            var addr = player.Channel.RemoteEndPoint.Address;
+            return System.Net.IPAddress.IsLoopback(addr);
         }
 
         public bool TryGetCommandFlags(CommandSpec command, out AdminFlags[]? flags)

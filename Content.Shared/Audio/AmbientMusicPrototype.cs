@@ -8,10 +8,10 @@ namespace Content.Shared.Audio;
 /// <summary>
 /// Attaches a rules prototype to sound files to play ambience.
 /// </summary>
-[Prototype("ambientMusic")]
+[Prototype]
 public sealed partial class AmbientMusicPrototype : IPrototype
 {
-    [IdDataField] public string ID { get; } = string.Empty;
+    [IdDataField] public string ID { get; private set; } = string.Empty;
 
     [ViewVariables(VVAccess.ReadWrite), DataField("sound", required: true)]
     public SoundSpecifier Sound = default!;

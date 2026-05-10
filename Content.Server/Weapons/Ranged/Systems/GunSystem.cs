@@ -1,3 +1,5 @@
+using System.Linq;
+using Content.Shared.Physics;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
 using Content.Shared.Contests;
@@ -63,6 +65,40 @@ public sealed partial class GunSystem : SharedGunSystem
     }
 
     // TODO: Pseudo RNG so the client can predict these.
+    protected override void FireHitscan(EntityUid gunUid, GunComponent gun, HitscanPrototype hitscan, EntityCoordinates fromCoordinates, EntityCoordinates toCoordinates, EntityUid? user = null)
+    {
+        var fromMap = fromCoordinates.ToMap(EntityManager, TransformSystem);
+        var toMap = toCoordinates.ToMap(EntityManager, TransformSystem);
+        var direction = (toMap.Position - fromMap.Position).Normalized();
+
+        if (direction == Vector2.Zero)
+            direction = Vector2.UnitX;
+
+        var ray = new CollisionRay(fromMap.Position, direction, (int) (CollisionGroup.BulletImpassable | CollisionGroup.Opaque));
+        var results = Physics.IntersectRay(fromMap.MapId, ray, hitscan.MaxLength, user, false).ToList();
+
+        EntityUid? hitEntity = null;
+        float distance = hitscan.MaxLength;
+
+        if (results.Count > 0)
+        {
+            var result = results[0];
+            hitEntity = result.HitEntity;
+            distance = result.Distance;
+
+            if (hitEntity != null)
+            {
+                var damage = hitscan.Damage;
+                if (damage != null)
+                {
+                    Damageable.TryChangeDamage(hitEntity.Value, damage, origin: user);
+                }
+            }
+        }
+
+        FireEffects(fromCoordinates, distance, direction.ToAngle(), hitscan, hitEntity);
+    }
+
     #region Hitscan effects
 
     private void FireEffects(EntityCoordinates fromCoordinates, float distance, Angle mapDirection, HitscanPrototype hitscan, EntityUid? hitEntity = null)

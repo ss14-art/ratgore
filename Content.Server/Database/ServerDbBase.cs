@@ -15,6 +15,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Preferences;
 using Microsoft.EntityFrameworkCore;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
@@ -30,7 +31,7 @@ namespace Content.Server.Database
         public event Action<DatabaseNotification>? OnNotificationReceived;
 
         /// <param name="opsLog">Sawmill to trace log database operations to.</param>
-        public ServerDbBase(ISawmill opsLog)
+        public ServerDbBase(ISawmill opsLog, ISerializationManager serialization)
         {
             _opsLog = opsLog;
         }
@@ -197,7 +198,7 @@ namespace Content.Server.Database
 
             // Art-TTS Start
             var voice = profile.Voice;
-            if (voice == string.Empty)
+            if (string.IsNullOrWhiteSpace(voice))
                 voice = SharedHumanoidAppearanceSystem.DefaultSexVoice[sex];
             // Art-TTS End
 
@@ -217,14 +218,14 @@ namespace Content.Server.Database
                 }
             }
 
-            return new HumanoidCharacterProfile(
+            var result = new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
                 profile.Species,
-                profile.CustomSpecieName,
-                profile.Nationality,
-                profile.Employer,
-                profile.Lifepath,
+                profile.CustomSpecieName ?? string.Empty,
+                profile.Nationality ?? SharedHumanoidAppearanceSystem.DefaultNationality,
+                profile.Employer ?? SharedHumanoidAppearanceSystem.DefaultEmployer,
+                profile.Lifepath ?? SharedHumanoidAppearanceSystem.DefaultLifepath,
                 profile.Height,
                 profile.Width,
                 profile.Age,
@@ -254,9 +255,11 @@ namespace Content.Server.Database
                     CustomColorTint = l.CustomColorTint, CustomHeirloom = l.CustomHeirloom, Selected = true,
                 }).ToHashSet(),
                 profile.BankBalance,
-                profile.Faction,
-                profile.CharacterFlags.ToList()
+                profile.Faction ?? string.Empty,
+                profile.CharacterFlags?.ToList() ?? [],
+                null
             );
+            return result;
         }
 
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)

@@ -69,14 +69,15 @@ public sealed class UserDbDataManager : IPostInjectInit
         {
             var tasks = new List<Task>();
             foreach (var action in _onLoadPlayer)
-                tasks.Add(action(session, cancel));
+                tasks.Add(RunLoadAction(action, session, cancel));
 
             await Task.WhenAll(tasks);
             cancel.ThrowIfCancellationRequested();
 
             foreach (var action in _onFinishLoad)
-                action(session);
-            _prefs.SanitizeData(session);
+                RunFinishAction(action, session);
+
+            RunSanitizeData(session);
             _sawmill.Verbose($"Load complete for user {session}");
         }
         catch (OperationCanceledException)
@@ -98,6 +99,53 @@ public sealed class UserDbDataManager : IPostInjectInit
             // We throw a OperationCanceledException so users of WaitLoadComplete() always see cancellation here.
             throw new OperationCanceledException("Load of user data cancelled due to unknown error");
         }
+    }
+
+    private async Task RunLoadAction(OnLoadPlayer action, ICommonSession session, CancellationToken cancel)
+    {
+        try
+        {
+            await action(session, cancel);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
+        catch (Exception e)
+        {
+            throw new InvalidOperationException($"OnLoadPlayer failed: {DescribeDelegate(action)}", e);
+        }
+    }
+
+    private void RunFinishAction(OnFinishLoad action, ICommonSession session)
+    {
+        try
+        {
+            action(session);
+        }
+        catch (Exception e)
+        {
+            throw new InvalidOperationException($"OnFinishLoad failed: {DescribeDelegate(action)}", e);
+        }
+    }
+
+    private void RunSanitizeData(ICommonSession session)
+    {
+        try
+        {
+            _prefs.SanitizeData(session);
+        }
+        catch (Exception e)
+        {
+            throw new InvalidOperationException("Preference sanitize step failed: IServerPreferencesManager.SanitizeData", e);
+        }
+    }
+
+    private static string DescribeDelegate(Delegate del)
+    {
+        var method = del.Method;
+        var type = method.DeclaringType?.FullName ?? "<unknown type>";
+        return $"{type}.{method.Name}";
     }
 
     /// <summary>

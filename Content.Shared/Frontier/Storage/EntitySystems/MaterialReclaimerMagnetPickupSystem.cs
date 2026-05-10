@@ -69,8 +69,8 @@ public sealed class MaterialReclaimerMagnetPickupSystem : EntitySystem
     {
         args.PushMarkup(Loc.GetString("magnet-pickup-component-on-examine-main",
                         ("stateText", Loc.GetString(component.MagnetEnabled
-                        ? "magnet-pickup-component-magnet-on"
-                        : "magnet-pickup-component-magnet-off"))));
+                            ? "magnet-pickup-component-magnet-on"
+                            : "magnet-pickup-component-magnet-off"))));
     }
 
     public override void Update(float frameTime)
@@ -81,7 +81,7 @@ public sealed class MaterialReclaimerMagnetPickupSystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var comp, out var storage, out var xform))
         {
-            if (comp.NextScan < currentTime)
+            if (comp.NextScan > currentTime)
                 continue;
 
             comp.NextScan += ScanDelay;
@@ -89,6 +89,13 @@ public sealed class MaterialReclaimerMagnetPickupSystem : EntitySystem
             // Frontier - magnet disabled
             if (!comp.MagnetEnabled)
                 continue;
+
+            if (!float.IsFinite(comp.Range) || comp.Range <= 0f)
+            {
+                Log.Warning($"Disabled material reclaimer magnet on {ToPrettyString(uid)} due to invalid range {comp.Range}.");
+                comp.MagnetEnabled = false;
+                continue;
+            }
 
             var parentUid = xform.ParentUid;
 

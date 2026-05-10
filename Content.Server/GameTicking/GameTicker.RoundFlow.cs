@@ -9,6 +9,7 @@ using Content.Server.Roles;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
+using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Preferences;
@@ -196,7 +197,6 @@ namespace Content.Server.GameTicking
         {
             var ev = RaisePreLoad(proto, options, offset, rot);
 
-            Logger.Info(ev.GameMap.MapPath.ToString());
 
             if (ev.GameMap.IsGrid)
             {
@@ -217,7 +217,7 @@ namespace Content.Server.GameTicking
                 return g;
             }
 
-            if (!_loader.TryLoadMap(ev.GameMap.MapPath, //this causes an engine related crash yippee!
+            if (!_loader.TryLoadMap(ev.GameMap.MapPath,
                     out var map,
                     out var grids,
                     ev.Options,
@@ -565,7 +565,7 @@ namespace Content.Server.GameTicking
 
                 if (TryGetEntity(mind.OriginalOwnedEntity, out var entity) && pvsOverride)
                 {
-                    _pvsOverride.AddGlobalOverride(GetNetEntity(entity.Value), recursive: true);
+                    _pvsOverride.AddGlobalOverride(entity.Value);
                 }
 
                 var roles = _roles.MindGetAllRoleInfo(mindId);

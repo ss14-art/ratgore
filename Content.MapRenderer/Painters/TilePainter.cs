@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.ContentPack;
@@ -31,7 +32,7 @@ namespace Content.MapRenderer.Painters
             _sMapSystem = esm.GetEntitySystem<SharedMapSystem>();
         }
 
-        public void Run(Image gridCanvas, EntityUid gridUid, MapGridComponent grid)
+        public void Run(Image gridCanvas, EntityUid gridUid, MapGridComponent grid, Vector2 customOffset)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();

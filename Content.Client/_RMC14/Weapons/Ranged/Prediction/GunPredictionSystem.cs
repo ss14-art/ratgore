@@ -1,4 +1,4 @@
-﻿﻿using System.Linq;
+﻿using System.Linq;
 using Content.Client.Projectiles;
 using Content.Shared._Crescent.ShipShields;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;

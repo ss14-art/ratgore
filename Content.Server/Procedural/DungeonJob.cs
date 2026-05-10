@@ -20,7 +20,6 @@ namespace Content.Server.Procedural;
 public sealed partial class DungeonJob : Job<Dungeon>
 {
     private readonly IEntityManager _entManager;
-    private readonly IMapManager _mapManager;
     private readonly IPrototypeManager _prototype;
     private readonly ITileDefinitionManager _tileDefManager;
 
@@ -46,7 +45,6 @@ public sealed partial class DungeonJob : Job<Dungeon>
         ISawmill sawmill,
         double maxTime,
         IEntityManager entManager,
-        IMapManager mapManager,
         IPrototypeManager prototype,
         ITileDefinitionManager tileDefManager,
         AnchorableSystem anchorable,
@@ -65,7 +63,6 @@ public sealed partial class DungeonJob : Job<Dungeon>
     {
         _sawmill = sawmill;
         _entManager = entManager;
-        _mapManager = mapManager;
         _prototype = prototype;
         _tileDefManager = tileDefManager;
 

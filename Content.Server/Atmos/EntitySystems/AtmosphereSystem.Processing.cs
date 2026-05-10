@@ -392,10 +392,10 @@ namespace Content.Server.Atmos.EntitySystems
             // Note: This is still processed even if space wind is turned off since this handles playing the sounds.
 
             var number = 0;
-            var bodies = EntityManager.GetEntityQuery<PhysicsComponent>();
-            var xforms = EntityManager.GetEntityQuery<TransformComponent>();
-            var metas = EntityManager.GetEntityQuery<MetaDataComponent>();
-            var pressureQuery = EntityManager.GetEntityQuery<MovedByPressureComponent>();
+            var bodies = GetEntityQuery<PhysicsComponent>();
+            var xforms = GetEntityQuery<TransformComponent>();
+            var metas = GetEntityQuery<MetaDataComponent>();
+            var pressureQuery = GetEntityQuery<MovedByPressureComponent>();
             var projectileQuery = GetEntityQuery<ProjectileComponent>();
 
             // Doing this here because it's entirely possible the gravity component can be on the Map OR the Grid, and can even be both.
@@ -404,11 +404,6 @@ namespace Content.Server.Atmos.EntitySystems
             if (TryComp(ent.Owner, out GravityComponent? gridGravity)
                 && gridGravity.Enabled)
                 sumGravity += gridGravity.Acceleration;
-
-            var gridMap = Transform(ent.Owner).MapUid;
-            if (gridMap is not null && TryComp(gridMap, out GravityComponent? mapGravity)
-                && mapGravity.Enabled)
-                sumGravity += mapGravity.Acceleration;
 
             while (atmosphere.CurrentRunTiles.TryDequeue(out var tile))
             {
@@ -572,14 +567,10 @@ namespace Content.Server.Atmos.EntitySystems
                 _currentRunAtmosphereIndex = 0;
                 _currentRunAtmosphere.Clear();
 
-                var query = EntityQueryEnumerator<GridAtmosphereComponent>();
-                while (query.MoveNext(out var uid, out var atmos))
+                var query = EntityQueryEnumerator<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent>();
+                while (query.MoveNext(out var uid, out var atmos, out var overlay, out var grid, out var xform ))
                 {
-                    if (!TryComp(uid, out GasTileOverlayComponent? overlay)
-                        || !TryComp(uid, out MapGridComponent? grid))
-                        continue;
-
-                    _currentRunAtmosphere.Add((uid, atmos, overlay, grid, Transform(uid)));
+                    _currentRunAtmosphere.Add((uid, atmos, overlay, grid, xform));
                 }
             }
 

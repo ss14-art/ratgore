@@ -1,12 +1,12 @@
 using System.Numerics;
 using Content.Server.Administration.Logs;
 using Content.Server.Singularity.Events;
-using Content.Server.Station.Components;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using Content.Shared.Singularity.Components;
 using Content.Shared.Singularity.EntitySystems;
+using Content.Shared.Station.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -136,7 +136,7 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
             _adminLogManager.Add(LogType.EntityDelete, LogImpact.Extreme, $"{ToPrettyString(morsel)} entered the event horizon of {ToPrettyString(hungry)} and was deleted");
         }
 
-        EntityManager.QueueDeleteEntity(morsel);
+        QueueDel(morsel);
         var evSelf = new EntityConsumedByEventHorizonEvent(morsel, hungry, eventHorizon, outerContainer);
         var evEaten = new EventHorizonConsumedEntityEvent(morsel, hungry, eventHorizon, outerContainer);
         RaiseLocalEvent(hungry, ref evSelf);
@@ -452,14 +452,14 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
     private void OnEventHorizonContained(EventHorizonContainedEvent args)
     {
         var uid = args.Entity;
-        if (!EntityManager.EntityExists(uid))
+        if (!Exists(uid))
             return;
         var comp = args.EventHorizon;
         if (comp.BeingConsumedByAnotherEventHorizon)
             return;
 
         var containerEntity = args.Args.Container.Owner;
-        if (!EntityManager.EntityExists(containerEntity))
+        if (!Exists(containerEntity))
             return;
         if (AttemptConsumeEntity(uid, containerEntity, comp))
             return; // If we consume the entity we also consume everything in the containers it has.

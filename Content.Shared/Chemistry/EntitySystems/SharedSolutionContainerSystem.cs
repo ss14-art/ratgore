@@ -261,8 +261,8 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     public FixedPoint2 GetTotalPrototypeQuantity(EntityUid owner, string reagentId)
     {
         var reagentQuantity = FixedPoint2.New(0);
-        if (EntityManager.EntityExists(owner)
-            && EntityManager.TryGetComponent(owner, out SolutionContainerManagerComponent? managerComponent))
+        if (Exists(owner)
+            && TryComp(owner, out SolutionContainerManagerComponent? managerComponent))
         {
             foreach (var (_, soln) in EnumerateSolutions((owner, managerComponent)))
             {
@@ -314,7 +314,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         var (uid, comp, appearanceComponent) = soln;
         var solution = comp.Solution;
 
-        if (!EntityManager.EntityExists(uid) || !Resolve(uid, ref appearanceComponent, false))
+        if (!Exists(uid) || !Resolve(uid, ref appearanceComponent, false))
             return;
 
         AppearanceSystem.SetData(uid, SolutionContainerVisuals.FillFraction, solution.FillFraction, appearanceComponent);
@@ -392,6 +392,12 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
             return;
 
         solution.MaxVolume = capacity;
+        UpdateChemicals(soln);
+    }
+
+    public void SetCanReact(Entity<SolutionComponent> soln, bool canReact)
+    {
+        soln.Comp.Solution.CanReact = canReact;
         UpdateChemicals(soln);
     }
 

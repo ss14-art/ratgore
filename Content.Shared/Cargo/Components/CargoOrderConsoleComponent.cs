@@ -3,6 +3,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Content.Shared.Radio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Cargo.Components;
 
@@ -18,6 +19,14 @@ public sealed partial class CargoOrderConsoleComponent : Component
     [DataField("soundConfirm")]
     public SoundSpecifier ConfirmSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 
+    [DataField]
+    public SoundSpecifier PrintSound = new SoundPathSpecifier("/Audio/Machines/printer.ogg");
+
+    [DataField]
+    public TimeSpan PrintDelay = TimeSpan.FromSeconds(2);
+
+    public TimeSpan NextPrintTime;
+
     /// <summary>
     /// All of the <see cref="CargoProductPrototype.Group"/>s that are supported.
     /// </summary>
@@ -29,5 +38,29 @@ public sealed partial class CargoOrderConsoleComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public ProtoId<RadioChannelPrototype> AnnouncementChannel = "Supply";
+
+    [DataField]
+    public ProtoId<CargoAccountPrototype> Account = "market";
+
+    [DataField]
+    public CargoOrderConsoleMode Mode = CargoOrderConsoleMode.DirectOrder;
+
+    [DataField]
+    public SoundSpecifier? ScanSound;
+
+    public TimeSpan NextDenySoundTime;
+
+    [DataField]
+    public TimeSpan DenySoundDelay = TimeSpan.FromSeconds(0.5);
+
+    public static ProtoId<RadioChannelPrototype> BaseAnnouncementChannel = "Supply";
+}
+
+[Serializable, NetSerializable]
+public enum CargoOrderConsoleMode : byte
+{
+    DirectOrder,
+    PrintSlip,
+    SendToPrimary
 }
 

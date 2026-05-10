@@ -222,7 +222,7 @@ public sealed partial class MarkingPicker : Control
             };
             var customize = new Button
             {
-                Text = "Customize",
+                Text = Loc.GetString("marking-slot-customize"),
                 StyleClasses = { StyleBase.ButtonOpenLeft, },
                 Disabled = !item.Pressed,
             };
@@ -325,7 +325,7 @@ public sealed partial class MarkingPicker : Control
 
             var colorSelector = new ColorSelectorSliders();
 
-            colorContainer.AddChild(new Label { Text = $"{stateNames[i]} color:" });
+            colorContainer.AddChild(new Label { Text = Loc.GetString("marking-slot-color", ("state", stateNames[i])) });
             colorContainer.AddChild(colorSelector);
 
             var listing = _currentMarkings.Markings[_selectedMarkingCategory];

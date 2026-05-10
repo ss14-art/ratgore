@@ -14,7 +14,7 @@ namespace Content.Shared.Decals
     {
         [Access(Other = AccessPermissions.ReadExecute)]
         [DataField(serverOnly: true)]
-        public DecalGridChunkCollection ChunkCollection = new(new ());
+        public DecalGridChunkCollection ChunkCollection = new();
 
         /// <summary>
         ///     Dictionary mapping decals to their corresponding grid chunks.
@@ -54,10 +54,12 @@ namespace Content.Shared.Decals
             }
         }
 
-        [DataRecord, Serializable, NetSerializable]
-        public record DecalGridChunkCollection(Dictionary<Vector2i, DecalChunk> ChunkCollection)
+        [DataRecord, DataDefinition, Serializable, NetSerializable]
+        public partial record DecalGridChunkCollection(Dictionary<Vector2i, DecalChunk> ChunkCollection)
         {
             public uint NextDecalId;
+
+            public DecalGridChunkCollection() : this(new Dictionary<Vector2i, DecalChunk>()) { }
         }
     }
 

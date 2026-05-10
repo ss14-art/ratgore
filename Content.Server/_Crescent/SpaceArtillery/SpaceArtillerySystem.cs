@@ -16,6 +16,7 @@ using Content.Server.DeviceLinking.Systems;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Shared.Actions.Components;
 using Content.Shared.Power;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Ranged.Components; 

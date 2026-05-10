@@ -52,7 +52,7 @@ internal sealed class UdderSystem : EntitySystem
                 continue;
 
             // Actually there is food digestion so no problem with instant reagent generation "OnFeed"
-            if (EntityManager.TryGetComponent(uid, out HungerComponent? hunger))
+            if (TryComp(uid, out HungerComponent? hunger))
             {
                 // Is there enough nutrition to produce reagent?
                 if (_hunger.GetHungerThreshold(hunger) < HungerThreshold.Okay)
@@ -117,7 +117,7 @@ internal sealed class UdderSystem : EntitySystem
     {
         if (args.Using == null ||
              !args.CanInteract ||
-             !EntityManager.HasComponent<RefillableSolutionComponent>(args.Using.Value))
+             !HasComp<RefillableSolutionComponent>(args.Using.Value))
             return;
 
         var uid = entity.Owner;

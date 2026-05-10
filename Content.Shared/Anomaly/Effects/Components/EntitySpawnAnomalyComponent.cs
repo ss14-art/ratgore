@@ -1,5 +1,6 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Anomaly.Effects.Components;
 
@@ -13,7 +14,8 @@ public sealed partial class EntitySpawnAnomalyComponent : Component
     public List<EntitySpawnSettingsEntry> Entries = new();
 }
 
-[DataRecord]
+[Serializable, NetSerializable]
+[DataRecord, DataDefinition]
 public partial record struct EntitySpawnSettingsEntry()
 {
     /// <summary>

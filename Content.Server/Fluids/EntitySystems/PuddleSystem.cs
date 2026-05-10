@@ -71,7 +71,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
     [ValidatePrototypeId<ReagentPrototype>]
     private const string BlackBlood = "BlackBlood";
 
-    private static string[] _standoutReagents = [Blood, Slime, CopperBlood, BlackBlood];
+    private static string[] _standoutReagents = { Blood, Slime, CopperBlood, BlackBlood };
 
     public static readonly float PuddleVolume = 1000;
 
@@ -701,7 +701,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         }
 
         var coords = _map.GridTileToLocal(gridId, mapGrid, tileRef.GridIndices);
-        puddleUid = EntityManager.SpawnEntity("Puddle", coords);
+        puddleUid = Spawn("Puddle", coords);
         EnsureComp<PuddleComponent>(puddleUid);
         if (TryAddSolution(puddleUid, solution, sound))
         {

@@ -5,8 +5,10 @@ using Content.Shared.Projectiles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Dynamics;
-using Robust.Shared.Physics.Systems;
+
+
+namespace Content.Server._Crescent;
+
 
 public sealed class ProjectilePhasePreventerSystem : EntitySystem
 {
@@ -125,11 +127,11 @@ public sealed class ProjectilePhasePreventerSystem : EntitySystem
                 var ray = new CollisionRay(rayStart, direction, phase.relevantBitmasks);
 
                 foreach (var hit in _phys.IntersectRay(
-                             currentMap,
-                             ray,
-                             distance + RaycastExtraDistance,
-                             projectile.Weapon,
-                             false))
+                    currentMap,
+                    ray,
+                    distance + RaycastExtraDistance,
+                    projectile.Weapon,
+                    false))
                 {
                     var hitEntity = hit.HitEntity;
 

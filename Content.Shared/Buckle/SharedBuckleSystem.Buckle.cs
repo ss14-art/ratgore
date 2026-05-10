@@ -1,7 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.Alert;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Buckle.Events;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -17,6 +19,7 @@ using Content.Shared.Storage.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
+using Content.Shared.Buckle.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -43,6 +46,7 @@ public abstract partial class SharedBuckleSystem
         SubscribeLocalEvent<BuckleComponent, StartPullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<BuckleComponent, BeingPulledAttemptEvent>(OnBeingPulledAttempt);
         SubscribeLocalEvent<BuckleComponent, PullStartedMessage>(OnPullStarted);
+        SubscribeLocalEvent<BuckleComponent, UnbuckleAlertEvent>(OnUnbuckleAlert);
 
         SubscribeLocalEvent<BuckleComponent, InsertIntoEntityStorageAttemptEvent>(OnBuckleInsertIntoEntityStorageAttempt);
 
@@ -51,10 +55,18 @@ public abstract partial class SharedBuckleSystem
         SubscribeLocalEvent<BuckleComponent, StandAttemptEvent>(OnBuckleStandAttempt);
         SubscribeLocalEvent<BuckleComponent, ThrowPushbackAttemptEvent>(OnBuckleThrowPushbackAttempt);
         SubscribeLocalEvent<BuckleComponent, UpdateCanMoveEvent>(OnBuckleUpdateCanMove);
+
+        SubscribeLocalEvent<BuckleComponent, BuckleDoAfterEvent>(OnBuckleDoafter);
+        SubscribeLocalEvent<BuckleComponent, DoAfterAttemptEvent<BuckleDoAfterEvent>>((uid, comp, ev) =>
+        {
+            BuckleDoafterEarly((uid, comp), ev.Event, ev);
+        });
     }
 
     private void OnBuckleComponentShutdown(Entity<BuckleComponent> ent, ref ComponentShutdown args)
-        => Unbuckle(ent!, null);
+    {
+        Unbuckle(ent!, null);
+    }
 
     #region Pulling
 
@@ -77,6 +89,13 @@ public abstract partial class SharedBuckleSystem
     private void OnPullStarted(Entity<BuckleComponent> ent, ref PullStartedMessage args)
     {
         Unbuckle(ent!, args.PullerUid);
+    }
+
+    private void OnUnbuckleAlert(Entity<BuckleComponent> ent, ref UnbuckleAlertEvent args)
+    {
+        if (args.Handled)
+            return;
+        args.Handled = TryUnbuckle(ent, ent, ent);
     }
 
     #endregion
@@ -346,14 +365,16 @@ public abstract partial class SharedBuckleSystem
 
         _audio.PlayPredicted(strap.Comp.BuckleSound, strap, user);
 
+        SetBuckledTo(buckle, strap!);
         Appearance.SetData(strap, StrapVisuals.State, true);
         Appearance.SetData(buckle, BuckleVisuals.Buckled, true);
+
         _rotationVisuals.SetHorizontalAngle(buckle.Owner, strap.Comp.Rotation);
 
         var xform = Transform(buckle);
         var coords = new EntityCoordinates(strap, strap.Comp.BuckleOffset);
-
         _transform.SetCoordinates(buckle, xform, coords, rotation: Angle.Zero);
+
         _joints.SetRelay(buckle, strap);
 
         switch (strap.Comp.Position)
@@ -362,7 +383,7 @@ public abstract partial class SharedBuckleSystem
                 _standing.Stand(buckle, force: true);
                 break;
             case StrapPosition.Down:
-                _standing.Down(buckle, false, false);
+                _standing.Down(buckle);
                 break;
         }
 
@@ -400,7 +421,7 @@ public abstract partial class SharedBuckleSystem
 
     public bool TryUnbuckle(Entity<BuckleComponent?> buckle, EntityUid? user, bool popup)
     {
-        if (!Resolve(buckle.Owner, ref buckle.Comp))
+        if (!Resolve(buckle.Owner, ref buckle.Comp, false))
             return false;
 
         if (!CanUnbuckle(buckle, user, popup, out var strap))
@@ -442,7 +463,7 @@ public abstract partial class SharedBuckleSystem
         var buckleXform = Transform(buckle);
         var oldBuckledXform = Transform(strap);
 
-        if (buckleXform.ParentUid == strap.Owner && !Terminating(buckleXform.ParentUid))
+        if (buckleXform.ParentUid == strap.Owner && !Terminating(oldBuckledXform.ParentUid))
         {
             _transform.PlaceNextTo((buckle, buckleXform), (strap.Owner, oldBuckledXform));
             buckleXform.ActivelyLerping = false;
@@ -462,7 +483,7 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(buckle, BuckleVisuals.Buckled, false);
 
         if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
-            _standing.Down(buckle, playSound: false);
+            _standing.Down(buckle);
         else
             _standing.Stand(buckle);
 
@@ -500,8 +521,14 @@ public abstract partial class SharedBuckleSystem
         if (_gameTiming.CurTime < buckle.Comp.BuckleTime + buckle.Comp.Delay)
             return false;
 
-        if (user != null && !_interaction.InRangeUnobstructed(user.Value, strap.Owner, buckle.Comp.Range, popup: popup))
-            return false;
+        if (user != null)
+        {
+            if (!_interaction.InRangeUnobstructed(user.Value, strap.Owner, buckle.Comp.Range, popup: popup))
+                return false;
+
+            if (user.Value != buckle.Owner && !ActionBlocker.CanComplexInteract(user.Value))
+                return false;
+        }
 
         var unbuckleAttempt = new UnbuckleAttemptEvent(strap, buckle!, user, popup);
         RaiseLocalEvent(buckle, ref unbuckleAttempt);
@@ -513,4 +540,40 @@ public abstract partial class SharedBuckleSystem
         return !unstrapAttempt.Cancelled;
     }
 
+    /// <summary>
+    /// Once the do-after is complete, try to buckle target to chair/bed
+    /// </summary>
+    /// <param name="args.Target"> The person being put in the chair/bed</param>
+    /// <param name="args.User"> The person putting a person in a chair/bed</param>
+    /// <param name="args.Used"> The chair/bed </param>
+
+    private void OnBuckleDoafter(Entity<BuckleComponent> entity, ref BuckleDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Target == null || args.Used == null)
+            return;
+
+        args.Handled = TryBuckle(GetEntity(args.Target.Value), args.User, GetEntity(args.Used.Value), popup: false);
+    }
+
+    /// <summary>
+    /// If the target being buckled to a chair/bed goes crit or is cuffed
+    /// Cancel the do-after time and try to buckle the target immediately
+    /// </summary>
+    /// <param name="args.Target"> The person being put in the chair/bed</param>
+    /// <param name="args.User"> The person putting a person in a chair/bed</param>
+    /// <param name="args.Used"> The chair/bed </param>
+    private void BuckleDoafterEarly(Entity<BuckleComponent> entity, BuckleDoAfterEvent args, CancellableEntityEventArgs ev)
+    {
+        if (args.Target == null || args.Used == null)
+            return;
+
+        var target = GetEntity(args.Target.Value);
+
+        if (TryComp<CuffableComponent>(target, out var targetCuffableComp) && targetCuffableComp.CuffedHandCount > 0
+            || _mobState.IsIncapacitated(target))
+        {
+            ev.Cancel();
+            TryBuckle(target, args.User, GetEntity(args.Used.Value), popup: false);
+        }
+    }
 }

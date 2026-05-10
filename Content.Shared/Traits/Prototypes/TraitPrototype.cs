@@ -1,4 +1,5 @@
 using Content.Shared.Customization.Systems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 
@@ -43,6 +44,18 @@ public sealed partial class TraitPrototype : IPrototype, IComparable
 
     [DataField]
     public List<CharacterRequirement> Requirements = new();
+
+    [DataField]
+    public ComponentRegistry Components { get; private set; } = new();
+
+    [DataField]
+    public EntProtoId? TraitGear;
+
+    [DataField]
+    public EntityWhitelist? Whitelist;
+
+    [DataField]
+    public EntityWhitelist? Blacklist;
 
     [DataField(serverOnly: true)]
     public TraitFunction[] Functions { get; private set; } = Array.Empty<TraitFunction>();

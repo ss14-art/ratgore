@@ -95,7 +95,10 @@ namespace Content.Server.Administration.Commands
                 profile = prefs.SelectedCharacter as HumanoidCharacterProfile;
 
                 if (profile != null)
-                    startingGear = IoCManager.Resolve<IEntityManager>().System<SharedStationSpawningSystem>().ApplySubGear(startingGear, profile);
+                {
+                    // TODO: ApplySubGear is missing in current branch
+                    // startingGear = IoCManager.Resolve<IEntityManager>().System<SharedStationSpawningSystem>().ApplySubGear(startingGear, profile);
+                }
             }
 
             var invSystem = entityManager.System<InventorySystem>();

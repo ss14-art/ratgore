@@ -42,6 +42,6 @@ public abstract class SharedMultiHandedItemSystem : EntitySystem
         if (args.BlockingEntity != uid)
             return;
 
-        _hands.TryDrop(args.User, uid);
+        _hands.TryDropEntity(args.User, uid);
     }
 }

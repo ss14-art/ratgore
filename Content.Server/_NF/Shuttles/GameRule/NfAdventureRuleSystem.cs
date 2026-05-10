@@ -31,6 +31,8 @@ using Robust.Shared.Configuration;
 using Content.Shared.Telescope;
 using Robust.Shared.Utility;
 using Content.Shared._Crescent.SpaceBiomes;
+using Content.Shared.Maps;
+
 
 namespace Content.Server.GameTicking.Rules;
 

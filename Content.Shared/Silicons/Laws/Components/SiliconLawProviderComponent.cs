@@ -37,4 +37,9 @@ public sealed partial class SiliconLawProviderComponent : Component
     [DataField]
     public bool UnRemovable;
 
+    /// <summary>
+    ///     Whether this lawset has been subverted, for example by an ion storm.
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool Subverted;
 }

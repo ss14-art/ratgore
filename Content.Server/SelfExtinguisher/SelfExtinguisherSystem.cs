@@ -54,7 +54,7 @@ public sealed partial class SelfExtinguisherSystem : SharedSelfExtinguisherSyste
 
         var curTime = _timing.CurTime;
         if (TryComp<LimitedChargesComponent>(uid, out var charges) &&
-            _charges.IsEmpty(uid, charges))
+            _charges.IsEmpty(uid))
         {
             if (!SetPopupCooldown((uid, selfExtinguisher), curTime))
                 return;
@@ -112,10 +112,9 @@ public sealed partial class SelfExtinguisherSystem : SharedSelfExtinguisherSyste
 
         if (charges != null)
         {
-            _charges.UseCharge(uid, charges);
-            _actions.RemoveCharges(selfExtinguisher.ActionEntity, 1);
+            _charges.TryUseCharge(uid);
 
-            if (_actions.GetCharges(selfExtinguisher.ActionEntity) == 0)
+            if (_charges.IsEmpty(uid))
             {
                 _actions.SetEnabled(selfExtinguisher.ActionEntity, false);
                 return; // Don't set cooldown when out of charges, they can't use it anymore anyways

@@ -7,6 +7,8 @@
   components:
   - type: HumanoidAppearance
     species: Moth
+    hideLayersOnEquip:
+    - HeadTop
   - type: Hunger
   - type: Thirst
   - type: Carriable # Carrying system from nyanotrasen.
@@ -51,9 +53,9 @@
       Female: UnisexMoth
       Unsexed: UnisexMoth
   - type: MovementSpeedModifier
-    weightlessAcceleration: 2.5 # Move around more easily in space.
-    weightlessModifier: 1.1
-    weightlessFriction: 2 # makes you turn more sharply while weightless
+    weightlessAcceleration: 1.5 # Move around more easily in space.
+    weightlessFriction: 1
+    weightlessModifier: 1
   - type: Flammable
     damage:
       types:
@@ -133,6 +135,14 @@
   - type: FootPrints
   - type: CanMoveInAir
 
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
 
 - type: entity
   parent: BaseSpeciesDummy
@@ -191,3 +201,11 @@
         sprite: "Effects/creampie.rsi"
         state: "creampie_moth"
         visible: false
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+

@@ -47,15 +47,15 @@ namespace Content.Tests.Server.Jobs
 
             queue.Process();
             Assert.That(job.Status, Is.EqualTo(JobStatus.Paused));
-            Assert.That((float)job.DebugTime, new ApproxEqualityConstraint(1f));
+            Assert.That(job.DebugTime, Is.EqualTo(1.0).Within(0.01));
             queue.Process();
             Assert.That(job.Status, Is.EqualTo(JobStatus.Paused));
-            Assert.That((float)job.DebugTime, new ApproxEqualityConstraint(2f));
+            Assert.That(job.DebugTime, Is.EqualTo(2.0).Within(0.01));
             queue.Process();
             Assert.That(job.Status, Is.EqualTo(JobStatus.Finished));
 
             Assert.That(job.Result, Is.EqualTo("foo!"));
-            Assert.That((float)job.DebugTime, new ApproxEqualityConstraint(2.4f));
+            Assert.That(job.DebugTime, Is.EqualTo(2.4).Within(0.01));
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace Content.Tests.Server.Jobs
             cts.Cancel();
             queue.Process();
             Assert.That(job.Status, Is.EqualTo(JobStatus.Finished));
-            Assert.That((float)job.DebugTime, new ApproxEqualityConstraint(2.0f));
+            Assert.That(job.DebugTime, Is.EqualTo(2.0).Within(0.01));
 
             Assert.That(job.Result, Is.Null);
         }

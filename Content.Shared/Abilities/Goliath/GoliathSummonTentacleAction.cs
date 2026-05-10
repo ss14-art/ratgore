@@ -1,9 +1,12 @@
 using Content.Shared.Actions;
 using Robust.Shared.Prototypes;
 
+using Robust.Shared.Serialization;
+
 namespace Content.Shared.Abilities.Goliath;
 
-public sealed partial class GoliathSummonTentacleAction : EntityWorldTargetActionEvent
+[Serializable, NetSerializable]
+public sealed partial class GoliathSummonTentacleAction : WorldTargetActionEvent
 {
     /// <summary>
     /// The ID of the entity that is spawned.

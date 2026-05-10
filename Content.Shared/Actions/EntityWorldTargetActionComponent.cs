@@ -17,7 +17,7 @@ public sealed partial class EntityWorldTargetActionComponent : BaseTargetActionC
     /// </summary>
     [DataField]
     [NonSerialized]
-    public EntityWorldTargetActionEvent? Event;
+    public WorldTargetActionEvent? Event;
 
     /// <summary>
     /// Determines which entities are valid targets for this action.

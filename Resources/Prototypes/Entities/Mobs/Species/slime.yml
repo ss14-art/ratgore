@@ -78,7 +78,8 @@
   - type: Barotrauma
     damage:
       types:
-        Blunt: 0.60 #per second, scales with pressure and other constants. Slighty more than humans.
+        Blunt: 0.50 #per second, scales with pressure and other constants.
+        Heat: 0.2 # 0.1 more than humans, i feel like low pressure would make slime boil more than blunt stretch them so i decided on this instead.
   - type: Reactive
     groups:
       Flammable: [ Touch ]
@@ -124,11 +125,25 @@
   - type: FootPrints
     leftBarePrint: "footprint-left-bare-slime"
     rightBarePrint: "footprint-right-bare-slime"
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
 
 - type: entity
   parent: MobHumanDummy
   id: MobSlimePersonDummy
   categories: [ HideSpawnMenu ]
   components:
-    - type: HumanoidAppearance
-      species: SlimePerson
+  - type: HumanoidAppearance
+    species: SlimePerson
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female

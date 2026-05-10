@@ -123,8 +123,8 @@ public sealed partial class FoodSequenceStartPointComponent : Component
 /// class that synchronizes with the client
 /// Stores all the necessary information for rendering the FoodSequence element
 /// </summary>
-[DataRecord, Serializable, NetSerializable]
-public record struct FoodSequenceVisualLayer
+[DataRecord, DataDefinition, Serializable, NetSerializable]
+public partial record struct FoodSequenceVisualLayer
 {
     /// <summary>
     /// reference to the original prototype of the layer. Used to edit visual layers.

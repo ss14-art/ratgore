@@ -138,5 +138,14 @@ namespace Content.Server.GameTicking
             UpdateRoundFlow(frameTime);
             UpdateGameRules();
         }
+
+        public bool OnGhostAttempt(EntityUid mindId, bool canReturn, bool viaCommand = false, MindComponent? mind = null)
+        {
+            if (!Resolve(mindId, ref mind))
+                return false;
+
+            _ghost.SpawnGhost((mindId, mind), mindId, canReturn);
+            return true;
+        }
     }
 }

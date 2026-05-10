@@ -24,6 +24,9 @@ public sealed partial class TraitorRuleComponent : Component
     public ProtoId<NpcFactionPrototype> SyndicateFaction = "Syndicate";
 
     [DataField]
+    public ProtoId<NpcFactionPrototype> CodewordFactionPrototypeId = "Syndicate";
+
+    [DataField]
     public ProtoId<DatasetPrototype> CodewordAdjectives = "adjectives";
 
     [DataField]

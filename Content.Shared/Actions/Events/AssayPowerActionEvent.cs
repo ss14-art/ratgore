@@ -1,7 +1,9 @@
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Actions.Events;
 
+[Serializable, NetSerializable]
 public sealed partial class AssayPowerActionEvent : EntityTargetActionEvent
 {
     [DataField]

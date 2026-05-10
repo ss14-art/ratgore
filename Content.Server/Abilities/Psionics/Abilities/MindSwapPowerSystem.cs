@@ -31,8 +31,6 @@ namespace Content.Server.Abilities.Psionics
             SubscribeLocalEvent<MindSwappedComponent, MindSwapPowerReturnActionEvent>(OnPowerReturned);
             SubscribeLocalEvent<MindSwappedComponent, DispelledEvent>(OnDispelled);
             SubscribeLocalEvent<MindSwappedComponent, MobStateChangedEvent>(OnMobStateChanged);
-            SubscribeLocalEvent<GhostAttemptHandleEvent>(OnGhostAttempt);
-            //
             SubscribeLocalEvent<MindSwappedComponent, ComponentInit>(OnSwapInit);
         }
 
@@ -97,22 +95,6 @@ namespace Content.Server.Abilities.Psionics
         {
             if (args.NewMobState == MobState.Dead)
                 RemComp<MindSwappedComponent>(uid);
-        }
-
-        private void OnGhostAttempt(GhostAttemptHandleEvent args)
-        {
-            if (args.Handled)
-                return;
-
-            if (!HasComp<MindSwappedComponent>(args.Mind.CurrentEntity))
-                return;
-
-            //No idea where the viaCommand went. It's on the internal OnGhostAttempt, but not this layer. Maybe unnecessary.
-            /*if (!args.viaCommand)
-                return;*/
-
-            args.Result = false;
-            args.Handled = true;
         }
 
         private void OnSwapInit(EntityUid uid, MindSwappedComponent component, ComponentInit args)

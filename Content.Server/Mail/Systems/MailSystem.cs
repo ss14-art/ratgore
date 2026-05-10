@@ -529,10 +529,7 @@ namespace Content.Server.Mail.Systems
                 ("recipient", recipient.Name)));
 
             var accessReader = EnsureComp<AccessReaderComponent>(uid);
-            foreach (var access in recipient.AccessTags)
-            {
-                accessReader.AccessLists.Add([access]);
-            }
+            _accessSystem.AddAccesses((uid, accessReader), recipient.AccessTags.Select(a => new HashSet<ProtoId<AccessLevelPrototype>> { a }).ToList());
         }
 
         /// <summary>

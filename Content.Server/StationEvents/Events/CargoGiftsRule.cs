@@ -2,9 +2,10 @@ using System.Linq;
 using Content.Server.Cargo.Components;
 using Content.Server.Cargo.Systems;
 using Content.Server.GameTicking;
-using Content.Server.Station.Components;
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Cargo.Prototypes;
+using Content.Shared.Station.Components;
 using Robust.Shared.Prototypes;
 using Content.Server.Announcements.Systems;
 using Robust.Shared.Player;
@@ -61,7 +62,8 @@ public sealed class CargoGiftsRule : StationEventSystem<CargoGiftsRuleComponent>
         }
 
         // Add some presents
-        var outstanding = CargoSystem.GetOutstandingOrderCount(cargoDb);
+        var account = new ProtoId<CargoAccountPrototype>("Station");
+        var outstanding = _cargoSystem.GetOutstandingOrderCount((station.Value, cargoDb), account);
         while (outstanding < cargoDb.Capacity - component.OrderSpaceToLeave && component.Gifts.Count > 0)
         {
             // I wish there was a nice way to pop this
@@ -80,6 +82,7 @@ public sealed class CargoGiftsRule : StationEventSystem<CargoGiftsRuleComponent>
                     Loc.GetString(component.Description),
                     Loc.GetString(component.Dest),
                     cargoDb,
+                    account,
                     (station.Value, stationData)
             ))
             {

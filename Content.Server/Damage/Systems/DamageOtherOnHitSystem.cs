@@ -32,8 +32,8 @@ namespace Content.Server.Damage.Systems
         {
             base.Initialize();
 
-            SubscribeLocalEvent<StaminaComponent, BeforeThrowEvent>(OnBeforeThrow, after: [typeof(PacificationSystem)]);
-            SubscribeLocalEvent<DamageOtherOnHitComponent, DamageExamineEvent>(OnDamageExamine, after: [typeof(MeleeWeaponSystem)]);
+            SubscribeLocalEvent<StaminaComponent, BeforeThrowEvent>(OnBeforeThrow, after: new[] { typeof(PacificationSystem) });
+            SubscribeLocalEvent<DamageOtherOnHitComponent, DamageExamineEvent>(OnDamageExamine, after: new[] { typeof(MeleeWeaponSystem) });
         }
 
         private void OnBeforeThrow(EntityUid uid, StaminaComponent component, ref BeforeThrowEvent args)

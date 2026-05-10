@@ -96,7 +96,7 @@ public sealed class DirectionalTilingSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<PlacementTileEvent>(OnTilePlaced);
         // I spent like 5 hours figuring out why decals weren't appearing , It was this. SPCR 2025
-        SubscribeLocalEvent<TileChangedEvent>(OnTileChanged, after: [typeof(DecalSystem)]);
+        SubscribeLocalEvent<TileChangedEvent>(OnTileChanged, after: new[] { typeof(DecalSystem) });
         SubscribeLocalEvent<PostInitEvent>(TileInitialize);
         // Remove this when all maps have been updated to save the decals by default , SPCR 2025
         SubscribeLocalEvent<GridInitializeEvent>(GridInitialize);

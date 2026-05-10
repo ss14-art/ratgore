@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text;
+using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Players.PlayTimeTracking;
@@ -7,6 +8,7 @@ using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Station;
+using Content.Shared.Customization.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -36,7 +38,7 @@ public sealed class CharacterRequirementsSystem : EntitySystem
         return
             !requirement.IsValid(job, profile, playTimes, whitelisted, prototype,
                 entityManager, prototypeManager, configManager,
-                out reason, depth)
+                out reason, depth, null)
                 ? requirement.Inverted
                 : !requirement.Inverted;
     }
@@ -58,11 +60,14 @@ public sealed class CharacterRequirementsSystem : EntitySystem
         if (!_mindSystem.TryGetMind(characterUid, out var mindId, out var mind)
             || mind.Session == null
             || !_jobSystem.MindTryGetJob(mindId, out var jobPrototype)
-            || !_stationSpawningSystem.GetProfile(characterUid, out var stationSpawningProfile)
             || !_playtimeManager.TryGetTrackerTimes(mind.Session, out var trackerTimes))
             return false;
 
-        return CheckRequirementsValid(requirements, jobPrototype, stationSpawningProfile, trackerTimes, whitelisted, prototype, _entManager, _protomanager, _configurationManager, out reasons, depth, mind);
+        var profile = TryComp(characterUid, out HumanoidAppearanceComponent? appearance) ? appearance.LastProfileLoaded : null;
+        if (profile == null)
+            return false;
+
+        return CheckRequirementsValid(requirements, jobPrototype, profile, trackerTimes, whitelisted, prototype, _entManager, _protomanager, _configurationManager, out reasons, depth, mind);
     }
 
     public bool CheckRequirementsValid(List<CharacterRequirement> requirements, JobPrototype job,
@@ -119,12 +124,12 @@ public sealed class CharacterRequirementsSystem : EntitySystem
     }
 
 
-    /// <summary>
-    ///     Returns true if the given dummy can equip the given item.
-    ///     Does not care if items are already in equippable slots, and ignores pockets.
-    /// </summary>
     public bool CanEntityWearItem(EntityUid dummy, EntityUid clothing, bool bypassAccessCheck = false)
     {
+        var profile = TryComp(dummy, out HumanoidAppearanceComponent? appearance) ? appearance.LastProfileLoaded : null;
+        if (profile == null)
+            return false;
+
         return _inventory.TryGetSlots(dummy, out var slots)
             && slots.Where(slot => !slot.SlotFlags.HasFlag(SlotFlags.POCKET))
                 .Any(slot => _inventory.CanEquip(dummy, clothing, slot.Name, out _, onSpawn: true, bypassAccessCheck: bypassAccessCheck));

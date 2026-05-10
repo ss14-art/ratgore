@@ -1,6 +1,7 @@
 using Content.Server.Construction;
 using Content.Server.Construction.Components;
 using Content.Server.Power.Components;
+using Content.Shared.Construction;
 
 namespace Content.Server.Power.EntitySystems;
 

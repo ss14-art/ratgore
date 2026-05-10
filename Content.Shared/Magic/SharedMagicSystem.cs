@@ -1,8 +1,8 @@
-﻿using System.Numerics;
+using System.Linq;
+using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
-using Content.Shared.Chat;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
@@ -14,23 +14,33 @@ using Content.Shared.Lock;
 using Content.Shared.Magic.Components;
 using Content.Shared.Magic.Events;
 using Content.Shared.Maps;
+using Content.Shared.Mind;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Muting;
 using Content.Shared.Storage;
+using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Spawners;
 
 namespace Content.Shared.Magic;
 
+// TODO: Move BeforeCast & Prerequirements (like Wizard clothes) to action comp
+//   Alt idea - make it its own comp and split, like the Charge PR
+// TODO: Move speech to actionComp or again, its own ECS
+// TODO: Use the MagicComp just for pure backend things like spawning patterns?
 /// <summary>
 /// Handles learning and using spells (actions)
 /// </summary>
@@ -54,6 +64,9 @@ public abstract class SharedMagicSystem : EntitySystem
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {
@@ -68,6 +81,9 @@ public abstract class SharedMagicSystem : EntitySystem
         SubscribeLocalEvent<SmiteSpellEvent>(OnSmiteSpell);
         SubscribeLocalEvent<KnockSpellEvent>(OnKnockSpell);
         SubscribeLocalEvent<ChargeSpellEvent>(OnChargeSpell);
+        SubscribeLocalEvent<AnimateSpellEvent>(OnAnimateSpell);
+        SubscribeLocalEvent<RandomGlobalSpawnSpellEvent>(OnRandomGlobalSpawnSpell);
+        SubscribeLocalEvent<MindSwapSpellEvent>(OnMindSwapSpell);
 
         // Spell wishlist
         //  A wishlish of spells that I'd like to implement or planning on implementing in a future PR
@@ -359,23 +375,8 @@ public abstract class SharedMagicSystem : EntitySystem
         ev.Handled = true;
         Speak(ev);
 
-        foreach (var toRemove in ev.ToRemove)
-        {
-            if (_compFact.TryGetRegistration(toRemove, out var registration))
-                RemComp(ev.Target, registration.Type);
-        }
-
-        foreach (var (name, data) in ev.ToAdd)
-        {
-            if (HasComp(ev.Target, data.Component.GetType()))
-                continue;
-
-            var component = (Component) _compFact.GetComponent(name);
-            component.Owner = ev.Target;
-            var temp = (object) component;
-            _seriMan.CopyTo(data.Component, ref temp);
-            EntityManager.AddComponent(ev.Target, (Component) temp!);
-        }
+        RemoveComponents(ev.Target, ev.ToRemove);
+        AddComponents(ev.Target, ev.ToAdd);
     }
     // End Change Component Spells
     #endregion
@@ -391,8 +392,7 @@ public abstract class SharedMagicSystem : EntitySystem
             return;
 
         var transform = Transform(args.Performer);
-
-        if (transform.MapID != args.Target.GetMapId(EntityManager) || !_interaction.InRangeUnobstructed(args.Performer, args.Target, range: 1000F, collisionMask: CollisionGroup.Opaque, popup: true))
+        if (transform.MapID != _transform.GetMapId(args.Target) || !_interaction.InRangeUnobstructed(args.Performer, args.Target, range: 1000F, collisionMask: CollisionGroup.Opaque, popup: true))
             return;
 
         _transform.SetCoordinates(args.Performer, args.Target);
@@ -422,9 +422,32 @@ public abstract class SharedMagicSystem : EntitySystem
             comp.Uid = performer;
         }
     }
+
+    private void AddComponents(EntityUid target, ComponentRegistry comps)
+    {
+        foreach (var (name, data) in comps)
+        {
+            if (HasComp(target, data.Component.GetType()))
+                continue;
+
+            var component = (Component)_compFact.GetComponent(name);
+            var temp = (object)component;
+            _seriMan.CopyTo(data.Component, ref temp);
+            AddComp(target, (Component)temp!);
+        }
+    }
+
+    private void RemoveComponents(EntityUid target, HashSet<string> comps)
+    {
+        foreach (var toRemove in comps)
+        {
+            if (_compFact.TryGetRegistration(toRemove, out var registration))
+                RemComp(target, registration.Type);
+        }
+    }
     // End Spell Helpers
     #endregion
-    #region Smite Spells
+    #region Touch Spells
     private void OnSmiteSpell(SmiteSpellEvent ev)
     {
         if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -443,7 +466,8 @@ public abstract class SharedMagicSystem : EntitySystem
 
         _body.GibBody(ev.Target, true, body);
     }
-    // End Smite Spells
+
+    // End Touch Spells
     #endregion
     #region Knock Spells
     /// <summary>
@@ -504,6 +528,95 @@ public abstract class SharedMagicSystem : EntitySystem
     }
     // End Charge Spells
     #endregion
+    #region Global Spells
+
+    private void OnRandomGlobalSpawnSpell(RandomGlobalSpawnSpellEvent ev)
+    {
+        if (!_net.IsServer || ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer) || ev.Spawns is not { } spawns)
+            return;
+
+        ev.Handled = true;
+        Speak(ev);
+
+        var allHumans = _mind.GetAliveHumans();
+
+        foreach (var human in allHumans)
+        {
+            if (!human.Comp.OwnedEntity.HasValue)
+                continue;
+
+            var ent = human.Comp.OwnedEntity.Value;
+
+            var mapCoords = _transform.GetMapCoordinates(ent);
+            foreach (var spawn in EntitySpawnCollection.GetSpawns(spawns, _random))
+            {
+                var spawned = Spawn(spawn, mapCoords);
+                _hands.PickupOrDrop(ent, spawned);
+            }
+        }
+
+        _audio.PlayGlobal(ev.Sound, ev.Performer);
+    }
+
+    #endregion
+    #region Mindswap Spells
+
+    private void OnMindSwapSpell(MindSwapSpellEvent ev)
+    {
+        if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer))
+            return;
+
+        ev.Handled = true;
+        Speak(ev);
+
+        // Need performer mind, but target mind is unnecessary, such as taking over a NPC
+        // Need to get target mind before putting performer mind into their body if they have one
+        // Thus, assign bool before first transfer, then check afterwards
+
+        if (!_mind.TryGetMind(ev.Performer, out var perMind, out var perMindComp))
+            return;
+
+        var tarHasMind = _mind.TryGetMind(ev.Target, out var tarMind, out var tarMindComp);
+
+        _mind.TransferTo(perMind, ev.Target);
+
+        if (tarHasMind)
+        {
+            _mind.TransferTo(tarMind, ev.Performer);
+        }
+
+        _stun.TryParalyze(ev.Target, ev.TargetStunDuration, true);
+        _stun.TryParalyze(ev.Performer, ev.PerformerStunDuration, true);
+    }
+
+    #endregion
+    #region Animation Spells
+
+    private void OnAnimateSpell(AnimateSpellEvent ev)
+    {
+        if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer) || !TryComp<FixturesComponent>(ev.Target, out var fixtures) ||
+            !TryComp<PhysicsComponent>(ev.Target, out var physics))
+            return;
+
+        ev.Handled = true;
+        Speak(ev);
+
+        RemoveComponents(ev.Target, ev.RemoveComponents);
+        AddComponents(ev.Target, ev.AddComponents);
+
+        var xform = Transform(ev.Target);
+        var fixture = fixtures.Fixtures.First();
+
+        _transform.Unanchor(ev.Target);
+        _physics.SetCanCollide(ev.Target, true, true, false, fixtures, physics);
+        _physics.SetCollisionMask(ev.Target, fixture.Key, fixture.Value, (int)CollisionGroup.FlyingMobMask, fixtures, physics);
+        _physics.SetCollisionLayer(ev.Target, fixture.Key, fixture.Value, (int)CollisionGroup.FlyingMobLayer, fixtures, physics);
+        _physics.SetBodyType(ev.Target, BodyType.KinematicController, fixtures, physics, xform);
+        _physics.SetBodyStatus(ev.Target, physics, BodyStatus.InAir, true);
+        _physics.SetFixedRotation(ev.Target, false, true, fixtures, physics);
+    }
+
+    #endregion
     // End Spells
     #endregion
 
@@ -515,12 +628,6 @@ public abstract class SharedMagicSystem : EntitySystem
             return;
 
         var ev = new SpeakSpellEvent(args.Performer, speak.Speech, speak.ChatType);
-        RaiseLocalEvent(ref ev);
-    }
-
-    public void Speak(EntityUid uid, string speech, InGameICChatType inGameICChatType)
-    {
-        var ev = new SpeakSpellEvent(uid, speech, inGameICChatType);
         RaiseLocalEvent(ref ev);
     }
 }

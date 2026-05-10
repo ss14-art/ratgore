@@ -32,8 +32,27 @@
     - TauCetiBasic #needed for vending machines
     # - Solarian # uncomment me if we need universal langs again
   - type: FootPrints
-  
+
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
+
 - type: entity
   parent: BaseSpeciesDummy
   id: MobHumanDummy
   categories: [ HideSpawnMenu ]
+  noSpawn: true
+  components:
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+

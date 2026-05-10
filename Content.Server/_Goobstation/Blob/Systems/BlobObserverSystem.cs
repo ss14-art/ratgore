@@ -87,7 +87,7 @@ public sealed class BlobObserverSystem : SharedBlobObserverSystem
         comp.Blob = ent;
         Dirty(ent);
 
-        if (!_hands.TryPickup(ent, ent.Comp.VirtualItem, "BlobHand", false, false, false))
+        if (!_hands.TryPickupByName(ent, ent.Comp.VirtualItem, handName: "BlobHand", checkActionBlocker: false, animateUser: false, animate: false))
         {
             QueueDel(ent);
         }

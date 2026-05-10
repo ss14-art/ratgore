@@ -143,23 +143,6 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(thief);
 
-        // Goobstation - changelings
-        Verb ling = new()
-        {
-            Text = Loc.GetString("admin-verb-text-make-changeling"),
-            Category = VerbCategory.Antag,
-            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_Goobstation/Changeling/changeling_abilities.rsi"), "transform"),
-            Act = () =>
-            {
-                if (!HasComp<SiliconComponent>(args.Target))
-                    _antag.ForceMakeAntag<ChangelingRuleComponent>(targetPlayer, DefaultChangelingRule);
-            },
-            Impact = LogImpact.High,
-            Message = Loc.GetString("admin-verb-make-changeling"),
-        };
-        if (!HasComp<SiliconComponent>(args.Target))
-            args.Verbs.Add(ling);
-
         Verb cultist = new()
         {
             Text = Loc.GetString("admin-verb-text-make-blood-cultist"),
@@ -173,20 +156,5 @@ public sealed partial class AdminVerbSystem
             Message = Loc.GetString("admin-verb-make-blood-cultist"),
         };
         args.Verbs.Add(cultist);
-
-        // Goobstation - Blob
-        Verb blobAntag = new()
-        {
-            Text = Loc.GetString("admin-verb-text-make-blob"),
-            Category = VerbCategory.Antag,
-            Icon = new SpriteSpecifier.Rsi(new("/Textures/_Goobstation/Blob/Actions/blob.rsi"), "blobFactory"),
-            Act = () =>
-            {
-                EnsureComp<Shared._Goobstation.Blob.Components.BlobCarrierComponent>(args.Target).HasMind = HasComp<ActorComponent>(args.Target);
-            },
-            Impact = LogImpact.High,
-            Message = Loc.GetString("admin-verb-text-make-blob"),
-	    };
-        args.Verbs.Add(blobAntag);
     }
 }
