@@ -1,0 +1,52 @@
+- type: entity
+  name: SHI Type-101 Sweeper 9x39mm
+  parent: [BaseWeaponRifle, StreeCredRedeemable]
+  id: WeaponRifleSweeper
+  description: A fast shooting rifle with an inbuilt suppressor, used by special ops units all over Taypan. Chambered in 9x39mm caseless rounds.
+  components:
+  - type: Item
+    shape:
+    - 0,0,5,1
+  - type: Sprite
+    sprite: _Rat/Objects/Weapons/Guns/SHI/sweeper.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Rat/Objects/Weapons/Guns/SHI/sweeper.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineCaselessRifleShort
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineCaselessRifleShort #Short mags, less fire rate. Still more cracked than all other rifles.
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCaselessRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCaselessRifle
+  - type: Gun
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    fireRate: 7
+    soundGunshot:
+      path: /Audio/_Crescent/Weapons/Guns/non_collection/liquidator.ogg
+      params:
+        volume: -10
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 5000
