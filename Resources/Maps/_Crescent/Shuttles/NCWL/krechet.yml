@@ -874,8 +874,8 @@ entities:
       - Авто-залп из 20мм
       - Авто-запуск ракет 48мм
       - Закрыть створки
-      - Empty Module
-      - Empty Module
+      - -
+      - -
 - proto: Firelock
   entities:
   - uid: 83

@@ -2549,11 +2549,11 @@ entities:
           - Toggle
     - type: NamedModules
       buttonNames:
-      - Открыть огонь из 300cc
-      - Module B
-      - Module C
-      - Module D
-      - Module E
+      - Авто-залп из 300cc
+      - -
+      - -
+      - -
+      - -
     - type: ContainerContainer
       containers:
         board: !type:Container

@@ -906,5 +906,14 @@ Entries:
     id: 109
     time: '2026-05-16T15:03:13.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/214
+  - author: ChangelingRUES
+    changes:
+      - type: Tweak
+        message: 'Дебаф ибиса: фронтовая броня стала существенно меньше, уменьшено кол-во орудий с 4 до 3.'
+      - type: Fix
+        message: 'Фикс: названия привязанных к орудиям кнопок в консоли пилота теперь более корректны у: ловчего, волка, авангарда'
+    id: 110
+    time: '2026-05-17T12:00:23.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/216
 Name: Rat
 Order: -1

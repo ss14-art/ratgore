@@ -29,6 +29,12 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Robust.Server.GameObjects;
+using System.Diagnostics;
+// Rat-start
+using Content.Server.Fluids.EntitySystems;
+using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.Components;
 
 namespace Content.Server.Explosion.EntitySystems;
 
@@ -54,6 +60,8 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly SmokeSystem _smoke = default!;    // Retgore changes
+    [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;    // Rargore changes
 
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<FlammableComponent> _flammableQuery;
@@ -361,6 +369,8 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
 
         var visualEnt = CreateExplosionVisualEntity(pos, queued.Proto.ID, spaceMatrix, spaceData, gridData.Values, iterationIntensity);
 
+        SpawnSmoke(queued.Epicenter, 5f, 5); // Ratgore changes
+
         // camera shake
         CameraShake(iterationIntensity.Count * 4f, pos, queued.TotalIntensity);
 
@@ -429,4 +439,20 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
                 _recoilSystem.KickCamera(uid, -delta.Normalized() * effect);
         }
     }
+
+    // Rat-start
+    private void SpawnSmoke(MapCoordinates coords, float duration, int spreadAmount)
+    {
+        var smokeEntity = Spawn("Smoke", coords);
+
+        var solutionComp = EntityManager.AddComponent<SolutionComponent>(smokeEntity);
+        TryComp<SmokeComponent>(smokeEntity, out var smokeComp);
+
+        var solution = new Solution();
+
+        _solutionContainer.TryAddSolution((smokeEntity, solutionComp), solution);
+
+        _smoke.StartSmoke(smokeEntity, solution, duration, spreadAmount, smokeComp);
+    }
+    // Rat-stop
 }
