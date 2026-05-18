@@ -1,0 +1,36 @@
+# Author Info
+# Discord: @V0lin1
+#
+- type: vessel
+  id: Strig
+  name: ПК Стриж
+  description: |
+    Быстрый самодельный истребитель профсоюза.
+    MINIMUM CREW: 1x Pilot
+  price: 20000
+  category: Small
+  group: None
+  path: /Maps/_Crescent/Shuttles/NCSP/Strig.yml
+
+- type: gameMap
+  id: Strig
+  mapName: 'ПК Стриж'
+  mapPath: /Maps/_Crescent/Shuttles/NCSP/Strig.yml
+  minPlayers: 0
+  stations:
+    Strig:
+      stationProto: StandardCrescentVessel
+      gridComponents:
+        - type: MapIcon
+          iconType: Shuttle
+      components:
+        - type: VesselIcon
+          iffIcon:
+            sprite: _Crescent/ShipIcons/ifficons.rsi
+            state: fighter
+        - type: StationNameSetup
+          mapNameTemplate: 'ПК Стриж {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: VesselDesignation
