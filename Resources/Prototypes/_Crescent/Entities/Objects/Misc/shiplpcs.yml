@@ -1200,6 +1200,47 @@
     recipes:
       - HyenaLPC
 
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherScarab
+  name: SAW 'Scarab' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a Scarab.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: Scarab
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - ScarabLPC
+
+- type: entity
+  parent: BaseItem
+  id: ShipVoucherScarab
+  name: SAW 'Dugong' pattern LPC fabprint disk
+  description: An LPC fabprint disk loaded with a Scarab.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Crescent/Objects/Misc/lpcchip.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 2500
+  - type: ShipVoucher
+    ship: Dugong
+  - type: ReverseEngineering # SectorCrescent
+    recipes:
+      - DugongLPC
+
 - type: entity
   parent: BaseItem
   id: ShipVoucherHulk
