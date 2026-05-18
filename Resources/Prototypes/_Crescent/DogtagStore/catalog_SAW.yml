@@ -429,16 +429,40 @@
   categories:
   - StoreCategorySAWships
 
-#- type: listing
-#  id: StoreListingSAWThanapod
-#  name: SAW Thanapod LPC
-#  description: A product of one particularly drunk foreman seeing a Bogatyr-class ship, and then asking if it could mine. Shockingly good platform for weaponization.
-#  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
-#  productEntity: ShipVoucherThanapod
-#  cost:
-#    ScrapSAW: 150
-#  categories:
-#  - StoreCategorySAWships
+- type: listing
+  id: StoreListingSAWDugong
+  name: SAW Dugong LPC
+  description: Dugong
+  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
+  productEntity: ShipVoucherDugong
+  cost:
+    ScrapSAW: 150
+  categories:
+  - StoreCategorySAWships
+
+- type: listing
+  id: StoreListingSAWThanapod
+  name: SAW Thanapod LPC
+  description: A product of one particularly drunk foreman seeing a Bogatyr-class ship, and then asking if it could mine. Shockingly good platform for weaponization.
+  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
+  productEntity: ShipVoucherThanapod
+  cost:
+    ScrapSAW: 150
+  categories:
+  - StoreCategorySAWships
+
+
+- type: listing
+  id: StoreListingSAWScarab
+  name: SAW Scarab LPC
+  description: Scarab.
+  icon: { sprite: _Crescent/Objects/Misc/lpcchip.rsi, state: icon }
+  productEntity: ShipVoucherScarab
+  cost:
+    ScrapSAW: 170
+  categories:
+  - StoreCategorySAWships
+
 
 - type: listing
   id: StoreListingSAWHyena
