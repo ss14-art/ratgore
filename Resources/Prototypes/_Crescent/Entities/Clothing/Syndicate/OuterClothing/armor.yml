@@ -16,14 +16,14 @@
   - type: ExplosionResistance
     damageCoefficient: 0.3
   - type: DegradeableArmor
-    armorMaxHealth: 900
+    armorMaxHealth: 700
     armorType: Metallic
     armorRepair: SteelPlate
     initialModifiers:
       flatReductions:
         Blunt: 10
         Slash: 10
-        Piercing: 35
+        Piercing: 45
         Heat: 15
         Caustic: 15
         Radiation: 35
@@ -65,7 +65,7 @@
       flatReductions:
         Blunt: 15
         Slash: 15
-        Piercing: 45
+        Piercing: 55
         Heat: 15
         Caustic: 15
         Radiation: 35
