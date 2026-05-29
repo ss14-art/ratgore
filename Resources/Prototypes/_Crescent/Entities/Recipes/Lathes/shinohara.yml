@@ -439,7 +439,7 @@
   materials:
     Steel: 1500
     Silver: 1000
-    BasicMechatronics: 1000
+    BallisticCycler: 500
 
 - type: latheRecipe
   id: WeaponLauncherHammerhead
@@ -476,6 +476,7 @@
   materials:
     Steel: 2500
     Silver: 500
+    TubeLoader: 500
 
 - type: latheRecipe
   id: WeaponShotgunSpas
