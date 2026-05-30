@@ -31,9 +31,9 @@
   - type: StorageFill
     contents:
       - id: WeaponPistolHKUSP
-        amount: 2
-      - id: WeaponSubMachineGunSabre
-        amount: 2
+        amount: 3
+      - id: WeaponSubMachineGunMP49
+        amount: 3
 
 #pangtai
 

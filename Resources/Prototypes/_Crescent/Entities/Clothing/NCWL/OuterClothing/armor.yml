@@ -130,7 +130,7 @@
       flatReductions:
         Blunt: 25
         Slash: 25
-        Piercing: 60
+        Piercing: 65
         Heat: 25
         Caustic: 25
   - type: ClothingSpeedModifier

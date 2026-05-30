@@ -863,8 +863,8 @@
   materials:
     BasicMechatronics: 500
     AdvancedElectronics: 1000
-    Gold: 500
-    Biomass: 5
+    Gold: 1500
+    Biomass: 20
 
 - type: latheRecipe
   id: CyberneticsAdrenalInterdyne
@@ -872,10 +872,10 @@
   completetime: 1.5
   materials:
     BasicElectronics: 1000
-    BasicMechatronics: 500
-    Silver: 500
-    Gold: 500
-    Biomass: 5
+    AdvancedElectronics: 500
+    Silver: 1000
+    Gold: 1000
+    Biomass: 50
 
 - type: latheRecipe
   id: CyberneticsBloodPumpInterdyne
@@ -884,19 +884,20 @@
   materials:
     AdvancedMechatronics: 1000
     BasicElectronics: 500
-    Gold: 500
-    Silver: 500
-    Biomass: 3
+    Gold: 1000
+    Silver: 1500
+    Biomass: 30
 
 - type: latheRecipe
   id: InterdyneSandevistanInterdyne
   result: OrganHeartSandevistan
   completetime: 1.5
   materials:
-    BasicMechatronics: 500
+    BasicMechatronics: 750
     AdvancedElectronics: 1500
-    Gold: 500
-    Biomass: 10
+    Silver: 1500
+    Gold: 2000
+    Biomass: 50
 
 - type: latheRecipe
   id: InterdyneBerserkerInterdyne
@@ -904,6 +905,7 @@
   completetime: 1.5
   materials:
     BasicMechatronics: 1000
-    AdvancedElectronics: 1000
-    Silver: 500
-    Biomass: 10
+    AdvancedElectronics: 1500
+    Silver: 2000
+    Gold:  1500
+    Biomass: 50
