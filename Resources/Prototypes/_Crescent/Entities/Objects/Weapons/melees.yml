@@ -14,7 +14,7 @@
     attackRate: 1
     damage:
       types:
-        Slash: 34
+        Slash: 38
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
     heavyDamageBaseModifier: 1
@@ -24,7 +24,7 @@
     lightRangeModifier: 1.15
     maxTargets: 4
   - type: Reflect
-    reflectProb: .6 #nerf
+    reflectProb: .65 #nerf
     spread: 75
   - type: Item
     size: Normal
