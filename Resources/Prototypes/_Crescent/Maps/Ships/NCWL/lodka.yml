@@ -4,7 +4,10 @@
 - type: vessel
   id: Lodka
   name: ЛРНП Лодка
-  description: Лёгкий коммунарский истребитель.
+  description: |
+    Лёгкий коммунарский фрегат.
+    Вооружение: 4x 20мм.
+    Минимальный экипаж: 1x Пилот, 1x Стрелок, 1x Заряжающий.
   price: 30000
   category: Small
   group: None

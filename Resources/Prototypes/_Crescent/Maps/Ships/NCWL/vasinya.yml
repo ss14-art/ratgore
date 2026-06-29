@@ -4,8 +4,11 @@
 - type: vessel
   id: Vasinya
   name: ЛРНП Вася
-  description: A light communard patrol corvette.
-  price: 50000
+  description: |
+    Лёгкий коммунарский патрульный корвет.
+    Вооружение: 1x 50мм, 4x 35мм, 2x 48мм .
+    Минимальный экипаж: 1x Пилот, 1x Стрелок, 2x Заряжающий.
+  price: 55000
   category: Small
   group: None
   path: /Maps/_Crescent/Shuttles/NCWL/vasinya.yml

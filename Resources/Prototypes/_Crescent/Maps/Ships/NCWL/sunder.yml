@@ -4,8 +4,11 @@
 - type: vessel
   id: Sunder
   name: ЛРНП Сандер
-  description: Лёгкий энергетический крейсер.
-  price: 90000
+  description: |
+    Лёгкий энергетический крейсер.
+    Вооружение: 4x 350cc, 2x 60мм, 1x 330мм.
+    Минимальный экпиаж: 1x Пилот, 1x Стрелок, 2x Заряжающий.
+  price: 100000
   category: Large
   group: None
   path: /Maps/_Crescent/Shuttles/NCWL/sunder.yml

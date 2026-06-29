@@ -4,7 +4,10 @@
 - type: vessel
   id: Krechet
   name: ЛРНП Кречет
-  description: Лёгкий коммунарский истребитель.
+  description: |
+    Лёгкий коммунарский истребитель.
+    Вооружение: 2x 20мм.
+    Минимальный экипаж: 1x Пилот.
   price: 30000
   category: Small
   group: None

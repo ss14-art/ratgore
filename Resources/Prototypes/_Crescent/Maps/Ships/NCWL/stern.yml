@@ -4,9 +4,12 @@
 - type: vessel
   id: Stern
   name: ЛРНП Стерн
-  description: Коммунарский тяжёлый линкор.
+  description: |
+    Коммунарский тяжёлый линкор.
+    Вооружение: 1x 300мм, 2x 90мм, 4x 120мм, 4x 50мм.
+    Минимальный экипаж: 1x Пилот, 1x Стрелок, 5x Заряжающий.
   price: 350000
-  category: Small
+  category: Large
   group: None
   path: /Maps/_Crescent/Shuttles/NCWL/stern.yml
 

@@ -4,9 +4,12 @@
 - type: vessel
   id: Bogatyr
   name: ЛРНП Богатырь
-  description: Продвинутый коммунарский тяжёлый эскорт.
+  description: |
+    Продвинутый коммунарский тяжёлый эскорт.
+    Вооружение: 4x 50мм.
+    Минимальный экипаж: 1x Пилот, 1x Заряжающий.
   price: 90000
-  category: Small
+  category: Medium
   group: None
   path: /Maps/_Crescent/Shuttles/NCWL/bogatyr.yml
 

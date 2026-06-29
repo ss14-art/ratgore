@@ -4,7 +4,10 @@
 - type: vessel
   id: Gargut
   name: ЛРНП Гаргут
-  description: Громоздкая боевая платформа, переделанная из заброшенной фабстанции.
+  description: |
+    Громоздкая боевая платформа, переделанная из заброшенной фабстанции.
+    Вооружение: 3x 50мм, 3x 240мм, 4x 88мм.
+    Минимальный экипаж: 1x Пилот, 1x Стрелок, 3x Заряжающий.
   price: 125000
   category: Large
   group: None
@@ -12,7 +15,7 @@
 
 - type: gameMap
   id: Gargut
-  mapName: ' ЛРНП Гаргут'
+  mapName: 'ЛРНП Гаргут'
   mapPath: /Maps/_Crescent/Shuttles/NCWL/gargut.yml
   minPlayers: 0
   stations:

@@ -1,15 +1,17 @@
 - type: vessel
   id: WaspDrone
-  name: NCWL Wasp
-  description: A fighter drone.
-  price: 12500
+  name: ЛРНП Оса
+  description: |
+    Боевой дрон.
+    Вооружение: 3x 150cc.
+  price: 25000
   category: Small
   group: None
   path: /Maps/_Crescent/Shuttles/NCWL/waspdrone.yml
 
 - type: gameMap
   id: WaspDrone
-  mapName: 'NCWL Wasp'
+  mapName: 'ЛРНП Оса'
   mapPath: /Maps/_Crescent/Shuttles/NCWL/waspdrone.yml
   minPlayers: 0
   stations:
@@ -20,7 +22,7 @@
           iconType: Shuttle
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'NCWL Wasp {1}'
+          mapNameTemplate: 'ЛРНП Оса {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

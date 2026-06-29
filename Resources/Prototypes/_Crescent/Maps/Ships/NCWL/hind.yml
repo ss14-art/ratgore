@@ -6,8 +6,8 @@
   name: ЛРНП Нанд
   description: |
     Лёгкий грузовоз для руды, переделанный в ракетный фрегат.
-    LOADOUT: 4x 240mm 'Gargoyle' Torpedo Launchers, 2x 20mm 'Warthog' autocannons, 1x 120mm 'Anvil' Cannon
-    MINIMUM CREW: 1x Pilot, 1x Gunner/Loader
+    Вооружение: 1x 95мм, 2x 50мм, 2x 20мм.
+    Минимальный экипаж: 1x Пилот, 1x Заряжающий.
   price: 70000
   category: Medium
   group: None
