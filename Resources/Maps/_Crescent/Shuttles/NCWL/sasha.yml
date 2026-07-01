@@ -3847,6 +3847,13 @@ entities:
           - Toggle
         - - Group3
           - SpaceArtilleryFire
+    - type: NamedModules
+      buttonNames:
+      - Переключить 50мм 'Свистун'
+      - Переключить 240мм 'Гаргулья'
+      - Выстрелить 240мм 'Гаргулья'
+      - Module D
+      - Module E
     - type: ContainerContainer
       containers:
         board: !type:Container
