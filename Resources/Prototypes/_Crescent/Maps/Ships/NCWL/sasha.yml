@@ -4,9 +4,12 @@
 - type: vessel
   id: Sasha
   name: ЛРНП Саша
-  description: Устаревший коммунарский военный корабль.
-  price: 125000
-  category: Small
+  description: |
+    Коммунарский линейный крейсер.
+    Вооружение: 4x 50мм, 2x 60мм, 4x 90мм, 2x 240мм.
+    Минимальный экипаж: 1x Пилот, 1x Стрелок, 4x Заряжающий.
+  price: 250000
+  category: Large
   group: None
   path: /Maps/_Crescent/Shuttles/NCWL/sasha.yml
 
@@ -30,7 +33,7 @@
       - type: VesselDesignation
         designation: vessel-designation-warship
       - type: VesselDescription
-        description: Реликт иного времени.
+        description: Модифицированный реликт прошлого.
       - type: VesselIcon
         iffIcon:
           sprite: _Crescent/ShipIcons/ifficons.rsi
