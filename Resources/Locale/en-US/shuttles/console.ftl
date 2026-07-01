@@ -50,3 +50,6 @@ shuttle-console-docks-label = Docks
 
 shuttle-console-undock-fail = Undocking failed
 shuttle-console-dock-fail = Docking failed
+
+# SHIPYARD
+shipyard-custom-name-placeholder = Custom name

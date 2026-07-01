@@ -1,0 +1,290 @@
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerCrewMonitorDebug
+  name: improved crew monitoring console
+  description: Shows all crew members across the entire map. No server required.
+  suffix: Rat, DEBUG
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: crew
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#006400"
+  - type: Computer
+    board: CrewMonitoringComputerCircuitboard
+  - type: ActivatableUI
+    key: enum.RatCrewMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RatCrewMonitorUiKey.Key:
+        type: Content.Client._Rat.CrewMonitoring.RatCrewMonitorBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: RatCrewMonitor
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewMonitor
+  - type: WirelessNetworkConnection
+    range: 1200
+
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerCrewMonitorDSM
+  name: DSM crew monitoring console
+  description: Tracks all DSM faction members across the sector.
+  suffix: Rat
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: crew
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#8A00C2"
+  - type: Computer
+    board: CrewMonitoringComputerCircuitboard
+  - type: ActivatableUI
+    key: enum.RatCrewMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RatCrewMonitorUiKey.Key:
+        type: Content.Client._Rat.CrewMonitoring.RatCrewMonitorBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: RatCrewMonitor
+    faction: DSM
+
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerCrewMonitorNCWL
+  name: NCWL crew monitoring console
+  description: Tracks all NCWL faction members across the sector.
+  suffix: Rat
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: crew
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#cf8e00"
+  - type: Computer
+    board: CrewMonitoringComputerCircuitboard
+  - type: ActivatableUI
+    key: enum.RatCrewMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RatCrewMonitorUiKey.Key:
+        type: Content.Client._Rat.CrewMonitoring.RatCrewMonitorBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: RatCrewMonitor
+    faction: NCWL
+
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerCrewMonitorSHI
+  name: SHI crew monitoring console
+  description: Tracks all SHI faction members across the sector.
+  suffix: Rat
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: crew
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#666d66"
+  - type: Computer
+    board: CrewMonitoringComputerCircuitboard
+  - type: ActivatableUI
+    key: enum.RatCrewMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RatCrewMonitorUiKey.Key:
+        type: Content.Client._Rat.CrewMonitoring.RatCrewMonitorBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: RatCrewMonitor
+    faction: SHI
+
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerCrewMonitorTFSC
+  name: TFSC crew monitoring console
+  description: Tracks all TFSC faction members across the sector.
+  suffix: Rat
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: crew
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#9b0000"
+  - type: Computer
+    board: CrewMonitoringComputerCircuitboard
+  - type: ActivatableUI
+    key: enum.RatCrewMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RatCrewMonitorUiKey.Key:
+        type: Content.Client._Rat.CrewMonitoring.RatCrewMonitorBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: RatCrewMonitor
+    faction: Interdyne
+
+# Tabletop
+
+- type: entity
+  parent: [BaseStructureComputerTabletop, ComputerCrewMonitorDebug]
+  id: ComputerTabletopCrewMonitorDebug
+  suffix: Rat, Tabletop
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: crew
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: med_key
+
+- type: entity
+  parent: [BaseStructureComputerTabletop, ComputerCrewMonitorDSM]
+  id: ComputerTabletopCrewMonitorDSM
+  suffix: Rat, Tabletop
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: crew
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: med_key
+
+- type: entity
+  parent: [BaseStructureComputerTabletop, ComputerCrewMonitorNCWL]
+  id: ComputerTabletopCrewMonitorNCWL
+  suffix: Rat, Tabletop
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: crew
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: med_key
+
+- type: entity
+  parent: [BaseStructureComputerTabletop, ComputerCrewMonitorSHI]
+  id: ComputerTabletopCrewMonitorSHI
+  suffix: Rat, Tabletop
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: crew
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: med_key
+
+- type: entity
+  parent: [BaseStructureComputerTabletop, ComputerCrewMonitorTFSC]
+  id: ComputerTabletopCrewMonitorTFSC
+  suffix: Rat, Tabletop
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    layers:
+    - map: ["computerLayerBody"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: computer_tabletop
+    - map: ["computerLayerKeyboard"]
+      sprite: _NF/Structures/Machines/computer_tabletop.rsi
+      state: generic_keyboard_tabletop
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Machines/computers.rsi
+      state: crew
+    - map: ["computerLayerKeys"]
+      sprite: Structures/Machines/computers.rsi
+      state: med_key

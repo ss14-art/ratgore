@@ -18,6 +18,8 @@
           variation: 0.15
           volume: -8
           range: 1
+    - type: FactionTracker
+      faction: ""
 
 # Hullrot vital tracking implants
 # IPM
@@ -40,6 +42,8 @@
           variation: 0.15
           volume: -8
           range: 1
+    - type: FactionTracker
+      faction: Interdyne
 
 - type: entity
   parent: BaseImplantOnlyImplanter
@@ -69,6 +73,8 @@
           variation: 0.15
           volume: -8
           range: 1
+    - type: FactionTracker
+      faction: CMM
 
 - type: entity
   parent: BaseImplantOnlyImplanter
@@ -98,6 +104,8 @@
           variation: 0.15
           volume: -8
           range: 1
+    - type: FactionTracker
+      faction: SHI
 
 - type: entity
   parent: BaseImplantOnlyImplanter
@@ -127,6 +135,8 @@
         variation: 0.15
         volume: -8
         range: 1
+  - type: FactionTracker
+    faction: DSM
 
 - type: entity
   parent: BaseImplantOnlyImplanter
@@ -155,6 +165,8 @@
         variation: 0.15
         volume: -8
         range: 1
+  - type: FactionTracker
+    faction: DSM
 
 - type: entity
   parent: BaseImplantOnlyImplanter
@@ -184,6 +196,8 @@
         variation: 0.15
         volume: -8
         range: 1
+  - type: FactionTracker
+    faction: NCWL
 
 - type: entity
   parent: BaseImplantOnlyImplanter
@@ -212,6 +226,8 @@
         variation: 0.15
         volume: -8
         range: 1
+  - type: FactionTracker
+    faction: CRN
 
 - type: entity
   parent: BaseImplantOnlyImplanter
@@ -240,6 +256,8 @@
         variation: 0.15
         volume: -8
         range: 1
+  - type: FactionTracker
+    faction: ATH
 
 - type: entity
   parent: BaseImplantOnlyImplanter

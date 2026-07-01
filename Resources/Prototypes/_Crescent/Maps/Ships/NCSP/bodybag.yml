@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Bodybag
-  name: МГ Мешок
+  name: ТС Мешок
   description: Маленький скрытный абордажный шаттл.
   price: 20000 #16000 appraisegrid
   category: Small
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Bodybag
-  mapName: 'МГ Мешок'
+  mapName: 'ТС Мешок'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/bodybag.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: fighter
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Мешок {1}'
+          mapNameTemplate: 'ТС Мешок {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

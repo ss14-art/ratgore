@@ -1,0 +1,16 @@
+- type: entity
+  name: stock-market-cartridge
+  parent: BaseItem
+  id: StockMarketCartridge
+  components:
+  - type: StockMarketCartridge
+  - type: Sprite
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-y
+  - type: UIFragment
+    ui: !type:StockMarketUi
+  - type: Cartridge
+    programName: stock-market-cartridge-name
+    icon:
+      sprite: Objects/Devices/cartridge.rsi
+      state: cart-y

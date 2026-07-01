@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Scabrak
-  name: ПК Скабрак
+  name: ТС Скабрак
   description: |
     Среднеразмерная добывающая баржа.
     LOADOUT: 4x 250c Exhumer mining guns, 4x 20mm 'Screamer' light carbine repeater cannons
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Scabrak
-  mapName: 'ПК Скабрак'
+  mapName: 'ТС Скабрак'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/scabrak.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: miner
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Скабрак {1}'
+          mapNameTemplate: 'ТС Скабрак {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

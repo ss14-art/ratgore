@@ -344,19 +344,19 @@
             !type:DamageTrigger
             damage: 100
           behaviors:
-            - !type:SpillBehavior
+            - !type:TankLeakBehavior
               solution: tank
+              leaksToAdd: 1
             - !type:PlaySoundBehavior
               sound:
                 collection: MetalBreak
             - !type:ChangeConstructionNodeBehavior
               node: machineFrame
-            - !type:DoActsBehavior
-              acts: ["Destruction"]
         - trigger:
             !type:DamageTypeTrigger
             damageType: Piercing
             damage: 75
           behaviors:
-            - !type:SolutionExplosionBehavior
+            - !type:TankLeakBehavior
               solution: tank
+              leaksToAdd: 1

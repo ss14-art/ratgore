@@ -255,6 +255,7 @@ namespace Content.Server.Database
                 }).ToHashSet(),
                 profile.BankBalance,
                 profile.Faction,
+                profile.Subfaction,
                 profile.CharacterFlags.ToList()
             );
         }
@@ -296,6 +297,7 @@ namespace Content.Server.Database
             profile.Markings = markings;
             profile.Slot = slot;
             profile.Faction = humanoid.Faction;
+            profile.Subfaction = humanoid.Subfaction;
             profile.BankBalance = humanoid.BankBalance;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
             profile.CharacterFlags = humanoid.CharacterFlags.ToArray();
@@ -1691,6 +1693,271 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             db.DbContext.RoleWhitelists.Remove(entry);
             await db.DbContext.SaveChangesAsync();
             return true;
+        }
+
+        #endregion
+
+        #region Factions
+
+        public async Task CreateFaction(string name, string description, bool isWhitelisted)
+        {
+            await using var db = await GetDb();
+            var faction = new RatFaction
+            {
+                Name = name,
+                Description = description,
+                IsWhitelisted = isWhitelisted,
+            };
+            db.DbContext.RatFactions.Add(faction);
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteFaction(string name)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions
+                .Include(f => f.Whitelists)
+                .Include(f => f.Managers)
+                .SingleOrDefaultAsync(f => f.Name == name);
+            
+            if (faction == null)
+                return false;
+            
+            // Явно удаляем связанные записи
+            db.DbContext.RatFactionWhitelists.RemoveRange(faction.Whitelists);
+            db.DbContext.RatFactionManagers.RemoveRange(faction.Managers);
+            db.DbContext.RatFactions.Remove(faction);
+            
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteFactionById(int id)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions
+                .Include(f => f.Whitelists)
+                .Include(f => f.Managers)
+                .SingleOrDefaultAsync(f => f.Id == id);
+            
+            if (faction == null)
+                return false;
+            
+            // Явно удаляем связанные записи
+            db.DbContext.RatFactionWhitelists.RemoveRange(faction.Whitelists);
+            db.DbContext.RatFactionManagers.RemoveRange(faction.Managers);
+            db.DbContext.RatFactions.Remove(faction);
+            
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<List<RatFaction>> GetAllFactions()
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RatFactions.ToListAsync();
+        }
+
+        public async Task<RatFaction?> GetFaction(string name)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Name == name);
+        }
+
+        public async Task<RatFaction?> GetFactionById(int id)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Id == id);
+        }
+
+        public async Task<bool> AddFactionWhitelist(Guid player, string factionName)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Name == factionName);
+            if (faction == null)
+                return false;
+
+            var exists = await db.DbContext.RatFactionWhitelists
+                .AnyAsync(w => w.PlayerUserId == player && w.FactionId == faction.Id);
+            if (exists)
+                return false;
+
+            db.DbContext.RatFactionWhitelists.Add(new RatFactionWhitelist
+            {
+                PlayerUserId = player,
+                FactionId = faction.Id,
+            });
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> AddFactionWhitelistById(Guid player, int factionId)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Id == factionId);
+            if (faction == null)
+                return false;
+
+            var exists = await db.DbContext.RatFactionWhitelists
+                .AnyAsync(w => w.PlayerUserId == player && w.FactionId == factionId);
+            if (exists)
+                return false;
+
+            db.DbContext.RatFactionWhitelists.Add(new RatFactionWhitelist
+            {
+                PlayerUserId = player,
+                FactionId = factionId,
+            });
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveFactionWhitelist(Guid player, string factionName)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Name == factionName);
+            if (faction == null)
+                return false;
+
+            var entry = await db.DbContext.RatFactionWhitelists
+                .SingleOrDefaultAsync(w => w.PlayerUserId == player && w.FactionId == faction.Id);
+            if (entry == null)
+                return false;
+
+            db.DbContext.RatFactionWhitelists.Remove(entry);
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveFactionWhitelistById(Guid player, int factionId)
+        {
+            await using var db = await GetDb();
+            var entry = await db.DbContext.RatFactionWhitelists
+                .SingleOrDefaultAsync(w => w.PlayerUserId == player && w.FactionId == factionId);
+            if (entry == null)
+                return false;
+
+            db.DbContext.RatFactionWhitelists.Remove(entry);
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> IsFactionWhitelisted(Guid player, string factionName)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Name == factionName);
+            if (faction == null)
+                return false;
+
+            return await db.DbContext.RatFactionWhitelists
+                .AnyAsync(w => w.PlayerUserId == player && w.FactionId == faction.Id);
+        }
+
+        public async Task<bool> IsFactionWhitelistedById(Guid player, int factionId)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RatFactionWhitelists
+                .AnyAsync(w => w.PlayerUserId == player && w.FactionId == factionId);
+        }
+
+        public async Task<bool> AddFactionManager(Guid player, string factionName)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Name == factionName);
+            if (faction == null)
+                return false;
+
+            var exists = await db.DbContext.RatFactionManagers
+                .AnyAsync(m => m.PlayerUserId == player && m.FactionId == faction.Id);
+            if (exists)
+                return false;
+
+            db.DbContext.RatFactionManagers.Add(new RatFactionManager
+            {
+                PlayerUserId = player,
+                FactionId = faction.Id,
+            });
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> AddFactionManagerById(Guid player, int factionId)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Id == factionId);
+            if (faction == null)
+                return false;
+
+            var exists = await db.DbContext.RatFactionManagers
+                .AnyAsync(m => m.PlayerUserId == player && m.FactionId == factionId);
+            if (exists)
+                return false;
+
+            db.DbContext.RatFactionManagers.Add(new RatFactionManager
+            {
+                PlayerUserId = player,
+                FactionId = factionId,
+            });
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveFactionManager(Guid player, string factionName)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Name == factionName);
+            if (faction == null)
+                return false;
+
+            var entry = await db.DbContext.RatFactionManagers
+                .SingleOrDefaultAsync(m => m.PlayerUserId == player && m.FactionId == faction.Id);
+            if (entry == null)
+                return false;
+
+            db.DbContext.RatFactionManagers.Remove(entry);
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveFactionManagerById(Guid player, int factionId)
+        {
+            await using var db = await GetDb();
+            var entry = await db.DbContext.RatFactionManagers
+                .SingleOrDefaultAsync(m => m.PlayerUserId == player && m.FactionId == factionId);
+            if (entry == null)
+                return false;
+
+            db.DbContext.RatFactionManagers.Remove(entry);
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> IsFactionManager(Guid player, string factionName)
+        {
+            await using var db = await GetDb();
+            var faction = await db.DbContext.RatFactions.SingleOrDefaultAsync(f => f.Name == factionName);
+            if (faction == null)
+                return false;
+
+            return await db.DbContext.RatFactionManagers
+                .AnyAsync(m => m.PlayerUserId == player && m.FactionId == faction.Id);
+        }
+
+        public async Task<bool> IsFactionManagerById(Guid player, int factionId)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RatFactionManagers
+                .AnyAsync(m => m.PlayerUserId == player && m.FactionId == factionId);
+        }
+
+        public async Task<List<string>> GetPlayerFactionWhitelists(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RatFactionWhitelists
+                .Where(w => w.PlayerUserId == player)
+                .Include(w => w.Faction)
+                .Select(w => w.Faction.Name)
+                .ToListAsync();
         }
 
         #endregion

@@ -69,6 +69,7 @@ research-technology-cyberdawn-CDTCombatcyborgs = Combat cyborgs
 research-technology-cyberdawn-CDTMedicalcyborgs = Medical cyborgs
 research-technology-cyberdawn-CDTSaboteurcyborgs = Saboteur cyborgs
 research-technology-cyberdawn-CDTShipT1LPC = Basic stealth ship production
+research-technology-cyberdawn-CDTAssaultcyborgs = Assault cyborgs
 research-technology-cyberdawn-energydagger = Скрытый жёсткосветовой кинжал
 research-technology-cyberdawn-zhongyao = Таксьют Zhongyao
 research-technology-cyberdawn-egui = Скрытный таксьют Egui

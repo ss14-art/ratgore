@@ -19,6 +19,12 @@
   whitelisted: true # Rat
   requireAdminNotify: false
   icon: "JobIconOverseer"
+  chatNameColor: "#fff700"
+  chatAmplification:
+    bubbleScale: 1.09
+    shoutBubbleScale: 1.32
+    radioScale: 1.23
+    radioBold: true
   supervisors: job-supervisors-srm-overseer
   canBeAntag: false
   requirements:

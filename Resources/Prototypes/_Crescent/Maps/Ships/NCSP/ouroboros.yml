@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Ouroboros
-  name: МГ Уроборос
+  name: ТС Уроборос
   description: Скрытный авианосец Синдиката.
   price: 110000 #65000 appraisegrid
   category: Medium
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Ouroboros
-  mapName: 'МГ Уроборос'
+  mapName: 'ТС Уроборос'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/ouroboros.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: carrier
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Уроборос {1}'
+          mapNameTemplate: 'ТС Уроборос {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

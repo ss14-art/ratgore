@@ -19,6 +19,12 @@
   whitelisted: true # Rat
   requireAdminNotify: true
   icon: "JobIconSyndieIntelligenceOfficer"
+  chatNameColor: "#839cd7"
+  chatAmplification:
+    bubbleScale: 1.09
+    shoutBubbleScale: 1.32
+    radioScale: 1.23
+    radioBold: true
   supervisors: You answer to the interests of the CyberDawn Technologies company. Protect your technology, make money,  take out competition.
   canBeAntag: false
   requirements:
@@ -76,6 +82,6 @@
     back: ClothingBackpackNCSPFilledInfanteer
     gloves: ClothingHandsGlovesFingerless
     outerClothing: ClothingOuterArmorCyberdawnPatriarch
-    ears: ClothingHeadsetNCSPCyberdawn
+    ears: ClothingHeadsetNCSPCyberdawnCommand
     pocket1: AccessElevatorCD
     pocket2: RatRubberStampTFSCCyberDawn

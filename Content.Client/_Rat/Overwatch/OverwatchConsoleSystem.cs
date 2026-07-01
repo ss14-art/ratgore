@@ -9,6 +9,7 @@ using Robust.Shared.Localization;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Timing;
+using Robust.Shared.Player;
 using System.Numerics;
 
 namespace Content.Client._Rat.Overwatch;
@@ -73,6 +74,8 @@ public sealed class OverwatchConsoleSystem : EntitySystem
             ("overwatchTitle", ev.OverwatchTitle),
             ("targetName", ev.TargetName));
         _announcementOverlay.SetText(title, ev.Message, ev.Color);
+
+        _audio.PlayGlobal("/Audio/_Crescent/Announcements/radio_announcement.ogg", Filter.Local(), false);
     }
 
     private void OnLocalWatchingInit(Entity<RatOverwatchWatchingComponent> ent, ref ComponentInit args)

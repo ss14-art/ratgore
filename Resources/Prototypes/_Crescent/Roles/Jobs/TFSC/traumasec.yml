@@ -26,6 +26,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconSyndieTraumasec"
+  chatNameColor: "#b8b8b8"
   supervisors: You answer to the interests of the Interdyne Pharmaceuticals company's coordinator and your peers.
   canBeAntag: false
   requirements:

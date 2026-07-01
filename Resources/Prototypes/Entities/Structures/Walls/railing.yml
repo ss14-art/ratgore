@@ -1,34 +1,53 @@
 - type: entity
-  parent: BaseStructure
-  id: Railing
+  parent: [ BaseStructure ] # Starlight-edit
+  id: BaseRailing
+  abstract: true
   name: railing
   description: Basic railing meant to protect idiots like you from falling.
   components:
   - type: Sprite
-    drawdepth: WallTops
-    sprite: Structures/Walls/railing.rsi
-    state: side
+    drawdepth: SmallObjects
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
   - type: Icon
-    sprite: Structures/Walls/railing.rsi
-    state: side
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
   - type: Physics
     bodyType: Static
+  - type: InteractionOutline
+  - type: Repairable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: FlimsyMetallic
+  - type: Climbable
+  - type: Construction
+    graph: Railing
+  - type: RCDDeconstructable
+    cost: 2
+    delay: 2
+    fx: EffectRCDDeconstruct2
+
+- type: entity
+  parent: BaseRailing
+  id: Railing
+  name: Railing #SL
+  suffix: Steel #SL
+  components:
+  - type: Sprite
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
+    state: side
+  - type: Icon
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
+    state: side
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.40"
+          bounds: "-0.49,-0.49,0.49,-0.25"
         density: 1000
         mask:
         - TableMask
         layer:
         - TableLayer
-  - type: InteractionOutline
-  - type: Repairable
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: FlimsyMetallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -53,36 +72,27 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Climbable
   - type: Construction
-    graph: Railing
     node: railing
-  - type: RCDDeconstructable
-    cost: 2
-    delay: 2
-    fx: EffectRCDDeconstruct2  
 
 - type: entity
-  parent: BaseStructure
+  parent: BaseRailing
   id: RailingCorner
-  name: railing
-  description: Basic railing meant to protect idiots like you from falling.
+  name: Railing #SL
+  suffix: Steel, Corner #SL
   components:
   - type: Sprite
-    drawdepth: WallTops
-    sprite: Structures/Walls/railing.rsi
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
     state: corner
   - type: Icon
-    sprite: Structures/Walls/railing.rsi
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
     state: corner
-  - type: Physics
-    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.40"
+          bounds: "-0.49,-0.49,0.49,-0.25"
         density: 1000
         mask:
         - TableMask
@@ -91,17 +101,12 @@
       fix2:
         shape:
           !type:PhysShapeAabb
-          bounds: "0.49,0.49,0.40,-0.49"
+          bounds: "0.25,-0.49,0.49,0.49"
         density: 1000
         mask:
         - TableMask
         layer:
         - TableLayer
-  - type: InteractionOutline
-  - type: Repairable
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: FlimsyMetallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -126,46 +131,32 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Climbable
   - type: Construction
-    graph: Railing
     node: railingCorner
-  - type: RCDDeconstructable
-    cost: 2
-    delay: 2
-    fx: EffectRCDDeconstruct2  
 
 - type: entity
-  parent: BaseStructure
+  parent: BaseRailing
   id: RailingCornerSmall
-  name: railing
-  description: Basic railing meant to protect idiots like you from falling.
+  name: Railing #SL
+  suffix: Steel, Corner Small #SL
   components:
   - type: Sprite
-    drawdepth: WallTops
-    sprite: Structures/Walls/railing.rsi
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
     state: corner_small
   - type: Icon
-    sprite: Structures/Walls/railing.rsi
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
     state: corner_small
-  - type: Physics
-    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,0.49,-0.40,0.40"
+          bounds: "-0.49,0.25,-0.25,0.49"
         density: 1000
         mask:
         - TableMask
         layer:
         - TableLayer
-  - type: InteractionOutline
-  - type: Repairable
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: FlimsyMetallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -190,33 +181,27 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Climbable
   - type: Construction
-    graph: Railing
     node: railingCornerSmall
-  - type: RCDDeconstructable
-    cost: 2
-    delay: 2
-    fx: EffectRCDDeconstruct2  
-    
+
 - type: entity
-  parent: BaseStructure
+  parent: BaseRailing
   id: RailingRound
-  name: railing
-  description: Basic railing meant to protect idiots like you from falling.
+  name: Railing #SL
+  suffix: Steel, Round #SL
   components:
   - type: Sprite
-    drawdepth: WallTops
-    sprite: Structures/Walls/railing.rsi
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
     state: round
-  - type: Physics
-    bodyType: Static
+  - type: Icon
+    sprite: _Starlight/Structures/Walls/railing.rsi #Starlight
+    state: round
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.40"
+          bounds: "-0.49,-0.49,0.49,-0.25"
         density: 1000
         mask:
           - TableMask
@@ -225,7 +210,7 @@
       fix2:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,-0.40,0.49"
+          bounds: "-0.49,-0.49,-0.25,0.49"
         density: 1000
         mask:
           - TableMask
@@ -234,17 +219,12 @@
       fix3:
         shape:
           !type:PhysShapeAabb
-          bounds: "0.40,-0.49,0.49,0.49"
+          bounds: "0.25,-0.49,0.49,0.49"
         density: 1000
         mask:
           - TableMask
         layer:
           - TableLayer
-  - type: InteractionOutline
-  - type: Repairable
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: FlimsyMetallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -269,11 +249,5 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Climbable
   - type: Construction
-    graph: Railing
     node: railingRound
-  - type: RCDDeconstructable
-    cost: 2
-    delay: 2
-    fx: EffectRCDDeconstruct2  

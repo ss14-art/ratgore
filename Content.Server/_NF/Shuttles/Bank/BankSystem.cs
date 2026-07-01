@@ -8,6 +8,8 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Content.Server.Cargo.Components;
 using Content.Shared.Preferences.Loadouts;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mind;
 
 namespace Content.Server.Bank;
 
@@ -23,8 +25,27 @@ public sealed partial class BankSystem : EntitySystem
         base.Initialize();
         _log = Logger.GetSawmill("bank");
         SubscribeLocalEvent<BankAccountComponent, ComponentGetState>(OnBankAccountChanged);
+        SubscribeLocalEvent<BankAccountComponent, MindAddedMessage>(OnMindAdded);
         InitializeATM();
         InitializeStationATM();
+    }
+
+    private void OnMindAdded(EntityUid uid, BankAccountComponent bank, ref MindAddedMessage args)
+    {
+        var mind = args.Mind.Comp;
+        if (mind.UserId == null)
+            return;
+
+        var prefs = _prefsManager.GetPreferences(mind.UserId.Value);
+        if (prefs.SelectedCharacter is not HumanoidCharacterProfile profile)
+            return;
+
+        if (bank.Balance != profile.BankBalance)
+        {
+            bank.Balance = profile.BankBalance;
+            EntityManager.Dirty(uid, bank);
+            _log.Info($"Mind transfer to {ToPrettyString(uid)}: bank balance reset to profile value {profile.BankBalance}");
+        }
     }
 
     // To ensure that bank account data gets saved, we are going to update the db every time the component changes

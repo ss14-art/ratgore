@@ -100,7 +100,7 @@
     gloves: ClothingHandsGlovesColorYellow
     head: ClothingHeadHatBeretEngineering
     eyes: ClothingEyesGlassesMeson
-    ears: ClothingHeadsetNCWL
+    ears: ClothingHeadsetNCWLCommand
     outerClothing: ClothingOuterArmorNCWLEngi
     belt: ClothingBeltSalvageWebbingFilledNF
     pocket2: RatRubberStampNCWLResearch

@@ -1,0 +1,24 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               Title="{Loc price-monitor-window-title}"
+               SetSize="800 600"
+               MinSize="600 400">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Vertical" Name="GoodsTab" Access="Public">
+            <Label Text="{Loc price-monitor-tab-prices}"/>
+            <ScrollContainer>
+                <BoxContainer Orientation="Vertical" Name="GoodsList" Access="Public"/>
+            </ScrollContainer>
+        </BoxContainer>
+        
+        <BoxContainer Orientation="Vertical" Name="ShuttlesTab" Access="Public">
+            <Label Text="{Loc price-monitor-tab-shuttles}"/>
+            <ScrollContainer>
+                <BoxContainer Orientation="Vertical" Name="ShuttlesList" Access="Public"/>
+            </ScrollContainer>
+        </BoxContainer>
+        
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="RefreshButton" Access="Public" Text="{Loc price-monitor-refresh}"/>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

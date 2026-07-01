@@ -394,6 +394,7 @@
         maxVol: 15
   - type: Injector
     injectOnly: false
+    delay: 10 # Ratgore-tweak
   - type: ExaminableSolution
     solution: injector
   - type: Spillable

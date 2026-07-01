@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Reaver
-  name: МГ Разоритель
+  name: ТС Разоритель
   description: Средний истребитель Синдиката.
   price: 25000 #26000 appraisegrid
   category: Small
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Reaver
-  mapName: 'МГ Разоритель'
+  mapName: 'ТС Разоритель'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/reaver.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: fighter
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Разоритель {1}'
+          mapNameTemplate: 'ТС Разоритель {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

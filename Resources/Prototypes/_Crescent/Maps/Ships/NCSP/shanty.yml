@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Shanty
-  name: ПК Лачужка
+  name: ТС Лачужка
   description: |
     Трофейный грузовой модуль Синдиката.
     LOADOUT: 1x 20mm 'Screamer' light carbine repeater cannon
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Shanty
-  mapName: 'ПК Лачужка'
+  mapName: 'ТС Лачужка'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/Shanty.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: civilian
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Лачужка {1}'
+          mapNameTemplate: 'ТС Лачужка {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

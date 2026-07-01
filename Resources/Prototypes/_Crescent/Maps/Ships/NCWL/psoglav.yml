@@ -3,18 +3,16 @@
 
 - type: vessel
   id: Psoglav
-  name: NCWL Psoglav
-  description: |
-    A communard mining carrier, converted from the scrappy cockroach- it's been given a third life as a combat capable mining barge for the league.
-    LOADOUT: 2x SHI 250c "Exhumer" kinetic Pulser, 7x Homeguard 20mm "Warthog" autocannons, 1x 88mm "Stormreign" Flak Array
-  price: 70000
+  name: ЛРНП Псоглав
+  description: Коммунарский тяжёлый добытчик. Помимо тяжёлой пушки 88мм, семи скорострельных 20мм, буров и магнита, этот корабль был оснащён минимум для изучений артефактов и аномалий на своём борту. В силу недостатка пространства, его исследовательские способности крайне снижены по сравнению с аналогами у других фракций в Тайпане.
+  price: 120000
   category: Large
   group: None
   path: /Maps/_Crescent/Shuttles/NCWL/psoglav.yml
 
 - type: gameMap
   id: Psoglav
-  mapName: 'NCWL Psoglav'
+  mapName: 'ЛРНП Псоглав'
   mapPath: /Maps/_Crescent/Shuttles/NCWL/psoglav.yml
   minPlayers: 0
   stations:
@@ -29,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: large_industrial
         - type: StationNameSetup
-          mapNameTemplate: 'NCWL Psoglav {1}'
+          mapNameTemplate: 'ЛРНП Псоглав {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

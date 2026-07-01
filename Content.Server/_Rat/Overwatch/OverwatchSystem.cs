@@ -265,7 +265,7 @@ public sealed class OverwatchSystem : EntitySystem
             Name(member),
             GetJobTitle(member),
             GetMemberStatus(member),
-            HasWearableCamera(member),
+            true,
             GetSquadId(member),
             GetSquadName(member) ?? "",
             GetMemberCoordinates(member)
@@ -449,14 +449,7 @@ public sealed class OverwatchSystem : EntitySystem
 
         var target = GetEntity(args.Target);
         if (!TryComp<HullrotFactionComponent>(target, out var factionComp) ||
-            factionComp.Faction != ent.Comp.Faction ||
-            !IsValidCameraTarget(target))
-            return;
-
-        if (!_inventorySystem.TryGetSlotEntity(target, CameraSlotId, out var neckItem))
-            return;
-
-        if (!TryComp<SurveillanceCameraComponent>(neckItem.Value, out var cameraComp))
+            factionComp.Faction != ent.Comp.Faction)
             return;
 
         if (!TryComp<ActorComponent>(actor, out var actorComp) || actorComp.PlayerSession == null)
@@ -473,11 +466,6 @@ public sealed class OverwatchSystem : EntitySystem
             }
         }
 
-        if (!cameraComp.Active)
-            _cameraSystem.SetActive(neckItem.Value, true, cameraComp);
-
-        _cameraSystem.AddActiveViewer(neckItem.Value, actor, ent.Owner, cameraComp);
-
         var cameraCompTarget = EnsureComp<RatOverwatchCameraComponent>(target);
         cameraCompTarget.Watching.Add(actor);
         Dirty(target, cameraCompTarget);
@@ -485,7 +473,7 @@ public sealed class OverwatchSystem : EntitySystem
         var watchingCompActor = EnsureComp<RatOverwatchWatchingComponent>(actor);
         watchingCompActor.Watching = target;
         watchingCompActor.Console = ent.Owner;
-        watchingCompActor.Camera = neckItem.Value;
+        watchingCompActor.Camera = null;
         Dirty(actor, watchingCompActor);
 
         _watchingPairs[actor] = target;
@@ -718,16 +706,7 @@ public sealed class OverwatchSystem : EntitySystem
         return OverwatchMemberStatus.Alive;
     }
 
-    /// <summary>
-    /// Проверяет наличие носимой камеры на участнике.
-    /// </summary>
-    private bool HasWearableCamera(EntityUid member)
-    {
-        if (!_inventorySystem.TryGetSlotEntity(member, CameraSlotId, out var neckItem))
-            return false;
 
-        return HasComp<SurveillanceCameraComponent>(neckItem.Value);
-    }
 
     /// <summary>
     /// Получает должность сущности.
@@ -765,13 +744,7 @@ public sealed class OverwatchSystem : EntitySystem
         return "";
     }
 
-    /// <summary>
-    /// Проверяет возможность использования сущности как цели для камеры.
-    /// </summary>
-    private bool IsValidCameraTarget(EntityUid target)
-    {
-        return HasWearableCamera(target);
-    }
+
 
     /// <summary>
     /// Получает название Overwatch для фракции.

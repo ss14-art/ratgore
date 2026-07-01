@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Itch
-  name: МГ Зудень
+  name: ТС Зудень
   description: Маленький скрытный истребитель.
   price: 25000 #23000 appraisegrid
   category: Small
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Itch
-  mapName: 'МГ Зудень'
+  mapName: 'ТС Зудень'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/itch.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: fighter
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Зудень {1}'
+          mapNameTemplate: 'ТС Зудень {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

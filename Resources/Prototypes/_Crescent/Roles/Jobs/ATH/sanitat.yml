@@ -28,6 +28,8 @@
       - type: CPRTraining
       - type: SurgerySpeedModifier
         speedModifier: 1.75
+      - type: HealingSpeedModifier # Ratgore-tweak
+        speedModifier: 2.0 # Ratgore-tweak
       - type: LanguageAdder
         addSpoken:
           - SolBasic

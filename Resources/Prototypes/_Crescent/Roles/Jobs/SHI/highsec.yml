@@ -26,6 +26,12 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconHighsec"
+  chatNameColor: "#3b4e57"
+  chatAmplification:
+    bubbleScale: 1.08
+    shoutBubbleScale: 1.3
+    radioScale: 1.2
+    radioBold: true
   supervisors: job-supervisors-shi
   canBeAntag: false
   requirements:

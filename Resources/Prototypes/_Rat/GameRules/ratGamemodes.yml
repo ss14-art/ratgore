@@ -31,42 +31,24 @@
         IFFFaction: DSM
       Tatsumoto:
         gameMapID: Tatsumoto
-        posX: -6000
-        posY: 1000
+        posX: 2500
+        posY: 0
+        randomOffsetX: 1000
+        randomOffsetY: 2000
         IFFColor: White
         IFFFaction: SHI
-      Castle:
-        gameMapID: Castle
-        posX: -3000
-        posY: 7000
-        IFFColor: Green
-        IFFFaction: SRM
-        randomOffsetX: 2000
-        randomOffsetY: 2000
-      Dochenskaya:
-        gameMapID: Dochenskaya
-        posX: 6000
-        posY: 1000
-        IFFColor: IndianRed
-        IFFFaction: TFSC
       Jackal:
         gameMapID: Jackal
         posX: 8000
         posY: -2000
         IFFColor: IndianRed
         IFFFaction: TFSC
-      Dawnbreaker:
-        gameMapID: Dawnbreaker
-        posX: 6000
-        posY: -1000
-        IFFColor: IndianRed
-        IFFFaction: TFSC
-      Hayes:
-        gameMapID: Hayes
-        posX: 5000
-        posY: -4000
-        IFFColor: IndianRed
-        IFFFaction: TFSC
+      GliessSanto:
+        gameMapID: GliessSanto
+        posX: -2000
+        posY: 2000
+        randomOffsetX: 1000
+        randomOffsetY: 1000
       TribalHideout:
         gameMapID: TribalHideout
         posX: 2000
@@ -77,8 +59,10 @@
         randomOffsetY: 2000
       IronRing:
         gameMapID: IronRing
-        posX: -3000
-        posY: 500
+        posX: -1000
+        posY: 0
+        randomOffsetX: 500
+        randomOffsetY: 1000
       RatFakel:
         gameMapID: RatFakel
         posX: 0
@@ -91,10 +75,6 @@
         gameMapID: RatKovf
         posX: 500
         posY: -4300
-      RatResearchLabratory:
-        gameMapID: RatResearchLabratory
-        posX: -2000
-        posY: 2000
 
 - type: gamePreset
   id: RatAdventureFreeport
@@ -128,24 +108,24 @@
         IFFFaction: DSM
       Tatsumoto:
         gameMapID: Tatsumoto
-        posX: -6000
-        posY: 1000
+        posX: 2500
+        posY: 0
+        randomOffsetX: 1000
+        randomOffsetY: 2000
         IFFColor: White
         IFFFaction: SHI
-      Castle:
-        gameMapID: Castle
-        posX: -3000
-        posY: 7000
-        IFFColor: Green
-        IFFFaction: SRM
-        randomOffsetX: 2000
-        randomOffsetY: 2000
       Freeport:
         gameMapID: Freeport
         posX: 7000
         posY: -2000
         IFFColor: IndianRed
         IFFFaction: TFSC
+      GliessSanto:
+        gameMapID: GliessSanto
+        posX: -2000
+        posY: 2000
+        randomOffsetX: 1000
+        randomOffsetY: 1000
       TribalHideout:
         gameMapID: TribalHideout
         posX: 2000
@@ -158,6 +138,8 @@
         gameMapID: IronRing
         posX: -3000
         posY: 500
+        randomOffsetX: 1000
+        randomOffsetY: 1000
       RatFakel:
         gameMapID: RatFakel
         posX: 0
@@ -170,10 +152,6 @@
         gameMapID: RatKovf
         posX: 500
         posY: -4300
-      RatResearchLabratory:
-        gameMapID: RatResearchLabratory
-        posX: -2000
-        posY: 2000
 
 - type: gamePreset
   id: RatAdventureWar

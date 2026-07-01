@@ -34,6 +34,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconNCWLMedicalWorker"
+  chatNameColor: "#00e6d6"
   supervisors: job-supervisors-ncwl-unionized
   canBeAntag: false
   requirements:
@@ -60,6 +61,8 @@
       - type: CPRTraining
       - type: SurgerySpeedModifier
         speedModifier: 1.75
+      - type: HealingSpeedModifier # Ratgore-tweak
+        speedModifier: 2.0 # Ratgore-tweak
       - type: LanguageAdder
         addSpoken:
           - Dockta
@@ -84,6 +87,7 @@
     outerClothing: ClothingOuterArmorNCWLMedi
     belt: ClothingBeltMedicalFilled
     back: ClothingBackpackNCWL
+    pocket1: HandheldCrewMonitorNCWL # Ratgore-tweak
     gloves: ClothingHandsGlovesNitrile
     head: ClothingHeadHatNCWLCapsoftMedical
     eyes: ClothingEyesHudMedical

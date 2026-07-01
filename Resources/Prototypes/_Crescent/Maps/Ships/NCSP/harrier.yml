@@ -1,7 +1,7 @@
 - type: vessel
   id: Harrier
-  name: IPM Harrier
-  description: Top of the line heavy fighter built for IPM by SAW.
+  name: TS Harrier
+  description: Top of the line Syndicate heavy fighter.
   price: 30000
   category: Medium
   group: None
@@ -9,7 +9,7 @@
 
 - type: gameMap
   id: Harrier
-  mapName: 'IPM Harrier'
+  mapName: 'TS Harrier'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/harrier.yml
   minPlayers: 0
   stations:
@@ -24,7 +24,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: fighter
         - type: StationNameSetup
-          mapNameTemplate: 'IPM Harrier {1}'
+          mapNameTemplate: 'TS Harrier {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

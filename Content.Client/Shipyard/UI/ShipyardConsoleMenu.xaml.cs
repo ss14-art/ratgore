@@ -17,7 +17,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     public event Action<ButtonEventArgs>? OnSellShip;
-    public event Action<string>? OnPurchased;
+    public event Action<string, string?>? OnPurchased;
     private readonly ShipyardConsoleBoundUserInterface _menu;
     private readonly EconomyPriceSystem _economy;
     private readonly List<string> _categoryStrings = new();
@@ -85,7 +85,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
                 search.Length == 0 && _category != null && prototype!.Category.Equals(_category))
             {
                 var vesselEntry = new VesselRow(prototype, true);
-                vesselEntry.OnPurchasePressed += () =>  { OnPurchased?.Invoke(prototype.ID); };
+                vesselEntry.OnPurchasePressed += (customName) => { OnPurchased?.Invoke(prototype.ID, customName); };
                 Vessels.AddChild(vesselEntry);
             }
         }

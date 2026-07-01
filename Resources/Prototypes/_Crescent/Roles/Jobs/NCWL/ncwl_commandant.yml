@@ -19,6 +19,12 @@
   whitelisted: true # Rat
   requireAdminNotify: false
   icon: "JobIconNCWLFactionLeader"
+  chatNameColor: "#f5b12a"
+  chatAmplification:
+    bubbleScale: 1.095
+    shoutBubbleScale: 1.35
+    radioScale: 1.39
+    radioBold: true
   supervisors: job-supervisors-highcomm
   canBeAntag: false
   requirements:
@@ -105,7 +111,7 @@
     gloves: ClothingHandsGlovesNCWLAdmiralParade
     head: ClothingHeadHatNCWLBeretAdmiral
     mask: ClothingMaskNCWLGasmask
-    ears: ClothingHeadsetNCWL
+    ears: ClothingHeadsetNCWLCommand
     eyes: ClothingEyesHudSecurity
     back: ClothingBackpackNCWL
   storage:

@@ -102,5 +102,5 @@
     gloves: ClothingHandsGlovesFingerless
     head: ClothingHeadHatBeretQM
     eyes: ClothingEyesHudSecurity
-    ears: ClothingHeadsetNCWL
+    ears: ClothingHeadsetNCWLCommand
     pocket2: RatRubberStampNCWLCargo

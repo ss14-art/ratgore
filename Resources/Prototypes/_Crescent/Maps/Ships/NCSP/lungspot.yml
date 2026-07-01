@@ -3,7 +3,7 @@
 
 - type: vessel
   id: Lungspot
-  name: ТК Легято
+  name: ТС Легято
   description: |
     Результат потребности "Кибердав" в универсальном и эффективном корабле сопровождения класса фрегат. "Легятно" стабильно выполняет свою работу, что делает его основой операций "Кибердав".
     LOADOUT: 2x 43mm Slugthrowers
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Lungspot
-  mapName: 'ТК Легято'
+  mapName: 'ТС Легято'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/lungspot.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: corvette
         - type: StationNameSetup
-          mapNameTemplate: 'ТК Легято {1}'
+          mapNameTemplate: 'ТС Легято {1}'
           nameGenerator:
            !type:NanotrasenNameGenerator
             prefixCreator: '14'

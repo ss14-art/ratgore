@@ -22,6 +22,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconSyndieOperative"
+  chatNameColor: "#264180"
   supervisors: You answer to the patriarch and the interests of the CyberDawn Technologies company.
   canBeAntag: false
   requirements:

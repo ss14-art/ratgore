@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Corvax
-  name: МГ Корвакс
+  name: ТС Корвакс
   description: Легкий ракетный корвет. Сокрушителен на дальних дистанциях.
   price: 50000 #47000 appraisegrid
   category: Small
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Corvax
-  mapName: 'МГ Корвакс'
+  mapName: 'ТС Корвакс'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/corvax.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: corvette
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Корвакс {1}'
+          mapNameTemplate: 'ТС Корвакс {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

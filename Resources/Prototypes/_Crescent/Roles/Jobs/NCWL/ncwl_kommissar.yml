@@ -22,6 +22,12 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconNCWLHomeguardLeader"
+  chatNameColor: "#c71010"
+  chatAmplification:
+    bubbleScale: 1.09
+    shoutBubbleScale: 1.32
+    radioScale: 1.23
+    radioBold: true
   supervisors: job-supervisors-ncwl-kommissar
   canBeAntag: false
   requirements:
@@ -107,6 +113,6 @@
     gloves: ClothingHandsGlovesCombat
     head: ClothingHeadHatNCWLKommissarHat
     mask: ClothingMaskNCWLGasmask
-    ears: ClothingHeadsetNCWL
+    ears: ClothingHeadsetNCWLCommand
     eyes: ClothingEyesHudSecurity
     pocket1: RatRubberStampNCWLComissar

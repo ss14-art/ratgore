@@ -43,10 +43,10 @@ public abstract class SharedShipyardConsoleSystem : EntitySystem
         if (!_proto.TryIndex(msg.Vessel, out var vessel) || _whitelistSystem.IsWhitelistFail(vessel.Whitelist, ent))
             return;
 
-        TryPurchase(ent, user, vessel);
+        TryPurchase(ent, user, vessel, msg.CustomName);
     }
 
-    protected virtual void TryPurchase(Entity<ShipyardConsoleComponent> ent, EntityUid user, VesselPrototype vessel)
+    protected virtual void TryPurchase(Entity<ShipyardConsoleComponent> ent, EntityUid user, VesselPrototype vessel, string? customName = null)
     {
     }
 }

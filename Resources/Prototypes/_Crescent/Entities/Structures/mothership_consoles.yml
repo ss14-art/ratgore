@@ -137,7 +137,7 @@
     - buffalo
     - gazpachov
     - Musinyane
-    #- Chanchu
+    - Chanchu
     - Nazaar
 
 - type: entity
@@ -148,7 +148,7 @@
   - type: ShipyardListing
     iffColor: IndianRed
     shuttles:
-    #- Velator
+    - Velator
     #- Taipan
     - Wreck
     - Spriggan

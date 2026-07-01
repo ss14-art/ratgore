@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Gnat
-  name: МГ Гнус
+  name: ТС Гнус
   description: | 
     Сверхлегкий истребитель Синдиката, оснащенный двумя 20-мм "Вулканами" для быстрого уничтожения вражеских сверхлегких кораблей или поражения уязвимых элементов корпуса.
     ВООРУЖЕНИЕ: 2x 20-мм "Вулканы" НТ
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Gnat
-  mapName: 'МГ Гнус'
+  mapName: 'ТС Гнус'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/gnat.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: fighter
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Гнус {1}'
+          mapNameTemplate: 'ТС Гнус {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

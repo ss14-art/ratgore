@@ -1118,6 +1118,7 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     ///     message gets sent on this channel, this should be set to null to prevent duplicate messages.
     /// </summary>
     public RadioChannelPrototype? Channel;
+    public bool RadioMessageSent; // Art-TTS
 
     public EntitySpokeEvent(EntityUid source, string message, RadioChannelPrototype? channel, bool isWhisper, LanguagePrototype language)
     {

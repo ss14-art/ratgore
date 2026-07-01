@@ -22,6 +22,7 @@ public sealed class SuitSensorStatus
     public string JobIcon;
     public List<string> JobDepartments;
     public bool IsAlive;
+    public byte MobState; // _Ratgore-tweak: 1=Alive, 2=Critical, 3=SoftCritical, 4=Dead
     public int? TotalDamage;
     public int? TotalDamageThreshold;
     public float? DamagePercentage => TotalDamageThreshold == null || TotalDamage == null ? null : TotalDamage / (float) TotalDamageThreshold;

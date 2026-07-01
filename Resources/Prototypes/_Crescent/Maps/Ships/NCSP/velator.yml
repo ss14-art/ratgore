@@ -3,16 +3,16 @@
 #
 - type: vessel
   id: Velator
-  name: ТК Велатор
-  description: Легкий корвет радиоэлектронной борьбы Синдиката с бортовым арсеналом саботажника.
-  price: 60000
+  name: ТС Велатор
+  description: Легкий корвет, который некогда был разработан для РЭБ и саботажа. Ныне, это теперь лёгкий тайный исследовательский корабль для изучения артефактов и аномалий во всех уголках Тайпана. Несмотря на то, что он лишился РЭБ установки, его стелс система и вооружение остались на месте, но из-за этого его подготовка к исследованиям сильно снижена, вынуждая его владельцев докупать необходимое самостоятельно.
+  price: 80000
   category: Medium
   group: None
   path: /Maps/_Crescent/Shuttles/NCSP/velator.yml
 
 - type: gameMap
   id: Velator
-  mapName: 'КВСТ Велатор'
+  mapName: 'ТС Велатор'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/velator.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: corvette
         - type: StationNameSetup
-          mapNameTemplate: 'ТК Велатор {1}'
+          mapNameTemplate: 'ТС Велатор {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

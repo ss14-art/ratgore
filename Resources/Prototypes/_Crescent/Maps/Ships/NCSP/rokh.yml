@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Rokh
-  name: ПК Рок
+  name: ТС Рок
   description: |
     Переоборудованный грузовой тягач.
     LOADOUT: 7x 20mm 'Screamer' light carbine reapeater cannons, 4x 90mm 'Resolute' tri-barreled repeaters, 1x 48mm 'Shortbow' SRM rocket systems, 2x 120mm Anvil mono barreled artillery cannons
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Rokh
-  mapName: 'ПК Рок'
+  mapName: 'ТС Рок'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/rokh.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: battleship
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Рок {1}'
+          mapNameTemplate: 'ТС Рок {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

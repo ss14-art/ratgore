@@ -27,7 +27,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 100
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -43,19 +43,19 @@
         damageType: Piercing
         damage: 5
       behaviors:
-      - !type:SolutionExplosionBehavior
+      - !type:TankLeakBehavior
         solution: tank
+        leaksToAdd: 1
     - trigger:
         !type:DamageTrigger
         damage: 10
       behaviors:
-      - !type:SpillBehavior
+      - !type:TankLeakBehavior
         solution: tank
+        leaksToAdd: 1
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
   - type: SolutionContainerManager
     solutions:
       tank:

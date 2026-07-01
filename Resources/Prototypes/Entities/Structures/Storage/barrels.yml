@@ -29,6 +29,17 @@
   - type: Destructible
     thresholds:
     - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpillBehavior
+        solution: barrel
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
         !type:DamageTypeTrigger
         damageType: Heat
         damage: 5
@@ -40,19 +51,19 @@
         damageType: Piercing
         damage: 5
       behaviors:
-      - !type:SolutionExplosionBehavior
+      - !type:TankLeakBehavior
         solution: barrel
+        leaksToAdd: 1
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 10
       behaviors:
-      - !type:SpillBehavior
+      - !type:TankLeakBehavior
         solution: barrel
+        leaksToAdd: 1
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
 
 # Base Open
 - type: entity

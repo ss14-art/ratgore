@@ -2,7 +2,7 @@
 # Discord: baldy
 - type: vessel
   id: Lockjaw
-  name: ПК Трицепс
+  name: ТС Трицепс
   description: Шаттл эпохи НаноТрейзен, переделанный в вооруженный личный блокадопрорыватель. Относится к части "прорыватель" буквально.
   price: 89000
   category: Small
@@ -11,7 +11,7 @@
 
 - type: gameMap
   id: Lockjaw
-  mapName: 'ПК Трицепс' 
+  mapName: 'ТС Трицепс' 
   mapPath: /Maps/_Crescent/Shuttles/NCSP/lockjaw.yml
   minPlayers: 0
   stations:
@@ -22,7 +22,7 @@
           iconType: Shuttle
       components: 
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Трицепс {1}' 
+          mapNameTemplate: 'ТС Трицепс {1}' 
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

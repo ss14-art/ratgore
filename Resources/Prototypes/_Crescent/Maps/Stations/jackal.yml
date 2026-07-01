@@ -1,6 +1,6 @@
 - type: gameMap
   id: Jackal
-  mapName: 'МГ Гидра'
+  mapName: 'ТС Гидра'
   mapPath: /Maps/_Crescent/Stations/jackal.yml
   minPlayers: 0
   stations:
@@ -12,7 +12,7 @@
           iconType: Station
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Гидра'
+          mapNameTemplate: 'ТС Гидра'
         - type: VesselDesignation
           designation: vessel-designation-headquarters
         - type: VesselMusic
@@ -22,8 +22,15 @@
             proper: true
         - type: StationJobs
           overflowJobs: []
-          availableJobs: #12 total
+          availableJobs: #19 total
             RingleaderNCSP: [ 1, 1 ]
-            LieutenantNCSP: [ 1, 1 ]
+            LieutenantNCSP: [ 2, 2 ]
             InfanteerNCSP: [ 4, 4 ]
-            TechnicianNCSP: [ 4, 4 ]
+            CoordinatorNCSP: [ 1, 1 ]
+            RipperdocNCSP: [2, 2]
+            TraumasecNCSP: [1, 1]
+            IntelligenceOfficerNCSP: [ 1, 1 ]
+            OperativeNCSP: [2, 2]
+            CyberdawnTechNCSP: [1, 1]
+            ForemanNCSP: [1, 1]
+            ShipbreakerNCSP: [3, 3]

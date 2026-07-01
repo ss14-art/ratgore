@@ -8,6 +8,12 @@
   alwaysUseSpawner: true
   requireAdminNotify: true
   icon: "JobIconSyndieLieutenant"
+  chatNameColor: "#8d2121"
+  chatAmplification:
+    bubbleScale: 1.08
+    shoutBubbleScale: 1.3
+    radioScale: 1.2
+    radioBold: true
   supervisors: job-supervisors-gsc-officer
   canBeAntag: false
   requirements:

@@ -415,7 +415,7 @@
     selectedMode: Burst
     availableModes:
     - Burst
-    burstFireRate: 24
+    burstFireRate: 15
     burstCooldown: 0.5
     soundGunshot:
       path: /Audio/_Crescent/Weapons/Guns/pistol_1/pistol_gunshot_3.ogg

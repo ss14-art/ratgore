@@ -1,0 +1,76 @@
+- type: entity
+  parent: BaseHandheldComputer
+  id: HandheldCrewMonitorDSM
+  name: DSM handheld crew monitor
+  description: A hand-held crew monitor tracking DSM faction members.
+  suffix: Rat
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/handheldcrewmonitor.rsi
+    state: scanner
+  - type: ActivatableUI
+    key: enum.RatCrewMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RatCrewMonitorUiKey.Key:
+        type: Content.Client._Rat.CrewMonitoring.RatCrewMonitorBoundUserInterface
+  - type: RatCrewMonitor
+    faction: DSM
+
+- type: entity
+  parent: BaseHandheldComputer
+  id: HandheldCrewMonitorNCWL
+  name: NCWL handheld crew monitor
+  description: A hand-held crew monitor tracking NCWL faction members.
+  suffix: Rat
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/handheldcrewmonitor.rsi
+    state: scanner
+  - type: ActivatableUI
+    key: enum.RatCrewMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RatCrewMonitorUiKey.Key:
+        type: Content.Client._Rat.CrewMonitoring.RatCrewMonitorBoundUserInterface
+  - type: RatCrewMonitor
+    faction: NCWL
+
+- type: entity
+  parent: BaseHandheldComputer
+  id: HandheldCrewMonitorSHI
+  name: SHI handheld crew monitor
+  description: A hand-held crew monitor tracking SHI faction members.
+  suffix: Rat
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/handheldcrewmonitor.rsi
+    state: scanner
+  - type: ActivatableUI
+    key: enum.RatCrewMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RatCrewMonitorUiKey.Key:
+        type: Content.Client._Rat.CrewMonitoring.RatCrewMonitorBoundUserInterface
+  - type: RatCrewMonitor
+    faction: SHI
+
+- type: entity
+  parent: BaseHandheldComputer
+  id: HandheldCrewMonitorTFSC
+  name: TFSC handheld crew monitor
+  description: A hand-held crew monitor tracking TFSC faction members.
+  suffix: Rat
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/handheldcrewmonitor.rsi
+    state: scanner
+  - type: ActivatableUI
+    key: enum.RatCrewMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RatCrewMonitorUiKey.Key:
+        type: Content.Client._Rat.CrewMonitoring.RatCrewMonitorBoundUserInterface
+  - type: RatCrewMonitor
+    faction: TFSC
+# _Ratgore-edit end

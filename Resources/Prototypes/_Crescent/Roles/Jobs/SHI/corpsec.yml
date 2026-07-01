@@ -26,6 +26,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconCorpsec"
+  chatNameColor: "#57717d"
   supervisors: job-supervisors-shi
   canBeAntag: false
   requirements:

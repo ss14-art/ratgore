@@ -71,10 +71,9 @@
                 collection: MetalBreak
             - !type:ChangeConstructionNodeBehavior
               node: machineFrame
-            - !type:DoActsBehavior
-            - !type:SolutionExplosionBehavior
+            - !type:TankLeakBehavior
               solution: tank
-              # acts: ["Destruction"] YAMLFIX: This is deprecated
+              leaksToAdd: 1
     - type: GuideHelp
       guides: [ PortableGenerator, Power ]
 

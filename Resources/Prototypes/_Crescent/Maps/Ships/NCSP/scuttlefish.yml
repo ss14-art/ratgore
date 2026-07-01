@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Scuttlefish
-  name: МГ Каракатица
+  name: ТС Каракатица
   description: |
     Сверхлегкий бомбардировщик с мощным зарядом из четырех ракет, созданный, чтобы сеять хаос среди менее маневренных кораблей, достаточно неудачливых, чтобы оказаться в зоне его поражения.
     ВООРУЖЕНИЕ: 2x Ракетная установка НКВЛ-3 48-мм "Куродава"
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Scuttlefish
-  mapName: 'МГ Каракатица'
+  mapName: 'ТС Каракатица'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/scuttlefish.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: fighter
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Каракатица {1}'
+          mapNameTemplate: 'ТС Каракатица {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

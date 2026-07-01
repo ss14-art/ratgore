@@ -2,7 +2,7 @@
 # Discord: ChangelingRUES
 - type: vessel
   id: Dugong
-  name: ПК Дюгонь
+  name: ТС Дюгонь
   description: |
     Когда-то мирный торговый корабль, что умер на просторах Тайпана. Он был воскрешён, выполняя для ПК роль странствующего торговца их товаром.
     ВООРУЖЕНИЕ: 2x 20мм орудия.
@@ -14,7 +14,7 @@
 
 - type: gameMap
   id: Dugong
-  mapName: 'ПК Дюгонь'
+  mapName: 'ТС Дюгонь'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/dugong.yml
   minPlayers: 0
   stations:
@@ -29,7 +29,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: hauler
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Дюгонь {1}'
+          mapNameTemplate: 'ТС Дюгонь {1}'
           nameGenerator:
            !type:NanotrasenNameGenerator
             prefixCreator: '14'

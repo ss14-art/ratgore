@@ -4,7 +4,7 @@
 # (narcan autoinjector and gun)
 
 #--- MAYBE IF NOT MAPPED ---#
-# (shipworks & material processing)  
+# (shipworks & material processing)
 # (explosives, propelland and casings production)
 # (ammo assembly)
 
@@ -19,7 +19,6 @@
   cost: 3000
   recipeUnlocks:
   - WeaponRifleCMMNimrod
-  #- WeaponSubMachineGunWt550 - uncomment in case of SMG
 
 - type: technology
   id: MinutemenHybridCorvette
@@ -87,7 +86,7 @@
   cost: 8000
   recipeUnlocks:
   - ArbiterLPC
-  
+
 - type: technology
   id: MinutemenLightMissileDestroyer
   name: research-technology-minutemen-light-missile-destroyer

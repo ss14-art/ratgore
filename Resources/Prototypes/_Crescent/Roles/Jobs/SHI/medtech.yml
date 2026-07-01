@@ -30,6 +30,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconMedtech"
+  chatNameColor: "#44c8e3"
   supervisors: job-supervisors-shi
   canBeAntag: false
   requirements:
@@ -52,6 +53,8 @@
       - type: CPRTraining
       - type: SurgerySpeedModifier
         speedModifier: 1.75
+      - type: HealingSpeedModifier # Ratgore-tweak
+        speedModifier: 2.0 # Ratgore-tweak
       - type: HullrotFaction
         faction: SHI
       - type: LanguageAdder
@@ -75,6 +78,7 @@
     shoes: ClothingShoesBootsJack
     id: MedtechPDA
     pocket1: TradePassport
+    pocket2: HandheldCrewMonitorSHI # Ratgore-tweak
     eyes: ClothingEyesGlassesChemical
     ears: ClothingHeadsetShinohara
     gloves: ClothingHandsGlovesLatex

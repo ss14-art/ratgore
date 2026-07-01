@@ -339,6 +339,8 @@ public sealed class ArrivalsSystem : EntitySystem
             return;
 
         // We use arrivals as the default spawn so don't check for job prio.
+        if (ev.DesiredSpawnPointType == SpawnPointType.Job)
+            return;
 
         // Only works on latejoin even if enabled.
         if (!Enabled || _ticker.RunLevel != GameRunLevel.InRound)

@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Sinn
-  name: МГ Злоба
+  name: ТС Злоба
   description: Усиленно вооруженный эсминец Синдиката.
   price: 85000 #84000 appraisegrid
   category: Medium
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Sinn
-  mapName: 'КВСТ Злоба'
+  mapName: 'ТС Злоба'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/sinn.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: destroyer
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Злоба {1}'
+          mapNameTemplate: 'ТС Злоба {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

@@ -3,9 +3,9 @@
 
 - type: vessel
   id: Mercurymk2
-  name: ПК Меркурий МКII
+  name: ТС Меркурий МКII
   description: |
-    Создан на базе захваченного Меркурия МКМ. Эта боевая модернизация от ПК превратила этого технодобытчика в настоящего разбрасывателя свинца, его мостик преобразован в орудийную платформу для специально созданной 20-мм автоматической пушки ПК "Очиститель".
+    Создан на базе захваченного Меркурия МКМ. Эта боевая модернизация от ТС превратила этого технодобытчика в настоящего разбрасывателя свинца, его мостик преобразован в орудийную платформу для специально созданной 20-мм автоматической пушки ТС "Очиститель".
     LOADOUT: 1x 35mm 'Scout' rotary cannon
     MINIMUM CREW: 1x Pilot
   price: 37000
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Mercurymk2
-  mapName: 'ПК Меркурий МКII'
+  mapName: 'ТС Меркурий МКII'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/mercurymk2.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: corvette
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Меркурий МКII {1}'
+          mapNameTemplate: 'ТС Меркурий МКII {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

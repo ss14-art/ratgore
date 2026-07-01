@@ -26,6 +26,13 @@ namespace Content.Client.Lobby.UI
 
             LeaveButton.OnPressed += _ => _consoleHost.ExecuteCommand("disconnect");
             OptionsButton.OnPressed += _ => UserInterfaceManager.GetUIController<OptionsUIController>().ToggleWindow();
+            FactionButton.OnPressed += _ => OpenFactionWindow();
+        }
+
+        private void OpenFactionWindow()
+        {
+            var window = new Content.Client._Rat.Factions.FactionSelectWindow();
+            window.OpenCentered();
         }
 
         public void SwitchState(LobbyGuiState state)

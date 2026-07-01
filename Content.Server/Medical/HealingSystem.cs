@@ -23,6 +23,7 @@ using Robust.Shared.Random;
 // Shitmed Change
 using Content.Shared.Body.Systems;
 using Content.Shared._Shitmed.Targeting;
+using Content.Shared._Rat.Medical; // Ratgore-tweak
 
 namespace Content.Server.Medical;
 
@@ -216,6 +217,11 @@ public sealed class HealingSystem : EntitySystem
         var delay = isNotSelf
             ? component.Delay
             : component.Delay * GetScaledHealingPenalty(user, component);
+
+        // Ratgore-edit start
+        if (TryComp<HealingSpeedModifierComponent>(user, out var healingSpeedMod))
+            delay /= healingSpeedMod.SpeedModifier;
+        // Ratgore-edit end
 
         var doAfterEventArgs =
             new DoAfterArgs(EntityManager, user, delay, new HealingDoAfterEvent(), target, target: target, used: uid)

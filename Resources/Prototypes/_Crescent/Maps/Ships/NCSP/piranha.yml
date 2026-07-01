@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Piranha
-  name: МГ Пиранья
+  name: ТС Пиранья
   description: |
     Сверхлегкий ударный истребитель, почти такой же старый, как и сам бренд Горлекс, несущий одно надежное противокорабельное оружие.
     ВООРУЖЕНИЕ: 1x СХИ 43-мм баллистический метатель слэгов "Рысак"
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Piranha
-  mapName: 'МГ Пиранья'
+  mapName: 'ТС Пиранья'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/piranha.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: fighter
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Пиранья {1}'
+          mapNameTemplate: 'ТС Пиранья {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

@@ -26,7 +26,7 @@
   - MarshalCMM
   - Spacer
   - GliessianDockhand
-  editorHidden: true
+  editorHidden: false
 
 - type: department
   id: Command
@@ -115,7 +115,7 @@
   - RingleaderNCSP
   - LieutenantNCSP
   - InfanteerNCSP
-  - TechnicianNCSP
+  #- TechnicianNCSP new conception comments out these jobs
   - CoordinatorNCSP
   - RipperdocNCSP
   - TraumasecNCSP
@@ -162,7 +162,7 @@
   - HunterSRM
   - MontagneSRM
   - OverseerSRM
-  editorHidden: false # i just like to see them for the numbers , SPCR 2025
+  editorHidden: true # i just like to see them for the numbers , SPCR 2025
 
 - type: department
   id: SHI
@@ -172,7 +172,7 @@
   roles:
   - ExecutiveSHI
   - BoardSHI
-  #- HighsecSHI
+  - HighsecSHI
   - CorpsecSHI
   - EmployeeSHI
   - MedtechSHI

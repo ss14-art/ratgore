@@ -15,8 +15,9 @@ public readonly record struct RadioReceiveEvent(
     ChatMessage OriginalChatMsg,
     ChatMessage LanguageObfuscatedChatMsg,
     LanguagePrototype Language,
-    EntityUid RadioSource
-);
+    EntityUid RadioSource,
+    string? Voice = null
+    );
 
 /// <summary>
 /// Use this event to cancel sending message per receiver

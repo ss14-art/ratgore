@@ -22,6 +22,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconSyndieRipperdoc"
+  chatNameColor: "#d4c6c6"
   supervisors: You answer to the interests of the Interdyne Pharmaceuticals company's coordinator and your peers.
   canBeAntag: false
   requirements:
@@ -46,6 +47,8 @@
       - type: CPRTraining
       - type: SurgerySpeedModifier
         speedModifier: 1.75
+      - type: HealingSpeedModifier # Ratgore-tweak
+        speedModifier: 2.0 # Ratgore-tweak
       - type: LanguageAdder
         addSpoken:
           - Freespeak
@@ -80,4 +83,5 @@
       - Tourniquet
       - CombatKnife
       - Zipties
+      - HandheldCrewMonitorTFSC # Ratgore-tweak
 

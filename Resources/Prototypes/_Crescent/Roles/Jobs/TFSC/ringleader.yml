@@ -9,6 +9,12 @@
   whitelisted: true # Rat
   requireAdminNotify: true
   icon: "JobIconSyndieRingleader"
+  chatNameColor: "#aa2828"
+  chatAmplification:
+    bubbleScale: 1.09
+    shoutBubbleScale: 1.32
+    radioScale: 1.23
+    radioBold: true
   supervisors: job-supervisors-gsc-ringleader
   canBeAntag: false
   requirements:
@@ -90,7 +96,7 @@
     head: ClothingHeadHatSyndicateOfficer
     outerClothing: ClothingOuterArmorSyndicateRingmaster
     id: RingleaderPDA
-    ears: ClothingHeadsetNCSP
+    ears: ClothingHeadsetNCSPCommand
     gloves: ClothingHandsGlovesFingerless
     belt: AccessElevatorGSC
     pocket1: WeaponPistolDeagleUranium

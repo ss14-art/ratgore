@@ -8,7 +8,7 @@
     "Таракан" — это грузовое судно значительного размера, проворное и маневренное, но его грузовой отсек полностью открыт в космос. Рекомендуется сопровождение, так как это делает корабль уязвимым для атак пиратов.
     LOADOUT: 6x 20mm 'Screamer' light autocannons
     MINIMUM CREW: 1x Captain, 2x Miner Crew
-  price: 85000
+  price: 100000
   category: Large
   group: Scrap
   path: /Maps/_Crescent/Shuttles/Civilian/cockroach.yml

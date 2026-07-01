@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Wolf
-  name: МГ Волк
+  name: ТС Волк
   description: Переделанный имперский крейсер.
   price: 110000 #107000 appraisegrid
   category: Medium
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Wolf
-  mapName: 'МГ Волк'
+  mapName: 'ТС Волк'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/wolf.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: cruiser
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Волк {1}'
+          mapNameTemplate: 'ТС Волк {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

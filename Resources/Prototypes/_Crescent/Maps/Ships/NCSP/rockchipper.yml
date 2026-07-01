@@ -3,7 +3,7 @@
 
 - type: vessel
   id: Rockchipper
-  name: ПК Рокчиппер
+  name: ТС Рокчиппер
   description: |
     Шаттл собранный из разрушенных "Термитов". Создана для интенсивных горных работ.
     LOADOUT: 2x 250c Exhumer mining guns
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Rockchipper
-  mapName: 'ПК Рокчиппер'
+  mapName: 'ТС Рокчиппер'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/rockchipper.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: miner
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Рокчиппер {1}'
+          mapNameTemplate: 'ТС Рокчиппер {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

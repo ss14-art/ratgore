@@ -155,12 +155,12 @@
       choices: { CMWeapon: 1 }
       entries:
       - id: WeaponRifleKrinkov
-        name: КВСТ АКС-74У Кринков 5.56x45 мм
+        name: ТС АКС-74У Кринков 5.56x45 мм
         recommended: true
       - id: WeaponSubMachineGunAtreides
         name: Атрейдес
       - id: WeaponShotgunNCSPSaiga12
-        name: КВСТ Сайга-12к Молот 12 кал.
+        name: ТС Сайга-12к Молот 12 кал.
     - name: EVA и утилиты
       choices: { CMUtilities: 2 }
       entries:

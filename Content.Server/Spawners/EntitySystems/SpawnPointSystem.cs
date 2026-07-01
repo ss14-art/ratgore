@@ -26,6 +26,8 @@ public sealed class SpawnPointSystem : EntitySystem
         // TODO: Cache all this if it ends up important.
         var points = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
         var possiblePositions = new List<EntityCoordinates>();
+        var factionLateJoinPositions = new List<EntityCoordinates>();
+        var hasFactionLateJoinPositions = false;
 
         while ( points.MoveNext(out var uid, out var spawnPoint, out var xform))
         {
@@ -41,18 +43,22 @@ public sealed class SpawnPointSystem : EntitySystem
                 switch (args.DesiredSpawnPointType)
                 {
                     case SpawnPointType.Job when isMatchingJob:
-                    case SpawnPointType.LateJoin when spawnPoint.SpawnType == SpawnPointType.LateJoin:
                     case SpawnPointType.Observer when spawnPoint.SpawnType == SpawnPointType.Observer:
                         possiblePositions.Add(xform.Coordinates);
+                        break;
+                    case SpawnPointType.LateJoin when spawnPoint.SpawnType == SpawnPointType.LateJoin:
+                        AddLateJoinPosition(uid, xform, possiblePositions, factionLateJoinPositions, args.HumanoidCharacterProfile?.Faction, ref hasFactionLateJoinPositions);
                         break;
                     default:
                         continue;
                 }
+
+                continue;
             }
 
             if (_gameTicker.RunLevel == GameRunLevel.InRound && spawnPoint.SpawnType == SpawnPointType.LateJoin)
             {
-                possiblePositions.Add(xform.Coordinates);
+                AddLateJoinPosition(uid, xform, possiblePositions, factionLateJoinPositions, args.HumanoidCharacterProfile?.Faction, ref hasFactionLateJoinPositions);
             }
 
             if (_gameTicker.RunLevel != GameRunLevel.InRound &&
@@ -63,21 +69,13 @@ public sealed class SpawnPointSystem : EntitySystem
             }
         }
 
+        if (hasFactionLateJoinPositions && !string.IsNullOrEmpty(args.HumanoidCharacterProfile?.Faction))
+            possiblePositions = factionLateJoinPositions;
+
         if (possiblePositions.Count == 0)
         {
-            // Ok we've still not returned, but we need to put them /somewhere/.
-            // TODO: Refactor gameticker spawning code so we don't have to do this!
-            var points2 = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
-
-            if (points2.MoveNext(out _, out var xform))
-            {
-                possiblePositions.Add(xform.Coordinates);
-            }
-            else
-            {
-                Log.Error("No spawn points were available!");
-                return;
-            }
+            Log.Error($"No spawn points were available for {args.Job?.Id ?? "unknown job"}!");
+            return;
         }
 
         var spawnLoc = _random.Pick(possiblePositions);
@@ -87,5 +85,25 @@ public sealed class SpawnPointSystem : EntitySystem
             args.Job,
             args.HumanoidCharacterProfile,
             args.Station);
+    }
+
+    private void AddLateJoinPosition(
+        EntityUid uid,
+        TransformComponent xform,
+        List<EntityCoordinates> possiblePositions,
+        List<EntityCoordinates> factionLateJoinPositions,
+        string? factionId,
+        ref bool hasFactionLateJoinPositions)
+    {
+        if (!TryComp<FactionLateJoinSpawnPointComponent>(uid, out var factionSpawn))
+        {
+            possiblePositions.Add(xform.Coordinates);
+            return;
+        }
+
+        hasFactionLateJoinPositions = true;
+
+        if (!string.IsNullOrEmpty(factionId) && factionSpawn.Faction == factionId)
+            factionLateJoinPositions.Add(xform.Coordinates);
     }
 }

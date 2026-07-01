@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Eradicator
-  name: МГ Дикатор
+  name: ТС Дикатор
   description: Скрытный эсминец Синдиката.
   price: 115000 #115000 appraisegrid
   category: Medium
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Eradicator
-  mapName: 'МГ Дикатор'
+  mapName: 'ТС Дикатор'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/eradicator.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: corvette
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Дикатор {1}'
+          mapNameTemplate: 'ТС Дикатор {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

@@ -19,6 +19,12 @@
   whitelisted: true # Rat
   requireAdminNotify: false
   icon: "JobIconMontagne"
+  chatNameColor: "#68A943"
+  chatAmplification:
+    bubbleScale: 1.08
+    shoutBubbleScale: 1.3
+    radioScale: 1.2
+    radioBold: true
   supervisors: job-supervisors-srm-leaders
   canBeAntag: false
   requirements:

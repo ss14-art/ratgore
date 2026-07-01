@@ -23,6 +23,7 @@ game-ticker-get-info-preround-text = Enter [color=red]Hullrot[/color]
                             >[color=yellow]{$desc}[/color]
 game-ticker-no-map-selected = [color=yellow]Map not yet selected![/color]
 game-ticker-player-no-jobs-available-when-joining = When attempting to join to the game, no jobs were available.
+game-ticker-player-no-spawn-point-available-when-joining = When attempting to join the game, no valid spawn point was available for your job or faction.
 game-ticker-welcome-to-the-station = The Hadal Tide has rescinded. All personnel are to resume their normal duties. Anyone who suspects Hadal Contamination is to present to the medbay.
 
 # Displayed in chat to admins when a player joins

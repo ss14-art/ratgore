@@ -27,6 +27,12 @@
   whitelisted: true # Rat
   requireAdminNotify: true
   icon: "JobIconSyndieCoordinator"
+  chatNameColor: "#e2e2e2"
+  chatAmplification:
+    bubbleScale: 1.09
+    shoutBubbleScale: 1.32
+    radioScale: 1.23
+    radioBold: true
   supervisors: You answer to the interests of the Interdyne Pharmaceuticals company. Organize your employees. Secure stakeholders and profit.
   canBeAntag: false
   requirements:
@@ -52,6 +58,8 @@
       - type: CPRTraining
       - type: SurgerySpeedModifier
         speedModifier: 2.5
+      - type: HealingSpeedModifier # Ratgore-tweak
+        speedModifier: 2.5 # Ratgore-tweak
       - type: LanguageAdder
         addSpoken:
           - Freespeak
@@ -78,7 +86,7 @@
     shoes: ClothingShoesBootsCombat
     head: ClothingHeadHatSyndicateInterdyneBeret
     id: CoordinatorPDA
-    ears: ClothingHeadsetNCSPInterdyne
+    ears: ClothingHeadsetNCSPInterdyneCommand
     pocket1: AccessElevatorIPM
     pocket2: WeaponPistolHKUSP
     back: ClothingBackpackNCSP
@@ -90,3 +98,4 @@
       - MagazinePistol
       - CombatKnife
       - RatRubberStampTFSCInterdyne
+      - HandheldCrewMonitorTFSC # Ratgore-tweak

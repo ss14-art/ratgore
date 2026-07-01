@@ -19,6 +19,7 @@
   requireAdminNotify: false
   whitelisted: true # Rat
   icon: "JobIconTender"
+  chatNameColor: "#B04A9A"
   supervisors: job-supervisors-srm-hunters
   canBeAntag: false
   requirements:
@@ -51,6 +52,8 @@
       - type: CPRTraining
       - type: SurgerySpeedModifier
         speedModifier: 1.75
+      - type: HealingSpeedModifier # Ratgore-tweak
+        speedModifier: 2.5 # Ratgore-tweak
       - type: LanguageAdder
         addSpoken:
           - LowImperial

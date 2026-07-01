@@ -9,6 +9,12 @@
   whitelisted: true # Rat
   requireAdminNotify: true
   icon: "JobIconSyndieForeman"
+  chatNameColor: "#dda52d"
+  chatAmplification:
+    bubbleScale: 1.09
+    shoutBubbleScale: 1.32
+    radioScale: 1.23
+    radioBold: true
   supervisors: You're the leader of the SAW. You answer to your own interests
   canBeAntag: false
   requirements:
@@ -58,7 +64,7 @@
     shoes: ClothingShoesBootsCombat
     head: ClothingHeadHatHardhatSyndicateForeman
     id: ForemanPDA
-    ears: ClothingHeadsetNCSPSaws
+    ears: ClothingHeadsetNCSPSawsCommand
     outerClothing: ClothingOuterArmorSyndicateForeman
     belt: ClothingBeltUtilityEngineering
     pocket1: WeaponPistolViperWood

@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Scarab
-  name: ПК Скарабей
+  name: ТС Скарабей
   description: |
     Большая консервная банка сделанная пьяным разборщиком.
     LOADOUT: 1x 240mm 'Gargoyle' Torpedo Launchers, 3x 20mm 'Screamer' light carbine repeater cannon
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Scarab
-  mapName: 'ПК Скарабей'
+  mapName: 'ТС Скарабей'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/scarab.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: destroyer
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Скарабей {1}'
+          mapNameTemplate: 'ТС Скарабей {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

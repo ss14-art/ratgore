@@ -43,3 +43,6 @@ shuttle-console-dock = Пристыковаться
 shuttle-console-docks-label = Стыковочные места
 shuttle-console-undock-fail = Ошибка отстыковки
 shuttle-console-dock-fail = Ошибка стыковки
+
+# SHIPYARD (Верфь)
+shipyard-custom-name-placeholder = Кастомное имя

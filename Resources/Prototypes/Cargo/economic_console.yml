@@ -1,0 +1,16 @@
+- type: entity
+  name: economic-console
+  parent: BaseComputer
+  id: EconomicConsole
+  components:
+  - type: EconomicConsole
+    refreshInterval: 300
+    autoUpdateEnabled: true
+  - type: UserInterface
+    interfaces:
+      enum.EconomicConsoleUiKey.Key:
+        type: EconomicConsoleBoundUserInterface
+  - type: PointLight
+    color: "#00FF00"
+    radius: 1.5
+    energy: 1.6

@@ -120,7 +120,7 @@
       TradeGoodImperialScrap: 16000
       TradeGoodImperialQualitySalvage: 24000
 
-      # КВСТ
+      # ТС
       TradeGoodGunparts: 8000
       TradeGoodAntibiotics: 8000
       TradeGoodPlasma: 16000
@@ -168,7 +168,7 @@
       TradeGoodUnionQualitySalvage: 24000
       TradeGoodCommunardScrap: 16000
 
-      # КВСТ
+      # ТС
       TradeGoodGunparts: 8000
       TradeGoodAntibiotics: 8000
       TradeGoodPlasma: 16000
@@ -269,7 +269,7 @@
       TradeGoodUnionQualitySalvage: 16000
       TradeGoodCommunardScrap: 8000
 
-      # КВСТ
+      # ТС
       TradeGoodGunparts: 8000
       TradeGoodAntibiotics: 8000
       TradeGoodDrugs: 16000

@@ -15,7 +15,7 @@
   - BorgModuleMining
 #  - BorgModuleGrapplingGun
   - MechEquipmentDrill # Goobstation
-  - OreProcessorIndustrialMachineCircuitboard
+  #- OreProcessorIndustrialMachineCircuitboard new conception
   - ClothingMaskWeldingGas
 
 - type: technology

@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Rattler
-  name: ПК Гремучник
+  name: ТС Гремучник
   description: Импровизированная орудийная платформа, разработанная "Кораблекрушителями".
   price: 45000
   category: Small
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Rattler
-  mapName: 'ПК Гремучник'
+  mapName: 'ТС Гремучник'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/rattler.yml
   minPlayers: 0
   stations:
@@ -23,7 +23,7 @@
           iconType: Shuttle
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Гремучник {1}'
+          mapNameTemplate: 'ТС Гремучник {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

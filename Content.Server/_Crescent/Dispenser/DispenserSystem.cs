@@ -6,6 +6,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Popups;
 using Content.Shared._Rat.Dispenser;
+using Content.Server.Cargo.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
@@ -20,6 +21,7 @@ public sealed class DispenserSystem : SharedDispenserSystem
     [Dependency] private readonly Stack.StackSystem _stackSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private readonly DynamicPricingSystem _dynamicPricing = default!;
   
     public override void Initialize()  
     {  
@@ -100,16 +102,26 @@ public sealed class DispenserSystem : SharedDispenserSystem
  
             var stationUid = _marketSystem.TryGetOwningStation(uid);  
 
-            float multiplier = stationUid.HasValue  
+            // Get base multiplier from station trade market
+            float marketMultiplier = stationUid.HasValue  
                 ? _marketSystem.GetPriceMultiplier(stationUid.Value, prototype.ID)  
                 : 1.0f;  
+
+            // Apply dynamic pricing multiplier
+            float dynamicMultiplier = _dynamicPricing.GetPriceMultiplier(prototype.ID);
+            
+            // Combine both multipliers
+            float finalMultiplier = marketMultiplier * dynamicMultiplier;
   
-            int finalAmount = (int)MathF.Round(baseAmount * multiplier);  
+            int finalAmount = (int)MathF.Round(baseAmount * finalMultiplier);  
 
             if (stationUid.HasValue)  
-                _marketSystem.RecordSale(stationUid.Value, prototype.ID);  
+                _marketSystem.RecordSale(stationUid.Value, prototype.ID);
+            
+            // Record transaction in dynamic pricing system
+            _dynamicPricing.RecordTransaction(prototype.ID, 1, isBuy: false);
 
-            int pct = (int)MathF.Round(multiplier * 100f);  
+            int pct = (int)MathF.Round(finalMultiplier * 100f);  
             _popup.PopupEntity(  
                 Loc.GetString("rat-station-trade-market", 
                     ("finalAmount", finalAmount),

@@ -49,6 +49,9 @@ namespace Content.Server.Database
         public DbSet<AdminMessage> AdminMessages { get; set; } = null!;
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
+        public DbSet<RatFaction> RatFactions { get; set; } = null!;
+        public DbSet<RatFactionWhitelist> RatFactionWhitelists { get; set; } = null!;
+        public DbSet<RatFactionManager> RatFactionManagers { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -360,6 +363,24 @@ namespace Content.Server.Database
                 .OwnsOne(p => p.HWId)
                 .Property(p => p.Type)
                 .HasDefaultValue(HwidType.Legacy);
+
+            modelBuilder.Entity<RatFaction>()
+                .HasIndex(f => f.Name)
+                .IsUnique();
+
+            modelBuilder.Entity<RatFactionManager>()
+                .HasOne(m => m.Player)
+                .WithMany()
+                .HasForeignKey(m => m.PlayerUserId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RatFactionWhitelist>()
+                .HasOne(w => w.Player)
+                .WithMany()
+                .HasForeignKey(w => w.PlayerUserId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -405,6 +426,7 @@ namespace Content.Server.Database
         public float Height { get; set; } = 1f;
         public float Width { get; set; } = 1f;
         public string Faction { get; set; } = "";
+        public string Subfaction { get; set; } = "";
         public long BankBalance { get; set; } = 0;
         [Column(TypeName = "jsonb")] public JsonDocument? Markings { get; set; } = null!;
         public string HairName { get; set; } = null!;
@@ -1230,5 +1252,48 @@ namespace Content.Server.Database
 
             return new ImmutableTypedHwid(hwid.Hwid.ToImmutableArray(), hwid.Type);
         }
+    }
+
+    [Table("rat_faction")]
+    public class RatFaction
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; } = default!;
+
+        public string Description { get; set; } = "";
+
+        public bool IsWhitelisted { get; set; }
+
+        public List<RatFactionWhitelist> Whitelists { get; } = new();
+        public List<RatFactionManager> Managers { get; } = new();
+    }
+
+    [Table("rat_faction_whitelist")]
+    [PrimaryKey(nameof(PlayerUserId), nameof(FactionId))]
+    public class RatFactionWhitelist
+    {
+        [Required, ForeignKey("Player")]
+        public Guid PlayerUserId { get; set; }
+        public Player Player { get; set; } = default!;
+
+        [Required, ForeignKey("Faction")]
+        public int FactionId { get; set; }
+        public RatFaction Faction { get; set; } = default!;
+    }
+
+    [Table("rat_faction_manager")]
+    [PrimaryKey(nameof(PlayerUserId), nameof(FactionId))]
+    public class RatFactionManager
+    {
+        [Required, ForeignKey("Player")]
+        public Guid PlayerUserId { get; set; }
+        public Player Player { get; set; } = default!;
+
+        [Required, ForeignKey("Faction")]
+        public int FactionId { get; set; }
+        public RatFaction Faction { get; set; } = default!;
     }
 }

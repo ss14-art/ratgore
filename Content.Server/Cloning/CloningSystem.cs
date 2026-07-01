@@ -1,4 +1,5 @@
 using Content.Server.Atmos.EntitySystems;
+using Content.Shared.Bank.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Cloning.Components;
 using Content.Server.Construction;
@@ -231,6 +232,9 @@ public sealed partial class CloningSystem : EntitySystem
             return true;
 
         var mob = FetchAndSpawnMob(uid, clonePod, pref, speciesPrototype, humanoid, bodyToClone, geneticDamage, mindEnt.Owner);
+        if (HasComp<BankAccountComponent>(bodyToClone))
+            EnsureComp<BankAccountComponent>(mob);
+
         var organMarking = new CloneBodySpawnedForOrganMarkingEvent();
         RaiseLocalEvent(mob, ref organMarking);
         var ev = new CloningEvent(bodyToClone, mob);
@@ -242,6 +246,7 @@ public sealed partial class CloningSystem : EntitySystem
         var cloneMindReturn = EntityManager.AddComponent<BeingClonedComponent>(mob);
         cloneMindReturn.Mind = mindEnt.Comp;
         cloneMindReturn.Parent = uid;
+        cloneMindReturn.BodyToClone = bodyToClone;
         _containerSystem.Insert(mob, clonePod.BodyContainer);
         ClonesWaitingForMind.Add(mindEnt.Comp, mob);
         UpdateStatus(uid, CloningPodStatus.NoMind, clonePod);

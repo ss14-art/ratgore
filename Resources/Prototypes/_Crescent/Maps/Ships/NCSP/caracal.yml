@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Caracal
-  name: ПК Каракал
+  name: ТС Каракал
   description: |
     Модернизированная платформа кораблекрушителя-истребителя.
     LOADOUT: 3x 20mm 'Screamer' light carbine reapeater cannons, 2x 50mm 'Striker' light autocannons, 1x 60mm 'Azimuth rapid fire LML system (TFSC edition)
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Caracal
-  mapName: 'ПК Каракал'
+  mapName: 'ТС Каракал'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/caracal.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: destroyer
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Каракал {1}'
+          mapNameTemplate: 'ТС Каракал {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

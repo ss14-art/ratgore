@@ -4,6 +4,7 @@
     <BoxContainer Orientation="Horizontal"
                   HorizontalExpand="True">
         <Button Name="Purchase" Text="{Loc 'purchase'}" StyleClasses="LabelSubText" />
+        <LineEdit Name="CustomNameEdit" MinSize="120 0" Margin="4 0 4 0" />
         <Label Name="VesselName" HorizontalExpand="True" />
         <PanelContainer>
             <PanelContainer.PanelOverride>

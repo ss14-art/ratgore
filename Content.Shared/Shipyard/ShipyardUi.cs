@@ -30,9 +30,11 @@ public sealed class ShipyardConsoleState : BoundUserInterfaceState
 public sealed class ShipyardConsolePurchaseMessage : BoundUserInterfaceMessage
 {
     public readonly ProtoId<VesselPrototype> Vessel;
+    public readonly string? CustomName;
 
-    public ShipyardConsolePurchaseMessage(string vessel)
+    public ShipyardConsolePurchaseMessage(string vessel, string? customName = null)
     {
         Vessel = vessel;
+        CustomName = customName;
     }
 }

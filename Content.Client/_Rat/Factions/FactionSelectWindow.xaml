@@ -1,0 +1,25 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              Title="{Loc 'rat-faction-window-title'}"
+              MinSize="350 200"
+              SetSize="400 250">
+    <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="5">
+        <Label Text="{Loc 'rat-faction-window-description'}" Margin="0 0 0 5" />
+
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <Label Text="{Loc 'rat-faction-label'}" MinSize="100 0" />
+            <OptionButton Name="FactionDropdown" HorizontalExpand="True" />
+        </BoxContainer>
+
+        <Label Name="FactionDescription"
+               Text=""
+               HorizontalExpand="True"
+               VerticalExpand="True"
+               Margin="0 10 0 0" />
+
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right" SeparationOverride="5">
+            <Button Name="ApplyButton" Text="{Loc 'rat-faction-apply'}" />
+            <Button Name="CancelButton" Text="{Loc 'rat-faction-cancel'}" />
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

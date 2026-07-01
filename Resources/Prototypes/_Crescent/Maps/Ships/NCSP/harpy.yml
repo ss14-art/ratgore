@@ -2,8 +2,8 @@
 # Discord: fleshangel
 - type: vessel
   id: Harpy
-  name: БИ Гарпия
-  description: | 
+  name: ТС Гарпия
+  description: |
     Мобильное хирургическое судно, способное предоставлять особые услуги клиентам.
     ВООРУЖЕНИЕ: 2x 150сс Плазма-Гатлинг. 4x 200сс лазер.
     МИНИМАЛЬНЫЙ ЭКИПАЖ: 1x Пилот, 1х Хирург
@@ -14,7 +14,7 @@
 
 - type: gameMap
   id: Harpy
-  mapName: 'БИ Гарпия'
+  mapName: 'ТС Гарпия'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/harpy.yml
   minPlayers: 0
   stations:
@@ -29,7 +29,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: corvette
         - type: StationNameSetup
-          mapNameTemplate: 'БИ Гарпия {1}'
+          mapNameTemplate: 'ТС Гарпия {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

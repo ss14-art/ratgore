@@ -1082,5 +1082,44 @@ Entries:
     id: 129
     time: '2026-06-07T15:49:13.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/273
+  - author: ReWAFFlution
+    changes:
+      - type: Add
+        message: Добавлена озвучка радио
+      - type: Remove
+        message: Убрана озвучка непонятного из-за языка текста
+    id: 130
+    time: '2026-06-16T18:23:05.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/278
+  - author: ChangelingRUES
+    changes:
+      - type: Tweak
+        message: Изменены кораблики под РНД нужды
+    id: 131
+    time: '2026-06-19T15:09:39.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/279
+  - author: Gorox
+    changes:
+      - type: Add
+        message: Добавлены цвета и выделения в рации для всех фракций.
+      - type: Add
+        message: Добавлен командный канал связи КВСТ.
+    id: 132
+    time: '2026-06-20T17:08:53.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/281
+  - author: Gr-avity
+    changes:
+      - type: Tweak
+        message: Изменён овервотч (он кому-то нужен?)
+    id: 133
+    time: '2026-06-20T17:09:18.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/282
+  - author: nabegator220
+    changes:
+      - type: Tweak
+        message: New conception, part 1.
+    id: 134
+    time: '2026-07-01T08:21:12.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/287
 Name: Rat
 Order: -1

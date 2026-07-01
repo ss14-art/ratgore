@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Hulk
-  name: БИ Халк
+  name: ТС Халк
   description: Мобильный госпиталь на двигателях. Довольно тяжелый, но слабовооруженный.
   price: 175000
   category: Large
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Hulk
-  mapName: 'БИ Халк'
+  mapName: 'ТС Халк'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/hulk.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: capital
         - type: StationNameSetup
-          mapNameTemplate: 'БИ Халк {1}'
+          mapNameTemplate: 'ТС Халк {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

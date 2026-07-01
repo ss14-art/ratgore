@@ -76,6 +76,14 @@
                                 <Control HorizontalExpand="True"/>
                                 <LineEdit Name="CosmeticPronounsNameEdit" MinSize="270 0" HorizontalAlignment="Right" />
                             </BoxContainer>
+                            <!-- До лучших времен. Обновление списка в реальном времени
+                            <BoxContainer HorizontalExpand="True">
+                                <Label Text="{Loc 'rat-faction-label'}" />
+                                <Control HorizontalExpand="True"/>
+                                <Button Name="FactionLoadButton" Text="{Loc 'humanoid-profile-editor-faction-load-button'}" StyleClasses="OpenRight" />
+                                <OptionButton Name="FactionButton" HorizontalAlignment="Right" StyleClasses="OpenLeft" />
+                            </BoxContainer>
+                            -->
                             <!-- Move these when you rename the tabs, this isn't appearance technically, but it's convenient there -->
                             <!-- Name -->
                             <BoxContainer HorizontalExpand="True">
@@ -108,6 +116,13 @@
                                 <Control HorizontalExpand="True"/>
                                 <Button Name="ShowLoadouts" Pressed="True" ToggleMode="True" Text="{Loc 'Show'}" HorizontalAlignment="Right" />
                             </BoxContainer>
+                            <!-- До лучших времен
+                            <BoxContainer HorizontalExpand="True">
+                                <Label Text="{Loc 'rat-faction-label'}" />
+                                <Control HorizontalExpand="True"/>
+                                <Button Name="FactionSelectButton" Text="{Loc 'rat-faction-button-text'}" HorizontalAlignment="Right" />
+                            </BoxContainer>
+                            -->
                             <!-- Spawn Priority -->
                             <BoxContainer HorizontalExpand="True">
                                 <Label Text="{Loc 'humanoid-profile-editor-spawn-priority-label'}" />

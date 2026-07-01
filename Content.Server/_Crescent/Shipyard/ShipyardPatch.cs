@@ -435,6 +435,11 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             return;
         }
 
+        if (!string.IsNullOrWhiteSpace(args.CustomName))
+        {
+            name = $"{vessel.Name} - {args.CustomName}";
+        }
+
         // Apply resale depreciation to purchased ships
         var priceMult = EnsureComp<ShipPriceMultiplierComponent>(shuttle.Owner);
         priceMult.priceMultiplier = 0.9f;
@@ -463,8 +468,12 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
                 shuttle.Owner
             };
             shuttleStation = _station.InitializeNewStation(stationProto.Stations[vessel.ID], gridUids);
-            var metaData = MetaData((EntityUid) shuttleStation);
-            name = metaData.EntityName;
+
+            if (string.IsNullOrWhiteSpace(args.CustomName))
+            {
+                var metaData = MetaData((EntityUid) shuttleStation);
+                name = metaData.EntityName;
+            }
 
             var iffColor = new Color { R = 10, G = 50, B = 100, A = 100 };
             if (TryComp<ShipyardListingComponent>(uid, out var listing) && listing.IffColor.HasValue)
@@ -495,6 +504,14 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             $"{MetaData(product).EntityDescription} It is owned by {idCardComponent.FullName}.");
         var deedShuttle = EnsureComp<ShuttleDeedComponent>(shuttle.Owner);
         AssignShuttleDeedProperties(deedShuttle, shuttle.Owner, name, player);
+
+        _metaData.SetEntityName(shuttle.Owner, name);
+
+        // Also update station name if it exists
+        if (shuttleStation.HasValue)
+        {
+            _metaData.SetEntityName(shuttleStation.Value, name);
+        }
 
         var channel = component.ShipyardChannel;
         _handsSystem.PickupOrDrop(args.Actor, product);

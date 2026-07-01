@@ -322,6 +322,30 @@ namespace Content.Server.Database
 
         #endregion
 
+        #region Factions
+
+        Task CreateFaction(string name, string description, bool isWhitelisted);
+        Task<bool> DeleteFaction(string name);
+        Task<bool> DeleteFactionById(int id);
+        Task<List<RatFaction>> GetAllFactions();
+        Task<RatFaction?> GetFaction(string name);
+        Task<RatFaction?> GetFactionById(int id);
+        Task<bool> AddFactionWhitelist(Guid player, string factionName);
+        Task<bool> AddFactionWhitelistById(Guid player, int factionId);
+        Task<bool> RemoveFactionWhitelist(Guid player, string factionName);
+        Task<bool> RemoveFactionWhitelistById(Guid player, int factionId);
+        Task<bool> IsFactionWhitelisted(Guid player, string factionName);
+        Task<bool> IsFactionWhitelistedById(Guid player, int factionId);
+        Task<bool> AddFactionManager(Guid player, string factionName);
+        Task<bool> AddFactionManagerById(Guid player, int factionId);
+        Task<bool> RemoveFactionManager(Guid player, string factionName);
+        Task<bool> RemoveFactionManagerById(Guid player, int factionId);
+        Task<bool> IsFactionManager(Guid player, string factionName);
+        Task<bool> IsFactionManagerById(Guid player, int factionId);
+        Task<List<string>> GetPlayerFactionWhitelists(Guid player);
+
+        #endregion
+
         #region DB Notifications
 
         void SubscribeToNotifications(Action<DatabaseNotification> handler);
@@ -990,6 +1014,124 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveJobWhitelist(player, job));
         }
+
+        #region Factions
+
+        public Task CreateFaction(string name, string description, bool isWhitelisted)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.CreateFaction(name, description, isWhitelisted));
+        }
+
+        public Task<bool> DeleteFaction(string name)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteFaction(name));
+        }
+
+        public Task<bool> DeleteFactionById(int id)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteFactionById(id));
+        }
+
+        public Task<List<RatFaction>> GetAllFactions()
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetAllFactions());
+        }
+
+        public Task<RatFaction?> GetFaction(string name)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetFaction(name));
+        }
+
+        public Task<RatFaction?> GetFactionById(int id)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetFactionById(id));
+        }
+
+        public Task<bool> AddFactionWhitelist(Guid player, string factionName)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddFactionWhitelist(player, factionName));
+        }
+
+        public Task<bool> AddFactionWhitelistById(Guid player, int factionId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddFactionWhitelistById(player, factionId));
+        }
+
+        public Task<bool> RemoveFactionWhitelist(Guid player, string factionName)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveFactionWhitelist(player, factionName));
+        }
+
+        public Task<bool> RemoveFactionWhitelistById(Guid player, int factionId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveFactionWhitelistById(player, factionId));
+        }
+
+        public Task<bool> IsFactionWhitelisted(Guid player, string factionName)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.IsFactionWhitelisted(player, factionName));
+        }
+
+        public Task<bool> IsFactionWhitelistedById(Guid player, int factionId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.IsFactionWhitelistedById(player, factionId));
+        }
+
+        public Task<bool> AddFactionManager(Guid player, string factionName)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddFactionManager(player, factionName));
+        }
+
+        public Task<bool> AddFactionManagerById(Guid player, int factionId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddFactionManagerById(player, factionId));
+        }
+
+        public Task<bool> RemoveFactionManager(Guid player, string factionName)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveFactionManager(player, factionName));
+        }
+
+        public Task<bool> RemoveFactionManagerById(Guid player, int factionId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveFactionManagerById(player, factionId));
+        }
+
+        public Task<bool> IsFactionManager(Guid player, string factionName)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.IsFactionManager(player, factionName));
+        }
+
+        public Task<bool> IsFactionManagerById(Guid player, int factionId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.IsFactionManagerById(player, factionId));
+        }
+
+        public Task<List<string>> GetPlayerFactionWhitelists(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPlayerFactionWhitelists(player));
+        }
+
+        #endregion
 
         public void SubscribeToNotifications(Action<DatabaseNotification> handler)
         {

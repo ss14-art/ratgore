@@ -44,6 +44,8 @@
       - type: CPRTraining
       - type: SurgerySpeedModifier
         speedModifier: 1.75
+      - type: HealingSpeedModifier # Ratgore-tweak
+        speedModifier: 2.0 # Ratgore-tweak
       - type: LanguageAdder
         addSpoken:
           - LowImperial
@@ -67,6 +69,7 @@
     eyes: ClothingEyesHudMedical
     head: ClothingHeadHatImperialSurgeon
     back: ClothingBackpackDSM
+    pocket1: HandheldCrewMonitorDSM # Ratgore-tweak
     gloves: ClothingHandsGlovesNitrile
     belt: ClothingBeltMedicalFilled
     shoes: ClothingShoesBootsImperialLaceup

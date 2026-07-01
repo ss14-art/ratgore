@@ -1,5 +1,7 @@
 using Content.Server.Cloning.Components;
+using Content.Server._Rat.Bank;
 using System.Linq;
+using Content.Shared.Bank.Components;
 using Content.Shared.Atmos;
 using Content.Shared.CCVar;
 using Content.Shared.Chemistry.Components;
@@ -40,10 +42,47 @@ public sealed partial class CloningSystem
         if (!ClonesWaitingForMind.TryGetValue(mind, out var entity)
             || !EntityManager.EntityExists(entity)
             || !TryComp<MindContainerComponent>(entity, out var mindComp)
-            || mindComp.Mind != null)
+            || mindComp.Mind != null
+            || !TryComp<BeingClonedComponent>(entity, out var beingCloned))
             return;
 
+        var source = beingCloned.BodyToClone;
+        BankTransferHistoryComponent? sourceHistory = null;
+        var sourceHasAccount = false;
+        List<BankTransferHistoryRecord>? history = null;
+        if (EntityManager.EntityExists(source))
+        {
+            sourceHasAccount = HasComp<BankAccountComponent>(source);
+            if (TryComp<BankTransferHistoryComponent>(source, out sourceHistory))
+                history = sourceHistory.Entries.Select(entry => new BankTransferHistoryRecord
+                {
+                    Outgoing = entry.Outgoing,
+                    CounterpartyName = entry.CounterpartyName,
+                    Amount = entry.Amount,
+                    Comment = entry.Comment,
+                    RoundTimestamp = entry.RoundTimestamp,
+                }).ToList();
+        }
+
         _mindSystem.TransferTo(mindId, entity, ghostCheckOverride: true, mind: mind);
+
+        if (mind.OwnedEntity != entity)
+            return;
+
+        if (history is not null)
+        {
+            var targetHistory = EnsureComp<BankTransferHistoryComponent>(entity);
+            targetHistory.Entries = history;
+        }
+
+        if (EntityManager.EntityExists(source))
+        {
+            if (sourceHasAccount)
+                RemComp<BankAccountComponent>(source);
+            if (sourceHistory is not null)
+                RemComp<BankTransferHistoryComponent>(source);
+        }
+
         _mindSystem.UnVisit(mindId, mind);
         ClonesWaitingForMind.Remove(mind);
     }

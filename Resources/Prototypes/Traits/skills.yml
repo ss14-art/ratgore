@@ -219,3 +219,25 @@
       - type: SurgerySpeedModifier
         speedModifier: 2
 
+# Ratgore-edit start
+- type: trait
+  id: HealingTraining
+  category: Mental
+  points: -3
+  functions:
+    - !type:TraitAddComponent
+      components:
+        - type: HealingSpeedModifier
+          speedModifier: 1.5
+
+- type: trait
+  id: ExperiencedHealer
+  category: Mental
+  points: -4
+  functions:
+    - !type:TraitReplaceComponent
+      components:
+      - type: HealingSpeedModifier
+        speedModifier: 2
+# Ratgore-edit end
+

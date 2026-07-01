@@ -8,6 +8,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconSyndieShipbreaker"
+  chatNameColor: "#b67520"
   supervisors: You answer to the Shipfitters Aerodynamic & Worker's union interests and its foreman's.
   canBeAntag: false
   requirements:

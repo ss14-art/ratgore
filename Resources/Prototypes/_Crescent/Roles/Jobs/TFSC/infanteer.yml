@@ -8,6 +8,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconSyndiePrivateer"
+  chatNameColor: "#681919"
   supervisors: job-supervisors-gsc-infanteer
   canBeAntag: false
   requirements:

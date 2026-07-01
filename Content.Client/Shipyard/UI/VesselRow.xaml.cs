@@ -11,19 +11,20 @@ namespace Content.Client.Shipyard.UI;
 [GenerateTypedNameReferences]
 public sealed partial class VesselRow : PanelContainer
 {
-    public event Action? OnPurchasePressed;
+    public event Action<string?>? OnPurchasePressed;
 
     public VesselRow(VesselPrototype vessel, bool access, int displayPrice)
     {
         RobustXamlLoader.Load(this);
 
         VesselName.Text = vessel.Name;
+        CustomNameEdit.PlaceHolder = Loc.GetString("shipyard-custom-name-placeholder");
 
         var tooltip = new Tooltip();
         tooltip.SetMessage(FormattedMessage.FromMarkup(vessel.Description));
         Purchase.TooltipSupplier = _ => tooltip;
         Purchase.Disabled = !access;
-        Purchase.OnPressed += _ => OnPurchasePressed?.Invoke();
+        Purchase.OnPressed += _ => OnPurchasePressed?.Invoke(CustomNameEdit.Text.Length > 0 ? CustomNameEdit.Text : null);
 
         Price.Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", displayPrice));
     }

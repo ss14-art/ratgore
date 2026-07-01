@@ -1,6 +1,6 @@
 ﻿- type: vessel
   id: Hornetsnest
-  name: МГ Роездо
+  name: ТС Роездо
   description: Авианосец, предназначенный для использования Частными Военными Компаниями. Эффективный корабль для своего класса.
   price: 105000
   category: Medium
@@ -9,7 +9,7 @@
 
 - type: gameMap
   id: Hornetsnest
-  mapName: 'МГ Роездо'
+  mapName: 'ТС Роездо'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/hornetsnest.yml # who wrote hornetsnest.ymll
   minPlayers: 0
   stations:
@@ -24,7 +24,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: cruiser
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Роездо {1}'
+          mapNameTemplate: 'ТС Роездо {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Geode
-  name: ПК Жеода
+  name: ТС Жеода
   description: |
     Легкобронированный корвет с бортовым залпом.
     LOADOUT: 4x 20mm 'Screamer' light carbine reapeater cannons, 4x 50mm 'Striker' light autocannons, 2x 90mm 'Resolute' tri-barreled repeater
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Geode
-  mapName: 'ПК Жеода'
+  mapName: 'ТС Жеода'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/geode.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: destroyer
         - type: StationNameSetup
-          mapNameTemplate: 'ПК Жеода {1}'
+          mapNameTemplate: 'ТС Жеода {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

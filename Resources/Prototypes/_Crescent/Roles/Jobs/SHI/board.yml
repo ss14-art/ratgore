@@ -22,6 +22,12 @@
   alwaysUseSpawner: true
   requireAdminNotify: true
   icon: "JobIconBoard"
+  chatNameColor: "#1e9c37"
+  chatAmplification:
+    bubbleScale: 1.09
+    shoutBubbleScale: 1.32
+    radioScale: 1.23
+    radioBold: true
   supervisors: job-supervisors-shi
   canBeAntag: false
   requirements:

@@ -15466,7 +15466,7 @@ entities:
     - type: Transform
       pos: 13.5,2.5
       parent: 1
-- proto: ComputerTabletopCrewMonitoring
+- proto: ComputerTabletopCrewMonitorTFSC
   entities:
   - uid: 1058
     components:

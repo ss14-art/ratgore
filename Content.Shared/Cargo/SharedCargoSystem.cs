@@ -17,6 +17,20 @@ public enum CargoPalletConsoleUiKey : byte
     Sale
 }
 
+[NetSerializable, Serializable]
+public enum EconomicConsoleUiKey : byte
+{
+    Key
+}
+
+public enum MarketTrendDirection
+{
+    Bullish,
+    Bearish,
+    Volatile,
+    Stable
+}
+
 public abstract class SharedCargoSystem : EntitySystem {}
 
 [Serializable, NetSerializable]

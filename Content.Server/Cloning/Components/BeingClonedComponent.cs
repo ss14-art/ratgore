@@ -10,5 +10,8 @@ namespace Content.Server.Cloning.Components
 
         [ViewVariables]
         public EntityUid Parent;
+
+        [ViewVariables]
+        public EntityUid BodyToClone;
     }
 }

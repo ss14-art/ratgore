@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Tick
-  name: МГ Клещ
+  name: ТС Клещ
   description: |
     Сверхлегкий истребитель Синдиката, вооруженный двумя сдвоенными торпедными установками. Способен наносить сокрушительный урон для своих размеров.
     ВООРУЖЕНИЕ: 2x СХИ 180-мм малая торпедная установка "Идна"
@@ -15,7 +15,7 @@
 
 - type: gameMap
   id: Tick
-  mapName: 'МГ Клещ'
+  mapName: 'ТС Клещ'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/tick.yml
   minPlayers: 0
   stations:
@@ -30,7 +30,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: fighter
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Клещ {1}'
+          mapNameTemplate: 'ТС Клещ {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

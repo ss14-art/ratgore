@@ -3,7 +3,7 @@
 #
 - type: vessel
   id: Cleaver
-  name: МГ Клевер
+  name: ТС Клевер
   description: Тяжелый истребитель Синдиката c EMP пушкой.
   price: 50000 #50000 appraisegrid
   category: Medium
@@ -12,7 +12,7 @@
 
 - type: gameMap
   id: Cleaver
-  mapName: 'МГ Клевер'
+  mapName: 'ТС Клевер'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/cleaver.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: corvette
         - type: StationNameSetup
-          mapNameTemplate: 'МГ Клевер {1}'
+          mapNameTemplate: 'ТС Клевер {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

@@ -34,6 +34,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconNCWLLogisticWorker"
+  chatNameColor: "#7a4c12"
   supervisors: job-supervisors-ncwl-unionized
   canBeAntag: false
   requirements:

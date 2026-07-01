@@ -3,16 +3,16 @@
 #
 - type: vessel
   id: Taipan
-  name: ТК Тайпан
+  name: ТС Тайпан
   description: Многоцелевой вооруженный корвет.
-  price: 35000
+  price: 45000
   category: Medium
   group: None
   path: /Maps/_Crescent/Shuttles/NCSP/taipan.yml
 
 - type: gameMap
   id: Taipan
-  mapName: 'ТК Тайпан'
+  mapName: 'ТС Тайпан'
   mapPath: /Maps/_Crescent/Shuttles/NCSP/taipan.yml
   minPlayers: 0
   stations:
@@ -27,7 +27,7 @@
             sprite: _Crescent/ShipIcons/ifficons.rsi
             state: corvette
         - type: StationNameSetup
-          mapNameTemplate: 'ТК Тайпан {1}'
+          mapNameTemplate: 'ТС Тайпан {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

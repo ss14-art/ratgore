@@ -1,0 +1,31 @@
+- type: entity
+  id: SpawnPointLatejoinNCWL
+  parent: SpawnPointLatejoin
+  name: NCWL latejoin spawn point
+  components:
+  - type: FactionLateJoinSpawnPoint
+    faction_id: NCWL
+
+- type: entity
+  id: SpawnPointLatejoinDSM
+  parent: SpawnPointLatejoin
+  name: DSM latejoin spawn point
+  components:
+  - type: FactionLateJoinSpawnPoint
+    faction_id: DSM
+
+- type: entity
+  id: SpawnPointLatejoinSRM
+  parent: SpawnPointLatejoin
+  name: SRM latejoin spawn point
+  components:
+  - type: FactionLateJoinSpawnPoint
+    faction_id: SRM
+
+- type: entity
+  id: SpawnPointLatejoinSHI
+  parent: SpawnPointLatejoin
+  name: SHI latejoin spawn point
+  components:
+  - type: FactionLateJoinSpawnPoint
+    faction_id: SHI

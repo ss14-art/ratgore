@@ -17,6 +17,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stacks;
 using Robust.Server.Player;
+using Content.Shared._Rat.Medical; // Ratgore-tweak
 
 
 namespace Content.Server.Chemistry.EntitySystems;
@@ -229,6 +230,11 @@ public sealed class InjectorSystem : SharedInjectorSystem
                     $"{EntityManager.ToPrettyString(user):user} is attempting to draw {injector.Comp.TransferAmount.ToString()} units from themselves.");
             }
         }
+
+        // Ratgore-edit start
+        if (TryComp<HealingSpeedModifierComponent>(user, out var healingSpeedMod))
+            actualDelay /= healingSpeedMod.SpeedModifier;
+        // Ratgore-edit end
 
         DoAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, actualDelay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
         {

@@ -8,6 +8,7 @@
   alwaysUseSpawner: true
   requireAdminNotify: false
   icon: "JobIconSyndieNewblood"
+  chatNameColor: "#3b0707"
   supervisors: job-supervisors-gsc-newbie
   canBeAntag: false
   requirements:

@@ -5,7 +5,6 @@
   frequency: 1985
   color: "#bf4d00"
 
-
 - type: radioChannel
   id: Imperial
   name: chat-radio-empire

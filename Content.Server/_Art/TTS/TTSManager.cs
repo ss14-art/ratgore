@@ -1,25 +1,28 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using Content.Shared._Art.CVars;
 using Prometheus;
 using Robust.Shared.Configuration;
 
 namespace Content.Server._Art.TTS;
 
-
 // ReSharper disable once InconsistentNaming
+/// <summary>
+/// TTS Manager for ntts.fdev.team API
+/// </summary>
 public sealed class TTSManager
 {
     private static readonly Histogram RequestTimings = Metrics.CreateHistogram(
         "tts_req_timings",
         "Timings of TTS API requests",
         new HistogramConfiguration()
-
         {
             LabelNames = new[] { "type" },
             Buckets = Histogram.ExponentialBuckets(.1, 1.5, 10),
@@ -68,19 +71,26 @@ public sealed class TTSManager
             ResetCache();
         }, true);
         _cfg.OnValueChanged(ArtCVars.TTSApiUrl, v => _apiUrl = v, true);
-        _cfg.OnValueChanged(ArtCVars.TTSApiToken, v => _apiToken = v, true);
+        _cfg.OnValueChanged(ArtCVars.TTSApiToken, v =>
+        {
+            _apiToken = v;
+            // Update Authorization header when token changes
+            _httpClient.DefaultRequestHeaders.Authorization =
+                string.IsNullOrEmpty(v) ? null : new AuthenticationHeaderValue("Bearer", v);
+        }, true);
     }
 
     /// <summary>
-    /// Generates audio with passed text by API
+    /// Generates audio with passed text using ntts.fdev.team API
     /// </summary>
-    /// <param name="speaker">Identifier of speaker</param>
-    /// <param name="text">Formatted text</param>
+    /// <param name="speaker">Identifier of speaker (e.g., "father_grigori")</param>
+    /// <param name="text">Text to synthesize</param>
+    /// <param name="effect">Optional audio effect (e.g., "echo", "reverb")</param>
     /// <returns>OGG audio bytes or null if failed</returns>
-    public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text)
+    public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text, string? effect = null)
     {
         WantedCount.Inc();
-        var cacheKey = GenerateCacheKey(speaker, text);
+        var cacheKey = GenerateCacheKey(speaker, text, effect);
         if (_cache.TryGetValue(cacheKey, out var data))
         {
             ReusedCount.Inc();
@@ -88,25 +98,32 @@ public sealed class TTSManager
             return data;
         }
 
+        if (string.IsNullOrWhiteSpace(_apiUrl))
+        {
+            _sawmill.Warning("TTS API URL is not configured");
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(_apiToken))
+        {
+            _sawmill.Warning("TTS API Token is not configured");
+            return null;
+        }
+
         _sawmill.Verbose($"Generate new audio for '{text}' speech by '{speaker}' speaker");
 
         var reqTime = DateTime.UtcNow;
         try
         {
+            // Build request URL with query parameters
+            var requestUrl = BuildRequestUrl(speaker, text, effect);
+
             var timeout = _cfg.GetCVar(ArtCVars.TTSApiTimeout);
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
 
-            var queryParams = System.Web.HttpUtility.ParseQueryString(string.Empty);
-            queryParams["speaker"] = speaker;
-            queryParams["text"] = text;
-            queryParams["ext"] = "ogg";
+            // GET request to ntts.fdev.team API
+            var response = await _httpClient.GetAsync(requestUrl, cts.Token);
 
-            var url = $"{_apiUrl}?{queryParams}";
-
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _apiToken);
-
-            var response = await _httpClient.SendAsync(request, cts.Token);
             if (!response.IsSuccessStatusCode)
             {
                 if (response.StatusCode == HttpStatusCode.TooManyRequests)
@@ -115,15 +132,30 @@ public sealed class TTSManager
                     return null;
                 }
 
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    _sawmill.Error("TTS request unauthorized - check API token");
+                    return null;
+                }
+
                 _sawmill.Error($"TTS request returned bad status code: {response.StatusCode}");
                 return null;
             }
 
+            // API returns raw audio bytes directly
             var soundData = await response.Content.ReadAsByteArrayAsync(cts.Token);
 
+            if (soundData.Length == 0)
+            {
+                _sawmill.Warning($"TTS API returned empty audio for '{text}'");
+                return null;
+            }
+
+            // Add to cache
             _cache.TryAdd(cacheKey, soundData);
             _cacheKeysSeq.Add(cacheKey);
 
+            // Evict old cache entries
             while (_cache.Count > _maxCachedCount && _cacheKeysSeq.Count > 0)
             {
                 var oldestKey = _cacheKeysSeq.First();
@@ -150,6 +182,25 @@ public sealed class TTSManager
         }
     }
 
+    /// <summary>
+    /// Build request URL for ntts.fdev.team API
+    /// Format: GET /api/v1/tts?speaker=X&text=Y&ext=ogg
+    /// </summary>
+    private string BuildRequestUrl(string speaker, string text, string? effect)
+    {
+        var uriBuilder = new UriBuilder(_apiUrl);
+        var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+
+        query["speaker"] = speaker;
+        query["text"] = text;
+        query["ext"] = "ogg";
+
+        if (!string.IsNullOrEmpty(effect))
+            query["effect"] = effect;
+
+        uriBuilder.Query = query.ToString();
+        return uriBuilder.ToString();
+    }
 
     public void ResetCache()
     {
@@ -158,9 +209,9 @@ public sealed class TTSManager
     }
 
     [MethodImpl(MethodImplOptions.AggressiveOptimization)]
-    private string GenerateCacheKey(string speaker, string text)
+    private string GenerateCacheKey(string speaker, string text, string? effect)
     {
-        var keyData = Encoding.UTF8.GetBytes($"{speaker}/{text}");
+        var keyData = Encoding.UTF8.GetBytes($"{speaker}/{text}/{effect ?? ""}");
         var hashBytes = System.Security.Cryptography.SHA256.HashData(keyData);
         return Convert.ToHexString(hashBytes);
     }

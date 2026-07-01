@@ -93,6 +93,7 @@
     - Termite
     - Manatee
     - Cockroach
+    - Hammerhead
 # Hardcoded consoles
 - type: entity
   id: RatComputerShipyardSecurity
@@ -230,6 +231,18 @@
     - Corvax
     - Ouroboros
     #- Cleaver - why the fuck is this designated upgrade available roundstart
+    # post new conception syndie shit
+    # CD section
+    - Taipan #jacked up the price
+    - Spriggan #mining ship
+    # IPM section
+    - Matabele #corpse recovery
+    # SAW section
+    - Hyena
+    - Shanty
+    - Rokh
+    - Scarab
+    - Amadeus
 
 - type: entity
   id: RatCountsmanMothershipComputer
@@ -313,7 +326,7 @@
     - buffalo
     - gazpachov
     - Musinyane
-    #- Chanchu
+    - Chanchu
     - Nazaar
 
 - type: entity
@@ -324,7 +337,7 @@
   - type: ShipyardListing
     iffColor: IndianRed
     shuttles:
-    #- Velator not rounstart.
+    - Velator
     #- Taipan
     - Wreck
     - Spriggan

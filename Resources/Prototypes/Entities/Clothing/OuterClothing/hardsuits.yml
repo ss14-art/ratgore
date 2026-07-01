@@ -650,6 +650,8 @@
     - Hardsuit
     - WhitelistChameleon
     - HidesHarpyWings
+  - type: ClothingAddFaction
+    faction: TFSC
 
 # Syndicate Medic Hardsuit
 - type: entity

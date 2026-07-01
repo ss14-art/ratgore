@@ -44,6 +44,8 @@
       - type: CPRTraining
       - type: SurgerySpeedModifier
         speedModifier: 2.5
+      - type: HealingSpeedModifier # Ratgore-tweak
+        speedModifier: 2.5 # Ratgore-tweak
       - type: LanguageAdder
         addSpoken:
           - Dockta
@@ -105,5 +107,10 @@
     gloves: ClothingHandsGlovesNitrile
     head: ClothingHeadHatNCWLBeretMedi
     eyes: ClothingEyesHudMedical
-    ears: ClothingHeadsetNCWL
+    ears: ClothingHeadsetNCWLCommand
     pocket2: RatRubberStampNCWLMedical
+# Ratgore-edit start
+  storage:
+    back:
+      - HandheldCrewMonitorNCWL
+# Ratgore-edit end

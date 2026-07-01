@@ -205,7 +205,7 @@
   recipeUnlocks:
   - NazaarLPC
   - MusinyaneLPC
-  
+
 - type: technology
   id: ShinoharaHeavyDestroyer
   name: research-technology-shinohara-corpsec-shark
@@ -217,7 +217,7 @@
   cost: 9000
   recipeUnlocks:
   - SharkLPC
-  
+
 - type: technology
   id: ShinoharaAdvancedMaterials
   name: research-technology-shinohara-advancedmaterials
@@ -470,7 +470,7 @@
   tier: 3
   cost: 12500
   recipeUnlocks:
-  - ClothingOuterHardsuitSHIJuggernaut
+  #- ClothingOuterHardsuitSHIJuggernaut new conception
   - ClothingOuterHardsuitHighsecUA #ratgore, moved UAs here
   - ClothingOuterHardsuitHighsecIndependent
   - ClothingOuterHardsuitSHISpeedsuit
