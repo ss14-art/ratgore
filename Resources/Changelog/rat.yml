@@ -1128,5 +1128,16 @@ Entries:
     id: 135
     time: '2026-07-04T11:22:51.0000000+00:00'
     url: https://github.com/ss14-art/ratgore/pull/289
+  - author: nabegator220
+    changes:
+      - type: Add
+        message: New map.
+      - type: Tweak
+        message: Remapped the bogatyr and torturer
+      - type: Tweak
+        message: The budgetvend SMG has had its firerate increased to 900 rpm.
+    id: 136
+    time: '2026-07-11T23:32:49.0000000+00:00'
+    url: https://github.com/ss14-art/ratgore/pull/291
 Name: Rat
 Order: -1
