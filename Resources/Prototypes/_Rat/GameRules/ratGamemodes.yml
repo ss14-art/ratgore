@@ -19,179 +19,94 @@
     gameMapsByID:
       PortBalreska:
         gameMapID: PortBalreska
-        posX: -3000
-        posY: -7000
+        posX: -4000
+        posY: 0
         IFFColor: Orange
         IFFFaction: NCWL
       AuroraImperialis:
         gameMapID: AuroraImperialis
-        posX: 3000
-        posY: 7000
+        posX: 4000
+        posY: 4000
         IFFColor: "#C677A5"
         IFFFaction: DSM
+      GliessSanto:
+        gameMapID: GliessSanto
+        posX: 0
+        posY: 0
+        IFFColor: White
       Tatsumoto:
         gameMapID: Tatsumoto
-        posX: 2500
-        posY: 0
-        randomOffsetX: 1000
-        randomOffsetY: 2000
+        posX: 0
+        posY: 2000
         IFFColor: White
         IFFFaction: SHI
       Jackal:
         gameMapID: Jackal
-        posX: -8000
-        posY: 2000
-        IFFColor: IndianRed
-        IFFFaction: TFSC
-      GliessSanto:
-        gameMapID: GliessSanto
-        posX: -2000
-        posY: 2000
-        randomOffsetX: 1000
-        randomOffsetY: 1000
-      TribalHideout:
-        gameMapID: TribalHideout
-        posX: 2000
-        posY: -7000
-        IFFColor: White
-        IFFFaction: TAP
-        randomOffsetX: 2000
-        randomOffsetY: 2000
-      IronRing:
-        gameMapID: IronRing
         posX: -1000
-        posY: 0
-        randomOffsetX: 500
-        randomOffsetY: 1000
-      RatFakel:
-        gameMapID: RatFakel
-        posX: 0
-        posY: 0
-      RatBuran:
-        gameMapID: RatBuran
-        posX: -2500
-        posY: 3500
-      RatKovf:
-        gameMapID: RatKovf
-        posX: 500
-        posY: -4300
-
-- type: gamePreset
-  id: RatAdventureFreeport
-  alias:
-  - ratadventurefreeport
-  name: Свободная игра (Фрипорт)
-  showInVote: true
-  description: Последние дни Тайпана. Длится 2-4 часа.
-  rules:
-  - RatAdventureFreeport
-  - HullrotEventScheduler
-
-- type: entity
-  id: RatAdventureFreeport
-  parent: BaseGameRule
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: AdventureRule
-    gameMapsByID:
-      PortBalreska:
-        gameMapID: PortBalreska
-        posX: -3000
-        posY: -7000
-        IFFColor: Orange
-        IFFFaction: NCWL
-      AuroraImperialis:
-        gameMapID: AuroraImperialis
-        posX: 3000
-        posY: 7000
-        IFFColor: "#C677A5"
-        IFFFaction: DSM
-      Tatsumoto:
-        gameMapID: Tatsumoto
-        posX: 2500
-        posY: 0
-        randomOffsetX: 1000
-        randomOffsetY: 2000
-        IFFColor: White
-        IFFFaction: SHI
-      Freeport:
-        gameMapID: Freeport
-        posX: 7000
-        posY: -2000
+        posY: -1500
         IFFColor: IndianRed
         IFFFaction: TFSC
-      GliessSanto:
-        gameMapID: GliessSanto
+      Taypan1AsteroidBelt:
+        gameMapID: Taypan1AsteroidBelt
         posX: -2000
         posY: 2000
-        randomOffsetX: 1000
-        randomOffsetY: 1000
+      Taypan2AsteroidBelt:
+        gameMapID: Taypan2AsteroidBelt
+        posX: 2000
+        posY: 2000
       TribalHideout:
         gameMapID: TribalHideout
-        posX: 2000
-        posY: -7000
-        IFFColor: White
-        IFFFaction: TAP
-        randomOffsetX: 2000
-        randomOffsetY: 2000
-      IronRing:
-        gameMapID: IronRing
-        posX: -3000
-        posY: 500
+        posX: 1000
+        posY: 1000
         randomOffsetX: 1000
         randomOffsetY: 1000
-      RatFakel:
-        gameMapID: RatFakel
+      ImperialHaulerWreck:
+        gameMapID: ImperialHaulerWreck
+        posX: 1000
+        posY: -2000
+        HideIFF: true
+      Fighter1:
+        gameMapID: Fighter1
+        posX: 500
+        posY: -1000
+        HideIFF: true
+      Fighter2:
+        gameMapID: Fighter2
+        posX: 1000
+        posY: 3000
+        HideIFF: true
+      SolarSailorDerelict:
+        gameMapID: SolarSailorDerelict
+        posX: 4000
+        posY: 1500
+        HideIFF: true
+      FogwreckedDerelict:
+        gameMapID: FogwreckedDerelict
+        posX: -1000
+        posY: 1000
+        HideIFF: true
+      IronRing:
+        gameMapID: IronRing
         posX: 0
-        posY: 0
-      RatBuran:
-        gameMapID: RatBuran
-        posX: -2500
-        posY: 3500
+        posY: 4000
       RatKovf:
         gameMapID: RatKovf
-        posX: 500
-        posY: -4300
-
-- type: gamePreset
-  id: RatAdventureWar
-  alias:
-  - ratwar
-  name: ЛРНП vs БМС
-  showInVote: true
-  description: Последние дни Тайпана. Длится 2-4 часа.
-  rules:
-  - RatAdventureWar
-  - HullrotEventScheduler
-
-- type: entity
-  id: RatAdventureWar
-  parent: BaseGameRule
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: AdventureRule
-    gameMapsByID:
-      PortBalreska:
-        gameMapID: PortBalreska
-        posX: -3000
-        posY: -5000
-        IFFColor: Orange
-        IFFFaction: NCWL
-      AuroraImperialis:
-        gameMapID: AuroraImperialis
         posX: 3000
-        posY: 5000
-        IFFColor: "#C677A5"
-        IFFFaction: DSM
-      RatFakel:
-        gameMapID: RatFakel
+        posY: -500
+      DerelictWaystation:
+        gameMapID: DerelictWaystation
         posX: 0
-        posY: 0
-      RatBuran:
-        gameMapID: RatBuran
-        posX: -2500
-        posY: 3500
-      RatKovf:
-        gameMapID: RatKovf
-        posX: 500
-        posY: -4300
+        posY: -3000
+      StrandedShip:
+        gameMapID: StrandedShip
+        posX: 2000
+        posY: 5000
+        HideIFF: true
+      Graveyard:
+        gameMapID: Graveyard
+        posX: -1000
+        posY: 4000
+      Craster:
+        gameMapID: Craster
+        posX: 2000
+        posY: -2000

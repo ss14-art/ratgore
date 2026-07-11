@@ -4,8 +4,13 @@
   - type: WorldController
   - type: BiomeSelection
     biomes:
-    - RatStandard
+    - Failsafe
+    - RatAsteroidsStandardTaypanOne
+    - RatAsteroidsStandardTaypanTwo
+    - RatGraveyardWrecks
+    #- RatBalreskaWrecks
+    #- RatAncientBattlefieldWrecks
+    #- RatHeartlandsWrecks
     - RatCraster
-    - RatAsteroidsStandardTaypan
-    - RatGraveyardMax
-    - RatGraveyardMin
+    #- RatMarchbelt
+    #- RatDeepbelt

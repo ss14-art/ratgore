@@ -360,7 +360,7 @@
     shape:
     - 0,0,2,1
   - type: Gun
-    fireRate: 10
+    fireRate: 15
     selectedMode: FullAuto
     soundGunshot:
       path: /Audio/_Crescent/Weapons/Guns/supressed_1/supressed_gunshot_2.ogg

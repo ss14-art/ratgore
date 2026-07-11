@@ -73,8 +73,6 @@ entities:
       iffIcon:
         sprite: _Crescent/ShipIcons/ifficons.rsi
         state: asteroids
-    - type: BecomesStation
-      id: TaypanOne
 - proto: AsteroidRock
   entities:
   - uid: 2

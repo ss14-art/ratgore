@@ -1,7 +1,7 @@
 - type: gameMap
   id: Taypan2AsteroidBelt
-  mapName: 'Taypan-2 Asteroid Belt'
-  mapPath: /Maps/_NF/POI/tinnia.yml
+  mapName: 'Пояс Астероидов "Тайпан-2"'
+  mapPath: /Maps/_Crescent/Explorables/taypantwo.yml
   minPlayers: 0
   stations:
     Taypan2AsteroidBelt:

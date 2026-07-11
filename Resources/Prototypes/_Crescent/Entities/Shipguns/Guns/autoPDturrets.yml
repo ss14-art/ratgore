@@ -106,9 +106,6 @@
       context: "human"
     - type: Anchorable
       delay: 10
-    - type: HardpointAnchorableOnly
-      class: Ballistic
-      size: Small
     - type: HTN
       rootTask:
         task: HullrotAutoPD

@@ -182,13 +182,6 @@ public sealed class RatCrewMonitorMapControl : BaseShuttleControl
         worldOrigin = worldOrigin with { Y = -worldOrigin.Y };
         var screenOrigin = ScalePosition(worldOrigin);
 
-        handle.DrawCircle(screenOrigin, 500f * MinimapScale, new Color(1f, 0f, 0f, 0.03f));
-        handle.DrawCircle(screenOrigin, 500f * MinimapScale, new Color(1f, 0f, 0f, 0.2f), filled: false);
-
-        DrawFilledRing(handle, screenOrigin,
-            4000f * MinimapScale, 4500f * MinimapScale,
-            new Color(0f, 1f, 0f, 0.03f), new Color(0f, 1f, 0f, 0.2f));
-
         DrawFilledRing(handle, screenOrigin,
             10000f * MinimapScale, 20000f * MinimapScale,
             new Color(1f, 0f, 0f, 0.01f), new Color(1f, 0f, 0f, 0.1f));
@@ -362,7 +355,7 @@ public sealed class RatCrewMonitorMapControl : BaseShuttleControl
 
             _trackedEntityLabel.Text = message;
             _trackedEntityPanel.Visible = true;
-            
+
             var mobColor = MobStates.TryGetValue(netEntity, out var mobState)
                 ? GetMobColor(mobState)
                 : Color.White;

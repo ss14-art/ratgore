@@ -41326,7 +41326,7 @@ entities:
       pos: 0.5,0.5
       parent: 1
     - type: WarpPoint
-      location: МГ Гидра
+      location: ТС Гидра
 - proto: WeaponDonorPlasmaCutter
   entities:
   - uid: 3945

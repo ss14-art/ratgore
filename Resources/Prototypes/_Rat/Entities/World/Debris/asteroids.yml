@@ -12,6 +12,9 @@
       blobDrawProb: 0.5
       radius: 6
       floorPlacements: 16
+    - type: IFF
+      flags: HideLabel
+      color: "#d67e27"
 
 - type: entity
   id: RatBaseAsteroidPoor
@@ -19,44 +22,29 @@
   name: Poor Asteroid Debris
   abstract: true
   components:
-    - type: IFF
-      flags: HideLabel
-      color: "#FFF0AA"
     - type: SimpleFloorPlanPopulator
       entries:
         FloorAsteroidSand:
           - id: WallRock
-            prob: 0.2
+            prob: 0.7
             orGroup: rock
           - id: WallRockCoal
-            prob: 0.05
+            prob: 0.12
             orGroup: rock
           - id: WallRockTin
-            prob: 0.05
-            orGroup: rock
-          - id: WallRockQuartz
-            prob: 0.05
+            prob: 0.08
             orGroup: rock
           - id: WallRockCopper
-            prob: 0.05
+            prob: 0.06
+            orGroup: rock
+          - id: WallRockQuartz
+            prob: 0.03
             orGroup: rock
           - id: WallRockGold
-            prob: 0.02
+            prob: 0.001
             orGroup: rock
           - id: WallRockSilver
-            prob: 0.02
-            orGroup: rock
-          - id: WallRockArtifactFragment
-            prob: 0.002
-            orGroup: rock
-          - id: WallRockPlasma
-            prob: 0.015
-            orGroup: rock
-          - id: WallRockUranium
-            prob: 0.015
-            orGroup: rock
-          - id: WallRockTungsten
-            prob: 0.015
+            prob: 0.001
             orGroup: rock
 
 - type: entity
@@ -65,35 +53,17 @@
   name: Rich Asteroid Debris
   abstract: true
   components:
-    - type: IFF
-      flags: HideLabel
-      color: "#FFD000"
     - type: SimpleFloorPlanPopulator
       entries:
         FloorAsteroidSand:
           - id: WallRock
-            prob: 0.1
-            orGroup: rock
-          - id: WallRockCoal
-            prob: 0.075
-            orGroup: rock
-          - id: WallRockTin
-            prob: 0.075
-            orGroup: rock
-          - id: WallRockQuartz
-            prob: 0.075
-            orGroup: rock
-          - id: WallRockCopper
-            prob: 0.075
+            prob: 0.5
             orGroup: rock
           - id: WallRockGold
             prob: 0.05
             orGroup: rock
           - id: WallRockSilver
             prob: 0.05
-            orGroup: rock
-          - id: WallRockArtifactFragment
-            prob: 0.01
             orGroup: rock
           - id: WallRockPlasma
             prob: 0.03
@@ -102,10 +72,25 @@
             prob: 0.03
             orGroup: rock
           - id: WallRockTungsten
-            prob: 0.03
+            prob: 0.02
+            orGroup: rock
+          - id: WallRockArtifactFragment
+            prob: 0.02
             orGroup: rock
           - id: RandomArtifactSpawner20
-            prob: 0.002
+            prob: 0.005
+            orGroup: rock
+          - id: RockElementalSpawner
+            prob: 0.01
+            orGroup: rock
+          - id: WallRockCoal
+            prob: 0.1
+            orGroup: rock
+          - id: WallRockTin
+            prob: 0.1
+            orGroup: rock
+          - id: WallRockCopper
+            prob: 0.08
             orGroup: rock
 
 - type: entity
@@ -137,7 +122,7 @@
             orGroup: rock
     - type: IFF
       flags: HideLabel
-      color: "#BACAFF"
+      color: "#d6fffc"
 
 - type: entity
   id: RatBaseIceAsteroidRich
@@ -186,7 +171,7 @@
             orGroup: rock
     - type: IFF
       flags: HideLabel
-      color: "#BACAFF"
+      color: "#d6fffc"
 
 - type: entity
   id: RatBaseBasaltAsteroidPoor
@@ -217,7 +202,7 @@
             orGroup: rock
     - type: IFF
       flags: HideLabel
-      color: "#FF7E75"
+      color: "#b5b5b5"
 
 - type: entity
   id: RatBaseBasaltAsteroidRich
@@ -266,7 +251,7 @@
             orGroup: rock
     - type: IFF
       flags: HideLabel
-      color: "#FF7E75"
+      color: "#b5b5b5"
 
 - type: entity
   id: RatAsteroidPoorLarge
@@ -298,8 +283,8 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 300
-      radius: 70
+      floorPlacements: 130
+      radius: 35
 
 - type: entity
   id: RatAsteroidRichHuge
@@ -309,8 +294,8 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      radius: 8
-      floorPlacements: 300
+      floorPlacements: 130
+      radius: 35
 
 - type: entity
   id: RatIceAsteroidPoorLarge
@@ -342,8 +327,8 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 300
-      radius: 70
+      floorPlacements: 130
+      radius: 35
 
 - type: entity
   id: RatIceAsteroidRichHuge
@@ -353,8 +338,8 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 300
-      radius: 70
+      floorPlacements: 130
+      radius: 35
 
 - type: entity
   id: RatBasaltAsteroidPoorLarge
@@ -386,8 +371,8 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 300
-      radius: 70
+      floorPlacements: 130
+      radius: 35
 
 - type: entity
   id: RatBasaltAsteroidRichHuge
@@ -397,5 +382,5 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 300
-      radius: 70
+      floorPlacements: 130
+      radius: 35
