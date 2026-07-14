@@ -1,0 +1,41 @@
+- type: gameMap
+  id: Freeport
+  mapName: 'The Freeport'
+  mapPath: /Maps/_Rat/Stations/freeport.yml
+  minPlayers: 0
+  stations:
+    Freeport:
+      stationProto: StandardCrescentStation
+      gridComponents:
+        - type: BlockShipWeaponProjectileGrid
+        - type: PreventPilot
+        - type: MapIcon
+          iconType: Station
+      components:
+        - type: VesselIcon
+          iffIcon:
+            sprite: _Crescent/ShipIcons/ifficons.rsi
+            state: outpost
+        - type: StationNameSetup
+          mapNameTemplate: 'The Freeport'
+        - type: VesselDesignation
+          designation: vessel-designation-headquarters
+        - type: Grammar
+          attributes:
+            proper: true
+        - type: StationJobs
+          overflowJobs: []
+          availableJobs: #28 pop - ratgore
+            RingleaderNCSP: [ 1, 1 ]
+            LieutenantNCSP: [ 1, 1 ]
+            InfanteerNCSP: [ 4, 4 ]
+            TechnicianNCSP: [ 2, 2 ]
+            CoordinatorNCSP: [ 1, 1 ]
+            TraumasecNCSP: [ 3, 3 ]
+            RipperdocNCSP: [ 2, 2 ]
+            IntelligenceOfficerNCSP: [ 1, 1 ]
+            OperativeNCSP: [ 4, 4 ]
+            CyberdawnTechNCSP: [ 2, 2 ]
+            ForemanNCSP: [ 1, 1 ]
+            ShipbreakerNCSP: [ 7, 7 ]
+            # Contractor: [ 15, 15 ] - ratgore
