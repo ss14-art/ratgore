@@ -116,3 +116,245 @@
   - type: TinfoilHat
     passthrough: true
     destroyOnFry: false
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatKNCBeret
+  name: Knight Beret
+  description: A prestigious beret made of expensive material in the colors of House Romaine. Shows status but does not protect the head from unwanted thoughts or penetrating objects.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Head/mandateberet.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Head/mandateberet.rsi
+  - type: TinfoilHat
+    passthrough: true
+    destroyOnFry: false
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHelmetKNCTrooperHelmet
+  name: Order Combat Helmet
+  description: A helmet adorned with the heraldry of House Romaine.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Head/mandatehelmet.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Head/mandatehelmet.rsi
+  - type: TinfoilHat
+    passthrough: true
+    destroyOnFry: false
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHelmetKNCKnightCommanderHelmet
+  name: Order Officer Helmet
+  description: A prestigious helmet adorned with gold trim and the heraldry of House Romaine.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Head/mandatecommanderhelmet.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Head/mandatecommanderhelmet.rsi
+  - type: TinfoilHat
+    passthrough: true
+    destroyOnFry: false
+
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetHardsuitKNCCommand
+  categories: [ HideSpawnMenu ]
+  name: Armor Helmet "REGENT" Mk. III
+  description: A prestigious and majestic helmet adorning the brow of the knightly leader.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Head/mandatecommand.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Head/mandatecommand.rsi
+  - type: PointLight
+    radius: 6
+    color: "#c3fffa"
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Radiation: 0.9
+        Caustic: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+
+
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetHardsuitKNCCoronet
+  categories: [ HideSpawnMenu ]
+  name: Knight Armor Helmet "HONOR" Mk. IV
+  description: The helmet from the upgraded fourth-generation version of the "VIGILANTE" knight armor. Looks brutal and majestic.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Head/mandatecoronet.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Head/mandatecoronet.rsi
+  - type: PointLight
+    radius: 6
+    color: "#c3fffa"
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Radiation: 0.9
+        Caustic: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+
+
+
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetKNCjuggernaut
+  categories: [ HideSpawnMenu ]
+  name: Combat Exosuit Helmet "VALOR" Mk. II
+  description: A prestigious, heavily armored knight helmet developed by the Scriptors of House Romaine during its Crusade. Looks intimidating.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Head/mandatejuggernauthelmet.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Head/mandatejuggernauthelmet.rsi
+  - type: PointLight
+    radius: 6
+    color: "#c3fffa"
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Radiation: 0.9
+        Caustic: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+
+
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetHardsuitKNCKnight
+  categories: [ HideSpawnMenu ]
+  name: Knight Armor Helmet "VIGILANTE" Mk. III
+  description: The helmet from the third-generation armor produced by House Romaine. Exudes pretentiousness.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Head/mandateknight.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Head/mandateknight.rsi
+  - type: PointLight
+    radius: 6
+    color: "#c3fffa"
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Radiation: 0.9
+        Caustic: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+
+
+
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetHardsuitKNCSoldier
+  categories: [ HideSpawnMenu ]
+  name: Knight Armor Helmet "VIGILANTE" Mk. I
+  description: The helmet from the first-generation knight armor produced by House Romaine. Looks old.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Head/mandatesoldier.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Head/mandatesoldier.rsi
+  - type: PointLight
+    radius: 6
+    color: "#c3fffa"
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Radiation: 0.9
+        Caustic: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+
+
+
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetKNCRitter
+  categories: [ HideSpawnMenu ]
+  name: Combat Exosuit Helmet "PARABELLUM" Mk. II
+  description: The helmet from the mass-produced armor for the numerous militia assembled by knightly houses. Looks somewhat plain.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Head/ritterhelmet.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Head/ritterhelmet.rsi
+  - type: PointLight
+    radius: 6
+    color: "#c3fffa"
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Radiation: 0.9
+        Caustic: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout

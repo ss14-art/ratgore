@@ -30,3 +30,36 @@
     sprite: _Crescent/Clothing/SRM/Uniform/overseerclericals.rsi
   - type: Clothing
     sprite: _Crescent/Clothing/SRM/Uniform/overseerclericals.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitorderofficer
+  name: Noble Uniform
+  description: An elegantly tailored uniform made of durable dur fabric, indicating the owner's status. In the colors of House Romaine.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Uniform/orderofficer.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Uniform/orderofficer.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitordermedic
+  name: Apothecary Uniform
+  description: A neatly tailored uniform indicating the owner's affiliation with the apothecaries. In the colors of House Romaine.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Uniform/ordermedic.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Uniform/ordermedic.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitordercombat
+  name: Combat Uniform
+  description: A standard-tailored uniform made of durable fabric, indicating the owner's affiliation. In the colors of House Romaine.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/Uniform/ordercombat.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/Uniform/ordercombat.rsi

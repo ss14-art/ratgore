@@ -203,3 +203,275 @@
   - type: ExplosionResistance
     damageCoefficient: 0.90
   - type: GroupExamine
+
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterArmorKNCTrooperArmor
+  name: Order Combat Chestplate
+  description: A standard-issue chestplate manufactured according to the Order's existing CIF blueprints. Provides the baseline necessary qualities to withstand a couple of small-caliber hits and keep your ribs from being crushed.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatearmor.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatearmor.rsi
+  - type: DegradeableArmor
+    armorMaxHealth: 750
+    armorType: Metallic
+    armorRepair: PlasteelEncasedKevlar
+    initialModifiers:
+      flatReductions:
+        Blunt: 15
+        Slash: 15
+        Piercing: 35
+        Heat: 20
+        Caustic: 15
+  - type: ClothingSpeedModifier
+    walkModifier: 1.0
+    sprintModifier: 1.0
+  - type: ExplosionResistance
+    damageCoefficient: 0.90
+  - type: GroupExamine
+
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterArmorKNCArmorPrestige
+  name: Order Officer's Chestplate
+  description: A standard-issue chestplate manufactured according to the Order's existing CIF blueprints. Modified for officer's needs – the construction is slightly more durable than the soldier's chestplate. Adorned with additional parts indicating the owner's status.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatearmorprestige.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatearmorprestige.rsi
+  - type: DegradeableArmor
+    armorMaxHealth: 750
+    armorType: Metallic
+    armorRepair: PlasteelEncasedKevlar
+    initialModifiers:
+      flatReductions:
+        Blunt: 15
+        Slash: 15
+        Piercing: 35
+        Heat: 20
+        Caustic: 15
+  - type: ClothingSpeedModifier
+    walkModifier: 1.0
+    sprintModifier: 1.0
+  - type: ExplosionResistance
+    damageCoefficient: 0.90
+  - type: GroupExamine
+
+- type: entity
+  parent: [ClothingOuterHardsuitBase, StreeCredRedeemableHigh]
+  id: ClothingOuterHardsuitKNCCommand
+  name: Special Knight Armor "REGENT" Mk. III
+  description: A unique variant of knight armor custom-commissioned for the Regent of House Romaine. Special nanofiber and plas-titan plates, fused into a single unit, are reinforced by nanotubes channeling the wearer's own psionic influence throughout the armor, rendering it not only incredibly durable but also extremely lightweight, barely restricting movement. This is the third model of this armor and the sole surviving specimen – all others, along with their blueprints, were lost in the Abyss alongside the Romaine fleet.  Upon closer inspection, an inscription is engraved on the chestplate - "In morte quoque manebimus tibi servire" (Even in death, we shall remain to serve You).
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatecommand.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatecommand.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.5
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: DegradeableArmor
+    armorMaxHealth: 1000
+    armorType: Metallic
+    armorRepair: PlasteelPlate
+    initialModifiers:
+      flatReductions:
+        Blunt: 35
+        Slash: 35
+        Piercing: 45
+        Heat: 20
+        Caustic: 25
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitKNCCommand
+  - type: StaticPrice
+    price: 5000
+  - type: ClothingAddFaction
+    faction: KNC
+
+- type: entity
+  parent: [ClothingOuterHardsuitBase, StreeCredRedeemableHigh]
+  id: ClothingOuterHardsuitKNCCoronet
+  name: Knight Armor "HONOR" mk.IV
+  description: An upgraded version of the "VIGILANTE" knight armor in its fourth generation. Features improved springs and plastisteel liners with nanofoam filling between them, providing additional kinetic damage reduction. The armor is primarily designed for one-on-one combat using blades or melee weapons, but is also capable of protecting the wearer from some amount of ballistic damage.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatecoronet.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatecoronet.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.5
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: DegradeableArmor
+    armorMaxHealth: 1000
+    armorType: Metallic
+    armorRepair: PlasteelPlate
+    initialModifiers:
+      flatReductions:
+        Blunt: 35
+        Slash: 35
+        Piercing: 45
+        Heat: 20
+        Caustic: 25
+  - type: ClothingSpeedModifier
+    walkModifier: 0.90
+    sprintModifier: 0.90
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitKNCCoronet
+  - type: StaticPrice
+    price: 5000
+  - type: ClothingAddFaction
+    faction: KNC
+
+- type: entity
+  parent: [ClothingOuterHardsuitBase, StreeCredRedeemableHigh]
+  id: ClothingOuterArmorKNCjuggernaut
+  name: Knight Combat Exosuit "VALOR" Mk. II
+  description: A prestigious, heavily armored knight exosuit developed by the Scriptors of House Romaine during its Crusade. It offers superior defensive performance but significantly restricts the operator's mobility. Painted in the colors of the Order of the New Covenant.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatejuggernaut.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatejuggernaut.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.5
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: DegradeableArmor
+    armorMaxHealth: 1000
+    armorType: Metallic
+    armorRepair: PlasteelPlate
+    initialModifiers:
+      flatReductions:
+        Blunt: 35
+        Slash: 35
+        Piercing: 45
+        Heat: 20
+        Caustic: 25
+  - type: ClothingSpeedModifier
+    walkModifier: 0.90
+    sprintModifier: 0.90
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetKNCjuggernaut
+  - type: StaticPrice
+    price: 5000
+  - type: ClothingAddFaction
+    faction: KNC
+
+- type: entity
+  parent: [ClothingOuterHardsuitBase, StreeCredRedeemableHigh]
+  id: ClothingOuterHardsuitKNCKnight
+  name: Knight Armor "VIGILANTE" Mk. III
+  description: The third generation of knight armor produced by House Romaine. Despite its bulk, the armor hardly restricts the wearer's movement, as it is designed for close combat through rapid closing with the enemy. Each such suit of armor has its own owner – a noble knight to whom the armor is assigned and remains with as a relic.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandateknight.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandateknight.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.5
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: DegradeableArmor
+    armorMaxHealth: 1000
+    armorType: Metallic
+    armorRepair: PlasteelPlate
+    initialModifiers:
+      flatReductions:
+        Blunt: 35
+        Slash: 35
+        Piercing: 45
+        Heat: 20
+        Caustic: 25
+  - type: ClothingSpeedModifier
+    walkModifier: 0.90
+    sprintModifier: 0.90
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitKNCKnight
+  - type: StaticPrice
+    price: 5000
+  - type: ClothingAddFaction
+    faction: KNC
+
+- type: entity
+  parent: [ClothingOuterHardsuitBase, StreeCredRedeemableHigh]
+  id: ClothingOuterHardsuitKNCSoldier
+  name: Knight Armor "VIGILANTE" Mk. I
+  description: The first generation of knight armor produced by House Romaine. The simplicity of its manufacturing and its performance allow for near-mass production using CIFs at a relatively low cost. Knights no longer use this version of the armor, instead leaving it for squires, who wear the armor bestowed by their master with honor.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatesoldier.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandatesoldier.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.5
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: DegradeableArmor
+    armorMaxHealth: 1000
+    armorType: Metallic
+    armorRepair: PlasteelPlate
+    initialModifiers:
+      flatReductions:
+        Blunt: 35
+        Slash: 35
+        Piercing: 45
+        Heat: 20
+        Caustic: 25
+  - type: ClothingSpeedModifier
+    walkModifier: 0.90
+    sprintModifier: 0.90
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitKNCSoldier
+  - type: StaticPrice
+    price: 5000
+  - type: ClothingAddFaction
+    faction: KNC
+
+- type: entity
+  parent: [ClothingOuterHardsuitBase, StreeCredRedeemableHigh]
+  id: ClothingOuterHardsuitKNCWorker
+  name: Combat Exosuit "PARABELLUM" Mk. II
+  description: Mass-produced armor for the numerous militias assembled by knightly houses. Extremely unreliable, extremely cheap, and extremely simple to manufacture – it has become the hallmark of any self-respecting knightly militia that noble sires lead into battle.
+  components:
+  - type: Sprite
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandateworker.rsi
+  - type: Clothing
+    sprite: _Crescent/Clothing/SRM/OuterClothing/mandateworker.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.5
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: DegradeableArmor
+    armorMaxHealth: 1000
+    armorType: Metallic
+    armorRepair: PlasteelPlate
+    initialModifiers:
+      flatReductions:
+        Blunt: 35
+        Slash: 35
+        Piercing: 45
+        Heat: 20
+        Caustic: 25
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetKNCRitter
+  - type: StaticPrice
+    price: 5000
+  - type: ClothingAddFaction
+    faction: KNC
