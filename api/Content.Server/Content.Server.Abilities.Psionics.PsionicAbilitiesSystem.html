@@ -1,0 +1,612 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class PsionicAbilitiesSystem
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class PsionicAbilitiesSystem
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem">
+  
+  
+  <h1 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem" class="text-break">Class PsionicAbilitiesSystem
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">PsionicAbilitiesSystem</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Content.Server.Abilities.Psionics.html">Content.Server.Abilities.Psionics</a></h6>
+  <h6><strong>Assembly</strong>: Content.Server.dll</h6>
+  <h5 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class PsionicAbilitiesSystem : EntitySystem</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_AddPsionics_EntityUid_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.AddPsionics(EntityUid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L71">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_AddPsionics_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.AddPsionics*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_AddPsionics_EntityUid_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.AddPsionics(EntityUid)">AddPsionics(EntityUid)</h4>
+  <div class="markdown level1 summary"><p>The most shorthand route to creating a Psion. If an entity is not already psionic, it becomes one. This also adds a random new PsionicPower.
+To create a &quot;Latent Psychic&quot;(Psion with no powers) just add or ensure the PsionicComponent normally.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddPsionics(EntityUid uid)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_AddRandomPsionicPower_EntityUid_System_Boolean_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.AddRandomPsionicPower(EntityUid%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L83">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_AddRandomPsionicPower_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.AddRandomPsionicPower*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_AddRandomPsionicPower_EntityUid_System_Boolean_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.AddRandomPsionicPower(EntityUid,System.Boolean)">AddRandomPsionicPower(EntityUid, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Pretty straightforward, adds a random psionic power to a given Entity. If that Entity is not already Psychic, it will be made one.
+If an entity already has all possible powers, this will not add any new ones.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddRandomPsionicPower(EntityUid uid, bool forced = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">forced</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_Initialize.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L37">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_Initialize_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.Initialize*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_Initialize" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Initialize()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_InitializePsionicPower_EntityUid_Content_Shared_Psionics_PsionicPowerPrototype_Content_Shared_Abilities_Psionics_PsionicComponent_System_Boolean_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.InitializePsionicPower(EntityUid%2CContent.Shared.Psionics.PsionicPowerPrototype%2CContent.Shared.Abilities.Psionics.PsionicComponent%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L118">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_InitializePsionicPower_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.InitializePsionicPower*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_InitializePsionicPower_EntityUid_Content_Shared_Psionics_PsionicPowerPrototype_Content_Shared_Abilities_Psionics_PsionicComponent_System_Boolean_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.InitializePsionicPower(EntityUid,Content.Shared.Psionics.PsionicPowerPrototype,Content.Shared.Abilities.Psionics.PsionicComponent,System.Boolean)">InitializePsionicPower(EntityUid, PsionicPowerPrototype, PsionicComponent, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new Psionic Power on a given entity, assuming the entity does not already have said power initialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InitializePsionicPower(EntityUid uid, PsionicPowerPrototype proto, PsionicComponent psionic, bool playFeedback = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../Content.Shared/Content.Shared.Psionics.PsionicPowerPrototype.html">PsionicPowerPrototype</a></td>
+        <td><span class="parametername">proto</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../Content.Shared/Content.Shared.Abilities.Psionics.PsionicComponent.html">PsionicComponent</a></td>
+        <td><span class="parametername">psionic</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">playFeedback</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_InitializePsionicPower_EntityUid_Content_Shared_Psionics_PsionicPowerPrototype_System_Boolean_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.InitializePsionicPower(EntityUid%2CContent.Shared.Psionics.PsionicPowerPrototype%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L149">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_InitializePsionicPower_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.InitializePsionicPower*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_InitializePsionicPower_EntityUid_Content_Shared_Psionics_PsionicPowerPrototype_System_Boolean_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.InitializePsionicPower(EntityUid,Content.Shared.Psionics.PsionicPowerPrototype,System.Boolean)">InitializePsionicPower(EntityUid, PsionicPowerPrototype, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new Psionic Power on a given entity, assuming the entity does not already have said power initialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InitializePsionicPower(EntityUid uid, PsionicPowerPrototype proto, bool playFeedback = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../Content.Shared/Content.Shared.Psionics.PsionicPowerPrototype.html">PsionicPowerPrototype</a></td>
+        <td><span class="parametername">proto</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">playFeedback</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_MindBreak_EntityUid_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.MindBreak(EntityUid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L194">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_MindBreak_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.MindBreak*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_MindBreak_EntityUid_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.MindBreak(EntityUid)">MindBreak(EntityUid)</h4>
+  <div class="markdown level1 summary"><p>A more advanced form of removing powers. Mindbreaking not only removes all psionic powers,
+it also disables the possibility of obtaining new ones.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MindBreak(EntityUid uid)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RefreshPsionicModifiers_EntityUid_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RefreshPsionicModifiers(EntityUid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L182">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RefreshPsionicModifiers_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RefreshPsionicModifiers*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RefreshPsionicModifiers_EntityUid_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RefreshPsionicModifiers(EntityUid)">RefreshPsionicModifiers(EntityUid)</h4>
+  <div class="markdown level1 summary"><p>Updates a Psion's casting stats, call this anytime a system adds a new source of Amp or Damp.
+Variant function for systems that didn't already have the PsionicComponent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshPsionicModifiers(EntityUid uid)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RefreshPsionicModifiers_EntityUid_Content_Shared_Abilities_Psionics_PsionicComponent_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RefreshPsionicModifiers(EntityUid%2CContent.Shared.Abilities.Psionics.PsionicComponent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L159">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RefreshPsionicModifiers_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RefreshPsionicModifiers*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RefreshPsionicModifiers_EntityUid_Content_Shared_Abilities_Psionics_PsionicComponent_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RefreshPsionicModifiers(EntityUid,Content.Shared.Abilities.Psionics.PsionicComponent)">RefreshPsionicModifiers(EntityUid, PsionicComponent)</h4>
+  <div class="markdown level1 summary"><p>Updates a Psion's casting stats, call this anytime a system adds a new source of Amp or Damp.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshPsionicModifiers(EntityUid uid, PsionicComponent comp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../Content.Shared/Content.Shared.Abilities.Psionics.PsionicComponent.html">PsionicComponent</a></td>
+        <td><span class="parametername">comp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RemoveAllPsionicPowers_EntityUid_System_Boolean_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RemoveAllPsionicPowers(EntityUid%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L251">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RemoveAllPsionicPowers_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RemoveAllPsionicPowers*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RemoveAllPsionicPowers_EntityUid_System_Boolean_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RemoveAllPsionicPowers(EntityUid,System.Boolean)">RemoveAllPsionicPowers(EntityUid, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Remove all Psionic powers, with accompanying actions, components, and casting stat sources, from a given Psion.
+Optionally, the Psion can also be rendered permanently non-Psionic.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveAllPsionicPowers(EntityUid uid, bool mindbreak = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">mindbreak</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RemovePsionicPower_EntityUid_Content_Shared_Abilities_Psionics_PsionicComponent_Content_Shared_Psionics_PsionicPowerPrototype_System_Boolean_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RemovePsionicPower(EntityUid%2CContent.Shared.Abilities.Psionics.PsionicComponent%2CContent.Shared.Psionics.PsionicPowerPrototype%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L266">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RemovePsionicPower_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RemovePsionicPower*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RemovePsionicPower_EntityUid_Content_Shared_Abilities_Psionics_PsionicComponent_Content_Shared_Psionics_PsionicPowerPrototype_System_Boolean_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RemovePsionicPower(EntityUid,Content.Shared.Abilities.Psionics.PsionicComponent,Content.Shared.Psionics.PsionicPowerPrototype,System.Boolean)">RemovePsionicPower(EntityUid, PsionicComponent, PsionicPowerPrototype, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemovePsionicPower(EntityUid uid, PsionicComponent psionicComponent, PsionicPowerPrototype psionicPower, bool forced = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../Content.Shared/Content.Shared.Abilities.Psionics.PsionicComponent.html">PsionicComponent</a></td>
+        <td><span class="parametername">psionicComponent</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../Content.Shared/Content.Shared.Psionics.PsionicPowerPrototype.html">PsionicPowerPrototype</a></td>
+        <td><span class="parametername">psionicPower</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">forced</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RemovePsionicPower_EntityUid_Content_Shared_Psionics_PsionicPowerPrototype_System_Boolean_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RemovePsionicPower(EntityUid%2CContent.Shared.Psionics.PsionicPowerPrototype%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L288">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RemovePsionicPower_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RemovePsionicPower*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_RemovePsionicPower_EntityUid_Content_Shared_Psionics_PsionicPowerPrototype_System_Boolean_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.RemovePsionicPower(EntityUid,Content.Shared.Psionics.PsionicPowerPrototype,System.Boolean)">RemovePsionicPower(EntityUid, PsionicPowerPrototype, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemovePsionicPower(EntityUid uid, PsionicPowerPrototype psionicPower, bool forced = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../Content.Shared/Content.Shared.Psionics.PsionicPowerPrototype.html">PsionicPowerPrototype</a></td>
+        <td><span class="parametername">psionicPower</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">forced</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_ScarierMindbreak_EntityUid_Content_Shared_Abilities_Psionics_PsionicComponent_.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.ScarierMindbreak(EntityUid%2CContent.Shared.Abilities.Psionics.PsionicComponent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L223">View Source</a>
+  </span>
+  <a id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_ScarierMindbreak_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.ScarierMindbreak*"></a>
+  <h4 id="Content_Server_Abilities_Psionics_PsionicAbilitiesSystem_ScarierMindbreak_EntityUid_Content_Shared_Abilities_Psionics_PsionicComponent_" data-uid="Content.Server.Abilities.Psionics.PsionicAbilitiesSystem.ScarierMindbreak(EntityUid,Content.Shared.Abilities.Psionics.PsionicComponent)">ScarierMindbreak(EntityUid, PsionicComponent)</h4>
+  <div class="markdown level1 summary"><p>An even more advanced form of Mindbreaking. Turn the victim into an NPC.
+For the people who somehow didn't intuit from the absolutely horrifying text that mindbreaking people is very fucking bad.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ScarierMindbreak(EntityUid uid, PsionicComponent component)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EntityUid</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="../Content.Shared/Content.Shared.Abilities.Psionics.PsionicComponent.html">PsionicComponent</a></td>
+        <td><span class="parametername">component</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ss14-art/ratgore/new/master/apiSpec/new?filename=Content_Server_Abilities_Psionics_PsionicAbilitiesSystem.md&amp;value=---%0Auid%3A%20Content.Server.Abilities.Psionics.PsionicAbilitiesSystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ss14-art/ratgore/blob/master/Content.Server/Abilities/Psionics/PsionicAbilitiesSystem.cs/#L21" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="toggle-mode">
+                <div class="icon">
+                  <i aria-hidden="true">☀</i>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="switch-style">
+                  <span class="slider round"></span>
+                </label>
+                <div class="icon">
+                  <i aria-hidden="true">☾</i>
+                </div>
+              </div>
+          
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <h5>In This Article</h5>
+              <div></div>
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <div class="pull-left">
+              
+              <span>Generated by <strong>DocFX</strong></span>
+            </div>
+            <div class="toggle-mode pull-right visible-sm visible-xs">
+              <div class="icon">
+                <i aria-hidden="true">☀</i>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="switch-style-m">
+                <span class="slider round"></span>
+              </label>
+              <div class="icon">
+                <i aria-hidden="true">☾</i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="../../styles/toggle-theme.js"></script>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
